@@ -10,20 +10,24 @@ set softtabstop=2
 set tabstop=2
 set expandtab
 
+" Use mac clipboard
+set clipboard=unnamed
+
 " Allow non-written buffers to be hidden in the background
 set hidden
 " Show line numbers
 set number
-" Syntax highlighting
-syntax on
+" more powerful backspacing
+set backspace=indent,eol,start
+
+" Keep context above and below cursor
+set scrolloff=10
 
 " Explorer
 " Tree view
 let g:netrw_liststyle = 3
 " Remove banner
 let g:netrw_banner = 0
-" Resize explorer
-let g:netrw_winsize = 25
 
 " FZF
 " If installed using Homebrew
@@ -42,24 +46,16 @@ let g:ale_completion_tsserver_autoimport = 1
 " Keep the sign gutter open
 set signcolumn=yes
 let g:ale_sign_column_always = 1
-" Immediately open a list if there is an error
-let g:ale_open_list = 1
 " Remove grey background from ALE gutter
 highlight clear SignColumn
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 " Ale linters and fixers
 let g:ale_linters = {
-\   'javascript': ['eslint'],
 \   'typescript': ['tsserver', 'eslint'],
-\   'vue': ['eslint']
 \}
 let g:ale_fixers = {
-\    'javascript': ['eslint'],
 \    'typescript': ['prettier', 'eslint'],
-\    'vue': ['eslint'],
-\    'scss': ['prettier'],
-\    'html': ['prettier']
 \}
 
 "
@@ -83,13 +79,16 @@ Plug 'https://github.com/airblade/vim-gitgutter'
 call plug#end()
 
 "
-" Keybindings
+" Custom keybindings
 "
-nnoremap <C-P> :Files<CR>
-nnoremap <C-N> :Rg<CR>
-nnoremap <C-]> :ALEGoToDefinition<CR>
-nnoremap ]<C-]> :ALEFindReferences<CR>
-nnoremap <C-K> :ALESymbolSearch<SPACE>
+let mapleader = ","
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>g :Rg<SPACE>
+nnoremap <leader>d :ALEGoToDefinition<CR>
+nnoremap <leader>r :ALEFindReferences<CR>
+nnoremap <leader>s :ALESymbolSearch<SPACE>
+nnoremap <leader>2 :ALERename<CR>
 
 "
 " Powerline
@@ -101,7 +100,7 @@ python3 del powerline_setup
 set laststatus=2
 
 " Colors
-syntax enable
+set termguicolors
+syntax on
 set background=dark
 colorscheme solarized8_flat
-set termguicolors
