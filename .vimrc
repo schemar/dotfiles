@@ -2,6 +2,9 @@
 " Geeral setup
 "
 
+" Faster ESC reaction
+set timeout timeoutlen=500 ttimeoutlen=15
+
 " Indentation
 filetype indent on
 set autoindent
