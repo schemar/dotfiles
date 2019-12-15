@@ -1,3 +1,12 @@
+if [ "$(uname)" "==" "Darwin" ]; then
+  # macOS
+  export PIP_LIB="/usr/local"
+else
+  # Assuming Linux otherwise
+  export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+  export PIP_LIB="/home/linuxbrew/.linuxbrew"
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -35,7 +44,7 @@ compinit
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
-. /usr/local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
+. $PIP_LIB/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # Correct locale
 export LC_ALL=en_US.UTF-8

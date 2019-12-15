@@ -35,6 +35,7 @@ let g:netrw_banner = 0
 " FZF
 " If installed using Homebrew
 set rtp+=/usr/local/opt/fzf
+set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 
 " Ale
 " Enable completion where available.
