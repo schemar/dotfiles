@@ -13,6 +13,14 @@ set softtabstop=2
 set tabstop=2
 set expandtab
 
+" Highlight search
+set hlsearch
+set incsearch
+
+" Show all whitespace characters
+set listchars=tab:>·,trail:~,extends:>,precedes:<
+set list
+
 " Use mac clipboard
 set clipboard=unnamed
 
@@ -88,11 +96,12 @@ call plug#end()
 let mapleader = ","
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>f :Files<CR>
-nnoremap <leader>g :Rg<SPACE>
+nnoremap <leader>g :Rg<SPACE> " grep
 nnoremap <leader>d :ALEGoToDefinition<CR>
 nnoremap <leader>r :ALEFindReferences<CR>
 nnoremap <leader>s :ALESymbolSearch<SPACE>
 nnoremap <leader>2 :ALERename<CR>
+nnoremap <leader>h :noh<CR> " disable search result highlights
 
 "
 " Powerline
