@@ -16,6 +16,7 @@ set expandtab
 " Highlight search
 set hlsearch
 set incsearch
+noh
 
 " Show all whitespace characters
 set listchars=tab:>·,trail:~,extends:>,precedes:<
@@ -86,6 +87,9 @@ Plug 'https://github.com/lifepillar/vim-solarized8'
 Plug 'https://github.com/leafgarland/typescript-vim'
 Plug 'https://github.com/ianks/vim-tsx'
 Plug 'https://github.com/airblade/vim-gitgutter'
+Plug 'https://github.com/tpope/vim-surround'
+Plug 'https://github.com/christoomey/vim-tmux-navigator'
+Plug 'https://github.com/kien/rainbow_parentheses.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -102,6 +106,15 @@ nnoremap <leader>r :ALEFindReferences<CR>
 nnoremap <leader>s :ALESymbolSearch<SPACE>
 nnoremap <leader>2 :ALERename<CR>
 nnoremap <leader>h :noh<CR> " disable search result highlights
+nnoremap <leader>p :RainbowParanthesesToggle<CR>
+
+"
+" Always have rainbow parantheses
+"
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 "
 " Powerline
