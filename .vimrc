@@ -44,6 +44,7 @@ let g:netrw_banner = 0
 " FZF
 " If installed using Homebrew
 set rtp+=/usr/local/opt/fzf
+" If installed using Linuxbrew
 set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 
 " Ale
@@ -83,13 +84,19 @@ call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/dense-analysis/ale'
 Plug 'https://github.com/tpope/vim-fugitive'
-Plug 'https://github.com/lifepillar/vim-solarized8'
 Plug 'https://github.com/leafgarland/typescript-vim'
 Plug 'https://github.com/ianks/vim-tsx'
 Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/christoomey/vim-tmux-navigator'
-Plug 'https://github.com/kien/rainbow_parentheses.vim'
+Plug 'https://github.com/luochen1990/rainbow'
+Plug 'https://github.com/vim-airline/vim-airline'
+Plug 'https://github.com/vim-airline/vim-airline-themes'
+Plug 'https://github.com/scrooloose/nerdtree'
+Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin'
+
+" Color themes:
+Plug 'https://github.com/lifepillar/vim-solarized8'
 
 " Initialize plugin system
 call plug#end()
@@ -100,29 +107,28 @@ call plug#end()
 let mapleader = ","
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>f :Files<CR>
-nnoremap <leader>g :Rg<SPACE> " grep
+nnoremap <leader>g :Rg<SPACE>
 nnoremap <leader>d :ALEGoToDefinition<CR>
 nnoremap <leader>r :ALEFindReferences<CR>
 nnoremap <leader>s :ALESymbolSearch<SPACE>
 nnoremap <leader>2 :ALERename<CR>
 nnoremap <leader>h :noh<CR> " disable search result highlights
 nnoremap <leader>p :RainbowParanthesesToggle<CR>
+nnoremap <leader>e :NERDTreeToggle<CR>
 
 "
-" Always have rainbow parantheses
+" Rainbow parantheses
 "
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+let g:rainbow_active = 1
+let g:rainbow_conf = {'guifgs': ['darkorange3', 'seagreen3', 'firebrick', 'lightblue', 'lightmagenta']}
 
 "
-" Powerline
+" Airline
 "
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
-
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'solarized'
+let g:airline#extensions#ale#enabled = 1
 set laststatus=2
 
 " Colors
