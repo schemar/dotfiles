@@ -28,6 +28,7 @@ ln -s $SCRIPTPATH/.tmux.conf  $HOME/.tmux.conf
 ln -s $SCRIPTPATH/.zshrc  $HOME/.zshrc
 mkdir -p $HOME/.config
 ln -s $SCRIPTPATH/.config/nvim $HOME/.config/nvim
+ln -s $SCRIPTPATH/.config/neomutt $HOME/.config/neomutt
 
 echo ""
 echo "To finsh setup:"
@@ -35,4 +36,6 @@ echo " * Change the default shell \`chsh -s <path/to/brew/zsh>\`"
 echo " * Install a patched font from https://github.com/powerline/fonts"
 echo "   and set it in your terminal emulator"
 echo " * Install oh-my-zsh in zsh"
-echo " * run :PlugInstall in vim"
+echo " * Run :PlugInstall in vim"
+echo " * Set up account and signature for neomutt"
+echo " * Don't forget to map capslock to <ESC>"

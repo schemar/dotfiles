@@ -19,7 +19,7 @@ set incsearch
 noh
 
 " Show all whitespace characters
-set listchars=tab:>·,trail:~,extends:>,precedes:<
+set listchars=space:·,tab:>~,trail:~,extends:>,precedes:<
 set list
 
 " Use mac clipboard
@@ -27,8 +27,15 @@ set clipboard=unnamed
 
 " Allow non-written buffers to be hidden in the background
 set hidden
-" Show line numbers
-set number
+
+" Show hybrid line numbers if focused
+set number relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+
 " more powerful backspacing
 set backspace=indent,eol,start
 

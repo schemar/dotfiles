@@ -59,7 +59,7 @@ eval "$(direnv hook zsh)"
 
 # FZF config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='fd --type f --hidden'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude ".git/"'
 export FZF_COMPLETION_OPTS="--preview 'bat --style=numbers --color=always {}'"
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always {}'"
 export FZF_COMPLETION_TRIGGER=',,'
