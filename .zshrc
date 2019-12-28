@@ -1,11 +1,10 @@
 if [ "$(uname)" "==" "Darwin" ]; then
   # macOS
-  export PIP_LIB="/usr/local"
 else
   # Assuming Linux otherwise
   export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-  export PIP_LIB="/home/linuxbrew/.linuxbrew"
 fi
+export BREW_PREFIX=$(brew --prefix)
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -33,7 +32,7 @@ unsetopt beep
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/Users/masc/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
 compinit
@@ -44,15 +43,15 @@ compinit
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
-. $PIP_LIB/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
+. $BREW_PREFIX/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # Correct locale
 export LC_ALL=en_US.UTF-8
 
 # NVM requires
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "$BREW_PREFIX/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "$BREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && . "$BREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # direnv to load environment (variables) per directory/project
 eval "$(direnv hook zsh)"
