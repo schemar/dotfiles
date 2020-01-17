@@ -3,7 +3,8 @@
 # install packages
 brew install fzf ripgrep vim neovim tmux python nvm zsh fd bat direnv
 $(brew --prefix)/opt/fzf/install
-pip3 install powerline-status
+pip3 install --upgrade powerline-status
+pip3 install --user --upgrade pynvim
 
 mkdir -p $HOME/.nvm
 nvm install node

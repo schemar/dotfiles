@@ -6,6 +6,9 @@ else
 fi
 export BREW_PREFIX=$(brew --prefix)
 
+# sbin should be in path as well as there are formuale that reside there.
+export PATH="$BREW_PREFIX/sbin:$PATH"
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
