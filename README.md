@@ -12,9 +12,15 @@ Requirements:
 * [Homebrew](https://docs.brew.sh/Installation) (on macOS, Linux, or WSL)
 * [Homebrew's requirements](https://docs.brew.sh/Installation)
 
-## Usage
+You need to change the default shell to zsh `chsh -s <path/to/brew/zsh>`
 
 You need to set a [powerline font](https://github.com/powerline/fonts) as your terminal emulator's font.
+
+You need to run `:PlugInstall` inside vim.
+
+You need to install oh-my-zsh inside zsh.
+
+## Usage
 
 An overview over the most common tasks follows below, especially if they differ from the default. Check the files' contents for more details.
 
