@@ -2,21 +2,55 @@
 
 dotfiles for macOS, Linux, and WSL.
 
-## Usage
+An opinionated default setup for working on the command line.
 
-* Use `<C-{h,j,k,l}>` to move around vim and tmux windows ("cross border").
-* Use `s` and `v` to split tmux (like vim).
-* (Neo)Vim
-  * `,f` to fuzzy find files
-  * `,b` to fuzzy find buffers
-  * `,g` to ripgrep and then fuzzy find on the results
-
-See plugins and custom keybindings in `.vimrc` for more.
-
-## Helper
+## Installation
 
 You can use the `install.sh` helper.
 
 Requirements:
 * [Homebrew](https://docs.brew.sh/Installation) (on macOS, Linux, or WSL)
 * [Homebrew's requirements](https://docs.brew.sh/Installation)
+
+## Usage
+
+You need to set a [powerline font](https://github.com/powerline/fonts) as your terminal emulator's font.
+
+An overview over the most common tasks follows below, especially if they differ from the default. Check the files' contents for more details.
+
+**This is not a replacement for the documentation of the tools! Please read the manuals.**
+
+### Command Line
+
+* `,,<tab>` to fuzzy find a path. E.g. `cd ./Projects/,,<tab>` will let you fuzzy find directories inside the Projects directory.
+* `<ctrl>+r` to fuzzy find in the shells history.
+* `tmux` to open a new tmux session.
+* `bat <filename>` to show a scrollable, syntax-highlighted file output.
+
+### Inside Tmux
+
+* `<ctrl>+b {c,n,p}` create/next/previous window.
+* `<ctrl>+b {v,s}` split pane vertically/horizontally.
+* `<ctrl>+{h,j,k,l}` to move curser across panes (works also with vim windows).
+* `<ctrl>+b z` to (un)zoom the current pane.
+* `<ctrl>+b {<,>}` resize panes by fixed amount.
+* `<ctrl>+b [` to enable copy mode. Use e.g. to scroll up to see older output. Movement in copy mode is vim-like (e.g. `<ctrl>+{d,u}` to move down/up a page).
+
+### Vim
+
+* `<ctrl>+w {v,s}` split window vertically/horizontally.
+* `<ctrl>+{h,j,k,l}` to move cursor across vim windows (works also with tmux panes).
+* `,h` to enable/disable search results highlighting.
+
+#### Working with files:
+
+* `,f` to fuzzy find files.
+* `,b` to fuzzy find buffers.
+* `,g` to ripgrep and then fuzzy find on the results.
+* `,e` to open/close file explorer
+
+#### For languages that support LSP:
+
+* `,d` to go to definition of symbol under cursor.
+* `,r` to list references of symbol under cursor.
+* `,2` to rename symbol under cursor.
