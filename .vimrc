@@ -60,8 +60,6 @@ set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 " You should not turn this setting on if you wish to use ALE as a completion
 " source for other completion plugins, like Deoplete.
 let g:ale_completion_enabled = 1
-" Set ale as omnicomplete to trigger manually if desired.
-set omnifunc=ale#completion#OmniFunc
 " Fix formatting on save
 let g:ale_fix_on_save = 1
 " Auto-import TS
