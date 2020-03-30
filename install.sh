@@ -27,6 +27,7 @@ SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 ln -s $SCRIPTPATH/.vimrc  $HOME/.vimrc
 ln -s $SCRIPTPATH/.tmux.conf  $HOME/.tmux.conf
 ln -s $SCRIPTPATH/.zshrc  $HOME/.zshrc
+ln -s $SCRIPTPATH/.gitconfig  $HOME/.gitconfig
 mkdir -p $HOME/.config
 ln -s $SCRIPTPATH/.config/nvim $HOME/.config/nvim
 ln -s $SCRIPTPATH/.config/neomutt $HOME/.config/neomutt
@@ -38,4 +39,5 @@ echo " * Install a patched font from https://github.com/powerline/fonts"
 echo "   and set it in your terminal emulator"
 echo " * Install oh-my-zsh in zsh"
 echo " * Run :PlugInstall in vim"
+echo " * Add .~/.gitconfigemail and set your email address"
 echo " * Don't forget to map capslock to <ESC>"

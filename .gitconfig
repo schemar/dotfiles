@@ -1,0 +1,19 @@
+[include]
+	path = ~/.gitconfigemail
+[user]
+	name = Martin Schenck
+[core]
+	editor = nvim
+[alias]
+  o = checkout
+  c = commit
+  a = add -A
+  s = status
+  b = branch
+  bd = branch -d
+  l = log --pretty=short --max-count=10
+  d = diff
+  ds = diff --staged
+  r = rebase
+  p = pull -p
+  h = push
