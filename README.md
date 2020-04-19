@@ -18,6 +18,8 @@ You need to set a [powerline font](https://github.com/powerline/fonts) as your t
 
 You need to run `:PlugInstall` inside vim.
 
+You need to run `:plug-install` inside kakoune.
+
 You need to install oh-my-zsh inside zsh.
 
 ## Usage
@@ -41,6 +43,15 @@ An overview over the most common tasks follows below, especially if they differ 
 * `<ctrl>+b z` to (un)zoom the current pane.
 * `<ctrl>+b {<,>}` resize panes by fixed amount.
 * `<ctrl>+b [` to enable copy mode. Use e.g. to scroll up to see older output. Movement in copy mode is vim-like (e.g. `<ctrl>+{d,u}` to move down/up a page).
+
+### Kakoune
+
+Since kakoune has a helpful info panel, I will only list the main commands here:
+
+* `,e` to show file explorer.
+* `,f` to fuzzy find files, buffers, etc.
+* `,s` to surround, e.g. with quotes.
+* `,l` to interact with the language server, e.g. "show references", "rename", etc.
 
 ### Vim
 

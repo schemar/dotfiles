@@ -80,3 +80,13 @@ echo "MMMs     :MMM:    NMMs   MMMs      +MMM-   \`MMM+   mMMh      -MMM/  /MMM/
 echo "MMMs     -MMM+   \`MMMs   MMMs      /MMM:   -MMM+   mMMh      -MMM/  -MMMy    -+/-  oMMM.    ./\`"
 echo "MMMs      hMMMyosmMMN.   dMMNsohs  \`mMMNyosNMMm\`   mMMh      -MMM/   +MMMdsoyMMMy  \`hMMNyooyNMM+"
 echo "mmm+       /hmMMMNdo\`    \`odNMMmh.  \`+hmMMMNho\`    dmmy      .mmm:    .odNMMNmy:     :ymNMMNds."
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/masc/Projects/vwfs/ERNST/ernst-vehicle-import-trigger/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/masc/Projects/vwfs/ERNST/ernst-vehicle-import-trigger/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/masc/Projects/vwfs/ERNST/ernst-vehicle-import-trigger/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/masc/Projects/vwfs/ERNST/ernst-vehicle-import-trigger/node_modules/tabtab/.completions/sls.zsh
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/masc/Projects/vwfs/ERNST/ernst-vehicle-import-trigger/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/masc/Projects/vwfs/ERNST/ernst-vehicle-import-trigger/node_modules/tabtab/.completions/slss.zsh
