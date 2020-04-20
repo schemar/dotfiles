@@ -37,6 +37,9 @@ require-module fzf
 map global user f ':fzf-mode<ret>' -docstring 'fuzzy find'
 set-option global fzf_file_command 'fd --type f --hidden --exclude ".git/"'
 set-option global fzf_highlight_command 'bat --style=numbers --color=always {}'
+## Swtich horizontal/vertical split to match VIM
+set global fzf_horizontal_map 'ctrl-v'
+set global fzf_vertical_map 'ctrl-s'
 
 # Surround functionality
 declare-user-mode surround
