@@ -3,7 +3,7 @@
 [user]
 	name = Martin Schenck
 [core]
-	editor = nvim
+	editor = kak
 [alias]
   o = checkout
   c = commit
