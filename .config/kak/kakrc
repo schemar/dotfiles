@@ -50,14 +50,12 @@ map global surround t ':select-surrounding-tag<ret>' -docstring 'select tag'
 map global user s ':enter-user-mode surround<ret>' -docstring 'surround'
 
 # LSP
+eval %sh{kak-lsp --config ~/.config/kak-lsp/kak-lsp.toml --kakoune -s $kak_session}
 map global user l ':enter-user-mode lsp<ret>' -docstring 'language server'
+
 # uncomment to enable debugging
 # eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
 # set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
-
-# this is not necessary; the `lsp-enable-window` will take care of it
-# eval %sh{${kak_opt_lsp_cmd} --kakoune -s $kak_session}
-eval %sh{kak-lsp --config ~/.config/kak-lsp/kak-lsp.toml --kakoune -s $kak_session}
 
 set global lsp_diagnostic_line_error_sign '║'
 set global lsp_diagnostic_line_warning_sign '┊'
