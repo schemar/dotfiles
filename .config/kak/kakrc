@@ -15,10 +15,18 @@ source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 plug "https://github.com/atomrc/kakoune-typescript"
 plug "https://github.com/h-youhei/kakoune-surround"
-plug "https://github.com/andreyorst/powerline.kak" config %{
-        powerline-start
+plug "https://github.com/andreyorst/powerline.kak"  defer powerline %{
+    set-option global powerline_format 'git bufname filetype mode_info line_column position'
+} config %{
+    powerline-start
 }
-plug "https://github.com/andreyorst/fzf.kak"
+plug "https://github.com/andreyorst/fzf.kak" defer fzf %{
+    set-option global fzf_file_command 'fd --type f --hidden --exclude ".git/"'
+    set-option global fzf_highlight_command 'bat --style=numbers --color=always {}'
+    ## Swtich horizontal/vertical split to match VIM
+    set global fzf_horizontal_map 'ctrl-v'
+    set global fzf_vertical_map 'ctrl-s'
+}
 plug "https://github.com/andreyorst/kaktree" config %{
     hook global WinSetOption filetype=kaktree %{
         remove-highlighter buffer/numbers
@@ -30,16 +38,10 @@ plug "https://github.com/andreyorst/kaktree" config %{
 }
 
 # Filetree
-map global user e ':kaktree-toggle<ret>'
+map global user e ':kaktree-toggle<ret>' -docstring 'file explorer'
 
 # FZF
-require-module fzf
 map global user f ':fzf-mode<ret>' -docstring 'fuzzy find'
-set-option global fzf_file_command 'fd --type f --hidden --exclude ".git/"'
-set-option global fzf_highlight_command 'bat --style=numbers --color=always {}'
-## Swtich horizontal/vertical split to match VIM
-set global fzf_horizontal_map 'ctrl-v'
-set global fzf_vertical_map 'ctrl-s'
 
 # Surround functionality
 declare-user-mode surround

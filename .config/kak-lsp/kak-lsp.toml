@@ -147,5 +147,14 @@ command = "texlab"
 
 [language.typescript]
 filetypes = ["typescript"]
-roots = ["package.json", "tsconfig.json"]
-command = "javascript-typescript-stdio"
+roots = ["package.json"]
+offset_encoding = "utf-8"
+command = "typescript-language-server"
+args = ['--stdio']
+
+[language.tsx]
+filetypes = ["typescript"]
+roots = ["package.json"]
+offset_encoding = "utf-8"
+command = "typescript-language-server"
+args = ['--stdio']

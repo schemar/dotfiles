@@ -9,7 +9,7 @@ pip3 install --user --upgrade pynvim
 mkdir -p $HOME/.nvm
 nvm install node
 npm install -g typescript
-npm install -g javascript-typescript-langserver
+npm install -g typescript-language-server
 brew install yarn
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
