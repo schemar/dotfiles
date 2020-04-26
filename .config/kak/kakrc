@@ -64,8 +64,6 @@ plug "https://github.com/h-youhei/kakoune-surround" config %{
 }
 
 plug "https://github.com/ul/kak-lsp" config %{
-    eval %sh{kak-lsp --config ~/.config/kak-lsp/kak-lsp.toml --kakoune -s $kak_session}
-
     # uncomment to enable debugging
     # eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
     # set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
@@ -76,6 +74,7 @@ plug "https://github.com/ul/kak-lsp" config %{
     declare-user-mode kaklsp
     map global kaklsp d ':lsp-definition<ret>' -docstring 'go to definition'
     map global kaklsp r ':lsp-references<ret>' -docstring 'show references'
+    map global kaklsp i ':lsp-implementation<ret>' -docstring 'show implementations'
     map global kaklsp R ':lsp-rename-prompt<ret>' -docstring 'rename'
     map global kaklsp e ':lsp-find-error --include-warnings<ret>' -docstring 'go to next error/warning'
     map global kaklsp p ':lsp-find-error --previous --include-warnings<ret>' -docstring 'go to previous error/warning'
