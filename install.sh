@@ -1,7 +1,9 @@
 #!/bin/bash
 
+WARNING="### Warning"
+
 echo "### Installing packages"
-brew install fzf ripgrep vim neovim tmux python nvm zsh fd bat direnv kakoune ul/kak-lsp/kak-lsp
+brew install fzf ripgrep vim neovim tmux python nvm zsh fd bat direnv kakoune 
 $(brew --prefix)/opt/fzf/install
 pip3 install --upgrade powerline-status
 pip3 install --user --upgrade pynvim
@@ -14,6 +16,8 @@ brew install yarn
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   brew cask install amethyst
+  brew install ul/kak-lsp/kak-lsp
+  WARNING="$WARNING\nYou need to manually install kak-lsp"
 fi
 
 echo "### Installing (Neo)Vim plugin managers"
@@ -44,10 +48,11 @@ git clone https://github.com/andreyorst/plug.kak.git $HOME/.config/kak/plugins/p
 echo ""
 echo "To finsh setup:"
 echo " * Change the default shell \`chsh -s <path/to/brew/zsh>\`"
-echo " * Install a patched font from https://github.com/powerline/fonts"
+echo " * Install a patched font from https://github.com/ryanoasis/nerd-fonts"
 echo "   and set it in your terminal emulator"
 echo " * Install oh-my-zsh in zsh"
 echo " * Run :PlugInstall in vim"
 echo " * Run :plug-install in kakoune"
 echo " * Add .~/.gitconfigemail and set your email address"
 echo " * Don't forget to map capslock to <ESC>"
+echo "$WARNING"

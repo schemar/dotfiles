@@ -27,12 +27,20 @@ plug "https://github.com/andreyorst/fzf.kak" defer fzf %{
     set global fzf_horizontal_map 'ctrl-v'
     set global fzf_vertical_map 'ctrl-s'
 }
-plug "https://github.com/andreyorst/kaktree" config %{
+plug "https://github.com/andreyorst/kaktree" defer kaktree %{
+    set-option global kaktree_indentation 2
+    set-option global kaktree_dir_icon_open  '▾ 🗁 '
+    set-option global kaktree_dir_icon_close '▸ 🗀 '
+    set-option global kaktree_file_icon      '🖺'
+    ## Open file with tab command
+    set global kaktree_tab_open_file true
+} config %{
     hook global WinSetOption filetype=kaktree %{
         remove-highlighter buffer/numbers
         remove-highlighter buffer/matching
         remove-highlighter buffer/wrap
         remove-highlighter buffer/show-whitespaces
+        map window normal 'o' ': kaktree--tab-action<ret>'
     }
     kaktree-enable
 }
