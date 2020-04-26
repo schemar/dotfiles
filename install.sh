@@ -32,20 +32,20 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 echo -e "### Symlinking config files"
 # symlink dotfiles into repository
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
-ln -s $SCRIPTPATH/.vimrc  $HOME/.vimrc || WARNINGS="${WARNINGS}\nCheck symlinking vimrc"
-ln -s $SCRIPTPATH/.tmux.conf  $HOME/.tmux.conf || WARNINGS="${WARNINGS}\nCheck symlinking tmux conf"
-ln -s $SCRIPTPATH/.zshrc  $HOME/.zshrc || WARNINGS="${WARNINGS}\nCheck symlinking zshrc"
-ln -s $SCRIPTPATH/.gitconfig  $HOME/.gitconfig || WARNINGS="${WARNINGS}\nCheck symlinking gitconfig"
+[ ! -L $HOME/.vimrc ] && ln -s $SCRIPTPATH/.vimrc  $HOME/.vimrc || WARNINGS="${WARNINGS}\nCheck symlinking vimrc"
+[ ! -L $HOME/.config/.tmux.conf ] && ln -s $SCRIPTPATH/.tmux.conf  $HOME/.tmux.conf || WARNINGS="${WARNINGS}\nCheck symlinking tmux conf"
+[ ! -L $HOME/.zshrc ] && ln -s $SCRIPTPATH/.zshrc  $HOME/.zshrc || WARNINGS="${WARNINGS}\nCheck symlinking zshrc"
+[ ! -L $HOME/.gitconfig ] && ln -s $SCRIPTPATH/.gitconfig  $HOME/.gitconfig || WARNINGS="${WARNINGS}\nCheck symlinking gitconfig"
 mkdir -p $HOME/.config
-ln -s $SCRIPTPATH/.config/nvim $HOME/.config/nvim || WARNINGS="${WARNINGS}\nCheck symlinking nvim config"
-ln -s $SCRIPTPATH/.config/neomutt $HOME/.config/neomutt || WARNINGS="${WARNINGS}\nCheck symlinking neomutt config"
-ln -s $SCRIPTPATH/.config/kak $HOME/.config/kak || WARNINGS="${WARNINGS}\nCheck symlinking kakoune rc"
+[ ! -L $HOME/.config/nvim ] && ln -s $SCRIPTPATH/.config/nvim $HOME/.config/nvim || WARNINGS="${WARNINGS}\nCheck symlinking nvim config"
+[ ! -L $HOME/.config/neomutt ] && ln -s $SCRIPTPATH/.config/neomutt $HOME/.config/neomutt || WARNINGS="${WARNINGS}\nCheck symlinking neomutt config"
+[ ! -L $HOME/.config/kak ] && ln -s $SCRIPTPATH/.config/kak $HOME/.config/kak || WARNINGS="${WARNINGS}\nCheck symlinking kakoune rc"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # Rust under MacOS uses another config path
-  ln -s $SCRIPTPATH/.config/kak-lsp $HOME/Library/Preferences/kak-lsp || WARNINGS="${WARNINGS}\nCheck symlinking kak-lsp conf"
+  [ ! -L $HOME/Library/Preferences/kak-lsp ] && ln -s $SCRIPTPATH/.config/kak-lsp $HOME/Library/Preferences/kak-lsp || WARNINGS="${WARNINGS}\nCheck symlinking kak-lsp conf"
 else
-  ln -s $SCRIPTPATH/.config/kak-lsp $HOME/.config/kak-lsp || WARNINGS="${WARNINGS}\nCheck symlinking kak-lsp conf"
+  [ ! -L $HOME/.config/kak-lsp ] && ln -s $SCRIPTPATH/.config/kak-lsp $HOME/.config/kak-lsp || WARNINGS="${WARNINGS}\nCheck symlinking kak-lsp conf"
 fi
 
 echo -e "### Installing kakoune plugin manager"
