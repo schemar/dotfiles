@@ -1,5 +1,5 @@
 # Colors
-colorscheme solarized-dark-termcolors
+colorscheme solarized-dark
 
 # Remove clippy from info window
 set global ui_options ncurses_assistant=none
@@ -8,25 +8,32 @@ set global ui_options ncurses_assistant=none
 add-highlighter global/ regex \b(TODO|FIXME|XXX|NOTE)\b 0:default+rb
 
 # Add line numbers
-add-highlighter global/ number-lines
+add-highlighter global/ number-lines -relative
+
+# Source a local project kak config if it exists
+try %{ source .kakrc.local }
 
 # Plugin manager and plugins
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 plug "https://github.com/atomrc/kakoune-typescript"
-plug "https://github.com/h-youhei/kakoune-surround"
-plug "https://github.com/andreyorst/powerline.kak"  defer powerline %{
+
+plug "https://github.com/andreyorst/powerline.kak" defer powerline %{
     set-option global powerline_format 'git bufname filetype mode_info line_column position'
 } config %{
     powerline-start
 }
+
 plug "https://github.com/andreyorst/fzf.kak" defer fzf %{
     set-option global fzf_file_command 'fd --type f --hidden --exclude ".git/"'
     set-option global fzf_highlight_command 'bat --style=numbers --color=always {}'
     ## Swtich horizontal/vertical split to match VIM
     set global fzf_horizontal_map 'ctrl-v'
     set global fzf_vertical_map 'ctrl-s'
+} config %{
+    map global user f ':fzf-mode<ret>' -docstring 'fuzzy find'
 }
+
 plug "https://github.com/andreyorst/kaktree" defer kaktree %{
     set-option global kaktree_indentation 2
     set-option global kaktree_dir_icon_open  '▾ 🗁 '
@@ -43,59 +50,57 @@ plug "https://github.com/andreyorst/kaktree" defer kaktree %{
         map window normal 'o' ': kaktree--tab-action<ret>'
     }
     kaktree-enable
+    map global user e ':kaktree-toggle<ret>' -docstring 'file explorer'
 }
 
-# Filetree
-map global user e ':kaktree-toggle<ret>' -docstring 'file explorer'
-
-# FZF
-map global user f ':fzf-mode<ret>' -docstring 'fuzzy find'
-
-# Surround functionality
-declare-user-mode surround
-map global surround s ':surround<ret>' -docstring 'surround'
-map global surround c ':change-surround<ret>' -docstring 'change'
-map global surround d ':delete-surround<ret>' -docstring 'delete'
-map global surround t ':select-surrounding-tag<ret>' -docstring 'select tag'
-map global user s ':enter-user-mode surround<ret>' -docstring 'surround'
-
-# LSP
-eval %sh{kak-lsp --config ~/.config/kak-lsp/kak-lsp.toml --kakoune -s $kak_session}
-map global user l ':enter-user-mode lsp<ret>' -docstring 'language server'
-
-# uncomment to enable debugging
-# eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
-# set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
-
-set global lsp_diagnostic_line_error_sign '║'
-set global lsp_diagnostic_line_warning_sign '┊'
-
-define-command ne -docstring 'go to next error/warning from lsp' %{ lsp-find-error --include-warnings }
-define-command pe -docstring 'go to previous error/warning from lsp' %{ lsp-find-error --previous --include-warnings }
-define-command ee -docstring 'go to current error/warning from lsp' %{ lsp-find-error --include-warnings; lsp-find-error --previous --include-warnings }
-
-define-command lsp-restart -docstring 'restart lsp server' %{ lsp-stop; lsp-start }
-hook global WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript) %{
-    set-option window lsp_auto_highlight_references true
-    set-option window lsp_hover_anchor false
-    lsp-auto-hover-enable
-    echo -debug "Enabling LSP for filtetype %opt{filetype}"
-    lsp-enable-window
+plug "https://github.com/h-youhei/kakoune-surround" config %{
+    # Surround functionality
+    declare-user-mode surround
+    map global surround s ':surround<ret>' -docstring 'surround'
+    map global surround c ':change-surround<ret>' -docstring 'change'
+    map global surround d ':delete-surround<ret>' -docstring 'delete'
+    map global surround t ':select-surrounding-tag<ret>' -docstring 'select tag'
+    map global user s ':enter-user-mode surround<ret>' -docstring 'surround'
 }
 
-hook global WinSetOption filetype=(rust) %{
-    set window lsp_server_configuration rust.clippy_preference="on"
-}
+plug "https://github.com/ul/kak-lsp" config %{
+    eval %sh{kak-lsp --config ~/.config/kak-lsp/kak-lsp.toml --kakoune -s $kak_session}
 
-hook global WinSetOption filetype=rust %{
-    hook window BufWritePre .* %{
-        evaluate-commands %sh{
-            test -f rustfmt.toml && printf lsp-formatting-sync
+    # uncomment to enable debugging
+    # eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
+    # set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
+
+    set global lsp_diagnostic_line_error_sign '║'
+    set global lsp_diagnostic_line_warning_sign '┊'
+
+    declare-user-mode kaklsp
+    map global kaklsp d ':lsp-definition<ret>' -docstring 'go to definition'
+    map global kaklsp r ':lsp-references<ret>' -docstring 'show references'
+    map global kaklsp R ':lsp-rename-prompt<ret>' -docstring 'rename'
+    map global kaklsp e ':lsp-find-error --include-warnings<ret>' -docstring 'go to next error/warning'
+    map global kaklsp p ':lsp-find-error --previous --include-warnings<ret>' -docstring 'go to previous error/warning'
+    map global user d ':enter-user-mode kaklsp<ret>' -docstring 'development'
+
+    define-command lsp-restart -docstring 'restart lsp server' %{ lsp-stop; lsp-start }
+    hook global WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript) %{
+        set-option window lsp_auto_highlight_references true
+        set-option window lsp_hover_anchor false
+        lsp-auto-hover-enable
+        echo -debug "Enabling LSP for filtetype %opt{filetype}"
+        lsp-enable-window
+    }
+
+    hook global WinSetOption filetype=(rust) %{
+        set window lsp_server_configuration rust.clippy_preference="on"
+    }
+
+    hook global WinSetOption filetype=rust %{
+        hook window BufWritePre .* %{
+            evaluate-commands %sh{
+                test -f rustfmt.toml && printf lsp-formatting-sync
+            }
         }
     }
+
+    hook global KakEnd .* lsp-exit
 }
-
-hook global KakEnd .* lsp-exit
-
-# Source a local project kak config if it exists
-try %{ source .kakrc.local }
