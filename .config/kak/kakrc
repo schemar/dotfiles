@@ -1,5 +1,5 @@
 # Colors
-colorscheme solarized-dark
+colorscheme solarized-dark-termcolors
 
 # Remove clippy from info window
 set global ui_options ncurses_assistant=none
@@ -36,9 +36,9 @@ plug "https://github.com/andreyorst/fzf.kak" defer fzf %{
 
 plug "https://github.com/andreyorst/kaktree" defer kaktree %{
     set-option global kaktree_indentation 2
-    set-option global kaktree_dir_icon_open  '▾ 🗁 '
-    set-option global kaktree_dir_icon_close '▸ 🗀 '
-    set-option global kaktree_file_icon      '🖺'
+    set-option global kaktree_dir_icon_open  '▾  '
+    set-option global kaktree_dir_icon_close '▸  '
+    set-option global kaktree_file_icon      ''
     ## Open file with tab command
     set global kaktree_tab_open_file true
 } config %{
