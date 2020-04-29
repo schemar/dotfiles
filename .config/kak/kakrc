@@ -16,8 +16,6 @@ try %{ source .kakrc.local }
 # Plugin manager and plugins
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
-plug "https://github.com/atomrc/kakoune-typescript"
-
 plug "https://github.com/andreyorst/powerline.kak" defer powerline %{
     set-option global powerline_format 'git bufname filetype mode_info line_column position'
 } config %{
