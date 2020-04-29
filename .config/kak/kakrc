@@ -13,6 +13,9 @@ add-highlighter global/ number-lines -relative
 # Source a local project kak config if it exists
 try %{ source .kakrc.local }
 
+# Use rg for grepping
+set global grepcmd 'rg --column'
+
 # Plugin manager and plugins
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
