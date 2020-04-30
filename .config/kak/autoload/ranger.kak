@@ -54,6 +54,8 @@ def for-each-line \
 }}
 
 def toggle-ranger %{
+    # ranger with the choosefiles switch writes the names of all selected files to the specified file when it is quit
+    # for-each-line makes sure all files that ranger wrote into that tmp file are opened when back in kakoune (using edit command)
     suspend-and-resume \
         "ranger --choosefiles=/tmp/ranger-files-%val{client_pid}" \
         "for-each-line edit /tmp/ranger-files-%val{client_pid}"

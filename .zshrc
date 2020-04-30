@@ -70,6 +70,10 @@ export FZF_COMPLETION_TRIGGER=',,'
 export BAT_THEME="Solarized (dark)"
 export BAT_STYLE="numbers,changes"
 
+# default editor
+export VISUAL=kak
+export EDITOR=kak
+
 # Welcome
 echo "\`odNMMmy\`                +oo:                                .hmd:"
 echo "dMMNsoh:                 MMMs                                +MMMy"
