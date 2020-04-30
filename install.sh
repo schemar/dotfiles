@@ -3,7 +3,7 @@
 WARNINGS="### WARNINGS"
 
 echo -e "### Installing packages"
-brew install fzf ripgrep vim neovim tmux python nvm zsh fd bat direnv kakoune || WARNINGS="${WARNINGS}\nCheck errors with brew"
+brew install fzf ripgrep vim neovim tmux python nvm zsh fd bat direnv kakoune ranger tig || WARNINGS="${WARNINGS}\nCheck errors with brew"
 $(brew --prefix)/opt/fzf/install --completion --key-bindings --update-rc --no-bash --no-fish || WARNINGS="${WARNINGS}\nCheck errors when installing fzf"
 pip3 install --upgrade powerline-status
 pip3 install --user --upgrade pynvim
@@ -40,6 +40,9 @@ mkdir -p $HOME/.config
 [ ! -L $HOME/.config/nvim ] && ln -s $SCRIPTPATH/.config/nvim $HOME/.config/nvim || WARNINGS="${WARNINGS}\nCheck symlinking nvim config"
 [ ! -L $HOME/.config/neomutt ] && ln -s $SCRIPTPATH/.config/neomutt $HOME/.config/neomutt || WARNINGS="${WARNINGS}\nCheck symlinking neomutt config"
 [ ! -L $HOME/.config/kak ] && ln -s $SCRIPTPATH/.config/kak $HOME/.config/kak || WARNINGS="${WARNINGS}\nCheck symlinking kakoune rc"
+[ ! -L $HOME/.config/ranger ] && ln -s $SCRIPTPATH/.config/ranger $HOME/.config/ranger || WARNINGS="${WARNINGS}\nCheck symlinking ranger"
+# Create kak symlink to original autload:
+[ ! -L $SCRIPTPATH/.config/kak/autoload ] && ln -s $(brew --prefix)/share/kak/autoload $SCRIPTPATH/.config/kak/autoload || WARNINGS="${WARNINGS}\nCheck symlinking kakoune autoload"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # Rust under MacOS uses another config path

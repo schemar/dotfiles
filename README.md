@@ -48,10 +48,14 @@ An overview over the most common tasks follows below, especially if they differ 
 
 Since kakoune has a helpful info panel, I will only list the main commands here:
 
-* `,e` to show file explorer.
+* `,r` to browse files with ranger.
 * `,f` to fuzzy find files, buffers, etc.
 * `,s` to surround, e.g. with quotes.
-* `,l` to interact with the language server, e.g. "show references", "rename", etc.
+* `,d` to interact with the language server, e.g. "show references", "rename", etc.
+* `,t` to interact with tig.
+
+There are some files in the .config/kak/autoload/ directory in addition to the .config/kak/kakrc file.
+Check there if something appears to be missing from kakrc.
 
 ### Vim
 

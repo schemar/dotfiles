@@ -29,8 +29,8 @@ alias tmux='tmux -2'
 
 # History
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 unsetopt beep
 bindkey -v
 # End of lines configured by zsh-newuser-install
@@ -62,12 +62,13 @@ eval "$(direnv hook zsh)"
 # FZF config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude ".git/"'
-export FZF_COMPLETION_OPTS="--preview 'bat --style=numbers --color=always {}'"
-export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always {}'"
+export FZF_COMPLETION_OPTS="--preview 'bat --style=numbers,changes --color=always {}'"
+export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers,changes --color=always {}'"
 export FZF_COMPLETION_TRIGGER=',,'
 
 # bat config
-export BAT_THEME="TwoDark"
+export BAT_THEME="Solarized (dark)"
+export BAT_STYLE="numbers,changes"
 
 # Welcome
 echo "\`odNMMmy\`                +oo:                                .hmd:"

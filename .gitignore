@@ -1,2 +1,4 @@
 *.swp
 .config/kak/plugins/
+# Ignoring the symlink to the original autoload
+.config/kak/autoload/autoload
