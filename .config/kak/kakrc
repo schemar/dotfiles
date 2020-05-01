@@ -40,10 +40,10 @@ plug "https://github.com/andreyorst/fzf.kak" defer fzf %{
 plug "https://github.com/h-youhei/kakoune-surround" config %{
     # Surround functionality
     declare-user-mode surround
-    map global surround s ':surround<ret>' -docstring 'surround'
-    map global surround c ':change-surround<ret>' -docstring 'change'
-    map global surround d ':delete-surround<ret>' -docstring 'delete'
-    map global surround t ':select-surrounding-tag<ret>' -docstring 'select tag'
+    map global surround s ': surround<ret>' -docstring 'surround'
+    map global surround c ': change-surround<ret>' -docstring 'change'
+    map global surround d ': delete-surround<ret>' -docstring 'delete'
+    map global surround t ': select-surrounding-tag<ret>' -docstring 'select tag'
     map global user s ': enter-user-mode surround<ret>' -docstring 'surround'
 }
 
@@ -56,12 +56,12 @@ plug "https://github.com/ul/kak-lsp" config %{
     set global lsp_diagnostic_line_warning_sign '┊'
 
     declare-user-mode kaklsp
-    map global kaklsp d ':lsp-definition<ret>' -docstring 'go to definition'
-    map global kaklsp r ':lsp-references<ret>' -docstring 'show references'
-    map global kaklsp i ':lsp-implementation<ret>' -docstring 'show implementations'
-    map global kaklsp R ':lsp-rename-prompt<ret>' -docstring 'rename'
-    map global kaklsp e ':lsp-find-error --include-warnings<ret>' -docstring 'go to next error/warning'
-    map global kaklsp p ':lsp-find-error --previous --include-warnings<ret>' -docstring 'go to previous error/warning'
+    map global kaklsp d ': lsp-definition<ret>' -docstring 'go to definition'
+    map global kaklsp r ': lsp-references<ret>' -docstring 'show references'
+    map global kaklsp i ': lsp-implementation<ret>' -docstring 'show implementations'
+    map global kaklsp R ': lsp-rename-prompt<ret>' -docstring 'rename'
+    map global kaklsp e ': lsp-find-error --include-warnings<ret>' -docstring 'go to next error/warning'
+    map global kaklsp p ': lsp-find-error --previous --include-warnings<ret>' -docstring 'go to previous error/warning'
     map global user d ': enter-user-mode kaklsp<ret>' -docstring 'development'
 
     define-command lsp-restart -docstring 'restart lsp server' %{ lsp-stop; lsp-start }
