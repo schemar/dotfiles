@@ -55,14 +55,14 @@ plug "https://github.com/ul/kak-lsp" config %{
     set global lsp_diagnostic_line_error_sign '║'
     set global lsp_diagnostic_line_warning_sign '┊'
 
-    declare-user-mode kaklsp
-    map global kaklsp d ': lsp-definition<ret>' -docstring 'go to definition'
-    map global kaklsp r ': lsp-references<ret>' -docstring 'show references'
-    map global kaklsp i ': lsp-implementation<ret>' -docstring 'show implementations'
-    map global kaklsp R ': lsp-rename-prompt<ret>' -docstring 'rename'
-    map global kaklsp e ': lsp-find-error --include-warnings<ret>' -docstring 'go to next error/warning'
-    map global kaklsp p ': lsp-find-error --previous --include-warnings<ret>' -docstring 'go to previous error/warning'
-    map global user d ': enter-user-mode kaklsp<ret>' -docstring 'development'
+    declare-user-mode development
+    map global development d ': lsp-definition<ret>' -docstring 'go to definition'
+    map global development r ': lsp-references<ret>' -docstring 'show references'
+    map global development i ': lsp-implementation<ret>' -docstring 'show implementations'
+    map global development R ': lsp-rename-prompt<ret>' -docstring 'rename'
+    map global development e ': lsp-find-error --include-warnings<ret>' -docstring 'go to next error/warning'
+    map global development p ': lsp-find-error --previous --include-warnings<ret>' -docstring 'go to previous error/warning'
+    map global user d ': enter-user-mode development<ret>' -docstring 'development'
 
     define-command lsp-restart -docstring 'restart lsp server' %{ lsp-stop; lsp-start }
     hook global WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript) %{

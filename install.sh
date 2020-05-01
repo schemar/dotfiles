@@ -12,6 +12,7 @@ mkdir -p $HOME/.nvm
 nvm install node || WARNINGS="${WARNINGS}\nnvm could not install node"
 npm install -g typescript
 npm install -g typescript-language-server
+npm install -g eslint-formatter-kakoune
 brew install yarn
 
 if [[ "$OSTYPE" == "darwin"* ]]; then

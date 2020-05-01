@@ -57,6 +57,21 @@ Since kakoune has a helpful info panel, I will only list the main commands here:
 There are some files in the .config/kak/autoload/ directory in addition to the .config/kak/kakrc file.
 Check there if something appears to be missing from kakrc.
 
+In JavaScript/TypeScript files, you can check `,d` to lint and format with prettier and eslint.
+
+You can add these to a `.kakrc.local` in your project to auto-format or auto-lint:
+
+```
+hook global WinSetOption filetype=(javascript|typescript) %{
+    # To auto-prettier on write:
+    hook buffer BufWritePre .* prettier-format
+    # To auto-eslint-fix on write:
+    hook buffer BufWritePost .* eslint-format
+    # To auto-eslint on write:
+    hook buffer BufWritePost .* lint
+}
+```
+
 ### Vim
 
 * `<ctrl>+w {v,s}` split window vertically/horizontally.
