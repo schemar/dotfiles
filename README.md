@@ -61,12 +61,18 @@ In JavaScript/TypeScript files, you can check `,d` to lint and format with prett
 
 You can add these to a `.kakrc.local` in your project to auto-format or auto-lint:
 
-```
+``` kak
 hook global WinSetOption filetype=(javascript|typescript) %{
-    # To auto-prettier on write:
-    hook buffer BufWritePre .* prettier-format
-    # To auto-eslint-fix on write:
-    hook buffer BufWritePost .* eslint-format
+    # Use *one* of the following to replace eslint as a formatter:
+    alias window tsformat prettier-format
+    alias window tsformat tslint-format
+
+    # Use *one* of the follwing to auto-format on write
+    # To auto-format on write with prettier:
+    hook buffer BufWritePre .* tsformat
+    # To auto-format on write with eslint:
+    hook buffer BufWritePost .* tsformat
+
     # To auto-eslint on write:
     hook buffer BufWritePost .* lint
 }
