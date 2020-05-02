@@ -67,11 +67,8 @@ hook global WinSetOption filetype=(javascript|typescript) %{
     alias window tsformat prettier-format
     alias window tsformat tslint-format
 
-    # Use *one* of the follwing to auto-format on write
-    # To auto-format on write with prettier:
+    # Use the follwing to auto-format on write with eslint or prettier:
     hook buffer BufWritePre .* tsformat
-    # To auto-format on write with eslint:
-    hook buffer BufWritePost .* tsformat
 
     # To auto-eslint on write:
     hook buffer BufWritePost .* lint

@@ -1,21 +1,27 @@
 define-command -hidden eslint-format %{
-    set-option window autoreload 'yes'
-    execute-keys ': w<ret>'
-    nop %sh{
-        npx eslint --fix "$kak_buffile"
-    }
-    hook -once window BufReload .* %{
-        unset-option window autoreload
-    }
+    cursor_store_position
+
+    # Pipes the buffer into stdin from eslint.
+    # eslint does a fix-dry-run with a json formatter which results in a JSON output to stdout that includes the fixed file.
+    # jq then extracts the fixed file output from the JSON.
+    # Because of the `%|` at the beginngin, that output replaces the entire current buffer.
+    execute-keys '%|echo "$kak_selection" | npx eslint --format json --fix-dry-run --stdin --stdin-filename "$kak_buffile" | jq -r ".[].output"<ret>'
+
+    # Remove an extra empty line at the end that the command adds:
+    execute-keys 'gjd'
+
+    cursor_restore_position
 }
 
 define-command -hidden prettier-format %{
+    cursor_store_position
     execute-keys '%|npx prettier --stdin-filepath $kak_buffile<ret><space>;'
+    cursor_restore_position
 }
 
 define-command -hidden tslint-format %{
     set-option window autoreload 'yes'
-    execute-keys ': w<ret>'
+    write
     nop %sh{
         npx tslint --fix "$kak_buffile"
     }
