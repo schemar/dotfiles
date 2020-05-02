@@ -1,7 +1,11 @@
 define-command -hidden eslint-format %{
+    set-option window autoreload 'yes'
     execute-keys ': w<ret>'
     nop %sh{
         npx eslint --fix "$kak_buffile"
+    }
+    hook -once window BufReload .* %{
+        unset-option window autoreload
     }
 }
 
@@ -10,9 +14,13 @@ define-command -hidden prettier-format %{
 }
 
 define-command -hidden tslint-format %{
+    set-option window autoreload 'yes'
     execute-keys ': w<ret>'
     nop %sh{
         npx tslint --fix "$kak_buffile"
+    }
+    hook -once window BufReload .* %{
+        unset-option window autoreload
     }
 }
 
