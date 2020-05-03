@@ -1,22 +1,50 @@
 define-command -hidden eslint-format %{
-    cursor_store_position
+    evaluate-commands -draft -no-hooks -save-regs '|' %{
+        cursor_store_position
 
-    # Pipes the buffer into stdin from eslint.
-    # eslint does a fix-dry-run with a json formatter which results in a JSON output to stdout that includes the fixed file.
-    # jq then extracts the fixed file output from the JSON.
-    # Because of the `%|` at the beginngin, that output replaces the entire current buffer.
-    execute-keys '%|echo "$kak_selection" | npx eslint --format json --fix-dry-run --stdin --stdin-filename "$kak_buffile" | jq -r ".[].output"<ret>'
+        # Select all to format
+        execute-keys '%'
 
-    # Remove an extra empty line at the end that the command adds:
-    execute-keys 'gjd'
+        # eslint does a fix-dry-run with a json formatter which results in a JSON output to stdout that includes the fixed file.
+        # jq then extracts the fixed file output from the JSON. -j returns the raw output without any escaping.
+        set-register '|' %{
+            %sh{
+                echo "$kak_selection" | \
+                npx eslint --format json \
+                           --fix-dry-run \
+                           --stdin \
+                           --stdin-filename "$kak_buffile" | \
+                jq -j ".[].output"
+            }
+        }
 
-    cursor_restore_position
+        # Replace all with content from register:
+        execute-keys '|<ret>'
+
+        cursor_restore_position
+    }
 }
 
 define-command -hidden prettier-format %{
-    cursor_store_position
-    execute-keys '%|npx prettier --stdin-filepath $kak_buffile<ret><space>;'
-    cursor_restore_position
+    evaluate-commands -draft -no-hooks -save-regs '|' %{
+        cursor_store_position
+
+        # Select all to format
+        execute-keys '%'
+
+        # Run prettier on the selection from stdin
+        set-register '|' %{
+            %sh{
+                echo "$kak_selection" | \
+                npx prettier --stdin-filepath $kak_buffile
+            }
+        }
+
+        # Replace all with content from register:
+        execute-keys '|<ret>'
+
+        cursor_restore_position
+    }
 }
 
 define-command -hidden tslint-format %{
