@@ -15,6 +15,10 @@ npm install -g typescript-language-server
 npm install -g eslint-formatter-kakoune
 brew install yarn
 
+# Install Tmux Plugin Manager
+mkdir -p $HOME/.config/tmux/plugins
+git clone https://github.com/tmux-plugins/tpm $HOME/.config/tmux/plugins/tpm
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
   brew cask install amethyst
   brew install ul/kak-lsp/kak-lsp
@@ -34,8 +38,9 @@ echo -e "### Symlinking config files"
 # symlink dotfiles into repository
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 [ ! -L $HOME/.vimrc ] && ln -s $SCRIPTPATH/.vimrc  $HOME/.vimrc || WARNINGS="${WARNINGS}\nCheck symlinking vimrc"
-[ ! -L $HOME/.config/.tmux.conf ] && ln -s $SCRIPTPATH/.tmux.conf  $HOME/.tmux.conf || WARNINGS="${WARNINGS}\nCheck symlinking tmux conf"
+[ ! -L $HOME/.tmux.conf ] && ln -s $SCRIPTPATH/.tmux.conf  $HOME/.tmux.conf || WARNINGS="${WARNINGS}\nCheck symlinking tmux conf"
 [ ! -L $HOME/.zshrc ] && ln -s $SCRIPTPATH/.zshrc  $HOME/.zshrc || WARNINGS="${WARNINGS}\nCheck symlinking zshrc"
+[ ! -L $HOME/.config/powerline ] && ln -s $SCRIPTPATH/.config/powerline $HOME/.config/powerline || WARNINGS="${WARNINGS}\nCheck symlinking powerline config"
 [ ! -L $HOME/.gitconfig ] && ln -s $SCRIPTPATH/.gitconfig  $HOME/.gitconfig || WARNINGS="${WARNINGS}\nCheck symlinking gitconfig"
 mkdir -p $HOME/.config
 [ ! -L $HOME/.config/nvim ] && ln -s $SCRIPTPATH/.config/nvim $HOME/.config/nvim || WARNINGS="${WARNINGS}\nCheck symlinking nvim config"
@@ -62,6 +67,8 @@ echo -e "To finsh setup:"
 echo -e " * Change the default shell \`chsh -s <path/to/brew/zsh>\`"
 echo -e " * Install a patched font from https://github.com/ryanoasis/nerd-fonts"
 echo -e "   and set it in your terminal emulator"
+echo -e " * Download Nord colors and set them in your terminal emulator:"
+echo -e "   https://www.nordtheme.com/"
 echo -e " * Install oh-my-zsh in zsh"
 echo -e " * Run :PlugInstall in vim"
 echo -e " * Run :plug-install in kakoune"

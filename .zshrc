@@ -67,7 +67,7 @@ export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers,changes --color=always {}
 export FZF_COMPLETION_TRIGGER=',,'
 
 # bat config
-export BAT_THEME="Solarized (dark)"
+export BAT_THEME="Nord"
 export BAT_STYLE="numbers,changes"
 
 # default editor

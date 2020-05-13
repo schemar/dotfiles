@@ -1,18 +1,16 @@
-# Colors
-colorscheme solarized-dark-termcolors
-
 # Remove clippy from info window
 set global ui_options ncurses_assistant=none
 
-# Add line numbers
+# Add relative line numbers
 add-highlighter global/ number-lines -relative
 
-# Use rg for grepping
+# Use ripgrep for grepping
 set global grepcmd 'rg --column'
 
 # Ranger is configured in the autoload directory
 map global user r ':  toggle-ranger<ret>' -docstring 'browse files with ranger'
 
+# tig is configured in the autoload directory
 map global user g ': enter-user-mode tig<ret>' -docstring 'tig'
 
 # A user mode for development related tasks like lsp and formatting
@@ -21,6 +19,7 @@ declare-user-mode development
 # Plugin manager and plugins
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
+plug "abuffseagull/nord.kak" theme %{ colorscheme nord }
 plug "https://github.com/schemar/kak-jsts" config %{
     hook global WinSetOption filetype=(javascript|typescript) %{
         alias window tsformat format-eslint

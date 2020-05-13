@@ -1,4 +1,5 @@
 *.swp
 .config/kak/plugins/
+.config/kak/colors/
 # Ignoring the symlink to the original autoload
 .config/kak/autoload/autoload
