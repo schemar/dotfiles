@@ -1,0 +1,128 @@
+##
+## Paths
+##
+set folder = ~/.mail
+set header_cache = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
+set certificate_file = ~/.config/certificates.pem
+set tmpdir = ~/.mutt/tmp
+
+##
+## Basic options
+##
+set wait_key = no
+# Mailbox type from mbsync
+set mbox_type = Maildir
+set timeout = 5
+set sleep_time = 0
+# Check for new mail every:
+set mail_check = 5
+set quit
+set thorough_search
+set mail_check_stats
+set delete               # don't ask, just do
+unset confirmappend
+unset mark_old
+unset beep_new
+
+set imap_peek = no # this setting asserts that messages stay read when moved between Gmail labels
+
+# Speed tuning
+# use very high $read_inc to speed up reading hcache'd maildirs
+folder-hook . 'set read_inc=1000'
+# use lower value for reading slower remote IMAP folders
+#folder-hook ^imap 'set read_inc=100'
+# use even lower value for reading even slower remote POP folders
+#folder-hook ^pop 'set read_inc=1'
+
+##
+## Compose View Options
+##
+set envelope_from                    # which from?
+set edit_headers                     # show headers when composing
+set fast_reply                       # skip to compose when replying
+set askcc                            # ask for CC:
+set fcc_attach                       # save attachments with the body
+set forward_format = "Fwd: %s"       # format of subject when forwarding
+set forward_decode                   # decode when forwarding
+set attribution = "On %d, %n wrote:" # format of quoting header
+set reply_to                         # reply to Reply to: field
+set reverse_name                     # reply as whomever it was to
+set include                          # include message in replies
+set forward_quote                    # include message in forwards
+set editor = "kak"
+set text_flowed
+unset sig_dashes                     # no dashes before sig
+unset mime_forward                   # forward attachments as part of body
+
+# Address book management with abook
+set query_command= "lbdbq %s"
+set query_format="%4c %t %-40.40a %-30.30n %?e?(%e)?" # Do not cut off query results
+macro index,pager F "<pipe-message>lbdb-fetchaddr -c 'utf-8'<return>" \
+             "add the sender address to lbdb"
+bind editor <Tab> complete-query # Use tab to search for addresses
+
+##
+## Status bar, date format, finding stuff etc.
+##
+set status_chars = " *%A"
+set status_format = "[ Folder: %f ] [%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]%>─%?p?( %p postponed )?"
+set date_format = "%Y-%m-%d %H:%M"
+set index_format = "[%Z] %?X?A&-? %D  %-20.20F  %s"
+set sort = threads
+set sort_aux = reverse-last-date-received
+set uncollapse_jump
+set sort_re
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set send_charset = "utf-8:iso-8859-1:us-ascii"
+set charset = "utf-8"
+
+##
+## Pager View Options
+##
+set pager_index_lines = 10
+set pager_context = 3
+set pager_stop
+set menu_scroll
+set tilde
+unset markers
+
+##
+## Email headers and attachments
+##
+#ignore *
+#unignore from: to: cc: bcc: date: subject:
+#unhdr_order *
+#hdr_order from: to: cc: bcc: date: subject:
+set mailcap_path =  ~/.mutt/mailcap
+alternative_order text/plain text/enriched text/html
+auto_view text/html
+
+##
+## Sidebar patch config
+##
+set sidebar_visible
+set sidebar_short_path
+set sidebar_folder_indent
+set sidebar_width = 27
+set sidebar_divider_char = ' | '
+set sidebar_format = "%B %* [%?N?%N / ?%S]"
+
+# Mailboxes to show in the sidebar.
+mailboxes =futurice/INBOX
+mailboxes =futurice/Atlassian
+mailboxes "=futurice/Sent" "=futurice/Trash" "=futurice/Archive"
+
+# by default, use futurice
+set realname = "Martin Schenck"
+set spoolfile = "+futurice/INBOX"
+source ~/.mutt/accounts/futurice
+
+# when changing into other mailboxes, use different adresses etc.
+folder-hook futurice/* source ~/.mutt/accounts/futurice
+
+source ~/.mutt/bindings
+
+source ~/.mutt/themes/colors-solarized
+source ~/.mutt/themes/powerline.neomuttrc

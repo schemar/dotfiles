@@ -1,0 +1,47 @@
+# Note: Due to Gmail horribly weird "All Mail" concept,
+# mail is handled a bit differently. The INBOX is where new
+# mail is read. When it is move to the Archive ("All Mail")
+# it will pop up unread and as a duplicate.
+# Gmail will automatically delete the duplicate, so it will
+# be removed at a later sync step.
+# Use the new macro (at the very bottom) to mark all mail
+# read.
+set move = no
+
+set from = "martin.schenck@futurice.com"
+set sendmail = "/usr/local/bin/msmtp -a futurice"
+
+# Set folders
+set spoolfile = "+futurice/INBOX"
+set mbox = "+futurice/Archive"
+set trash = "+futurice/Trash"
+unset postponed
+unset record # Gmail automatically adds mails to "Sent"
+
+# custom signaure
+set signature = ~/.mutt/signatures/futurice
+
+macro index o "<shell-escape>mbsync futurice<enter>" "run mbsync to sync mail for this account"
+
+# macro index,pager J \
+#   "<enter-command>set my_old_resolve=\$resolve noresolve<enter>\
+#   <tag-prefix><clear-flag>n<enter-command>set resolve=\$my_old_resolve<enter>\
+#   <save-message>+mailbox/junk<enter>" \
+#   "mark as read and move to junk folder"
+
+# Gmail: see above; archiving means deleting e.g. from INBOX.
+macro index,pager A \
+  "<save-message>+futurice/Archive<enter>"  \
+  "move message to the archive"
+
+macro index,pager I \
+  "<save-message>+futurice/INBOX<enter>"  \
+  "move message to the inbox"
+
+macro index,pager T \
+  "<save-message>+futurice/Trash<enter>"  \
+  "move message to the trash"
+
+macro index \er \
+  "<tag-pattern>all<enter><tag-prefix><clear-flag>N<untag-pattern>all<enter>" \
+  "mark all as read"

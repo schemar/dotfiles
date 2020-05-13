@@ -1,0 +1,69 @@
+#################################
+####### Account futurice ########
+#################################
+
+IMAPAccount futurice
+Host imap.gmail.com
+User martin.schenck@futurice.com
+PassCmd "security find-internet-password -s 'imap.gmail.com' -a 'martin.schenck@futurice.com' -w"
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile ~/.config/certificates.pem
+
+# Remote storage
+IMAPStore futurice-remote
+Account futurice
+
+# Local storage
+MaildirStore futurice-local
+SubFolders Verbatim
+# Trailing slash crucial:
+Path ~/.mail/futurice/
+Inbox ~/.mail/futurice/INBOX
+
+Channel futurice-default
+Master :futurice-remote:
+Slave :futurice-local:
+# All labels that exist on Google:
+Patterns INBOX Atlassian
+CopyArrivalDate yes
+# Do not create folders/labels on the server
+Create Slave
+Expunge Both
+# Save the synchronization state files in the relevant directory
+SyncState *
+Sync All
+
+Channel futurice-sent
+Master :futurice-remote:"[Gmail]/Sent Mail"
+Slave :futurice-local:Sent
+CopyArrivalDate yes
+Create Slave
+Expunge Both
+SyncState *
+Sync All
+
+Channel futurice-trash
+Master :futurice-remote:"[Gmail]/Trash"
+Slave :futurice-local:Trash
+CopyArrivalDate yes
+Create Slave
+Expunge Both
+SyncState *
+Sync All
+
+Channel futurice-archive
+Master :futurice-remote:"[Gmail]/All Mail"
+Slave :futurice-local:Archive
+CopyArrivalDate yes
+Create Slave
+Expunge Both
+SyncState *
+Sync All
+
+Group futurice
+Channel futurice-default
+Channel futurice-sent
+Channel futurice-trash
+Channel futurice-archive

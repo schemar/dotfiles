@@ -1,0 +1,29 @@
+# some sane kakoune-like keybindings
+bind index,pager k previous-entry
+bind index,pager j next-entry
+bind index,pager g noop
+bind index,pager \Cu half-up
+bind index,pager \Cd half-down
+bind pager gk top
+bind index gk first-entry
+bind pager gj bottom
+bind index gj last-entry
+
+# Sidebar Navigation
+# `\e` for `<alt>`
+bind index,pager \ej sidebar-next
+bind index,pager \ek sidebar-prev
+bind index,pager \el sidebar-open
+
+# global index and pager shortcuts
+bind index,pager @ compose-to-sender
+bind index,pager R group-reply
+bind index <tab> sync-mailbox
+bind index <space> collapse-thread
+
+# Save all attachments
+macro pager \ea "<pipe-message> ripmime -i - -d ~/Downloads && rm ~/Downloads/textfile*<enter>" "Save all non-text attachments using ripmime"
+# opening urls with urlscan
+macro pager \eu "<pipe-message> urlscan<enter>" "call urlscan to extract URLs out of a message"
+# Sync all email
+macro index,pager O "<shell-escape>mbsync -a<enter>" "run mbsync to sync all mail"
