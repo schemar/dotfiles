@@ -21,6 +21,14 @@ declare-user-mode development
 # Plugin manager and plugins
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
+plug "https://github.com/schemar/kak-jsts" config %{
+    hook global WinSetOption filetype=(javascript|typescript) %{
+        alias window tsformat format-eslint
+        map window development l -docstring 'lint' ': lint<ret>'
+        map window development f -docstring 'format' ': tsformat<ret>'
+    }
+}
+
 plug "https://github.com/occivink/kakoune-vertical-selection"
 
 plug "https://github.com/andreyorst/powerline.kak" defer powerline %{
@@ -90,6 +98,7 @@ plug "https://github.com/ul/kak-lsp" config %{
 }
 
 # Source a local project kak config if it exists
+# Do this last to ensure it overwrites everything else
 # Make sure it is set as a kak filetype
 hook global BufCreate (.*/)?(\.kakrc\.local) %{
     set-option buffer filetype kak
