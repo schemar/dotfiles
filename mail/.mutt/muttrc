@@ -124,5 +124,5 @@ folder-hook futurice/* source ~/.mutt/accounts/futurice
 
 source ~/.mutt/bindings
 
-source ~/.mutt/themes/colors-solarized
+source ~/.mutt/themes/colors
 source ~/.mutt/themes/powerline.neomuttrc
