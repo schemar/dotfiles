@@ -6,12 +6,20 @@ add-highlighter global/ number-lines -relative
 
 # Use ripgrep for grepping
 set global grepcmd 'rg --column'
+map -docstring 'grep' global user g ': grepmenu '
+set global grepmenucmd 'rg --column'
 
 # Ranger is configured in the autoload directory
 map global user r ':  toggle-ranger<ret>' -docstring 'browse files with ranger'
 
 # tig is configured in the autoload directory
-map global user g ': enter-user-mode tig<ret>' -docstring 'tig'
+map global user t ': enter-user-mode tig<ret>' -docstring 'tig'
+
+# all kinds of case-insensitive searches
+map -docstring 'case insensitive search' global user '/' /(?i)
+map -docstring 'case insensitive backward search' global user '<a-/>' <a-/>(?i)
+map -docstring 'case insensitive extend search' global user '?' ?(?i)
+map -docstring 'case insensitive backward extend-search' global user '<a-?>' <a-?>(?i)
 
 # A user mode for development related tasks like lsp and formatting
 declare-user-mode development
@@ -20,6 +28,7 @@ declare-user-mode development
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 plug "abuffseagull/nord.kak" theme %{ colorscheme nord }
+
 plug "https://github.com/schemar/kak-jsts" config %{
     hook global WinSetOption filetype=(javascript|typescript) %{
         alias window tsformat format-eslint
@@ -28,7 +37,19 @@ plug "https://github.com/schemar/kak-jsts" config %{
     }
 }
 
-plug "https://github.com/occivink/kakoune-vertical-selection"
+plug "https://github.com/occivink/kakoune-vertical-selection" config %{
+    map -docstring 'vertical selection down' global user v     ': vertical-selection-down<ret>'
+    map -docstring 'vertical selection up'   global user <a-v> ': vertical-selection-up<ret>'
+    map -docstring 'vertical selection up and down' global user V     ': vertical-selection-up-and-down<ret>'
+}
+
+plug "https://github.com/krornus/kakoune-toggle-map" config %{
+    toggle-map -docstring 'toggle search highlights' global user h hlsearch-on hlsearch-off
+}
+
+plug "https://github.com/jjk96/kakoune-rainbow" config %{
+    toggle-map -docstring 'toggle rainbow parantheses' global user [ rainbow rainbow-disable
+}
 
 plug "https://github.com/andreyorst/powerline.kak" defer powerline %{
     set-option global powerline_format 'git bufname filetype mode_info line_column position'
