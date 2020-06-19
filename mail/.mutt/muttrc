@@ -23,7 +23,8 @@ set mail_check_stats
 set delete               # don't ask, just do
 unset confirmappend
 unset mark_old
-unset beep_new
+set beep = no
+set beep_new = no
 
 set imap_peek = no # this setting asserts that messages stay read when moved between Gmail labels
 
