@@ -12,6 +12,7 @@ Requirements:
 * [Homebrew](https://docs.brew.sh/Installation) (on macOS, Linux, or WSL)
 * [Homebrew's requirements](https://docs.brew.sh/Installation)
 
+Post-installation:
 * You need to change the default shell to zsh `chsh -s <path/to/brew/zsh>`
 * You need to set a [Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/DejaVuSansMono/Regular/complete) as your terminal emulator's font.
 * You need to run `<ctrl>+b I` inside tmux to install the tmux plug-ins.
