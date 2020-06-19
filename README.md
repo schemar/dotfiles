@@ -12,68 +12,66 @@ Requirements:
 * [Homebrew](https://docs.brew.sh/Installation) (on macOS, Linux, or WSL)
 * [Homebrew's requirements](https://docs.brew.sh/Installation)
 
-You need to change the default shell to zsh `chsh -s <path/to/brew/zsh>`
-
-You need to set a [powerline font](https://github.com/powerline/fonts) as your terminal emulator's font.
-
-You need to run `:PlugInstall` inside vim.
-
-You need to run `:plug-install` inside kakoune.
-
-You need to install oh-my-zsh inside zsh.
+* You need to change the default shell to zsh `chsh -s <path/to/brew/zsh>`
+* You need to set a [Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/DejaVuSansMono/Regular/complete) as your terminal emulator's font.
+* You need to run `<ctrl>+b I` inside tmux to install the tmux plug-ins.
+* You need to run `:plug-install` inside kakoune.
+* You need to run `:PlugInstall` inside NeoVim.
+* You need to install oh-my-zsh inside zsh.
 
 ## Usage
 
-An overview over the most common tasks follows below, especially if they differ from the default. Check the files' contents for more details.
+### Included
 
-**This is not a replacement for the documentation of the tools! Please read the manuals.**
+* [Zsh](https://www.zsh.org/)
+* [starship](https://github.com/starship/starship)
+* [tmux](https://github.com/tmux/tmux)❤️
+* [kakoune editor](https://github.com/mawww/kakoune)❤️
+* [fzf](https://github.com/junegunn/fzf)
+* [bat](https://github.com/sharkdp/bat)
+* [ripgrep](https://github.com/BurntSushi/ripgrep)
+* [fd](https://github.com/sharkdp/fd)
+* [ranger](https://github.com/ranger/ranger)
+* [tig](https://github.com/jonas/tig)
+* [NeoVim](https://github.com/neovim/neovim)
+* [nvm](https://github.com/nvm-sh/nvm)
+* [direnv](https://github.com/direnv/direnv)
+* [Amethyst (on macOS)](https://github.com/ianyh/Amethyst)
+
+An overview over the most common tasks follows below, especially if they differ from the default. Check the files' contents for more details.
 
 ### Command Line
 
 * `,,<tab>` to fuzzy find a path. E.g. `cd ./Projects/,,<tab>` will let you fuzzy find directories inside the Projects directory.
-* `<ctrl>+r` to fuzzy find in the shells history.
-* `tmux` to open a new tmux session.
-* `bat <filename>` to show a scrollable, syntax-highlighted file output.
+* `<ctrl>+r` to fuzzy find in the shell's history.
+* `.nvmrc` files will automatically trigger `nvm use`.
 
 ### Inside Tmux
+
+Tmux sessions will be stored every 15 minutes and auto-restored when starting tmux the next time.
+Persists across restarts.
 
 * `<ctrl>+b {c,n,p}` create/next/previous window.
 * `<ctrl>+b {v,s}` split pane vertically/horizontally.
 * `<ctrl>+{h,j,k,l}` to move curser across panes (works also with vim windows).
 * `<ctrl>+b z` to (un)zoom the current pane.
-* `<ctrl>+b {<,>}` resize panes by fixed amount.
+* `<ctrl>+b {<,>,+,-}` resize panes by fixed amount left/right/up/down.
 * `<ctrl>+b [` to enable copy mode. Use e.g. to scroll up to see older output. Movement in copy mode is vim-like (e.g. `<ctrl>+{d,u}` to move down/up a page).
+* `<ctrl>+b u` fuzzy find and open a URL from the buffer.
 
 ### Kakoune
 
-Since kakoune has a helpful info panel, I will only list the main commands here:
-
-* `,r` to browse files with ranger.
-* `,f` to fuzzy find files, buffers, etc.
-* `,s` to surround, e.g. with quotes.
-* `,d` to interact with the language server, e.g. "show references", "rename", etc.
-* `,t` to interact with tig.
+Since kakoune has a helpful info panel, I don't need to list much here.
+Check the info panel when entering user mode with `,`.
 
 There are some files in the .config/kak/autoload/ directory in addition to the .config/kak/kakrc file.
 Check there if something appears to be missing from kakrc.
 
-In JavaScript/TypeScript files, you can check `,d` to lint and format with prettier and eslint.
+In JavaScript/TypeScript files, you can check `,df` to lint and format with prettier and eslint.
 
-You can add these to a `.kakrc.local` in your project to auto-format or auto-lint:
+You can add these to a `.kakrc.local` in your project for project specific settings.
 
-``` kak
-hook global WinSetOption filetype=(javascript|typescript) %{
-    # Use *one* of the following to replace eslint as a formatter:
-    alias window tsformat prettier-format
-    alias window tsformat tslint-format
-
-    # Use the follwing to auto-format on write with eslint or prettier:
-    hook buffer BufWritePre .* tsformat
-
-    # To auto-eslint on write:
-    hook buffer BufWritePost .* lint
-}
-```
+See https://github.com/schemar/kak-jsts/ for details on TypeScript formatting/linting.
 
 ### Vim
 
