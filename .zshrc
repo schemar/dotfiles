@@ -12,12 +12,26 @@ export PATH="$BREW_PREFIX/sbin:$PATH"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# NVM configuration (see https://github.com/lukechilds/zsh-nvm for details)
+export NVM_COMPLETION=true
+export NVM_LAZY_LOAD=true
+export NVM_AUTO_USE=true
+
+# Auto-load nvm with .nvmrc due to lazy loading
+autoload -U add-zsh-hook
+load-nvmrc() {
+  if [ -f "./.nvmrc" ]; then
+    nvm use
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git yarn brew fd)
+plugins=(zsh-nvm git yarn brew fd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -44,11 +58,6 @@ compinit
 
 # Correct locale
 export LC_ALL=en_US.UTF-8
-
-# NVM requires
-export NVM_DIR="$HOME/.nvm"
-[ -s "$BREW_PREFIX/opt/nvm/nvm.sh" ] && . "$BREW_PREFIX/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "$BREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && . "$BREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # direnv to load environment (variables) per directory/project
 eval "$(direnv hook zsh)"

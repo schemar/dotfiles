@@ -7,8 +7,11 @@ brew install fzf ripgrep vim neovim tmux python nvm zsh fd bat direnv kakoune ra
 $(brew --prefix)/opt/fzf/install --completion --key-bindings --update-rc --no-bash --no-fish || WARNINGS="${WARNINGS}\nCheck errors when installing fzf"
 pip3 install --user --upgrade pynvim
 
-mkdir -p $HOME/.nvm
-nvm install node || WARNINGS="${WARNINGS}\nnvm could not install node"
+# NVM
+mkdir -p $HOME/.oh-my-zsh/custom/plugins/
+git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
+
+# TypeScript
 npm install -g typescript
 npm install -g typescript-language-server
 npm install -g eslint-formatter-kakoune
@@ -39,7 +42,6 @@ SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 [ ! -L $HOME/.vimrc ] && ln -s $SCRIPTPATH/.vimrc  $HOME/.vimrc || WARNINGS="${WARNINGS}\nCheck symlinking vimrc"
 [ ! -L $HOME/.tmux.conf ] && ln -s $SCRIPTPATH/.tmux.conf  $HOME/.tmux.conf || WARNINGS="${WARNINGS}\nCheck symlinking tmux conf"
 [ ! -L $HOME/.zshrc ] && ln -s $SCRIPTPATH/.zshrc  $HOME/.zshrc || WARNINGS="${WARNINGS}\nCheck symlinking zshrc"
-[ ! -L $HOME/.config/powerline ] && ln -s $SCRIPTPATH/.config/powerline $HOME/.config/powerline || WARNINGS="${WARNINGS}\nCheck symlinking powerline config"
 [ ! -L $HOME/.config/alacritty ] && ln -s $SCRIPTPATH/.config/alacritty $HOME/.config/alacritty || WARNINGS="${WARNINGS}\nCheck symlinking alacritty config"
 [ ! -L $HOME/.gitconfig ] && ln -s $SCRIPTPATH/.gitconfig  $HOME/.gitconfig || WARNINGS="${WARNINGS}\nCheck symlinking gitconfig"
 mkdir -p $HOME/.config
