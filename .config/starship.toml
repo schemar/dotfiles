@@ -1,0 +1,22 @@
+character.symbol = ">"
+character.error_symbol = ">"
+character.vicmd_symbol = "<"
+character.style_success = "blue"
+character.style_failure = "red"
+
+directory.truncate_to_repo = false
+directory.style = "blue"
+
+git_branch.style = "purple"
+git_commit.only_detached = false
+git_commit.style = "purple"
+git_status.modified = "M"
+git_status.deleted = "D"
+git_status.renamed = "R"
+git_status.stashed_count.enabled = true
+git_status.style = "purple"
+
+nodejs.style = "green"
+
+package.symbol = "⬢ "
+package.style = "yellow"

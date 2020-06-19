@@ -59,6 +59,10 @@ export NVM_DIR="$HOME/.nvm"
 # direnv to load environment (variables) per directory/project
 eval "$(direnv hook zsh)"
 
+# staship shell prompt
+export STARSHIP_CONFIG="$HOME/.config/starship.toml"
+eval "$(starship init zsh)"
+
 # FZF config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude ".git/"'
