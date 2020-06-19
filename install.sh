@@ -5,7 +5,6 @@ WARNINGS="### WARNINGS"
 echo -e "### Installing packages"
 brew install fzf ripgrep vim neovim tmux python nvm zsh fd bat direnv kakoune ranger tig jq starship || WARNINGS="${WARNINGS}\nCheck errors with brew"
 $(brew --prefix)/opt/fzf/install --completion --key-bindings --update-rc --no-bash --no-fish || WARNINGS="${WARNINGS}\nCheck errors when installing fzf"
-pip3 install --upgrade powerline-status
 pip3 install --user --upgrade pynvim
 
 mkdir -p $HOME/.nvm

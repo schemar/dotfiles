@@ -42,12 +42,6 @@ compinit
 # End of lines added by compinstall
 # User config
 
-# powerline
-powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
-. $BREW_PREFIX/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
-
 # Correct locale
 export LC_ALL=en_US.UTF-8
 
