@@ -17,3 +17,5 @@
   r = rebase
   p = pull -p
   h = push
+[pull]
+	rebase = false
