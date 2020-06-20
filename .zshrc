@@ -31,7 +31,9 @@ add-zsh-hook chpwd load-nvmrc
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-nvm git yarn brew fd)
+plugins=(zsh-nvm fd)
+alias g='git'
+alias y='yarn'
 
 source $ZSH/oh-my-zsh.sh
 
@@ -52,7 +54,11 @@ bindkey -v
 zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
-compinit
+# Only check for new stuff once a day to improve shell startup time
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
 # End of lines added by compinstall
 # User config
 
