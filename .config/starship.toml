@@ -1,22 +1,115 @@
-character.symbol = ">"
-character.error_symbol = ">"
-character.vicmd_symbol = "<"
-character.style_success = "blue"
-character.style_failure = "red"
+# Change all styles to include `bg:black` once it is supported for the whole string
+# https://github.com/starship/starship/issues/1057
+#
+# Custom symbols as per https://starship.rs/presets/#nerd-font-symbols
 
-directory.truncate_to_repo = false
-directory.style = "blue"
+[character]
+symbol = ">"
+error_symbol = ">"
+vicmd_symbol = "<"
+style_success = "fg:blue"
+style_failure = "fg:red"
 
-git_branch.style = "purple"
-git_commit.only_detached = false
-git_commit.style = "purple"
-git_status.modified = "M"
-git_status.deleted = "D"
-git_status.renamed = "R"
-git_status.stashed_count.enabled = true
-git_status.style = "purple"
+[cmd_duration]
+style = "fg:blue"
+prefix = " "
 
-nodejs.style = "green"
+[directory]
+style = "fg:blue"
+truncate_to_repo = false
 
-package.symbol = "⬢ "
-package.style = "yellow"
+[aws]
+style = "fg:blue"
+symbol = " "
+
+[battery]
+style = "fg:blue"
+full_symbol = ""
+charging_symbol = ""
+discharging_symbol = ""
+
+[conda]
+style = "fg:blue"
+symbol = " "
+
+[docker]
+style = "fg:blue"
+symbol = " "
+
+[elixir]
+style = "fg:blue"
+symbol = " "
+
+[elm]
+style = "fg:blue"
+symbol = " "
+
+[git_branch]
+style = "fg:blue"
+symbol = " "
+
+[git_commit]
+style = "fg:blue"
+
+[git_status]
+style = "fg:blue"
+modified = "M"
+deleted = "D"
+renamed = "R"
+stashed_count.enabled = true
+
+[golang]
+style = "fg:blue"
+symbol = " "
+
+[haskell]
+style = "fg:blue"
+symbol = " "
+
+[hg_branch]
+style = "fg:blue"
+symbol = " "
+
+[java]
+style = "fg:blue"
+symbol = " "
+
+[julia]
+style = "fg:blue"
+symbol = " "
+
+[memory_usage]
+style = "fg:blue"
+symbol = " "
+
+[nim]
+style = "fg:blue"
+symbol = " "
+
+[nix_shell]
+style = "fg:blue"
+symbol = " "
+
+[nodejs]
+style = "fg:blue"
+symbol = " "
+
+[package]
+style = "fg:blue"
+symbol = " "
+
+[php]
+style = "fg:blue"
+symbol = " "
+
+[python]
+style = "fg:blue"
+symbol = " "
+
+[ruby]
+style = "fg:blue"
+symbol = " "
+
+[rust]
+style = "fg:blue"
+symbol = " "
