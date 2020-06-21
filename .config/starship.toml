@@ -3,6 +3,13 @@
 #
 # Custom symbols as per https://starship.rs/presets/#nerd-font-symbols
 
+[username]
+style_root = "fg:red"
+style_user = "fg:purple"
+
+[hostname]
+style = "fg:purple"
+
 [character]
 symbol = ">"
 error_symbol = ">"
