@@ -22,7 +22,7 @@ mkdir -p $HOME/.config/tmux/plugins
 git clone https://github.com/tmux-plugins/tpm $HOME/.config/tmux/plugins/tpm
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  brew cask install amethyst alacritty
+  brew cask install amethyst kitty
   brew install ul/kak-lsp/kak-lsp
 else
   WARNINGS="${WARNINGS}\nYou need to manually install kak-lsp"
@@ -42,7 +42,7 @@ SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 [ ! -L $HOME/.vimrc ] && ln -s $SCRIPTPATH/.vimrc  $HOME/.vimrc || WARNINGS="${WARNINGS}\nCheck symlinking vimrc"
 [ ! -L $HOME/.tmux.conf ] && ln -s $SCRIPTPATH/.tmux.conf  $HOME/.tmux.conf || WARNINGS="${WARNINGS}\nCheck symlinking tmux conf"
 [ ! -L $HOME/.zshrc ] && ln -s $SCRIPTPATH/.zshrc  $HOME/.zshrc || WARNINGS="${WARNINGS}\nCheck symlinking zshrc"
-[ ! -L $HOME/.config/alacritty ] && ln -s $SCRIPTPATH/.config/alacritty $HOME/.config/alacritty || WARNINGS="${WARNINGS}\nCheck symlinking alacritty config"
+[ ! -L $HOME/.config/kitty ] && ln -s $SCRIPTPATH/.config/kitty $HOME/.config/kitty || WARNINGS="${WARNINGS}\nCheck symlinking kitty config"
 [ ! -L $HOME/.gitconfig ] && ln -s $SCRIPTPATH/.gitconfig  $HOME/.gitconfig || WARNINGS="${WARNINGS}\nCheck symlinking gitconfig"
 mkdir -p $HOME/.config
 [ ! -L $HOME/.config/nvim ] && ln -s $SCRIPTPATH/.config/nvim $HOME/.config/nvim || WARNINGS="${WARNINGS}\nCheck symlinking nvim config"
