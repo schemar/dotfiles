@@ -15,6 +15,9 @@ map global user r ':  toggle-ranger<ret>' -docstring 'browse files with ranger'
 # tig is configured in the autoload directory
 map global user t ': enter-user-mode tig<ret>' -docstring 'tig'
 
+# git gutter
+map global user l ': git show-diff<ret>' -docstring 'gitgutter'
+
 # all kinds of case-insensitive searches
 map -docstring 'case insensitive search' global user '/' /(?i)
 map -docstring 'case insensitive backward search' global user '<a-/>' <a-/>(?i)
