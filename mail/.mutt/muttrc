@@ -113,6 +113,7 @@ set sidebar_format = "%B %* [%?N?%N / ?%S]"
 # Mailboxes to show in the sidebar.
 mailboxes =futurice/INBOX
 mailboxes =futurice/Atlassian
+mailboxes "=futurice/GitHub DU"
 mailboxes "=futurice/Sent" "=futurice/Trash" "=futurice/Archive"
 
 # by default, use futurice

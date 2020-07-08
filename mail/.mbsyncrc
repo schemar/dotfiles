@@ -26,7 +26,7 @@ Channel futurice-default
 Master :futurice-remote:
 Slave :futurice-local:
 # All labels that exist on Google:
-Patterns INBOX Atlassian
+Patterns INBOX Atlassian "GitHub DU"
 CopyArrivalDate yes
 # Do not create folders/labels on the server
 Create Slave
