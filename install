@@ -1,0 +1,88 @@
+#!/bin/bash
+
+set -euxo pipefail
+
+WARNINGS="### WARNINGS"
+
+function warn {
+  WARNINGS="${WARNINGS}\n$@"
+}
+
+echo -e "### Installing packages"
+brew install fzf ripgrep vim neovim tmux python nvm zsh fd bat direnv kakoune ranger tig jq starship || warn "Check errors with brew"
+"$(brew --prefix)/opt/fzf/install" --completion --key-bindings --update-rc --no-bash --no-fish || warn "Check errors when installing fzf"
+pip3 install --user --upgrade pynvim
+
+# NVM
+mkdir -p "$HOME"/.oh-my-zsh/custom/plugins/
+git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm || warn "Could not clone zsh-nvm"
+
+# TypeScript
+npm install -g typescript
+npm install -g typescript-language-server
+npm install -g eslint-formatter-kakoune
+brew install yarn
+
+# Install Tmux Plugin Manager
+mkdir -p "$HOME"/.config/tmux/plugins
+git clone https://github.com/tmux-plugins/tpm "$HOME"/.config/tmux/plugins/tpm || warn "Could not clone tmux plugins"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  brew cask install amethyst kitty
+  brew install ul/kak-lsp/kak-lsp
+else
+  warn "You need to manually install kak-lsp"
+fi
+
+echo -e "### Installing (Neo)Vim plugin managers"
+# vim-plug to manage plugins in vim
+curl -fLo "$HOME"/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# same for neovim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+echo -e "### Symlinking config files"
+# symlink dotfiles into repository
+SCRIPTPATH="$( cd "$(dirname "$0")" || exit ; pwd -P )"
+ln -snf "$SCRIPTPATH"/.vimrc  "$HOME"/.vimrc || warn "Check symlinking vimrc"
+ln -snf "$SCRIPTPATH"/.tmux.conf  "$HOME"/.tmux.conf || warn "Check symlinking tmux conf"
+ln -snf "$SCRIPTPATH"/.zshrc  "$HOME"/.zshrc || warn "Check symlinking zshrc"
+ln -snf "$SCRIPTPATH"/.config/kitty "$HOME"/.config/kitty || warn "Check symlinking kitty config"
+ln -snf "$SCRIPTPATH"/.gitconfig  "$HOME"/.gitconfig || warn "Check symlinking gitconfig"
+mkdir -p "$HOME"/.config
+ln -snf "$SCRIPTPATH"/.config/nvim "$HOME"/.config/nvim || warn "Check symlinking nvim config"
+ln -snf "$SCRIPTPATH"/.config/neomutt "$HOME"/.config/neomutt || warn "Check symlinking neomutt config"
+ln -snf "$SCRIPTPATH"/.config/kak "$HOME"/.config/kak || warn "Check symlinking kakoune rc"
+ln -snf "$SCRIPTPATH"/.config/ranger "$HOME"/.config/ranger || warn "Check symlinking ranger"
+ln -snf "$SCRIPTPATH"/.config/starship.toml "$HOME"/.config/starship.toml || warn "Check symlinking starship.toml config"
+# Create kak symlink to original autload:
+ln -snf "$(brew --prefix)"/share/kak/autoload "$SCRIPTPATH"/.config/kak/autoload || warn "Check symlinking kakoune autoload"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # Rust under MacOS uses another config path
+ln -snf "$SCRIPTPATH"/.config/kak-lsp "$HOME"/Library/Preferences/kak-lsp || warn "Check symlinking kak-lsp conf"
+else
+ln -snf "$SCRIPTPATH"/.config/kak-lsp "$HOME"/.config/kak-lsp || warn "Check symlinking kak-lsp conf"
+fi
+
+echo -e "### Installing kakoune plugin manager"
+mkdir -p "$HOME"/.config/kak/plugins
+git clone https://github.com/andreyorst/plug.kak.git "$HOME"/.config/kak/plugins/plug.kak || warn "Could not clone kak plugin manager"
+
+echo -e ""
+echo -e "### INFO"
+echo -e "To finsh setup:"
+echo -e " * Change the default shell 'chsh -s <path/to/brew/zsh>'"
+echo -e " * Install a patched font from https://github.com/ryanoasis/nerd-fonts"
+echo -e "   and set it in your terminal emulator"
+echo -e " * Download Nord colors and set them in your terminal emulator:"
+echo -e "   https://www.nordtheme.com/"
+echo -e " * Install oh-my-zsh in zsh"
+echo -e " * Run '<ctrl>+b' I inside tmux"
+echo -e " * Run ':plug-install' in kakoune"
+echo -e " * Run ':PlugInstall' in NeoVim"
+echo -e " * Add .~/.gitconfigemail and set your email address"
+echo -e " * Don't forget to map capslock to <ESC>"
+echo -e ""
+echo -e "${WARNINGS}"

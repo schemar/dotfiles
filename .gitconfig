@@ -2,6 +2,7 @@
 	path = ~/.gitconfigemail
 [user]
 	name = Martin Schenck
+	email = martinschenck@fastmail.com
 [core]
 	editor = kak
 [alias]
