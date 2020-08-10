@@ -17,15 +17,6 @@ export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
 export NVM_AUTO_USE=true
 
-# Auto-load nvm with .nvmrc due to lazy loading
-autoload -U add-zsh-hook
-load-nvmrc() {
-  if [ -f "./.nvmrc" ]; then
-    nvm use
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -38,6 +29,18 @@ alias y='yarn'
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# Auto-load nvm with .nvmrc due to lazy loading
+# Must be after loading oh-my-zsh to find command nvm
+autoload -U add-zsh-hook
+load-nvmrc() {
+  if [ -f "./.nvmrc" ]; then
+    nvm use
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+# Call it in case the shell starts in a dir with a .nvmrc
+load-nvmrc
 
 # Aliases
 # Enable 256 colors in tmux
