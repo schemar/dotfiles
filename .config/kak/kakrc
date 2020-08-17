@@ -1,8 +1,12 @@
 # Remove clippy from info window
 set global ui_options ncurses_assistant=none
 
-# Add relative line numbers
-add-highlighter global/ number-lines -relative
+# Add relative or absolute line numbers
+# add-highlighter global/ number-lines -relative
+add-highlighter global/ number-lines
+
+# Use c-w to delete previous word in insert mode
+map global insert <c-w> '<a-;>:exec -draft bd<ret>'
 
 # Use ripgrep for grepping
 set global grepcmd 'rg --column'
@@ -18,7 +22,33 @@ map global user t ': enter-user-mode tig<ret>' -docstring 'tig'
 # git gutter
 map global user l ': git show-diff<ret>' -docstring 'gitgutter'
 
-# all kinds of case-insensitive searches
+# Show matching characters (e.g. [])
+# In normal mode:
+add-highlighter global/ show-matching
+# In insert mode:
+declare-option -hidden range-specs show_matching_range
+hook global -group kakrc-matching-ranges InsertChar '[[\](){}<>]' %{
+    eval -draft %{
+        try %{
+            exec '<esc>;hm<a-k>..<ret>;'
+            set window show_matching_range %val{timestamp} "%val{selection_desc}|MatchingChar"
+        } catch %{
+            set window show_matching_range 0
+        }
+        hook window -once InsertChar '[^[\](){}<>]' %{
+            set window show_matching_range 0
+        }
+        hook window -once ModeChange .* %{
+            set window show_matching_range 0
+        }
+        hook window -once InsertMove .* %{
+            set window show_matching_range 0
+        }
+    }
+}
+add-highlighter global/ ranges show_matching_range
+
+# All kinds of case-insensitive searches
 map -docstring 'case insensitive search' global user '/' /(?i)
 map -docstring 'case insensitive backward search' global user '<a-/>' <a-/>(?i)
 map -docstring 'case insensitive extend search' global user '?' ?(?i)
@@ -61,8 +91,10 @@ plug "https://github.com/andreyorst/powerline.kak" defer powerline %{
 }
 
 plug "https://github.com/andreyorst/fzf.kak" defer fzf %{
+    map global normal <c-p> ': fzf-mode<ret>'
     set-option global fzf_file_command 'fd --type f --hidden --exclude ".git/"'
     set-option global fzf_highlight_command 'bat --style=numbers --color=always {}'
+    set-option global fzf_use_main_selection false
 } config %{
     map global user f ': fzf-mode<ret>' -docstring 'fuzzy find'
 }
