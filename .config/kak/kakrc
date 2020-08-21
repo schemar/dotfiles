@@ -109,7 +109,7 @@ plug "https://github.com/h-youhei/kakoune-surround" config %{
     map global user s ': enter-user-mode surround<ret>' -docstring 'surround'
 }
 
-plug "https://github.com/ul/kak-lsp" config %{
+plug "https://github.com/ul/kak-lsp" tag "v8.0.0" config %{
     # uncomment to enable debugging
     # eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
     # set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
