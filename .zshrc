@@ -90,6 +90,9 @@ export BAT_STYLE="numbers,changes"
 export VISUAL=kak
 export EDITOR=kak
 
+# better man pager
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 # Welcome
 echo "\`odNMMmy\`                +oo:                                .hmd:"
 echo "dMMNsoh:                 MMMs                                +MMMy"
