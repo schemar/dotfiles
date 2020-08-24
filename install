@@ -70,19 +70,22 @@ echo -e "### Installing kakoune plugin manager"
 mkdir -p "$HOME"/.config/kak/plugins
 git clone https://github.com/andreyorst/plug.kak.git "$HOME"/.config/kak/plugins/plug.kak || warn "Could not clone kak plugin manager"
 
-echo -e ""
-echo -e "### INFO"
-echo -e "To finsh setup:"
-echo -e " * Change the default shell 'chsh -s <path/to/brew/zsh>'"
-echo -e " * Install a patched font from https://github.com/ryanoasis/nerd-fonts"
-echo -e "   and set it in your terminal emulator"
-echo -e " * Download Nord colors and set them in your terminal emulator:"
-echo -e "   https://www.nordtheme.com/"
-echo -e " * Install oh-my-zsh in zsh"
-echo -e " * Run '<ctrl>+b' I inside tmux"
-echo -e " * Run ':plug-install' in kakoune"
-echo -e " * Run ':PlugInstall' in NeoVim"
-echo -e " * Add .~/.gitconfigemail and set your email address"
-echo -e " * Don't forget to map capslock to <ESC>"
-echo -e ""
+cat <<EOF
+
+### INFO
+To finsh setup:
+ * Change the default shell 'chsh -s <path/to/brew/zsh>'
+ * Install a patched font from https://github.com/ryanoasis/nerd-fonts
+   and set it in your terminal emulator
+ * Download Nord colors and set them in your terminal emulator:
+   https://www.nordtheme.com/
+ * Install oh-my-zsh in zsh
+ * Run '<ctrl>+b' I inside tmux
+ * Run ':plug-install' in kakoune
+ * Run ':PlugInstall' in NeoVim
+ * Add .~/.gitconfigemail and set your email address
+ * Don't forget to map capslock to <Ctrl>
+
+EOF
+
 echo -e "${WARNINGS}"
