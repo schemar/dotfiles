@@ -9,7 +9,7 @@ function warn {
 }
 
 echo -e "### Installing packages"
-brew install fzf ripgrep vim neovim tmux python nvm zsh fd bat direnv kakoune ranger tig jq starship || warn "Check errors with brew"
+brew install fzf ripgrep vim neovim tmux python nvm zsh fd bat direnv kakoune ranger tig jq starship node || warn "Check errors with brew"
 "$(brew --prefix)/opt/fzf/install" --completion --key-bindings --update-rc --no-bash --no-fish || warn "Check errors when installing fzf"
 pip3 install --user --upgrade pynvim
 
@@ -61,9 +61,11 @@ ln -snf "$(brew --prefix)"/share/kak/autoload "$SCRIPTPATH"/.config/kak/autoload
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # Rust under MacOS uses another config path
-ln -snf "$SCRIPTPATH"/.config/kak-lsp "$HOME"/Library/Preferences/kak-lsp || warn "Check symlinking kak-lsp conf"
+  ln -snf "$SCRIPTPATH"/.config/kak-lsp "$HOME"/Library/Preferences/kak-lsp || warn "Check symlinking kak-lsp conf"
 else
-ln -snf "$SCRIPTPATH"/.config/kak-lsp "$HOME"/.config/kak-lsp || warn "Check symlinking kak-lsp conf"
+  # Assuming Linux
+  ln -snf "$SCRIPTPATH"/.config/kak-lsp "$HOME"/.config/kak-lsp || warn "Check symlinking kak-lsp conf"
+  ln -snf "$SCRIPTPATH"/.config/sway "$HOME"/.config/sway || warn "Check symlinking sway conf"
 fi
 
 echo -e "### Installing kakoune plugin manager"
