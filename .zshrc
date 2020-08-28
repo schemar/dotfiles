@@ -27,6 +27,7 @@ export NVM_AUTO_USE=true
 plugins=(zsh-nvm fd yarn)
 alias g='git'
 alias y='yarn'
+alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
 source $ZSH/oh-my-zsh.sh
 
