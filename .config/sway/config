@@ -23,7 +23,12 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg #2e3440 solid_color
+output * bg #434c5e solid_color
+client.focused #4c566a #434c5e #d8dee9 #5e81ac
+client.unfocused #4c566a #3b4252 #4c566a #5e81ac
+client.urgent #4c566a #d08770 #d8dee9 #5e81ac
+
+gaps inner 5
 #
 # Example configuration:
 #
@@ -61,11 +66,10 @@ output * bg #2e3440 solid_color
 
 input "type:keyboard" {
     xkb_layout us
-    xkb_variant intl
-    # xkb_variant=altgr-intl
-    # xkb_options=compose:menu
+    xkb_variant altgr-intl
+    xkb_options compose:menu
     repeat_delay 300
-    repeat_rate 30
+    repeat_rate 40
 }
 
 ### Key bindings
@@ -212,6 +216,7 @@ bindsym $mod+r mode "resize"
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position bottom
+    gaps 5
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
@@ -220,7 +225,7 @@ bar {
     colors {
         statusline #d8dee9
         background #3b4252
-        focused_workspace #4c566a #4c566a #d8dee9
+        focused_workspace #4c566a #434c5e #d8dee9
         inactive_workspace #4c566a #3b4252 #4c566a
         urgent_workspace #4c566a #d08770 #d8dee9
     }
