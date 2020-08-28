@@ -94,7 +94,7 @@ export VISUAL=kak
 export EDITOR=kak
 
 # better man pager
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANPAGER="bat -l man -p"
 
 # Welcome
 echo "\`odNMMmy\`                +oo:                                .hmd:"
