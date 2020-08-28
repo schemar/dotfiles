@@ -3,6 +3,8 @@ if [ "$(uname)" "==" "Darwin" ]; then
 else
   # Assuming Linux otherwise
   export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+  alias pbcopy='xclip -selection clipboard'
+  alias pbpaste='xclip -selection clipboard -o'
 fi
 export BREW_PREFIX=$(brew --prefix)
 
