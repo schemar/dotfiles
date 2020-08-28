@@ -1,0 +1,25 @@
+* {
+  background-color: #4c566a;
+  color: #d8dee9;
+  font-size: 15px;
+  font-family: "DejaVuSansMono Nerd Font";
+}
+
+window {
+  border: 1px solid #2e3440;
+}
+
+#input {
+  margin: 5px;
+  border-radius: 0;
+  border: 1px solid #2e3440;
+}
+
+#outer-box {
+  margin: 5px;
+}
+
+#entry {
+  margin: 0px 5px 5px 5px;
+  padding: 5px;
+}

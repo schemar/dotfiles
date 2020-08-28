@@ -66,6 +66,7 @@ else
   # Assuming Linux
   ln -snf "$SCRIPTPATH"/.config/kak-lsp "$HOME"/.config/kak-lsp || warn "Check symlinking kak-lsp conf"
   ln -snf "$SCRIPTPATH"/.config/sway "$HOME"/.config/sway || warn "Check symlinking sway conf"
+  ln -snf "$SCRIPTPATH"/.config/wofi "$HOME"/.config/wofi || warn "Check symlinking wofi conf"
 fi
 
 echo -e "### Installing kakoune plugin manager"
