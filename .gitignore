@@ -1,3 +1,5 @@
+output.log
+.state
 *.swp
 .config/kak/plugins/
 .config/kak/colors/

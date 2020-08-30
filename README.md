@@ -1,8 +1,9 @@
 # dotfiles
 
-dotfiles for macOS, Linux, and WSL.
+dotfiles for Linux, WSL, and macOS.
 
 An opinionated default setup for working on the command line.
+Supports Fedora, Ubuntu 20,04+, Ubuntu WSL, and macOS.
 
 ## Installation
 

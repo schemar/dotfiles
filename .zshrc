@@ -1,15 +1,12 @@
-if [ "$(uname)" "==" "Darwin" ]; then
-  # macOS
+if [[  "$(uname)" = "Darwin" ]]; then
+  # sbin should be in path as well as there are formuale that reside there.
+  export PATH="$(brew --prefix)/sbin:$PATH"
 else
   # Assuming Linux otherwise
-  export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
   alias pbcopy='xclip -selection clipboard'
   alias pbpaste='xclip -selection clipboard -o'
 fi
-export BREW_PREFIX=$(brew --prefix)
 
-# sbin should be in path as well as there are formuale that reside there.
-export PATH="$BREW_PREFIX/sbin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
