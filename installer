@@ -108,7 +108,8 @@ install() {
         esac
     fi
 
-    echo "${1}_installed=\"true\"" >> .state
+    # Replacing invalid dash with underscore
+    echo "${1//-/_}_installed=\"true\"" >> .state
 }
 
 install_brew() {
@@ -245,6 +246,25 @@ for package in "${common_packages[@]}"; do
     fi
 done
 
+if [[ "$linux_distro" = "fedora" ]]; then
+    print "Installing fedora packages ..."
+    for package in "${fedora_packages[@]}"; do
+        var_reference="${package//-/_}_installed"
+        if [[ ! "${!var_reference}" = "true" ]]; then
+            install "$package"
+        fi
+    done
+fi
+
+if [[ "$linux_distro" = "ubuntu" ]]; then
+    print "Installing ubuntu packages ..."
+    for package in "${ubuntu_packages[@]}"; do
+        var_reference="${package}_installed"
+        if [[ ! "${!var_reference}" = "true" ]]; then
+            install "$package"
+        fi
+    done
+fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     for package in "${brew_packages[@]}"; do
@@ -291,7 +311,7 @@ if [[ ! "$zshnvm_installed" = "true" ]]; then
     print "Installing zsh_nvm ..."
     mkdir -p "$HOME"/.oh-my-zsh/custom/plugins/
     git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm 1>>output.log 2>&1 || error "Could not install zshnvm"
-    echo "zshnvm_installed=\"true\"" >> .state
+    echo 'zshnvm_installed="true"' >> .state
 fi
 
 if [[ ! "$sourced" = "true" ]]; then
