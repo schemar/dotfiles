@@ -18,7 +18,7 @@ set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | wofi --dmenu --hide-scroll --sort-order=alphabetical --prompt="Run application ..." --styl="$HOME/.config/wofi/style.css" | xargs swaymsg exec --
+set $menu rofi -show run
 
 ### Output configuration
 #
@@ -27,6 +27,8 @@ output * bg #434c5e solid_color
 client.focused #4c566a #434c5e #d8dee9 #4c566a
 client.unfocused #4c566a #3b4252 #4c566a #4c566a
 client.urgent #4c566a #d08770 #d8dee9 #4c566a
+default_border none
+hide_edge_borders --i3 smart
 
 font "DejaVuSansMono Nerd Font" 10
 

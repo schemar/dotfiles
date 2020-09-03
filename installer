@@ -44,7 +44,7 @@ brew_desktop_packages=(
 linux_desktop_packages=(
     sway
     kitty
-    wofi
+    rofi
     xclip
 )
 
@@ -167,7 +167,6 @@ symlink_configs() {
         ln -snf /usr/share/kak/autoload "$SCRIPTPATH"/.config/kak/autoload
         ln -snf "$SCRIPTPATH"/.config/kak-lsp "$HOME"/.config/kak-lsp
         ln -snf "$SCRIPTPATH"/.config/sway "$HOME"/.config/sway
-        ln -snf "$SCRIPTPATH"/.config/wofi "$HOME"/.config/wofi
     fi
 }
 #
