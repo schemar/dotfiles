@@ -1,0 +1,404 @@
+#!/bin/bash
+
+# Script to automatically install all required dependencies and symlink the
+# configurations.
+# Actual execution at the very end.
+#
+# If you pass "symlinks" as the only arg, only the symlinks will be linked.
+# Otherwise, everything will run.
+#
+# Keeps state in .state and sends output of most commands to output.log.
+
+common_packages=(
+    fzf
+    ripgrep
+    vim
+    neovim
+    tmux
+    python
+    zsh
+    bat
+    direnv
+    kakoune
+    ranger
+    tig
+    jq
+    yarn
+)
+
+brew_packages=(
+    starship
+    ul/kak-lsp/kak-lsp
+    fd
+)
+
+fedora_packages=(
+    # Starship is being installed from download
+    # starship
+    kak-lsp
+    fd-find
+)
+
+ubuntu_packages=(
+    # Starship is being installed from download
+    # starship
+    fd
+)
+
+brew_desktop_packages=(
+    amethyst
+    kitty
+)
+
+linux_desktop_packages=(
+    sway
+    kitty
+    rofi
+    xclip
+)
+
+#
+# Functions
+#
+
+print() {
+    printf "%s\n" "$1"
+}
+
+error() {
+    print ""
+    print "${1}:"
+    printf "    "
+    tail -1 ./output.log
+    print ""
+    print "Check output.log for more details."
+    exit 1
+}
+
+redirect_output() {
+    eval "$1" 1>>output.log 2>&1 || error "Could not run $1"
+}
+
+install_on_ubuntu() {
+    case "$1" in
+        "bat"|"ripgrep")
+            # Workaround required for broken/incompatible packages ripgrep and bat
+            redirect_output "sudo apt install -o Dpkg::Options::=\"--force-overwrite\" $1"
+            redirect_output "sudo ln -snf /usr/bin/batcat /usr/bin/bat"
+            ;;
+        "fd")
+            # Workaround for conflicting package names
+            redirect_output "sudo apt-get -y install fd-find"
+            redirect_output "sudo ln -snf /usr/bin/fdfind /usr/bin/fd"
+            ;;
+        *)
+            redirect_output "sudo apt-get -y install $1"
+            ;;
+    esac
+}
+
+install() {
+    print "Installing ${1} ..."
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        redirect_output "brew install $1"
+    else
+        # Assuming Linux
+        case "$linux_distro" in
+            "ubuntu")
+                install_on_ubuntu "$1"
+                ;;
+            "fedora")
+                redirect_output "sudo dnf -y install $1"
+                ;;
+            *)
+                print "Unknown distro ${linux_distro}. Exiting ..."
+                exit 1
+                ;;
+        esac
+    fi
+
+    # Replacing invalid dash with underscore
+    echo "${1//-/_}_installed=\"true\"" >> .state
+}
+
+install_brew() {
+    print "Installing brew ..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    echo 'brew_installed="true"' >> .state
+}
+
+install_zsh() {
+    install zsh
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
+        redirect_output "chsh -s /usr/local/bin/zsh"
+    else
+        # Assuming Linux
+        redirect_output "sudo usermod --shell /bin/zsh $(whoami)"
+    fi
+
+    print "Zsh installed and set as your default shell. Switch to zsh and run ./installer again."
+    exit 0
+}
+
+install_ohmyzsh() {
+    print "Installing oh-my-zsh ..."
+    print "#"
+    print "# IMPORTANT: Once you are inside the new zsh shell, type 'exit'!"
+    print "#"
+
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || error "Could not install oh-my-zsh"
+}
+
+symlink_configs() {
+    print "Symlinking configurations ..."
+
+    SCRIPTPATH="$( cd "$(dirname "$0")" || exit ; pwd -P )"
+    ln -snf "$SCRIPTPATH"/.vimrc  "$HOME"/.vimrc
+    ln -snf "$SCRIPTPATH"/.tmux.conf  "$HOME"/.tmux.conf
+    ln -snf "$SCRIPTPATH"/.zshrc  "$HOME"/.zshrc
+    ln -snf "$SCRIPTPATH"/.config/kitty "$HOME"/.config/kitty
+    ln -snf "$SCRIPTPATH"/.gitconfig  "$HOME"/.gitconfig
+    mkdir -p "$HOME"/.config
+    ln -snf "$SCRIPTPATH"/.config/nvim "$HOME"/.config/nvim
+    ln -snf "$SCRIPTPATH"/.config/neomutt "$HOME"/.config/neomutt
+    ln -snf "$SCRIPTPATH"/.config/kak "$HOME"/.config/kak
+    ln -snf "$SCRIPTPATH"/.config/ranger "$HOME"/.config/ranger
+    ln -snf "$SCRIPTPATH"/.config/starship.toml "$HOME"/.config/starship.toml
+    
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # Create kak symlink to original autload:
+        ln -snf "$(brew --prefix)"/share/kak/autoload "$SCRIPTPATH"/.config/kak/autoload
+        # Rust under MacOS uses another config path
+        ln -snf "$SCRIPTPATH"/.config/kak-lsp "$HOME"/Library/Preferences/kak-lsp
+    else
+        # Assuming Linux
+        # Create kak symlink to original autload:
+        ln -snf /usr/share/kak/autoload "$SCRIPTPATH"/.config/kak/autoload
+        ln -snf "$SCRIPTPATH"/.config/kak-lsp "$HOME"/.config/kak-lsp
+        ln -snf "$SCRIPTPATH"/.config/sway "$HOME"/.config/sway
+    fi
+}
+
+setup() {
+    rm -f output.log
+    touch output.log
+    
+    if [[ ! -f .state ]]; then
+        print ".state file not found. Creating it ..."
+        touch .state
+    fi
+    
+    # Sourcing state updates all state variables for parts that
+    # are already installed.
+    # You can delete individual lines from .state to reinstall.
+    brew_installed=""
+    zsh_installed=""
+    source .state
+    
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        if [[ ! "$brew_installed" = "true" ]]; then
+            install_brew
+        fi
+        # Forcing brew to be in path
+        PATH="/usr/local/bin:$PATH"
+    else
+        # Assuming Linux
+        if [[ -z "$linux_distro" ]]; then
+            read -p "Which distro are you on? (fedora/ubuntu) " -r linux_distro
+            if [[ "$linux_distro" = "fedora" ]] || [[ "$linux_distro" = "ubuntu" ]]; then
+                printf 'linux_distro="%s"\n' "$linux_distro" >> .state
+            else
+                print "Unknown distro. Exiting ..."
+                exit 1
+            fi
+        fi
+    
+        if [[ -z "$linux_is_desktop" ]]; then
+            read -p "Are you on a desktop? (y/N) " -n 1 -r linux_is_desktop
+            if [[ "$linux_is_desktop" =~ ^[yY]$ ]]; then
+                linux_is_desktop="true"
+            else
+                linux_is_desktop="false"
+            fi
+            printf 'linux_is_desktop="%s"\n' "$linux_is_desktop" >> .state
+        fi
+    fi
+}
+
+# Also symlinks configs:
+installs() {
+    if [[ "$linux_distro" = "fedora" ]]; then
+        if [[ ! "$kakcopradded" = "ture" ]]; then
+            print "Adding kak-lsp copr to fedora ..."
+            redirect_output "sudo dnf copr enable atim/kakoune -y"
+            echo 'kakcopradded="true"' >> .state
+        fi
+        if [[ ! "$yarnrepoadded" = "ture" ]]; then
+            print "Adding yarn repo to fedora ..."
+            redirect_output "curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo"
+            echo 'yarnrepoadded="true"' >> .state
+        fi
+    fi
+    
+    if [[ ! "$zsh_installed" = "true" ]]; then
+        install_zsh
+    fi
+    
+    for package in "${common_packages[@]}"; do
+        var_reference="${package}_installed"
+        if [[ ! "${!var_reference}" = "true" ]]; then
+            install "$package"
+        fi
+    done
+    
+    if [[ "$linux_distro" = "fedora" ]]; then
+        print "Installing fedora packages ..."
+        for package in "${fedora_packages[@]}"; do
+            var_reference="${package//-/_}_installed"
+            if [[ ! "${!var_reference}" = "true" ]]; then
+                install "$package"
+            fi
+        done
+    fi
+    
+    if [[ "$linux_distro" = "ubuntu" ]]; then
+        print "Installing ubuntu packages ..."
+        for package in "${ubuntu_packages[@]}"; do
+            var_reference="${package}_installed"
+            if [[ ! "${!var_reference}" = "true" ]]; then
+                install "$package"
+            fi
+        done
+    fi
+    
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        for package in "${brew_packages[@]}"; do
+            var_reference="${package}_installed"
+            if [[ ! "${!var_reference}" = "true" ]]; then
+                install "$package"
+            fi
+        done
+    
+        for package in "${brew_desktop_packages[@]}"; do
+            var_reference="${package}_installed"
+            if [[ ! "${!var_reference}" = "true" ]]; then
+                redirect_output "brew cask install $1"
+            fi
+        done
+    else
+        # Assuming Linux
+        if [[ ! "$starship_installed" = "true" ]]; then
+            # Starship on Linux is only available as download
+            print "Installing starship ..."
+            curl -fsSL https://starship.rs/install.sh | sudo bash
+            echo "starship_installed=\"true\"" >> .state
+        fi
+    
+        if [[ "$linux_is_desktop" = "true" ]]; then
+            print "Installing desktop packages ..."
+            for package in "${linux_desktop_packages[@]}"; do
+                var_reference="${package}_installed"
+                if [[ ! "${!var_reference}" = "true" ]]; then
+                    install "$package"
+                fi
+            done
+        fi
+    fi
+    
+    if [[ ! "$ohmyzsh_installed" = "true" ]]; then
+        install_ohmyzsh
+        echo 'ohmyzsh_installed="true"' >> .state
+    fi
+    
+    if [[ ! "$zshnvm_installed" = "true" ]]; then
+        print "Installing zsh_nvm ..."
+        mkdir -p "$HOME"/.oh-my-zsh/custom/plugins/
+        git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm 1>>output.log 2>&1 || error "Could not install zshnvm"
+        echo 'zshnvm_installed="true"' >> .state
+    fi
+    
+    symlink_configs
+    
+    if [[ ! "$sourced" = "true" ]]; then
+        print "You must manually 'source ~/.zshrc'."
+        print "Then, run ./installer again."
+        echo 'sourced="true"' >> .state
+        exit 0
+    fi
+    
+    if [[ ! "$node_installed" = "true" ]]; then
+        print "You must manually 'nvm install stable'."
+        print "Then, run ./installer again."
+        echo 'node_installed="true"' >> .state
+        exit 0
+    fi
+    
+    if [[ ! "$npmpackages_installed" = "true" ]]; then
+        print "Installing npm packages ..."
+        redirect_output "npm install -g typescript"
+        redirect_output "npm install -g typescript-language-server"
+        redirect_output "npm install -g eslint-formatter-kakoune"
+        echo 'npmpackages_installed="true"' >> .state
+    fi
+    
+    if [[ ! "$neovimdependencies_installed" = "true" ]]; then
+        print "Installing (Neo)Vim dependencies ..."
+        redirect_output "pip3 install --user --upgrade pynvim"
+        
+        # vim-plug to manage plugins in vim
+        curl -fLo "$HOME"/.vim/autoload/plug.vim --create-dirs \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        # same for neovim
+        curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        echo 'neovimdependencies_installed="true"' >> .state
+    fi
+    
+    if [[ ! "$kakpluginmanager_installed" = "true" ]]; then
+        print "Installing kakoune plugin manager ..."
+        mkdir -p "$HOME"/.config/kak/plugins
+        git clone https://github.com/andreyorst/plug.kak.git "$HOME"/.config/kak/plugins/plug.kak
+        echo 'kakpluginmanager_installed="true"' >> .state
+    fi
+    
+    if [[ ! "$tmuxpluginmanager_installed" = "true" ]]; then
+        print "Installing tmux plugin manager ..."
+        mkdir -p "$HOME"/.config/tmux/plugins
+        git clone https://github.com/tmux-plugins/tpm "$HOME"/.config/tmux/plugins/tpm
+        echo 'tmuxpluginmanager_installed="true"' >> .state
+    fi
+    
+    if [[ "$linux_distro" = "ubuntu" ]]; then
+        print "Remember to manually install kak-lsp as per the following link:"
+        print "https://github.com/ul/kak-lsp#others"
+    fi
+}
+
+everything() {
+    setup
+    installs
+        
+    cat <<EOF
+        
+To finsh setup:
+ * Install a patched font from https://github.com/ryanoasis/nerd-fonts
+   and set it in your terminal emulator
+ * Run '<ctrl>+b' I inside tmux
+ * Run ':plug-install' in kakoune
+ * Run ':PlugInstall' in NeoVim
+ * Add .~/.gitconfigemail and set your email address
+ * Don't forget to map capslock to <Ctrl>
+        
+EOF
+}
+
+case $1 in
+    "symlinks")
+        symlink_configs
+        ;;
+    *)
+        everything
+        ;;
+esac
+
