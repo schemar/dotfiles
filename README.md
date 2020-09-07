@@ -7,19 +7,12 @@ Supports Fedora, Ubuntu 20,04+, Ubuntu WSL, and macOS.
 
 ## Installation
 
-You can use the `install.sh` helper.
+You can use the `./installer` helper.
+Run `./installer symlinks` if you only want to symlink all configs.
 
-Requirements:
-* [Homebrew](https://docs.brew.sh/Installation) (on macOS, Linux, or WSL)
+Requirements macOS (Linux and WSL don't have any special requirements):
+* [Homebrew](https://docs.brew.sh/Installation)
 * [Homebrew's requirements](https://docs.brew.sh/Installation)
-
-Post-installation:
-* Change the default shell to zsh `chsh -s <path/to/brew/zsh>`
-* Set a [Nerd Font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/DejaVuSansMono/Regular/complete) as your terminal emulator's font.
-* Run `<ctrl>+b I` inside tmux to install the tmux plug-ins.
-* Run `:plug-install` inside kakoune.
-* Run `:PlugInstall` inside NeoVim.
-* Install oh-my-zsh inside zsh.
 
 ## Usage
 
@@ -46,6 +39,7 @@ An overview over the most common tasks follows below, especially if they differ 
 
 * `,,<tab>` to fuzzy find a path. E.g. `cd ./Projects/,,<tab>` will let you fuzzy find directories inside the Projects directory.
 * `<ctrl>+r` to fuzzy find in the shell's history.
+* `<ctrl>+t` to fuzzy find files.
 * `.nvmrc` files will automatically trigger `nvm use`.
 
 ### Inside Tmux
@@ -53,13 +47,15 @@ An overview over the most common tasks follows below, especially if they differ 
 Tmux sessions will be stored every 15 minutes and auto-restored when starting tmux the next time.
 Persists across restarts.
 
-* `<ctrl>+b {c,n,p}` create/next/previous window.
-* `<ctrl>+b {v,s}` split pane vertically/horizontally.
+Prefix is `<ctrl>-i`.
+
+* `<ctrl>+i {c,n,p}` create/next/previous window.
+* `<ctrl>+i {v,s}` split pane vertically/horizontally.
 * `<ctrl>+{h,j,k,l}` to move curser across panes (works also with vim windows).
-* `<ctrl>+b z` to (un)zoom the current pane.
-* `<ctrl>+b {<,>,+,-}` resize panes by fixed amount left/right/up/down.
-* `<ctrl>+b [` to enable copy mode. Use e.g. to scroll up to see older output. Movement in copy mode is vim-like (e.g. `<ctrl>+{d,u}` to move down/up a page).
-* `<ctrl>+b u` fuzzy find and open a URL from the buffer.
+* `<ctrl>+i z` to (un)zoom the current pane.
+* `<ctrl>+i {<,>,+,-}` resize panes by fixed amount left/right/up/down.
+* `<ctrl>+i [` to enable copy mode. Use e.g. to scroll up to see older output. Movement in copy mode is vim-like (e.g. `<ctrl>+{d,u}` to move down/up a page).
+* `<ctrl>+i u` fuzzy find and open a URL from the buffer.
 
 ### Kakoune
 
