@@ -32,7 +32,10 @@ hide_edge_borders --i3 smart
 
 font "DejaVuSansMono Nerd Font" 10
 
+# General gaps and gaps for bottom waybar
+smart_gaps on
 gaps inner 5
+
 #
 # Example configuration:
 #
@@ -43,6 +46,10 @@ gaps inner 5
 # Change the scaling based on the screen resolution (2x for HiDPI)
 exec_always $HOME/.config/sway/scaling.sh
 
+# Clamshell: turn off laptop display when closing lid:
+set $laptop eDP-1
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
 
 ### Idle configuration
 #
@@ -75,9 +82,13 @@ exec_always $HOME/.config/sway/scaling.sh
 input "type:keyboard" {
     xkb_layout us
     xkb_variant altgr-intl
-    xkb_options compose:menu
+    xkb_options compose:menu,ctrl:nocaps
     repeat_delay 300
     repeat_rate 40
+}
+
+input "type:touchpad" {
+    natural_scroll enabled
 }
 
 ### Key bindings
@@ -103,8 +114,6 @@ input "type:keyboard" {
     # Reload the configuration file
     bindsym $mod+Shift+c reload
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
@@ -129,6 +138,20 @@ input "type:keyboard" {
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
+#
+# Special keys
+#
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+    bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+
+    bindsym XF86AudioPlay exec playerctl play-pause
+    bindsym XF86AudioNext exec playerctl next
+    bindsym XF86AudioPrev exec playerctl previous
 #
 # Workspaces:
 #
@@ -218,25 +241,26 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+set $mode_system System: (e) logout, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
+mode "$mode_system" {
+    bindsym e exit
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+    bindsym Shift+r exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
+
+    # return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+e mode "$mode_system"
+
 #
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position bottom
-    gaps 5
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %H:%M'; do sleep 1; done
-
-    colors {
-        statusline #d8dee9
-        background #3b4252
-        focused_workspace #4c566a #434c5e #d8dee9
-        inactive_workspace #4c566a #3b4252 #4c566a
-        urgent_workspace #4c566a #d08770 #d8dee9
-    }
+    swaybar_command waybar
 }
 
 include /etc/sway/config.d/*

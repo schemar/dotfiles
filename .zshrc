@@ -93,6 +93,9 @@ export EDITOR=kak
 # better man pager
 export MANPAGER="bat -l man -p"
 
+# Wayland
+export MOZ_ENABLE_WAYLAND="true"
+
 # Welcome
 echo "\`odNMMmy\`                +oo:                                .hmd:"
 echo "dMMNsoh:                 MMMs                                +MMMy"

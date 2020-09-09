@@ -55,6 +55,10 @@ linux_desktop_packages=(
     kitty
     rofi
     xclip
+    brightnessctl
+    pavucontrol
+    playerctl
+    waybar
 )
 
 #
@@ -157,6 +161,7 @@ symlink_configs() {
     ln -snf "$SCRIPTPATH"/.vimrc  "$HOME"/.vimrc
     ln -snf "$SCRIPTPATH"/.tmux.conf  "$HOME"/.tmux.conf
     ln -snf "$SCRIPTPATH"/.zshrc  "$HOME"/.zshrc
+    ln -snf "$SCRIPTPATH"/.fzf.zsh  "$HOME"/.fzf.zsh
     ln -snf "$SCRIPTPATH"/.config/kitty "$HOME"/.config/kitty
     ln -snf "$SCRIPTPATH"/.gitconfig  "$HOME"/.gitconfig
     mkdir -p "$HOME"/.config
@@ -177,6 +182,7 @@ symlink_configs() {
         ln -snf /usr/share/kak/autoload "$SCRIPTPATH"/.config/kak/autoload
         ln -snf "$SCRIPTPATH"/.config/kak-lsp "$HOME"/.config/kak-lsp
         ln -snf "$SCRIPTPATH"/.config/sway "$HOME"/.config/sway
+        ln -snf "$SCRIPTPATH"/.config/waybar "$HOME"/.config/waybar
     fi
 }
 
@@ -388,6 +394,8 @@ To finsh setup:
  * Run ':plug-install' in kakoune
  * Run ':PlugInstall' in NeoVim
  * Add .~/.gitconfigemail and set your email address
+ * You may need to add "export MOZ_ENABLE_WAYLAND=1" to "/etc/environment"
+   if Firefox looks blurry when scaling with sway
  * Don't forget to map capslock to <Ctrl>
         
 EOF
