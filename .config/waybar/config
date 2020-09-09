@@ -109,14 +109,15 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "tooltip-format-wifi": "{ipaddr} on {essid} ({signalStrength}%)",
         "format-ethernet": "",
         "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
         "format-linked": "",
         "tooltip-format-linked": "{ifname} (No IP) ",
         "format-disconnected": "⚠",
         "tooltip-format-disconnected": "Disconnected",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        // "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "on-click": "kitty nmtui-connect"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float

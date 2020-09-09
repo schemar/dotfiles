@@ -241,13 +241,14 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-set $mode_system System: (e) logout, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
+set $mode_system (l)ock, (e)xit, (s)uspend, (r)eboot, (S)hutdown, (U)EFI
 mode "$mode_system" {
     bindsym e exit
+    bindsym l exec --no-startup-id swaylock --show-failed-attempts --color 2e3440 --font "DejaVuSansMono Nerd Font" --font-size 10, mode "default"
     bindsym s exec --no-startup-id systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-    bindsym Shift+r exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
+    bindsym Shift+u exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
 
     # return to default mode
     bindsym Return mode "default"
@@ -262,5 +263,8 @@ bindsym $mod+Shift+e mode "$mode_system"
 bar {
     swaybar_command waybar
 }
+
+for_window [app_id="TogglDesktop"] floating enable
+bindsym $mod+t exec flatpak run com.toggl.TogglDesktop
 
 include /etc/sway/config.d/*

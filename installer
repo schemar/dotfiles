@@ -58,6 +58,7 @@ linux_desktop_packages=(
     brightnessctl
     pavucontrol
     playerctl
+    swaylock
     waybar
 )
 
