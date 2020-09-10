@@ -22,11 +22,13 @@ export NVM_AUTO_USE=true
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(zsh-nvm fd yarn)
-alias g='git'
-alias y='yarn'
-alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
 source $ZSH/oh-my-zsh.sh
+
+alias g='git'
+alias y='yarn'
+alias l='exa -l --icons'
+alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
 # User configuration
 
@@ -93,8 +95,8 @@ export EDITOR=kak
 # better man pager
 export MANPAGER="bat -l man -p"
 
-# Wayland
-export MOZ_ENABLE_WAYLAND="true"
+# Nord dir colors (e.g. ls or fd)
+test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
 
 # Welcome
 echo "\`odNMMmy\`                +oo:                                .hmd:"

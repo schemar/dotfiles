@@ -24,6 +24,7 @@ common_packages=(
     tig
     jq
     yarn
+    exa
 )
 
 brew_packages=(
@@ -60,6 +61,7 @@ linux_desktop_packages=(
     playerctl
     swaylock
     waybar
+    NetworkManager-tui
 )
 
 #
@@ -163,14 +165,16 @@ symlink_configs() {
     ln -snf "$SCRIPTPATH"/.tmux.conf  "$HOME"/.tmux.conf
     ln -snf "$SCRIPTPATH"/.zshrc  "$HOME"/.zshrc
     ln -snf "$SCRIPTPATH"/.fzf.zsh  "$HOME"/.fzf.zsh
-    ln -snf "$SCRIPTPATH"/.config/kitty "$HOME"/.config/kitty
+    ln -snf "$SCRIPTPATH"/.dir_colors  "$HOME"/.dir_colors
     ln -snf "$SCRIPTPATH"/.gitconfig  "$HOME"/.gitconfig
     mkdir -p "$HOME"/.config
+    ln -snf "$SCRIPTPATH"/.config/kitty "$HOME"/.config/kitty
     ln -snf "$SCRIPTPATH"/.config/nvim "$HOME"/.config/nvim
     ln -snf "$SCRIPTPATH"/.config/neomutt "$HOME"/.config/neomutt
     ln -snf "$SCRIPTPATH"/.config/kak "$HOME"/.config/kak
     ln -snf "$SCRIPTPATH"/.config/ranger "$HOME"/.config/ranger
     ln -snf "$SCRIPTPATH"/.config/starship.toml "$HOME"/.config/starship.toml
+    ln -snf "$SCRIPTPATH"/.config/rofi "$HOME"/.config/rofi
     
     if [[ "$OSTYPE" == "darwin"* ]]; then
         # Create kak symlink to original autload:
@@ -305,7 +309,7 @@ installs() {
         if [[ "$linux_is_desktop" = "true" ]]; then
             print "Installing desktop packages ..."
             for package in "${linux_desktop_packages[@]}"; do
-                var_reference="${package}_installed"
+                var_reference="${package//-/_}_installed"
                 if [[ ! "${!var_reference}" = "true" ]]; then
                     install "$package"
                 fi
