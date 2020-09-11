@@ -6,7 +6,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
     "modules-center": ["sway/window"],
-    "modules-right": ["cpu", "memory", "backlight", "pulseaudio", "network", "battery", "clock", "tray"],
+    "modules-right": ["idle_inhibitor", "cpu", "memory", "backlight", "pulseaudio", "network", "battery", "clock", "tray"],
     // Modules configuration
     "sway/workspaces": {
         "disable-scroll": true,
@@ -88,7 +88,8 @@
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
-        "format-icons": ["", ""]
+        "format-icons": ["", ""],
+        "on-click": "wdisplays"
     },
     "battery": {
         "states": {

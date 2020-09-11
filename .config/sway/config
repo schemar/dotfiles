@@ -20,6 +20,8 @@ set $term kitty
 # on the original workspace that the command was run on.
 set $menu rofi -show drun -font "DejaVuSansMono Nerd Font 10" -theme sidetab_nord
 
+set $lock swaylock --daemonize --show-failed-attempts --color 2e3440 --font "DejaVuSansMono Nerd Font" --font-size 10
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
@@ -64,6 +66,12 @@ bindswitch --reload --locked lid:off output $laptop enable
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
+exec swayidle -w \
+    timeout 300 '$lock' \
+    timeout 600  'swaymsg "output * dpms off"' \
+        resume  'swaymsg "output * dpms on"'  \
+    timeout 900 'systemctl suspend' \
+    before-sleep '$lock'
 
 ### Input configuration
 #
@@ -88,6 +96,10 @@ input "type:keyboard" {
 }
 
 input "type:touchpad" {
+    natural_scroll enabled
+}
+
+input "type:pointer" {
     natural_scroll enabled
 }
 
@@ -244,7 +256,7 @@ bindsym $mod+r mode "resize"
 set $mode_system (l)ock, (e)xit, (s)uspend, (r)eboot, (S)hutdown, (U)EFI
 mode "$mode_system" {
     bindsym e exit
-    bindsym l exec --no-startup-id swaylock --show-failed-attempts --color 2e3440 --font "DejaVuSansMono Nerd Font" --font-size 10, mode "default"
+    bindsym l exec --no-startup-id $lock, mode "default"
     bindsym s exec --no-startup-id systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
