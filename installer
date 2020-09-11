@@ -60,7 +60,9 @@ linux_desktop_packages=(
     pavucontrol
     playerctl
     swaylock
+    swayidle
     waybar
+    wdisplays
     NetworkManager-tui
 )
 
@@ -175,6 +177,7 @@ symlink_configs() {
     ln -snf "$SCRIPTPATH"/.config/ranger "$HOME"/.config/ranger
     ln -snf "$SCRIPTPATH"/.config/starship.toml "$HOME"/.config/starship.toml
     ln -snf "$SCRIPTPATH"/.config/rofi "$HOME"/.config/rofi
+    ln -snf "$SCRIPTPATH"/.config/environment.d "$HOME"/.config/environment.d
     
     if [[ "$OSTYPE" == "darwin"* ]]; then
         # Create kak symlink to original autload:
