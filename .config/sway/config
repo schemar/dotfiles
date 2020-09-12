@@ -257,7 +257,7 @@ set $mode_system (l)ock, (e)xit, (s)uspend, (r)eboot, (S)hutdown, (U)EFI
 mode "$mode_system" {
     bindsym e exit
     bindsym l exec --no-startup-id $lock, mode "default"
-    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym s exec --no-startup-id $lock, exec --no-startup-id systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
     bindsym Shift+u exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
