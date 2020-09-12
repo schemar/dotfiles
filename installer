@@ -52,18 +52,18 @@ brew_desktop_packages=(
 )
 
 linux_desktop_packages=(
-    sway
-    kitty
-    rofi
-    xclip
     brightnessctl
+    kitty
+    NetworkManager-tui
     pavucontrol
     playerctl
-    swaylock
+    rofi
+    sway
     swayidle
+    swaylock
+    wl-clipboard
     waybar
     wdisplays
-    NetworkManager-tui
 )
 
 #

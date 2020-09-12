@@ -3,8 +3,8 @@ if [[  "$(uname)" = "Darwin" ]]; then
   export PATH="$(brew --prefix)/sbin:$PATH"
 else
   # Assuming Linux otherwise
-  alias pbcopy='xclip -selection clipboard'
-  alias pbpaste='xclip -selection clipboard -o'
+  alias pbcopy='wl-copy --trim-newline'
+  alias pbpaste='wl-paste --no-newline'
 fi
 
 
