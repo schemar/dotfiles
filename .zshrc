@@ -27,7 +27,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias g='git'
 alias y='yarn'
-alias l='exa -l --icons'
+alias l='exa -a -l --icons'
 alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
 # User configuration
