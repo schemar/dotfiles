@@ -55,11 +55,13 @@ linux_desktop_packages=(
     brightnessctl
     gammastep
     gammastep-indicator
+    grim
     kitty
     NetworkManager-tui
     pavucontrol
     playerctl
     rofi
+    slurp
     sway
     swayidle
     swaylock

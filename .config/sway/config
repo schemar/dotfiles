@@ -22,6 +22,8 @@ set $menu rofi -show drun -font "DejaVuSansMono Nerd Font 10" -theme sidetab_nor
 
 set $lock swaylock --daemonize --show-failed-attempts --color 2e3440 --font "DejaVuSansMono Nerd Font" --font-size 10
 
+set $screenshotname "$(xdg-user-dir PICTURES)/$(date +'%s_screenshot.png')"
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
@@ -269,6 +271,19 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 bindsym $mod+Shift+e mode "$mode_system"
+
+set $mode_screenshot (a)rea, (w)indow, (c)lipboard area, c(l)ipboard window
+mode "$mode_screenshot" {
+    bindsym a exec --no-startup-id grim -g "$(slurp)" $screenshotname, mode "default"
+    #bindsym w exec --no-startup-id grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" $screenshotname, mode "default"
+
+    bindsym c exec --no-startup-id grim -g "$(slurp)" - | wl-copy, mode "default"
+
+    # return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+p mode "$mode_screenshot"
 
 #
 # Status Bar:
