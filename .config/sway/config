@@ -47,6 +47,8 @@ gaps inner 5
 #
 # Change the scaling based on the screen resolution (2x for HiDPI)
 exec_always $HOME/.config/sway/scaling.sh
+# Red tinted screen at night (config in .config/gammastep)
+exec gammastep
 
 # Clamshell: turn off laptop display when closing lid:
 set $laptop eDP-1

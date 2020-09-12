@@ -53,6 +53,8 @@ brew_desktop_packages=(
 
 linux_desktop_packages=(
     brightnessctl
+    gammastep
+    gammastep-indicator
     kitty
     NetworkManager-tui
     pavucontrol
@@ -179,6 +181,7 @@ symlink_configs() {
     ln -snf "$SCRIPTPATH"/.config/ranger "$HOME"/.config/ranger
     ln -snf "$SCRIPTPATH"/.config/starship.toml "$HOME"/.config/starship.toml
     ln -snf "$SCRIPTPATH"/.config/rofi "$HOME"/.config/rofi
+    ln -snf "$SCRIPTPATH"/.config/gammastep "$HOME"/.config/gammastep
     ln -snf "$SCRIPTPATH"/.config/environment.d "$HOME"/.config/environment.d
     
     if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -245,12 +248,17 @@ setup() {
 # Also symlinks configs:
 installs() {
     if [[ "$linux_distro" = "fedora" ]]; then
-        if [[ ! "$kakcopradded" = "ture" ]]; then
+        if [[ ! "$kakcopradded" = "true" ]]; then
             print "Adding kak-lsp copr to fedora ..."
             redirect_output "sudo dnf copr enable atim/kakoune -y"
             echo 'kakcopradded="true"' >> .state
         fi
-        if [[ ! "$yarnrepoadded" = "ture" ]]; then
+        if [[ ! "$gammastepcopradded" = "true" ]]; then
+            print "Adding gammastep copr to fedora ..."
+            redirect_output "sudo dnf copr enable alebastr/sway-extras -y"
+            echo 'gammastepcopradded="true"' >> .state
+        fi
+        if [[ ! "$yarnrepoadded" = "true" ]]; then
             print "Adding yarn repo to fedora ..."
             redirect_output "curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo"
             echo 'yarnrepoadded="true"' >> .state
