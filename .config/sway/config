@@ -300,4 +300,6 @@ bar {
 for_window [app_id="TogglDesktop"] floating enable
 bindsym $mod+t exec flatpak run com.toggl.TogglDesktop
 
+for_window [app_id="firefox" title=".*Sharing Indicator"] floating enable
+
 include /etc/sway/config.d/*
