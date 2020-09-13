@@ -32,6 +32,7 @@ Requirements macOS (Linux and WSL don't have any special requirements):
 * [nvm](https://github.com/nvm-sh/nvm)
 * [direnv](https://github.com/direnv/direnv)
 * [Amethyst (on macOS)](https://github.com/ianyh/Amethyst)
+* [sway (on linux desktop)](https://github.com/swaywm/sway)❤️
 
 An overview over the most common tasks follows below, especially if they differ from the default. Check the files' contents for more details.
 
@@ -89,3 +90,27 @@ See https://github.com/schemar/kak-jsts/ for details on TypeScript formatting/li
 * `,d` to go to definition of symbol under cursor.
 * `,r` to list references of symbol under cursor.
 * `,2` to rename symbol under cursor.
+
+### Sway
+
+Sway is set up with:
+
+* Full screen sharing with Firefox.
+* Red tinted display at night.
+* Easy screenshot of screen area.
+* Application launcher.
+* Auto-lock and auto-sleep.
+* Waybar:
+  * Click "eye" to stop auto-lock/sleep.
+  * Click "brightness" to manage displays.
+  * Click "audio" to manage sound settings.
+  * Click "network" to connect to WiFi.
+
+See the sway config for all relevant keybindings. Most relevant:
+
+* `$mod` is by default "super"/"windows".
+* `$mod+d` to launch application.
+* `$mod+Shift+e` to exit, lock, etc.
+* `$mod+p` to take screenshots (saved to `~/Pictures/`).
+* `$mod+r` to resize.
+* `$mod+Shift+c` to reload config.

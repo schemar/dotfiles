@@ -259,12 +259,12 @@ bindsym $mod+r mode "resize"
 
 set $mode_system (l)ock, (e)xit, (s)uspend, (r)eboot, (S)hutdown, (U)EFI
 mode "$mode_system" {
-    bindsym e exit
-    bindsym l exec --no-startup-id $lock, mode "default"
-    bindsym s exec --no-startup-id $lock, exec --no-startup-id systemctl suspend, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
-    bindsym Shift+u exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
+    bindsym e exit, mode "default"
+    bindsym l exec $lock, mode "default"
+    bindsym s exec $lock, exec systemctl suspend, mode "default"
+    bindsym r exec systemctl reboot, mode "default"
+    bindsym Shift+s exec systemctl poweroff -i, mode "default"
+    bindsym Shift+u exec systemctl reboot --firmware-setup, mode "default"
 
     # return to default mode
     bindsym Return mode "default"
@@ -272,12 +272,16 @@ mode "$mode_system" {
 }
 bindsym $mod+Shift+e mode "$mode_system"
 
-set $mode_screenshot (a)rea, (w)indow, (c)lipboard area, c(l)ipboard window
+set $mode_screenshot (a)rea, (c)lipboard area
 mode "$mode_screenshot" {
-    bindsym a exec --no-startup-id grim -g "$(slurp)" $screenshotname, mode "default"
-    #bindsym w exec --no-startup-id grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" $screenshotname, mode "default"
+    # Selecting a window doesn't work. The command works in the shell, but
+    # somehow not here with exec.
 
-    bindsym c exec --no-startup-id grim -g "$(slurp)" - | wl-copy, mode "default"
+    bindsym a exec grim -g "$(slurp)" $screenshotname, mode "default"
+    #bindsym w exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" $screenshotname, mode "default"
+
+    bindsym c exec grim -g "$(slurp)" - | wl-copy, mode "default"
+    #bindsym l exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | wl-copy, mode "default"
 
     # return to default mode
     bindsym Return mode "default"
