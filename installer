@@ -60,7 +60,7 @@ linux_desktop_packages=(
     NetworkManager-tui
     pavucontrol
     playerctl
-    rofi
+    wofi
     slurp
     sway
     swayidle

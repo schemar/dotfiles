@@ -110,6 +110,7 @@ See the sway config for all relevant keybindings. Most relevant:
 
 * `$mod` is by default "super"/"windows".
 * `$mod+d` to launch application.
+* `$mod+Shift+d` to "run" binary.
 * `$mod+Shift+e` to exit, lock, etc.
 * `$mod+p` to take screenshots (saved to `~/Pictures/`).
 * `$mod+r` to resize.
