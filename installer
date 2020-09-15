@@ -24,11 +24,11 @@ common_packages=(
     tig
     jq
     yarn
-    exa
 )
 
 brew_packages=(
     starship
+    exa
     ul/kak-lsp/kak-lsp
     fd
 )
@@ -36,6 +36,7 @@ brew_packages=(
 fedora_packages=(
     # Starship is being installed from download
     # starship
+    exa
     kak-lsp
     fd-find
 )
@@ -277,6 +278,16 @@ installs() {
             install "$package"
         fi
     done
+
+    if [[ ! "$rust_installed" = "true" ]]; then
+        print "Installing rust ..."
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+        print "You must manually 'source $HOME/.cargo/env'."
+        print "Then, run ./installer again."
+        echo 'rust_installed="true"' >> .state
+        exit 0
+    fi
     
     if [[ "$linux_distro" = "fedora" ]]; then
         print "Installing fedora packages ..."
@@ -296,6 +307,11 @@ installs() {
                 install "$package"
             fi
         done
+
+        if [[ ! "$exa_installed" = "true" ]]; then
+            redirect_output "cargo install exa"
+            echo 'exa_installed="true"' >> .state
+        fi
     fi
     
     if [[ "$OSTYPE" == "darwin"* ]]; then
