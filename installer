@@ -4,7 +4,7 @@
 # configurations.
 # Actual execution at the very end.
 #
-# If you pass "symlinks" as the only arg, only the symlinks will be linked.
+# If you pass "symlinks-" as the only arg, only the symlinks will be linked.
 # Otherwise, everything will run.
 #
 # Keeps state in .state and sends output of most commands to output.log.
@@ -53,14 +53,25 @@ brew_desktop_packages=(
 )
 
 linux_desktop_packages=(
+    arandr
     brightnessctl
+    dunst
+    feh
     gammastep
     gammastep-indicator
     grim
+    i3-gaps
+    i3lock
     kitty
+    lxappearance
+    maim
     NetworkManager-tui
     pavucontrol
     playerctl
+    polybar
+    redshift
+    redshift-gtk
+    rofi
     wofi
     slurp
     sway
@@ -69,6 +80,8 @@ linux_desktop_packages=(
     wl-clipboard
     waybar
     wdisplays
+    xautolock
+    xclip
 )
 
 #
@@ -183,7 +196,6 @@ symlink_configs() {
     ln -snf "$SCRIPTPATH"/.config/kak "$HOME"/.config/kak
     ln -snf "$SCRIPTPATH"/.config/ranger "$HOME"/.config/ranger
     ln -snf "$SCRIPTPATH"/.config/starship.toml "$HOME"/.config/starship.toml
-    ln -snf "$SCRIPTPATH"/.config/rofi "$HOME"/.config/rofi
     ln -snf "$SCRIPTPATH"/.config/gammastep "$HOME"/.config/gammastep
     ln -snf "$SCRIPTPATH"/.config/environment.d "$HOME"/.config/environment.d
     
@@ -196,9 +208,13 @@ symlink_configs() {
         # Assuming Linux
         # Create kak symlink to original autload:
         ln -snf /usr/share/kak/autoload "$SCRIPTPATH"/.config/kak/autoload
+        ln -snf "$SCRIPTPATH"/.fehbg "$HOME"/.fehbg
         ln -snf "$SCRIPTPATH"/.config/kak-lsp "$HOME"/.config/kak-lsp
         ln -snf "$SCRIPTPATH"/.config/sway "$HOME"/.config/sway
+        ln -snf "$SCRIPTPATH"/.config/i3 "$HOME"/.config/i3
+        ln -snf "$SCRIPTPATH"/.config/rofi "$HOME"/.config/rofi
         ln -snf "$SCRIPTPATH"/.config/waybar "$HOME"/.config/waybar
+        ln -snf "$SCRIPTPATH"/.config/polybar "$HOME"/.config/polybar
     fi
 }
 
@@ -265,6 +281,11 @@ installs() {
             print "Adding yarn repo to fedora ..."
             redirect_output "curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo"
             echo 'yarnrepoadded="true"' >> .state
+        fi
+        if [[ ! "$i3gapsrepoadded" = "true" ]]; then
+            print "Adding i3-gaps repo to fedora ..."
+            redirect_output "sudo dnf copr enable fuhrmann/i3-gaps -y"
+            echo 'i3gapsrepoadded="true"' >> .state
         fi
     fi
     

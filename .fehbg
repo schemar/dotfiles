@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-fill "$HOME/.config/i3/tim-muller-fbKeAVK2gM0-unsplash.jpg"

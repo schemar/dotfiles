@@ -91,7 +91,19 @@ See https://github.com/schemar/kak-jsts/ for details on TypeScript formatting/li
 * `,r` to list references of symbol under cursor.
 * `,2` to rename symbol under cursor.
 
-### Sway
+### Sway/i3
+
+Linux desktop installs include sway and i3 in a somewhat similar setup. Even though I love wayland and sway, we are not quite at wayland yet. I guess once electron apps come with chromium ozone and pipewire support, I won't need i3 anymore.
+
+See the sway/i3 config for all keybindings. Most relevant:
+
+* `$mod` is by default "super"/"windows".
+* `$mod+d` to launch application.
+* `$mod+Shift+e` to exit, lock, etc.
+* `$mod+p` to take screenshots (saved to `~/Pictures/`).
+* `$mod+m` to enter "maintenance mode" (display settings, etc.)
+* `$mod+r` to resize.
+* `$mod+Shift+c` to reload config.
 
 Sway is set up with:
 
@@ -106,12 +118,3 @@ Sway is set up with:
   * Click "audio" to manage sound settings.
   * Click "network" to connect to WiFi.
 
-See the sway config for all relevant keybindings. Most relevant:
-
-* `$mod` is by default "super"/"windows".
-* `$mod+d` to launch application.
-* `$mod+Shift+d` to "run" binary.
-* `$mod+Shift+e` to exit, lock, etc.
-* `$mod+p` to take screenshots (saved to `~/Pictures/`).
-* `$mod+r` to resize.
-* `$mod+Shift+c` to reload config.

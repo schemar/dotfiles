@@ -3,10 +3,14 @@ if [[  "$(uname)" = "Darwin" ]]; then
   export PATH="$(brew --prefix)/sbin:$PATH"
 else
   # Assuming Linux otherwise
-  alias pbcopy='wl-copy --trim-newline'
-  alias pbpaste='wl-paste --no-newline'
+  #alias pbcopy='wl-copy --trim-newline'
+  #alias pbpaste='wl-paste --no-newline'
+  # Using xclip instead of wayland version
+  alias pbcopy='xclip -selection clipboard'
+  alias pbpaste='xclip -selection clipboard -o'
 fi
-
+  
+export PATH="$HOME/.local/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
