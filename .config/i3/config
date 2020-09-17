@@ -11,7 +11,7 @@
 
 set $mod Mod4
 
-set $lock i3lock --color=2e3440
+set $lock $HOME/.config/i3/lock.sh
 
 set $screenshotname "$(xdg-user-dir PICTURES)/$(date +'%s_screenshot.png')"
 
@@ -20,7 +20,7 @@ set $screenshotname "$(xdg-user-dir PICTURES)/$(date +'%s_screenshot.png')"
 font pango:fixed 10
 
 # Background image
-exec --no-startup-id ~/.fehbg
+exec --no-startup-id $HOME/.config/dwall/dwall.sh -s anime
 
 # Red tint
 exec redshift-gtk

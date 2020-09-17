@@ -114,6 +114,9 @@ plug "https://github.com/ul/kak-lsp" tag "v8.0.0" config %{
     # eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
     # set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
 
+    # this is not necessary; the `lsp-enable-window` will take care of it
+    # eval %sh{${kak_opt_lsp_cmd} --kakoune -s $kak_session}
+
     set global lsp_diagnostic_line_error_sign '║'
     set global lsp_diagnostic_line_warning_sign '┊'
 
