@@ -143,7 +143,7 @@ init() {
         exit 0;
     fi
     while true; do
-        main && sleep 2
+        main && sleep 120
     done
 }
 
