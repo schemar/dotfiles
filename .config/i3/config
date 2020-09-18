@@ -28,6 +28,9 @@ exec --no-startup-id redshift-gtk
 # Composer
 exec --no-startup-id DISPLAY=":0" picom -b
 
+# Notifications
+exec --no-startup-id dunst
+
 # Make sure the screen locks when inactive
 # Put mouse in top left corner to lock and bottom right corner to never lock
 exec --no-startup-id xautolock -time 5 -corners +00- -locker "$lock"
