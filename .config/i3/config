@@ -26,7 +26,7 @@ exec --no-startup-id $HOME/.config/dwall/dwall.sh -s anime
 exec --no-startup-id redshift-gtk
 
 # Composer
-exec --no-startup-id DISPLAY=":0" picom -b
+exec --no-startup-id DISPLAY=":0" picom -b --experimental-backends --backend glx
 
 # Notifications
 exec --no-startup-id dunst

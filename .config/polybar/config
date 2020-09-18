@@ -18,8 +18,8 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #3b4252
-background-alt = #2e3440
+background = #ee3b4252
+background-alt = #ee2e3440
 ;foreground = ${xrdb:color7:#222}
 foreground = #d8dee9
 foreground-alt = #e5e9f0
@@ -30,7 +30,7 @@ alert = #d08770
 [bar/bar1]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 27
+height = 30
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0.0
@@ -43,14 +43,16 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = ${colors.primary}
 
-border-size = 0
+border-size = 10
+border-top-size = 0
+border-bottom-size = 5
 border-color = #00000000
 
 padding-left = 0
 padding-right = 0
 
-module-margin-left = 1
-module-margin-right = 2
+module-margin-left = 0
+module-margin-right = 1
 
 font-0 = DejaVuSansMono Nerd Font:style=Book:pixelsize=10;1
 ;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
@@ -61,8 +63,8 @@ modules-center =
 modules-right = backlight pulseaudio cpu memory wlan eth battery temperature date powermenu
 
 tray-position = right
-tray-padding = 2
-;tray-background = #0063ff
+tray-padding = 1
+;tray-background = #883b4252
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -117,30 +119,30 @@ wrapping-scroll = false
 ; Only show workspaces on the same output as the bar
 ;pin-workspaces = true
 
-label-mode-padding = 2
+label-mode-padding = 1
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = %index%: %icon%
+label-focused = "%index%: %icon% "
 label-focused-background = ${colors.background-alt}
 label-focused-underline= ${colors.primary}
-label-focused-padding = 2
+label-focused-padding = ${self.label-mode-padding}
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%: %icon%
-label-unfocused-padding = 2
+label-unfocused = "%index%: %icon% "
+label-unfocused-padding = ${self.label-mode-padding}
 
 ; visible = Active workspace on unfocused monitor
-label-visible = %index%: %icon%
+label-visible = "%index%: %icon% "
 label-visible-background = ${self.label-focused-background}
 label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %index%: %icon%
+label-urgent = "%index%: %icon% "
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = ${self.label-mode-padding}
 
 ; Separator in between workspaces
 label-separator = |
