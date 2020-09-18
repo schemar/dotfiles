@@ -23,7 +23,10 @@ font pango:fixed 10
 exec --no-startup-id $HOME/.config/dwall/dwall.sh -s anime
 
 # Red tint
-exec redshift-gtk
+exec --no-startup-id redshift-gtk
+
+# Composer
+exec --no-startup-id DISPLAY=":0" picom -b
 
 # Make sure the screen locks when inactive
 # Put mouse in top left corner to lock and bottom right corner to never lock

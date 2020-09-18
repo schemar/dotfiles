@@ -67,6 +67,7 @@ linux_desktop_packages=(
     maim
     NetworkManager-tui
     pavucontrol
+    picom
     playerctl
     polybar
     redshift
@@ -190,6 +191,7 @@ symlink_configs() {
     ln -snf "$SCRIPTPATH"/.themes  "$HOME"/.themes
     ln -snf "$SCRIPTPATH"/.icons  "$HOME"/.icons
     mkdir -p "$HOME"/.config
+    ln -snf "$SCRIPTPATH"/.config/picom "$HOME"/.config/picom
     ln -snf "$SCRIPTPATH"/.config/kitty "$HOME"/.config/kitty
     ln -snf "$SCRIPTPATH"/.config/nvim "$HOME"/.config/nvim
     ln -snf "$SCRIPTPATH"/.config/neomutt "$HOME"/.config/neomutt
