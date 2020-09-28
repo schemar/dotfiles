@@ -1,0 +1,9 @@
+configuration {
+  display-drun: "Start";
+  display-run: "Run";
+  display-window: "Win";
+  display-ssh: "SSH";
+  show-icons: true;
+  font: "DejaVuSansMono Nerd Font 10";
+  case-sensitive: false;
+}

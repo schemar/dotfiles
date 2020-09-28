@@ -9,7 +9,7 @@ network=" Network"
 
 options="${network}\n${display}\n${audio}\n${audio_rescan}\n${keyboard_reload}"
 
-selected="$(echo -e ${options} | rofi -dmenu -i -p 'Settings' -font 'DejaVuSansMono Nerd Font 10' -theme slate_nord)"
+selected="$(echo -e ${options} | rofi -dmenu -i -p 'Settings' -theme slate_nord)"
 
 case $selected in
     $display)
