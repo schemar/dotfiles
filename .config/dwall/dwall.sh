@@ -41,15 +41,6 @@ case "$OSTYPE" in
         ;;
 esac
 
-case "$OSTYPE" in
-    linux*)
-        TIME="$(date +%k)"
-        ;;
-    *)
-        TIME="$(date +%k)"
-        ;;
-esac
-
 ## For XFCE
 if [[ "$OSTYPE" == "linux"* ]]; then
     SCREEN="$(xrandr --listactivemonitors | awk -F ' ' 'END {print $1}' | tr -d \:)"
@@ -112,6 +103,7 @@ set_wallpaper() {
 }
 
 main() {
+    TIME="$(date +%k)"
     num=$(($TIME/1))
     set_wallpaper "$num"
 }
