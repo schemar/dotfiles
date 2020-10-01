@@ -59,6 +59,7 @@ linux_desktop_packages=(
     feh
     gammastep
     gammastep-indicator
+    gnome-flashback
     grim
     i3-gaps
     i3lock
@@ -373,6 +374,9 @@ installs() {
             # Set the GTK theme:
             gsettings set org.gnome.desktop.interface gtk-theme "Nordic"
             gsettings set org.gnome.desktop.wm.preferences theme "Nordic"
+
+            # Disable gnome flashback's desktop to start on top of i3:
+            dconf write /org/gnome/gnome-flashback/desktop false
         fi
     fi
     
@@ -460,7 +464,9 @@ To finsh setup:
  * Add .~/.gitconfigemail and set your email address
  * You may need to add "export MOZ_ENABLE_WAYLAND=1" to "/etc/environment"
    if Firefox looks blurry when scaling with sway
- * Don't forget to map capslock to <Ctrl>
+ * Map capslock to <Ctrl>
+ * If you are on desktop, install i3-gnome:
+   https://github.com/i3-gnome/i3-gnome
         
 EOF
 }

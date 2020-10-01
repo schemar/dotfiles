@@ -1,17 +1,21 @@
 #!/bin/bash
 
 # Options
+gnome_settings=" Gnome settings"
 display=" Display"
 audio="蓼 Audio"
 audio_rescan="遼 Rescan audio devices"
 keyboard_reload=" Reload keyboard config"
 network=" Network"
 
-options="${network}\n${display}\n${audio}\n${audio_rescan}\n${keyboard_reload}"
+options="${gnome_settings}\n${network}\n${display}\n${audio}\n${audio_rescan}\n${keyboard_reload}"
 
 selected="$(echo -e ${options} | rofi -dmenu -i -p 'Settings' -theme slate_nord)"
 
 case $selected in
+    $gnome_settings)
+        gnome-control-center
+        ;;
     $display)
         arandr
         ;;
