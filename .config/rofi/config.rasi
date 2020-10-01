@@ -1,9 +1,15 @@
 configuration {
-  display-drun: "Start";
-  display-run: "Run";
-  display-window: "Win";
-  display-ssh: "SSH";
+  display-drun: " ";
+  display-run: " ";
+  display-window: " ";
+  display-ssh: " ";
+  drun-display-format: "{icon} {name}";
   show-icons: true;
-  font: "DejaVuSansMono Nerd Font 10";
+  font: "DejaVuSansMono Nerd Font 12";
   case-sensitive: false;
+  modi: "window,run,drun";
+  fixed-num-lines: false;
+  lines: 15;
+  location: 2;
+  yoffset: 50;
 }

@@ -10,7 +10,7 @@ network=" Network"
 
 options="${gnome_settings}\n${network}\n${display}\n${audio}\n${audio_rescan}\n${keyboard_reload}"
 
-selected="$(echo -e ${options} | rofi -dmenu -i -p 'Settings' -theme slate_nord)"
+selected="$(echo -e ${options} | rofi -dmenu -i -p ' ' -theme slate_nord)"
 
 case $selected in
     $gnome_settings)
