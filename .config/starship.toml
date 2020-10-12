@@ -11,15 +11,12 @@ style_user = "fg:purple"
 style = "fg:purple"
 
 [character]
-symbol = ">"
-error_symbol = ">"
-vicmd_symbol = "<"
-style_success = "fg:blue"
-style_failure = "fg:red"
+success_symbol = "[>](blue)"
+error_symbol = "[>](red)"
+vicmd_symbol = "[<](blue)"
 
 [cmd_duration]
-style = "fg:blue"
-prefix = " "
+format = "took [$duration](fg:blue) "
 
 [directory]
 style = "fg:blue"
@@ -53,7 +50,7 @@ symbol = " "
 
 [git_branch]
 style = "fg:blue"
-symbol = " "
+symbol = " "
 
 [git_commit]
 style = "fg:blue"
@@ -75,7 +72,7 @@ symbol = " "
 
 [hg_branch]
 style = "fg:blue"
-symbol = " "
+symbol = " "
 
 [java]
 style = "fg:blue"
