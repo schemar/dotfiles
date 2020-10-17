@@ -10,20 +10,22 @@
 # Keeps state in .state and sends output of most commands to output.log.
 
 common_packages=(
-    fzf
-    ripgrep
-    vim
-    neovim
-    tmux
-    python
-    zsh
     bat
     direnv
-    kakoune
-    ranger
-    tig
+    fzf
     jq
+    kakoune
+    neovim
+    python
+    ranger
+    ripgrep
+    task
+    tig
+    tmux
+    vim
+    w3m
     yarn
+    zsh
 )
 
 brew_packages=(
@@ -119,6 +121,10 @@ install_on_ubuntu() {
             # Workaround for conflicting package names
             redirect_output "sudo apt-get -y install fd-find"
             redirect_output "sudo ln -snf /usr/bin/fdfind /usr/bin/fd"
+            ;;
+        "task")
+            # Workaround for conflicting package names
+            redirect_output "sudo apt-get -y install taskwarrior"
             ;;
         *)
             redirect_output "sudo apt-get -y install $1"
@@ -414,6 +420,13 @@ installs() {
         redirect_output "npm install -g typescript-language-server"
         redirect_output "npm install -g eslint-formatter-kakoune"
         echo 'npmpackages_installed="true"' >> .state
+    fi
+
+    if [[ ! "$npm_nb_installed" = "true" ]]; then
+        print "Installing nb ..."
+        redirect_output "npm install -g nb.sh"
+        redirect_output "sudo $(npm bin -g)/nb completions install"
+        echo 'npm_nb_installed="true"' >> .state
     fi
     
     if [[ ! "$neovimdependencies_installed" = "true" ]]; then
