@@ -39,6 +39,7 @@ fedora_packages=(
     # Starship is being installed from download
     # starship
     exa
+    git-delta
     kak-lsp
     fd-find
 )
@@ -340,8 +341,15 @@ installs() {
         done
 
         if [[ ! "$exa_installed" = "true" ]]; then
+            print "Installing exa ..."
             redirect_output "cargo install exa"
             echo 'exa_installed="true"' >> .state
+        fi
+
+        if [[ ! "$git_delta_installed" = "true" ]]; then
+            print "Installing git-delta ..."
+            redirect_output "cargo install git-delta"
+            echo 'git_delta_installed="true"' >> .state
         fi
     fi
     

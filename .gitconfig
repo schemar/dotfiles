@@ -1,9 +1,10 @@
 [include]
-	path = ~/.gitconfigemail
+  path = ~/.gitconfigemail
 [user]
-	name = Martin Schenck
+  name = Martin Schenck
 [core]
-	editor = kak
+  editor = kak
+  pager = delta
 [alias]
   o = checkout
   c = commit
@@ -18,4 +19,7 @@
   p = pull -p
   h = push
 [pull]
-	rebase = false
+  rebase = false
+[delta]
+  syntax-theme = Nord
+  line-numbers = true
