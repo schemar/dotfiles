@@ -54,6 +54,9 @@ map -docstring 'case insensitive backward search' global user '<a-/>' <a-/>(?i)
 map -docstring 'case insensitive extend search' global user '?' ?(?i)
 map -docstring 'case insensitive backward extend-search' global user '<a-?>' <a-?>(?i)
 
+# Go to alternative file (e.g. test file)
+map global goto m '<esc>: alt<ret>' -docstring 'alternative file'
+
 # A user mode for development related tasks like lsp and formatting
 declare-user-mode development
 
