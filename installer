@@ -55,36 +55,36 @@ brew_desktop_packages=(
 )
 
 linux_desktop_packages=(
-    arandr
-    brightnessctl
-    dunst
-    feh
-    gammastep
-    gammastep-indicator
-    gnome-flashback
-    grim
-    i3-gaps
-    i3lock
+    #arandr
+    #brightnessctl
+    #dunst
+    #feh
+    #gammastep
+    #gammastep-indicator
+    #gnome-flashback
+    #grim
+    #i3-gaps
+    #i3lock
     kitty
     lxappearance
-    maim
-    NetworkManager-tui
+    #maim
+    #NetworkManager-tui
     pavucontrol
-    picom
-    playerctl
-    polybar
-    redshift
-    redshift-gtk
-    rofi
-    wofi
-    slurp
-    sway
-    swayidle
-    swaylock
-    wl-clipboard
-    waybar
-    wdisplays
-    xautolock
+    #picom
+    #playerctl
+    #polybar
+    #redshift
+    #redshift-gtk
+    #rofi
+    #wofi
+    #slurp
+    #sway
+    #swayidle
+    #swaylock
+    #wl-clipboard
+    #waybar
+    #wdisplays
+    #xautolock
     xclip
 )
 
