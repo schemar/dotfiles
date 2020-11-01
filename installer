@@ -29,10 +29,11 @@ common_packages=(
 )
 
 brew_packages=(
-    starship
     exa
-    ul/kak-lsp/kak-lsp
     fd
+    navi
+    starship
+    ul/kak-lsp/kak-lsp
 )
 
 fedora_packages=(
@@ -210,6 +211,8 @@ symlink_configs() {
     ln -snf "$SCRIPTPATH"/.config/gammastep "$HOME"/.config/gammastep
     ln -snf "$SCRIPTPATH"/.config/dwall "$HOME"/.config/dwall
     ln -snf "$SCRIPTPATH"/.config/environment.d "$HOME"/.config/environment.d
+    mkdir -p "$HOME"/.local/share
+    ln -snf "$SCRIPTPATH"/.local/share/navi "$HOME"/.local/share/navi
     
     if [[ "$OSTYPE" == "darwin"* ]]; then
         # Create kak symlink to original autload:
@@ -283,21 +286,21 @@ installs() {
             redirect_output "sudo dnf copr enable atim/kakoune -y"
             echo 'kakcopradded="true"' >> .state
         fi
-        if [[ ! "$gammastepcopradded" = "true" ]]; then
-            print "Adding gammastep copr to fedora ..."
-            redirect_output "sudo dnf copr enable alebastr/sway-extras -y"
-            echo 'gammastepcopradded="true"' >> .state
-        fi
+#        if [[ ! "$gammastepcopradded" = "true" ]]; then
+#            print "Adding gammastep copr to fedora ..."
+#            redirect_output "sudo dnf copr enable alebastr/sway-extras -y"
+#            echo 'gammastepcopradded="true"' >> .state
+#        fi
         if [[ ! "$yarnrepoadded" = "true" ]]; then
             print "Adding yarn repo to fedora ..."
             redirect_output "curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo"
             echo 'yarnrepoadded="true"' >> .state
         fi
-        if [[ ! "$i3gapsrepoadded" = "true" ]]; then
-            print "Adding i3-gaps repo to fedora ..."
-            redirect_output "sudo dnf copr enable fuhrmann/i3-gaps -y"
-            echo 'i3gapsrepoadded="true"' >> .state
-        fi
+#        if [[ ! "$i3gapsrepoadded" = "true" ]]; then
+#            print "Adding i3-gaps repo to fedora ..."
+#            redirect_output "sudo dnf copr enable fuhrmann/i3-gaps -y"
+#            echo 'i3gapsrepoadded="true"' >> .state
+#        fi
     fi
     
     if [[ ! "$zsh_installed" = "true" ]]; then
@@ -376,6 +379,12 @@ installs() {
             echo "starship_installed=\"true\"" >> .state
         fi
     
+        if [[ ! "$navi_installed" = "true" ]]; then
+            print "Installing navi ..."
+            redirect_output "cargo install navi"
+            echo 'navi_installed="true"' >> .state
+        fi
+
         if [[ "$linux_is_desktop" = "true" ]]; then
             print "Installing desktop packages ..."
             for package in "${linux_desktop_packages[@]}"; do
@@ -386,11 +395,11 @@ installs() {
             done
 
             # Set the GTK theme:
-            gsettings set org.gnome.desktop.interface gtk-theme "Nordic"
-            gsettings set org.gnome.desktop.wm.preferences theme "Nordic"
+#            gsettings set org.gnome.desktop.interface gtk-theme "Nordic"
+#            gsettings set org.gnome.desktop.wm.preferences theme "Nordic"
 
             # Disable gnome flashback's desktop to start on top of i3:
-            dconf write /org/gnome/gnome-flashback/desktop false
+#            dconf write /org/gnome/gnome-flashback/desktop false
         fi
     fi
     

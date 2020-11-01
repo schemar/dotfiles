@@ -32,7 +32,6 @@ Requirements macOS (Linux and WSL don't have any special requirements):
 * [nvm](https://github.com/nvm-sh/nvm)
 * [direnv](https://github.com/direnv/direnv)
 * [Amethyst (on macOS)](https://github.com/ianyh/Amethyst)
-* [sway (on linux desktop)](https://github.com/swaywm/sway)❤️
 
 An overview over the most common tasks follows below, especially if they differ from the default. Check the files' contents for more details.
 
@@ -41,6 +40,7 @@ An overview over the most common tasks follows below, especially if they differ 
 * `,,<tab>` to fuzzy find a path. E.g. `cd ./Projects/,,<tab>` will let you fuzzy find directories inside the Projects directory.
 * `<ctrl>+r` to fuzzy find in the shell's history.
 * `<ctrl>+t` to fuzzy find files.
+* `<ctrl>+g` to get cheat sheets for commands.
 * `.nvmrc` files will automatically trigger `nvm use`.
 
 ### Inside Tmux
@@ -57,6 +57,7 @@ Prefix is `<ctrl>-space`.
 * `<prefix> {<,>,+,-}` resize panes by fixed amount left/right/up/down.
 * `<prefix> [` to enable copy mode. Use e.g. to scroll up to see older output. Movement in copy mode is vim-like (e.g. `<ctrl>+{d,u}` to move down/up a page).
 * `<prefix> u` fuzzy find and open a URL from the buffer.
+* `<prefix> tab` fuzzy find any previous tmux output (words, lines, URLs, paths).
 
 ### Kakoune
 

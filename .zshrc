@@ -77,6 +77,9 @@ export LC_ALL=en_US.UTF-8
 # direnv to load environment (variables) per directory/project
 eval "$(direnv hook zsh)"
 
+# eval navi (terminal cheat sheets; activate with C-g)
+eval "$(navi widget zsh)"
+
 # staship shell prompt
 export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 eval "$(starship init zsh)"
