@@ -1,10 +1,11 @@
 # Integration with ranger
 #
 # It suspends kakoune in the background and shows ranger.
-# When a file in ranger is selected and ranger is close,
+# When a file in ranger is selected and ranger is closed,
 # the terminal returns to kakoune and opens the selected file.
 # 
 # From the wiki: https://github.com/mawww/kakoune/wiki/Integrating-Other-CLI-apps
+# With improvements from https://github.com/Crote/kakoune-ranger/blob/master/ranger.kak
 
 def suspend-and-resume \
     -params 1..2 \
@@ -15,29 +16,20 @@ def suspend-and-resume \
     cli_cmd="$1 && fg"
     post_resume_cmd="$2"
 
-    # automation is different platform to platform
-    platform=$(uname -s)
-    case $platform in
-        Darwin)
-            automate_cmd="sleep 0.01; osascript -e 'tell application \"System Events\" to keystroke \"$cli_cmd\\n\" '"
-            kill_cmd="/bin/kill"
-            break
-            ;;
-        Linux)
-            automate_cmd="sleep 0.2; xdotool type '$cli_cmd'; xdotool key Return"
-            kill_cmd="/usr/bin/kill"
-            break
-            ;;
-    esac
+    if [ -z ${TMUX_PANE+x} ]; then
+        echo "fail \"Cannot open command: this only works inside tmux.\""
+        exit
+    fi
 
-    # Uses platforms automation to schedule the typing of our cli command
-    nohup sh -c "$automate_cmd"  > /dev/null 2>&1 &
+    # Schedule the command to run after kak is sent to background (see sleep)
+    # Auto "clear" and "fg" when commans is done
+    nohup sh -c "sleep 0.1; tmux send-keys -t $TMUX_PANE -l \"$1; clear; fg\"; tmux send-keys -t $TMUX_PANE \"Enter\"" > /dev/null 2>&1 &
     # Send kakoune client to the background
-    $kill_cmd -SIGTSTP $kak_client_pid
+    /bin/kill -SIGTSTP $kak_client_pid
 
-    # ...At this point the kakoune client is paused until the " && fg " gets run in the $automate_cmd
+    # ...At this point the kakoune client is paused until the "; fg" gets run in the nohup cmd
 
-    # Upon resume, run the kak command is specified
+    # Upon resume, run the kak command if is specified
     if [ ! -z "$post_resume_cmd" ]; then
         echo "$post_resume_cmd"
     fi
