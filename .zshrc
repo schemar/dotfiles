@@ -34,6 +34,11 @@ alias y='yarn'
 alias l='logo-ls -Agh'
 alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
+# Tmux usability aliases
+alias tmde='tmux new-session -A -s development'
+alias tmdo='tmux new-session -A -s dotfiles'
+alias tmta='tmux new-session -A -s tasks'
+
 # User configuration
 
 # Auto-load nvm with .nvmrc due to lazy loading
