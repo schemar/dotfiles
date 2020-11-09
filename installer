@@ -60,19 +60,19 @@ linux_desktop_packages=(
     #arandr
     #brightnessctl
     #dunst
-    #feh
+    feh
     #gammastep
     #gammastep-indicator
     #gnome-flashback
     #grim
-    #i3-gaps
+    i3-gaps
     #i3lock
     kitty
     lxappearance
     #maim
     #NetworkManager-tui
     pavucontrol
-    #picom
+    picom
     #playerctl
     #polybar
     #redshift
@@ -197,8 +197,7 @@ symlink_configs() {
     ln -snf "$SCRIPTPATH"/.fzf.zsh  "$HOME"/.fzf.zsh
     ln -snf "$SCRIPTPATH"/.dir_colors  "$HOME"/.dir_colors
     ln -snf "$SCRIPTPATH"/.gitconfig  "$HOME"/.gitconfig
-    ln -snf "$SCRIPTPATH"/.themes  "$HOME"/.themes
-    ln -snf "$SCRIPTPATH"/.icons  "$HOME"/.icons
+    ln -snf "$SCRIPTPATH"/.kde-i3.sh  "$HOME"/.kde-i3.sh
     mkdir -p "$HOME"/.config
     ln -snf "$SCRIPTPATH"/.config/picom "$HOME"/.config/picom
     ln -snf "$SCRIPTPATH"/.config/dunst "$HOME"/.config/dunst
@@ -211,6 +210,8 @@ symlink_configs() {
     ln -snf "$SCRIPTPATH"/.config/gammastep "$HOME"/.config/gammastep
     ln -snf "$SCRIPTPATH"/.config/dwall "$HOME"/.config/dwall
     ln -snf "$SCRIPTPATH"/.config/environment.d "$HOME"/.config/environment.d
+    mkdir -p "$HOME"/.config/plasma-workspace/env
+    ln -snf "$SCRIPTPATH"/.config/plasma-workspace/env/kde-i3.sh "$HOME"/.config/plasma-workspace/env/kde-i3.sh
     mkdir -p "$HOME"/.local/share
     ln -snf "$SCRIPTPATH"/.local/share/navi "$HOME"/.local/share/navi
     mkdir -p "$HOME"/.task
@@ -488,17 +489,19 @@ everything() {
     cat <<EOF
         
 To finsh setup:
- * Install a patched font from https://github.com/ryanoasis/nerd-fonts
-   and set it in your terminal emulator
  * Run '<ctrl>+b' I inside tmux
  * Run ':plug-install' in kakoune
  * Run ':PlugInstall' in NeoVim
  * Add .~/.gitconfigemail and set your email address
- * You may need to add "export MOZ_ENABLE_WAYLAND=1" to "/etc/environment"
-   if Firefox looks blurry when scaling with sway
- * Map capslock to <Ctrl>
- * If you are on desktop, install i3-gnome:
-   https://github.com/i3-gnome/i3-gnome
+
+On desktop:
+ * Install a patched font from https://github.com/ryanoasis/nerd-fonts
+   and set it in your terminal emulator
+ * Map capslock to <Esc>
+ * Map printscr/menu to <composer>
+ * Set wallpaper with 'feh --bg-fill <path/to/file>'
+ * Disable all "activity" shortcuts in plasma
+ * Log out and back into plasma to have i3 as window manager.
         
 EOF
 }

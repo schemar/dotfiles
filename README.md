@@ -5,6 +5,8 @@ dotfiles for Linux, WSL, and macOS.
 An opinionated default setup for working on the command line.
 Supports Fedora, Ubuntu 20,04+, Ubuntu WSL, and macOS.
 
+Also supports a desktop install with Fedora KDE spin (using i3 as window manager).
+
 ## Installation
 
 You can use the `./installer` helper.
@@ -31,7 +33,6 @@ Requirements macOS (Linux and WSL don't have any special requirements):
 * [NeoVim](https://github.com/neovim/neovim)
 * [nvm](https://github.com/nvm-sh/nvm)
 * [direnv](https://github.com/direnv/direnv)
-* [Amethyst (on macOS)](https://github.com/ianyh/Amethyst)
 
 An overview over the most common tasks follows below, especially if they differ from the default. Check the files' contents for more details.
 
@@ -92,30 +93,15 @@ See https://github.com/schemar/kak-jsts/ for details on TypeScript formatting/li
 * `,r` to list references of symbol under cursor.
 * `,2` to rename symbol under cursor.
 
-### Sway/i3
+### i3
 
-Linux desktop installs include sway and i3 in a somewhat similar setup. Even though I love wayland and sway, we are not quite at wayland yet. I guess once electron apps come with chromium ozone and pipewire support, I won't need i3 anymore.
+Linux desktop installs include i3 as the window manager of KDE Plasma.
 
-See the sway/i3 config for all keybindings. Most relevant:
+See the i3 config for all keybindings. Most relevant:
 
 * `$mod` is by default "super"/"windows".
 * `$mod+d` to launch application.
 * `$mod+Shift+e` to exit, lock, etc.
-* `$mod+p` to take screenshots (saved to `~/Pictures/`).
-* `$mod+m` to enter "maintenance mode" (display settings, etc.)
+* `$mod+p` to take screenshots.
 * `$mod+r` to resize.
 * `$mod+Shift+c` to reload config.
-
-Sway is set up with:
-
-* Full screen sharing with Firefox.
-* Red tinted display at night.
-* Easy screenshot of screen area.
-* Application launcher.
-* Auto-lock and auto-sleep.
-* Waybar:
-  * Click "eye" to stop auto-lock/sleep.
-  * Click "brightness" to manage displays.
-  * Click "audio" to manage sound settings.
-  * Click "network" to connect to WiFi.
-
