@@ -213,6 +213,8 @@ symlink_configs() {
     ln -snf "$SCRIPTPATH"/.config/environment.d "$HOME"/.config/environment.d
     mkdir -p "$HOME"/.local/share
     ln -snf "$SCRIPTPATH"/.local/share/navi "$HOME"/.local/share/navi
+    mkdir -p "$HOME"/.task
+    ln -snf "$SCRIPTPATH"/.task/nord.theme "$HOME"/.task/nord.theme
     
     if [[ "$OSTYPE" == "darwin"* ]]; then
         # Create kak symlink to original autload:
