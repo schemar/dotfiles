@@ -29,6 +29,7 @@ exec --no-startup-id redshift-gtk
 floating_modifier $mod
 
 # Application starter
+# Adding LC_ALL in case of locale setting issues with KDE
 bindsym $mod+d exec --no-startup-id LC_ALL=C rofi -show drun -theme slate_nord >/tmp/rofi.log 2>&1
 bindsym $mod+Shift+d exec --no-startup-id LC_ALL=C rofi -show run -theme slate_nord
 
