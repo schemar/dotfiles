@@ -20,6 +20,8 @@ exec_always --no-startup-id $HOME/.config/picom/launch.sh
 
 # Background
 exec_always --no-startup-id $HOME/.fehbg
+# Notifications
+exec --no-startup-id dunst
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).

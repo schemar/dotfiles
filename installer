@@ -59,7 +59,7 @@ brew_desktop_packages=(
 linux_desktop_packages=(
     #arandr
     #brightnessctl
-    #dunst
+    dunst
     feh
     #gammastep
     #gammastep-indicator
