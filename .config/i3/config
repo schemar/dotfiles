@@ -18,6 +18,9 @@ exec --no-startup-id dunst
 # Background, sleeping so that Plasma can get the resolution right
 exec_always --no-startup-id sleep 5 && $HOME/.fehbg
 
+# Red tint
+exec --no-startup-id redshift-gtk
+
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
@@ -25,8 +28,10 @@ exec_always --no-startup-id sleep 5 && $HOME/.fehbg
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start krunner
-bindsym $mod+d exec --no-startup-id krunner
+# Application starter
+bindsym $mod+d exec --no-startup-id LC_ALL=C rofi -show drun -theme slate_nord >/tmp/rofi.log 2>&1
+bindsym $mod+Shift+d exec --no-startup-id LC_ALL=C rofi -show run -theme slate_nord
+
 # show logout
 bindsym $mod+Shift+e exec --no-startup-id qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
 
@@ -154,7 +159,7 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-gaps inner 10
+gaps inner 7
 default_border none
 hide_edge_borders smart
 
@@ -175,7 +180,9 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 
 for_window [class="Toggl Desktop"] floating enable
 for_window [title="settings-nmtui-connect"] floating enable
-for_window [title="Slack | mini panel"] floating enable; border none
+for_window [title="Slack \| mini panel"] floating enable; border none
+for_window [title="Slack \| [Cc]all"] floating enable; border none
+for_window [title="Slack \| Slack [Cc]all"] floating enable; border none
 
 #
 # Plasma specific overrides
@@ -185,11 +192,11 @@ for_window [class="plasmashell"] floating enable;
 for_window [class="Plasma"] floating enable; border none
 for_window [title="plasma-desktop"] floating enable; border none
 for_window [title="win7"] floating enable; border none
-for_window [class="krunner"] floating enable; border none
+for_window [class="krunner"] floating enable; border none; move position center
 for_window [class="Kmix"] floating enable; border none
 for_window [class="Klipper"] floating enable; border none
 for_window [class="Plasmoidviewer"] floating enable; border none
 for_window [class="(?i)*nextcloud*"] floating disable
-for_window [class="plasmashell" window_type="notification"] floating enable, border none, move position center, move down 300px
+for_window [class="plasmashell" window_type="notification"] floating enable, border none, move position center, move down 300 px
 no_focus [class="plasmashell" window_type="notification"] 
 # Plasma end

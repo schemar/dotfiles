@@ -111,16 +111,18 @@ export MANPAGER="bat -l man -p"
 test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
 
 # Welcome
-echo "\`odNMMmy\`                +oo:                                .hmd:"
-echo "dMMNsoh:                 MMMs                                +MMMy"
-echo "MMMs                     MMMs                                 .:-         \`\`             \`\`"
-echo "MMMMNNNs :NNN-    NNNs   MMMMNNNm  +NNN.   \`NNN+   mNNNNNNN/ -NNN/    -smMMMMNh/     /hNMMMMms-"
-echo "MMMdsss/ :MMM:    NMMs   MMMdssso  +MMM-   \`MMM+   mMMmssss- -MMM/   oMMMho+sNMMh  \`dMMmo//sMMM/"
-echo "MMMs     :MMM:    NMMs   MMMs      +MMM-   \`MMM+   mMMh      -MMM/  -MMMs    ./:.  sMMM/::::hMMN"
-echo "MMMs     :MMM:    NMMs   MMMs      +MMM-   \`MMM+   mMMh      -MMM/  /MMM/          hMMMNNNNNNNNN"
-echo "MMMs     -MMM+   \`MMMs   MMMs      /MMM:   -MMM+   mMMh      -MMM/  -MMMy    -+/-  oMMM.    ./\`"
-echo "MMMs      hMMMyosmMMN.   dMMNsohs  \`mMMNyosNMMm\`   mMMh      -MMM/   +MMMdsoyMMMy  \`hMMNyooyNMM+"
-echo "mmm+       /hmMMMNdo\`    \`odNMMmh.  \`+hmMMMNho\`    dmmy      .mmm:    .odNMMNmy:     :ymNMMNds."
+printf "\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n" \
+"  \`odNMMmy\`                +oo:                                .hmd:" \
+"  dMMNsoh:                 MMMs                                +MMMy" \
+"  MMMs                     MMMs                                 .:-         \`\`             \`\`" \
+"  MMMMNNNs :NNN-    NNNs   MMMMNNNm  +NNN.   \`NNN+   mNNNNNNN/ -NNN/    -smMMMMNh/     /hNMMMMms-" \
+"  MMMdsss/ :MMM:    NMMs   MMMdssso  +MMM-   \`MMM+   mMMmssss- -MMM/   oMMMho+sNMMh  \`dMMmo//sMMM/" \
+"  MMMs     :MMM:    NMMs   MMMs      +MMM-   \`MMM+   mMMh      -MMM/  -MMMs    ./:.  sMMM/::::hMMN" \
+"  MMMs     :MMM:    NMMs   MMMs      +MMM-   \`MMM+   mMMh      -MMM/  /MMM/          hMMMNNNNNNNNN" \
+"  MMMs     -MMM+   \`MMMs   MMMs      /MMM:   -MMM+   mMMh      -MMM/  -MMMy    -+/-  oMMM.    ./\`" \
+"  MMMs      hMMMyosmMMN.   dMMNsohs  \`mMMNyosNMMm\`   mMMh      -MMM/   +MMMdsoyMMMy  \`hMMNyooyNMM+" \
+"  mmm+       /hmMMMNdo\`    \`odNMMmh.  \`+hmMMMNho\`    dmmy      .mmm:    .odNMMNmy:     :ymNMMNds." \
+| lolcat
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`

@@ -19,6 +19,7 @@ common_packages=(
     python
     ranger
     ripgrep
+    ruby
     task
     tig
     tmux
@@ -68,16 +69,17 @@ linux_desktop_packages=(
     i3-gaps
     #i3lock
     kitty
-    lxappearance
+    #latte-dock
+    #lxappearance
     #maim
     #NetworkManager-tui
     pavucontrol
     picom
     #playerctl
     #polybar
-    #redshift
-    #redshift-gtk
-    #rofi
+    redshift
+    redshift-gtk
+    rofi
     #wofi
     #slurp
     #sway
@@ -191,29 +193,34 @@ symlink_configs() {
     print "Symlinking configurations ..."
 
     SCRIPTPATH="$( cd "$(dirname "$0")" || exit ; pwd -P )"
-    ln -snf "$SCRIPTPATH"/.vimrc  "$HOME"/.vimrc
-    ln -snf "$SCRIPTPATH"/.tmux.conf  "$HOME"/.tmux.conf
-    ln -snf "$SCRIPTPATH"/.zshrc  "$HOME"/.zshrc
-    ln -snf "$SCRIPTPATH"/.fzf.zsh  "$HOME"/.fzf.zsh
     ln -snf "$SCRIPTPATH"/.dir_colors  "$HOME"/.dir_colors
+    ln -snf "$SCRIPTPATH"/.fzf.zsh  "$HOME"/.fzf.zsh
     ln -snf "$SCRIPTPATH"/.gitconfig  "$HOME"/.gitconfig
-    ln -snf "$SCRIPTPATH"/.kde-i3.sh  "$HOME"/.kde-i3.sh
+    ln -snf "$SCRIPTPATH"/.tmux.conf  "$HOME"/.tmux.conf
+    ln -snf "$SCRIPTPATH"/.vimrc  "$HOME"/.vimrc
+    ln -snf "$SCRIPTPATH"/.zshrc  "$HOME"/.zshrc
+
     mkdir -p "$HOME"/.config
-    ln -snf "$SCRIPTPATH"/.config/picom "$HOME"/.config/picom
     ln -snf "$SCRIPTPATH"/.config/dunst "$HOME"/.config/dunst
-    ln -snf "$SCRIPTPATH"/.config/kitty "$HOME"/.config/kitty
-    ln -snf "$SCRIPTPATH"/.config/nvim "$HOME"/.config/nvim
-    ln -snf "$SCRIPTPATH"/.config/neomutt "$HOME"/.config/neomutt
-    ln -snf "$SCRIPTPATH"/.config/kak "$HOME"/.config/kak
-    ln -snf "$SCRIPTPATH"/.config/ranger "$HOME"/.config/ranger
-    ln -snf "$SCRIPTPATH"/.config/starship.toml "$HOME"/.config/starship.toml
-    ln -snf "$SCRIPTPATH"/.config/gammastep "$HOME"/.config/gammastep
     ln -snf "$SCRIPTPATH"/.config/dwall "$HOME"/.config/dwall
     ln -snf "$SCRIPTPATH"/.config/environment.d "$HOME"/.config/environment.d
+    ln -snf "$SCRIPTPATH"/.config/gammastep "$HOME"/.config/gammastep
+    ln -snf "$SCRIPTPATH"/.config/kak "$HOME"/.config/kak
+    ln -snf "$SCRIPTPATH"/.config/kitty "$HOME"/.config/kitty
+    ln -snf "$SCRIPTPATH"/.config/kmonad "$HOME"/.config/kmonad
+    ln -snf "$SCRIPTPATH"/.config/neomutt "$HOME"/.config/neomutt
+    ln -snf "$SCRIPTPATH"/.config/nvim "$HOME"/.config/nvim
+    ln -snf "$SCRIPTPATH"/.config/picom "$HOME"/.config/picom
+    ln -snf "$SCRIPTPATH"/.config/ranger "$HOME"/.config/ranger
+    ln -snf "$SCRIPTPATH"/.config/starship.toml "$HOME"/.config/starship.toml
+
+    # Autostart on KDE Plasma
     mkdir -p "$HOME"/.config/plasma-workspace/env
     ln -snf "$SCRIPTPATH"/.config/plasma-workspace/env/kde-i3.sh "$HOME"/.config/plasma-workspace/env/kde-i3.sh
+
     mkdir -p "$HOME"/.local/share
     ln -snf "$SCRIPTPATH"/.local/share/navi "$HOME"/.local/share/navi
+
     mkdir -p "$HOME"/.task
     ln -snf "$SCRIPTPATH"/.task/nord.theme "$HOME"/.task/nord.theme
     
@@ -288,6 +295,11 @@ installs() {
             print "Adding kak-lsp copr to fedora ..."
             redirect_output "sudo dnf copr enable atim/kakoune -y"
             echo 'kakcopradded="true"' >> .state
+        fi
+        if [[ ! "$i3gapscopradded" = "true" ]]; then
+            print "Adding i3-gaps copr to fedora ..."
+            redirect_output "sudo dnf copr enable fuhrmann/i3-gaps -y"
+            echo 'i3gapscopradded="true"' >> .state
         fi
 #        if [[ ! "$gammastepcopradded" = "true" ]]; then
 #            print "Adding gammastep copr to fedora ..."
@@ -386,6 +398,12 @@ installs() {
             print "Installing navi ..."
             redirect_output "cargo install navi"
             echo 'navi_installed="true"' >> .state
+        fi
+    
+        if [[ ! "$lolcat_installed" = "true" ]]; then
+            print "Installing lolcat..."
+            redirect_output "gem install lolcat"
+            echo 'lolcat_installed="true"' >> .state
         fi
 
         if [[ "$linux_is_desktop" = "true" ]]; then
@@ -493,6 +511,8 @@ To finsh setup:
  * Run ':plug-install' in kakoune
  * Run ':PlugInstall' in NeoVim
  * Add .~/.gitconfigemail and set your email address
+ * Add a KMonad executable where i3 can find it
+   https://github.com/david-janssen/kmonad/releases
 
 On desktop:
  * Install a patched font from https://github.com/ryanoasis/nerd-fonts
