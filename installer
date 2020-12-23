@@ -499,7 +499,7 @@ On desktop:
    and set it in your terminal emulator
  * Map capslock to <Esc>
  * Map printscr/menu to <composer>
- * Set wallpaper with 'feh --bg-fill <path/to/file>'
+ * Set wallpaper with 'feh'
  * Disable all "activity" shortcuts in plasma
  * Log out and back into plasma to have i3 as window manager.
         
