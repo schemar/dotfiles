@@ -167,36 +167,36 @@ symlink_configs() {
     print "Symlinking configurations ..."
 
     SCRIPTPATH="$( cd "$(dirname "$0")" || exit ; pwd -P )"
-    ln -snf "$SCRIPTPATH"/.fzf.zsh  "$HOME"/.fzf.zsh
-    ln -snf "$SCRIPTPATH"/.gitconfig  "$HOME"/.gitconfig
-    ln -snf "$SCRIPTPATH"/.tmux.conf  "$HOME"/.tmux.conf
-    ln -snf "$SCRIPTPATH"/.vimrc  "$HOME"/.vimrc
-    ln -snf "$SCRIPTPATH"/.zshrc  "$HOME"/.zshrc
+    ln -snf "$SCRIPTPATH"/configs/fzf/.fzf.zsh  "$HOME"/.fzf.zsh
+    ln -snf "$SCRIPTPATH"/configs/git/.gitconfig  "$HOME"/.gitconfig
+    ln -snf "$SCRIPTPATH"/configs/tmux/.tmux.conf  "$HOME"/.tmux.conf
+    ln -snf "$SCRIPTPATH"/configs/vim/.vimrc  "$HOME"/.vimrc
+    ln -snf "$SCRIPTPATH"/configs/zsh/.zshrc  "$HOME"/.zshrc
 
     mkdir -p "$HOME"/.config
-    ln -snf "$SCRIPTPATH"/.config/dunst "$HOME"/.config/dunst
-    ln -snf "$SCRIPTPATH"/.config/kak "$HOME"/.config/kak
-    ln -snf "$SCRIPTPATH"/.config/kitty "$HOME"/.config/kitty
-    ln -snf "$SCRIPTPATH"/.config/kmonad "$HOME"/.config/kmonad
-    ln -snf "$SCRIPTPATH"/.config/nvim "$HOME"/.config/nvim
-    ln -snf "$SCRIPTPATH"/.config/picom "$HOME"/.config/picom
-    ln -snf "$SCRIPTPATH"/.config/ranger "$HOME"/.config/ranger
-    ln -snf "$SCRIPTPATH"/.config/starship.toml "$HOME"/.config/starship.toml
+    ln -snf "$SCRIPTPATH"/configs/dunst "$HOME"/.config/dunst
+    ln -snf "$SCRIPTPATH"/configs/kak "$HOME"/.config/kak
+    ln -snf "$SCRIPTPATH"/configs/kitty "$HOME"/.config/kitty
+    ln -snf "$SCRIPTPATH"/configs/kmonad "$HOME"/.config/kmonad
+    ln -snf "$SCRIPTPATH"/configs/nvim "$HOME"/.config/nvim
+    ln -snf "$SCRIPTPATH"/configs/picom "$HOME"/.config/picom
+    ln -snf "$SCRIPTPATH"/configs/ranger "$HOME"/.config/ranger
+    ln -snf "$SCRIPTPATH"/configs/starship.toml "$HOME"/.config/starship.toml
 
     if [[ "$OSTYPE" == "darwin"* ]]; then
         # Create kak symlink to original autload:
-        ln -snf "$(brew --prefix)"/share/kak/autoload "$SCRIPTPATH"/.config/kak/autoload
+        ln -snf "$(brew --prefix)"/share/kak/autoload "$SCRIPTPATH"/configs/kak/autoload
         # Rust under MacOS uses another config path
-        ln -snf "$SCRIPTPATH"/.config/kak-lsp "$HOME"/Library/Preferences/kak-lsp
+        ln -snf "$SCRIPTPATH"/configs/kak-lsp "$HOME"/Library/Preferences/kak-lsp
     else
         # Assuming Linux
         # Create kak symlink to original autload:
-        ln -snf /usr/share/kak/autoload "$SCRIPTPATH"/.config/kak/autoload
-        ln -snf "$SCRIPTPATH"/.config/kak-lsp "$HOME"/.config/kak-lsp
+        ln -snf /usr/share/kak/autoload "$SCRIPTPATH"/configs/kak/autoload
+        ln -snf "$SCRIPTPATH"/configs/kak-lsp "$HOME"/.config/kak-lsp
 
         if [[ "$linux_is_desktop" == "true" ]]; then
-            ln -snf "$SCRIPTPATH"/.config/rofi "$HOME"/.config/rofi
-            ln -snf "$SCRIPTPATH"/.config/i3 "$HOME"/.config/i3
+            ln -snf "$SCRIPTPATH"/configs/rofi "$HOME"/.config/rofi
+            ln -snf "$SCRIPTPATH"/configs/i3 "$HOME"/.config/i3
 
             # Add an option to use plasma with i3 at login.
             # These must be copied. Otherwise SDDM will not show the option.
@@ -204,8 +204,8 @@ symlink_configs() {
             if [[ ! "$plasma_with_i3_session_sopied" = "true" ]]; then
                 print "Copying files to start i3 session ..."
                 sudo mkdir -p /usr/local/bin
-                sudo cp "$SCRIPTPATH"/plasma/plasma-with-i3.sh /usr/local/bin/plasma-with-i3.sh
-                sudo cp "$SCRIPTPATH"/plasma/plasma-with-i3.desktop /usr/share/xsessions/plasma-with-i3.desktop
+                sudo cp "$SCRIPTPATH"/configs/plasma/plasma-with-i3.sh /usr/local/bin/plasma-with-i3.sh
+                sudo cp "$SCRIPTPATH"/configs/plasma/plasma-with-i3.desktop /usr/share/xsessions/plasma-with-i3.desktop
 
                 echo 'plasma_with_i3_session_sopied="true"' >> .state
             fi
@@ -405,6 +405,9 @@ installs() {
         redirect_output "npm install -g typescript"
         redirect_output "npm install -g typescript-language-server"
         redirect_output "npm install -g eslint-formatter-kakoune"
+        redirect_output "sudo npm install -g typescript"
+        redirect_output "sudo npm install -g typescript-language-server"
+        redirect_output "sudo npm install -g eslint-formatter-kakoune"
         echo 'npmpackages_installed="true"' >> .state
     fi
 

@@ -1,7 +1,7 @@
 output.log
 .state
 *.swp
-.config/kak/plugins/
-.config/kak/colors/
+configs/kak/plugins/
+configs/kak/colors/
 # Ignoring the symlink to the original autoload
-.config/kak/autoload/autoload
+configs/kak/autoload/autoload
