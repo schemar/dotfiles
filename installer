@@ -180,7 +180,7 @@ symlink_configs() {
     ln -snf "$SCRIPTPATH"/configs/nvim "$HOME"/.config/nvim
     ln -snf "$SCRIPTPATH"/configs/picom "$HOME"/.config/picom
     ln -snf "$SCRIPTPATH"/configs/ranger "$HOME"/.config/ranger
-    ln -snf "$SCRIPTPATH"/configs/starship.toml "$HOME"/.config/starship.toml
+    ln -snf "$SCRIPTPATH"/configs/starship/starship.toml "$HOME"/.config/starship.toml
 
     if [[ "$OSTYPE" == "darwin"* ]]; then
         # Create kak symlink to original autload:
@@ -412,7 +412,7 @@ installs() {
 
     if [[ ! "$npm_nb_installed" = "true" ]]; then
         print "Installing nb ..."
-        redirect_output "npm install -g nb.sh"
+        redirect_output "sudo npm install -g nb.sh"
         redirect_output "sudo $(npm bin -g)/nb completions install"
         echo 'npm_nb_installed="true"' >> .state
     fi
