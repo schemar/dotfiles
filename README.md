@@ -7,40 +7,52 @@ This repository contains configurations for:
 
 ## Installation
 
-You can use the `./installer` helper.
+You can use the `./installer` helper. It will install the packages and symlink the configs.
 Run `./installer symlinks` if you only want to symlink all configs.
 
 Requirements macOS (Linux and WSL don't have any special requirements):
 * [Homebrew](https://docs.brew.sh/Installation)
 * [Homebrew's requirements](https://docs.brew.sh/Installation)
 
-## Usage
+## Included Configurations
 
-### Included
+### Terminal
 
-* [Zsh](https://www.zsh.org/)
-* [starship](https://github.com/starship/starship)
-* [tmux](https://github.com/tmux/tmux)❤️
-* [kakoune editor](https://github.com/mawww/kakoune)❤️
-* [fzf](https://github.com/junegunn/fzf)
 * [bat](https://github.com/sharkdp/bat)
-* [ripgrep](https://github.com/BurntSushi/ripgrep)
+* [direnv](https://github.com/direnv/direnv)
 * [fd](https://github.com/sharkdp/fd)
-* [ranger](https://github.com/ranger/ranger)
-* [tig](https://github.com/jonas/tig)
+* [fzf](https://github.com/junegunn/fzf)
+* [kakoune editor](https://github.com/mawww/kakoune)❤️
 * [NeoVim](https://github.com/neovim/neovim)
 * [nvm](https://github.com/nvm-sh/nvm)
-* [direnv](https://github.com/direnv/direnv)
+* [ranger](https://github.com/ranger/ranger)
+* [ripgrep](https://github.com/BurntSushi/ripgrep)
+* [starship](https://github.com/starship/starship)
+* [tig](https://github.com/jonas/tig)
+* [tmux](https://github.com/tmux/tmux)❤️
+* [Zsh](https://www.zsh.org/)
+
+### X Window System
+
+* [dunst](https://github.com/dunst-project/dunst)
+* [i3-gaps](https://github.com/Airblader/i3)❤️
+  * Integrated as [kwin](https://github.com/KDE/kwin) replacement in [plasma](https://kde.org/plasma-desktop/)
+* [kitty](https://github.com/kovidgoyal/kitty)❤️
+* [kmonad](https://github.com/david-janssen/kmonad)
+* [picom](https://github.com/yshui/picom)
+* [rofi](https://github.com/davatorium/rofi)
+
+## Usage
 
 An overview over the most common tasks follows below, especially if they differ from the default. Check the files' contents for more details.
 
 ### Command Line
 
 * `<ctrl>+r` to fuzzy find in the shell's history.
-* `<ctrl>+t` to fuzzy find files.
+* `<ctrl>+t` to fuzzy find paths within current directory.
 * `.nvmrc` files will automatically trigger `nvm use`.
 
-### Inside Tmux
+### Tmux
 
 Tmux sessions will be stored every 15 minutes and auto-restored when starting tmux the next time.
 Persists across restarts.
@@ -64,11 +76,22 @@ Check the info panel when entering user mode with `,`.
 There are some files in the .config/kak/autoload/ directory in addition to the .config/kak/kakrc file.
 Check there if something appears to be missing from kakrc.
 
-In JavaScript/TypeScript files, you can check `,df` to lint and format with prettier and eslint.
-
-You can add these to a `.kakrc.local` in your project for project specific settings.
+You can add custom hooks or configurations to a `.kakrc.local` in your project root for project specific settings.
 
 See https://github.com/schemar/kak-jsts/ for details on TypeScript formatting/linting.
+
+### i3
+
+Linux desktop installs include i3 as the window manager of KDE Plasma.
+
+See the i3 config for all keybindings. Most relevant:
+
+* `$mod` is by default "super"/"windows".
+* `$mod+d` to launch application.
+* `$mod+Shift+e` to exit, lock, etc.
+* `$mod+p` to take screenshots.
+* `$mod+r` to resize.
+* `$mod+Shift+c` to reload config.
 
 ### Vim
 
@@ -88,16 +111,3 @@ See https://github.com/schemar/kak-jsts/ for details on TypeScript formatting/li
 * `,d` to go to definition of symbol under cursor.
 * `,r` to list references of symbol under cursor.
 * `,2` to rename symbol under cursor.
-
-### i3
-
-Linux desktop installs include i3 as the window manager of KDE Plasma.
-
-See the i3 config for all keybindings. Most relevant:
-
-* `$mod` is by default "super"/"windows".
-* `$mod+d` to launch application.
-* `$mod+Shift+e` to exit, lock, etc.
-* `$mod+p` to take screenshots.
-* `$mod+r` to resize.
-* `$mod+Shift+c` to reload config.
