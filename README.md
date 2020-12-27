@@ -1,11 +1,9 @@
-# dotfiles
+# Dotfiles
 
-dotfiles for Linux, WSL, and macOS.
+This repository contains configurations for:
 
-An opinionated default setup for working on the command line.
-Supports Fedora, Ubuntu 20,04+, Ubuntu WSL, and macOS.
-
-Also supports a desktop install with Fedora KDE spin (using i3 as window manager).
+* Terminal in Linux (Ubuntu and Fedora), WSL (Ubuntu), and macOS
+* Plasma with i3 on Fedora KDE
 
 ## Installation
 
@@ -38,10 +36,8 @@ An overview over the most common tasks follows below, especially if they differ 
 
 ### Command Line
 
-* `,,<tab>` to fuzzy find a path. E.g. `cd ./Projects/,,<tab>` will let you fuzzy find directories inside the Projects directory.
 * `<ctrl>+r` to fuzzy find in the shell's history.
 * `<ctrl>+t` to fuzzy find files.
-* `<ctrl>+g` to get cheat sheets for commands.
 * `.nvmrc` files will automatically trigger `nvm use`.
 
 ### Inside Tmux
@@ -49,7 +45,7 @@ An overview over the most common tasks follows below, especially if they differ 
 Tmux sessions will be stored every 15 minutes and auto-restored when starting tmux the next time.
 Persists across restarts.
 
-Prefix is `<ctrl>-space`.
+Prefix is `<ctrl>-b`.
 
 * `<prefix> {c,n,p}` create/next/previous window.
 * `<prefix> {v,s}` split pane vertically/horizontally.

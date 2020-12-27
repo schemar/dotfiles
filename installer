@@ -32,7 +32,6 @@ common_packages=(
 brew_packages=(
     exa
     fd
-    navi
     starship
     ul/kak-lsp/kak-lsp
 )
@@ -461,8 +460,12 @@ To finsh setup:
  * Run '<ctrl>+b' I inside tmux
  * Run ':plug-install' in kakoune
  * Run ':PlugInstall' in NeoVim
- * Add .~/.gitconfigemail and set your email address
+ * Add ~/.gitconfigemail and set your email address
 
+EOF
+
+    if [[ "$linux_is_desktop" == "true" ]]; then
+        cat << EOF
 On desktop:
  * Install a patched font from https://github.com/ryanoasis/nerd-fonts
    and set it in your terminal emulator
@@ -470,9 +473,11 @@ On desktop:
  * Map printscr/menu to <composer>
  * Set wallpaper with 'feh'
  * Disable all "activity" shortcuts in plasma
+ * Set "Launch Spectacle" shortcut to "Meta+p"
  * Log out and choose "plasma with i3" as desktop session.
         
 EOF
+    fi
 }
 
 case $1 in
