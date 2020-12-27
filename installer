@@ -56,6 +56,8 @@ linux_desktop_packages=(
     dunst
     feh
     i3-gaps
+    # ibus is a dependency of the KDE Plasma Emoji Picker and missing in a standard fedora installation.
+    ibus
     kitty
     pavucontrol
     picom
