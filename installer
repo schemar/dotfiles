@@ -183,10 +183,6 @@ symlink_configs() {
     ln -snf "$SCRIPTPATH"/.config/ranger "$HOME"/.config/ranger
     ln -snf "$SCRIPTPATH"/.config/starship.toml "$HOME"/.config/starship.toml
 
-    # Autostart on KDE Plasma
-    mkdir -p "$HOME"/.config/plasma-workspace/env
-    ln -snf "$SCRIPTPATH"/.config/plasma-workspace/env/kde-i3.sh "$HOME"/.config/plasma-workspace/env/kde-i3.sh
-
     if [[ "$OSTYPE" == "darwin"* ]]; then
         # Create kak symlink to original autload:
         ln -snf "$(brew --prefix)"/share/kak/autoload "$SCRIPTPATH"/.config/kak/autoload
@@ -197,8 +193,23 @@ symlink_configs() {
         # Create kak symlink to original autload:
         ln -snf /usr/share/kak/autoload "$SCRIPTPATH"/.config/kak/autoload
         ln -snf "$SCRIPTPATH"/.config/kak-lsp "$HOME"/.config/kak-lsp
-        ln -snf "$SCRIPTPATH"/.config/i3 "$HOME"/.config/i3
-        ln -snf "$SCRIPTPATH"/.config/rofi "$HOME"/.config/rofi
+
+        if [[ "$linux_is_desktop" == "true" ]]; then
+            ln -snf "$SCRIPTPATH"/.config/rofi "$HOME"/.config/rofi
+            ln -snf "$SCRIPTPATH"/.config/i3 "$HOME"/.config/i3
+
+            # Add an option to use plasma with i3 at login.
+            # These must be copied. Otherwise SDDM will not show the option.
+            # Only done once, because we don't want to ask for the sudo password every time we symlink.
+            if [[ ! "$plasma_with_i3_session_sopied" = "true" ]]; then
+                print "Copying files to start i3 session ..."
+                sudo mkdir -p /usr/local/bin
+                sudo cp "$SCRIPTPATH"/plasma/plasma-with-i3.sh /usr/local/bin/plasma-with-i3.sh
+                sudo cp "$SCRIPTPATH"/plasma/plasma-with-i3.desktop /usr/share/xsessions/plasma-with-i3.desktop
+
+                echo 'plasma_with_i3_session_sopied="true"' >> .state
+            fi
+        fi
     fi
 }
 
@@ -456,7 +467,7 @@ On desktop:
  * Map printscr/menu to <composer>
  * Set wallpaper with 'feh'
  * Disable all "activity" shortcuts in plasma
- * Log out and back into plasma to have i3 as window manager.
+ * Log out and choose "plasma with i3" as desktop session.
         
 EOF
 }
