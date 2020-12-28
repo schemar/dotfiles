@@ -91,11 +91,10 @@ See the i3 config for all keybindings. Most relevant:
 * `$mod` is by default "super"/"windows".
 * `$mod+d` to launch application.
 * `$mod+Shift+e` to exit, lock, etc.
-* `$mod+p` to take screenshots.
 * `$mod+r` to resize.
 * `$mod+Shift+c` to reload config.
 
-### Vim
+### (Neo)Vim
 
 * `<ctrl>+w {v,s}` split window vertically/horizontally.
 * `<ctrl>+{h,j,k,l}` to move cursor across vim windows (works also with tmux panes).
