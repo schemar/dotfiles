@@ -160,12 +160,8 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-gaps inner 7
-default_border none
-hide_edge_borders smart
-
 # Colors
-set $highlight-color     #4c566a
+set $highlight-color     #a3be8c
 set $bg-color 	         #4c566a
 set $inactive-bg-color   #2e3440
 set $text-color          #d8dee9
@@ -174,10 +170,10 @@ set $urgent-bg-color     #d08770
 
 # window colors
 #                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #00ff00
-client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
-client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+client.focused          $bg-color           $bg-color          $text-color          $highlight-color
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color $highlight-color
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $highlight-color
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $highlight-color
 
 for_window [class="Toggl Desktop"] floating enable
 for_window [title="settings-nmtui-connect"] floating enable

@@ -36,7 +36,7 @@ Requirements macOS (Linux and WSL don't have any special requirements):
 
 * [dunst](https://github.com/dunst-project/dunst)
 * [feh](https://github.com/derf/feh)
-* [i3-gaps](https://github.com/Airblader/i3)❤️
+* [i3](https://github.com/i3/i3)❤️
   * Integrated as [kwin](https://github.com/KDE/kwin) replacement in [plasma](https://kde.org/plasma-desktop/)
 * [kitty](https://github.com/kovidgoyal/kitty)❤️
 * [kmonad](https://github.com/david-janssen/kmonad)

@@ -55,7 +55,7 @@ brew_desktop_packages=(
 linux_desktop_packages=(
     dunst
     feh
-    i3-gaps
+    i3
     # ibus is a dependency of the KDE Plasma Emoji Picker and missing in a standard fedora installation.
     ibus
     kitty
@@ -267,11 +267,6 @@ installs() {
             print "Adding kak-lsp copr to fedora ..."
             redirect_output "sudo dnf copr enable atim/kakoune -y"
             echo 'kakcopradded="true"' >> .state
-        fi
-        if [[ ! "$i3gapscopradded" = "true" ]]; then
-            print "Adding i3-gaps copr to fedora ..."
-            redirect_output "sudo dnf copr enable fuhrmann/i3-gaps -y"
-            echo 'i3gapscopradded="true"' >> .state
         fi
         if [[ ! "$yarnrepoadded" = "true" ]]; then
             print "Adding yarn repo to fedora ..."
