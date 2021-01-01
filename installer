@@ -26,6 +26,7 @@ common_packages=(
     vim
     w3m
     yarn
+    zoxide
     zsh
 )
 
