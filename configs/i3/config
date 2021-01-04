@@ -161,25 +161,21 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Colors
-set $highlight-color     #a3be8c
-set $bg-color 	         #4c566a
-set $inactive-bg-color   #2e3440
-set $text-color          #d8dee9
-set $inactive-text-color #d8dee9
-set $urgent-bg-color     #d08770
+set $highlight-color      #a3be8c
+set $bg-color 	          #4c566a
+set $text-color           #d8dee9
+set $unfocused-bg-color   #2e3440
+set $unfocused-text-color #d8dee9
+set $urgent-bg-color      #d08770
 
 # window colors
-#                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          $highlight-color
-client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color $highlight-color
-client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $highlight-color
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $highlight-color
+#                       border              background          text                  indicator
+client.focused          $bg-color           $bg-color           $text-color           $highlight-color
+client.unfocused        $unfocused-bg-color $unfocused-bg-color $unfocused-text-color $highlight-color
+client.focused_inactive $bg-color           $bg-color           $text-color           $highlight-color
+client.urgent           $urgent-bg-color    $urgent-bg-color    $text-color           $highlight-color
 
-for_window [class="Toggl Desktop"] floating enable
-for_window [title="settings-nmtui-connect"] floating enable
 for_window [title="Slack \| mini panel"] floating enable; border none
-for_window [title="Slack \| [Cc]all"] floating enable; border none
-for_window [title="Slack \| Slack [Cc]all"] floating enable; border none
 
 #
 # Plasma specific overrides
