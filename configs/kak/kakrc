@@ -71,7 +71,7 @@ plug "abuffseagull/nord.kak" theme %{ colorscheme nord }
 
 plug "https://github.com/schemar/kak-jsts" config %{
     hook global WinSetOption filetype=(javascript|typescript) %{
-        alias window tsformat format-eslint
+        alias window tsformat format-prettier
         map window development l -docstring 'lint' ': lint<ret>'
         map window development f -docstring 'format' ': tsformat<ret>'
     }
