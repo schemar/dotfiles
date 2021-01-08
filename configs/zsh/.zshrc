@@ -99,10 +99,6 @@ export FZF_COMPLETION_OPTS="--preview 'bat --style=numbers,changes --color=alway
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers,changes --color=always {}'"
 export FZF_COMPLETION_TRIGGER=',,'
 
-# bat config
-export BAT_THEME="Nord"
-export BAT_STYLE="numbers,changes"
-
 # default editor
 export VISUAL=kak
 export EDITOR=kak

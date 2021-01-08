@@ -176,6 +176,7 @@ symlink_configs() {
     ln -snf "$SCRIPTPATH"/configs/zsh/.zshrc  "$HOME"/.zshrc
 
     mkdir -p "$HOME"/.config
+    ln -snf "$SCRIPTPATH"/configs/bat "$HOME"/.config/bat
     ln -snf "$SCRIPTPATH"/configs/dunst "$HOME"/.config/dunst
     ln -snf "$SCRIPTPATH"/configs/kak "$HOME"/.config/kak
     ln -snf "$SCRIPTPATH"/configs/kitty "$HOME"/.config/kitty
