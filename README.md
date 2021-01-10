@@ -23,6 +23,7 @@ Requirements macOS (Linux and WSL don't have any special requirements):
 * [fd](https://github.com/sharkdp/fd)
 * [fzf](https://github.com/junegunn/fzf)
 * [kakoune editor](https://github.com/mawww/kakoune)❤️
+* [nb](https://github.com/xwmx/nb)
 * [NeoVim](https://github.com/neovim/neovim)
 * [nvm](https://github.com/nvm-sh/nvm)
 * [ranger](https://github.com/ranger/ranger)
