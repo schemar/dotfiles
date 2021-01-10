@@ -116,6 +116,16 @@ plug "https://github.com/h-youhei/kakoune-surround" config %{
     map global user s ': enter-user-mode surround<ret>' -docstring 'surround'
 }
 
+plug "listentolist/kakoune-table" domain "gitlab.com" config %{
+    # Table mode to edit tables in markdown
+    # Use o/O to add a new row
+    # Use tab/<s-tab> to move between cells
+    # Use <a-hjkl> to move columns/rows
+    # Auto-aligns table when exiting insert mode
+    map global user e ': table-toggle<ret>' -docstring 'toggle table mode'
+}
+
+
 plug "https://github.com/ul/kak-lsp" tag "v8.0.0" config %{
     # uncomment to enable debugging
     # eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
