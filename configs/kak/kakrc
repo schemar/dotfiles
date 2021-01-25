@@ -85,6 +85,10 @@ plug "https://github.com/occivink/kakoune-vertical-selection" config %{
 
 plug "https://github.com/krornus/kakoune-toggle-map" config %{
     toggle-map -docstring 'toggle search highlights' global user h hlsearch-on hlsearch-off
+
+    define-command softwrap-on %{add-highlighter global/ wrap}
+    define-command softwrap-off %{remove-highlighter global/wrap}
+    toggle-map -docstring 'toggle soft wrap' global user w softwrap-on softwrap-off
 }
 
 plug "https://github.com/jjk96/kakoune-rainbow" config %{
