@@ -64,7 +64,7 @@ declare-user-mode development
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 plug "https://github.com/TeddyDD/kakoune-wiki" config %{
-    wiki-setup %sh{ echo ~/.nb }
+    wiki-setup %sh{ echo ~/.nb/home }
 }
 
 plug "abuffseagull/nord.kak" theme %{ colorscheme nord }
