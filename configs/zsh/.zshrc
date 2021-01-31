@@ -39,6 +39,27 @@ alias tmde='tmux new-session -A -s development'
 alias tmdo='tmux new-session -A -s dotfiles'
 alias tmta='tmux new-session -A -s tasks'
 
+# Kakoune session management
+# Use k to launch kakoune with "managed" session names.
+k() {
+  if [ -n "$TMUX" ]; then
+    # When in tmux, use the tmux session and window as session name.
+    # We have to replace $ and @ to end up with a valis session name for kakoune.
+    name=$(tmux display-message -p "#{session_id}-#{window_id}" | sed 's/\$\([0-9]*\)-@\([0-9]*\)/tmux-s\1-w\2/')
+  else
+    # Otherwise use the same session for kakoune clients
+    # that are launched from the same directory.
+    name=$(pwd | sed 's/\//_/g')
+  fi
+
+  kak -clear;
+  if kak -l | grep -q -x "$name"; then
+    kak -c "$name" "$@"
+  else
+    kak -s "$name" "$@"
+  fi
+}
+
 # User configuration
 
 # Auto-load nvm with .nvmrc due to lazy loading
