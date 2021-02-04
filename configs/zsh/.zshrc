@@ -28,10 +28,11 @@ export NVM_AUTO_USE=true
 plugins=(zsh-nvm fd yarn docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
+source "$HOME"/.config/broot/launcher/bash/br
 
 alias g='git'
 alias y='yarn'
-alias l='logo-ls -Agh'
+alias l='br -sdp'
 alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
 # Tmux usability aliases

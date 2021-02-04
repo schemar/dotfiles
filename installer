@@ -177,6 +177,7 @@ symlink_configs() {
 
     mkdir -p "$HOME"/.config
     ln -snf "$SCRIPTPATH"/configs/bat "$HOME"/.config/bat
+    ln -snf "$SCRIPTPATH"/configs/broot "$HOME"/.config/broot
     ln -snf "$SCRIPTPATH"/configs/dunst "$HOME"/.config/dunst
     ln -snf "$SCRIPTPATH"/configs/kak "$HOME"/.config/kak
     ln -snf "$SCRIPTPATH"/configs/kitty "$HOME"/.config/kitty
@@ -296,6 +297,13 @@ installs() {
         print "Then, run ./installer again."
         echo 'rust_installed="true"' >> .state
         exit 0
+    fi
+
+    if [[ ! "$broot_installed" = "true" ]]; then
+        print "Installing broot ..."
+        redirect_output "cargo install broot"
+        redirect_output "broot --install"
+        echo 'broot_installed="true"' >> .state
     fi
     
     if [[ "$linux_distro" = "fedora" ]]; then
@@ -468,6 +476,8 @@ EOF
 On desktop:
  * Install a patched font from https://github.com/ryanoasis/nerd-fonts
    and set it in your terminal emulator
+ * Install VSCode font from
+   https://github.com/Canop/broot/blob/master/resources/icons/vscode/vscode.ttf
  * Map capslock to <Esc>
  * Map printscr/menu to <composer>
  * Set wallpaper with 'feh'
