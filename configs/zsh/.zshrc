@@ -33,7 +33,10 @@ source "$HOME"/.config/broot/launcher/bash/br
 alias g='git'
 alias y='yarn'
 alias l='ls -al'
+# Use b as broot ls replacement
 alias b='br -sdp'
+# Use bd to search for a folder with broot
+bd() {br --only-folders --cmd "$1;"}
 alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
 # Tmux usability aliases
