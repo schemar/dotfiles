@@ -33,7 +33,10 @@ source "$HOME"/.config/broot/launcher/bash/br
 alias g='git'
 alias y='yarn'
 alias l='ls -al'
-# Use b as broot ls replacement
+# Use bb as a one-shot ls replacement
+# Reduce height to not overflow
+bb() {br -sdp --height=$(echo "$(tput lines) - 1" | bc) --cmd ":pt" "$@"}
+# Use b as interactive ls replacement
 alias b='br -sdp'
 # Use bd to search for a folder with broot
 bd() {br --only-folders --cmd "$1;"}
