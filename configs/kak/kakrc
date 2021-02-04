@@ -13,6 +13,8 @@ set global grepcmd 'rg --column'
 map -docstring 'grep' global user g ': grepmenu '
 set global grepmenucmd 'rg --column'
 
+# Broot is configured in the autoload directory
+map global user b ':  toggle-broot<ret>' -docstring 'browse files with broot'
 # Ranger is configured in the autoload directory
 map global user r ':  toggle-ranger<ret>' -docstring 'browse files with ranger'
 

@@ -19,6 +19,7 @@ Requirements macOS (Linux and WSL don't have any special requirements):
 ### Terminal
 
 * [bat](https://github.com/sharkdp/bat)
+* [broot](https://github.com/Canop/broot)
 * [direnv](https://github.com/direnv/direnv)
 * [fd](https://github.com/sharkdp/fd)
 * [fzf](https://github.com/junegunn/fzf)
@@ -75,6 +76,8 @@ Prefix is `<ctrl>-b`.
 
 Since kakoune has a helpful info panel, I don't need to list much here.
 Check the info panel when entering user mode with `,`.
+
+For example, you can select files to open with broot or open tig's blame on the current line.
 
 There are some files in the .config/kak/autoload/ directory in addition to the .config/kak/kakrc file.
 Check there if something appears to be missing from kakrc.

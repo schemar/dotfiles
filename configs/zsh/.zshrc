@@ -32,7 +32,8 @@ source "$HOME"/.config/broot/launcher/bash/br
 
 alias g='git'
 alias y='yarn'
-alias l='br -sdp'
+alias l='ls -al'
+alias b='br -sdp'
 alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
 # Tmux usability aliases

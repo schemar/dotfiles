@@ -1,0 +1,13 @@
+{
+	verbs: [
+		# Setting the enter key like this will print the selected file to a file specified by --out
+		# That file was specified by broot.kak when executing broot.
+		{
+			key: enter
+			execution: ":print_path"
+			apply_to: file
+			leave_broot: true
+		}
+	]
+
+}
