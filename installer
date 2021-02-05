@@ -303,6 +303,10 @@ installs() {
         print "Installing broot ..."
         redirect_output "cargo install broot"
         redirect_output "broot --install"
+        # The correct source will be in the symlinked .zshrc
+        # Deleting the two lines that were added by broot --install
+        # Required, because broot --install is not portable with an expanded home path
+        redirect_output "tac $HOME/.zshrc | sed '/^source \/home\/[a-zA-Z0-9]*\/.config\/broot\/launcher\/bash\/br$/,+1d' | tac > $HOME/.zshrc"
         echo 'broot_installed="true"' >> .state
     fi
     

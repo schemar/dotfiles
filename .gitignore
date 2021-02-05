@@ -1,6 +1,7 @@
 output.log
 .state
 *.swp
+configs/broot/launcher/
 configs/kak/plugins/
 configs/kak/colors/
 # Ignoring the symlink to the original autoload
