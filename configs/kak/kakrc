@@ -5,6 +5,14 @@ set global ui_options ncurses_assistant=none
 # add-highlighter global/ number-lines -relative
 add-highlighter global/ number-lines
 
+# whitespace
+add-highlighter global/ show-whitespaces
+set-face global Whitespace rgb:4c566a,default
+
+# rulers on columns 81 and 101
+add-highlighter global/ column 81 default,rgb:3b4252
+add-highlighter global/ column 101 default,rgb:3b4252
+
 # Use c-w to delete previous word in insert mode
 map global insert <c-w> '<a-;>:exec -draft bd<ret>'
 
