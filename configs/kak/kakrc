@@ -4,6 +4,8 @@ set global ui_options ncurses_assistant=none
 # Add relative or absolute line numbers
 # add-highlighter global/ number-lines -relative
 add-highlighter global/ number-lines
+set-face global LineNumbers rgb:4c566a,default
+set-face global LineNumberCursor rgb:5e81ac,default
 
 # whitespace
 add-highlighter global/ show-whitespaces
