@@ -7,7 +7,7 @@ add-highlighter global/ number-lines
 
 # whitespace
 add-highlighter global/ show-whitespaces
-set-face global Whitespace rgb:4c566a,default
+set-face global Whitespace rgb:4c566a,default+f
 
 # rulers on columns 81 and 101
 add-highlighter global/ column 81 default,rgb:3b4252
