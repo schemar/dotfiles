@@ -18,6 +18,7 @@ Requirements macOS (Linux and WSL don't have any special requirements):
 
 ### Terminal
 
+* [asdf](https://github.com/asdf-vm/asdf)
 * [bat](https://github.com/sharkdp/bat)
 * [broot](https://github.com/Canop/broot)
 * [direnv](https://github.com/direnv/direnv)
@@ -26,7 +27,6 @@ Requirements macOS (Linux and WSL don't have any special requirements):
 * [kakoune editor](https://github.com/mawww/kakoune)❤️
 * [nb](https://github.com/xwmx/nb)
 * [NeoVim](https://github.com/neovim/neovim)
-* [nvm](https://github.com/nvm-sh/nvm)
 * [ranger](https://github.com/ranger/ranger)
 * [ripgrep](https://github.com/BurntSushi/ripgrep)
 * [starship](https://github.com/starship/starship)
@@ -54,7 +54,6 @@ An overview over the most common tasks follows below, especially if they differ 
 
 * `<ctrl>+r` to fuzzy find in the shell's history.
 * `<ctrl>+t` to fuzzy find paths within current directory.
-* `.nvmrc` files will automatically trigger `nvm use`.
 
 ### Tmux
 

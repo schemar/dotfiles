@@ -169,6 +169,7 @@ symlink_configs() {
     print "Symlinking configurations ..."
 
     SCRIPTPATH="$( cd "$(dirname "$0")" || exit ; pwd -P )"
+    ln -snf "$SCRIPTPATH"/configs/asdf/.asdfrc  "$HOME"/.asdfrc
     ln -snf "$SCRIPTPATH"/configs/fzf/.fzf.zsh  "$HOME"/.fzf.zsh
     ln -snf "$SCRIPTPATH"/configs/git/.gitconfig  "$HOME"/.gitconfig
     ln -snf "$SCRIPTPATH"/configs/tmux/.tmux.conf  "$HOME"/.tmux.conf
@@ -387,11 +388,13 @@ installs() {
         echo 'ohmyzsh_installed="true"' >> .state
     fi
     
-    if [[ ! "$zshnvm_installed" = "true" ]]; then
-        print "Installing zsh_nvm ..."
-        mkdir -p "$HOME"/.oh-my-zsh/custom/plugins/
-        git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm 1>>output.log 2>&1 || error "Could not install zshnvm"
-        echo 'zshnvm_installed="true"' >> .state
+    if [[ ! "$asdf_installed" = "true" ]]; then
+        print "Installing asdf ..."
+        redirect_output "git clone https://github.com/asdf-vm/asdf.git ~/.asdf"
+        cd ~/.asdf
+        redirect_output "git checkout $(git describe --abbrev=0 --tags)"
+        cd -
+        echo 'asdf_installed="true"' >> .state
     fi
     
     symlink_configs
@@ -404,8 +407,9 @@ installs() {
     fi
     
     if [[ ! "$node_installed" = "true" ]]; then
-        print "You must manually 'nvm install stable'."
+        print "You must manually 'asdf install nodejs latest'."
         print "Then, run ./installer again."
+        print "If asdf doesn't work, yet, you must re-source ~/.zshrc"
         echo 'node_installed="true"' >> .state
         exit 0
     fi
@@ -472,6 +476,8 @@ To finsh setup:
  * Run ':plug-install' in kakoune
  * Run ':PlugInstall' in NeoVim
  * Add ~/.gitconfigemail and set your email address
+ * In a new shell set https://github.com/asdf-vm/asdf-nodejs up
+   (and/or any other asdf plugins) if you haven't already
 
 EOF
 

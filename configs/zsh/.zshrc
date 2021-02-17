@@ -71,17 +71,8 @@ k() {
 
 # User configuration
 
-# Auto-load nvm with .nvmrc due to lazy loading
-# Must be after loading oh-my-zsh to find command nvm
-autoload -U add-zsh-hook
-load-nvmrc() {
-  if [ -f "./.nvmrc" ]; then
-    nvm use
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-# Call it in case the shell starts in a dir with a .nvmrc
-load-nvmrc
+. "$HOME"/.asdf/asdf.sh
+fpath=(${ASDF_DIR}/completions $fpath)
 
 # Aliases
 # Enable 256 colors in tmux
