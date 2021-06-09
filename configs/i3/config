@@ -10,7 +10,7 @@ set $mod Mod4
 font pango:fixed 10
 
 # Composer
-exec_always --no-startup-id $HOME/.config/picom/launch.sh
+#exec_always --no-startup-id $HOME/.config/picom/launch.sh
 
 # Notifications
 exec --no-startup-id dunst
@@ -30,8 +30,8 @@ floating_modifier $mod
 
 # Application starter
 # Adding LC_ALL in case of locale setting issues with KDE
-bindsym $mod+d exec --no-startup-id LC_ALL=C rofi -show drun -theme slate_nord >/tmp/rofi.log 2>&1
-bindsym $mod+Shift+d exec --no-startup-id LC_ALL=C rofi -show run -theme slate_nord
+bindsym $mod+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show drun -theme slate_nord >/tmp/rofi.log 2>&1
+bindsym $mod+Shift+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show run -theme slate_nord >/tmp/rofi.log 2>&1
 
 # show logout
 bindsym $mod+Shift+e exec --no-startup-id qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
