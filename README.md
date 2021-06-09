@@ -2,17 +2,13 @@
 
 This repository contains configurations for:
 
-* Terminal in Linux (Ubuntu and Fedora), WSL (Ubuntu), and macOS
+* Terminal in Linux (Ubuntu and Fedora) and WSL (Ubuntu)
 * Plasma with i3 on Fedora KDE
 
 ## Installation
 
 You can use the `./installer` helper. It will install the packages and symlink the configs.
 Run `./installer symlinks` if you only want to symlink all configs.
-
-Requirements macOS (Linux and WSL don't have any special requirements):
-* [Homebrew](https://docs.brew.sh/Installation)
-* [Homebrew's requirements](https://docs.brew.sh/Installation)
 
 ## Included Configurations
 
