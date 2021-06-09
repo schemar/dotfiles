@@ -30,13 +30,6 @@ common_packages=(
     zsh
 )
 
-brew_packages=(
-    exa
-    fd
-    starship
-    ul/kak-lsp/kak-lsp
-)
-
 fedora_packages=(
     exa
     git-delta
@@ -46,11 +39,6 @@ fedora_packages=(
 
 ubuntu_packages=(
     fd
-)
-
-brew_desktop_packages=(
-    amethyst
-    kitty
 )
 
 linux_desktop_packages=(
@@ -114,43 +102,26 @@ install_on_ubuntu() {
 
 install() {
     print "Installing ${1} ..."
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        redirect_output "brew install $1"
-    else
-        # Assuming Linux
-        case "$linux_distro" in
-            "ubuntu")
-                install_on_ubuntu "$1"
-                ;;
-            "fedora")
-                redirect_output "sudo dnf -y install $1"
-                ;;
-            *)
-                print "Unknown distro ${linux_distro}. Exiting ..."
-                exit 1
-                ;;
-        esac
-    fi
+    case "$linux_distro" in
+        "ubuntu")
+            install_on_ubuntu "$1"
+            ;;
+        "fedora")
+            redirect_output "sudo dnf -y install $1"
+            ;;
+        *)
+            print "Unknown distro ${linux_distro}. Exiting ..."
+            exit 1
+            ;;
+    esac
 
     # Replacing invalid dash with underscore
     echo "${1//-/_}_installed=\"true\"" >> .state
 }
 
-install_brew() {
-    print "Installing brew ..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    echo 'brew_installed="true"' >> .state
-}
-
 install_zsh() {
     install zsh
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
-        redirect_output "chsh -s /usr/local/bin/zsh"
-    else
-        # Assuming Linux
-        redirect_output "sudo usermod --shell /bin/zsh $(whoami)"
-    fi
+    redirect_output "sudo usermod --shell /bin/zsh $(whoami)"
 
     print "Zsh installed and set as your default shell. Switch to zsh and run ./installer again."
     exit 0
@@ -188,32 +159,23 @@ symlink_configs() {
     ln -snf "$SCRIPTPATH"/configs/ranger "$HOME"/.config/ranger
     ln -snf "$SCRIPTPATH"/configs/starship/starship.toml "$HOME"/.config/starship.toml
 
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        # Create kak symlink to original autload:
-        ln -snf "$(brew --prefix)"/share/kak/autoload "$SCRIPTPATH"/configs/kak/autoload
-        # Rust under MacOS uses another config path
-        ln -snf "$SCRIPTPATH"/configs/kak-lsp "$HOME"/Library/Preferences/kak-lsp
-    else
-        # Assuming Linux
-        # Create kak symlink to original autload:
-        ln -snf /usr/share/kak/autoload "$SCRIPTPATH"/configs/kak/autoload
-        ln -snf "$SCRIPTPATH"/configs/kak-lsp "$HOME"/.config/kak-lsp
+    # Create kak symlink to original autload:
+    ln -snf /usr/share/kak/autoload "$SCRIPTPATH"/configs/kak/autoload
+    ln -snf "$SCRIPTPATH"/configs/kak-lsp "$HOME"/.config/kak-lsp
 
-        if [[ "$linux_is_desktop" == "true" ]]; then
-            ln -snf "$SCRIPTPATH"/configs/rofi "$HOME"/.config/rofi
-            ln -snf "$SCRIPTPATH"/configs/i3 "$HOME"/.config/i3
+    if [[ "$linux_is_desktop" == "true" ]]; then
+        ln -snf "$SCRIPTPATH"/configs/rofi "$HOME"/.config/rofi
+        ln -snf "$SCRIPTPATH"/configs/i3 "$HOME"/.config/i3
 
-            # Add an option to use plasma with i3 at login.
-            # These must be copied. Otherwise SDDM will not show the option.
-            # Only done once, because we don't want to ask for the sudo password every time we symlink.
-            if [[ ! "$plasma_with_i3_session_sopied" = "true" ]]; then
-                print "Copying files to start i3 session ..."
-                sudo mkdir -p /usr/local/bin
-                sudo cp "$SCRIPTPATH"/configs/plasma/plasma-with-i3.sh /usr/local/bin/plasma-with-i3.sh
-                sudo cp "$SCRIPTPATH"/configs/plasma/plasma-with-i3.desktop /usr/share/xsessions/plasma-with-i3.desktop
-
-                echo 'plasma_with_i3_session_sopied="true"' >> .state
-            fi
+        # Add an option to use plasma with i3 at login.
+        # These must be copied. Otherwise SDDM will not show the option.
+        # Only done once, because we don't want to ask for the sudo password every time we symlink.
+        if [[ ! "$plasma_with_i3_session_sopied" = "true" ]]; then
+            print "Copying files to start i3 session ..."
+            sudo mkdir -p /usr/local/bin
+            sudo cp "$SCRIPTPATH"/configs/plasma/plasma-with-i3.sh /usr/local/bin/plasma-with-i3.sh
+            sudo cp "$SCRIPTPATH"/configs/plasma/plasma-with-i3.desktop /usr/share/xsessions/plasma-with-i3.desktop
+            echo 'plasma_with_i3_session_sopied="true"' >> .state
         fi
     fi
 }
@@ -230,37 +192,27 @@ setup() {
     # Sourcing state updates all state variables for parts that
     # are already installed.
     # You can delete individual lines from .state to reinstall.
-    brew_installed=""
     zsh_installed=""
     source .state
-    
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        if [[ ! "$brew_installed" = "true" ]]; then
-            install_brew
+
+    if [[ -z "$linux_distro" ]]; then
+        read -p "Which distro are you on? (fedora/ubuntu) " -r linux_distro
+        if [[ "$linux_distro" = "fedora" ]] || [[ "$linux_distro" = "ubuntu" ]]; then
+            printf 'linux_distro="%s"\n' "$linux_distro" >> .state
+        else
+            print "Unknown distro. Exiting ..."
+            exit 1
         fi
-        # Forcing brew to be in path
-        PATH="/usr/local/bin:$PATH"
-    else
-        # Assuming Linux
-        if [[ -z "$linux_distro" ]]; then
-            read -p "Which distro are you on? (fedora/ubuntu) " -r linux_distro
-            if [[ "$linux_distro" = "fedora" ]] || [[ "$linux_distro" = "ubuntu" ]]; then
-                printf 'linux_distro="%s"\n' "$linux_distro" >> .state
-            else
-                print "Unknown distro. Exiting ..."
-                exit 1
-            fi
+    fi
+
+    if [[ -z "$linux_is_desktop" ]]; then
+        read -p "Are you on a desktop? (y/N) " -n 1 -r linux_is_desktop
+        if [[ "$linux_is_desktop" =~ ^[yY]$ ]]; then
+            linux_is_desktop="true"
+        else
+            linux_is_desktop="false"
         fi
-    
-        if [[ -z "$linux_is_desktop" ]]; then
-            read -p "Are you on a desktop? (y/N) " -n 1 -r linux_is_desktop
-            if [[ "$linux_is_desktop" =~ ^[yY]$ ]]; then
-                linux_is_desktop="true"
-            else
-                linux_is_desktop="false"
-            fi
-            printf 'linux_is_desktop="%s"\n' "$linux_is_desktop" >> .state
-        fi
+        printf 'linux_is_desktop="%s"\n' "$linux_is_desktop" >> .state
     fi
 }
 
@@ -343,44 +295,27 @@ installs() {
         fi
     fi
     
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        for package in "${brew_packages[@]}"; do
-            var_reference="${package}_installed"
+    if [[ ! "$starship_installed" = "true" ]]; then
+        # Starship on Linux is only available as download
+        print "Installing starship ..."
+        curl -fsSL https://starship.rs/install.sh | sudo bash
+        echo "starship_installed=\"true\"" >> .state
+    fi
+
+    if [[ ! "$lolcat_installed" = "true" ]]; then
+        print "Installing lolcat..."
+        redirect_output "gem install lolcat"
+        echo 'lolcat_installed="true"' >> .state
+    fi
+
+    if [[ "$linux_is_desktop" = "true" ]]; then
+        print "Installing desktop packages ..."
+        for package in "${linux_desktop_packages[@]}"; do
+            var_reference="${package//-/_}_installed"
             if [[ ! "${!var_reference}" = "true" ]]; then
                 install "$package"
             fi
         done
-    
-        for package in "${brew_desktop_packages[@]}"; do
-            var_reference="${package}_installed"
-            if [[ ! "${!var_reference}" = "true" ]]; then
-                redirect_output "brew cask install $1"
-            fi
-        done
-    else
-        # Assuming Linux
-        if [[ ! "$starship_installed" = "true" ]]; then
-            # Starship on Linux is only available as download
-            print "Installing starship ..."
-            curl -fsSL https://starship.rs/install.sh | sudo bash
-            echo "starship_installed=\"true\"" >> .state
-        fi
-    
-        if [[ ! "$lolcat_installed" = "true" ]]; then
-            print "Installing lolcat..."
-            redirect_output "gem install lolcat"
-            echo 'lolcat_installed="true"' >> .state
-        fi
-
-        if [[ "$linux_is_desktop" = "true" ]]; then
-            print "Installing desktop packages ..."
-            for package in "${linux_desktop_packages[@]}"; do
-                var_reference="${package//-/_}_installed"
-                if [[ ! "${!var_reference}" = "true" ]]; then
-                    install "$package"
-                fi
-            done
-        fi
     fi
     
     if [[ ! "$ohmyzsh_installed" = "true" ]]; then
@@ -409,7 +344,6 @@ installs() {
     if [[ ! "$node_installed" = "true" ]]; then
         print "You must manually 'asdf install nodejs latest'."
         print "Then, run ./installer again."
-        print "If asdf doesn't work, yet, you must re-source ~/.zshrc"
         echo 'node_installed="true"' >> .state
         exit 0
     fi
