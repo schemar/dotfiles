@@ -113,7 +113,7 @@ plug "https://github.com/andreyorst/powerline.kak" defer powerline %{
     powerline-start
 }
 
-plug "https://github.com/andreyorst/fzf.kak" defer fzf %{
+plug "https://github.com/andreyorst/fzf.kak" tag "v1.0.3" defer fzf %{
     map global normal <c-p> ': fzf-mode<ret>'
     set-option global fzf_file_command 'fd --type f --hidden --exclude ".git/"'
     set-option global fzf_highlight_command 'bat --style=numbers --color=always {}'
@@ -142,7 +142,7 @@ plug "listentolist/kakoune-table" domain "gitlab.com" config %{
 }
 
 
-plug "https://github.com/ul/kak-lsp" tag "v9.0.0" config %{
+plug "https://github.com/ul/kak-lsp" tag "v10.0.0" config %{
     # uncomment to enable debugging
     # eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
     # set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
