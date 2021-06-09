@@ -10,7 +10,7 @@ set $mod Mod4
 font pango:fixed 10
 
 # Composer
-#exec_always --no-startup-id $HOME/.config/picom/launch.sh
+exec_always --no-startup-id $HOME/.config/picom/launch.sh
 
 # Notifications
 exec --no-startup-id dunst

@@ -1,0 +1,51 @@
+  {
+    "name": "5",
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splith",
+    "marks": [],
+    "percent": 0.166666666666667,
+    "type": "workspace",
+    "nodes": [
+      {
+        "border": "normal",
+        "current_border_width": 2,
+        "floating": "auto_off",
+        "geometry": {
+          "height": 1034,
+          "width": 1148,
+          "x": 2,
+          "y": 20
+        },
+        "marks": [],
+        "name": "Slack",
+        "percent": 0.6,
+        "swallows": [
+          {
+            "class": "Slack"
+          }
+        ],
+        "type": "con"
+      },
+      {
+        "border": "normal",
+        "current_border_width": 1,
+        "floating": "auto_off",
+        "geometry": {
+          "height": 1056,
+          "width": 960,
+          "x": 0,
+          "y": 0
+        },
+        "marks": [],
+        "name": "Microsoft Teams",
+        "percent": 0.4,
+        "swallows": [
+          {
+            "class": "Teams"
+          }
+        ],
+        "type": "con"
+      }
+    ]
+  }
