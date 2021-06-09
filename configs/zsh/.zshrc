@@ -10,7 +10,7 @@ else
   alias pbpaste='xclip -selection clipboard -o'
 fi
   
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
