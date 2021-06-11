@@ -178,7 +178,19 @@ client.unfocused        $unfocused-bg-color $unfocused-bg-color $unfocused-text-
 client.urgent           $urgent-bg-color    $urgent-bg-color    $text-color           $highlight-color
 
 # Force borders for Microsoft Teams
-for_window [title="\| Microsoft Teams"] border normal 1
+for_window [class="Microsoft Teams - Preview"] border normal 1
+
+# Assign to workspaces
+assign [class="kitty"] 1
+assign [class="Google-chrome"] 2
+assign [class="Firefox"] 3
+assign [class="obsidian"] 4
+assign [class="Slack"] 5
+assign [class="Microsoft Teams - Preview"] 5
+assign [class="Spotify"] 6
+assign [class="Insomnia"] 9
+assign [class="DBeaver"] 9
+assign [class="TelegramDesktop"] 10
 
 #
 # Plasma specific overrides
