@@ -15,8 +15,7 @@ exec_always --no-startup-id $HOME/.config/picom/launch.sh
 # Notifications
 exec --no-startup-id dunst
 
-# Background, sleeping so that Plasma can get the resolution right
-exec_always --no-startup-id sleep 5 && $HOME/.fehbg
+exec_always --no-startup-id $HOME/.fehbg
 
 # Red tint
 exec --no-startup-id redshift-gtk

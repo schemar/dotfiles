@@ -46,8 +46,8 @@ linux_desktop_packages=(
     arandr
     brightnessctl
     dunst
-    dunstctl
     feh
+    gnome-keyring
     i3
     i3blocks
     i3lock
