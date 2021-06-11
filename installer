@@ -42,17 +42,22 @@ ubuntu_packages=(
 )
 
 linux_desktop_packages=(
+    arandr
     dunst
     feh
     i3
     # ibus is a dependency of the KDE Plasma Emoji Picker and missing in a standard fedora installation.
     ibus
     kitty
+    maim
+    NetworkManager
+    NetworkManager-tui
     pavucontrol
     picom
     redshift
     redshift-gtk
     rofi
+    xautolock
     xclip
 )
 
@@ -164,8 +169,9 @@ symlink_configs() {
     ln -snf "$SCRIPTPATH"/configs/kak-lsp "$HOME"/.config/kak-lsp
 
     if [[ "$linux_is_desktop" == "true" ]]; then
-        ln -snf "$SCRIPTPATH"/configs/rofi "$HOME"/.config/rofi
         ln -snf "$SCRIPTPATH"/configs/i3 "$HOME"/.config/i3
+        ln -snf "$SCRIPTPATH"/configs/polybar "$HOME"/.config/polybar
+        ln -snf "$SCRIPTPATH"/configs/rofi "$HOME"/.config/rofi
 
         # Add an option to use plasma with i3 at login.
         # These must be copied. Otherwise SDDM will not show the option.
