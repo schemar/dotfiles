@@ -1,3 +1,6 @@
+# Plugin manager and plugins
+source "%val{config}/plugins/plug.kak/rc/plug.kak"
+
 # Remove clippy from info window
 set global ui_options ncurses_assistant=none
 
@@ -20,8 +23,6 @@ map global insert <c-w> '<a-;>:exec -draft bd<ret>'
 
 # Use ripgrep for grepping
 set global grepcmd 'rg --column'
-map -docstring 'grep' global user g ': grepmenu '
-set global grepmenucmd 'rg --column'
 
 # Broot is configured in the autoload directory
 map global user b ':  toggle-broot<ret>' -docstring 'browse files with broot'
@@ -72,9 +73,6 @@ map global goto m '<esc>: alt<ret>' -docstring 'alternative file'
 # A user mode for development related tasks like lsp and formatting
 declare-user-mode development
 
-# Plugin manager and plugins
-source "%val{config}/plugins/plug.kak/rc/plug.kak"
-
 plug "https://github.com/TeddyDD/kakoune-wiki" config %{
     wiki-setup %sh{ echo ~/.nb/home }
 }
@@ -113,14 +111,16 @@ plug "https://github.com/andreyorst/powerline.kak" defer powerline %{
     powerline-start
 }
 
-plug "https://github.com/andreyorst/fzf.kak" tag "v1.0.3" defer fzf %{
-    map global normal <c-p> ': fzf-mode<ret>'
-    set-option global fzf_file_command 'fd --type f --hidden --exclude ".git/"'
-    set-option global fzf_highlight_command 'bat --style=numbers --color=always {}'
-    set-option global fzf_use_main_selection false
-} config %{
+plug "https://github.com/andreyorst/fzf.kak" tag "v1.0.3" config %{
     map global user f ': fzf-mode<ret>' -docstring 'fuzzy find'
-}
+} defer fzf %{
+    map global normal <c-p> ': fzf-mode<ret>'
+    set-option global fzf_use_main_selection false
+} defer fzf-file %{
+    set-option global fzf_file_command 'fd --type f --hidden --exclude ".git/"'
+    set-option global fzf_grep_command rg
+    set-option global fzf_highlight_command 'bat --style=numbers --color=always {}'
+} 
 
 plug "https://github.com/h-youhei/kakoune-surround" config %{
     # Surround functionality

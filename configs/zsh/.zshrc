@@ -15,17 +15,12 @@ export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$PATH"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# NVM configuration (see https://github.com/lukechilds/zsh-nvm for details)
-export NVM_COMPLETION=true
-export NVM_LAZY_LOAD=true
-export NVM_AUTO_USE=true
-
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-nvm fd yarn docker docker-compose)
+plugins=(fd yarn docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 source "$HOME"/.config/broot/launcher/bash/br
@@ -102,9 +97,6 @@ export LC_ALL=en_US.UTF-8
 
 # direnv to load environment (variables) per directory/project
 eval "$(direnv hook zsh)"
-
-# eval navi (terminal cheat sheets; activate with C-g)
-eval "$(navi widget zsh)"
 
 # staship shell prompt
 export STARSHIP_CONFIG="$HOME/.config/starship.toml"

@@ -5,4 +5,4 @@ configs/broot/launcher/
 configs/kak/plugins/
 configs/kak/colors/
 # Ignoring the symlink to the original autoload
-configs/kak/autoload/autoload
+configs/kak/autoload

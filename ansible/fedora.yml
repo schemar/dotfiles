@@ -1,0 +1,163 @@
+- hosts: localhost
+  become: true
+  vars_prompt:
+    - name: username
+      prompt: Username 
+      private: no
+    - name: dotfiles_dir
+      prompt: Dotfiles directory (e.g. /home/schemar/Projects/dotfiles without trailing slash)
+      private: no
+  tasks:
+  - name: Enable COPRs
+    community.general.copr:
+      state=enabled
+      name={{item}}
+    with_items:
+      - atim/kakoune
+    tags: packages
+  - name: Install packages
+    package:
+      name={{item}}
+      state=latest
+    with_items:
+      - acpi
+      - arandr
+      - arc-theme
+      - bat
+      - brightnessctl
+      - curl
+      - direnv
+      - dunst
+      - exa
+      - fd-find
+      - feh
+      - fzf
+      - git-delta
+      - i3
+      - i3blocks
+      - i3lock
+      - i3status
+      - iw
+      - jq
+      - kak-lsp
+      - kakoune
+      - kitty
+      - lxappearance
+      - maim
+      - NetworkManager
+      - NetworkManager-tui
+      - pavucontrol
+      - picom
+      - python
+      - ranger
+      - redshift
+      - redshift-gtk
+      - ripgrep
+      - rofi
+      - tig
+      - tmux
+      - xautolock
+      - xbacklight
+      - xclip
+      - xdotool
+      - xset
+      - zoxide
+      - zsh
+    tags: packages
+  - name: Setup user account
+    user:
+      name: "{{username}}"
+      shell: zsh
+      generate_ssh_key: yes
+  - name: Install oh-my-zsh
+    become: "{{username}}"
+    git:
+      repo: "https://github.com/ohmyzsh/ohmyzsh.git"
+      dest: "/home/{{username}}/.oh-my-zsh"
+      depth: 1
+  - name: Delete i3 config dir to be able to symlink
+    file:
+      path: "/home/{{username}}/.config/i3"
+      state: absent
+    tags: symlinks
+  - name: Set up symlinks of dotfiles
+    become: "{{username}}"
+    file:
+      src: "{{dotfiles_dir}}/configs/{{item.src}}"
+      dest: "/home/{{username}}/{{item.dest}}"
+      state: link
+    loop:
+      - { src: "asdf/.asdfrc", dest: ".asdfrc" }
+      - { src: "fzf/.fzf.zsh", dest: ".fzf.zsh" }
+      - { src: "git/.gitconfig", dest: ".gitconfig" }
+      - { src: "tmux/.tmux.conf", dest: ".tmux.conf" }
+      - { src: "vim/.vimrc", dest: ".vimrc" }
+      - { src: "zsh/.zshrc", dest: ".zshrc" }
+      - { src: "bat", dest: ".config/bat" }
+      - { src: "broot", dest: ".config/broot" }
+      - { src: "dunst", dest: ".config/dunst" }
+      - { src: "kak", dest: ".config/kak" }
+      - { src: "kitty", dest: ".config/kitty" }
+      - { src: "kmonad", dest: ".config/kmonad" }
+      - { src: "nvim", dest: ".config/nvim" }
+      - { src: "picom", dest: ".config/picom" }
+      - { src: "ranger", dest: ".config/ranger" }
+      - { src: "starship/starship.toml", dest: ".config/starship.toml" }
+      - { src: "kak-lsp", dest: ".config/kak-lsp" }
+      - { src: "i3", dest: ".config/i3" }
+      - { src: "i3blocks", dest: ".config/i3blocks" }
+      - { src: "rofi", dest: ".config/rofi" }
+    tags: symlinks
+  - name: Symlinkg kakounes original autoload file
+    become: "{{username}}"
+    file:
+      src: "/usr/share/kak/autoload"
+      dest: "{{dotfiles_dir}}/configs/kak/autoload"
+      state: link
+    tags: symlinks
+  - name: Create kakoune plugin dir
+    become: "{{username}}"
+    file:
+      path: "/home/{{username}}/.config/kak/plugins"
+      state: directory
+    tags: plugins
+  - name: Download kakoune plugin manager
+    become: "{{username}}"
+    git:
+      repo: "git@github.com:andreyorst/plug.kak.git"
+      dest: "/home/{{username}}/.config/kak/plugins/plug.kak"
+    tags: plugins
+  - name: Create tmux plugin dir
+    become: "{{username}}"
+    file:
+      path: "/home/{{username}}/.config/tmux/plugins"
+      state: directory
+    tags: plugins
+  - name: Download tmux plugin manager
+    become: "{{username}}"
+    git:
+      repo: "https://github.com/tmux-plugins/tpm.git"
+      dest: "/home/{{username}}/.config/tmux/plugins/tpm"
+    tags: plugins
+  - name: Make sure fonts directory exists
+    file:
+      path: /usr/local/share/fonts
+      state: directory
+    tags: fonts
+  - name: Download nerd fonts
+    get_url:
+      url: "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/{{item.url}}"
+      dest: "/usr/local/share/fonts/{{item.name}}"
+    loop:
+      - { name: "DejaVu Sans Mono Nerd Font Complete.ttf", url: "Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete.ttf" }
+      - { name: "DejaVu Sans Mono Bold Nerd Font Complete.ttf", url: "Bold/complete/DejaVu%20Sans%20Mono%20Bold%20Nerd%20Font%20Complete.ttf" }
+    tags: fonts
+  - name: Download vscode font
+    get_url:
+      url: "https://github.com/Canop/broot/blob/master/resources/icons/vscode/vscode.ttf"
+      dest: "/usr/local/share/fonts/vscode.ttf"
+    tags: fonts
+  - name: Reload fonts cache
+    become: "{{username}}"
+    command: fc-cache -f /usr/local/share/fonts
+    tags: fonts
