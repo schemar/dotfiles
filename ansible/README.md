@@ -19,10 +19,15 @@ Auto workstation configuration based on a clean installation of [Fedora 34 i3 Sp
 
 ## TODO
 
-- asdf
+- install asdf latest tag
 - kmonad compose key
+- autostart kmonad 
+- install kmonad with api.GitHub.com and jq 
+- monitor config with [autorandr](https://github.com/phillipberndt/autorandr)
+  - including option to save and force apply with rofi
 - rust
 - broot
+- [other cli tools](https://zaiste.net/posts/shell-commands-rust/#bonus)?
 - npm packages
 - based on installer:
  * In a new shell set https://github.com/asdf-vm/asdf-nodejs up
