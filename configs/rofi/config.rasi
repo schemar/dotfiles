@@ -5,7 +5,7 @@ configuration {
   display-ssh: "  ";
   drun-display-format: "{name}";
   show-icons: false;
-  font: "DejaVuSansMono Nerd Font 12";
+  font: "DejaVuSansMono Nerd Font Mono 12";
   case-sensitive: false;
   modi: "window,run,drun";
   fixed-num-lines: false;

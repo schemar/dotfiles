@@ -5,7 +5,8 @@ Auto workstation configuration based on a clean installation of [Fedora 34 i3 Sp
 1. Run `dnf install git ansible`
 2. Run `ansible-galaxy collection install community.general`
 3. Clone repo `git clone git@github.com:schemar/dotfiles.git && cd dotfiles/ansible`
-4. Run `ansible-playbook --ask-become-pass ./fedora.yml`
+4. Run `./install.sh`
+  a. You can specify ansible options, e.g. `./install.sh --tags symlinks`
 5. Run `systemctl reboot`
 6. After reboot:
   a. Run `Ctrl+b I` inside tmux
@@ -13,13 +14,13 @@ Auto workstation configuration based on a clean installation of [Fedora 34 i3 Sp
   c. Add `~/.gitconfigemail` and set your email address
   d. Run `sh -c "$(curl -fsSL https://starship.rs/install.sh)"` in your shell
   e. Set a wallpaper with `feh --bg-fill <path-to-file>`
+  f. Download a kmonad release and make it available as `kmonad` in the path
+    - https://github.com/kmonad/kmonad/releases
 
 ## TODO
 
-- kak plugin manager
-- tmux plugin manager
-- kmonad
 - asdf
+- kmonad compose key
 - rust
 - broot
 - npm packages

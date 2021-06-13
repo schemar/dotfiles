@@ -141,23 +141,26 @@
     tags: plugins
   - name: Make sure fonts directory exists
     file:
-      path: /usr/local/share/fonts
+      path: /usr/share/fonts/{{item}}
       state: directory
+    with_items:
+      - "nerd-fonts"
+      - vscode
     tags: fonts
   - name: Download nerd fonts
     get_url:
-      url: "https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DejaVuSansMono/{{item.url}}"
-      dest: "/usr/local/share/fonts/{{item.name}}"
+      url: "{{item.url}}"
+      dest: "/usr/share/fonts/nerd-fonts/{{item.name}}"
     loop:
-      - { name: "DejaVu Sans Mono Nerd Font Complete.ttf", url: "Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete.ttf" }
-      - { name: "DejaVu Sans Mono Bold Nerd Font Complete.ttf", url: "Bold/complete/DejaVu%20Sans%20Mono%20Bold%20Nerd%20Font%20Complete.ttf" }
+      - { url: "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete%20Mono.ttf", name: "DejaVu_Sans_Mono_Nerd_Font_Mono_Book.ttf" }
+      - { url: "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Bold/complete/DejaVu%20Sans%20Mono%20Bold%20Nerd%20Font%20Complete%20Mono.ttf", name: "DejaVu_Sans_Mono_Nerd_Font_Mono_Bold.ttf" }
     tags: fonts
   - name: Download vscode font
     get_url:
-      url: "https://github.com/Canop/broot/blob/master/resources/icons/vscode/vscode.ttf"
-      dest: "/usr/local/share/fonts/vscode.ttf"
+      url: "https://github.com/Canop/broot/raw/master/resources/icons/vscode/vscode.ttf"
+      dest: "/usr/share/fonts/vscode/vscode.ttf"
     tags: fonts
   - name: Reload fonts cache
     become: "{{username}}"
-    command: fc-cache -f /usr/local/share/fonts
+    command: fc-cache -f /usr/share/fonts
     tags: fonts
