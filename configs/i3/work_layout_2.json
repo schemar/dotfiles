@@ -1,31 +1,22 @@
+[
   {
-    "name": "2",
     "border": "normal",
+    "current_border_width": 2,
     "floating": "auto_off",
-    "layout": "splith",
+    "geometry": {
+      "height": 1034,
+      "width": 1916,
+      "x": 2,
+      "y": 20
+    },
     "marks": [],
-    "percent": 0.166666666666667,
-    "type": "workspace",
-    "nodes": [
+    "name": "Google Chrome",
+    "percent": 1,
+    "swallows": [
       {
-        "border": "normal",
-        "current_border_width": 2,
-        "floating": "auto_off",
-        "geometry": {
-          "height": 1034,
-          "width": 1916,
-          "x": 2,
-          "y": 20
-        },
-        "marks": [],
-        "name": "Google Chrome",
-        "percent": 1,
-        "swallows": [
-          {
-            "class": "chrome"
-          }
-        ],
-        "type": "con"
+        "class": "chrome"
       }
-    ]
+    ],
+    "type": "con"
   }
+]

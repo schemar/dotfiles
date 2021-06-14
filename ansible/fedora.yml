@@ -14,6 +14,12 @@
       name={{item}}
     with_items:
       - atim/kakoune
+      - atim/bottom
+    tags: packages
+  - name: Enable RPM Fusion
+    shell: dnf install "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+    args:
+      warn: no
     tags: packages
   - name: Install packages
     package:
@@ -24,8 +30,11 @@
       - arandr
       - arc-theme
       - bat
+      - blueman
+      - bottom
       - brightnessctl
       - curl
+      - dex-autostart
       - direnv
       - dunst
       - exa
@@ -46,14 +55,22 @@
       - maim
       - NetworkManager
       - NetworkManager-tui
+      - network-manager-applet
+      - nodejs
+      - papirus-icon-theme
       - pavucontrol
       - picom
+      - procs
       - python
+      - qt5-qtwebengine-freeworld
+      - qutebrowser
       - ranger
       - redshift
       - redshift-gtk
       - ripgrep
       - rofi
+      - tealdeer
+      - thunar
       - tig
       - tmux
       - xautolock
@@ -63,6 +80,56 @@
       - xset
       - zoxide
       - zsh
+    tags: packages
+  - name: Clone autorandr
+    become: "{{username}}"
+    git:
+      repo: "https://github.com/phillipberndt/autorandr.git"
+      dest: "/home/{{username}}/.autorandr"
+    tags: packages
+  - name: Install autorandr
+    community.general.make:
+      chdir: /home/{{username}}/.autorandr
+      target: install
+    tags: packages
+  - name: Enable and start autorandr service
+    systemd:
+      name: autorandr
+      state: started
+      enabled: yes
+    tags: packages
+  - name: Download broot
+    get_url:
+      url: https://dystroy.org/broot/download/x86_64-linux/broot
+      dest: /usr/local/bin/broot
+    tags: packages
+  - name: Make broot executable
+    file:
+      path: /usr/local/bin/broot
+      mode: '+x'
+    tags: packages
+  - name: Run broot setup
+    shell: broot --install
+    tags: packages
+  - name: Install npm packages
+    become: "{{username}}"
+    community.general.npm:
+      name: "{{item}}"
+      global: yes
+    with_items:
+      - "@bitwarden/cli"
+      - "typescript"
+      - "typescript-language-server"
+      - "eslint-formatter-kakoune"
+    tags: packages
+  - name: Install pip packages
+    become: "{{username}}"
+    pip:
+      name: ['tldextract']
+    tags: packages
+  - name: Make qutebrowser the default
+    become: "{{username}}"
+    command: xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
     tags: packages
   - name: Setup user account
     user:
@@ -88,31 +155,35 @@
       state: link
     loop:
       - { src: "asdf/.asdfrc", dest: ".asdfrc" }
-      - { src: "fzf/.fzf.zsh", dest: ".fzf.zsh" }
-      - { src: "git/.gitconfig", dest: ".gitconfig" }
-      - { src: "tmux/.tmux.conf", dest: ".tmux.conf" }
-      - { src: "vim/.vimrc", dest: ".vimrc" }
-      - { src: "zsh/.zshrc", dest: ".zshrc" }
       - { src: "bat", dest: ".config/bat" }
       - { src: "broot", dest: ".config/broot" }
       - { src: "dunst", dest: ".config/dunst" }
+      - { src: "fzf/.fzf.zsh", dest: ".fzf.zsh" }
+      - { src: "git/.gitconfig", dest: ".gitconfig" }
+      - { src: "i3blocks", dest: ".config/i3blocks" }
+      - { src: "i3", dest: ".config/i3" }
       - { src: "kak", dest: ".config/kak" }
+      - { src: "kak-lsp", dest: ".config/kak-lsp" }
       - { src: "kitty", dest: ".config/kitty" }
       - { src: "kmonad", dest: ".config/kmonad" }
       - { src: "nvim", dest: ".config/nvim" }
       - { src: "picom", dest: ".config/picom" }
+      - { src: "qutebrowser/autoconfig.yml", dest: ".config/qutebrowser/autoconfig.yml" }
+      - { src: "qutebrowser/config.py", dest: ".config/qutebrowser/config.py" }
+      - { src: "qutebrowser/nord.py", dest: ".config/qutebrowser/nord.py" }
+      - { src: "qutebrowser/userscripts", dest: ".config/qutebrowser/userscripts" }
       - { src: "ranger", dest: ".config/ranger" }
-      - { src: "starship/starship.toml", dest: ".config/starship.toml" }
-      - { src: "kak-lsp", dest: ".config/kak-lsp" }
-      - { src: "i3", dest: ".config/i3" }
-      - { src: "i3blocks", dest: ".config/i3blocks" }
       - { src: "rofi", dest: ".config/rofi" }
+      - { src: "starship/starship.toml", dest: ".config/starship.toml" }
+      - { src: "tmux/.tmux.conf", dest: ".tmux.conf" }
+      - { src: "vim/.vimrc", dest: ".vimrc" }
+      - { src: "zsh/.zshrc", dest: ".zshrc" }
     tags: symlinks
   - name: Symlinkg kakounes original autoload file
     become: "{{username}}"
     file:
       src: "/usr/share/kak/autoload"
-      dest: "{{dotfiles_dir}}/configs/kak/autoload"
+      dest: "{{dotfiles_dir}}/configs/kak/autoload/autoload"
       state: link
     tags: symlinks
   - name: Create kakoune plugin dir

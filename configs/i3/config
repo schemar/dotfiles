@@ -20,6 +20,16 @@ exec_always --no-startup-id $HOME/.fehbg
 # Red tint
 exec --no-startup-id redshift-gtk
 
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet
+
+# Bluetooth icon in the tray
+exec --no-startup-id blueman-applet
+
+# Apply stored autorandr configuration
+exec --no-startup-id systemctl start autorandr.service
+
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
@@ -36,14 +46,13 @@ set $screenshotname "$(xdg-user-dir PICTURES)/$(date +'%s_screenshot.png')"
 exec --no-startup-id xautolock -time 5 -corners +00- -locker "$lock"
 exec --no-startup-id xautolock -time 10 -locker systemctl suspend
 
+# Input changes
+## US Keyboard with Compose
+exec_always --no-startup-id setxkbmap -layout us  -option 'compose:menu' -option 'compose:prsc' -option 'caps:escape'
 ## Key repeat (typematic delay and rate)
 exec --no-startup-id xset r rate 300 40
 ## Natural scrolling (https://altendorfer.at/2020/andi/linux/i3/2020/03/20/i3xtermAndScrolling.html)
 exec --no-startup-id xinput --set-prop 12 322 1
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3blocks pkill -RTMIN+1 i3blocks
@@ -73,7 +82,7 @@ bindsym $mod+p exec $HOME/.config/rofi/screenshot.sh
 bindsym $mod+m exec $HOME/.config/rofi/settings.sh
 
 # lock screen Ctrl+Alt+L
-bindsym Control+Mod1+l exec i3lock -c 000000
+bindsym Control+Mod1+l exec $lock
 
 # start a terminal
 bindsym $mod+Return exec kitty
@@ -237,7 +246,6 @@ client.urgent           $urgent-bg-color    $urgent-bg-color    $text-color     
 for_window [class="Microsoft Teams - Preview"] border normal 1
 
 # Assign to workspaces
-assign [class="kitty"] 1
 assign [class="Google-chrome"] 2
 assign [class="Firefox"] 3
 assign [class="obsidian"] 4

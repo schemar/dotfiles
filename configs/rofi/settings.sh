@@ -2,7 +2,7 @@
 
 # Options
 display=" Display"
-scaling=" Scaling"
+scaling=" Scaling"
 audio="蓼 Audio"
 audio_rescan="遼 Rescan audio devices"
 network=" Network"

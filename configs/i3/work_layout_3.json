@@ -1,31 +1,22 @@
+[
   {
-    "name": "3",
     "border": "normal",
+    "current_border_width": 2,
     "floating": "auto_off",
-    "layout": "splith",
+    "geometry": {
+      "height": 1034,
+      "width": 1916,
+      "x": 0,
+      "y": 0
+    },
     "marks": [],
-    "percent": 0.166666666666667,
-    "type": "workspace",
-    "nodes": [
+    "name": "Mozilla Firefox",
+    "percent": 1,
+    "swallows": [
       {
-        "border": "normal",
-        "current_border_width": 2,
-        "floating": "auto_off",
-        "geometry": {
-          "height": 1034,
-          "width": 1916,
-          "x": 0,
-          "y": 0
-        },
-        "marks": [],
-        "name": "Mozilla Firefox",
-        "percent": 1,
-        "swallows": [
-          {
-            "class": "Firefox"
-          }
-        ],
-        "type": "con"
+        "class": "Firefox"
       }
-    ]
+    ],
+    "type": "con"
   }
+]

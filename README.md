@@ -3,7 +3,7 @@
 This repository contains configurations for:
 
 * Terminal in Linux (Ubuntu and Fedora) and WSL (Ubuntu)
-* Plasma with i3 on Fedora KDE
+* X System based on Fedora i3 Spin
 
 ## Installation
 
@@ -16,6 +16,7 @@ Run `./installer symlinks` if you only want to symlink all configs.
 
 * [asdf](https://github.com/asdf-vm/asdf)
 * [bat](https://github.com/sharkdp/bat)
+* [bottom](https://github.com/ClementTsang/bottom)
 * [broot](https://github.com/Canop/broot)
 * [direnv](https://github.com/direnv/direnv)
 * [fd](https://github.com/sharkdp/fd)
@@ -23,15 +24,18 @@ Run `./installer symlinks` if you only want to symlink all configs.
 * [kakoune editor](https://github.com/mawww/kakoune)❤️
 * [nb](https://github.com/xwmx/nb)
 * [NeoVim](https://github.com/neovim/neovim)
+* [procs](https://github.com/dalance/procs)
 * [ranger](https://github.com/ranger/ranger)
 * [ripgrep](https://github.com/BurntSushi/ripgrep)
 * [starship](https://github.com/starship/starship)
+* [tealdeer](https://github.com/dbrgn/tealdeer)
 * [tig](https://github.com/jonas/tig)
 * [tmux](https://github.com/tmux/tmux)❤️
 * [Zsh](https://www.zsh.org/)
 
 ### X Window System
 
+* [autorandr](https://github.com/phillipberndt/autorandr)
 * [dunst](https://github.com/dunst-project/dunst)
 * [feh](https://github.com/derf/feh)
 * [i3](https://github.com/i3/i3)❤️
@@ -93,21 +97,13 @@ See the i3 config for all keybindings. Most relevant:
 * `$mod+r` to resize.
 * `$mod+Shift+c` to reload config.
 
-### (Neo)Vim
+#### Monitor layouts
 
-* `<ctrl>+w {v,s}` split window vertically/horizontally.
-* `<ctrl>+{h,j,k,l}` to move cursor across vim windows (works also with tmux panes).
-* `,h` to enable/disable search results highlighting.
+The system includes [autorandr](https://github.com/phillipberndt/autorandr) to automatically detect and apply screen layouts based on the connected monitors.
+If you have a new layout set up using for example arandr, run `autorandr --save <name>` to save the layout with the given name.
+Autorandr should automatically apply this layout the next time the monitors are connected identically.
+You can manually load a profile using `autorandr --load <name>`.
 
-#### Working with files:
+### Qutebrowser
 
-* `,f` to fuzzy find files.
-* `,b` to fuzzy find buffers.
-* `,g` to ripgrep and then fuzzy find on the results.
-* `,e` to open/close file explorer
-
-#### For languages that support LSP:
-
-* `,d` to go to definition of symbol under cursor.
-* `,r` to list references of symbol under cursor.
-* `,2` to rename symbol under cursor.
+To use bitwarden inside qutebrowser (`,bb`, `,bu`, and `,bp`), login to `bw` via the command line.

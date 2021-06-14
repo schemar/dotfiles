@@ -8,28 +8,28 @@ Auto workstation configuration based on a clean installation of [Fedora 34 i3 Sp
 4. Run `./install.sh`
   a. You can specify ansible options, e.g. `./install.sh --tags symlinks`
 5. Run `systemctl reboot`
-6. After reboot:
+6. After reboot (first-time set-up):
   a. Run `Ctrl+b I` inside tmux
   b. Run `:plug-install` inside kakoune
-  c. Add `~/.gitconfigemail` and set your email address
-  d. Run `sh -c "$(curl -fsSL https://starship.rs/install.sh)"` in your shell
-  e. Set a wallpaper with `feh --bg-fill <path-to-file>`
-  f. Download a kmonad release and make it available as `kmonad` in the path
+  c. Run `:adblock-update` inside qutebrowser
+  d. Add `~/.gitconfigemail` and set your email address
+  e. Run `sh -c "$(curl -fsSL https://starship.rs/install.sh)"` in your shell
+  f. Set a wallpaper with `feh --bg-fill <path-to-file>`
+  g. Download a kmonad release and make it available as `kmonad` in the path
     - https://github.com/kmonad/kmonad/releases
+  h. Run `lxappearance` to set theme and icons
+  i. Install `asdf`:
+    - `git clone https://github.com/asdf-vm/asdf.git ~/.asdf`
+    - `cd ~/.asdf`
+    - `git checkout "$(git describe --abbrev=0 --tags)"`
+  j. Install `nodejs` `asdf` plugin and latest:
+    - `asdf plugin-add nodejs`
+    - `asdf install nodejs`
+  k. Reboot one last time
 
 ## TODO
-
-- install asdf latest tag
-- kmonad compose key
-- autostart kmonad 
-- install kmonad with api.GitHub.com and jq 
-- monitor config with [autorandr](https://github.com/phillipberndt/autorandr)
-  - including option to save and force apply with rofi
-- rust
-- broot
-- [other cli tools](https://zaiste.net/posts/shell-commands-rust/#bonus)?
-- npm packages
-- based on installer:
- * In a new shell set https://github.com/asdf-vm/asdf-nodejs up
-   (and/or any other asdf plugins) if you haven't already
- * Map printscr/menu to <composer>
+- kmonad
+  - autostart kmonad 
+  - install kmonad with api.GitHub.com and jq?
+  - update layers to be less intrusive
+- auto-start applications with [dex](https://github.com/jceb/dex)? (fedora package `dex-autostart`)?

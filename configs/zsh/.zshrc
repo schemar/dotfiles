@@ -27,11 +27,8 @@ source "$HOME"/.config/broot/launcher/bash/br
 
 alias g='git'
 alias y='yarn'
-# Use bb as a one-shot ls replacement
-# Reduce height to not overflow
-# Use -h to show hidden files
-lf() {br -sdp --height=$(echo "$(tput lines) - 1" | bc) --cmd ":pt" "$@"}
-alias l='lf'
+
+alias l='exa -al --git --icons'
 # Use b as interactive ls replacement
 alias ll='br -sdp'
 # Use bd to search for a folder with broot
