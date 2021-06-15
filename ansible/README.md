@@ -7,6 +7,7 @@ Auto workstation configuration based on a clean installation of [Fedora 34 i3 Sp
 3. Clone repo `git clone git@github.com:schemar/dotfiles.git && cd dotfiles/ansible`
 4. Run `./install.sh`
   a. You can specify ansible options, e.g. `./install.sh --tags symlinks`
+  b. The `BECOME password` is your user password for `sudo`
 5. Run `systemctl reboot`
 6. After reboot (first-time set-up):
   a. Run `Ctrl+b I` inside tmux
@@ -33,3 +34,4 @@ Auto workstation configuration based on a clean installation of [Fedora 34 i3 Sp
   - install kmonad with api.GitHub.com and jq?
   - update layers to be less intrusive
 - auto-start applications with [dex](https://github.com/jceb/dex)? (fedora package `dex-autostart`)?
+- gnome-keyring

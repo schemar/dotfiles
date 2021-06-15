@@ -27,7 +27,7 @@ style = "fg:blue"
 symbol = " "
 
 [battery]
-style = "fg:blue"
+#style = "fg:blue"
 full_symbol = ""
 charging_symbol = ""
 discharging_symbol = ""

@@ -42,6 +42,7 @@
       - feh
       - fzf
       - git-delta
+      - gnome-keyring
       - i3
       - i3blocks
       - i3lock
@@ -51,6 +52,7 @@
       - kak-lsp
       - kakoune
       - kitty
+      - libsecret
       - lxappearance
       - maim
       - NetworkManager
@@ -69,6 +71,7 @@
       - redshift-gtk
       - ripgrep
       - rofi
+      - seahorse
       - tealdeer
       - thunar
       - tig

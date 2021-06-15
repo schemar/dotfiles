@@ -10,5 +10,7 @@ settings:
     global: 20000
   auto_save.session:
     global: true
+  content.notifications.enabled:
+    https://www.reddit.com: false
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: true
