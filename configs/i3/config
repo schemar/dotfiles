@@ -229,13 +229,17 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+# Borders
+default_border pixel 1
+default_floating_border normal
+
 # Colors
 set $highlight-color      #a3be8c
 set $bg-color 	          #4c566a
 set $text-color           #d8dee9
-set $inactive-bg-color    #434c5e
+set $inactive-bg-color    #2e3440
 set $inactive-text-color  #81a1c1
-set $unfocused-bg-color   #3b4252
+set $unfocused-bg-color   #3B4252
 set $unfocused-text-color #81a1c1
 set $urgent-bg-color      #d08770
 
@@ -247,7 +251,7 @@ client.unfocused        $unfocused-bg-color $unfocused-bg-color $unfocused-text-
 client.urgent           $urgent-bg-color    $urgent-bg-color    $text-color           $highlight-color
 
 # Force borders for Microsoft Teams
-for_window [class="Microsoft Teams - Preview"] border normal 1
+for_window [class="Microsoft Teams - Preview"] border pixel 1
 
 # Assign to workspaces
 assign [class="Google-chrome"] 2
