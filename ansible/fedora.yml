@@ -45,9 +45,9 @@
       - git-delta
       - gnome-keyring
       - i3
-      - i3blocks
       - i3lock
       - i3status
+      - ImageMagick
       - iw
       - jq
       - kak-lsp
@@ -57,12 +57,15 @@
       - lxappearance
       - maim
       - NetworkManager
+      - NetworkManager-openvpn
       - NetworkManager-tui
       - network-manager-applet
       - nodejs
+      - openvpn
       - papirus-icon-theme
       - pavucontrol
       - picom
+      - polybar
       - procs
       - python
       - python3-tkinter
@@ -190,6 +193,7 @@
       - { src: "kmonad", dest: ".config/kmonad" }
       - { src: "nvim", dest: ".config/nvim" }
       - { src: "picom", dest: ".config/picom" }
+      - { src: "polybar", dest: ".config/polybar" }
       - { src: "qutebrowser/autoconfig.yml", dest: ".config/qutebrowser/autoconfig.yml" }
       - { src: "qutebrowser/config.py", dest: ".config/qutebrowser/config.py" }
       - { src: "qutebrowser/nord.py", dest: ".config/qutebrowser/nord.py" }

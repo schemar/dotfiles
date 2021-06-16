@@ -37,3 +37,4 @@ Auto workstation configuration based on a clean installation of [Fedora 34 i3 Sp
 - auto-apply autorandr after boot
 - fix redshift-gtk geo access (and CPU usage)
 - fix `~/.xsession-errors`
+- fix lacking i3blocks

@@ -10,11 +10,11 @@
       "y": 0
     },
     "marks": [],
-    "name": "Mozilla Firefox",
+    "name": "qutebrowser",
     "percent": 1,
     "swallows": [
       {
-        "class": "Firefox"
+        "class": "qutebrowser"
       }
     ],
     "type": "con"
