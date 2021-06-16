@@ -17,7 +17,7 @@
       - atim/bottom
     tags: packages
   - name: Enable RPM Fusion
-    shell: dnf install "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+    shell: dnf install -y "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
     args:
       warn: no
     tags: packages
@@ -41,6 +41,7 @@
       - fd-find
       - feh
       - fzf
+      - geoclue2
       - git-delta
       - gnome-keyring
       - i3
@@ -64,6 +65,7 @@
       - picom
       - procs
       - python
+      - python3-tkinter
       - qt5-qtwebengine-freeworld
       - qutebrowser
       - ranger
@@ -80,10 +82,21 @@
       - xbacklight
       - xclip
       - xdotool
+      - xinput
+      - xmodmap
+      - xrdb
       - xset
       - zoxide
       - zsh
     tags: packages
+  - name: Ensure redshift has access to geoclue
+    blockinfile:
+      path: /etc/geoclue/geoclue.conf
+      block: |
+        [redshift]
+        allowed=true
+        system=false
+        users=
   - name: Clone autorandr
     become: "{{username}}"
     git:
@@ -112,10 +125,10 @@
       mode: '+x'
     tags: packages
   - name: Run broot setup
+    become: "{{username}}"
     shell: broot --install
     tags: packages
   - name: Install npm packages
-    become: "{{username}}"
     community.general.npm:
       name: "{{item}}"
       global: yes
@@ -137,7 +150,7 @@
   - name: Setup user account
     user:
       name: "{{username}}"
-      shell: zsh
+      shell: /usr/bin/zsh
       generate_ssh_key: yes
   - name: Install oh-my-zsh
     become: "{{username}}"
@@ -149,6 +162,12 @@
     file:
       path: "/home/{{username}}/.config/i3"
       state: absent
+    tags: symlinks
+  - name: Ensure symlink target dirs exist
+    file:
+      path: "/home/{{username}}/.config/{{item}}"
+    with_items:
+      - qutebrowser
     tags: symlinks
   - name: Set up symlinks of dotfiles
     become: "{{username}}"

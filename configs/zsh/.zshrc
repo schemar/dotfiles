@@ -128,3 +128,5 @@ test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [[ -f /Users/masc/Projects/vwfs/ERNST/ernst-vehicle-import-trigger/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/masc/Projects/vwfs/ERNST/ernst-vehicle-import-trigger/node_modules/tabtab/.completions/slss.zsh
+
+source /home/masc/.config/broot/launcher/bash/br

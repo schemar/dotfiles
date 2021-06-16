@@ -34,4 +34,6 @@ Auto workstation configuration based on a clean installation of [Fedora 34 i3 Sp
   - install kmonad with api.GitHub.com and jq?
   - update layers to be less intrusive
 - auto-start applications with [dex](https://github.com/jceb/dex)? (fedora package `dex-autostart`)?
-- gnome-keyring
+- auto-apply autorandr after boot
+- fix redshift-gtk geo access (and CPU usage)
+- fix `~/.xsession-errors`
