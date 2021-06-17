@@ -76,6 +76,7 @@ bindsym XF86AudioPrev exec playerctl previous
 # Adding LC_ALL in case of locale setting issues with KDE
 bindsym $mod+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show drun -theme slate_nord >/tmp/rofi.log 2>&1
 bindsym $mod+Shift+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show run -theme slate_nord >/tmp/rofi.log 2>&1
+bindsym $mod+u exec --no-startup-id LC_ALL=en_US.UTF-8 rofimoji --rofi-args "-theme slate_nord"
 
 # show logout
 #bindsym $mod+Shift+e exec --no-startup-id qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1

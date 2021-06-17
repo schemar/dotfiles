@@ -37,6 +37,8 @@
       - dex-autostart
       - direnv
       - dunst
+      - evince
+      - evince-previewer
       - exa
       - fd-find
       - feh
@@ -64,6 +66,7 @@
       - openvpn
       - papirus-icon-theme
       - pavucontrol
+      - pdfarranger
       - picom
       - polybar
       - procs
@@ -141,11 +144,12 @@
       - "typescript-language-server"
       - "eslint-formatter-kakoune"
     tags: packages
-  - name: Install pip packages
-    become: "{{username}}"
+  - name: Install pip packages globally
     pip:
-      name: ['tldextract']
-    tags: packages
+      name: ['tldextract', 'rofimoji']
+    tags:
+      - packages
+      - pip
   - name: Make qutebrowser the default
     become: "{{username}}"
     command: xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
