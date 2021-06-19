@@ -232,7 +232,7 @@ bindsym $mod+r mode "resize"
 
 # Borders
 default_border pixel 1
-default_floating_border normal
+default_floating_border pixel 1
 
 # Colors
 set $highlight-color      #a3be8c

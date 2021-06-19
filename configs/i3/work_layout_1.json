@@ -8,8 +8,8 @@
     "type": "con",
     "nodes": [
       {
-        "border": "normal",
-        "current_border_width": 2,
+        "border": "pixel",
+        "current_border_width": 1,
         "floating": "auto_off",
         "geometry": {
           "height": 1034,

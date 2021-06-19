@@ -1,27 +1,46 @@
+configuration {
+  display-drun: " ";
+  display-run: " ";
+  display-window: " ";
+  display-ssh: " ";
+  drun-display-format: "{name}";
+  show-icons: true;
+  icon-theme: "papirus";
+  font: "Roboto Light 16";
+  case-sensitive: false;
+  modi: "window,run,drun";
+  fixed-num-lines: false;
+  lines: 12;
+  location: 2;
+  yoffset: 150;
+}
+
 * {
-  background-color: #3b4252;
-  border-color: #5e81ac;
-  text-color: #d8dee9;
+  background-color: #4c566a;
+  text-color: #eceff4;
   spacing: 0;
   width: 1000px;
 }
 
-inputbar {
+#window {
+  background-color: @background-color;
   border: 0;
+  border-radius: 12px;
+}
+
+inputbar {
   children: [prompt,entry];
+  border: 0 0 1px 0;
+  border-color: #d8dee9;
 }
 
 prompt {
-  padding: 16px 0 16px 16px;
-  border: 0;
-  background-color: #88c0d0;
-  color: #2e3440;
+  padding: 7px 0 7px 16px;
+  font: "DejaVuSansMono Nerd Font Mono 25";
 }
 
 entry {
   padding: 16px 0 16px 0;
-  background-color: #88c0d0;
-  color: #2e3440;
 }
 
 listview {
@@ -35,5 +54,9 @@ element {
 }
 
 element selected {
-  color: #88c0d0;
+  background-color: #2e3440;
+}
+
+element-icon {
+  size: 24px;
 }

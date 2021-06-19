@@ -1,15 +1,20 @@
 #!/bin/bash
 
 # Options
-lock=" Lock"
-suspend="鈴 Suspend"
-power_off=" Power off"
-reboot=" Reboot"
-exit=" Exit"
+lock="Lock"
+lock_icon="\0icon\x1fsystem-lock-screen"
+suspend="Suspend"
+suspend_icon="\0icon\x1fsystem-suspend"
+power_off="Shutdown"
+power_off_icon="\0icon\x1fsystem-shutdown"
+reboot="Reboot"
+reboot_icon="\0icon\x1fsystem-reboot"
+exit="Exit"
+exit_icon="\0icon\x1fsystem-log-out"
 
-options="${lock}\n${suspend}\n${power_off}\n${reboot}\n${exit}"
+options="${lock}${lock_icon}\n${suspend}${suspend_icon}\n${power_off}${power_off_icon}\n${reboot}${reboot_icon}\n${exit}${exit_icon}"
 
-selected="$(echo -e ${options} | rofi -dmenu -i -p ' ' -theme slate_nord)"
+selected="$(echo -en ${options} | rofi -dmenu -p ' ' -i -theme slate_nord)"
 
 case $selected in
     $lock)

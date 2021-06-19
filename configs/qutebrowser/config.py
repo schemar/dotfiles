@@ -1223,7 +1223,7 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 ## either a float value with a "pt" suffix, or an integer value with a
 ## "px" suffix.
 ## Type: String
-# c.fonts.default_size = '10pt'
+c.fonts.default_size = '11pt'
 
 ## Font used for the downloadbar.
 ## Type: Font
