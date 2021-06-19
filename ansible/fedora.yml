@@ -135,7 +135,7 @@
     become: "{{username}}"
     shell: broot --install
     tags: packages
-  - name: Install npm packages
+  - name: Install npm packages globally
     community.general.npm:
       name: "{{item}}"
       global: yes
@@ -151,6 +151,23 @@
     tags:
       - packages
       - pip
+  - name: Add the flathub flatpak repository
+    community.general.flatpak_remote:
+      name: flathub
+      flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+    tags:
+      - packages
+      - flatpak
+  - name: Install flat packages
+    community.general.flatpak:
+      name: "{{item}}"
+    with_items:
+      - com.spotify.Client
+      - com.discordapp.Discord
+      - md.obsidian.Obsidian
+    tags:
+      - packages
+      - flatpak
   - name: Make qutebrowser the default
     become: "{{username}}"
     command: xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
