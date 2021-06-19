@@ -7,4 +7,4 @@ killall -q picom
 while pgrep -u $UID -x picom >/dev/null; do sleep 1; done
 
 # Launch
-DISPLAY=":0" picom -b
+DISPLAY=":0" picom -b --experimental-backends --backend glx

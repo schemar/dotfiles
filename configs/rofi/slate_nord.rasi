@@ -16,14 +16,13 @@ configuration {
 }
 
 * {
-  background-color: #4c566a;
+  background-color: #4c566a33;
   text-color: #eceff4;
   spacing: 0;
   width: 1000px;
 }
 
 #window {
-  background-color: @background-color;
   border: 0;
 }
 
@@ -37,9 +36,11 @@ inputbar {
 prompt {
   padding: -6px 0 0 0;
   font: "DejaVuSansMono Nerd Font Mono 25";
+  background-color: #00000000;
 }
 
 entry {
+  background-color: #00000000;
 }
 
 listview {
@@ -50,6 +51,7 @@ listview {
 }
 
 element {
+  background-color: #00000000;
   border: 0;
   padding: 12px;
 }
