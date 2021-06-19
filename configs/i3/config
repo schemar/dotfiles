@@ -77,6 +77,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show drun -theme slate_nord >/tmp/rofi.log 2>&1
 bindsym $mod+Shift+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show run -theme slate_nord >/tmp/rofi.log 2>&1
 bindsym $mod+u exec --no-startup-id LC_ALL=en_US.UTF-8 rofimoji --rofi-args "-theme slate_nord"
+bindsym Mod1+Tab exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show window -theme slate_nord >/tmp/rofi.log 2>&1
 
 # show logout
 #bindsym $mod+Shift+e exec --no-startup-id qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
