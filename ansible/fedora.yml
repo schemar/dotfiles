@@ -165,6 +165,7 @@
       - com.spotify.Client
       - com.discordapp.Discord
       - md.obsidian.Obsidian
+      - org.telegram.desktop
     tags:
       - packages
       - flatpak
