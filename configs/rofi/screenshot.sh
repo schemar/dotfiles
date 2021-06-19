@@ -1,6 +1,6 @@
 #!/bin/bash
 
-screenshotname="$(xdg-user-dir PICTURES)/$(date +'%s_screenshot.png')"
+screenshotname="$HOME/Pictures/$(date +'%s_screenshot.png')"
 
 # Options
 screen="Entire screen"

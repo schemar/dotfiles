@@ -6,13 +6,13 @@ configuration {
   drun-display-format: "{name}";
   show-icons: true;
   icon-theme: "papirus";
-  font: "Roboto Light 16";
+  font: "Roboto 16";
   case-sensitive: false;
   modi: "window,run,drun";
   fixed-num-lines: false;
   lines: 12;
   location: 2;
-  yoffset: 150;
+  yoffset: 250;
 }
 
 * {
@@ -25,38 +25,45 @@ configuration {
 #window {
   background-color: @background-color;
   border: 0;
-  border-radius: 12px;
 }
 
 inputbar {
   children: [prompt,entry];
   border: 0 0 1px 0;
   border-color: #d8dee9;
+  padding: 16px;
 }
 
 prompt {
-  padding: 7px 0 7px 16px;
+  padding: -6px 0 0 0;
   font: "DejaVuSansMono Nerd Font Mono 25";
 }
 
 entry {
-  padding: 16px 0 16px 0;
 }
 
 listview {
+  columns: 1;
   cycle: true;
   scrollbar: false;
+  padding: 16px;
 }
 
 element {
   border: 0;
-  padding: 16px;
+  padding: 12px;
 }
 
 element selected {
-  background-color: #2e3440;
+  background-color: #88C0D0;
+  text-color: #4c566a;
+  border-radius: 8px;
 }
 
 element-icon {
   size: 24px;
+}
+
+element-text {
+   highlight: none;
 }

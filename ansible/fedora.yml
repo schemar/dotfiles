@@ -284,3 +284,7 @@
     become: "{{username}}"
     command: fc-cache -f /usr/share/fonts
     tags: fonts
+  - name: Create ~/Pictures for screenshots
+    file:
+      path: "/home/{{username}}/Pictures"
+      state: directory
