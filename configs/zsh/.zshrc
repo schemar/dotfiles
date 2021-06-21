@@ -1,15 +1,3 @@
-if [[  "$(uname)" = "Darwin" ]]; then
-  # sbin should be in path as well as there are formuale that reside there.
-  export PATH="$(brew --prefix)/sbin:$PATH"
-else
-  # Assuming Linux otherwise
-  #alias pbcopy='wl-copy --trim-newline'
-  #alias pbpaste='wl-paste --no-newline'
-  # Using xclip instead of wayland version
-  alias pbcopy='xclip -selection clipboard'
-  alias pbpaste='xclip -selection clipboard -o'
-fi
-  
 export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
@@ -23,6 +11,7 @@ export ZSH="$HOME/.oh-my-zsh"
 plugins=(fd yarn docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
+
 source "$HOME"/.config/broot/launcher/bash/br
 
 alias g='git'
@@ -40,33 +29,11 @@ alias tmde='tmux new-session -A -s development'
 alias tmdo='tmux new-session -A -s dotfiles'
 alias tmta='tmux new-session -A -s tasks'
 
-# Kakoune session management
-# Use k to launch kakoune with "managed" session names.
-k() {
-  if [ -n "$TMUX" ]; then
-    # When in tmux, use the tmux session and window as session name.
-    # We have to replace $ and @ to end up with a valis session name for kakoune.
-    name=$(tmux display-message -p "#{session_id}-#{window_id}" | sed 's/\$\([0-9]*\)-@\([0-9]*\)/tmux-s\1-w\2/')
-  else
-    # Otherwise use the same session for kakoune clients
-    # that are launched from the same directory.
-    name=$(pwd | sed 's/\//_/g')
-  fi
-
-  kak -clear;
-  if kak -l | grep -q -x "$name"; then
-    kak -c "$name" "$@"
-  else
-    kak -s "$name" "$@"
-  fi
-}
-
 # User configuration
 
 . "$HOME"/.asdf/asdf.sh
 fpath=(${ASDF_DIR}/completions $fpath)
 
-# Aliases
 # Enable 256 colors in tmux
 alias tmux='tmux -2'
 
@@ -76,8 +43,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 unsetopt beep
 bindkey -v
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
+
 zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
@@ -86,8 +52,6 @@ for dump in ~/.zcompdump(N.mh+24); do
   compinit
 done
 compinit -C
-# End of lines added by compinstall
-# User config
 
 # Correct locale
 export LC_ALL=en_US.UTF-8
@@ -112,21 +76,3 @@ export FZF_COMPLETION_TRIGGER=',,'
 # default editor
 export VISUAL=kak
 export EDITOR=kak
-
-# better man pager
-export MANPAGER="bat -l man -p"
-
-# Nord dir colors (e.g. ls or fd)
-test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/masc/Projects/vwfs/ERNST/ernst-vehicle-import-trigger/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/masc/Projects/vwfs/ERNST/ernst-vehicle-import-trigger/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/masc/Projects/vwfs/ERNST/ernst-vehicle-import-trigger/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/masc/Projects/vwfs/ERNST/ernst-vehicle-import-trigger/node_modules/tabtab/.completions/sls.zsh
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /Users/masc/Projects/vwfs/ERNST/ernst-vehicle-import-trigger/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/masc/Projects/vwfs/ERNST/ernst-vehicle-import-trigger/node_modules/tabtab/.completions/slss.zsh
-
-source /home/masc/.config/broot/launcher/bash/br
