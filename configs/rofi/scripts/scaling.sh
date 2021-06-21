@@ -7,7 +7,7 @@ two="2.0"
 
 options="${one}\n${onefive}\n${two}"
 
-selected="$(echo -e ${options} | rofi -dmenu -i -p ' ' -theme slate_nord)"
+selected="$(echo -e ${options} | rofi -dmenu -i -p ' ' -theme no_icons)"
 
 case $selected in
     $one)
@@ -27,7 +27,7 @@ echo "Xft.dpi: ${dpi}" > ~/.Xresources
 yes="Yes"
 no="No"
 options="${yes}\n${no}"
-selected="$(echo -e ${options} | rofi -dmenu -i -p 'Reboot? ' -theme slate_nord)"
+selected="$(echo -e ${options} | rofi -dmenu -i -p 'Reboot? ' -theme no_icons_prompt)"
 case $selected in
     $yes)
         systemctl reboot

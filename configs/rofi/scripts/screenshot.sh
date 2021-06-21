@@ -9,7 +9,7 @@ area_clip="Area or window to clipboard"
 
 options="${screen}\n${area}\n${area_clip}"
 
-selected="$(echo -e ${options} | rofi -dmenu -i -p ' ' -theme slate_nord)"
+selected="$(echo -e ${options} | rofi -dmenu -i -p ' ' -theme no_icons)"
 
 case $selected in
     $screen)

@@ -74,17 +74,17 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # Application starter
 # Adding LC_ALL in case of locale setting issues with KDE
-bindsym $mod+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show drun -theme slate_nord >/tmp/rofi.log 2>&1
-bindsym $mod+Shift+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show run -theme slate_nord >/tmp/rofi.log 2>&1
-bindsym $mod+u exec --no-startup-id LC_ALL=en_US.UTF-8 rofimoji --rofi-args "-theme slate_nord"
-bindsym Mod1+Tab exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show window -theme slate_nord >/tmp/rofi.log 2>&1
+bindsym $mod+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show drun -theme icons >/tmp/rofi.log 2>&1
+bindsym $mod+Shift+d exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show run -theme icons >/tmp/rofi.log 2>&1
+bindsym $mod+u exec --no-startup-id LC_ALL=en_US.UTF-8 rofimoji --rofi-args "-theme no_icons"
+bindsym Mod1+Tab exec --no-startup-id LC_ALL=en_US.UTF-8 rofi -show window -theme icons >/tmp/rofi.log 2>&1
 
 # show logout
 #bindsym $mod+Shift+e exec --no-startup-id qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+e exec $HOME/.config/rofi/power.sh
-bindsym $mod+p exec $HOME/.config/rofi/screenshot.sh
-bindsym $mod+m exec $HOME/.config/rofi/settings.sh
+bindsym $mod+Shift+e exec $HOME/.config/rofi/scripts/power.sh
+bindsym $mod+p exec $HOME/.config/rofi/scripts/screenshot.sh
+bindsym $mod+m exec $HOME/.config/rofi/scripts/settings.sh
 
 # lock screen Ctrl+Alt+L
 bindsym Control+Mod1+l exec $lock

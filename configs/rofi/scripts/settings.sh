@@ -14,7 +14,7 @@ network_icon="\0icon\x1fnetwork-wireless"
 
 options="${network}${network_icon}\n${display}${display_icon}\n${scaling}${scaling_icon}\n${audio}${audio_icon}\n${audio_rescan}${audio_rescan_icon}"
 
-selected="$(echo -en ${options} | rofi -dmenu -i -p ' ' -theme slate_nord)"
+selected="$(echo -en ${options} | rofi -dmenu -i -p ' ' -theme icons)"
 
 case $selected in
     $display)
@@ -30,6 +30,6 @@ case $selected in
         kitty --title "settings-nmtui-connect" nmtui-connect
         ;;
     $scaling)
-        ~/.config/rofi/scaling.sh
+        ~/.config/rofi/scripts/scaling.sh
         ;;
 esac

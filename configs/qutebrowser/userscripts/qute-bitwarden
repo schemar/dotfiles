@@ -60,7 +60,7 @@ argument_parser = argparse.ArgumentParser(
     epilog=EPILOG,
 )
 argument_parser.add_argument('url', nargs='?', default=os.getenv('QUTE_URL'))
-argument_parser.add_argument('--dmenu-invocation', '-d', default='rofi -dmenu -i -p "Bitwarden: " -theme slate_nord',
+argument_parser.add_argument('--dmenu-invocation', '-d', default='rofi -dmenu -i -p "Bitwarden: " -theme icons',
                              help='Invocation used to execute a dmenu-provider')
 argument_parser.add_argument('--no-insert-mode', '-n', dest='insert_mode', action='store_false',
                              help="Don't automatically enter insert mode")
@@ -108,7 +108,7 @@ def ask_password():
         '-lines',
         '0',
         '-theme',
-        'slate_nord'
+        'no_icons_prompt'
     ], universal_newlines=True, stdout=subprocess.PIPE)
     if process.returncode > 0:
         raise Exception('Could not unlock vault')

@@ -14,7 +14,7 @@ exit_icon="\0icon\x1fsystem-log-out"
 
 options="${lock}${lock_icon}\n${suspend}${suspend_icon}\n${power_off}${power_off_icon}\n${reboot}${reboot_icon}\n${exit}${exit_icon}"
 
-selected="$(echo -en ${options} | rofi -dmenu -p ' ' -i -theme slate_nord)"
+selected="$(echo -en ${options} | rofi -dmenu -p ' ' -i -theme icons)"
 
 case $selected in
     $lock)
