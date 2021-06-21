@@ -286,3 +286,7 @@ for_window [class="(?i)*nextcloud*"] floating disable
 for_window [class="plasmashell" window_type="notification"] floating enable, border none, move position center, move down 300 px
 no_focus [class="plasmashell" window_type="notification"] 
 # Plasma end
+
+# Gaps
+gaps inner 12
+smart_borders on
