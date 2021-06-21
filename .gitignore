@@ -4,6 +4,7 @@ output.log
 configs/broot/launcher/
 configs/kak/plugins/
 configs/kak/colors/
+configs/nushell/nu-env.toml
 configs/qutebrowser/autoconfig.yml
 # Ignoring the symlink to the original autoload
 configs/kak/autoload/autoload

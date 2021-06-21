@@ -13,8 +13,9 @@
       state=enabled
       name={{item}}
     with_items:
-      - atim/kakoune
       - atim/bottom
+      - atim/kakoune
+      - atim/nushell
     tags: packages
   - name: Enable RPM Fusion
     shell: dnf install -y "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
@@ -31,79 +32,78 @@
       - packages
       - i3gaps
   - name: Install packages
-    package:
-      name={{item}}
-      state=latest
-    with_items:
-      - acpi
-      - arandr
-      - arc-theme
-      - bat
-      - blueman
-      - bottom
-      - brightnessctl
-      - curl
-      - dex-autostart
-      - direnv
-      - dunst
-      - evince
-      - evince-previewer
-      - exa
-      - fd-find
-      - feh
-      - fzf
-      - geoclue2
-      - git-delta
-      - gnome-keyring
-      - i3
-      - i3lock
-      - i3status
-      - ImageMagick
-      - iw
-      - jq
-      - kak-lsp
-      - kakoune
-      - kitty
-      - libsecret
-      - lxappearance
-      - maim
-      - NetworkManager
-      - NetworkManager-openvpn
-      - NetworkManager-tui
-      - network-manager-applet
-      - nodejs
-      - openvpn
-      - papirus-icon-theme
-      - pavucontrol
-      - pdfarranger
-      - picom
-      - polybar
-      - procs
-      - python
-      - python3-tkinter
-      - qt5-qtwebengine-freeworld
-      - qutebrowser
-      - ranger
-      - redshift
-      - redshift-gtk
-      - ripgrep
-      - roboto-fontface-fonts
-      - rofi
-      - seahorse
-      - tealdeer
-      - thunar
-      - tig
-      - tmux
-      - xautolock
-      - xbacklight
-      - xclip
-      - xdotool
-      - xinput
-      - xmodmap
-      - xrdb
-      - xset
-      - zoxide
-      - zsh
+    dnf:
+      name: 
+        - acpi
+        - arandr
+        - arc-theme
+        - bat
+        - blueman
+        - bottom
+        - brightnessctl
+        - curl
+        - dex-autostart
+        - direnv
+        - dunst
+        - evince
+        - evince-previewer
+        - exa
+        - fd-find
+        - feh
+        - fzf
+        - geoclue2
+        - git-delta
+        - gnome-keyring
+        - i3lock
+        - i3status
+        - ImageMagick
+        - iw
+        - jq
+        - kak-lsp
+        - kakoune
+        - kitty
+        - libsecret
+        - lxappearance
+        - maim
+        - NetworkManager
+        - NetworkManager-openvpn
+        - NetworkManager-tui
+        - network-manager-applet
+        - nodejs
+        - nushell
+        - openvpn
+        - papirus-icon-theme
+        - pavucontrol
+        - pdfarranger
+        - picom
+        - polybar
+        - procs
+        - python
+        - python3-tkinter
+        - qt5-qtwebengine-freeworld
+        - qutebrowser
+        - ranger
+        - redshift
+        - redshift-gtk
+        - ripgrep
+        - roboto-fontface-fonts
+        - rofi
+        - seahorse
+        - tealdeer
+        - thunar
+        - tig
+        - tmux
+        - xautolock
+        - xbacklight
+        - xclip
+        - xdotool
+        - xinput
+        - xmodmap
+        - xrdb
+        - xset
+        - zoxide
+        - zsh
+      state: latest
     tags: packages
   - name: Ensure redshift has access to geoclue
     blockinfile:
@@ -222,6 +222,7 @@
       - { src: "kak-lsp", dest: ".config/kak-lsp" }
       - { src: "kitty", dest: ".config/kitty" }
       - { src: "kmonad", dest: ".config/kmonad" }
+      - { src: "nushell", dest: ".config/nu" }
       - { src: "nvim", dest: ".config/nvim" }
       - { src: "picom", dest: ".config/picom" }
       - { src: "polybar", dest: ".config/polybar" }
