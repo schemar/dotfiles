@@ -166,8 +166,10 @@
     community.general.flatpak:
       name: "{{item}}"
     with_items:
-      - com.spotify.Client
       - com.discordapp.Discord
+      - com.microsoft.Teams
+      - com.slack.Slack
+      - com.spotify.Client
       - md.obsidian.Obsidian
       - org.telegram.desktop
     tags:

@@ -11,6 +11,6 @@ sleep 1
 nohup kitty 1>/dev/null 2>&1 &
 nohup google-chrome 1>/dev/null 2>&1 &
 nohup qutebrowser 1>/dev/null 2>&1 &
-nohup slack 1>/dev/null 2>&1 &
-nohup teams 1>/dev/null 2>&1 &
+nohup flatpak run com.slack.Slack 1>/dev/null 2>&1 &
+nohup flatpak run com.microsoft.Teams 1>/dev/null 2>&1 &
 nohup flatpak run md.obsidian.Obsidian 1>/dev/null 2>&1 &
