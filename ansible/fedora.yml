@@ -175,7 +175,14 @@
     tags:
       - packages
       - flatpak
+  - name: Allow flatpak to read theme settings
+    become_user: "{{username}}"
+    command: flatpak override --user --filesystem=xdg-config/gtk-3.0:ro
+    tags:
+      - packages
+      - flatpak
   - name: Install flat packages
+    become_user: "{{username}}"
     community.general.flatpak:
       name: "{{item}}"
     with_items:
@@ -184,6 +191,8 @@
       - com.slack.Slack
       - com.spotify.Client
       - md.obsidian.Obsidian
+      - org.gtk.Gtk3theme.Arc-Dark
+      - org.gtk.Gtk3theme.Arc-Dark-solid
       - org.telegram.desktop
     tags:
       - packages
