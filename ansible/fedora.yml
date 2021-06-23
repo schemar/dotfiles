@@ -8,10 +8,22 @@
       prompt: Dotfiles directory (e.g. /home/schemar/Projects/dotfiles without trailing slash)
       private: no
   tasks:
+  - name: Update all dnf packages
+    dnf:
+      name: "*"
+      state: latest
+    tags:
+      - packages
+      - updates
+  - name: Update flatpak packages
+    command: "flatpak update --noninteractive"
+    tags:
+      - packages
+      - updates
   - name: Enable COPRs
     community.general.copr:
-      state=enabled
-      name={{item}}
+      state: enabled
+      name: "{{item}}"
     with_items:
       - atim/bottom
       - atim/kakoune
@@ -152,6 +164,7 @@
   - name: Install pip packages globally
     pip:
       name: ['tldextract', 'rofimoji']
+      state: latest
     tags:
       - packages
       - pip
