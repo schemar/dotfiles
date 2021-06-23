@@ -11,8 +11,10 @@ audio_rescan="Rescan audio devices"
 audio_rescan_icon="\0icon\x1faudio-speaker-right-testing"
 network="Network"
 network_icon="\0icon\x1fnetwork-wireless"
+printers="Printers (opens in browser; username/password like linux)"
+printers_icon="\0icon\x1fgnome-dev-printer"
 
-options="${network}${network_icon}\n${display}${display_icon}\n${scaling}${scaling_icon}\n${audio}${audio_icon}\n${audio_rescan}${audio_rescan_icon}"
+options="${network}${network_icon}\n${display}${display_icon}\n${scaling}${scaling_icon}\n${audio}${audio_icon}\n${audio_rescan}${audio_rescan_icon}\n${printers}${printers_icon}"
 
 selected="$(echo -en ${options} | rofi -dmenu -i -p ' ' -theme icons)"
 
@@ -31,5 +33,8 @@ case $selected in
         ;;
     $scaling)
         ~/.config/rofi/scripts/scaling.sh
+        ;;
+    $printers)
+        qutebrowser http://localhost:631/admin
         ;;
 esac
