@@ -26,8 +26,7 @@
     dnf:
       name: "i3-gaps"
       state: latest
-#      will be available from ansible 2.10:
-#      allowerasing: yes
+      allowerasing: yes
     tags:
       - packages
       - i3gaps
@@ -114,7 +113,7 @@
         system=false
         users=
   - name: Clone autorandr
-    become: "{{username}}"
+    become_user: "{{username}}"
     git:
       repo: "https://github.com/phillipberndt/autorandr.git"
       dest: "/home/{{username}}/.autorandr"
@@ -139,10 +138,6 @@
     file:
       path: /usr/local/bin/broot
       mode: '+x'
-    tags: packages
-  - name: Run broot setup
-    become: "{{username}}"
-    shell: broot --install
     tags: packages
   - name: Install npm packages globally
     community.general.npm:
@@ -179,7 +174,7 @@
       - packages
       - flatpak
   - name: Make qutebrowser the default
-    become: "{{username}}"
+    become_user: "{{username}}"
     command: xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
     tags: packages
   - name: Setup user account
@@ -188,7 +183,7 @@
       shell: /usr/bin/zsh
       generate_ssh_key: yes
   - name: Install oh-my-zsh
-    become: "{{username}}"
+    become_user: "{{username}}"
     git:
       repo: "https://github.com/ohmyzsh/ohmyzsh.git"
       dest: "/home/{{username}}/.oh-my-zsh"
@@ -205,7 +200,7 @@
       - qutebrowser
     tags: symlinks
   - name: Set up symlinks of dotfiles
-    become: "{{username}}"
+    become_user: "{{username}}"
     file:
       src: "{{dotfiles_dir}}/configs/{{item.src}}"
       dest: "/home/{{username}}/{{item.dest}}"
@@ -226,7 +221,6 @@
       - { src: "nvim", dest: ".config/nvim" }
       - { src: "picom", dest: ".config/picom" }
       - { src: "polybar", dest: ".config/polybar" }
-      - { src: "qutebrowser/autoconfig.yml", dest: ".config/qutebrowser/autoconfig.yml" }
       - { src: "qutebrowser/config.py", dest: ".config/qutebrowser/config.py" }
       - { src: "qutebrowser/nord.py", dest: ".config/qutebrowser/nord.py" }
       - { src: "qutebrowser/userscripts", dest: ".config/qutebrowser/userscripts" }
@@ -238,32 +232,32 @@
       - { src: "zsh/.zshrc", dest: ".zshrc" }
     tags: symlinks
   - name: Symlinkg kakounes original autoload file
-    become: "{{username}}"
+    become_user: "{{username}}"
     file:
       src: "/usr/share/kak/autoload"
       dest: "{{dotfiles_dir}}/configs/kak/autoload/autoload"
       state: link
     tags: symlinks
   - name: Create kakoune plugin dir
-    become: "{{username}}"
+    become_user: "{{username}}"
     file:
       path: "/home/{{username}}/.config/kak/plugins"
       state: directory
     tags: plugins
   - name: Download kakoune plugin manager
-    become: "{{username}}"
+    become_user: "{{username}}"
     git:
       repo: "git@github.com:andreyorst/plug.kak.git"
       dest: "/home/{{username}}/.config/kak/plugins/plug.kak"
     tags: plugins
   - name: Create tmux plugin dir
-    become: "{{username}}"
+    become_user: "{{username}}"
     file:
       path: "/home/{{username}}/.config/tmux/plugins"
       state: directory
     tags: plugins
   - name: Download tmux plugin manager
-    become: "{{username}}"
+    become_user: "{{username}}"
     git:
       repo: "https://github.com/tmux-plugins/tpm.git"
       dest: "/home/{{username}}/.config/tmux/plugins/tpm"
@@ -290,7 +284,7 @@
       dest: "/usr/share/fonts/vscode/vscode.ttf"
     tags: fonts
   - name: Reload fonts cache
-    become: "{{username}}"
+    become_user: "{{username}}"
     command: fc-cache -f /usr/share/fonts
     tags: fonts
   - name: Create ~/Pictures for screenshots

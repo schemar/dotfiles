@@ -6,8 +6,9 @@ This repository contains configurations for:
 * X System based on Fedora i3 Spin
 
 ## Installation
+Use `./ansible/installer.sh` if you start from a [Fedora i3 spin](https://spins.fedoraproject.org/i3/).
 
-You can use the `./installer` helper. It will install the packages and symlink the configs.
+Alternatively, you can use the `./installer` helper. It will install the packages and symlink the configs.
 Run `./installer symlinks` if you only want to symlink all configs.
 
 ## Included Configurations
@@ -22,7 +23,6 @@ Run `./installer symlinks` if you only want to symlink all configs.
 * [fd](https://github.com/sharkdp/fd)
 * [fzf](https://github.com/junegunn/fzf)
 * [kakoune editor](https://github.com/mawww/kakoune)❤️
-* [nb](https://github.com/xwmx/nb)
 * [NeoVim](https://github.com/neovim/neovim)
 * [procs](https://github.com/dalance/procs)
 * [ranger](https://github.com/ranger/ranger)
@@ -39,7 +39,6 @@ Run `./installer symlinks` if you only want to symlink all configs.
 * [dunst](https://github.com/dunst-project/dunst)
 * [feh](https://github.com/derf/feh)
 * [i3](https://github.com/i3/i3)❤️
-  * Integrated as [kwin](https://github.com/KDE/kwin) replacement in [plasma](https://kde.org/plasma-desktop/)
 * [kitty](https://github.com/kovidgoyal/kitty)❤️
 * [kmonad](https://github.com/david-janssen/kmonad)
 * [picom](https://github.com/yshui/picom)
@@ -87,7 +86,7 @@ See https://github.com/schemar/kak-jsts/ for details on TypeScript formatting/li
 
 ### i3
 
-Linux desktop installs include i3 as the window manager of KDE Plasma.
+Installation is based on Fedora i3 spin and replaces i3 with i3-gaps.
 
 See the i3 config for all keybindings. Most relevant:
 
@@ -95,6 +94,7 @@ See the i3 config for all keybindings. Most relevant:
 * `$mod+d` to launch application.
 * `$mod+Shift+e` to exit, lock, etc.
 * `$mod+r` to resize.
+* `$mod+p` to take a screenshot.
 * `$mod+Shift+c` to reload config.
 
 #### Monitor layouts

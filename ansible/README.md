@@ -2,10 +2,9 @@
 
 Auto workstation configuration based on a clean installation of [Fedora 34 i3 Spin](https://spins.fedoraproject.org/en/i3/).
 
-1. Run `dnf install git ansible`
+1. Run `dnf install git` and `pip install --user ansible`
 2. Run `ansible-galaxy collection install community.general`
 3. Clone repo `git clone git@github.com:schemar/dotfiles.git && cd dotfiles/ansible`
-3.1. Until ansible 2.10 is available, manually install i3-gaps: `sudo dnf install --allowerasing i3-gaps`
 4. Run `./install.sh`
   a. You can specify ansible options, e.g. `./install.sh --tags symlinks`
   b. The `BECOME password` is your user password for `sudo`
