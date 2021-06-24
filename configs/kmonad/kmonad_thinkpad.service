@@ -1,0 +1,9 @@
+[Unit]
+Description=kmonad keyboard config
+
+[Service]
+ExecStart=/usr/bin/kmonad %E/kmonad/thinkpad.cfg
+Nice=-20
+
+[Install]
+WantedBy=default.target

@@ -16,8 +16,6 @@ Auto workstation configuration based on a clean installation of [Fedora 34 i3 Sp
   d. Add `~/.gitconfigemail` and set your email address
   e. Run `sh -c "$(curl -fsSL https://starship.rs/install.sh)"` in your shell
   f. Set a wallpaper with `feh --bg-fill <path-to-file>`
-  g. Download a kmonad release and make it available as `kmonad` in the path
-    - https://github.com/kmonad/kmonad/releases
   h. Run `lxappearance` to set theme and icons
   i. Install `asdf`:
     - `git clone https://github.com/asdf-vm/asdf.git ~/.asdf`
@@ -29,12 +27,5 @@ Auto workstation configuration based on a clean installation of [Fedora 34 i3 Sp
   k. Reboot one last time
 
 ## TODO
-- kmonad
-  - autostart kmonad 
-  - install kmonad with api.GitHub.com and jq?
-  - update layers to be less intrusive
-- auto-start applications with [dex](https://github.com/jceb/dex)? (fedora package `dex-autostart`)?
-- auto-apply autorandr after boot
 - fix redshift-gtk geo access (and CPU usage)
 - fix `~/.xsession-errors`
-- fix lacking i3blocks

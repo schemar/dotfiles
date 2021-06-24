@@ -315,3 +315,45 @@
     file:
       path: "/home/{{username}}/Pictures"
       state: directory
+  - name: Copy kmonad executable
+    get_url:
+      url: https://github.com/kmonad/kmonad/releases/download/0.4.1/kmonad-0.4.1-linux
+      dest: "/usr/bin/kmonad"
+      mode: "+x"
+    tags: kmonad
+  - name: Copy kmonad service files
+    copy:
+      src: "{{dotfiles_dir}}/configs/kmonad/{{item}}"
+      dest: "/etc/systemd/system/{{item}}"
+      mode: "664"
+    loop:
+      - kmonad_sculpt.service
+      - kmonad_sculpt_office.service
+      - kmonad_thinkpad.service
+    tags: kmonad
+  - name: Ensure kmonad system config dir exists
+    file:
+      path: /etc/kmonad
+      state: directory
+    tags: kmonad
+  - name: Symlink kmonad configs
+    file:
+      src: "{{dotfiles_dir}}/configs/kmonad/{{item}}"
+      dest: "/etc/kmonad/{{item}}"
+      state: link
+    with_items:
+      - sculpt.cfg
+      - sculpt_office.cfg
+      - thinkpad.cfg
+    tags: kmonad
+  - name: Update systemd
+    systemd:
+      name: "{{item}}"
+      state: started
+      enabled: yes
+      daemon_reload: yes
+    with_items:
+      - kmonad_sculpt
+      - kmonad_sculpt_office
+      - kmonad_thinkpad
+    tags: kmonad
