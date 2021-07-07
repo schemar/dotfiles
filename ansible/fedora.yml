@@ -39,6 +39,7 @@
       name: "i3-gaps"
       state: latest
       allowerasing: yes
+      install_weak_deps: no
     tags:
       - packages
       - i3gaps
@@ -61,10 +62,12 @@
         - exa
         - fd-find
         - feh
+        - fwupd
         - fzf
         - geoclue2
         - git-delta
         - gnome-keyring
+        - gscan2pdf
         - i3lock
         - i3status
         - ImageMagick
@@ -115,6 +118,16 @@
         - zoxide
         - zsh
       state: latest
+    tags: packages
+  - name: Get AppImageLauncher latest release URL
+    shell: "curl -s https://api.github.com/repos/TheAssassin/AppImageLauncher/releases/latest | grep 'https://.*appimagelauncher-.*x86_64.rpm' | cut -d\\\" -f4"
+    register: appimagelauncher_url
+    tags: packages
+  - name: Install AppImageLauncher
+    dnf:
+      name: "{{appimagelauncher_url.stdout}}"
+      disable_gpg_check: yes
+      state: present
     tags: packages
   - name: Ensure redshift has access to geoclue
     blockinfile:
