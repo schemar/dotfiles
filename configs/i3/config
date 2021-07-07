@@ -16,7 +16,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id dex-autostart $HOME/.config/autostart/*.desktop
 
 # Composer
-exec_always --no-startup-id $HOME/.config/picom/launch.sh
+exec_always --no-startup-id sleep 1 && $HOME/.config/picom/launch.sh
 
 # Notifications
 exec --no-startup-id dunst
@@ -38,19 +38,20 @@ exec --no-startup-id sleep 2 && autorandr -c
 floating_modifier $mod
 
 set $lock $HOME/.config/i3/lock.sh
+set $autolock $HOME/.config/i3/auto_lock.sh
 
 # Make sure the screen locks when inactive
 # Put mouse in top left corner to lock and bottom right corner to never lock
-exec --no-startup-id xautolock -time 5 -corners +00- -locker "$lock"
+exec --no-startup-id xautolock -time 5 -corners +00- -locker "$autolock"
 
 # Input changes
 # All input changes will be overridden by kmonad if active
 ## US Keyboard with Compose
 exec_always --no-startup-id setxkbmap -layout us  -option 'compose:menu' -option 'compose:prsc' -option 'caps:escape'
 ## Key repeat (typematic delay and rate)
-exec --no-startup-id xset r rate 300 60
+exec_always --no-startup-id xset r rate 300 60
 ## Natural scrolling (https://altendorfer.at/2020/andi/linux/i3/2020/03/20/i3xtermAndScrolling.html)
-exec --no-startup-id xinput --set-prop 12 322 1
+exec_always --no-startup-id xinput --set-prop 12 322 1
 
 # Use pactl to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
