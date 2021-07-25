@@ -107,6 +107,7 @@
         - thunar
         - tig
         - tmux
+        - vlc
         - xautolock
         - xbacklight
         - xclip
@@ -206,6 +207,7 @@
       - md.obsidian.Obsidian
       - org.gtk.Gtk3theme.Arc-Dark
       - org.gtk.Gtk3theme.Arc-Dark-solid
+      - org.onlyoffice.desktopeditors
       - org.telegram.desktop
     tags:
       - packages

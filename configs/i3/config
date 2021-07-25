@@ -244,5 +244,6 @@ assign [class="TelegramDesktop"] 10
 for_window [title="settings-nmtui-connect"] floating enable
 
 # Gaps
-gaps inner 12
+gaps inner 8
+gaps top 24
 smart_borders on
