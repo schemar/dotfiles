@@ -64,7 +64,6 @@
         - feh
         - fwupd
         - fzf
-        - geoclue2
         - git-delta
         - gnome-keyring
         - gscan2pdf
@@ -130,14 +129,6 @@
       disable_gpg_check: yes
       state: present
     tags: packages
-  - name: Ensure redshift has access to geoclue
-    blockinfile:
-      path: /etc/geoclue/geoclue.conf
-      block: |
-        [redshift]
-        allowed=true
-        system=false
-        users=
   - name: Clone autorandr
     become_user: "{{username}}"
     git:
@@ -201,8 +192,6 @@
       name: "{{item}}"
     with_items:
       - com.discordapp.Discord
-      - com.microsoft.Teams
-      - com.slack.Slack
       - com.spotify.Client
       - md.obsidian.Obsidian
       - org.gtk.Gtk3theme.Arc-Dark
@@ -264,6 +253,7 @@
       - { src: "qutebrowser/nord.py", dest: ".config/qutebrowser/nord.py" }
       - { src: "qutebrowser/userscripts", dest: ".config/qutebrowser/userscripts" }
       - { src: "ranger", dest: ".config/ranger" }
+      - { src: "redshift", dest: ".config/redshift" }
       - { src: "rofi", dest: ".config/rofi" }
       - { src: "starship/starship.toml", dest: ".config/starship.toml" }
       - { src: "tmux/.tmux.conf", dest: ".tmux.conf" }

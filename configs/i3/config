@@ -242,6 +242,7 @@ assign [class="TelegramDesktop"] 10
 
 # i3 specific window behaviors
 for_window [title="settings-nmtui-connect"] floating enable
+for_window [class="Godot_Engine"] floating enable
 
 # Gaps
 gaps inner 8
