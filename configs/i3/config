@@ -241,8 +241,14 @@ assign [class="DBeaver"] 9
 assign [class="TelegramDesktop"] 10
 
 # i3 specific window behaviors
-for_window [title="settings-nmtui-connect"] floating enable
-for_window [class="Godot_Engine"] floating enable
+for_window [title="settings-nmtui-connect"] floating enable, move position center
+for_window [instance="Godot_Engine"] floating enable, move position center
+for_window [class="Pavucontrol"] floating enable, move position center
+for_window [class="Blueman-manager"] floating enable, move position center
+for_window [class="Nm-"] floating enable, move position center
+for_window [class="Arandr"] floating enable, move position center
+# browser pop-ups
+for_window [window_role="pop-up"] floating enable, move position center
 
 # Gaps
 gaps inner 8
