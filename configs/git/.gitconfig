@@ -6,7 +6,8 @@
   editor = kak
   pager = delta
 [alias]
-  o = checkout
+  o = switch
+  e = restore
   c = commit
   a = add -A
   s = status
