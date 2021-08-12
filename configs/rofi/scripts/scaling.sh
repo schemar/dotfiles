@@ -21,15 +21,23 @@ case $selected in
         ;;
 esac
 
-# THIS OVERWRITES .Xresources !!!
-echo "Xft.dpi: ${dpi}" > ~/.Xresources
+# Create Xresources if it doesn't exist
+[[ -f ~/.Xresources ]] || printf "Xft.dpi: ${dpi}\nrofi.dpi: ${dpi}" > ~/.Xresources
+
+# Add line if file exists but line is missing
+if ! grep -Fq "Xft.dpi: " ~/.Xresources; then echo "Xft.dpi: ${dpi}" >> ~/.Xresources; fi
+if ! grep -Fq "rofi.dpi: " ~/.Xresources; then echo "rofi.dpi: ${dpi}" >> ~/.Xresources; fi
+
+# Update dpi in Xresources
+sed -i "s/Xft.dpi: .*/Xft.dpi: ${dpi}/" ~/.Xresources
+sed -i "s/rofi.dpi: .*/rofi.dpi: ${dpi}/" ~/.Xresources
 
 yes="Yes"
 no="No"
 options="${yes}\n${no}"
-selected="$(echo -e ${options} | rofi -dmenu -i -p 'Reboot? ' -theme no_icons_prompt)"
+selected="$(echo -e ${options} | rofi -dmenu -i -p 'Exit? ' -theme no_icons_prompt)"
 case $selected in
     $yes)
-        systemctl reboot
+        i3-msg exit
         ;;
 esac

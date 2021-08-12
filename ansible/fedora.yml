@@ -258,6 +258,7 @@
       - { src: "starship/starship.toml", dest: ".config/starship.toml" }
       - { src: "tmux/.tmux.conf", dest: ".tmux.conf" }
       - { src: "vim/.vimrc", dest: ".vimrc" }
+      - { src: "xconfig/.xinitrc", dest: ".xinitrc" }
       - { src: "zsh/.zshrc", dest: ".zshrc" }
     tags: symlinks
   - name: Symlinkg kakounes original autoload file
