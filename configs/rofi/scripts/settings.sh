@@ -13,8 +13,10 @@ network="Network"
 network_icon="\0icon\x1fnetwork-wireless"
 printers="Printers (opens in browser; username/password like linux)"
 printers_icon="\0icon\x1fgnome-dev-printer"
+power="Power"
+power_icon="\0icon\x1fbattery"
 
-options="${network}${network_icon}\n${display}${display_icon}\n${scaling}${scaling_icon}\n${audio}${audio_icon}\n${audio_rescan}${audio_rescan_icon}\n${printers}${printers_icon}"
+options="${network}${network_icon}\n${audio}${audio_icon}\n${power}${power_icon}\n${display}${display_icon}\n${scaling}${scaling_icon}\n${audio_rescan}${audio_rescan_icon}\n${printers}${printers_icon}"
 
 selected="$(echo -en ${options} | rofi -dmenu -i -p ' ' -theme icons)"
 
@@ -30,6 +32,9 @@ case $selected in
         ;;
     $network)
         kitty --title "settings-nmtui-connect" nmtui-connect
+        ;;
+    $power)
+        xfce4-power-manager-settings
         ;;
     $scaling)
         ~/.config/rofi/scripts/scaling.sh

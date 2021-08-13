@@ -105,16 +105,18 @@
         - tealdeer
         - thunar
         - tig
+        - tlp
         - tmux
         - vlc
-        - xautolock
         - xbacklight
         - xclip
         - xdotool
+        - xfce4-power-manager
         - xinput
         - xmodmap
         - xrdb
         - xset
+        - xss-lock
         - zoxide
         - zsh
       state: latest
