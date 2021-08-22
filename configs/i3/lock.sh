@@ -11,7 +11,14 @@ screenshot="$(tmp_image)"
 blurred="$(tmp_image)"
 
 maim "$screenshot"
-convert "$screenshot" -blur 0x10 "$blurred"
+# Speedup over simple `-blur` as described in
+# https://legacy.imagemagick.org/Usage/blur/#blur_args
+convert "$screenshot" \
+    -filter Gaussian \
+    -resize 25% \
+    -define filter:sigma=5 \
+    -resize 400% \
+    "$blurred"
 
 i3lock -i "$blurred"
 
