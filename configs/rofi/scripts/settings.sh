@@ -15,8 +15,10 @@ printers="Printers (opens in browser; username/password like linux)"
 printers_icon="\0icon\x1fgnome-dev-printer"
 power="Power"
 power_icon="\0icon\x1fbattery"
+bluetooth="Bluetooth"
+bluetooth_icon="\0icon\x1fbluetooth"
 
-options="${network}${network_icon}\n${audio}${audio_icon}\n${power}${power_icon}\n${display}${display_icon}\n${scaling}${scaling_icon}\n${audio_rescan}${audio_rescan_icon}\n${printers}${printers_icon}"
+options="${network}${network_icon}\n${bluetooth}${bluetooth_icon}\n${audio}${audio_icon}\n${power}${power_icon}\n${display}${display_icon}\n${scaling}${scaling_icon}\n${audio_rescan}${audio_rescan_icon}\n${printers}${printers_icon}"
 
 selected="$(echo -en ${options} | rofi -dmenu -i -p ' ' -theme icons)"
 
@@ -29,6 +31,9 @@ case $selected in
         ;;
     $audio_rescan)
         rm -rf ~/.config/pulse && pulseaudio -k
+        ;;
+    $bluetooth)
+        blueman-manager
         ;;
     $network)
         kitty --title "settings-nmtui-connect" nmtui-connect
