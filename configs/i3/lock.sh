@@ -2,7 +2,7 @@
 
 tmp_image() {
     image="$(mktemp)"
-    mv "${image}"{,png}
+    mv "${image}"{,.png}
     image="${image}.png"
     echo $image
 }

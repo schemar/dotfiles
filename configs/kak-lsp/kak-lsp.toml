@@ -120,7 +120,7 @@ roots = [".htaccess", "composer.json"]
 command = "intelephense"
 args = ["--stdio"]
 
-[language.php.initialization_options]
+[language.php.settings]
 storagePath = "/tmp/intelephense"
 
 [language.nim]
@@ -134,7 +134,7 @@ roots = ["elm.json"]
 command = "elm-language-server"
 args = ["--stdio"]
 
-[language.elm.initialization_options]
+[language.elm.settings]
 runtime = "node"
 elmPath = "elm"
 elmFormatPath = "elm-format"

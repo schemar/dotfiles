@@ -62,6 +62,7 @@
         - exa
         - fd-find
         - feh
+        - flameshot
         - fwupd
         - fzf
         - git-delta
@@ -93,6 +94,7 @@
         - procs
         - python
         - python3-tkinter
+        - qalculate-gtk
         - qt5-qtwebengine-freeworld
         - qutebrowser
         - ranger
@@ -203,9 +205,9 @@
     tags:
       - packages
       - flatpak
-  - name: Make qutebrowser the default
+  - name: Make firefox the default
     become_user: "{{username}}"
-    command: xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
+    command: xdg-settings set default-web-browser firefox.desktop
     tags: packages
   - name: Setup user account
     user:

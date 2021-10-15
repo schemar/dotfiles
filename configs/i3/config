@@ -75,7 +75,7 @@ bindsym Mod1+Tab exec --no-startup-id rofi -show window -theme icons >/tmp/rofi.
 
 # Convenience menus
 bindsym $mod+Shift+e exec $HOME/.config/rofi/scripts/power.sh
-bindsym $mod+p exec $HOME/.config/rofi/scripts/screenshot.sh
+bindsym $mod+p exec flameshot gui
 bindsym $mod+m exec $HOME/.config/rofi/scripts/settings.sh
 
 # Lock screen Ctrl+Alt+L
@@ -241,10 +241,13 @@ assign [class="DBeaver"] 9
 assign [class="TelegramDesktop"] 10
 
 # i3 specific window behaviors
+for_window [class="1Password"] floating enable, move position center
 for_window [class="Arandr"] floating enable, move position center
 for_window [class="Blueman-manager"] floating enable, move position center
+for_window [class="Gthumb"] floating enable, move position center
 for_window [class="Nm-"] floating enable, move position center
 for_window [class="Pavucontrol"] floating enable, move position center
+for_window [class="Qalculate"] floating enable, move position center
 for_window [class="Xfce4-power-manager-settings"] floating enable, move position center
 for_window [instance="Godot_Engine"] floating enable, move position center
 for_window [title="settings-nmtui-connect"] floating enable, move position center
