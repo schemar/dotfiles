@@ -197,7 +197,6 @@
     with_items:
       - com.discordapp.Discord
       - com.spotify.Client
-      - md.obsidian.Obsidian
       - org.gtk.Gtk3theme.Arc-Dark
       - org.gtk.Gtk3theme.Arc-Dark-solid
       - org.onlyoffice.desktopeditors
