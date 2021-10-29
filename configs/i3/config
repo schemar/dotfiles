@@ -67,6 +67,9 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+# Use Display key to call Arandr
+bindsym XF86Display exec --no-startup-id arandr
+
 # Application starter
 bindsym $mod+d exec --no-startup-id rofi -show drun -theme icons >/tmp/rofi.log 2>&1
 bindsym $mod+Shift+d exec --no-startup-id rofi -show run -theme icons >/tmp/rofi.log 2>&1
