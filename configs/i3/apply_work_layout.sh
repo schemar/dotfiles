@@ -13,4 +13,3 @@ nohup google-chrome 1>/dev/null 2>&1 &
 nohup firefox 1>/dev/null 2>&1 &
 nohup slack 1>/dev/null 2>&1 &
 nohup teams 1>/dev/null 2>&1 &
-nohup flatpak run md.obsidian.Obsidian 1>/dev/null 2>&1 &
