@@ -55,17 +55,17 @@ exec_always --no-startup-id xset r rate 300 60
 exec_always --no-startup-id xinput --set-prop 12 322 1
 
 # Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
 
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Use Display key to call Arandr
 bindsym XF86Display exec --no-startup-id arandr
@@ -78,11 +78,11 @@ bindsym Mod1+Tab exec --no-startup-id rofi -show window -theme icons >/tmp/rofi.
 
 # Convenience menus
 bindsym $mod+Shift+e exec $HOME/.config/rofi/scripts/power.sh
-bindsym $mod+p exec flameshot gui
+bindsym $mod+p exec --no-startup-id flameshot gui
 bindsym $mod+m exec $HOME/.config/rofi/scripts/settings.sh
 
 # Lock screen Ctrl+Alt+L
-bindsym Control+Mod1+l exec $lock
+bindsym Control+Mod1+l exec --no-startup-id $lock
 
 # Start a terminal
 bindsym $mod+Return exec kitty
