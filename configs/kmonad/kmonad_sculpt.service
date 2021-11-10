@@ -1,9 +1,0 @@
-[Unit]
-Description=kmonad keyboard config
-
-[Service]
-ExecStart=/usr/bin/kmonad %E/kmonad/sculpt.cfg
-Nice=-20
-
-[Install]
-WantedBy=default.target

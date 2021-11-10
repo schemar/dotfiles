@@ -83,8 +83,6 @@
         - NetworkManager-openvpn
         - NetworkManager-tui
         - network-manager-applet
-        - nodejs
-        - nushell
         - openvpn
         - papirus-icon-theme
         - pavucontrol
@@ -95,8 +93,6 @@
         - python
         - python3-tkinter
         - qalculate-gtk
-        - qt5-qtwebengine-freeworld
-        - qutebrowser
         - ranger
         - redshift
         - redshift-gtk
@@ -160,16 +156,6 @@
       path: /usr/local/bin/broot
       mode: '+x'
     tags: packages
-  - name: Install npm packages globally
-    community.general.npm:
-      name: "{{item}}"
-      global: yes
-    with_items:
-      - "@bitwarden/cli"
-      - "typescript"
-      - "typescript-language-server"
-      - "eslint-formatter-kakoune"
-    tags: packages
   - name: Install pip packages globally
     pip:
       name: ['tldextract', 'rofimoji']
@@ -224,12 +210,6 @@
       path: "/home/{{username}}/.config/i3"
       state: absent
     tags: symlinks
-  - name: Ensure symlink target dirs exist
-    file:
-      path: "/home/{{username}}/.config/{{item}}"
-    with_items:
-      - qutebrowser
-    tags: symlinks
   - name: Set up symlinks of dotfiles
     become_user: "{{username}}"
     file:
@@ -247,14 +227,9 @@
       - { src: "kak", dest: ".config/kak" }
       - { src: "kak-lsp", dest: ".config/kak-lsp" }
       - { src: "kitty", dest: ".config/kitty" }
-      - { src: "kmonad", dest: ".config/kmonad" }
-      - { src: "nushell", dest: ".config/nu" }
       - { src: "nvim", dest: ".config/nvim" }
       - { src: "picom", dest: ".config/picom" }
       - { src: "polybar", dest: ".config/polybar" }
-      - { src: "qutebrowser/config.py", dest: ".config/qutebrowser/config.py" }
-      - { src: "qutebrowser/nord.py", dest: ".config/qutebrowser/nord.py" }
-      - { src: "qutebrowser/userscripts", dest: ".config/qutebrowser/userscripts" }
       - { src: "ranger", dest: ".config/ranger" }
       - { src: "redshift", dest: ".config/redshift" }
       - { src: "rofi", dest: ".config/rofi" }
@@ -324,45 +299,3 @@
     file:
       path: "/home/{{username}}/Pictures"
       state: directory
-  - name: Copy kmonad executable
-    get_url:
-      url: https://github.com/kmonad/kmonad/releases/download/0.4.1/kmonad-0.4.1-linux
-      dest: "/usr/bin/kmonad"
-      mode: "+x"
-    tags: kmonad
-  - name: Copy kmonad service files
-    copy:
-      src: "{{dotfiles_dir}}/configs/kmonad/{{item}}"
-      dest: "/etc/systemd/system/{{item}}"
-      mode: "664"
-    loop:
-      - kmonad_sculpt.service
-      - kmonad_sculpt_office.service
-      - kmonad_thinkpad.service
-    tags: kmonad
-  - name: Ensure kmonad system config dir exists
-    file:
-      path: /etc/kmonad
-      state: directory
-    tags: kmonad
-  - name: Symlink kmonad configs
-    file:
-      src: "{{dotfiles_dir}}/configs/kmonad/{{item}}"
-      dest: "/etc/kmonad/{{item}}"
-      state: link
-    with_items:
-      - sculpt.cfg
-      - sculpt_office.cfg
-      - thinkpad.cfg
-    tags: kmonad
-  - name: Update systemd
-    systemd:
-      name: "{{item}}"
-      state: started
-      enabled: yes
-      daemon_reload: yes
-    with_items:
-      - kmonad_sculpt
-      - kmonad_sculpt_office
-      - kmonad_thinkpad
-    tags: kmonad
