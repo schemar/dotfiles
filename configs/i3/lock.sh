@@ -1,25 +1,6 @@
 #!/bin/bash
 
-tmp_image() {
-    image="$(mktemp)"
-    mv "${image}"{,.png}
-    image="${image}.png"
-    echo $image
-}
+# Use feh background as lock background.
+fehbg=$(grep -o "'.*'" ~/.fehbg | sed "s/'//g")
 
-screenshot="$(tmp_image)"
-blurred="$(tmp_image)"
-
-maim "$screenshot"
-# Speedup over simple `-blur` as described in
-# https://legacy.imagemagick.org/Usage/blur/#blur_args
-convert "$screenshot" \
-    -filter Gaussian \
-    -resize 25% \
-    -define filter:sigma=5 \
-    -resize 400% \
-    "$blurred"
-
-i3lock -i "$blurred"
-
-rm -f "$screenshot" "$blurred"
+i3lock -i "$fehbg"
