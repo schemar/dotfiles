@@ -227,6 +227,7 @@
       - { src: "kak", dest: ".config/kak" }
       - { src: "kak-lsp", dest: ".config/kak-lsp" }
       - { src: "kitty", dest: ".config/kitty" }
+      - { src: "kmonad", dest: ".config/kmonad" }
       - { src: "nvim", dest: ".config/nvim" }
       - { src: "picom", dest: ".config/picom" }
       - { src: "polybar", dest: ".config/polybar" }

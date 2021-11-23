@@ -6,7 +6,7 @@ This repository contains configurations for:
 * X System based on Fedora i3 Spin
 
 ## Installation
-Use `./ansible/installer.sh` if you start from a [Fedora i3 spin](https://spins.fedoraproject.org/i3/).
+Use `./ansible/install.sh` if you start from a [Fedora i3 spin](https://spins.fedoraproject.org/i3/).
 
 Alternatively, you can use the `./installer` helper. It will install the packages and symlink the configs.
 Run `./installer symlinks` if you only want to symlink all configs.

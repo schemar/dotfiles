@@ -8,23 +8,27 @@ Auto workstation configuration based on a clean installation of [Fedora 34 i3 Sp
 4. Run `./install.sh`
   a. You can specify ansible options, e.g. `./install.sh --tags symlinks`
   b. The `BECOME password` is your user password for `sudo`
-5. Run `systemctl reboot`
-6. After reboot (first-time set-up):
+5. Install kmonad
+  a. Install stack: `curl -sSL https://get.haskellstack.org/ | sh`
+  b. `git clone https://github.com/kmonad/kmonad`
+  c. `cd` into the directory and run `stack install`
+  d. Copy the binary where root can access it: `cp ${HOME}/.local/bin/kmonad /usr/local/bin/`
+6. Run `systemctl reboot`
+7. After reboot (first-time set-up):
   a. Run `Ctrl+b I` inside tmux
   b. Run `:plug-install` inside kakoune
-  c. Run `:adblock-update` inside qutebrowser
-  d. Add `~/.gitconfigemail` and set your email address
-  e. Run `sh -c "$(curl -fsSL https://starship.rs/install.sh)"` in your shell
-  f. Set a wallpaper with `feh --bg-fill <path-to-file>`
-  h. Run `lxappearance` to set theme and icons
-  i. Install `asdf`:
+  c. Add `~/.gitconfigemail` and set your email address
+  d. Run `sh -c "$(curl -fsSL https://starship.rs/install.sh)"` in your shell
+  e. Set a wallpaper with `feh --bg-fill <path-to-file>`
+  f. Run `lxappearance` to set theme and icons
+  g. Install `asdf`:
     - `git clone https://github.com/asdf-vm/asdf.git ~/.asdf`
     - `cd ~/.asdf`
     - `git checkout "$(git describe --abbrev=0 --tags)"`
-  j. Install `nodejs` `asdf` plugin and latest:
+  h. Install `nodejs` `asdf` plugin and latest:
     - `asdf plugin-add nodejs`
     - `asdf install nodejs`
-  k. Reboot one last time
+  i. Reboot one last time
 
 ## TODO
 - fix redshift-gtk geo access (and CPU usage)

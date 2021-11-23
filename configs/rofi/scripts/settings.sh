@@ -17,8 +17,10 @@ power="Power"
 power_icon="\0icon\x1fbattery"
 bluetooth="Bluetooth"
 bluetooth_icon="\0icon\x1fbluetooth"
+keyboard="Restart kmonad"
+keyboard_icon="\0icon\x1fkeyboard"
 
-options="${network}${network_icon}\n${bluetooth}${bluetooth_icon}\n${audio}${audio_icon}\n${power}${power_icon}\n${display}${display_icon}\n${scaling}${scaling_icon}\n${audio_rescan}${audio_rescan_icon}\n${printers}${printers_icon}"
+options="${network}${network_icon}\n${bluetooth}${bluetooth_icon}\n${audio}${audio_icon}\n${power}${power_icon}\n${display}${display_icon}\n${scaling}${scaling_icon}\n${audio_rescan}${audio_rescan_icon}\n${printers}${printers_icon}\n${keyboard}${keyboard_icon}"
 
 selected="$(echo -en ${options} | rofi -dmenu -i -p ' ' -theme icons)"
 
@@ -45,6 +47,9 @@ case $selected in
         ~/.config/rofi/scripts/scaling.sh
         ;;
     $printers)
-        qutebrowser http://localhost:631/admin
+        firefox http://localhost:631/admin
+        ;;
+    $keyboard)
+        ~/.config/kmonad/launch.sh
         ;;
 esac
