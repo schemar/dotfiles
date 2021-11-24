@@ -46,13 +46,27 @@
 ;; Aliases to have simpler layer mapping
 (defalias
     las (tap-hold-next-release 300 (layer-next special) lalt)
+
     raa (tap-hold-next-release 300 (layer-switch arrowkeys) ralt)
     rad (tap-hold-next-release 300 (layer-switch default) ralt)
+
+    rch (tap-hold-next-release 300 (layer-switch homerowmods) rctl)
+    rcd (tap-hold-next-release 300 (layer-switch default) rctl)
 
     sca (layer-next specialcaps)
 
     arr (layer-toggle arrowkeys)
     spc (layer-toggle special)
+
+    alm (tap-hold-next-release 300 a lmet :timeout-button a)
+    sla (tap-hold-next-release 300 s lalt :timeout-button s)
+    dlc (tap-hold-next-release 300 d lctl :timeout-button d)
+    fls (tap-hold-next-release 300 f rsft :timeout-button f)
+
+    jrs (tap-hold-next-release 300 j rsft :timeout-button j)
+    krc (tap-hold-next-release 300 k rctl :timeout-button k)
+    lra (tap-hold-next-release 300 l ralt :timeout-button l)
+    ;rm (tap-hold-next-release 300 ; rmet :timeout-button ;)
 )
 
 (deflayer default
@@ -61,7 +75,7 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \          end
   caps a    s    d    f    g    h    j    k    l    ;    '    ret        ins  pgup
   lsft z    x    c    v    b    n    m    ,    .    /         rsft       up   pgdn
-  lctl lmet @las           spc            @raa cmp  rctl            left down rght
+  lctl lmet @las           spc            @raa cmp  @rch            left down rght
 )
 
 (deflayer arrowkeys
@@ -70,7 +84,7 @@
   _    _    _    up   _    _    home pgdn pgup end  home _    _    _          _  
   _    _    left down rght _    left down up   right home _    _          _    _   
   _    _    _    _    _    _    _    _    _    _    _         _          _    _   
-  _    _    _              _              @rad    _    _               _    _    _   
+  _    _    _              _              @rad _    @rch            _    _    _   
 )
 
 (deflayer special
@@ -91,3 +105,12 @@
   _    _    _              _              _    _    _               _    _    _   
 )
 
+;; Use homerow as modifiers
+(deflayer homerowmods
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc  del  home
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \          end
+  caps @alm @sla @dlc @fls g    h    @jrs @krc @lra @;rm '    ret        ins  pgup
+  lsft z    x    c    v    b    n    m    ,    .    /         rsft       up   pgdn
+  lctl lmet @las           spc            @raa cmp  @rcd            left down rght
+)
