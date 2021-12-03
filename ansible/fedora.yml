@@ -223,6 +223,7 @@
       - { src: "dunst", dest: ".config/dunst" }
       - { src: "fzf/.fzf.zsh", dest: ".fzf.zsh" }
       - { src: "git/.gitconfig", dest: ".gitconfig" }
+      - { src: "helix/config.toml", dest: ".config/helix/config.toml" }
       - { src: "i3", dest: ".config/i3" }
       - { src: "kak", dest: ".config/kak" }
       - { src: "kak-lsp", dest: ".config/kak-lsp" }
