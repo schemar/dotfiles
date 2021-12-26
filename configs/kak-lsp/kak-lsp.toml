@@ -151,3 +151,9 @@ roots = ["package.json"]
 offset_encoding = "utf-8"
 command = "typescript-language-server"
 args = ['--stdio']
+
+[language.svelte]
+filetypes = ["svelte"]
+roots = ["package.json"]
+command = "svelteserver"
+args = ["--stdio"]
