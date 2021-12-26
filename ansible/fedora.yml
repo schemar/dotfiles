@@ -57,6 +57,7 @@
         - dex-autostart
         - direnv
         - dunst
+        - emacs
         - evince
         - evince-previewer
         - exa
@@ -210,6 +211,12 @@
       path: "/home/{{username}}/.config/i3"
       state: absent
     tags: symlinks
+  - name: Create emacs config dir
+    become_user: "{{username}}"
+    file:
+      path: "/home/{{username}}/.emacs.d"
+      state: directory
+    tags: symlinks
   - name: Set up symlinks of dotfiles
     become_user: "{{username}}"
     file:
@@ -221,6 +228,7 @@
       - { src: "bat", dest: ".config/bat" }
       - { src: "broot", dest: ".config/broot" }
       - { src: "dunst", dest: ".config/dunst" }
+      - { src: "emacs/init.el", dest: ".emacs.d/init.el" }
       - { src: "fzf/.fzf.zsh", dest: ".fzf.zsh" }
       - { src: "git/.gitconfig", dest: ".gitconfig" }
       - { src: "helix/config.toml", dest: ".config/helix/config.toml" }
