@@ -41,10 +41,21 @@
   (setq sml/theme 'respectful)
   (sml/setup))
 
+;; Projectile for project navigation
+(use-package projectile
+  :config
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+
 ;; Helm configuration for finding files, buffers, and so on.
 (use-package helm
   :config
   (require 'helm-config)
+  ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+  ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
+  ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+  (global-set-key (kbd "C-c h") 'helm-command-prefix)
+  (global-unset-key (kbd "C-x c"))
   :init
   (helm-mode 1)
   :bind
@@ -57,6 +68,12 @@
    :map helm-map
    ("C-z" . helm-select-action)
    ("<tab>" . helm-execute-persistent-action)))
+
+(use-package helm-projectile
+  :config
+  (projectile-mode)
+  (setq projectile-completion-system 'helm)
+  (helm-projectile-on))
 
 ;; Show help for shortcuts.
 (use-package which-key
@@ -75,7 +92,9 @@
 (global-company-mode)
 
 ;; Magit for git integration
-(use-package magit)
+(use-package magit
+  :config
+  (global-set-key (kbd "C-c g") 'magit))
 
 ;;;;
 ;; Programming languages.
