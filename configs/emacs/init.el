@@ -108,6 +108,11 @@
 ;; Add line numbers in all programming modes.
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
+;; Highlight numerals
+(use-package highlight-numbers
+  :config
+  (add-hook 'prog-mode-hook 'highlight-numbers-mode))
+
 ;; flycheck for all languages to do diagnostics in-line.
 (use-package flycheck
   :ensure t
