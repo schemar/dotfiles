@@ -11,18 +11,22 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
-;; Define and initialize additional package repositories.
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
-
-;; Use use-package to simplify package management.
-;; Will automatically install itself and any missing packages.
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(require 'use-package)
-(setq use-package-always-ensure 't)
+;; Use straight for package management instead of package.el
+(setq package-enable-at-startup nil)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 
 ;; Keyboard-centered user interface.
 (setq inhibit-startup-message t)
@@ -33,13 +37,20 @@
 ;; Theme.
 (set-frame-font "DejaVuSansMono Nerd Font Mono 11" nil t)
 (use-package nord-theme
-  :ensure t
-  :config (load-theme 'nord t))
-(use-package smart-mode-line
-  :ensure t
   :config
-  (setq sml/theme 'respectful)
-  (sml/setup))
+  (load-theme 'nord t))
+(use-package powerline
+  :config
+  (powerline-default-theme))
+
+;; Org-Roamd and more recent Org version from ELPA.
+;; We have to delete the built-in packages in order for the package manager to
+;; pull a newer version from ELPA.
+
+(use-package org
+  :init
+  (require 'org))
+(use-package org-roam)
 
 ;; Install counsel, ivy, and swipe for more complete completion.
 (use-package counsel
@@ -115,7 +126,6 @@
 
 ;; flycheck for all languages to do diagnostics in-line.
 (use-package flycheck
-  :ensure t
   :init (global-flycheck-mode))
 
 ;; YAML
@@ -126,7 +136,6 @@
 
 ;; TypeScript
 (use-package tide
-  :ensure t
   :after (typescript-mode company flycheck)
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
