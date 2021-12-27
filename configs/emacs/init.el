@@ -41,47 +41,54 @@
   (setq sml/theme 'respectful)
   (sml/setup))
 
-;; Projectile for project navigation
+;; Install counsel, ivy, and swipe for more complete completion.
+(use-package counsel
+  :config
+  (ivy-mode 1)
+  (counsel-mode 1)
+  (setq ivy-use-virtual-buffers t
+	ivy-count-format "(%d/%d) "
+	ivy-re-builders-alist
+      '((t . ivy--regex-ignore-order)))
+  (define-prefix-command 'emacs-counsel-map)
+  (global-set-key (kbd "C-c e") 'emacs-counsel-map)
+  (global-set-key (kbd "C-s") 'swiper-isearch)
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "M-y") 'counsel-yank-pop)
+  (global-set-key (kbd "C-c e f") 'counsel-describe-function)
+  (global-set-key (kbd "C-c e v") 'counsel-describe-variable)
+  (global-set-key (kbd "C-c e l") 'counsel-find-library)
+  (global-set-key (kbd "C-c e i") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "C-c e u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-c e j") 'counsel-set-variable)
+  (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
+  (global-set-key (kbd "C-c v") 'ivy-push-view)
+  (global-set-key (kbd "C-c V") 'ivy-pop-view)
+  (global-set-key (kbd "C-c k") 'counsel-rg)
+  (global-set-key (kbd "C-c m") 'counsel-linux-app)
+  (global-set-key (kbd "C-c n") 'counsel-fzf)
+  (global-set-key (kbd "C-x l") 'counsel-locate)
+  (global-set-key (kbd "C-c J") 'counsel-file-jump)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "C-c b") 'counsel-bookmark)
+  (global-set-key (kbd "C-c o") 'counsel-outline)
+  (global-set-key (kbd "C-c F") 'counsel-org-file))
+
+;; Projectile for project navigation.
 (use-package projectile
   :config
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
-;; Helm configuration for finding files, buffers, and so on.
-(use-package helm
+(use-package counsel-projectile
   :config
-  (require 'helm-config)
-  ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
-  ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
-  ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
-  (global-set-key (kbd "C-c h") 'helm-command-prefix)
-  (global-unset-key (kbd "C-x c"))
-  :init
-  (helm-mode 1)
-  :bind
-  (("M-x"     . helm-M-x) ;; Evaluate functions
-   ("C-x C-f" . helm-find-files) ;; Open or create files
-   ("C-x b"   . helm-mini) ;; Select buffers
-   ("C-x C-r" . helm-recentf) ;; Select recently saved files
-   ("C-c i"   . helm-imenu) ;; Select document heading
-   ("M-y"     . helm-show-kill-ring) ;; Show the kill ring
-   :map helm-map
-   ("C-z" . helm-select-action)
-   ("<tab>" . helm-execute-persistent-action)))
+  (counsel-projectile-mode 1))
 
-(use-package helm-projectile
-  :config
-  (projectile-mode)
-  (setq projectile-completion-system 'helm)
-  (helm-projectile-on))
-
-;; Show help for shortcuts.
+;; Help by showing all key bindings.
 (use-package which-key
   :config
-  (which-key-mode)
-  (setq which-key-idle 0.5
-	which-key-idle-delay 50)
-  (which-key-setup-minibuffer))
+  (which-key-mode))
 
 ;; Use company mode for auto-completion suggestions.
 (use-package company
@@ -92,9 +99,7 @@
 (global-company-mode)
 
 ;; Magit for git integration
-(use-package magit
-  :config
-  (global-set-key (kbd "C-c g") 'magit))
+(use-package magit)
 
 ;;;;
 ;; Programming languages.
