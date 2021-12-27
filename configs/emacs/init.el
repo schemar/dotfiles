@@ -42,15 +42,56 @@
 (use-package powerline
   :config
   (powerline-default-theme))
+(setq column-number-mode t)
 
 ;; Org-Roamd and more recent Org version from ELPA.
 ;; We have to delete the built-in packages in order for the package manager to
 ;; pull a newer version from ELPA.
-
+(define-prefix-command 'org-roam-map)
+(global-set-key (kbd "C-c o") 'org-roam-map)
 (use-package org
   :init
   (require 'org))
-(use-package org-roam)
+(use-package org-roam
+  :config
+  (setq org-roam-directory (file-truename "~/Documents/org")
+	org-roam-dailies-directory "daily/"
+	org-roam-dailies-capture-templates
+        '(("d" "default" entry
+           "* %?"
+           :target (file+head "%<%Y-%m-%d>.org"
+                              "#+title: %<%Y-%m-%d>\n"))))
+  (org-roam-db-autosync-mode)
+  (add-to-list 'display-buffer-alist
+             '("\\*org-roam\\*"
+               (display-buffer-in-direction)
+               (direction . right)
+               (window-width . 0.33)
+               (window-height . fit-window-to-buffer)))
+  :bind
+  ("C-c o i" . org-roam-node-insert)
+  ("C-c o f" . org-roam-node-find)
+  ("C-c o c" . org-roam-capture)
+  ("C-c o b" . org-roam-buffer-toggle)
+  ("C-c o a" . org-roam-alias-add)
+  ("C-c o r" . org-roam-ref-add)
+  ("C-c o t" . org-roam-dailies-goto-today))
+
+;; Deft for showing and filtering org-roam notes.
+(use-package deft
+  :after org
+  :bind
+  ("C-c o d" . deft)
+  :custom
+  (deft-recursive t)
+  (deft-use-filter-string-for-filename t)
+  (deft-default-extension "org")
+  (deft-directory org-roam-directory))
+
+;; Winner mode to go back/forward when interacting with org-roam.
+(winner-mode +1)
+(define-key winner-mode-map (kbd "<M-left>") #'winner-undo)
+(define-key winner-mode-map (kbd "<M-right>") #'winner-redo)
 
 ;; Install counsel, ivy, and swipe for more complete completion.
 (use-package counsel
@@ -83,7 +124,7 @@
   (global-set-key (kbd "C-c J") 'counsel-file-jump)
   (global-set-key (kbd "C-c C-r") 'ivy-resume)
   (global-set-key (kbd "C-c b") 'counsel-bookmark)
-  (global-set-key (kbd "C-c o") 'counsel-outline)
+  (global-set-key (kbd "C-c l") 'counsel-outline)
   (global-set-key (kbd "C-c F") 'counsel-org-file))
 
 ;; Projectile for project navigation.
@@ -107,7 +148,7 @@
   (setq company-idle-delay 0
 	company-minimum-prefix-length 4
 	company-selection-wrap-around t))
-(global-company-mode)
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;; Magit for git integration
 (use-package magit)
