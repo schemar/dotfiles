@@ -1,6 +1,6 @@
 #+title: Emacs settings file
 
-* Basics and package management
+* Basics and Package Management
   Create another auto-generated init file so that the handcrafted one won't be overwritten by Emacs.
   #+BEGIN_SRC emacs-lisp
     (setq custom-file (expand-file-name "auto-generated.el" user-emacs-directory))
@@ -28,6 +28,25 @@
      (straight-use-package 'use-package)
      (setq straight-use-package-by-default t)
    #+END_SRC
+
+* EViL Mode
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :init
+    (setq evil-want-keybinding nil)
+    :config
+    (evil-mode 1))
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init))
+  (use-package evil-org
+    :after org
+    :hook (org-mode . (lambda () evil-org-mode))
+    :config
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys))
+#+END_SRC
 
 * Help
   Show all available key-bindings in the mini buffer.
