@@ -30,16 +30,23 @@
    #+END_SRC
 
 * EViL Mode
+** EViL mode itself
 #+BEGIN_SRC emacs-lisp
   (use-package evil
     :init
     (setq evil-want-keybinding nil)
     :config
     (evil-mode 1))
+#+END_SRC
+** Use evil-collection to have evil-bindings in other packages like magit.
+#+BEGIN_SRC emacs-lisp
   (use-package evil-collection
     :after evil
     :config
     (evil-collection-init))
+#+END_SRC
+** Use evil-org to have evil-bindings in org-mode.
+#+BEGIN_SRC emacs-lisp
   (use-package evil-org
     :after org
     :hook (org-mode . (lambda () evil-org-mode))
