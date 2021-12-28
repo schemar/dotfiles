@@ -12,22 +12,124 @@
    Use straight for package management (instead of the built-in package).
    *Make sure to not use ~:ensure~ in any ~use-package~ blocks.*
    #+BEGIN_SRC emacs-lisp
-     (setq package-enable-at-startup nil)
-     (defvar bootstrap-version)
-     (let ((bootstrap-file
-	    (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-	   (bootstrap-version 5))
-       (unless (file-exists-p bootstrap-file)
-	 (with-current-buffer
-	     (url-retrieve-synchronously
-	      "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	      'silent 'inhibit-cookies)
-	   (goto-char (point-max))
-	   (eval-print-last-sexp)))
-       (load bootstrap-file nil 'nomessage))
-     (straight-use-package 'use-package)
-     (setq straight-use-package-by-default t)
    #+END_SRC
+
+* Org, Org-Roam, and productivity
+** Org
+   The built-in version of Org is outdated and not sufficient for Org-Roam.
+   Thanks to the straight package manager, we can use a simple ~use-package~ and straight will replace the built-in version with the latest version from ELPA.
+   However, we must load org already in ~init.el~ in order to load the package before it is used to load this file.
+
+   For org, use ~indented~ to show sub-items indented instead of all the leading asterisks.
+   Hide emphasis markers and only use font face change as indication.
+
+   Org-super-agenda and org-ql do not support tag groups. So it doesn't make sense to set them up.
+   #+BEGIN_SRC emacs-lisp
+       (setq org-startup-indented t
+             org-pretty-entities t
+             org-hide-emphasis-markers t
+             org-startup-with-inline-images t
+             org-image-acual-width '(300))
+       (setq org-todo-keywords '((type "TODO(t)" "WAITING(w)" "FOLLOWUP(f)" "|" "DONE(d)" "DELEGATED(l)" "ABANDONED(a)")))
+       (setq org-agenda-files (directory-files-recursively "~/Documents/org/" "\\.org$"))
+       (define-prefix-command 'org-user-map)
+       (global-set-key (kbd "C-c o") 'org-user-map)
+   #+END_SRC
+
+   Use org-appear to show emphasis-markers, which are hidden otherwise, when the cursor is on them.
+   #+BEGIN_SRC emacs-lisp
+       (use-package org-appear
+         :hook (org-mode . org-appear-mode))
+   #+END_SRC
+
+   Use org-superstar to make the bullets look nicer.
+   #+BEGIN_SRC emacs-lisp
+     (use-package org-superstar
+       :config
+       (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+   #+END_SRC
+    
+** Org-QL
+   Org query language to build agenda-like views based on an input query.
+   #+BEGIN_SRC emacs-lisp
+     (use-package org-ql)
+   #+END_SRC
+
+** Org-Super-Agenda
+Org super agenda groups agendas into groups based on its configuration.
+All groups must be configured here using the project's syntax.
+Super agenda does not support tag groups, that's why we have to list *all* relevant tags.
+   #+BEGIN_SRC emacs-lisp
+     (use-package org-super-agenda
+       :config
+       (setq org-super-agenda-groups '(
+                                       (:name "Today"
+                                        :scheduled today
+                                        :scheduled past
+                                        :deadline today
+                                        :deadline past)
+                                       (:name "Futurice"
+                                        :and (:tag "futurice"
+                                        :not (:todo ("WAITING" "FOLLOWUP"))))
+                                       (:name "Private"
+                                        :and (:tag "private"
+                                        :not (:todo ("WAITING" "FOLLOWUP"))))
+                                       (:name "Follow-up"
+                                        :todo "FOLLOWUP")
+                                       (:name "Waiting"
+                                        :todo "WAITING"))))
+     (org-super-agenda-mode)
+   #+End_SRC
+
+** Org-Roam
+   #+BEGIN_SRC emacs-lisp
+      (use-package org-roam
+        :config
+        (setq org-roam-directory (file-truename "~/Documents/org")
+      	org-roam-dailies-directory "daily/"
+      	org-roam-dailies-capture-templates
+      	'(("d" "default" entry
+      	   "* %?"
+      	   :target (file+head "%<%Y-%m-%d>.org"
+      			      "#+title: %<%Y-%m-%d>\n"))))
+        (org-roam-db-autosync-mode)
+        (add-to-list 'display-buffer-alist
+      	     '("\\*org-roam\\*"
+      	       (display-buffer-in-direction)
+      	       (direction . right)
+      	       (window-width . 0.33)
+      	       (window-height . fit-window-to-buffer)))
+        :bind
+        ("C-c o i" . org-roam-node-insert)
+        ("C-c o f" . org-roam-node-find)
+        ("C-c o c" . org-roam-capture)
+        ("C-c o b" . org-roam-buffer-toggle)
+        ("C-c o a" . org-roam-alias-add)
+        ("C-c o r" . org-roam-ref-add)
+        ("C-c o t" . org-roam-dailies-goto-today))
+   #+END_SRC
+
+** Deft
+   Show and filter org-roam notes by contained text.
+   #+BEGIN_SRC emacs-lisp
+     (use-package deft
+       :after org
+       :bind
+       ("C-c o d" . deft)
+       :custom
+       (deft-recursive t)
+       (deft-use-filter-string-for-filename t)
+       (deft-default-extension "org")
+       (deft-directory org-roam-directory))
+   #+END_SRC
+
+** Winner Mode
+   Winner mode to go back/forward when interacting with org-roam using ~M-left/M-right~.
+   #+BEGIN_SRC emacs-lisp
+     (winner-mode +1)
+     (define-key winner-mode-map (kbd "<M-left>") #'winner-undo)
+     (define-key winner-mode-map (kbd "<M-right>") #'winner-redo)
+  #+END_SRC
 
 * EViL Mode
 ** EViL mode itself
@@ -105,90 +207,6 @@
       :config
       (powerline-default-theme))
     (setq column-number-mode t)
-  #+END_SRC
-
-* Org, Org-Roam, and productivity
-** Org
-   The built-in version of Org is outdated and not sufficient for Org-Roam.
-   Thanks to the straight package manager, we can use a simple ~use-package~ and straight will replace the built-in version with the latest version from ELPA.
-
-   For org, use ~indented~ to show sub-items indented instead of all the leading asterisks.
-   Hide emphasis markers and only use font face change as indication.
-   #+BEGIN_SRC emacs-lisp
-     (use-package org
-       :init
-       (require 'org)
-       :config
-       (setq org-startup-indented t
-	 org-pretty-entities t
-	 org-hide-emphasis-markers t
-	 org-startup-with-inline-images t
-	 org-image-actual-width '(300))
-       (define-prefix-command 'org-user-map)
-       (global-set-key (kbd "C-c o") 'org-user-map))
-   #+END_SRC
-
-   Use org-appear to show emphasis-markers, which are hidden otherwise, when the cursor is on them.
-   #+BEGIN_SRC emacs-lisp
-       (use-package org-appear
-         :hook (org-mode . org-appear-mode))
-   #+END_SRC
-
-   Use org-superstar to make the bullets look nicer.
-   #+BEGIN_SRC emacs-lisp
-     (use-package org-superstar
-       :config
-       (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
-   #+END_SRC
-    
-** Org-Roam
-   #+BEGIN_SRC emacs-lisp
-     (use-package org-roam
-       :config
-       (setq org-roam-directory (file-truename "~/Documents/org")
-	     org-roam-dailies-directory "daily/"
-	     org-roam-dailies-capture-templates
-	     '(("d" "default" entry
-		"* %?"
-		:target (file+head "%<%Y-%m-%d>.org"
-				   "#+title: %<%Y-%m-%d>\n"))))
-       (org-roam-db-autosync-mode)
-       (add-to-list 'display-buffer-alist
-		  '("\\*org-roam\\*"
-		    (display-buffer-in-direction)
-		    (direction . right)
-		    (window-width . 0.33)
-		    (window-height . fit-window-to-buffer)))
-       :bind
-       ("C-c o i" . org-roam-node-insert)
-       ("C-c o f" . org-roam-node-find)
-       ("C-c o c" . org-roam-capture)
-       ("C-c o b" . org-roam-buffer-toggle)
-       ("C-c o a" . org-roam-alias-add)
-       ("C-c o r" . org-roam-ref-add)
-       ("C-c o t" . org-roam-dailies-goto-today))
-   #+END_SRC
-
-** Deft
-   Show and filter org-roam notes by contained text.
-   #+BEGIN_SRC emacs-lisp
-     (use-package deft
-       :after org
-       :bind
-       ("C-c o d" . deft)
-       :custom
-       (deft-recursive t)
-       (deft-use-filter-string-for-filename t)
-       (deft-default-extension "org")
-       (deft-directory org-roam-directory))
-   #+END_SRC
-
-** Winner Mode
-   Winner mode to go back/forward when interacting with org-roam using ~M-left/M-right~.
-   #+BEGIN_SRC emacs-lisp
-     (winner-mode +1)
-     (define-key winner-mode-map (kbd "<M-left>") #'winner-undo)
-     (define-key winner-mode-map (kbd "<M-right>") #'winner-redo)
   #+END_SRC
 
 * IDE Features
