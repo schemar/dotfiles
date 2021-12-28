@@ -229,6 +229,7 @@
       - { src: "broot", dest: ".config/broot" }
       - { src: "dunst", dest: ".config/dunst" }
       - { src: "emacs/init.el", dest: ".emacs.d/init.el" }
+      - { src: "emacs/settings.org", dest: ".emacs.d/settings.org" }
       - { src: "fzf/.fzf.zsh", dest: ".fzf.zsh" }
       - { src: "git/.gitconfig", dest: ".gitconfig" }
       - { src: "helix/config.toml", dest: ".config/helix/config.toml" }

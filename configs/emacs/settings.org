@@ -1,0 +1,224 @@
+#+title: Emacs settings file
+
+* Basics and package management
+  Create another auto-generated init file so that the handcrafted one won't be overwritten by Emacs.
+  #+BEGIN_SRC emacs-lisp
+    (setq custom-file (expand-file-name "auto-generated.el" user-emacs-directory))
+    (when (file-exists-p custom-file)
+      (load custom-file))
+  #+END_SRC
+
+** Package Management
+   Use straight for package management (instead of the built-in package).
+   #+BEGIN_SRC emacs-lisp
+     (setq package-enable-at-startup nil)
+     (defvar bootstrap-version)
+     (let ((bootstrap-file
+	    (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+	   (bootstrap-version 5))
+       (unless (file-exists-p bootstrap-file)
+	 (with-current-buffer
+	     (url-retrieve-synchronously
+	      "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	      'silent 'inhibit-cookies)
+	   (goto-char (point-max))
+	   (eval-print-last-sexp)))
+       (load bootstrap-file nil 'nomessage))
+     (straight-use-package 'use-package)
+     (setq straight-use-package-by-default t)
+   #+END_SRC
+
+* Help
+  Show all available key-bindings in the mini buffer.
+  #+BEGIN_SRC emacs-lisp
+    (use-package which-key
+      :config
+      (which-key-mode))
+  #+END_SRC
+
+  Company for auto-completion.
+  #+BEGIN_SRC emacs-lisp
+    (use-package company
+      :config
+      (setq company-idle-delay 0
+	    company-minimum-prefix-length 4
+	    company-selection-wrap-around t))
+    (add-hook 'after-init-hook 'global-company-mode)
+  #+END_SRC
+
+* Visuals
+  Remove startup message, tool bar, menu bar, and scroll bar.
+  #+BEGIN_SRC emacs-lisp
+    (setq inhibit-startup-message t)
+    (tool-bar-mode -1)
+    (menu-bar-mode -1)
+    (scroll-bar-mode -1)
+  #+END_SRC
+
+** Fonts
+   Set a default font for all windows.
+   #+BEGIN_SRC emacs-lisp
+     (set-frame-font "DejaVuSansMono Nerd Font Mono 11" nil t)
+   #+END_SRC
+
+*** TODO Use a variable pitch (non-monospaced) font for org-mode, but not for code blocks inside org.
+
+** Theme
+   #+BEGIN_SRC emacs-lisp
+     (use-package nord-theme
+       :config
+       (load-theme 'nord t))
+   #+END_SRC
+
+** Mode Line
+  Modeline that looks like power line.
+  #+BEGIN_SRC emacs-lisp
+    (use-package powerline
+      :config
+      (powerline-default-theme))
+    (setq column-number-mode t)
+  #+END_SRC
+
+* Org, Org-Roam, and productivity
+  The built-in version of Org is outdated and not sufficient for Org-Roam.
+  Thanks to the straight package manager, we can use a simple =use-package= and straight will replace the built-in version with the latest version from ELPA.
+  #+BEGIN_SRC emacs-lisp
+      (use-package org
+	:init
+	(require 'org)
+        :config
+        (define-prefix-command 'org-user-map)
+        (global-set-key (kbd "C-c o") 'org-user-map))
+      (use-package org-roam
+	:config
+	(setq org-roam-directory (file-truename "~/Documents/org")
+	      org-roam-dailies-directory "daily/"
+	      org-roam-dailies-capture-templates
+	      '(("d" "default" entry
+		 "* %?"
+		 :target (file+head "%<%Y-%m-%d>.org"
+				    "#+title: %<%Y-%m-%d>\n"))))
+	(org-roam-db-autosync-mode)
+	(add-to-list 'display-buffer-alist
+		   '("\\*org-roam\\*"
+		     (display-buffer-in-direction)
+		     (direction . right)
+		     (window-width . 0.33)
+		     (window-height . fit-window-to-buffer)))
+	:bind
+	("C-c o i" . org-roam-node-insert)
+	("C-c o f" . org-roam-node-find)
+	("C-c o c" . org-roam-capture)
+	("C-c o b" . org-roam-buffer-toggle)
+	("C-c o a" . org-roam-alias-add)
+	("C-c o r" . org-roam-ref-add)
+	("C-c o t" . org-roam-dailies-goto-today))
+
+      ;; Deft for showing and filtering org-roam notes.
+      (use-package deft
+	:after org
+	:bind
+	("C-c o d" . deft)
+	:custom
+	(deft-recursive t)
+	(deft-use-filter-string-for-filename t)
+	(deft-default-extension "org")
+	(deft-directory org-roam-directory))
+
+      ;; Winner mode to go back/forward when interacting with org-roam.
+      (winner-mode +1)
+      (define-key winner-mode-map (kbd "<M-left>") #'winner-undo)
+      (define-key winner-mode-map (kbd "<M-right>") #'winner-redo)
+  #+END_SRC
+
+* IDE Features
+  Counsel, Ivy, and Swipe for more complete completion and filtering.
+  #+BEGIN_SRC emacs-lisp
+    (use-package counsel
+      :config
+      (ivy-mode 1)
+      (counsel-mode 1)
+      (setq ivy-use-virtual-buffers t
+	    ivy-count-format "(%d/%d) "
+	    ivy-re-builders-alist
+	  '((t . ivy--regex-ignore-order)))
+      (define-prefix-command 'emacs-counsel-map)
+      (global-set-key (kbd "C-c e") 'emacs-counsel-map)
+      (global-set-key (kbd "C-s") 'swiper-isearch)
+      (global-set-key (kbd "M-x") 'counsel-M-x)
+      (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+      (global-set-key (kbd "M-y") 'counsel-yank-pop)
+      (global-set-key (kbd "C-c e f") 'counsel-describe-function)
+      (global-set-key (kbd "C-c e v") 'counsel-describe-variable)
+      (global-set-key (kbd "C-c e l") 'counsel-find-library)
+      (global-set-key (kbd "C-c e i") 'counsel-info-lookup-symbol)
+      (global-set-key (kbd "C-c e u") 'counsel-unicode-char)
+      (global-set-key (kbd "C-c e j") 'counsel-set-variable)
+      (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
+      (global-set-key (kbd "C-c v") 'ivy-push-view)
+      (global-set-key (kbd "C-c V") 'ivy-pop-view)
+      (global-set-key (kbd "C-c k") 'counsel-rg)
+      (global-set-key (kbd "C-c m") 'counsel-linux-app)
+      (global-set-key (kbd "C-c n") 'counsel-fzf)
+      (global-set-key (kbd "C-x l") 'counsel-locate)
+      (global-set-key (kbd "C-c J") 'counsel-file-jump)
+      (global-set-key (kbd "C-c C-r") 'ivy-resume)
+      (global-set-key (kbd "C-c b") 'counsel-bookmark)
+      (global-set-key (kbd "C-c l") 'counsel-outline)
+      (global-set-key (kbd "C-c F") 'counsel-org-file))
+  #+END_SRC
+
+  Projectile for project navigation.
+  #+BEGIN_SRC emacs-lisp
+    (use-package projectile
+      :config
+      (projectile-mode +1)
+      (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+
+    (use-package counsel-projectile
+      :config
+      (counsel-projectile-mode 1))
+  #+END_SRC
+
+  Magit for git integration.
+  #+BEGIN_SRC emacs-lisp
+    (use-package magit)
+  #+END_SRC
+
+* Programming
+  #+BEGIN_SRC emacs-lisp
+    ;; Add line numbers in all programming modes.
+    (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+    ;; Highlight numerals
+    (use-package highlight-numbers
+      :config
+      (add-hook 'prog-mode-hook 'highlight-numbers-mode))
+
+    ;; flycheck for all languages to do diagnostics in-line.
+    (use-package flycheck
+      :init (global-flycheck-mode))
+
+    ;; YAML
+    (use-package yaml-mode)
+
+    ;; Web Mode for all things web.
+    (use-package web-mode)
+
+    ;; TypeScript
+    (use-package tide
+      :after (typescript-mode company flycheck)
+      :hook ((typescript-mode . tide-setup)
+	     (typescript-mode . tide-hl-identifier-mode)
+	     (before-save . tide-format-before-save)))
+    ;; TSX
+    (require 'web-mode)
+    (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+    (add-hook 'web-mode-hook
+	      (lambda ()
+		(when (string-equal "tsx" (file-name-extension buffer-file-name))
+		  (setup-tide-mode))))
+    ;; enable typescript-tslint checker
+    (flycheck-add-mode 'typescript-tslint 'web-mode)
+  #+END_SRC
+  
