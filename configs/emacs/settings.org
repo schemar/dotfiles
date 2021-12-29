@@ -19,7 +19,8 @@
 #+BEGIN_SRC emacs-lisp
   (use-package evil
     :init
-    (setq evil-want-keybinding nil)
+    (setq evil-want-keybinding nil
+          evil-want-C-u-scroll t)
     :config
     (evil-mode 1))
 #+END_SRC
@@ -31,10 +32,39 @@
   (evil-set-leader 'normal (kbd "SPC"))
   (evil-set-leader 'visual (kbd "SPC"))
   (evil-set-leader 'insert (kbd "C-SPC"))
-  (evil-set-leader 'normal (kbd "SPC"))
 
+  (evil-global-set-key 'normal (kbd "gl") 'end-of-line)
+  (evil-global-set-key 'normal (kbd "gh") 'beginning-of-line)
+  (evil-global-set-key 'normal (kbd "gj") 'end-of-buffer)
+  (evil-global-set-key 'normal (kbd "gk") 'beginning-of-buffer)
   (evil-global-set-key 'normal (kbd "<leader>xs") 'save-buffer)
   (evil-global-set-key 'normal (kbd "<leader>xc") 'save-buffers-kill-terminal)
+  (evil-global-set-key 'normal (kbd "<leader>r") 'replace-string)
+  (evil-global-set-key 'visual (kbd "<leader>r") 'replace-string)
+#+END_SRC
+*** Window management
+#+BEGIN_SRC emacs-lisp
+  (evil-global-set-key 'normal (kbd "<leader>w+") 'evil-window-increase-height)
+  (evil-global-set-key 'normal (kbd "<leader>w-") 'evil-window-decrease-height)
+  (evil-global-set-key 'normal (kbd "<leader>w<") 'evil-window-decrease-width)
+  (evil-global-set-key 'normal (kbd "<leader>w>") 'evil-window-increase-width)
+  (evil-global-set-key 'normal (kbd "<leader>ws") 'evil-window-vsplit)
+  (evil-global-set-key 'normal (kbd "<leader>wv") 'evil-window-split)
+  (evil-global-set-key 'normal (kbd "<leader>wh") 'evil-window-left)
+  (evil-global-set-key 'normal (kbd "<leader>wj") 'evil-window-down)
+  (evil-global-set-key 'normal (kbd "<leader>wk") 'evil-window-up)
+  (evil-global-set-key 'normal (kbd "<leader>wl") 'evil-window-right)
+  (evil-global-set-key 'normal (kbd "<leader>wH") 'evil-window-move-far-left)
+  (evil-global-set-key 'normal (kbd "<leader>wJ") 'evil-window-move-very-bottom)
+  (evil-global-set-key 'normal (kbd "<leader>wK") 'evil-window-move-very-top)
+  (evil-global-set-key 'normal (kbd "<leader>wL") 'evil-window-move-far-right)
+  (evil-global-set-key 'normal (kbd "<leader>wn") 'evil-window-new)
+  (evil-global-set-key 'normal (kbd "<leader>wr") 'evil-window-rotate-downwards)
+  (evil-global-set-key 'normal (kbd "<leader>wR") 'evil-window-rotate-upwards)
+  (evil-global-set-key 'normal (kbd "<leader>wu") 'winner-undo)
+  (evil-global-set-key 'normal (kbd "<leader>wU") 'winner-red)
+  (evil-global-set-key 'normal (kbd "<leader>w1") 'delete-other-windows)
+  (evil-global-set-key 'normal (kbd "<leader>w0") 'delete-window)
 #+END_SRC
 ** Use evil-collection to have evil-bindings in other packages like magit.
 #+BEGIN_SRC emacs-lisp
@@ -143,6 +173,8 @@ Super agenda does not support tag groups, that's why we have to list *all* relev
       	       (window-height . fit-window-to-buffer))))
       (evil-global-set-key 'normal (kbd "<leader>oi") 'org-roam-node-insert)
       (evil-global-set-key 'insert (kbd "<leader>oi") 'org-roam-node-insert)
+      (evil-global-set-key 'normal (kbd "<leader>oi") 'org-roam-id-get-create)
+      (evil-global-set-key 'insert (kbd "<leader>oi") 'org-roam-id-get-create)
       (evil-global-set-key 'normal (kbd "<leader>of") 'org-roam-node-find)
       (evil-global-set-key 'normal (kbd "<leader>oc") 'org-roam-capture)
       (evil-global-set-key 'normal (kbd "<leader>ob") 'org-roam-buffer-toggle)
@@ -162,8 +194,10 @@ Super agenda does not support tag groups, that's why we have to list *all* relev
        :custom
        (deft-recursive t)
        (deft-use-filter-string-for-filename t)
+       (deft-use-filename-as-title t)
        (deft-default-extension "org")
-       (deft-directory org-roam-directory))
+       (deft-directory org-roam-directory)
+       (deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n"))
      (evil-global-set-key 'normal (kbd "<leader>od") 'deft)
    #+END_SRC
 
@@ -245,8 +279,11 @@ Show whitespaces everywhere
       (evil-global-set-key 'normal (kbd "<leader>s") 'swiper-isearch)
       (evil-global-set-key 'normal (kbd "/") 'swiper-isearch)
       (evil-global-set-key 'normal (kbd "<leader>c") 'counsel-M-x)
+      (evil-global-set-key 'insert (kbd "<leader>c") 'counsel-M-x)
       (evil-global-set-key 'normal (kbd "<leader>xf") 'counsel-find-file)
       (evil-global-set-key 'normal (kbd "<leader>y") 'counsel-yank-pop)
+      (evil-global-set-key 'normal (kbd "<leader>Y") 'clipboard-yank)
+      (evil-global-set-key 'insert (kbd "<leader>Y") 'clipboard-yank)
       (evil-global-set-key 'normal (kbd "<leader>xb") 'ivy-switch-buffer)
       (evil-global-set-key 'normal (kbd "<leader>v") 'ivy-push-view)
       (evil-global-set-key 'normal (kbd "<leader>V") 'ivy-pop-view)
