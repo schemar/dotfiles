@@ -27,6 +27,10 @@ Also required by evil for redo-functionality.
        :init
        (setq evil-want-keybinding nil
              evil-want-C-u-scroll t
+             evil-overriding-maps nil ;; Evil everywhere.
+             evil-repeat-move-cursor nil ;; Keeps cursor in place when repeating an insert.
+             evil-move-cursor-back nil ;; Do not move the cursor back when leaving insert mode.
+             evil-move-beyond-eol t ;; To be able to move "onto" newline character.
              evil-undo-system 'undo-fu) ;; Dependency is installed under * Basics.
        :config
        (evil-mode 1)
