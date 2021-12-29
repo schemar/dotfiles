@@ -14,11 +14,50 @@
    #+BEGIN_SRC emacs-lisp
    #+END_SRC
 
+* Evil Mode
+** Evil mode itself
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :init
+    (setq evil-want-keybinding nil)
+    :config
+    (evil-mode 1))
+#+END_SRC
+** Evil Emacs key bindings
+#+BEGIN_SRC emacs-lisp
+  ;; set leader key in all states
+  (evil-set-leader nil (kbd "C-SPC"))
+  ;; set leader key in specific states
+  (evil-set-leader 'normal (kbd "SPC"))
+  (evil-set-leader 'visual (kbd "SPC"))
+  (evil-set-leader 'insert (kbd "C-SPC"))
+  (evil-set-leader 'normal (kbd "SPC"))
+
+  (evil-global-set-key 'normal (kbd "<leader>xs") 'save-buffer)
+  (evil-global-set-key 'normal (kbd "<leader>xc") 'save-buffers-kill-terminal)
+#+END_SRC
+** Use evil-collection to have evil-bindings in other packages like magit.
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init))
+#+END_SRC
+** Use evil-org to have evil-bindings in org-mode.
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-org
+    :after org
+    :hook (org-mode . (lambda () evil-org-mode))
+    :config
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys))
+#+END_SRC
+
 * Org, Org-Roam, and productivity
 ** Org
-   The built-in version of Org is outdated and not sufficient for Org-Roam.
-   Thanks to the straight package manager, we can use a simple ~use-package~ and straight will replace the built-in version with the latest version from ELPA.
-   However, we must load org already in ~init.el~ in order to load the package before it is used to load this file.
+The built-in version of Org is outdated and not sufficient for Org-Roam.
+Thanks to the straight package manager, we can use a simple ~use-package~ and straight will replace the built-in version with the latest version from ELPA.
+However, we must load org already in ~init.el~ in order to load the package before it is used to load this file.
 
    For org, use ~indented~ to show sub-items indented instead of all the leading asterisks.
    Hide emphasis markers and only use font face change as indication.
@@ -32,8 +71,6 @@
              org-image-acual-width '(300))
        (setq org-todo-keywords '((type "TODO(t)" "WAITING(w)" "FOLLOWUP(f)" "|" "DONE(d)" "DELEGATED(l)" "ABANDONED(a)")))
        (setq org-agenda-files (directory-files-recursively "~/Documents/org/" "\\.org$"))
-       (define-prefix-command 'org-user-map)
-       (global-set-key (kbd "C-c o") 'org-user-map)
    #+END_SRC
 
    Use org-appear to show emphasis-markers, which are hidden otherwise, when the cursor is on them.
@@ -48,7 +85,12 @@
        :config
        (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
    #+END_SRC
-    
+** Org Keybindings
+#+BEGIN_SRC emacs-lisp
+  (evil-global-set-key 'normal (kbd "<leader>oa") 'org-agenda)
+  (evil-define-key nil org-mode-map (kbd "<leader>ot") 'org-todo)
+  (evil-define-key nil org-mode-map (kbd "<leader>og") 'org-set-tags-command)
+#+END_SRC
 ** Org-QL
    Org query language to build agenda-like views based on an input query.
    #+BEGIN_SRC emacs-lisp
@@ -98,15 +140,18 @@ Super agenda does not support tag groups, that's why we have to list *all* relev
       	       (display-buffer-in-direction)
       	       (direction . right)
       	       (window-width . 0.33)
-      	       (window-height . fit-window-to-buffer)))
-        :bind
-        ("C-c o i" . org-roam-node-insert)
-        ("C-c o f" . org-roam-node-find)
-        ("C-c o c" . org-roam-capture)
-        ("C-c o b" . org-roam-buffer-toggle)
-        ("C-c o a" . org-roam-alias-add)
-        ("C-c o r" . org-roam-ref-add)
-        ("C-c o t" . org-roam-dailies-goto-today))
+      	       (window-height . fit-window-to-buffer))))
+      (evil-global-set-key 'normal (kbd "<leader>oi") 'org-roam-node-insert)
+      (evil-global-set-key 'insert (kbd "<leader>oi") 'org-roam-node-insert)
+      (evil-global-set-key 'normal (kbd "<leader>of") 'org-roam-node-find)
+      (evil-global-set-key 'normal (kbd "<leader>oc") 'org-roam-capture)
+      (evil-global-set-key 'normal (kbd "<leader>ob") 'org-roam-buffer-toggle)
+      (evil-global-set-key 'insert (kbd "<leader>ob") 'org-roam-buffer-toggle)
+      (evil-global-set-key 'normal (kbd "<leader>ol") 'org-roam-alias-add)
+      (evil-global-set-key 'insert (kbd "<leader>ol") 'org-roam-alias-add)
+      (evil-global-set-key 'normal (kbd "<leader>or") 'org-roam-ref-add)
+      (evil-global-set-key 'insert (kbd "<leader>or") 'org-roam-ref-add)
+      (evil-global-set-key 'normal (kbd "<leader>oj") 'org-roam-dailies-goto-today)
    #+END_SRC
 
 ** Deft
@@ -114,13 +159,12 @@ Super agenda does not support tag groups, that's why we have to list *all* relev
    #+BEGIN_SRC emacs-lisp
      (use-package deft
        :after org
-       :bind
-       ("C-c o d" . deft)
        :custom
        (deft-recursive t)
        (deft-use-filter-string-for-filename t)
        (deft-default-extension "org")
        (deft-directory org-roam-directory))
+     (evil-global-set-key 'normal (kbd "<leader>od") 'deft)
    #+END_SRC
 
 ** Winner Mode
@@ -130,32 +174,6 @@ Super agenda does not support tag groups, that's why we have to list *all* relev
      (define-key winner-mode-map (kbd "<M-left>") #'winner-undo)
      (define-key winner-mode-map (kbd "<M-right>") #'winner-redo)
   #+END_SRC
-
-* EViL Mode
-** EViL mode itself
-#+BEGIN_SRC emacs-lisp
-  (use-package evil
-    :init
-    (setq evil-want-keybinding nil)
-    :config
-    (evil-mode 1))
-#+END_SRC
-** Use evil-collection to have evil-bindings in other packages like magit.
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-collection
-    :after evil
-    :config
-    (evil-collection-init))
-#+END_SRC
-** Use evil-org to have evil-bindings in org-mode.
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-org
-    :after org
-    :hook (org-mode . (lambda () evil-org-mode))
-    :config
-    (require 'evil-org-agenda)
-    (evil-org-agenda-set-keys))
-#+END_SRC
 
 * Help
   Show all available key-bindings in the mini buffer.
@@ -186,10 +204,14 @@ Super agenda does not support tag groups, that's why we have to list *all* relev
   #+END_SRC
 
 ** Fonts
-   Set a default font for all windows.
-   #+BEGIN_SRC emacs-lisp
-     (set-frame-font "DejaVuSansMono Nerd Font Mono 11" nil t)
-   #+END_SRC
+Set a default font for all windows.
+#+BEGIN_SRC emacs-lisp
+  (set-frame-font "DejaVuSansMono Nerd Font Mono 11" nil t)
+#+END_SRC
+Show whitespaces everywhere
+#+BEGIN_SRC emacs-lisp
+  (global-whitespace-mode 1)
+#+END_SRC
 
 *** TODO Use a variable pitch (non-monospaced) font for org-mode, but not for code blocks inside org.
 
@@ -217,33 +239,25 @@ Super agenda does not support tag groups, that's why we have to list *all* relev
       (ivy-mode 1)
       (counsel-mode 1)
       (setq ivy-use-virtual-buffers t
-	    ivy-count-format "(%d/%d) "
-	    ivy-re-builders-alist
-	  '((t . ivy--regex-ignore-order)))
-      (define-prefix-command 'emacs-counsel-map)
-      (global-set-key (kbd "C-c e") 'emacs-counsel-map)
-      (global-set-key (kbd "C-s") 'swiper-isearch)
-      (global-set-key (kbd "M-x") 'counsel-M-x)
-      (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-      (global-set-key (kbd "M-y") 'counsel-yank-pop)
-      (global-set-key (kbd "C-c e f") 'counsel-describe-function)
-      (global-set-key (kbd "C-c e v") 'counsel-describe-variable)
-      (global-set-key (kbd "C-c e l") 'counsel-find-library)
-      (global-set-key (kbd "C-c e i") 'counsel-info-lookup-symbol)
-      (global-set-key (kbd "C-c e u") 'counsel-unicode-char)
-      (global-set-key (kbd "C-c e j") 'counsel-set-variable)
-      (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
-      (global-set-key (kbd "C-c v") 'ivy-push-view)
-      (global-set-key (kbd "C-c V") 'ivy-pop-view)
-      (global-set-key (kbd "C-c k") 'counsel-rg)
-      (global-set-key (kbd "C-c m") 'counsel-linux-app)
-      (global-set-key (kbd "C-c n") 'counsel-fzf)
-      (global-set-key (kbd "C-x l") 'counsel-locate)
-      (global-set-key (kbd "C-c J") 'counsel-file-jump)
-      (global-set-key (kbd "C-c C-r") 'ivy-resume)
-      (global-set-key (kbd "C-c b") 'counsel-bookmark)
-      (global-set-key (kbd "C-c l") 'counsel-outline)
-      (global-set-key (kbd "C-c F") 'counsel-org-file))
+            ivy-count-format "(%d/%d) "
+            ivy-re-builders-alist
+          '((t . ivy--regex-ignore-order)))
+      (evil-global-set-key 'normal (kbd "<leader>s") 'swiper-isearch)
+      (evil-global-set-key 'normal (kbd "/") 'swiper-isearch)
+      (evil-global-set-key 'normal (kbd "<leader>c") 'counsel-M-x)
+      (evil-global-set-key 'normal (kbd "<leader>xf") 'counsel-find-file)
+      (evil-global-set-key 'normal (kbd "<leader>y") 'counsel-yank-pop)
+      (evil-global-set-key 'normal (kbd "<leader>xb") 'ivy-switch-buffer)
+      (evil-global-set-key 'normal (kbd "<leader>v") 'ivy-push-view)
+      (evil-global-set-key 'normal (kbd "<leader>V") 'ivy-pop-view)
+      (evil-global-set-key 'normal (kbd "<leader>g") 'counsel-rg)
+      (evil-global-set-key 'normal (kbd "<leader>a") 'counsel-linux-app)
+      (evil-global-set-key 'normal (kbd "<leader>ff") 'counsel-fzf)
+      (evil-global-set-key 'normal (kbd "<leader>xl") 'counsel-locate)
+      (evil-global-set-key 'normal (kbd "<leader>xF") 'counsel-file-jump)
+      (evil-global-set-key 'normal (kbd "<leader>xr") 'ivy-resume)
+      (evil-global-set-key 'normal (kbd "<leader>b") 'counsel-bookmark)
+      (evil-global-set-key 'normal (kbd "<leader>oo") 'counsel-outline))
   #+END_SRC
 
   Projectile for project navigation.
@@ -251,7 +265,7 @@ Super agenda does not support tag groups, that's why we have to list *all* relev
     (use-package projectile
       :config
       (projectile-mode +1)
-      (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+      (evil-define-key 'normal projectile-mode-map (kbd "<leader>p") 'projectile-command-map))
 
     (use-package counsel-projectile
       :config
@@ -261,6 +275,7 @@ Super agenda does not support tag groups, that's why we have to list *all* relev
   Magit for git integration.
   #+BEGIN_SRC emacs-lisp
     (use-package magit)
+    (evil-global-set-key 'normal (kbd "<leader>t") 'magit-status)
   #+END_SRC
 
 * Programming
