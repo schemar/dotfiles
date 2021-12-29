@@ -78,6 +78,7 @@
         - kakoune
         - kitty
         - libsecret
+        - libtool
         - lxappearance
         - maim
         - NetworkManager

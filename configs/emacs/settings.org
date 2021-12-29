@@ -7,6 +7,12 @@ Also required by evil for redo-functionality.
 #+BEGIN_SRC emacs-lisp
   (use-package undo-fu)
 #+END_SRC
+** Zoom window to full frame
+#+BEGIN_SRC emacs-lisp
+  (use-package zoom-window
+    :config
+    (custom-set-variables '(zoom-window-mode-line-color "#bf8ead")))
+#+END_SRC
 * Evil Mode
   Re-map the default universal argument from ~C-u~ to ~C-f~.
   ~C-u~ is used by evil mode to scroll up half a screen.
@@ -69,6 +75,7 @@ Also required by evil for redo-functionality.
   (evil-global-set-key 'normal (kbd "<leader>w1") 'delete-other-windows)
   (evil-global-set-key 'normal (kbd "<leader>w0") 'delete-window)
   (evil-global-set-key 'normal (kbd "<leader>wc") 'delete-window)
+  (evil-global-set-key 'normal (kbd "<leader>wz") 'zoom-window-zoom)
 #+END_SRC
 ** Use evil-collection to have evil-bindings in other packages like magit.
 #+BEGIN_SRC emacs-lisp
@@ -344,4 +351,9 @@ Show whitespaces everywhere
     ;; enable typescript-tslint checker
     (flycheck-add-mode 'typescript-tslint 'web-mode)
   #+END_SRC
-  
+** Terminal
+Use ~vterm~ as terminal inside emacs.
+Use ~C-c C-c~ to send ~C-c~ to terminal.
+#+BEGIN_SRC emacs-lisp
+  (use-package vterm)
+#+END_SRC
