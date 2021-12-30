@@ -1,9 +1,15 @@
 #+title: Emacs settings file
 
 * Basics
+** Winner redo/undo
+Winner mode to go back/forward when interacting with windows using ~M-left/M-right~.
+#+BEGIN_SRC emacs-lisp
+  (winner-mode +1)
+  (define-key winner-mode-map (kbd "<M-left>") #'winner-undo)
+  (define-key winner-mode-map (kbd "<M-right>") #'winner-redo)
+#+END_SRC
 ** Undo/Redo
 Use the undo-fu package to not have Emacs' confusing undo/redo functionality.
-Also required by evil for redo-functionality.
 #+BEGIN_SRC emacs-lisp
   (use-package undo-fu)
 #+END_SRC
@@ -13,91 +19,6 @@ Also required by evil for redo-functionality.
     :config
     (custom-set-variables '(zoom-window-mode-line-color "#bf8ead")))
 #+END_SRC
-* Evil Mode
-  Re-map the default universal argument from ~C-u~ to ~C-f~.
-  ~C-u~ is used by evil mode to scroll up half a screen.
-  #+BEGIN_SRC emacs-lisp
-    (define-key global-map (kbd "C-f") 'universal-argument)
-    (define-key universal-argument-map (kbd "C-u") nil)
-    (define-key universal-argument-map (kbd "C-f") 'universal-argument-more)
-  #+END_SRC
-** Evil mode itself
-   #+BEGIN_SRC emacs-lisp
-     (use-package evil
-       :init
-       (setq evil-want-keybinding nil
-             evil-want-C-u-scroll t
-             evil-overriding-maps nil ;; Evil everywhere.
-             evil-repeat-move-cursor nil ;; Keeps cursor in place when repeating an insert.
-             evil-move-cursor-back nil ;; Do not move the cursor back when leaving insert mode.
-             evil-move-beyond-eol t ;; To be able to move "onto" newline character.
-             evil-undo-system 'undo-fu) ;; Dependency is installed under * Basics.
-       :config
-       (evil-mode 1)
-       (define-key evil-motion-state-map (kbd "C-f") nil)) ;; Unbind C-f that we use as comand prefix (bound above).
-   #+END_SRC
-** Evil Emacs key bindings
-   #+BEGIN_SRC emacs-lisp
-     ;; set leader key in all states
-     (evil-set-leader nil (kbd "C-SPC"))
-     ;; set leader key in specific states
-     (evil-set-leader 'normal (kbd "SPC"))
-     (evil-set-leader 'visual (kbd "SPC"))
-     (evil-set-leader 'insert (kbd "C-SPC"))
-
-     (evil-global-set-key 'normal (kbd "gl") 'evil-end-of-line)
-     (evil-global-set-key 'normal (kbd "gh") 'evil-beginning-of-line)
-     (evil-global-set-key 'normal (kbd "gj") 'end-of-buffer)
-     (evil-global-set-key 'normal (kbd "gk") 'beginning-of-buffer)
-     (evil-global-set-key 'normal (kbd "ga") 'evil-switch-to-windows-last-buffer)
-     (evil-global-set-key 'normal (kbd "<leader>xs") 'save-buffer)
-     (evil-global-set-key 'normal (kbd "<leader>xc") 'save-buffers-kill-terminal)
-     (evil-global-set-key 'normal (kbd "<leader>r") 'replace-string)
-     (evil-global-set-key 'visual (kbd "<leader>r") 'replace-string)
-   #+END_SRC
-*** Window management
-#+BEGIN_SRC emacs-lisp
-  (evil-global-set-key 'normal (kbd "<leader>w+") 'evil-window-increase-height)
-  (evil-global-set-key 'normal (kbd "<leader>w-") 'evil-window-decrease-height)
-  (evil-global-set-key 'normal (kbd "<leader>w<") 'evil-window-decrease-width)
-  (evil-global-set-key 'normal (kbd "<leader>w>") 'evil-window-increase-width)
-  (evil-global-set-key 'normal (kbd "<leader>ws") 'evil-window-vsplit)
-  (evil-global-set-key 'normal (kbd "<leader>wv") 'evil-window-split)
-  (evil-global-set-key 'normal (kbd "<leader>wh") 'evil-window-left)
-  (evil-global-set-key 'normal (kbd "<leader>wj") 'evil-window-down)
-  (evil-global-set-key 'normal (kbd "<leader>wk") 'evil-window-up)
-  (evil-global-set-key 'normal (kbd "<leader>wl") 'evil-window-right)
-  (evil-global-set-key 'normal (kbd "<leader>wH") 'evil-window-move-far-left)
-  (evil-global-set-key 'normal (kbd "<leader>wJ") 'evil-window-move-very-bottom)
-  (evil-global-set-key 'normal (kbd "<leader>wK") 'evil-window-move-very-top)
-  (evil-global-set-key 'normal (kbd "<leader>wL") 'evil-window-move-far-right)
-  (evil-global-set-key 'normal (kbd "<leader>wn") 'evil-window-new)
-  (evil-global-set-key 'normal (kbd "<leader>wr") 'evil-window-rotate-downwards)
-  (evil-global-set-key 'normal (kbd "<leader>wR") 'evil-window-rotate-upwards)
-  (evil-global-set-key 'normal (kbd "<leader>wu") 'winner-undo)
-  (evil-global-set-key 'normal (kbd "<leader>wU") 'winner-red)
-  (evil-global-set-key 'normal (kbd "<leader>w1") 'delete-other-windows)
-  (evil-global-set-key 'normal (kbd "<leader>w0") 'delete-window)
-  (evil-global-set-key 'normal (kbd "<leader>wc") 'delete-window)
-  (evil-global-set-key 'normal (kbd "<leader>wz") 'zoom-window-zoom)
-#+END_SRC
-** Use evil-collection to have evil-bindings in other packages like magit.
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-collection
-    :after evil
-    :config
-    (evil-collection-init))
-#+END_SRC
-** Use evil-org to have evil-bindings in org-mode.
-#+BEGIN_SRC emacs-lisp
-  (use-package evil-org
-    :after org
-    :hook (org-mode . (lambda () evil-org-mode))
-    :config
-    (require 'evil-org-agenda)
-    (evil-org-agenda-set-keys))
-#+END_SRC
-
 * Org, Org-Roam, and productivity
 ** Org
    The built-in version of Org is outdated and not sufficient for Org-Roam.
@@ -131,9 +52,6 @@ Also required by evil for redo-functionality.
    #+END_SRC
 ** Org Keybindings
 #+BEGIN_SRC emacs-lisp
-  (evil-global-set-key 'normal (kbd "<leader>oa") 'org-agenda)
-  (evil-define-key nil org-mode-map (kbd "<leader>ot") 'org-todo)
-  (evil-define-key nil org-mode-map (kbd "<leader>og") 'org-set-tags-command)
 #+END_SRC
 ** Org-QL
    Org query language to build agenda-like views based on an input query.
@@ -168,41 +86,40 @@ Also required by evil for redo-functionality.
 ** Org-Roam
    Use ~<leader>wu~ and ~<leader>wU~ to go back and forth in the windows (bound earlier).
    #+BEGIN_SRC emacs-lisp
-      (use-package org-roam
-        :config
-        (setq org-roam-directory (file-truename "~/Documents/org")
-      	org-roam-dailies-directory "daily/"
-      	org-roam-dailies-capture-templates
-      	'(("d" "default" entry
-      	   "* %?"
-      	   :target (file+head "%<%Y-%m-%d>.org"
-      			      "#+title: %<%Y-%m-%d>\n"))))
-        (org-roam-db-autosync-mode)
-        (add-to-list 'display-buffer-alist
-      	     '("\\*org-roam\\*"
-      	       (display-buffer-in-direction)
-      	       (direction . right)
-      	       (window-width . 0.33)
-      	       (window-height . fit-window-to-buffer))))
-      (evil-global-set-key 'normal (kbd "<leader>oi") 'org-roam-node-insert)
-      (evil-global-set-key 'insert (kbd "<leader>oi") 'org-roam-node-insert)
-      (evil-global-set-key 'normal (kbd "<leader>oi") 'org-roam-id-get-create)
-      (evil-global-set-key 'insert (kbd "<leader>oi") 'org-roam-id-get-create)
-      (evil-global-set-key 'normal (kbd "<leader>of") 'org-roam-node-find)
-      (evil-global-set-key 'normal (kbd "<leader>oc") 'org-roam-capture)
-      (evil-global-set-key 'normal (kbd "<leader>ob") 'org-roam-buffer-toggle)
-      (evil-global-set-key 'insert (kbd "<leader>ob") 'org-roam-buffer-toggle)
-      (evil-global-set-key 'normal (kbd "<leader>ol") 'org-roam-alias-add)
-      (evil-global-set-key 'insert (kbd "<leader>ol") 'org-roam-alias-add)
-      (evil-global-set-key 'normal (kbd "<leader>or") 'org-roam-ref-add)
-      (evil-global-set-key 'insert (kbd "<leader>or") 'org-roam-ref-add)
-      (evil-global-set-key 'normal (kbd "<leader>oj") 'org-roam-dailies-goto-today)
+     (use-package org-roam
+       :after org
+       :config
+       (setq org-roam-directory (file-truename "~/Documents/org")
+       org-roam-dailies-directory "daily/"
+       org-roam-dailies-capture-templates
+       '(("d" "default" entry
+          "* %?"
+          :target (file+head "%<%Y-%m-%d>.org"
+                             "#+title: %<%Y-%m-%d>\n"))))
+       (org-roam-db-autosync-mode)
+       (add-to-list 'display-buffer-alist
+            '("\\*org-roam\\*"
+              (display-buffer-in-direction)
+              (direction . right)
+              (window-width . 0.33)
+              (window-height . fit-window-to-buffer)))
+       :bind
+       ("C-c o i" . org-roam-node-insert)
+       ("C-c o f" . org-roam-node-find)
+       ("C-c o n" . org-roam-id-get-create)
+       ("C-c o c" . org-roam-capture)
+       ("C-c o b" . org-roam-buffer-toggle)
+       ("C-c o a" . org-roam-alias-add)
+       ("C-c o r" . org-roam-ref-add)
+       ("C-c o t" . org-roam-dailies-goto-today))
    #+END_SRC
 ** Deft
    Show and filter org-roam notes by contained text.
    #+BEGIN_SRC emacs-lisp
      (use-package deft
-       :after org
+       :after org-roam
+       :bind
+       ("C-c o d" . deft)
        :custom
        (deft-recursive t)
        (deft-use-filter-string-for-filename t)
@@ -210,7 +127,6 @@ Also required by evil for redo-functionality.
        (deft-default-extension "org")
        (deft-directory org-roam-directory)
        (deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n"))
-     (evil-global-set-key 'normal (kbd "<leader>od") 'deft)
    #+END_SRC
 * Help
   Show all available key-bindings in the mini buffer.
@@ -279,25 +195,22 @@ Show whitespaces everywhere
             ivy-count-format "(%d/%d) "
             ivy-re-builders-alist
           '((t . ivy--regex-ignore-order)))
-      (evil-global-set-key 'normal (kbd "<leader>s") 'swiper-isearch)
-      (evil-global-set-key 'normal (kbd "/") 'swiper-isearch)
-      (evil-global-set-key 'normal (kbd "<leader>c") 'counsel-M-x)
-      (evil-global-set-key 'insert (kbd "<leader>c") 'counsel-M-x)
-      (evil-global-set-key 'normal (kbd "<leader>xf") 'counsel-find-file)
-      (evil-global-set-key 'normal (kbd "<leader>y") 'counsel-yank-pop)
-      (evil-global-set-key 'normal (kbd "<leader>Y") 'clipboard-yank)
-      (evil-global-set-key 'insert (kbd "<leader>Y") 'clipboard-yank)
-      (evil-global-set-key 'normal (kbd "<leader>xb") 'ivy-switch-buffer)
-      (evil-global-set-key 'normal (kbd "<leader>v") 'ivy-push-view)
-      (evil-global-set-key 'normal (kbd "<leader>V") 'ivy-pop-view)
-      (evil-global-set-key 'normal (kbd "<leader>g") 'counsel-rg)
-      (evil-global-set-key 'normal (kbd "<leader>a") 'counsel-linux-app)
-      (evil-global-set-key 'normal (kbd "<leader>ff") 'counsel-fzf)
-      (evil-global-set-key 'normal (kbd "<leader>xl") 'counsel-locate)
-      (evil-global-set-key 'normal (kbd "<leader>xF") 'counsel-file-jump)
-      (evil-global-set-key 'normal (kbd "<leader>xr") 'ivy-resume)
-      (evil-global-set-key 'normal (kbd "<leader>b") 'counsel-bookmark)
-      (evil-global-set-key 'normal (kbd "<leader>oo") 'counsel-outline))
+          (global-set-key (kbd "C-s") 'swiper-isearch)
+          (global-set-key (kbd "M-x") 'counsel-M-x)
+          (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+          (global-set-key (kbd "M-y") 'counsel-yank-pop)
+          (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
+          (global-set-key (kbd "C-c v") 'ivy-push-view)
+          (global-set-key (kbd "C-c V") 'ivy-pop-view)
+          (global-set-key (kbd "C-c g") 'counsel-rg)
+          (global-set-key (kbd "C-c m") 'counsel-linux-app)
+          (global-set-key (kbd "C-c n") 'counsel-fzf)
+          (global-set-key (kbd "C-x l") 'counsel-locate)
+          (global-set-key (kbd "C-c J") 'counsel-file-jump)
+          (global-set-key (kbd "C-c C-r") 'ivy-resume)
+          (global-set-key (kbd "C-c b") 'counsel-bookmark)
+          (global-set-key (kbd "C-c l") 'counsel-outline)
+          (global-set-key (kbd "C-c F") 'counsel-org-file))
   #+END_SRC
 
   Projectile for project navigation.
@@ -305,7 +218,7 @@ Show whitespaces everywhere
     (use-package projectile
       :config
       (projectile-mode +1)
-      (evil-define-key 'normal projectile-mode-map (kbd "<leader>p") 'projectile-command-map))
+      (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
     (use-package counsel-projectile
       :config
@@ -330,7 +243,6 @@ Show whitespaces everywhere
   Magit for git integration.
   #+BEGIN_SRC emacs-lisp
     (use-package magit)
-    (evil-global-set-key 'normal (kbd "<leader>t") 'magit-status)
   #+END_SRC
 
 * Programming
@@ -358,8 +270,7 @@ Show whitespaces everywhere
       :after (typescript-mode company flycheck)
       :hook ((typescript-mode . tide-setup)
              (typescript-mode . tide-hl-identifier-mode)
-             (before-save . tide-format-before-save))
-      :config (evil-collection-define-key 'normal 'tide-mode-map "gr" 'tide-references))
+             (before-save . tide-format-before-save)))
     ;; TSX
     (require 'web-mode)
     (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
