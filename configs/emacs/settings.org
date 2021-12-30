@@ -312,6 +312,21 @@ Show whitespaces everywhere
       (counsel-projectile-mode 1))
   #+END_SRC
 
+  Prescient for faster candidate filtering.
+  #+BEGIN_SRC emacs-lisp
+    (use-package prescient
+      :config
+      (prescient-persist-mode))
+    (use-package ivy-prescient
+      :after ivy
+      :config
+      (ivy-prescient-mode))
+    (use-package company-prescient
+      :after company
+      :config
+      (company-prescient-mode))
+  #+END_SRC
+
   Magit for git integration.
   #+BEGIN_SRC emacs-lisp
     (use-package magit)
