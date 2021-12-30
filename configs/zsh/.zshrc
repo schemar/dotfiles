@@ -18,9 +18,9 @@ alias g='git'
 alias y='yarn'
 
 alias l='exa -al --git --icons'
-# Use b as interactive ls replacement
+# Use ll as interactive ls replacement
 alias ll='br -sdp'
-# Use bd to search for a folder with broot
+# Use br to search for a folder with broot
 ld() {br --only-folders --cmd "$1;"}
 alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
@@ -42,7 +42,6 @@ HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 unsetopt beep
-bindkey -v
 
 zstyle :compinstall filename "$HOME/.zshrc"
 
