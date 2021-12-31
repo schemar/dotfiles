@@ -26,6 +26,20 @@ String manipulation library =s= from [[https://github.com/magnars/s.el]].
 #+BEGIN_SRC emacs-lisp
   (use-package s)
 #+END_SRC
+** Tabs
+Tabs help organize window setups.
+It is convenient to have tabs for that purpose, like a mail tab, a development tab, and so on.
+
+Use the prefix =C-x t= to see the usual tab commands.
+Most common are probably:
+- =C-x t 2=: Create new tab
+- =C-x t r=: Rename a tab
+- =C-x t RET=: Choose tabs by name
+
+I do not ever want to see the tab-bar at the top of the frame.
+#+BEGIN_SRC emacs-lisp
+  (setq tab-bar-show nil)
+#+END_SRC
 * Org
 ** Org
 The built-in version of Org is outdated and not sufficient for Org-Roam.
