@@ -37,7 +37,7 @@ Org-super-agenda and org-ql do not support tag groups. So it doesn't make sense 
         org-hide-emphasis-markers t
         org-startup-with-inline-images t
         org-image-acual-width '(300))
-  (setq org-todo-keywords '((type "TODO(t)" "WAITING(w)" "FOLLOWUP(f)" "|" "DONE(d)" "DELEGATED(l)" "ABANDONED(a)")))
+  (setq org-todo-keywords '((type "TODO(t)" "TODAY(y)" "WAITING(w)" "FOLLOWUP(f)" "|" "DONE(d)" "DELEGATED(l)" "ABANDONED(a)")))
   (setq org-agenda-files (directory-files-recursively "~/Documents/org/" "\\.org$"))
 #+END_SRC
 
