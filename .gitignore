@@ -8,3 +8,5 @@ configs/nushell/nu-env.toml
 configs/qutebrowser/autoconfig.yml
 # Ignoring the symlink to the original autoload
 configs/kak/autoload/autoload
+# Ignore temporary files that end in ~
+*~
