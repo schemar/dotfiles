@@ -56,7 +56,25 @@ Org-super-agenda and org-ql do not support tag groups. So it doesn't make sense 
         org-hide-emphasis-markers t
         org-startup-with-inline-images t
         org-image-acual-width '(300))
-  (setq org-todo-keywords '((type "TODO(t)" "TODAY(y)" "WAITING(w)" "FOLLOWUP(f)" "|" "DONE(d)" "DELEGATED(l)" "ABANDONED(a)")))
+#+END_SRC
+
+=!= means the timestamp is recorded when switching to this state.
+=@= means a note must be recorded when switching to this state.
+If asked for a note, you can only record the timestamp by =C-c C-c= on the empty prompt.
+=/!= means a timestamp should be recorded when /leaving/ that state.
+#+BEGIN_SRC emacs-lisp
+  (setq org-todo-keywords '((type "TODO(t)" "TODAY(y!)" "WAITING(w@/!)" "FOLLOWUP(f@/!)" "|" "DONE(d!)" "DELEGATED(l@)" "ABANDONED(a@)")))
+#+END_SRC
+
+Make sure that tasks with sub-tasks or a sub-checklist cannot be marked done, if the sub-tasks/list aren't done.
+#+BEGIN_SRC emacs-lisp
+  (setq org-enforce-todo-dependencies t
+        org-enforce-todo-checkbox-dependencies t)
+#+END_SRC
+
+Insert state change notes and time stamps into a drawer.
+#+BEGIN_SRC emacs-lisp
+  (setq org-log-into-drawer t)
 #+END_SRC
 
 If org agenda gets slow, check out how others limit the number of notes to only those that actually contain TODOs.
@@ -146,7 +164,7 @@ Use ~<leader>wu~ and ~<leader>wU~ to go back and forth in the windows (bound ear
     '(("d" "default" entry
        "* %?"
        :target (file+head "%<%Y-%m-%d>.org"
-                          "#+TITLE: %<%Y-%m-%d>\n"))))
+                          "#+title: %<%Y-%m-%d>\n"))))
     (org-roam-db-autosync-mode)
     (add-to-list 'display-buffer-alist
          '("\\*org-roam\\*"
