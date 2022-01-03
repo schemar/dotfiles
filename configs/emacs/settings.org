@@ -289,10 +289,21 @@ Show whitespaces everywhere
 
 *** TODO Use a variable pitch (non-monospaced) font for org-mode, but not for code blocks inside org.
 ** Theme
+Use the =describe-char= command to find out about font faces.
+Changes from there will be written to the auto-generated config file.
+
+*** Nord theme
 #+BEGIN_SRC emacs-lisp
-(use-package nord-theme
-  :config
-  (load-theme 'nord t))
+  (use-package nord-theme
+    :config
+    (load-theme 'nord t))
+#+END_SRC
+
+Override some faces in order for them to appear correctly:
+#+BEGIN_SRC emacs-lisp
+  (custom-set-faces
+    ;; Fix the dimmed todo-face to be actually dimmed instead of having a bright yellow background.
+    '(org-agenda-dimmed-todo-face ((t (:background "#2e3440" :foreground "#4c566a")))))
 #+END_SRC
 ** Mode Line
 I no longer use powerline, as there wasn't an easy way to compress the list of minor modes.
