@@ -77,6 +77,25 @@ Insert state change notes and time stamps into a drawer.
   (setq org-log-into-drawer t)
 #+END_SRC
 
+Show Monday as first day of week.
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-start-on-weekday 1)
+  (setq calendar-week-start-day 1)
+#+END_SRC
+
+Use org-appear to show emphasis-markers, which are hidden otherwise, when the cursor is on them.
+#+BEGIN_SRC emacs-lisp
+  (use-package org-appear
+    :hook (org-mode . org-appear-mode))
+#+END_SRC
+Use org-superstar to make the bullets look nicer.
+#+BEGIN_SRC emacs-lisp
+  (use-package org-superstar
+    :config
+    (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+#+END_SRC
+
+*** Org Agenda
 If org agenda gets slow, check out how others limit the number of notes to only those that actually contain TODOs.
 There is lots of info on the interwebs.
 
@@ -101,22 +120,10 @@ Therefore we take them out of the list of files.
                (directory-files-recursively "~/Documents/org/" "\\.org$")))))
 #+END_SRC
 
-Show Monday as first day of week.
+Do not show DONE items in the agenda.
 #+BEGIN_SRC emacs-lisp
-  (setq org-agenda-start-on-weekday 1)
-  (setq calendar-week-start-day 1)
-#+END_SRC
-
-Use org-appear to show emphasis-markers, which are hidden otherwise, when the cursor is on them.
-#+BEGIN_SRC emacs-lisp
-  (use-package org-appear
-    :hook (org-mode . org-appear-mode))
-#+END_SRC
-Use org-superstar to make the bullets look nicer.
-#+BEGIN_SRC emacs-lisp
-  (use-package org-superstar
-    :config
-    (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
+  (setq org-agenda-skip-scheduled-if-done t
+        org-agenda-skip-deadline-if-done t)
 #+END_SRC
 ** Org Keybindings
 #+BEGIN_SRC emacs-lisp
@@ -153,18 +160,17 @@ Super agenda does not support tag groups, that's why we have to list *all* relev
   ;; (org-super-agenda-mode)
 #+End_SRC
 ** Org-Roam
-Use ~<leader>wu~ and ~<leader>wU~ to go back and forth in the windows (bound earlier).
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam
     :after org
     :config
     (setq org-roam-directory (file-truename "~/Documents/org")
-    org-roam-dailies-directory "daily/"
-    org-roam-dailies-capture-templates
-    '(("d" "default" entry
-       "* %?"
-       :target (file+head "%<%Y-%m-%d>.org"
-                          "#+title: %<%Y-%m-%d>\n"))))
+          org-roam-dailies-directory "daily/"
+          org-roam-dailies-capture-templates
+          '(("d" "default" entry
+             "* %?"
+             :target (file+head "%<%Y-%m-%d>.org"
+                                "#+title: %<%Y-%m-%d>\n"))))
     (org-roam-db-autosync-mode)
     (add-to-list 'display-buffer-alist
          '("\\*org-roam\\*"
@@ -180,7 +186,17 @@ Use ~<leader>wu~ and ~<leader>wU~ to go back and forth in the windows (bound ear
     ("C-c o b" . org-roam-buffer-toggle)
     ("C-c o a" . org-roam-alias-add)
     ("C-c o r" . org-roam-ref-add)
+    ("C-c o g" . org-roam-dailies-goto-date)
     ("C-c o t" . org-roam-dailies-goto-today))
+#+END_SRC
+
+Automatically open and close the org-roam buffer when opening an org-roam file.
+#+BEGIN_SRC emacs-lisp
+  ;; (add-hook 'find-file-hook
+  ;;           (lambda ()
+  ;;             (and (org-roam-file-p)
+  ;;                  (not (eq 'visible (org-roam-buffer--visibility)))
+  ;;                '  (org-roam-buffer-toggle))))
 #+END_SRC
 ** Deft
 Show and filter org-roam notes by contained text.
