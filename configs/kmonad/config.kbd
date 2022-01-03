@@ -64,6 +64,7 @@
     ;rm (tap-hold-next-release 500 ; rmet)
     'rc (tap-hold-next-release 500 ' rctl)
     cec (tap-hold-next-release 500 esc lctl)
+    scs (tap-hold-next-release 500 caps lsft)
 )
 
 (deflayer default
@@ -71,7 +72,7 @@
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc  del  home
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \          end
   @cec a    s    d    f    g    h    j    k    l    @;rm @'rc ret        ins  pgup
-  lsft z    x    c    v    b    n    m    ,    .    /         rsft       up   pgdn
+  @scs z    x    c    v    b    n    m    ,    .    /         rsft       up   pgdn
   lctl lmet @las           spc            @raa cmp  rctl            left down rght
 )
 
