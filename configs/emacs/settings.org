@@ -512,9 +512,7 @@ Use =multi-vterm= to easier manage =vterm= buffers.
   (use-package lsp-ui
     :commands lsp-ui-mode
     :config
-    (setq lsp-ui-sideline-show-diagnostics t
-          lsp-ui-sideline-show-hover t
-          lsp-ui-sideline-show-code-actions t))
+    (setq lsp-ui-sideline-show-diagnostics t))
   (use-package lsp-ivy)
 #+END_SRC
 ** Tree Sitter
