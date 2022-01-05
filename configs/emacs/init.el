@@ -6,7 +6,9 @@
 ;;; Code:
 ;; Increase the garbage collection threshold in the hopes of improving
 ;; perfomance. The default is 800kB. Doom uses 16mb and Spacemacs uses 100mb.
-(setq gc-cons-threshold 100000000) ;; That is 100mB.
+(setq gc-cons-threshold (* 100 1024 1024)
+      read-process-output-max (* 1024 1024)
+      create-lockfiles nil) ;; lock files will kill `npm start'
 
 ;; Create another auto-generated init file so that the handcrafted one
 ;; won't be overwritten by Emacs.

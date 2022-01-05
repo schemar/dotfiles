@@ -40,6 +40,17 @@ I do not ever want to see the tab-bar at the top of the frame.
 #+BEGIN_SRC emacs-lisp
   (setq tab-bar-show nil)
 #+END_SRC
+** Multiple cursors
+#+BEGIN_SRC emacs-lisp
+  (use-package multiple-cursors
+    :config
+    (global-set-key (kbd "C-S-m l") 'mc/edit-lines)
+    (global-set-key (kbd "C-S-m n") 'mc/mark-next-like-this)
+    (global-set-key (kbd "C-S-m p") 'mc/mark-previous-like-this)
+    (global-set-key (kbd "C-S-m m") 'mc/mark-all-like-this)
+    ;; Make <return> enter a newline:
+    (define-key mc/keymap (kbd "<return>") nil))
+#+END_SRC
 * Org
 ** Org
 The built-in version of Org is outdated and not sufficient for Org-Roam.
@@ -94,7 +105,6 @@ Use org-superstar to make the bullets look nicer.
     :config
     (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))))
 #+END_SRC
-
 *** Org Agenda
 If org agenda gets slow, check out how others limit the number of notes to only those that actually contain TODOs.
 There is lots of info on the interwebs.
@@ -128,6 +138,8 @@ Do not show DONE items in the agenda.
 ** Org Keybindings
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-c a") 'org-agenda)
+  ;; Unbind the key combination that is used by multiple-cursors.
+  (define-key org-mode-map (kbd "C-S-m") nil)
 #+END_SRC
 ** Org-QL
 Org query language to build agenda-like views based on an input query.
@@ -197,6 +209,16 @@ Automatically open and close the org-roam buffer when opening an org-roam file.
   ;;             (and (org-roam-file-p)
   ;;                  (not (eq 'visible (org-roam-buffer--visibility)))
   ;;                '  (org-roam-buffer-toggle))))
+#+END_SRC
+** Org-Roam-Ui
+#+BEGIN_SRC emacs-lisp
+  (use-package org-roam-ui
+    :after org-roam
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
 #+END_SRC
 ** Deft
 Show and filter org-roam notes by contained text.
@@ -280,7 +302,7 @@ Company for auto-completion.
   (use-package company
     :config
     (setq company-idle-delay 0
-          company-minimum-prefix-length 4
+          company-minimum-prefix-length 1
           company-selection-wrap-around t))
   (add-hook 'after-init-hook 'global-company-mode)
 #+END_SRC
@@ -317,9 +339,11 @@ Changes from there will be written to the auto-generated config file.
 
 Override some faces in order for them to appear correctly:
 #+BEGIN_SRC emacs-lisp
-  (custom-set-faces
-    ;; Fix the dimmed todo-face to be actually dimmed instead of having a bright yellow background.
-    '(org-agenda-dimmed-todo-face ((t (:background "#2e3440" :foreground "#4c566a")))))
+      (custom-set-faces
+        ;; Fix the dimmed todo-face to be actually dimmed instead of having a bright yellow background.
+        '(org-agenda-dimmed-todo-face ((t (:background "#2e3440" :foreground "#4c566a"))))
+        ;; Highlight the current line number
+        '(line-number-current-line((t (:background "#4c566a" :foreground "#88c0d0")))))
 #+END_SRC
 ** Mode Line
 I no longer use powerline, as there wasn't an easy way to compress the list of minor modes.
@@ -364,7 +388,7 @@ Counsel, Ivy, and Swipe for more complete completion and filtering.
         (global-set-key (kbd "C-c J") 'counsel-file-jump)
         (global-set-key (kbd "C-c C-r") 'ivy-resume)
         (global-set-key (kbd "C-c b") 'counsel-bookmark)
-        (global-set-key (kbd "C-c l") 'counsel-outline)
+        (global-set-key (kbd "C-c c") 'counsel-outline)
         (global-set-key (kbd "C-c F") 'counsel-org-file))
 #+END_SRC
 
@@ -400,6 +424,13 @@ Magit for git integration.
   (use-package magit)
 #+END_SRC
 * Programming
+** Checking and linting
+Flycheck for all languages to do diagnostics in-line.
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :init (global-flycheck-mode))
+#+END_SRC
+** General coding environment
 #+BEGIN_SRC emacs-lisp
   ;; Add line numbers in all programming modes.
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
@@ -408,36 +439,89 @@ Magit for git integration.
   (use-package highlight-numbers
     :config
     (add-hook 'prog-mode-hook 'highlight-numbers-mode))
-
-  ;; flycheck for all languages to do diagnostics in-line.
-  (use-package flycheck
-    :init (global-flycheck-mode))
-
+#+END_SRC
+** YAML
+#+BEGIN_SRC emacs-lisp
   ;; YAML
   (use-package yaml-mode)
-
+#+END_SRC
+** JSON
+#+BEGIN_SRC emacs-lisp
+  (use-package json-mode)
+#+END_SRC
+** Web Mode (incl. =TSX=)
+#+BEGIN_SRC emacs-lisp
   ;; Web Mode for all things web.
-  (use-package web-mode)
+  (use-package web-mode
+    :commands web-mode
+    :mode
+    (("\\.js\\'" . web-mode)
+     ("\\.jsx\\'" . web-mode)
+     ("\\.ts\\'" . web-mode)
+     ("\\.tsx\\'" . web-mode)
+     ("\\.css\\'" . web-mode)
+     ("\\.html\\'" . web-mode))
+    :config
+    (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+    (add-hook 'web-mode-hook
+              (lambda ()
+                (when (string-equal "tsx" (file-name-extension buffer-file-name))
+                  (setup-tide-mode))))
+    (flycheck-add-mode 'typescript-tslint 'web-mode))
+#+END_SRC
+** Terminal
+Use ~vterm~ as terminal inside emacs.
+To start a new terminal when one is already running, use =prefix + M-x vterm=.
+Use ~C-c C-c~ to send ~C-c~ to terminal.
+#+BEGIN_SRC emacs-lisp
+  (use-package vterm)
+#+END_SRC
 
-  ;; TypeScript
+Use =multi-vterm= to easier manage =vterm= buffers.
+#+BEGIN_SRC emacs-lisp
+  (use-package multi-vterm
+    :config
+   (global-set-key (kbd "C-c t t") #'multi-vterm)
+   (global-set-key (kbd "C-c t n") #'multi-vterm-next)
+   (global-set-key (kbd "C-c t p") #'multi-vterm-prev))
+#+END_SRC
+** Tide
+#+BEGIN_SRC emacs-lisp
   (use-package tide
     :after (typescript-mode company flycheck)
     :hook ((typescript-mode . tide-setup)
            (typescript-mode . tide-hl-identifier-mode)
            (before-save . tide-format-before-save)))
-  ;; TSX
-  (require 'web-mode)
-  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-  (add-hook 'web-mode-hook
-            (lambda ()
-              (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                (setup-tide-mode))))
-  ;; enable typescript-tslint checker
-  (flycheck-add-mode 'typescript-tslint 'web-mode)
 #+END_SRC
-** Terminal
-Use ~vterm~ as terminal inside emacs.
-Use ~C-c C-c~ to send ~C-c~ to terminal.
+** NPM
 #+BEGIN_SRC emacs-lisp
-  (use-package vterm)
+  (use-package npm-mode)
+#+END_SRC
+** LSP
+#+BEGIN_SRC emacs-lisp
+  (use-package lsp-mode
+    :hook
+    ((web-mode . lsp-deferred)
+     (typescript-mode . lsp-deferred)
+     (lsp-mode . lsp-enable-which-key-integration))
+    :commands lsp-deferred
+    :config
+    (setq lsp-log-io nil ;; No logging to improve perfomance
+          lsp-keymap-prefix "C-c l"
+          lsp-restart 'auto-restart))
+  (use-package lsp-ui
+    :commands lsp-ui-mode
+    :config
+    (setq lsp-ui-sideline-show-diagnostics t
+          lsp-ui-sideline-show-hover t
+          lsp-ui-sideline-show-code-actions t))
+  (use-package lsp-ivy)
+#+END_SRC
+** Tree Sitter
+#+BEGIN_SRC emacs-lisp
+  (use-package tree-sitter)
+  (use-package tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'web-mode-hook 'tree-sitter-hl-mode)
+  (add-hook 'typescript-mode-hook 'tree-sitter-hl-mode)
 #+END_SRC
