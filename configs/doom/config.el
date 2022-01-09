@@ -31,6 +31,12 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+;; Enable showing of whitespace.
+(global-whitespace-mode +1)
+
+;; Let cursor go onto newline character like in Emacs:
+(after! evil
+  (setq evil-move-beyond-eol t))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
