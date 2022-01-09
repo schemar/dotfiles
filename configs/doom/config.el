@@ -34,9 +34,12 @@
 ;; Enable showing of whitespace.
 (global-whitespace-mode +1)
 
-;; Let cursor go onto newline character like in Emacs:
 (after! evil
-  (setq evil-move-beyond-eol t))
+  ;; Let cursor go onto newline character like in Emacs.
+  (setq evil-move-beyond-eol t
+        ;; Do not move the cursor back when leaving insert mode.
+        evil-move-cursor-back nil))
+
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
