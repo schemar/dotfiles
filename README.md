@@ -8,7 +8,8 @@ This repository contains configurations for:
 ## Installation
 Use `./ansible/install.sh` if you start from a [Fedora i3 spin](https://spins.fedoraproject.org/i3/).
 
-Alternatively, you can use the `./installer` helper. It will install the packages and symlink the configs.
+Alternatively, you can use the (outdated) `./installer` helper.
+It will install the packages and symlink the configs.
 Run `./installer symlinks` if you only want to symlink all configs.
 
 ## Included Configurations
@@ -18,8 +19,8 @@ Run `./installer symlinks` if you only want to symlink all configs.
 * [asdf](https://github.com/asdf-vm/asdf)
 * [bat](https://github.com/sharkdp/bat)
 * [bottom](https://github.com/ClementTsang/bottom)
-* [broot](https://github.com/Canop/broot)
 * [direnv](https://github.com/direnv/direnv)
+* [(Doom) Emacs](https://github.com/hlissner/doom-emacs)❤️
 * [fd](https://github.com/sharkdp/fd)
 * [fzf](https://github.com/junegunn/fzf)
 * [kakoune editor](https://github.com/mawww/kakoune)❤️
@@ -37,6 +38,7 @@ Run `./installer symlinks` if you only want to symlink all configs.
 
 * [autorandr](https://github.com/phillipberndt/autorandr)
 * [dunst](https://github.com/dunst-project/dunst)
+* [(Doom) Emacs](https://github.com/hlissner/doom-emacs)❤️
 * [feh](https://github.com/derf/feh)
 * [i3](https://github.com/i3/i3)❤️
 * [kitty](https://github.com/kovidgoyal/kitty)❤️
@@ -47,7 +49,9 @@ Run `./installer symlinks` if you only want to symlink all configs.
 
 ## Usage
 
-An overview over the most common tasks follows below, especially if they differ from the default. Check the files' contents for more details.
+An overview over the most common tasks follows below,
+especially if they differ from the default.
+Check the files' contents for more details.
 
 ### Command Line
 
@@ -66,7 +70,8 @@ Prefix is `<ctrl>-b`.
 * `<ctrl>+{h,j,k,l}` to move curser across panes (works also with vim windows).
 * `<prefix> z` to (un)zoom the current pane.
 * `<prefix> {<,>,+,-}` resize panes by fixed amount left/right/up/down.
-* `<prefix> [` to enable copy mode. Use e.g. to scroll up to see older output. Movement in copy mode is vim-like (e.g. `<ctrl>+{d,u}` to move down/up a page).
+* `<prefix> [` to enable copy mode. Use e.g. to scroll up to see older output.
+   Movement in copy mode is vim-like (e.g. `<ctrl>+{d,u}` to move down/up a page).
 * `<prefix> u` fuzzy find and open a URL from the buffer.
 * `<prefix> tab` fuzzy find any previous tmux output (words, lines, URLs, paths).
 
@@ -75,7 +80,7 @@ Prefix is `<ctrl>-b`.
 Since kakoune has a helpful info panel, I don't need to list much here.
 Check the info panel when entering user mode with `,`.
 
-For example, you can select files to open with broot or open tig's blame on the current line.
+For example, you can select files to open with ranger or open tig's blame on the current line.
 
 There are some files in the .config/kak/autoload/ directory in addition to the .config/kak/kakrc file.
 Check there if something appears to be missing from kakrc.
@@ -103,7 +108,3 @@ The system includes [autorandr](https://github.com/phillipberndt/autorandr) to a
 If you have a new layout set up using for example arandr, run `autorandr --save <name>` to save the layout with the given name.
 Autorandr should automatically apply this layout the next time the monitors are connected identically.
 You can manually load a profile using `autorandr --load <name>`.
-
-### Qutebrowser
-
-To use bitwarden inside qutebrowser (`,bb`, `,bu`, and `,bp`), login to `bw` via the command line.

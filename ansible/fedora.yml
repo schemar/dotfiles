@@ -241,6 +241,20 @@
         dest: "{{dotfiles_dir}}/configs/kak/autoload/autoload"
         state: link
       tags: symlinks
+    - name: Download Doom Emacs
+      git:
+        repo: "https://github.com/hlissner/doom-emacs"
+        dest: "/home/{{username}}/.emacs.d"
+        update: no
+      tags: emacs
+    - name: Install Doom Emacs
+      shell:
+        cmd: "/home/{{username}}/.emacs.d/bin/doom --yes install"
+      tags: emacs
+    - name: Sync Doom Emacs
+      shell:
+        cmd: "/home/{{username}}/.emacs.d/bin/doom --yes sync"
+      tags: emacs
     - name: Create kakoune plugin dir
       file:
         path: "/home/{{username}}/.config/kak/plugins"
