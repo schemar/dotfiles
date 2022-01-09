@@ -1,306 +1,300 @@
 - hosts: localhost
-  become: true
   vars_prompt:
     - name: username
-      prompt: Username 
+      prompt: Username
       private: no
     - name: dotfiles_dir
       prompt: Dotfiles directory (e.g. /home/schemar/Projects/dotfiles without trailing slash)
       private: no
   tasks:
-  - name: Update all dnf packages
-    dnf:
-      name: "*"
-      state: latest
-    tags:
-      - packages
-      - updates
-  - name: Update flatpak packages
-    command: "flatpak update --noninteractive"
-    tags:
-      - packages
-      - updates
-  - name: Enable COPRs
-    community.general.copr:
-      state: enabled
-      name: "{{item}}"
-    with_items:
-      - atim/bottom
-      - atim/kakoune
-      - atim/nushell
-    tags: packages
-  - name: Enable RPM Fusion
-    shell: dnf install -y "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
-    args:
-      warn: no
-    tags: packages
-  - name: Replace i3 with i3-gaps
-    dnf:
-      name: "i3-gaps"
-      state: latest
-      allowerasing: yes
-      install_weak_deps: no
-    tags:
-      - packages
-      - i3gaps
-  - name: Install packages
-    dnf:
-      name: 
-        - acpi
-        - arandr
-        - arc-theme
-        - bat
-        - blueman
-        - bottom
-        - brightnessctl
-        - curl
-        - dex-autostart
-        - direnv
-        - dunst
-        - emacs
-        - evince
-        - evince-previewer
-        - exa
-        - fd-find
-        - feh
-        - flameshot
-        - fwupd
-        - fzf
-        - git-delta
-        - gnome-keyring
-        - gscan2pdf
-        - i3lock
-        - i3status
-        - ImageMagick
-        - iw
-        - jq
-        - kak-lsp
-        - kakoune
-        - kitty
-        - libsecret
-        - libtool
-        - lxappearance
-        - maim
-        - NetworkManager
-        - NetworkManager-openvpn
-        - NetworkManager-tui
-        - network-manager-applet
-        - openvpn
-        - papirus-icon-theme
-        - pavucontrol
-        - pdfarranger
-        - picom
-        - polybar
-        - procs
-        - python
-        - python3-tkinter
-        - qalculate-gtk
-        - ranger
-        - redshift
-        - redshift-gtk
-        - ripgrep
-        - roboto-fontface-fonts
-        - rofi
-        - seahorse
-        - tealdeer
-        - thunar
-        - tig
-        - tlp
-        - tmux
-        - vlc
-        - xbacklight
-        - xclip
-        - xdotool
-        - xfce4-power-manager
-        - xinput
-        - xmodmap
-        - xrdb
-        - xset
-        - xss-lock
-        - zoxide
-        - zsh
-      state: latest
-    tags: packages
-  - name: Get AppImageLauncher latest release URL
-    shell: "curl -s https://api.github.com/repos/TheAssassin/AppImageLauncher/releases/latest | grep 'https://.*appimagelauncher-.*x86_64.rpm' | cut -d\\\" -f4"
-    register: appimagelauncher_url
-    tags: packages
-  - name: Install AppImageLauncher
-    dnf:
-      name: "{{appimagelauncher_url.stdout}}"
-      disable_gpg_check: yes
-      state: present
-    tags: packages
-  - name: Clone autorandr
-    become_user: "{{username}}"
-    git:
-      repo: "https://github.com/phillipberndt/autorandr.git"
-      dest: "/home/{{username}}/.autorandr"
-    tags: packages
-  - name: Install autorandr
-    community.general.make:
-      chdir: /home/{{username}}/.autorandr
-      target: install
-    tags: packages
-  - name: Enable and start autorandr service
-    systemd:
-      name: autorandr
-      state: started
-      enabled: yes
-    tags: packages
-  - name: Download broot
-    get_url:
-      url: https://dystroy.org/broot/download/x86_64-linux/broot
-      dest: /usr/local/bin/broot
-    tags: packages
-  - name: Make broot executable
-    file:
-      path: /usr/local/bin/broot
-      mode: '+x'
-    tags: packages
-  - name: Install pip packages globally
-    pip:
-      name: ['tldextract', 'rofimoji']
-      state: latest
-    tags:
-      - packages
-      - pip
-  - name: Add the flathub flatpak repository
-    community.general.flatpak_remote:
-      name: flathub
-      flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-    tags:
-      - packages
-      - flatpak
-  - name: Allow flatpak to read theme settings
-    become_user: "{{username}}"
-    command: flatpak override --user --filesystem=xdg-config/gtk-3.0:ro
-    tags:
-      - packages
-      - flatpak
-  - name: Install flat packages
-    become_user: "{{username}}"
-    community.general.flatpak:
-      name: "{{item}}"
-    with_items:
-      - com.discordapp.Discord
-      - com.spotify.Client
-      - org.gtk.Gtk3theme.Arc-Dark
-      - org.gtk.Gtk3theme.Arc-Dark-solid
-      - org.onlyoffice.desktopeditors
-      - org.telegram.desktop
-    tags:
-      - packages
-      - flatpak
-  - name: Make firefox the default
-    become_user: "{{username}}"
-    command: xdg-settings set default-web-browser firefox.desktop
-    tags: packages
-  - name: Setup user account
-    user:
-      name: "{{username}}"
-      shell: /usr/bin/zsh
-      generate_ssh_key: yes
-  - name: Install oh-my-zsh
-    become_user: "{{username}}"
-    git:
-      repo: "https://github.com/ohmyzsh/ohmyzsh.git"
-      dest: "/home/{{username}}/.oh-my-zsh"
-      depth: 1
-  - name: Delete i3 config dir to be able to symlink
-    file:
-      path: "/home/{{username}}/.config/i3"
-      state: absent
-    tags: symlinks
-  - name: Set up symlinks of dotfiles
-    become_user: "{{username}}"
-    file:
-      src: "{{dotfiles_dir}}/configs/{{item.src}}"
-      dest: "/home/{{username}}/{{item.dest}}"
-      state: link
-    loop:
-      - { src: "asdf/.asdfrc", dest: ".asdfrc" }
-      - { src: "bat", dest: ".config/bat" }
-      - { src: "broot", dest: ".config/broot" }
-      - { src: "doom", dest: ".config/doom" }
-      - { src: "dunst", dest: ".config/dunst" }
-      - { src: "fzf/.fzf.zsh", dest: ".fzf.zsh" }
-      - { src: "git/.gitconfig", dest: ".gitconfig" }
-      - { src: "helix/config.toml", dest: ".config/helix/config.toml" }
-      - { src: "i3", dest: ".config/i3" }
-      - { src: "kak", dest: ".config/kak" }
-      - { src: "kak-lsp", dest: ".config/kak-lsp" }
-      - { src: "kitty", dest: ".config/kitty" }
-      - { src: "kmonad", dest: ".config/kmonad" }
-      - { src: "nvim", dest: ".config/nvim" }
-      - { src: "picom", dest: ".config/picom" }
-      - { src: "polybar", dest: ".config/polybar" }
-      - { src: "ranger", dest: ".config/ranger" }
-      - { src: "redshift", dest: ".config/redshift" }
-      - { src: "rofi", dest: ".config/rofi" }
-      - { src: "starship/starship.toml", dest: ".config/starship.toml" }
-      - { src: "tmux/.tmux.conf", dest: ".tmux.conf" }
-      - { src: "vim/.vimrc", dest: ".vimrc" }
-      - { src: "xconfig/.xinitrc", dest: ".xinitrc" }
-      - { src: "zsh/.zshrc", dest: ".zshrc" }
-    tags: symlinks
-  - name: Symlinkg kakounes original autoload file
-    become_user: "{{username}}"
-    file:
-      src: "/usr/share/kak/autoload"
-      dest: "{{dotfiles_dir}}/configs/kak/autoload/autoload"
-      state: link
-    tags: symlinks
-  - name: Create kakoune plugin dir
-    become_user: "{{username}}"
-    file:
-      path: "/home/{{username}}/.config/kak/plugins"
-      state: directory
-    tags: plugins
-  - name: Download kakoune plugin manager
-    become_user: "{{username}}"
-    git:
-      repo: "git@github.com:andreyorst/plug.kak.git"
-      dest: "/home/{{username}}/.config/kak/plugins/plug.kak"
-    tags: plugins
-  - name: Create tmux plugin dir
-    become_user: "{{username}}"
-    file:
-      path: "/home/{{username}}/.config/tmux/plugins"
-      state: directory
-    tags: plugins
-  - name: Download tmux plugin manager
-    become_user: "{{username}}"
-    git:
-      repo: "https://github.com/tmux-plugins/tpm.git"
-      dest: "/home/{{username}}/.config/tmux/plugins/tpm"
-    tags: plugins
-  - name: Make sure fonts directory exists
-    file:
-      path: /usr/share/fonts/{{item}}
-      state: directory
-    with_items:
-      - "nerd-fonts"
-      - vscode
-    tags: fonts
-  - name: Download nerd fonts
-    get_url:
-      url: "{{item.url}}"
-      dest: "/usr/share/fonts/nerd-fonts/{{item.name}}"
-    loop:
-      - { url: "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete%20Mono.ttf", name: "DejaVu_Sans_Mono_Nerd_Font_Mono_Book.ttf" }
-      - { url: "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Bold/complete/DejaVu%20Sans%20Mono%20Bold%20Nerd%20Font%20Complete%20Mono.ttf", name: "DejaVu_Sans_Mono_Nerd_Font_Mono_Bold.ttf" }
-    tags: fonts
-  - name: Download vscode font
-    get_url:
-      url: "https://github.com/Canop/broot/raw/master/resources/icons/vscode/vscode.ttf"
-      dest: "/usr/share/fonts/vscode/vscode.ttf"
-    tags: fonts
-  - name: Reload fonts cache
-    become_user: "{{username}}"
-    command: fc-cache -f /usr/share/fonts
-    tags: fonts
-  - name: Create ~/Pictures for screenshots
-    file:
-      path: "/home/{{username}}/Pictures"
-      state: directory
+    - name: Update all dnf packages
+      become: yes
+      dnf:
+        name: "*"
+        state: latest
+      tags:
+        - packages
+        - updates
+    - name: Update flatpak packages
+      command: "flatpak update --noninteractive"
+      tags:
+        - packages
+        - updates
+    - name: Enable COPRs
+      become: yes
+      community.general.copr:
+        state: enabled
+        name: "{{item}}"
+      with_items:
+        - atim/bottom
+        - atim/kakoune
+        - atim/nushell
+      tags: packages
+    - name: Enable RPM Fusion
+      become: yes
+      shell: dnf install -y "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+      args:
+        warn: no
+      tags: packages
+    - name: Replace i3 with i3-gaps
+      become: yes
+      dnf:
+        name: "i3-gaps"
+        state: latest
+        allowerasing: yes
+        install_weak_deps: no
+      tags:
+        - packages
+        - i3gaps
+    - name: Install packages
+      become: yes
+      dnf:
+        name:
+          - acpi
+          - arandr
+          - arc-theme
+          - bat
+          - blueman
+          - bottom
+          - brightnessctl
+          - curl
+          - dex-autostart
+          - direnv
+          - dunst
+          - emacs
+          - evince
+          - evince-previewer
+          - exa
+          - fd-find
+          - feh
+          - flameshot
+          - fwupd
+          - fzf
+          - git-delta
+          - gnome-keyring
+          - gscan2pdf
+          - i3lock
+          - i3status
+          - ImageMagick
+          - iw
+          - jq
+          - kak-lsp
+          - kakoune
+          - kitty
+          - libsecret
+          - libtool
+          - lxappearance
+          - maim
+          - NetworkManager
+          - NetworkManager-openvpn
+          - NetworkManager-tui
+          - network-manager-applet
+          - openvpn
+          - papirus-icon-theme
+          - pavucontrol
+          - pdfarranger
+          - picom
+          - polybar
+          - procs
+          - python
+          - python3-tkinter
+          - qalculate-gtk
+          - ranger
+          - redshift
+          - redshift-gtk
+          - ripgrep
+          - roboto-fontface-fonts
+          - rofi
+          - seahorse
+          - tealdeer
+          - thunar
+          - tig
+          - tlp
+          - tmux
+          - vlc
+          - xbacklight
+          - xclip
+          - xdotool
+          - xfce4-power-manager
+          - xinput
+          - xmodmap
+          - xrdb
+          - xset
+          - xss-lock
+          - zoxide
+          - zsh
+        state: latest
+      tags: packages
+    - name: Get AppImageLauncher latest release URL
+      shell: "curl -s https://api.github.com/repos/TheAssassin/AppImageLauncher/releases/latest | grep 'https://.*appimagelauncher-.*x86_64.rpm' | cut -d\\\" -f4"
+      register: appimagelauncher_url
+      tags: packages
+    - name: Install AppImageLauncher
+      become: yes
+      dnf:
+        name: "{{appimagelauncher_url.stdout}}"
+        disable_gpg_check: yes
+        state: present
+      tags: packages
+    - name: Clone autorandr
+      git:
+        repo: "https://github.com/phillipberndt/autorandr.git"
+        dest: "/home/{{username}}/.autorandr"
+      tags: packages
+    - name: Install autorandr
+      become: yes
+      community.general.make:
+        chdir: /home/{{username}}/.autorandr
+        target: install
+      tags: packages
+    - name: Enable and start autorandr service
+      become: yes
+      systemd:
+        name: autorandr
+        state: started
+        enabled: yes
+      tags: packages
+    - name: Install pip packages globally
+      pip:
+        name: ["tldextract", "rofimoji"]
+        state: latest
+      tags:
+        - packages
+        - pip
+    - name: Add the flathub flatpak repository
+      community.general.flatpak_remote:
+        name: flathub
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+      tags:
+        - packages
+        - flatpak
+    - name: Allow flatpak to read theme settings
+      command: flatpak override --user --filesystem=xdg-config/gtk-3.0:ro
+      tags:
+        - packages
+        - flatpak
+    - name: Install flat packages
+      community.general.flatpak:
+        name: "{{item}}"
+      with_items:
+        - com.discordapp.Discord
+        - com.spotify.Client
+        - org.gtk.Gtk3theme.Arc-Dark
+        - org.gtk.Gtk3theme.Arc-Dark-solid
+        - org.onlyoffice.desktopeditors
+        - org.telegram.desktop
+      tags:
+        - packages
+        - flatpak
+    - name: Make firefox the default
+      command: xdg-settings set default-web-browser firefox.desktop
+      tags: packages
+    - name: Setup user account
+      user:
+        name: "{{username}}"
+        shell: /usr/bin/zsh
+        generate_ssh_key: yes
+    - name: Install oh-my-zsh
+      git:
+        repo: "https://github.com/ohmyzsh/ohmyzsh.git"
+        dest: "/home/{{username}}/.oh-my-zsh"
+        depth: 1
+    - name: Delete i3 config dir to be able to symlink
+      file:
+        path: "/home/{{username}}/.config/i3"
+        state: absent
+      tags: symlinks
+    - name: Set up symlinks of dotfiles
+      file:
+        src: "{{dotfiles_dir}}/configs/{{item.src}}"
+        dest: "/home/{{username}}/{{item.dest}}"
+        state: link
+      loop:
+        - { src: "asdf/.asdfrc", dest: ".asdfrc" }
+        - { src: "bat", dest: ".config/bat" }
+        - { src: "broot", dest: ".config/broot" }
+        - { src: "doom", dest: ".config/doom" }
+        - { src: "dunst", dest: ".config/dunst" }
+        - { src: "fzf/.fzf.zsh", dest: ".fzf.zsh" }
+        - { src: "git/.gitconfig", dest: ".gitconfig" }
+        - { src: "helix/config.toml", dest: ".config/helix/config.toml" }
+        - { src: "i3", dest: ".config/i3" }
+        - { src: "kak", dest: ".config/kak" }
+        - { src: "kak-lsp", dest: ".config/kak-lsp" }
+        - { src: "kitty", dest: ".config/kitty" }
+        - { src: "kmonad", dest: ".config/kmonad" }
+        - { src: "nvim", dest: ".config/nvim" }
+        - { src: "picom", dest: ".config/picom" }
+        - { src: "polybar", dest: ".config/polybar" }
+        - { src: "ranger", dest: ".config/ranger" }
+        - { src: "redshift", dest: ".config/redshift" }
+        - { src: "rofi", dest: ".config/rofi" }
+        - { src: "starship/starship.toml", dest: ".config/starship.toml" }
+        - { src: "tmux/.tmux.conf", dest: ".tmux.conf" }
+        - { src: "vim/.vimrc", dest: ".vimrc" }
+        - { src: "xconfig/.xinitrc", dest: ".xinitrc" }
+        - { src: "zsh/.zshrc", dest: ".zshrc" }
+      tags: symlinks
+    - name: Symlinkg kakounes original autoload file
+      file:
+        src: "/usr/share/kak/autoload"
+        dest: "{{dotfiles_dir}}/configs/kak/autoload/autoload"
+        state: link
+      tags: symlinks
+    - name: Create kakoune plugin dir
+      file:
+        path: "/home/{{username}}/.config/kak/plugins"
+        state: directory
+      tags: plugins
+    - name: Download kakoune plugin manager
+      git:
+        repo: "git@github.com:andreyorst/plug.kak.git"
+        dest: "/home/{{username}}/.config/kak/plugins/plug.kak"
+      tags: plugins
+    - name: Create tmux plugin dir
+      file:
+        path: "/home/{{username}}/.config/tmux/plugins"
+        state: directory
+      tags: plugins
+    - name: Download tmux plugin manager
+      git:
+        repo: "https://github.com/tmux-plugins/tpm.git"
+        dest: "/home/{{username}}/.config/tmux/plugins/tpm"
+      tags: plugins
+    - name: Make sure fonts directory exists
+      become: yes
+      file:
+        path: /usr/share/fonts/{{item}}
+        state: directory
+      with_items:
+        - "nerd-fonts"
+        - vscode
+      tags: fonts
+    - name: Download nerd fonts
+      become: yes
+      get_url:
+        url: "{{item.url}}"
+        dest: "/usr/share/fonts/nerd-fonts/{{item.name}}"
+      loop:
+        - {
+            url: "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete%20Mono.ttf",
+            name: "DejaVu_Sans_Mono_Nerd_Font_Mono_Book.ttf",
+          }
+        - {
+            url: "https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Bold/complete/DejaVu%20Sans%20Mono%20Bold%20Nerd%20Font%20Complete%20Mono.ttf",
+            name: "DejaVu_Sans_Mono_Nerd_Font_Mono_Bold.ttf",
+          }
+      tags: fonts
+    - name: Download vscode font
+      become: yes
+      get_url:
+        url: "https://github.com/Canop/broot/raw/master/resources/icons/vscode/vscode.ttf"
+        dest: "/usr/share/fonts/vscode/vscode.ttf"
+      tags: fonts
+    - name: Reload fonts cache
+      command: fc-cache -f /usr/share/fonts
+      tags: fonts
+    - name: Create ~/Pictures for screenshots
+      file:
+        path: "/home/{{username}}/Pictures"
+        state: directory
