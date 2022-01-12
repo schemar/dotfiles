@@ -68,7 +68,7 @@
         :localleader :desc "log mode" "l" #'org-agenda-log-mode)
   (map! :leader
         :desc "Goto today"
-        "n r t" #'org-roam-dailies-goto-today))
+        "n r t" #'org-roam-dailies-goto-today)
 
   ;; If you use `org' and don't want your org files in the default location below,
   ;; change `org-directory'. It must be set before org loads!
