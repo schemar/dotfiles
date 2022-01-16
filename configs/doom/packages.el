@@ -50,3 +50,4 @@
 ;(unpin! t)
 
 (package! org-ql)
+(package! org-super-agenda)

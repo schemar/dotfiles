@@ -168,3 +168,16 @@
 
 (use-package! org-ql
   :after org)
+(use-package! org-super-agenda
+  :after org-agenda
+  :config
+  (org-super-agenda-mode)
+  (setq org-super-agenda-groups
+        '((:name "Today"
+                 :time-grid t)
+          (:name "Futurice"
+                 :tag "futurice")
+          (:name "Private"
+                 :tag "private")))
+  ;; Need to fix header map of super agenda to not override evil bindings.
+  (setq org-super-agenda-header-map (make-sparse-keymap)))
