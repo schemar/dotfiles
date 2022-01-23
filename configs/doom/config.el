@@ -94,13 +94,13 @@
   ;; These are temporary files which I assume are created by org or org-roam.
   ;; Org-agenda would complain any time it doesn't find these files anymore.
   ;; Therefore we take them out of the list of files.
-  (add-hook! org-agenda-mode
-    (lambda ()
-      (setq org-agenda-files
-            (cl-delete-if
-             (lambda (f)
-               (string-match-p "\\.#" f))
-               (directory-files-recursively "~/Documents/org/" "\\.org$")))))
+  (setq-hook! org-agenda-mode
+              org-agenda-files
+                (cl-delete-if
+                  (lambda (f)
+                    (string-match-p "\\.#" f))
+                  (directory-files-recursively "~/Documents/org/" "\\.org$")))
+
   ;; Do not show DONE items in the agenda.
   (setq org-agenda-skip-scheduled-if-done t
         org-agenda-skip-deadline-if-done t)
@@ -156,6 +156,7 @@
          (match-beginning 1)
          (match-end 1)))))
 )
+
 (after! org-roam
   (setq org-roam-directory (file-truename "~/Documents/org")
         org-roam-dailies-directory "daily/"
