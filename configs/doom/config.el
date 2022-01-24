@@ -167,6 +167,24 @@
                               "#+title: %<%Y-%m-%d>\n"))))
 )
 
+(after! deft
+  (setq deft-extensions '("org")
+        deft-directory "~/Documents/org"
+        deft-recursive t
+        deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n")
+  ;; Use #+title as title:
+  (advice-add 'deft-parse-title :override
+    (lambda (file contents)
+      (if deft-use-filename-as-title
+	  (deft-base-filename file)
+	(let* ((case-fold-search 't)
+	       (begin (string-match "title: " contents))
+	       (end-of-begin (match-end 0))
+	       (end (string-match "\n" contents begin)))
+	  (if begin
+	      (substring contents end-of-begin end)
+	    (format "%s" file)))))))
+
 (use-package! org-ql
   :after org)
 (use-package! org-super-agenda
