@@ -37,12 +37,6 @@
 ;; Enable showing of whitespace.
 (global-whitespace-mode +1)
 
-(after! evil
-  ;; Let cursor go onto newline character like in Emacs.
-  (setq evil-move-beyond-eol t
-        ;; Do not move the cursor back when leaving insert mode.
-        evil-move-cursor-back nil))
-
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -60,6 +54,12 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(after! evil
+        ;; Let cursor go onto newline character like in Emacs.
+  (setq evil-move-beyond-eol t
+        ;; Do not move the cursor back when leaving insert mode.
+        evil-move-cursor-back nil))
 
 (setq org-directory "~/Documents/org/")
 (after! org
@@ -200,3 +200,6 @@
                  :tag "private")))
   ;; Need to fix header map of super agenda to not override evil bindings.
   (setq org-super-agenda-header-map (make-sparse-keymap)))
+
+;; Gemini/Gopher
+(use-package! elpher)

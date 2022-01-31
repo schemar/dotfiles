@@ -49,5 +49,9 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
+;; Gemini and Gopher protocol
+(package! elpher)
+
+;; Org
 (package! org-ql)
 (package! org-super-agenda)
