@@ -28,7 +28,8 @@
 
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
+;; numbers are disabled. For relative line numbers, set this to `relative'. To
+;; enable line numbers, set it to `t'.
 (setq display-line-numbers-type t)
 
 ;; Do not highlight long lines.
@@ -55,25 +56,33 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; User vertico for default search with slash.
+(map! :desc "Search" :n "/" #'+default/search-buffer)
+
 (after! evil
         ;; Let cursor go onto newline character like in Emacs.
   (setq evil-move-beyond-eol t
         ;; Do not move the cursor back when leaving insert mode.
         evil-move-cursor-back nil))
 
+(after! ispell (setq ispell-dictionary "en"))
+
 (setq org-directory "~/Documents/org/")
 (after! org
+  ;; Disable latex in org mode as it slows down editing too much :(
+  (setq org-highlight-latex-and-related nil)
+
   ;; Org key bindings.
   (map! :map org-agenda-mode-map
         :localleader :desc "log mode" "l" #'org-agenda-log-mode)
   (map! :leader
-        :desc "Goto today"
+        :desc "Go to today"
         "n r t" #'org-roam-dailies-goto-today)
 
   ;; If you use `org' and don't want your org files in the default location below,
   ;; change `org-directory'. It must be set before org loads!
   (setq org-todo-keywords '((type "TODO(t!)" "WAIT(w@/!)" "HOLD(h@/!)" "|" "DONE(d!)" "DELEGATED(l@)" "KILL(k@)")))
-  ;; Explixitly track when a task was closed (as a property that is also used by `ox-hugo').
+  ;; Explicitly track when a task was closed (as a property that is also used by `ox-hugo').
   (setq org-log-done 'time)
   ;; Make sure that tasks with sub-tasks or a sub-checklist cannot be marked done, if the sub-tasks/list aren't done.
   (setq org-enforce-todo-dependencies t
