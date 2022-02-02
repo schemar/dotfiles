@@ -56,8 +56,11 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;; User vertico for default search with slash.
+;; Use pop-up search for default search with slash.
 (map! :desc "Search" :n "/" #'+default/search-buffer)
+
+;; Use org mode when using Emacs everywhere.
+(setq emacs-everywhere-major-mode-function #'org-mode)
 
 (after! evil
         ;; Let cursor go onto newline character like in Emacs.

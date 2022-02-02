@@ -79,6 +79,9 @@ bindsym $mod+Shift+d exec --no-startup-id rofi -show run -theme icons >/tmp/rofi
 bindsym $mod+u exec --no-startup-id rofimoji --rofi-args "-theme no_icons"
 bindsym Mod1+Tab exec --no-startup-id rofi -show window -theme icons >/tmp/rofi.log 2>&1
 
+# Emacs everywhere
+bindsym $mod+i exec $HOME/.emacs.d/bin/doom everywhere
+
 # Convenience menus
 bindsym $mod+Shift+e exec $HOME/.config/rofi/scripts/power.sh
 bindsym $mod+p exec --no-startup-id flameshot gui
