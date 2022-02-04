@@ -82,6 +82,11 @@
         :desc "Go to today"
         "n r t" #'org-roam-dailies-goto-today)
 
+  ;; Extend the priorities so that B is above none and D is low.
+  ;; See also setting of `org-fancy-priorities-list' after the `org' block.
+  (setq org-priority-lowest ?D
+        org-priority-default ?C)
+
   ;; If you use `org' and don't want your org files in the default location below,
   ;; change `org-directory'. It must be set before org loads!
   (setq org-todo-keywords '((type "TODO(t!)" "WAIT(w@/!)" "HOLD(h@/!)" "|" "DONE(d!)" "DELEGATED(l@)" "KILL(k@)")))
@@ -169,9 +174,14 @@
          (match-end 1)))))
 )
 
+(after! org-fancy-priorities
+  (setq org-fancy-priorities-list '("❗" "🔼" "📥" "⬇")))
+
 (after! org-roam
   (setq org-roam-directory (file-truename "~/Documents/org")
         org-roam-dailies-directory "daily/"
+        ;; Completion slows down the org buffers too much
+        org-roam-completion-everywhere nil
         org-roam-dailies-capture-templates
         '(("d" "default" entry
            "* %?"
