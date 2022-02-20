@@ -6,7 +6,17 @@
     - name: dotfiles_dir
       prompt: Dotfiles directory (e.g. /home/schemar/Projects/dotfiles without trailing slash)
       private: no
+  vars_files:
+    - vars/common.yml
   tasks:
+    - name: Make sure projects directory exists
+      file:
+        path: "/home/{{username}}/Projects"
+        state: directory
+    - name: Clone dotfiles-private
+      git:
+        repo: "git@github.com:schemar/dotfiles-private.git"
+        dest: "/home/{{username}}/Projects/dotfiles-private"
     - name: Update all dnf packages
       become: yes
       dnf:
@@ -49,80 +59,7 @@
     - name: Install packages
       become: yes
       dnf:
-        name:
-          - acpi
-          - arandr
-          - arc-theme
-          - bat
-          - blueman
-          - bottom
-          - brightnessctl
-          - curl
-          - dex-autostart
-          - direnv
-          - dunst
-          - emacs
-          - evince
-          - evince-previewer
-          - exa
-          - fd-find
-          - feh
-          - flameshot
-          - fwupd
-          - fzf
-          - git-delta
-          - gnome-keyring
-          - gscan2pdf
-          - i3lock
-          - i3status
-          - ImageMagick
-          - iw
-          - jq
-          - kak-lsp
-          - kakoune
-          - kitty
-          - libsecret
-          - libtool
-          - lxappearance
-          - maim
-          - NetworkManager
-          - NetworkManager-openvpn
-          - NetworkManager-tui
-          - network-manager-applet
-          - openvpn
-          - papirus-icon-theme
-          - pavucontrol
-          - pdfarranger
-          - picom
-          - polybar
-          - procs
-          - python
-          - python3-tkinter
-          - qalculate-gtk
-          - ranger
-          - redshift
-          - redshift-gtk
-          - ripgrep
-          - roboto-fontface-fonts
-          - rofi
-          - seahorse
-          - tealdeer
-          - thunar
-          - tig
-          - tlp
-          - tmux
-          - vlc
-          - xbacklight
-          - xclip
-          - xdotool
-          - xfce4-power-manager
-          - xinput
-          - xmodmap
-          - xrdb
-          - xset
-          - xss-lock
-          - zoxide
-          - zsh
+        name: "{{ common_packages }}"
         state: latest
       tags: packages
     - name: Get AppImageLauncher latest release URL
@@ -168,19 +105,12 @@
       tags:
         - packages
         - flatpak
-    - name: Allow flatpak to read theme settings
-      command: flatpak override --user --filesystem=xdg-config/gtk-3.0:ro
-      tags:
-        - packages
-        - flatpak
     - name: Install flat packages
       community.general.flatpak:
         name: "{{item}}"
       with_items:
         - com.discordapp.Discord
         - com.spotify.Client
-        - org.gtk.Gtk3theme.Arc-Dark
-        - org.gtk.Gtk3theme.Arc-Dark-solid
         - org.onlyoffice.desktopeditors
         - org.telegram.desktop
       tags:
@@ -235,7 +165,7 @@
         - { src: "xconfig/.xinitrc", dest: ".xinitrc" }
         - { src: "zsh/.zshrc", dest: ".zshrc" }
       tags: symlinks
-    - name: Symlinkg kakounes original autoload file
+    - name: Symlinking kakounes original autoload file
       file:
         src: "/usr/share/kak/autoload"
         dest: "{{dotfiles_dir}}/configs/kak/autoload/autoload"
@@ -245,6 +175,7 @@
       git:
         repo: "https://github.com/hlissner/doom-emacs"
         dest: "/home/{{username}}/.emacs.d"
+        depth: 1
         update: no
       tags: emacs
     - name: Install Doom Emacs
@@ -283,6 +214,8 @@
       with_items:
         - "nerd-fonts"
         - vscode
+        - monolisa
+        - playfair
       tags: fonts
     - name: Download nerd fonts
       become: yes
@@ -304,6 +237,18 @@
       get_url:
         url: "https://github.com/Canop/broot/raw/master/resources/icons/vscode/vscode.ttf"
         dest: "/usr/share/fonts/vscode/vscode.ttf"
+      tags: fonts
+    - name: Copy MonoLisa font
+      become: yes
+      copy:
+        src: "/home/{{username}}/Projects/dotfiles-private/fonts/MonoLisa/ttf/"
+        dest: "/usr/share/fonts/monolisa"
+      tags: fonts
+    - name: Copy Playfair font
+      become: yes
+      copy:
+        src: "/home/{{username}}/Projects/dotfiles-private/fonts/Playfair/ttf/"
+        dest: "/usr/share/fonts/playfair"
       tags: fonts
     - name: Reload fonts cache
       command: fc-cache -f /usr/share/fonts

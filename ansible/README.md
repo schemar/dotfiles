@@ -2,7 +2,7 @@
 
 Auto workstation configuration based on a clean installation of [Fedora 34 i3 Spin](https://spins.fedoraproject.org/en/i3/).
 
-1. Run `dnf install git` and `pip install --user ansible`
+1. Run `dnf install git` and `pip install --user ansible`. Make sure to add your public key to GitHub for ssh access.
 2. Run `ansible-galaxy collection install community.general`
 3. Clone repo `git clone git@github.com:schemar/dotfiles.git && cd dotfiles/ansible`
 4. Run `./install.sh`

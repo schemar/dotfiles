@@ -49,6 +49,11 @@
     raa (tap-hold-next-release 500 (layer-switch arrowkeys) ralt)
     rad (tap-hold-next-release 500 (layer-switch default) ralt)
 
+    lau (tap-hold-next-release 500 (layer-next super) lalt)
+    rau (tap-hold-next-release 500 (layer-switch super) ralt)
+    lcs (tap-hold-next-release 500 (layer-next special) lctl)
+    rcs (tap-hold-next-release 500 (layer-next special) rctl)
+
     arr (layer-toggle arrowkeys)
     spc (layer-toggle special)
     sca (layer-toggle specialcaps)
@@ -75,14 +80,23 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \          end
   @cec a    s    d    f    g    h    j    k    l    @;rm @'rc ret        ins  pgup
   lsft z    x    c    v    b    n    m    ,    .    /         rsft       up   pgdn
-  lctl lmet @las           spc            @raa @crm rctl            left down rght
+  @lcs lmet @lau           spc            @rau @crm @rcs            left down rght
+)
+
+(deflayer super
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _
+  _    \)   ]    }    @    -    5    6    7    8    9    +    _    _          _
+  @cec \(   [    {    !    \_   left down up   rght *    =    _          _    _
+  _    #    $    %    ^    &    0    1    2    3    4         _          _    _
+  _    _    _              _              @rad _    _               _    _    _
 )
 
 (deflayer arrowkeys
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _
   _    _    _    up   _    _    home pgdn pgup end  _    _    _    _          _
-  _    _    left down rght _    left down up   rght _    _    _          _    _
+  @cec _    left down rght _    left down up   rght _    _    _          _    _
   _    _    _    _    _    _    _    _    _    _    _         _          _    _
   _    _    _              _              @rad _    rctl            _    _    _
 )
@@ -91,7 +105,7 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _
   _    _    _    _    _    _    _    ü    ï    ö    _    _    _    _          _
-  _    ä    ß    _    _    _    [    \(   \)   ]    =    _    _          _    _
+  @cec ä    ß    _    _    _    [    \(   \)   ]    =    _    _          _    _
   @sca _    _    _    _    _    _    _    _    _    _         @sca       _    _
   _    _    _              _              _    _    _               _    _    _
 )
@@ -100,7 +114,7 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _
   _    _    _    _    _    _    _    Ü    Ï    Ö    _    _    _    _          _
-  _    Ä    ß    _    _    _    {    &    *    }    +    _    _          _    _
+  @cec Ä    ß    _    _    _    {    &    *    }    +    _    _          _    _
   _    _    _    _    _    _    _    _    _    _    _         _          _    _
   _    _    _              _              _    _    _               _    _    _
 )

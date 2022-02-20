@@ -7,6 +7,7 @@ sculpt_home="/dev/input/by-id/usb-Microsoft_Microsoft®_Nano_Transceiver_v2.1-ev
 sculpt_office="/dev/input/by-id/usb-Microsoft_Microsoft®_2.4GHz_Transceiver_v9.0-event-kbd"
 lenovo="/dev/input/by-path/platform-i8042-serio-0-event-kbd"
 cherry="/dev/input/by-id/usb-046a_0023-event-kbd"
+mama="/dev/input/by-id/usb-046a_USB_Wireless_Device-event-kbd"
 
 start_kmonad() {
     device=$1
@@ -35,4 +36,8 @@ fi
 
 if [[ -e "${cherry}" ]]; then
     start_kmonad "${cherry}"
+fi
+
+if [[ -e "${mama}" ]]; then
+    start_kmonad "${mama}"
 fi

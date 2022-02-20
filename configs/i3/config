@@ -7,7 +7,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:DejaVu Sans Mono NerdFont 11
+font pango:MonoLisa 11
 
 # kmonad
 exec_always --no-startup-id $HOME/.config/kmonad/launch.sh
@@ -76,7 +76,7 @@ bindsym XF86Display exec --no-startup-id arandr
 # Application starter
 bindsym $mod+d exec --no-startup-id rofi -show drun -theme icons >/tmp/rofi.log 2>&1
 bindsym $mod+Shift+d exec --no-startup-id rofi -show run -theme icons >/tmp/rofi.log 2>&1
-bindsym $mod+u exec --no-startup-id rofimoji --rofi-args "-theme no_icons"
+bindsym $mod+u exec --no-startup-id rofimoji --selector-args "-theme no_icons"
 bindsym Mod1+Tab exec --no-startup-id rofi -show window -theme icons >/tmp/rofi.log 2>&1
 
 # Emacs everywhere
