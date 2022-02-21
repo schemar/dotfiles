@@ -18,7 +18,7 @@ inputbar {
 
 prompt {
   padding: -6px 0 0 0;
-  font: "DejaVuSansMono Nerd Font Mono 25";
+  font: "MonoLisa Nerd Font 25";
   background-color: #00000000;
 }
 

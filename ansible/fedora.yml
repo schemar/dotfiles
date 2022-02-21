@@ -215,6 +215,7 @@
         - "nerd-fonts"
         - vscode
         - monolisa
+        - monolisa-nerd-font
         - playfair
       tags: fonts
     - name: Download nerd fonts
@@ -243,6 +244,12 @@
       copy:
         src: "/home/{{username}}/Projects/dotfiles-private/fonts/MonoLisa/ttf/"
         dest: "/usr/share/fonts/monolisa"
+      tags: fonts
+    - name: Copy MonoLisa patched Nerd Font
+      become: yes
+      copy:
+        src: "/home/{{username}}/Projects/dotfiles-private/fonts/MonoLisaNerdFont/ttf/"
+        dest: "/usr/share/fonts/monolisa-nerd-font"
       tags: fonts
     - name: Copy Playfair font
       become: yes
