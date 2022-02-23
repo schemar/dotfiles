@@ -148,7 +148,7 @@
 
   ;; If you use `org' and don't want your org files in the default location below,
   ;; change `org-directory'. It must be set before org loads!
-  (setq org-todo-keywords '((type "TODO(t!)" "WAIT(w@/!)" "HOLD(h@/!)" "|" "DONE(d!)" "DELEGATED(l@)" "KILL(k@)")))
+  (setq org-todo-keywords '((type "TODO(t!)" "WAIT(w@/!)" "HOLD(h@/!)" "PROJ(p!)" "|" "DONE(d!)" "DELEGATED(l@)" "KILL(k@)")))
   ;; Explicitly track when a task was closed (as a property that is also used by `ox-hugo').
   (setq org-log-done 'time)
   ;; Make sure that tasks with sub-tasks or a sub-checklist cannot be marked done, if the sub-tasks/list aren't done.
