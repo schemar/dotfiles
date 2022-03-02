@@ -14,6 +14,14 @@
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;      directory (for easy access to its source code).
 
+;; Whether movement commands respect visual-line-mode.
+;; If non-nil, visual-line-mode is generally respected when it is on.
+;; In this case, motions such as j and k navigate by visual lines (on the screen) rather than “physical” lines (defined by newline characters).
+;; If nil, the setting of visual-line-mode is ignored.
+;;
+;; This variable must be set before Evil is loaded.
+(setq evil-respect-visual-line-mode t)
+
 (doom! :input
        ;;chinese
        ;;japanese
