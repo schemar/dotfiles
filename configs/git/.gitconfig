@@ -3,7 +3,7 @@
 [user]
   name = Martin Schenck
 [core]
-  editor = kak
+  editor = emacs -nw
   pager = delta
 [alias]
   o = switch

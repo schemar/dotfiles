@@ -73,8 +73,8 @@ export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers,changes --color=always {}
 export FZF_COMPLETION_TRIGGER=',,'
 
 # default editor
-export VISUAL=kak
-export EDITOR=kak
+export VISUAL=emacs
+export EDITOR="emacs -nw"
 
 # custom functions required for vterm inside emacs
 vterm_printf(){
