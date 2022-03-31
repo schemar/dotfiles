@@ -3,7 +3,7 @@
 [user]
   name = Martin Schenck
 [core]
-  editor = emacs -nw
+  editor = emacsclient -c
   pager = delta
 [alias]
   o = switch
