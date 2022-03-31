@@ -1,58 +1,5 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;;
-;;
-;; The following is temporary until https://github.com/hlissner/doom-emacs/issues/6131 is fixed.
-;; TODO: Delete below when issue with size and weight of `variable-pitch-font' is fixed.
-(defun doom--make-font-specs (face font &optional base-specs)
-  (let* ((base-specs (cadr (assq 'user (get face 'theme-face))))
-         (base-specs (or base-specs '((t nil))))
-         (attrs '(:family :foundry :slant :weight :height :width))
-         (new-specs nil))
-    (dolist (spec base-specs)
-      ;; Each SPEC has the form (DISPLAY ATTRIBUTE-PLIST)
-      (let ((display (car spec))
-            (plist   (copy-tree (nth 1 spec))))
-        ;; Alter only DISPLAY conditions matching this frame.
-        (when (or (memq display '(t default))
-                  (face-spec-set-match-display display this-frame))
-          (dolist (attr attrs)
-            (setq plist (plist-put plist attr (face-attribute face attr)))))
-        (push (list display plist) new-specs)))
-    (nreverse new-specs)))
-
-(defadvice! fix-doom-init-fonts-h (&optional reload)
-  :override #'doom-init-fonts-h
-  (dolist (map `((default . ,doom-font)
-                 (fixed-pitch . ,doom-font)
-                 (fixed-pitch-serif . ,doom-serif-font)
-                 (variable-pitch . ,doom-variable-pitch-font)))
-    (when-let* ((face (car map))
-                (font (cdr map)))
-      (dolist (frame (frame-list))
-        (when (display-multi-font-p frame)
-          (set-face-attribute face frame
-                              :width 'normal :weight 'normal
-                              :slant 'normal :font font)))
-      (let ((new-specs (doom--make-font-specs face font)))
-        ;; Don't save to `customized-face' so it's omitted from `custom-file'
-        ;;(put face 'customized-face new-specs)
-        (custom-push-theme 'theme-face face 'user 'set new-specs)
-        (put face 'face-modified nil))))
-  (when (fboundp 'set-fontset-font)
-    (let ((fn (doom-rpartial #'member (font-family-list))))
-      (when-let (font (cl-find-if fn doom-symbol-fallback-font-families))
-        (set-fontset-font t 'symbol font))
-      (when-let (font (cl-find-if fn doom-emoji-fallback-font-families))
-        (set-fontset-font t 'unicode font))
-      (when doom-unicode-font
-        (set-fontset-font t 'unicode doom-unicode-font))))
-  ;; Users should inject their own font logic in `after-setting-font-hook'
-  (run-hooks 'after-setting-font-hook))
-;;
-;;
-;; The above is temporary until https://github.com/hlissner/doom-emacs/issues/6131 is fixed.
-
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
@@ -74,8 +21,7 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 (setq doom-font (font-spec :family "MonoLisa Nerd Font" :size 10.5)
-      ;; TODO: size should be reduced once it is applied properly. To `12.0'?
-      doom-variable-pitch-font (font-spec :family "Roboto" :size 22.0 :weight 'light))
+      doom-variable-pitch-font (font-spec :family "Roboto" :size 12.0 :weight 'light))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -117,6 +63,10 @@
 
 ;; Use org mode when using Emacs everywhere.
 (setq emacs-everywhere-major-mode-function #'org-mode)
+
+;; Disable flyspell messages to improve performance
+(setq flyspell-issue-message-flag nil
+      flyspell-issue-welcome-flag nil)
 
 (after! evil
         ;; Let cursor go onto newline character like in Emacs.
@@ -161,6 +111,8 @@
   ;; Show Monday as first day of week.
   (setq org-agenda-start-on-weekday 1)
   (setq calendar-week-start-day 1)
+  ;; Start the agenda view today (default in Doom was `-3d').
+  (setq org-agenda-start-day nil)
   ;; Org agenda should get files from the org directory as well as the daily directory of =org-roam-dailies=.
   (setq org-agenda-files
         (directory-files-recursively "~/Documents/org/" "\\.org$"))
@@ -283,4 +235,5 @@
   (setq org-super-agenda-header-map (make-sparse-keymap)))
 
 ;; Gemini/Gopher
-(use-package! elpher)
+;; TODO: Improve loading. Current way slows Emacs startup by 0.3 seconds.
+;;(use-package! elpher)
