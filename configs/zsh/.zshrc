@@ -58,9 +58,16 @@ export LC_ALL=en_US.UTF-8
 # direnv to load environment (variables) per directory/project
 eval "$(direnv hook zsh)"
 
-# staship shell prompt
-export STARSHIP_CONFIG="$HOME/.config/starship.toml"
-eval "$(starship init zsh)"
+# Do some things only if we are in a "smart" terminal
+# (not Emacs TRAMP)
+if [ "$TERM" != "dumb" ]; then
+  # staship shell prompt
+  export STARSHIP_CONFIG="$HOME/.config/starship.toml"
+  eval "$(starship init zsh)"
+else
+  # Emacs TRAMP
+  PS1=''
+fi
 
 # z for directory jumping
 eval "$(zoxide init zsh)"
