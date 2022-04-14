@@ -12,7 +12,6 @@ plugins=(fd yarn docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
-source "$HOME"/.config/broot/launcher/bash/br
 
 alias g='git'
 alias y='yarn'
@@ -20,8 +19,7 @@ alias y='yarn'
 alias l='exa -al --git --icons'
 # Use ll as interactive ls replacement
 alias ll='br -sdp'
-# Use br to search for a folder with broot
-ld() {br --only-folders --cmd "$1;"}
+
 alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
 # Tmux usability aliases

@@ -10,6 +10,7 @@ common_packages:
   - blueman
   - bottom
   - brightnessctl
+  - cmake
   - curl
   - dex-autostart
   - direnv
@@ -36,6 +37,7 @@ common_packages:
   - kitty
   - libsecret
   - libtool
+  - libvterm
   - lxappearance
   - maim
   - mopidy
@@ -44,6 +46,7 @@ common_packages:
   - NetworkManager
   - NetworkManager-openvpn
   - NetworkManager-tui
+  - neovim
   - network-manager-applet
   - openvpn
   - papirus-icon-theme
@@ -71,6 +74,7 @@ common_packages:
   - xbacklight
   - xclip
   - xdotool
+  - xdpyinfo
   - xfce4-power-manager
   - xinput
   - xmodmap

@@ -119,11 +119,33 @@
     - name: Make firefox the default
       command: xdg-settings set default-web-browser firefox.desktop
       tags: packages
+    - name: Set udev rule for kmonad
+      become: yes
+      copy:
+        src: "/home/{{username}}/Projects/dotfiles/configs/kmonad/60-kmonad.rules"
+        dest: "/lib/udev/rules.d/60-kmonad.rules"
+      tags: kmonad
+    - name: Enable input kernel module for kmonad
+      become: yes
+      modprobe:
+        name: "uinput"
+      tags: kmonad
+    - name: Create groups
+      become: yes
+      group:
+        name: "uinput"
+      tags: user
     - name: Setup user account
+      become: yes
       user:
         name: "{{username}}"
         shell: /usr/bin/zsh
-        generate_ssh_key: yes
+        groups:
+          - "{{username}}"
+          - wheel
+          - input
+          - uinput
+      tags: user
     - name: Install oh-my-zsh
       git:
         repo: "https://github.com/ohmyzsh/ohmyzsh.git"
@@ -147,7 +169,6 @@
         - { src: "dunst", dest: ".config/dunst" }
         - { src: "fzf/.fzf.zsh", dest: ".fzf.zsh" }
         - { src: "git/.gitconfig", dest: ".gitconfig" }
-        - { src: "helix/config.toml", dest: ".config/helix/config.toml" }
         - { src: "i3", dest: ".config/i3" }
         - { src: "kak", dest: ".config/kak" }
         - { src: "kak-lsp", dest: ".config/kak-lsp" }
