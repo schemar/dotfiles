@@ -36,7 +36,7 @@
 
 ;; Do not highlight long lines.
 ;; Setting it to `nil' won't help, as then `fill-column' would be used.
-(setq whitespace-line-column 900)
+(setq whitespace-line-column 9000)
 ;; Enable showing of whitespace.
 (global-whitespace-mode +1)
 

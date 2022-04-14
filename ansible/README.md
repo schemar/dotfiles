@@ -17,18 +17,19 @@ Auto workstation configuration based on a clean installation of [Fedora 34 i3 Sp
 7. After reboot (first-time set-up):
   a. Run `Ctrl+b I` inside tmux
   b. Run `:plug-install` inside kakoune
-  c. Add `~/.gitconfigemail` and set your email address
-  d. Run `sh -c "$(curl -fsSL https://starship.rs/install.sh)"` in your shell
-  e. Set a wallpaper with `feh --bg-fill <path-to-file>`
-  f. Run `lxappearance` to set theme and icons
-  g. Install `asdf`:
+  c. Run `:PlugInstall` inside neovim
+  d. Add `~/.gitconfigemail` and set your email address
+  e. Run `sh -c "$(curl -fsSL https://starship.rs/install.sh)"` in your shell
+  f. Set a wallpaper with `feh --bg-fill <path-to-file>`
+  g. Run `lxappearance` to set theme and icons
+  h. Install `asdf`:
     - `git clone https://github.com/asdf-vm/asdf.git ~/.asdf`
     - `cd ~/.asdf`
     - `git checkout "$(git describe --abbrev=0 --tags)"`
-  h. Install `nodejs` `asdf` plugin and latest:
+  i. Install `nodejs` `asdf` plugin and latest:
     - `asdf plugin-add nodejs`
     - `asdf install nodejs`
-  i. Reboot one last time
+  j. Reboot one last time
 
 ## TODO
 - fix redshift-gtk geo access (and CPU usage)
