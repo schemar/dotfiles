@@ -5,9 +5,8 @@ configuration {
   font: "Roboto 16";
   case-sensitive: false;
   fixed-num-lines: false;
-  lines: 12;
   location: 2;
-  yoffset: 250;
+  yoffset: 150;
 }
 
 @import "nord"

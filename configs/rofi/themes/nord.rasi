@@ -1,6 +1,6 @@
 * {
-  background-color: #4c566a22;
-  text-color: #eceff4;
+  background-color: #2e344044;
+  text-color: #d8dee9;
   spacing: 0;
   width: 1000px;
 }
@@ -18,7 +18,7 @@ inputbar {
 
 prompt {
   padding: -6px 0 0 0;
-  font: "MonoLisa Nerd Font 25";
+  font: "MonoLisa Nerd Font 20";
   background-color: #00000000;
 }
 
@@ -27,7 +27,8 @@ entry {
 }
 
 listview {
-  columns: 1;
+  lines: 12;
+  columns: 3;
   cycle: true;
   scrollbar: false;
   padding: 16px;
@@ -41,14 +42,19 @@ element {
 
 element selected {
   background-color: #88C0D0;
-  text-color: #4c566a;
   border-radius: 8px;
 }
 
 element-icon {
   size: 24px;
+  background-color: #00000000;
 }
 
 element-text {
    highlight: none;
+   background-color: #00000000;
+}
+
+element-text selected {
+  text-color: #4c566a;
 }
