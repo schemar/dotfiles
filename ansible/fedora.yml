@@ -289,3 +289,24 @@
       file:
         path: "/home/{{username}}/Pictures"
         state: directory
+    - name: LightDB - Set background
+      become: yes
+      lineinfile:
+        path: "/etc/lightdm/lightdm-gtk-greeter.conf"
+        regexp: "^#?background=.*"
+        line: "background=#2E3440"
+      tags: lightdm
+    - name: LightDB - Set theme
+      become: yes
+      lineinfile:
+        path: "/etc/lightdm/lightdm-gtk-greeter.conf"
+        regexp: "^#?theme-name=.*"
+        line: "theme-name=Arc-Dark"
+      tags: lightdm
+    - name: LightDB - Set icon theme
+      become: yes
+      lineinfile:
+        path: "/etc/lightdm/lightdm-gtk-greeter.conf"
+        regexp: "^#?icon-theme-name=.*"
+        line: "icon-theme-name=ePapirus-Dark"
+      tags: lightdm
