@@ -265,5 +265,5 @@ for_window [window_role="pop-up"] floating enable, move position center
 
 # Gaps
 gaps inner 8
-gaps top 24
+gaps bottom 24
 smart_borders on
