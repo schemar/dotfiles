@@ -265,5 +265,7 @@ for_window [window_role="pop-up"] floating enable, move position center
 
 # Gaps
 gaps inner 8
-gaps bottom 24
+# Only add borders when there is more than one window:
 smart_borders on
+# Only enable gaps on a workspace when there is at least one container:
+smart_gaps on
