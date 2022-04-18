@@ -237,3 +237,12 @@
 ;; Gemini/Gopher
 ;; TODO: Improve loading. Current way slows Emacs startup by 0.3 seconds.
 ;;(use-package! elpher)
+
+;; Tree Sitter
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+
+  ;; Only for syntax highlighting.
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))

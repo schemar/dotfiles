@@ -55,3 +55,7 @@
 ;; Org
 (package! org-ql)
 (package! org-super-agenda)
+
+;; Tree Sitter for code ASTs
+(package! tree-sitter)
+(package! tree-sitter-langs)
