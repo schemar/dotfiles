@@ -1,16 +1,6 @@
 # Dotfiles
 
-This repository contains configurations for:
-
-* Terminal in Linux (Ubuntu and Fedora) and WSL (Ubuntu)
-* X System based on Fedora i3 Spin
-
-## Installation
-Use `./ansible/install.sh` if you start from a [Fedora i3 spin](https://spins.fedoraproject.org/i3/).
-
-Alternatively, you can use the (outdated) `./installer` helper.
-It will install the packages and symlink the configs.
-Run `./installer symlinks` if you only want to symlink all configs.
+This repository contains configurations for my productivity stack and some basic visual improvements.
 
 ## Included Configurations
 
@@ -97,6 +87,7 @@ See the i3 config for all keybindings. Most relevant:
 
 * `$mod` is by default "super"/"windows".
 * `$mod+d` to launch application.
+* `$mod+m` to see configuration options.
 * `$mod+Shift+e` to exit, lock, etc.
 * `$mod+r` to resize.
 * `$mod+p` to take a screenshot.
