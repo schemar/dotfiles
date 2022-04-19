@@ -234,6 +234,25 @@
   ;; Need to fix header map of super agenda to not override evil bindings.
   (setq org-super-agenda-header-map (make-sparse-keymap)))
 
+;;
+;; Coding settings
+(after! lsp-mode
+  (setq lsp-headerline-breadcrumb-enable t))
+
+;; Make sure that TypeScript files only get formatted once, with eslint when present.
+(after! (:and typescript-mode lsp-mode)
+  (defun my/eslint-format ()
+    (interactive
+     (if-let ((eslint (-first (lambda (wks)
+                                (eq 'eslint (lsp--client-server-id
+                                             (lsp--workspace-client wks))))
+                              (lsp-workspaces))))
+         (with-lsp-workspace eslint
+           (lsp-format-buffer))
+       (lsp-format-buffer))))
+  (setq-hook! typescript-mode-hook +format-with 'my/eslint-format)
+  (setq +format-with-lsp nil))
+
 ;; Gemini/Gopher
 ;; TODO: Improve loading. Current way slows Emacs startup by 0.3 seconds.
 ;;(use-package! elpher)
