@@ -240,7 +240,8 @@
   (setq lsp-headerline-breadcrumb-enable t))
 
 ;; Make sure that TypeScript files only get formatted once, with eslint when present.
-(after! (:and typescript-mode lsp-mode)
+(setq-hook! 'typescript-mode-hook +format-with-lsp nil)
+(after! lsp-mode
   (defun my/eslint-format ()
     (interactive
      (if-let ((eslint (-first (lambda (wks)
@@ -250,8 +251,7 @@
          (with-lsp-workspace eslint
            (lsp-format-buffer))
        (lsp-format-buffer))))
-  (setq-hook! typescript-mode-hook +format-with 'my/eslint-format)
-  (setq +format-with-lsp nil))
+  (setq-hook! 'typescript-mode-hook +format-with 'my/eslint-format))
 
 ;; Gemini/Gopher
 ;; TODO: Improve loading. Current way slows Emacs startup by 0.3 seconds.
