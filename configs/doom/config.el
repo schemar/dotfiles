@@ -8,6 +8,11 @@
 (setq user-full-name "Martin Schenck"
       user-mail-address "martinschenck@fastmail.com")
 
+;; Org everywhere, even though the initial major mode means that startup slows down a bit.
+(setq doom-scratch-initial-major-mode 'org-mode)
+;; Remove this is startup takes too long.
+(setq initial-major-mode 'org-mode)
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
@@ -34,12 +39,27 @@
 ;; enable line numbers, set it to `t'.
 (setq display-line-numbers-type t)
 
+;; Prevents some cases of Emacs flickering.
+(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
+
 ;; Do not highlight long lines.
 ;; Setting it to `nil' won't help, as then `fill-column' would be used.
 (setq whitespace-line-column 9000)
 ;; Enable showing of whitespace.
 (global-whitespace-mode +1)
 
+;;; :completion company
+;; IMO, modern editors have trained a bad habit into us all: a burning need for
+;; completion all the time -- as we type, as we breathe, as we pray to the
+;; ancient ones -- but how often do you *really* need that information? I say
+;; rarely. So opt for manual completion with C-SPC:
+(after! company
+  (setq company-idle-delay nil))
+
+;;; :editor evil
+;; Focus new window after splitting
+(setq evil-split-window-below t
+      evil-vsplit-window-right t)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -83,6 +103,9 @@
 (after! org
   ;; Disable latex in org mode as it slows down editing too much :(
   (setq org-highlight-latex-and-related nil)
+
+  (setq org-startup-folded 'show2levels
+        org-ellipsis " [...] ")
 
   ;; Org key bindings.
   (map! :map org-agenda-mode-map
@@ -234,6 +257,16 @@
   ;; Need to fix header map of super agenda to not override evil bindings.
   (setq org-super-agenda-header-map (make-sparse-keymap)))
 
+;; Always show workspaces in the minibuffer if nothing else to show.
+;; From https://discourse.doomemacs.org/t/permanently-display-workspaces-in-minibuffer/84
+(after! persp-mode
+  (defun display-workspaces-in-minibuffer ()
+    (with-current-buffer " *Minibuf-0*"
+      (erase-buffer)
+      (insert (+workspace--tabline))))
+  (run-with-idle-timer 1 t #'display-workspaces-in-minibuffer)
+  (+workspace/display))
+
 ;;
 ;; Coding settings
 (after! lsp-mode
@@ -254,8 +287,8 @@
   (setq-hook! 'typescript-mode-hook +format-with 'my/eslint-format))
 
 ;; Gemini/Gopher
-;; TODO: Improve loading. Current way slows Emacs startup by 0.3 seconds.
-;;(use-package! elpher)
+(use-package! elpher
+  :defer t)
 
 ;; Tree Sitter
 (use-package! tree-sitter
