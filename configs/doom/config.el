@@ -105,7 +105,7 @@
   (setq org-highlight-latex-and-related nil)
 
   (setq org-startup-folded 'show2levels
-        org-ellipsis " [...] ")
+        org-ellipsis " […]")
 
   ;; Org key bindings.
   (map! :map org-agenda-mode-map
