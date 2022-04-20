@@ -257,16 +257,6 @@
   ;; Need to fix header map of super agenda to not override evil bindings.
   (setq org-super-agenda-header-map (make-sparse-keymap)))
 
-;; Always show workspaces in the minibuffer if nothing else to show.
-;; From https://discourse.doomemacs.org/t/permanently-display-workspaces-in-minibuffer/84
-(after! persp-mode
-  (defun display-workspaces-in-minibuffer ()
-    (with-current-buffer " *Minibuf-0*"
-      (erase-buffer)
-      (insert (+workspace--tabline))))
-  (run-with-idle-timer 1 t #'display-workspaces-in-minibuffer)
-  (+workspace/display))
-
 ;;
 ;; Coding settings
 (after! lsp-mode
