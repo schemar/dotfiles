@@ -24,3 +24,5 @@
 [delta]
   syntax-theme = Nord
   line-numbers = true
+[init]
+  defaultBranch = main
