@@ -49,13 +49,15 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
-;; Gemini and Gopher protocol
+;;; Gemini and Gopher protocol
 (package! elpher)
 
-;; Org
-(package! org-ql)
+;;; Org
+;; org-super-agenda to sort and group the agenda view.
 (package! org-super-agenda)
+;; org-ql to query org items.
+(package! org-ql)
 
-;; Tree Sitter for code ASTs
+;;; Tree Sitter for code ASTs
 (package! tree-sitter)
 (package! tree-sitter-langs)

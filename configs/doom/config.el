@@ -3,20 +3,17 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+;;; General settings
+
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Martin Schenck"
       user-mail-address "martinschenck@fastmail.com")
 
-;; Org everywhere, even though the initial major mode means that startup slows down a bit.
-(setq doom-scratch-initial-major-mode 'org-mode)
-;; Remove this is startup takes too long.
-(setq initial-major-mode 'org-mode)
-
-;; Allow i3 to always float "everywhere"
+;; Allow i3 to always float "everywhere".
 (setq emacs-everywhere-frame-name-format "emacs-everywhere")
 
-;; Always keep a few lines around the point visible
+;; Always keep a few lines around the point visible.
 (setq scroll-margin 8)
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
@@ -39,7 +36,6 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-nord)
 
-
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'. To
 ;; enable line numbers, set it to `t'.
@@ -48,25 +44,16 @@
 ;; Prevents some cases of Emacs flickering.
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
-;; Do not highlight long lines.
-;; Setting it to `nil' won't help, as then `fill-column' would be used.
-(setq whitespace-line-column 9000)
+;; Allow 100 characters before highlighting a line as too long
+(setq whitespace-line-column 100)
+
 ;; Enable showing of whitespace.
 (global-whitespace-mode +1)
 
-;;; :completion company
-;; IMO, modern editors have trained a bad habit into us all: a burning need for
-;; completion all the time -- as we type, as we breathe, as we pray to the
-;; ancient ones -- but how often do you *really* need that information? I say
-;; rarely. So opt for manual completion with C-SPC:
-(after! company
-  (setq company-idle-delay nil))
+;; Use pop-up search for default search with slash.
+(map! :desc "Search" :n "/" #'+default/search-buffer)
 
-;;; :editor evil
-;; Focus new window after splitting
-(setq evil-split-window-below t
-      evil-vsplit-window-right t)
-
+;;; Packages
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
@@ -84,67 +71,127 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;; Use pop-up search for default search with slash.
-(map! :desc "Search" :n "/" #'+default/search-buffer)
+;;; :editor evil
+;; Focus new window after splitting.
+(setq evil-split-window-below t
+      evil-vsplit-window-right t)
+
+;;; :checkers spell
+;; Disable flyspell messages to improve performance.
+(setq flyspell-issue-message-flag nil
+      flyspell-issue-welcome-flag nil)
+
+;; Default to English.
+(after! ispell (setq ispell-dictionary "en"))
+
+;;; :tools lsp
+(after! lsp-mode
+  ;; Show where we are at the top of the buffer.
+  (setq lsp-headerline-breadcrumb-enable t))
+
+;; Make sure that TypeScript files only get formatted once, with eslint when present.
+(setq-hook! 'typescript-mode-hook +format-with-lsp nil)
+(after! lsp-mode
+  (defun my/eslint-format ()
+    (interactive
+     (if-let ((eslint (-first (lambda (wks)
+                                (eq 'eslint (lsp--client-server-id
+                                             (lsp--workspace-client wks))))
+                              (lsp-workspaces))))
+         (with-lsp-workspace eslint
+           (lsp-format-buffer))
+       (lsp-format-buffer))))
+  (setq-hook! 'typescript-mode-hook +format-with 'my/eslint-format))
+
+;;; Tree Sitter
+;; See also https://github.com/hlissner/doom-emacs-private/blob/master/modules/ui/tree-sitter/config.el
+(use-package! tree-sitter
+  ;; Enable tree sitter for programming modes:
+  :hook (prog-mode . tree-sitter-mode)
+  ;; Syntax highlighting:
+  :hook (tree-sitter-after-on . tree-sitter-hl-mode)
+  :config
+  (require 'tree-sitter-langs)  (defadvice! doom-tree-sitter-fail-gracefully-a (orig-fn &rest args)
+                                  "Don't break with errors when current major mode lacks tree-sitter support."
+                                  :around #'tree-sitter-mode
+                                  (condition-case e
+                                      (apply orig-fn args)
+                                    (error
+                                     (unless (string-match-p (concat "^Cannot find shared library\\|"
+                                                                     "^No language registered\\|"
+                                                                     "cannot open shared object file")
+                                                             (error-message-string e))
+                                       (signal (car e) (cadr e)))))))
+
+;;; Gemini/Gopher
+(use-package! elpher
+  :defer t)
+
+;;; :lang org
+;; Use org-mode in the *scratch* buffer (`SPC x')
+(setq doom-scratch-initial-major-mode 'org-mode)
 
 ;; Use org mode when using Emacs everywhere.
 (setq emacs-everywhere-major-mode-function #'org-mode)
 
-;; Disable flyspell messages to improve performance
-(setq flyspell-issue-message-flag nil
-      flyspell-issue-welcome-flag nil)
-
-(after! evil
-        ;; Let cursor go onto newline character like in Emacs.
-  (setq evil-move-beyond-eol t
-        ;; Do not move the cursor back when leaving insert mode.
-        evil-move-cursor-back nil))
-
-(after! ispell (setq ispell-dictionary "en"))
-
-;; Enable the following to read org files in a variable pitch font:
-;;(add-hook! 'org-mode-hook #'mixed-pitch-mode)
-
+;; Where my org(-roam) files are stored.
 (setq org-directory "~/Documents/org/")
+
 (after! org
   ;; Disable latex in org mode as it slows down editing too much :(
   (setq org-highlight-latex-and-related nil)
 
+  ;; Nicer folding and initial behavior.
   (setq org-startup-folded 'show2levels
         org-ellipsis " […]")
-
-  ;; Org key bindings.
-  (map! :map org-agenda-mode-map
-        :localleader :desc "log mode" "l" #'org-agenda-log-mode)
-  (map! :leader
-        :desc "Go to today"
-        "n r t" #'org-roam-dailies-goto-today)
 
   ;; Extend the priorities so that B is above none and D is low.
   ;; See also setting of `org-fancy-priorities-list' after the `org' block.
   (setq org-priority-lowest ?D
         org-priority-default ?C)
 
-  ;; If you use `org' and don't want your org files in the default location below,
-  ;; change `org-directory'. It must be set before org loads!
+  ;; Set up keywords incl. when to be asked to add a note.
   (setq org-todo-keywords '((type "TODO(t!)" "WAIT(w@/!)" "HOLD(h@/!)" "PROJ(p!)" "|" "DONE(d!)" "DELEGATED(l@)" "KILL(k@)")))
+
   ;; Explicitly track when a task was closed (as a property that is also used by `ox-hugo').
   (setq org-log-done 'time)
+
   ;; Make sure that tasks with sub-tasks or a sub-checklist cannot be marked done, if the sub-tasks/list aren't done.
   (setq org-enforce-todo-dependencies t
         org-enforce-todo-checkbox-dependencies t)
+
   ;; Insert state change notes and time stamps into a drawer.
   (setq org-log-into-drawer t)
+
   ;; Include running timer in clock table
   (setq org-clock-report-include-clocking-task t)
+
+  ;; Disable auto-completion with `company' in org-mode.
+  (setq-hook! org-mode company-idle-delay nil)
+
+  ;;
+  ;; Agenda
+  ;;
+
+  ;; Do not show DONE items in the agenda.
+  (setq org-agenda-skip-scheduled-if-done t
+        org-agenda-skip-deadline-if-done t)
+
   ;; Show Monday as first day of week.
   (setq org-agenda-start-on-weekday 1)
   (setq calendar-week-start-day 1)
+
   ;; Start the agenda view today (default in Doom was `-3d').
   (setq org-agenda-start-day nil)
-  ;; Org agenda should get files from the org directory as well as the daily directory of =org-roam-dailies=.
+
+  ;; Org agenda should get files from the org directory as well as the daily directory of `org-roam-dailies'.
   (setq org-agenda-files
         (directory-files-recursively "~/Documents/org/" "\\.org$"))
+
+  ;; Org key bindings.
+  (map! :map org-agenda-mode-map
+        :localleader :desc "log mode" "l" #'org-agenda-log-mode)
+
   ;; Also add a hook so that the list is re-created on every agenda.
   ;; It could be the case that new files were added in the meantime, which would not be considered by org-agenda otherwise.
   ;; Note the removal of files that contain =.#= in their name.
@@ -152,22 +199,18 @@
   ;; Org-agenda would complain any time it doesn't find these files anymore.
   ;; Therefore we take them out of the list of files.
   (setq-hook! org-agenda-mode
-              org-agenda-files
-                (cl-delete-if
-                  (lambda (f)
-                    (string-match-p "\\.#" f))
-                  (directory-files-recursively "~/Documents/org/" "\\.org$")))
-
-  ;; Do not show DONE items in the agenda.
-  (setq org-agenda-skip-scheduled-if-done t
-        org-agenda-skip-deadline-if-done t)
+    org-agenda-files
+    (cl-delete-if
+     (lambda (f)
+       (string-match-p "\\.#" f))
+     (directory-files-recursively "~/Documents/org/" "\\.org$")))
 
   ;; [[https://d12frosted.io/posts/2020-06-24-task-management-with-roam-vol2.html][Source]]. Vulpea functions are also available [[https://github.com/d12frosted/vulpea][here]].
   (setq org-agenda-prefix-format
-      '((agenda . " %i %(vulpea-agenda-category 12)%?-12t% s")
-        (todo . " %i %(vulpea-agenda-category 12) ")
-        (tags . " %i %(vulpea-agenda-category 12) ")
-        (search . " %i %(vaulpea-agenda-category 12) ")))
+        '((agenda . " %i %(vulpea-agenda-category 12)%?-12t% s")
+          (todo . " %i %(vulpea-agenda-category 12) ")
+          (tags . " %i %(vulpea-agenda-category 12) ")
+          (search . " %i %(vaulpea-agenda-category 12) ")))
 
   (defun vulpea-agenda-category (&optional len)
     "Get category of item at point for agenda.
@@ -212,10 +255,14 @@
         (buffer-substring-no-properties
          (match-beginning 1)
          (match-end 1)))))
-)
+  )
 
 (after! org-fancy-priorities
   (setq org-fancy-priorities-list '("" "" "" "")))
+
+(map! :leader
+      :desc "Go to today"
+      "n r t" #'org-roam-dailies-goto-today)
 
 (after! org-roam
   (setq org-roam-directory (file-truename "~/Documents/org")
@@ -227,7 +274,7 @@
            "* %?"
            :target (file+head "%<%Y-%m-%d>.org"
                               "#+title: %<%Y-%m-%d>\n"))))
-)
+  )
 
 (after! deft
   (setq deft-extensions '("org")
@@ -236,72 +283,30 @@
         deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n")
   ;; Use #+title as title:
   (advice-add 'deft-parse-title :override
-    (lambda (file contents)
-      (if deft-use-filename-as-title
-	  (deft-base-filename file)
-	(let* ((case-fold-search 't)
-	       (begin (string-match "title: " contents))
-	       (end-of-begin (match-end 0))
-	       (end (string-match "\n" contents begin)))
-	  (if begin
-	      (substring contents end-of-begin end)
-	    (format "%s" file)))))))
+              (lambda (file contents)
+                (if deft-use-filename-as-title
+	            (deft-base-filename file)
+	          (let* ((case-fold-search 't)
+	                 (begin (string-match "title: " contents))
+	                 (end-of-begin (match-end 0))
+	                 (end (string-match "\n" contents begin)))
+	            (if begin
+	                (substring contents end-of-begin end)
+	              (format "%s" file)))))))
 
 (use-package! org-ql
   :after org)
+
 (use-package! org-super-agenda
   :after org-agenda
   :config
   (org-super-agenda-mode)
   (setq org-super-agenda-groups
         '((:name "Today"
-                 :time-grid t)
+           :time-grid t)
           (:name "Futurice"
-                 :tag "futurice")
+           :tag "futurice")
           (:name "Private"
-                 :tag "private")))
+           :tag "private")))
   ;; Need to fix header map of super agenda to not override evil bindings.
   (setq org-super-agenda-header-map (make-sparse-keymap)))
-
-;;
-;; Coding settings
-(after! lsp-mode
-  (setq lsp-headerline-breadcrumb-enable t))
-
-;; Make sure that TypeScript files only get formatted once, with eslint when present.
-(setq-hook! 'typescript-mode-hook +format-with-lsp nil)
-(after! lsp-mode
-  (defun my/eslint-format ()
-    (interactive
-     (if-let ((eslint (-first (lambda (wks)
-                                (eq 'eslint (lsp--client-server-id
-                                             (lsp--workspace-client wks))))
-                              (lsp-workspaces))))
-         (with-lsp-workspace eslint
-           (lsp-format-buffer))
-       (lsp-format-buffer))))
-  (setq-hook! 'typescript-mode-hook +format-with 'my/eslint-format))
-
-;; Gemini/Gopher
-(use-package! elpher
-  :defer t)
-
-;; Tree Sitter
-;; See also https://github.com/hlissner/doom-emacs-private/blob/master/modules/ui/tree-sitter/config.el
-(use-package! tree-sitter
-  ;; Enable tree sitter for programming modes:
-  :hook (prog-mode . tree-sitter-mode)
-  ;; Syntax highlighting:
-  :hook (tree-sitter-after-on . tree-sitter-hl-mode)
-  :config
-  (require 'tree-sitter-langs)  (defadvice! doom-tree-sitter-fail-gracefully-a (orig-fn &rest args)
-                                  "Don't break with errors when current major mode lacks tree-sitter support."
-                                  :around #'tree-sitter-mode
-                                  (condition-case e
-                                      (apply orig-fn args)
-                                    (error
-                                     (unless (string-match-p (concat "^Cannot find shared library\\|"
-                                                                     "^No language registered\\|"
-                                                                     "cannot open shared object file")
-                                                             (error-message-string e))
-                                       (signal (car e) (cadr e)))))))
