@@ -71,6 +71,11 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;;; :core projectile
+;; Go to "other" file based on test file, not file extension (was the default).
+(after! projectile
+  (map! :leader :desc "Find other file" "p o" #'projectile-toggle-between-implementation-and-test))
+
 ;;; :editor evil
 ;; Focus new window after splitting.
 (setq evil-split-window-below t
@@ -156,7 +161,8 @@
   ;; Explicitly track when a task was closed (as a property that is also used by `ox-hugo').
   (setq org-log-done 'time)
 
-  ;; Make sure that tasks with sub-tasks or a sub-checklist cannot be marked done, if the sub-tasks/list aren't done.
+  ;; Make sure that tasks with sub-tasks or a sub-checklist cannot be marked done, if the
+  ;; sub-tasks/list aren't done.
   (setq org-enforce-todo-dependencies t
         org-enforce-todo-checkbox-dependencies t)
 
@@ -184,7 +190,8 @@
   ;; Start the agenda view today (default in Doom was `-3d').
   (setq org-agenda-start-day nil)
 
-  ;; Org agenda should get files from the org directory as well as the daily directory of `org-roam-dailies'.
+  ;; Org agenda should get files from the org directory as well as the daily directory of
+  ;; `org-roam-dailies'.
   (setq org-agenda-files
         (directory-files-recursively "~/Documents/org/" "\\.org$"))
 
@@ -193,7 +200,8 @@
         :localleader :desc "log mode" "l" #'org-agenda-log-mode)
 
   ;; Also add a hook so that the list is re-created on every agenda.
-  ;; It could be the case that new files were added in the meantime, which would not be considered by org-agenda otherwise.
+  ;; It could be the case that new files were added in the meantime, which would not be considered
+  ;; by org-agenda otherwise.
   ;; Note the removal of files that contain =.#= in their name.
   ;; These are temporary files which I assume are created by org or org-roam.
   ;; Org-agenda would complain any time it doesn't find these files anymore.
@@ -205,7 +213,8 @@
        (string-match-p "\\.#" f))
      (directory-files-recursively "~/Documents/org/" "\\.org$")))
 
-  ;; [[https://d12frosted.io/posts/2020-06-24-task-management-with-roam-vol2.html][Source]]. Vulpea functions are also available [[https://github.com/d12frosted/vulpea][here]].
+  ;; [[https://d12frosted.io/posts/2020-06-24-task-management-with-roam-vol2.html][Source]].
+  ;; Vulpea functions are also available [[https://github.com/d12frosted/vulpea][here]].
   (setq org-agenda-prefix-format
         '((agenda . " %i %(vulpea-agenda-category 12)%?-12t% s")
           (todo . " %i %(vulpea-agenda-category 12) ")
