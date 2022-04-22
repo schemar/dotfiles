@@ -13,6 +13,9 @@
 ;; Remove this is startup takes too long.
 (setq initial-major-mode 'org-mode)
 
+;; Allow i3 to always float "everywhere"
+(setq emacs-everywhere-frame-name-format "emacs-everywhere")
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
