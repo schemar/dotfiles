@@ -209,7 +209,7 @@
 )
 
 (after! org-fancy-priorities
-  (setq org-fancy-priorities-list '("❗" "🔼" "📥" "⬇")))
+  (setq org-fancy-priorities-list '("" "" "" "")))
 
 (after! org-roam
   (setq org-roam-directory (file-truename "~/Documents/org")
