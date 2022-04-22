@@ -16,6 +16,9 @@
 ;; Allow i3 to always float "everywhere"
 (setq emacs-everywhere-frame-name-format "emacs-everywhere")
 
+;; Always keep a few lines around the point visible
+(setq scroll-margin 8)
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
