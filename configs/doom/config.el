@@ -76,6 +76,16 @@
 (after! projectile
   (map! :leader :desc "Find other file" "p o" #'projectile-toggle-between-implementation-and-test))
 
+;;; :ui treemacs
+;; Set the icons to be the same as in dired (all-the-icons).
+(setq doom-themes-treemacs-theme "doom-colors")
+;; Do not use variable pitch font for treemacs.
+(setq doom-themes-treemacs-enable-variable-pitch nil)
+
+(after! treemacs
+  ;; Better git mode (requires Python 3).
+  (setq treemacs-git-mode 'deferred))
+
 ;;; :editor evil
 ;; Focus new window after splitting.
 (setq evil-split-window-below t
