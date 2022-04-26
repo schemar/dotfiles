@@ -2,7 +2,7 @@
   background-color: #2e344044;
   text-color: #d8dee9;
   spacing: 0;
-  width: 1000px;
+  width: 733px;
 }
 
 #window {
@@ -28,7 +28,7 @@ entry {
 
 listview {
   lines: 12;
-  columns: 3;
+  columns: 1;
   cycle: true;
   scrollbar: false;
   padding: 16px;
