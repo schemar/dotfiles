@@ -99,6 +99,14 @@
 ;; Default to English.
 (after! ispell (setq ispell-dictionary "en"))
 
+;;; :completion company
+(after! company
+  (map! :map company-active-map
+        ;; Use `TAB' to select element, instead of cycling through candidates.
+        "<tab>" #'company-complete-selection
+        ;; Use `ESC' to exit company mode without leaving insert mode.
+        "<escape>" #'company-abort))
+
 ;;; :tools lsp
 (after! lsp-mode
   ;; Show where we are at the top of the buffer.
