@@ -44,8 +44,11 @@
 ;; Prevents some cases of Emacs flickering.
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
-;; Allow 100 characters before highlighting a line as too long
-(setq whitespace-line-column 100)
+;; Allow 80 characters before highlighting a line as too long.
+(setq whitespace-line-column 80)
+
+;; Show a ruler at the line column.
+(global-display-fill-column-indicator-mode)
 
 ;; Enable showing of whitespace.
 (global-whitespace-mode +1)
@@ -74,7 +77,9 @@
 ;;; :core projectile
 ;; Go to "other" file based on test file, not file extension (was the default).
 (after! projectile
-  (map! :leader :desc "Find other file" "p o" #'projectile-toggle-between-implementation-and-test))
+  (map! :leader
+        :desc "Find other file" "p o"
+        #'projectile-toggle-between-implementation-and-test))
 
 ;;; :ui treemacs
 ;; Set the icons to be the same as in dired (all-the-icons).
