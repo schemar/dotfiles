@@ -132,24 +132,16 @@
   (setq-hook! 'typescript-mode-hook +format-with 'my/eslint-format))
 
 ;;; Tree Sitter
-;; See also https://github.com/hlissner/doom-emacs-private/blob/master/modules/ui/tree-sitter/config.el
+;; See also https://discourse.doomemacs.org/t/tree-sitter/2547
 (use-package! tree-sitter
-  ;; Enable tree sitter for programming modes:
-  :hook (prog-mode . tree-sitter-mode)
-  ;; Syntax highlighting:
-  :hook (tree-sitter-after-on . tree-sitter-hl-mode)
-  :config
-  (require 'tree-sitter-langs)  (defadvice! doom-tree-sitter-fail-gracefully-a (orig-fn &rest args)
-                                  "Don't break with errors when current major mode lacks tree-sitter support."
-                                  :around #'tree-sitter-mode
-                                  (condition-case e
-                                      (apply orig-fn args)
-                                    (error
-                                     (unless (string-match-p (concat "^Cannot find shared library\\|"
-                                                                     "^No language registered\\|"
-                                                                     "cannot open shared object file")
-                                                             (error-message-string e))
-                                       (signal (car e) (cadr e)))))))
+   :hook (prog-mode . turn-on-tree-sitter-mode)
+   :hook (tree-sitter-after-on . tree-sitter-hl-mode)
+   :config
+   (require 'tree-sitter-langs)
+   ;; This makes every node a link to a section of code
+   (setq tree-sitter-debug-jump-buttons t
+         ;; and this highlights the entire sub tree in your code
+         tree-sitter-debug-highlight-jump-region t))
 
 ;;; Gemini/Gopher
 (use-package! elpher
