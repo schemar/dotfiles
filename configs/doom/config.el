@@ -117,7 +117,8 @@
   ;; Show where we are at the top of the buffer.
   (setq lsp-headerline-breadcrumb-enable t))
 
-;; Make sure that TypeScript files only get formatted once, with eslint when present.
+;; Make sure that TypeScript files only get formatted once, with eslint when
+;; present.
 (setq-hook! 'typescript-mode-hook +format-with-lsp nil)
 (after! lsp-mode
   (defun my/eslint-format ()
@@ -176,13 +177,21 @@
         org-priority-default ?C)
 
   ;; Set up keywords incl. when to be asked to add a note.
-  (setq org-todo-keywords '((type "TODO(t!)" "WAIT(w@/!)" "HOLD(h@/!)" "PROJ(p!)" "|" "DONE(d!)" "DELEGATED(l@)" "KILL(k@)")))
+  (setq org-todo-keywords '((type "TODO(t!)"
+                                  "WAIT(w@/!)"
+                                  "HOLD(h@/!)"
+                                  "PROJ(p!)"
+                                  "|"
+                                  "DONE(d!)"
+                                  "DELEGATED(l@)"
+                                  "KILL(k@)")))
 
-  ;; Explicitly track when a task was closed (as a property that is also used by `ox-hugo').
+  ;; Explicitly track when a task was closed (as a property that is also used by
+  ;; `ox-hugo').
   (setq org-log-done 'time)
 
-  ;; Make sure that tasks with sub-tasks or a sub-checklist cannot be marked done, if the
-  ;; sub-tasks/list aren't done.
+  ;; Make sure that tasks with sub-tasks or a sub-checklist cannot be marked
+  ;; done, if the sub-tasks/list aren't done.
   (setq org-enforce-todo-dependencies t
         org-enforce-todo-checkbox-dependencies t)
 
@@ -210,8 +219,8 @@
   ;; Start the agenda view today (default in Doom was `-3d').
   (setq org-agenda-start-day nil)
 
-  ;; Org agenda should get files from the org directory as well as the daily directory of
-  ;; `org-roam-dailies'.
+  ;; Org agenda should get files from the org directory as well as the daily
+  ;; directory of `org-roam-dailies'.
   (setq org-agenda-files
         (directory-files-recursively "~/Documents/org/" "\\.org$"))
 
@@ -220,8 +229,8 @@
         :localleader :desc "log mode" "l" #'org-agenda-log-mode)
 
   ;; Also add a hook so that the list is re-created on every agenda.
-  ;; It could be the case that new files were added in the meantime, which would not be considered
-  ;; by org-agenda otherwise.
+  ;; It could be the case that new files were added in the meantime, which would
+  ;; not be considered by org-agenda otherwise.
   ;; Note the removal of files that contain =.#= in their name.
   ;; These are temporary files which I assume are created by org or org-roam.
   ;; Org-agenda would complain any time it doesn't find these files anymore.
