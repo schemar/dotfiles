@@ -157,6 +157,11 @@
 ;; Where my org(-roam) files are stored.
 (setq org-directory "~/Documents/org/")
 
+;; Do not hightlight long lines in org-mode, as the links are usually longer
+;; than they look.
+(setq-hook! 'org-mode-hook whitespace-style
+            (remove 'lines-tail whitespace-style))
+
 (after! org
   ;; Disable latex in org mode as it slows down editing too much :(
   (setq org-highlight-latex-and-related nil)
