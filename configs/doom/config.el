@@ -47,9 +47,6 @@
 ;; Allow 80 characters before highlighting a line as too long.
 (setq whitespace-line-column 80)
 
-;; Show a ruler at the line column.
-(global-display-fill-column-indicator-mode)
-
 ;; Enable showing of whitespace.
 (global-whitespace-mode +1)
 
@@ -148,7 +145,9 @@
 (use-package! elpher
   :defer t)
 
+;;
 ;;; :lang org
+
 ;; Use org-mode in the *scratch* buffer (`SPC x')
 (setq doom-scratch-initial-major-mode 'org-mode)
 
@@ -158,12 +157,15 @@
 ;; Where my org(-roam) files are stored.
 (setq org-directory "~/Documents/org/")
 
-;; Do not hightlight long lines in org-mode, as the links are usually longer
-;; than they look.
-(setq-hook! 'org-mode-hook whitespace-style
-            (remove 'lines-tail whitespace-style))
-
 (after! org
+  ;; Do not hightlight long lines in org-mode, as the links are usually longer
+  ;; than they look.
+  (setq-hook! 'org-mode-hook whitespace-style
+              (remove 'lines-tail whitespace-style))
+
+  ;; Show a ruler at the line column.
+  (add-hook! 'org-mode-hook #'display-fill-column-indicator-mode)
+
   ;; Disable latex in org mode as it slows down editing too much :(
   (setq org-highlight-latex-and-related nil)
 
@@ -332,8 +334,16 @@
 	                (substring contents end-of-begin end)
 	              (format "%s" file)))))))
 
+;; TODO: Enable fancy priorities with org-ql.
 (use-package! org-ql
   :after org)
+  ;; ### Does not work
+  ;; :config
+  ;; (add-hook! 'org-agenda-finalize-hook :append (org-fancy-priorities-create-overlays)))
+  ;; ### Also does not work
+  ;; :after org-fancy-priorities
+  ;; :config
+  ;; (advice-add 'org-ql-view--add-priority-face :override (lambda (&rest _) (org-fancy-priorities-create-overlays))))
 
 (use-package! org-super-agenda
   :after org-agenda
