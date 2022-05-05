@@ -158,6 +158,15 @@
 (setq org-directory "~/Documents/org/")
 
 (after! org
+  ;; No need to be so bold.
+  (custom-set-faces!
+    `(org-level-1 :weight normal :foreground ,(doom-color 'blue))
+    `(org-level-2 :weight normal :foreground ,(doom-color 'magenta))
+    `(org-level-3 :weight normal :foreground ,(doom-color 'dark-blue))
+    `(org-level-4 :weight normal :foreground ,(doom-color 'cyan))
+    `(org-level-5 :weight normal :foreground ,(doom-color 'violet))
+    `(link        :weight normal :foreground ,(doom-color 'blue)))
+
   ;; Do not hightlight long lines in org-mode, as the links are usually longer
   ;; than they look.
   (setq-hook! 'org-mode-hook whitespace-style
