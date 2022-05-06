@@ -92,6 +92,8 @@
 ;; Focus new window after splitting.
 (setq evil-split-window-below t
       evil-vsplit-window-right t)
+;; Allow pint to move to end-of-line character
+(setq evil-move-beyond-eol t)
 
 ;;; :checkers spell
 ;; Disable flyspell messages to improve performance.
