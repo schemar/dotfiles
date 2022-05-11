@@ -189,6 +189,9 @@
   (setq org-priority-lowest ?D
         org-priority-default ?C)
 
+  ;; Set the face of the new lowest priority to not be red.
+  (push '(?D . success) org-priority-faces)
+
   ;; Set up keywords incl. when to be asked to add a note.
   (setq org-todo-keywords '((type "TODO(t!)"
                                   "WAIT(w@/!)"
