@@ -192,6 +192,10 @@
   ;; Set the face of the new lowest priority to not be red.
   (push '(?D . success) org-priority-faces)
 
+  ;; Customize the bullet appearance of org headings.
+  (setq org-superstar-headline-bullets-list
+        '(9673 9675 9672 9671 9654 9655))
+
   ;; Set up keywords incl. when to be asked to add a note.
   (setq org-todo-keywords '((type "TODO(t!)"
                                   "WAIT(w@/!)"
