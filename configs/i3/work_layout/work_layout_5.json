@@ -1,22 +1,20 @@
-[
-  {
+{
     "border": "pixel",
     "current_border_width": 1,
     "floating": "auto_off",
     "geometry": {
-      "height": 1034,
-      "width": 1916,
-      "x": 0,
-      "y": 0
+        "height": 1056,
+        "width": 1920,
+        "x": 0,
+        "y": 0
     },
     "marks": [],
-    "name": "obsidian",
+    "name": "Slack",
     "percent": 1,
     "swallows": [
-      {
-        "class": "obsidian"
-      }
+        {
+            "class": "^Slack$"
+        }
     ],
     "type": "con"
-  }
-]
+}

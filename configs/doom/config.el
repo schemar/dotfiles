@@ -177,6 +177,9 @@
   ;; Show a ruler at the line column.
   (add-hook! 'org-mode-hook #'display-fill-column-indicator-mode)
 
+  ;; Use org-appear mode.
+  (add-hook! 'org-mode-hook #'org-appear-mode)
+
   ;; Disable latex in org mode as it slows down editing too much :(
   (setq org-highlight-latex-and-related nil)
 
