@@ -357,7 +357,19 @@
 
 ;; TODO: Enable fancy priorities with org-ql.
 (use-package! org-ql
-  :after org)
+  :after org
+  :config
+  (setq org-ql-views '(
+                       ("Futurice Todo (Not Scheduled)"
+                        :buffers-files org-agenda-files
+                        :query (and
+                                (todo)
+                                (tags "futurice")
+                                (not
+                                 (or (scheduled) (deadline))))
+                        :super-groups ((:auto-priority))
+                        :sort (todo date)
+                        :title "Futurice Todo"))))
   ;; ### Does not work
   ;; :config
   ;; (add-hook! 'org-agenda-finalize-hook :append (org-fancy-priorities-create-overlays)))
