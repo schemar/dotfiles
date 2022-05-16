@@ -1,6 +1,6 @@
 ;;; package --- schemar emacs
 ;;; Commentary:
-;; Carefully handcrafted Emacs config.
+;; Carefully hand copy-pasted Emacs config.
 ;; Takes parts from Emacs from Scratch, Doom Emacs, and Spacemacs.
 
 ;;
@@ -34,9 +34,6 @@
 (defvar schemar/default-font-size 105)
 (defvar schemar/default-variable-font-size 125)
 
-;; The default is 800 kilobytes.  Measured in bytes.
-(setq gc-cons-threshold (* 50 1000 1000))
-
 (defun schemar/display-startup-time ()
   "Display the time it took Emacs to load."
   (message "Emacs loaded in %s with %d garbage collections."
@@ -49,17 +46,63 @@
 
 (setq inhibit-startup-message t)
 
-(scroll-bar-mode -1)        ; Disable visible scrollbar
-(tool-bar-mode -1)          ; Disable the toolbar
-(tooltip-mode -1)           ; Disable tooltips
+;; We do not need two spaces after a sentence. One is fine.
+(setq sentence-end-double-space nil)
 
-(menu-bar-mode -1)            ; Disable the menu bar
+;; Always end a file with a newline.
+(setq require-final-newline t)
+
+;; Remove UI stuff.
+(scroll-bar-mode -1) ; Disable visible scrollbar
+(tool-bar-mode -1) ; Disable the toolbar
+(tooltip-mode -1) ; Disable tooltips
+(menu-bar-mode -1) ; Disable the menu bar
 
 ;; Set up the visible bell
 (setq visible-bell t)
 
+;; Show the column in the mode line.
 (column-number-mode)
-(global-display-line-numbers-mode t)
+
+;; PGTK builds only: this timeout adds latency to frame operations, like
+;; `make-frame-invisible', which are frequently called without a guard because
+;; it's inexpensive in non-PGTK builds. Lowering the timeout from the default
+;; 0.1 should make childframes and packages that manipulate them (like `lsp-ui',
+;; `company-box', and `posframe') feel much snappier. See emacs-lsp/lsp-ui#613.
+(setq pgtk-wait-for-event-timeout 0.001)
+
+;; Increase how much is read from processes in a single chunk (default is 4kb).
+;; This is further increased elsewhere, where needed (like our LSP module).
+(setq read-process-output-max (* 64 1024))  ; 64kb
+
+;; Reduce *Message* noise at startup. An empty scratch buffer (or the dashboard)
+;; is more than enough.
+(setq inhibit-startup-screen t
+      inhibit-startup-echo-area-message user-login-name
+      inhibit-default-init t
+      ;; Shave seconds off startup time by starting the scratch buffer in
+      ;; `fundamental-mode', rather than, say, `org-mode' or `text-mode', which
+      ;; pull in a ton of packages. `doom/open-scratch-buffer' provides a better
+      ;; scratch buffer anyway.
+      initial-major-mode 'fundamental-mode
+      initial-scratch-message nil)
+
+;;
+;;; Line numbers
+
+;; Explicitly define a width to reduce the cost of on-the-fly computation
+(setq-default display-line-numbers-width 3)
+
+;; Show absolute line numbers for narrowed regions to make it easier to tell the
+;; buffer is narrowed, and where you are, exactly.
+(setq-default display-line-numbers-widen t)
+
+;; Enable line numbers in most text-editing modes. We avoid
+;; `global-display-line-numbers-mode' because there are many special and
+;; temporary modes where we don't need/want them.
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(add-hook 'text-mode-hook #'display-line-numbers-mode)
+(add-hook 'conf-mode-hook #'display-line-numbers-mode)
 
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
@@ -79,9 +122,27 @@
 ;;
 ;;; Overarching packages:
 
+;; Restart Emacs:
+(use-package restart-emacs
+  :commands (restart-emacs))
+
 ;; which-key:
 (use-package which-key
   :hook (after-init . which-key-mode))
+
+(use-package helpful
+  ;; a better *help* buffer
+  :commands helpful--read-symbol
+  :hook (helpful-mode . visual-line-mode)
+  :init
+  ;; Make `apropos' et co search more extensively. They're more useful this way.
+  (setq apropos-do-all t)
+
+  (global-set-key [remap describe-function] #'helpful-callable)
+  (global-set-key [remap describe-command]  #'helpful-command)
+  (global-set-key [remap describe-variable] #'helpful-variable)
+  (global-set-key [remap describe-key]      #'helpful-key)
+  (global-set-key [remap describe-symbol]   #'helpful-symbol))
 
 ;; Theme:
 (use-package doom-themes
@@ -186,38 +247,38 @@
 ;;; Spelling and syntax checking:
 ;; TODO: Spelling is still not working as intended.
 
-;; Spelling:
-(use-package ispell
-  :straight (:type built-in)
-  :defer t
-  :init
-  (setq ispell-program-name "aspell"
-        ispell-extra-args '("--sug-mode=ultra"
-                            "--run-together")))
-(use-package flyspell
-  :straight (:type built-in)
-  :hook ((org-mode
-          markdown-mode
-          TeX-mode
-          rst-mode
-          mu4e-compose-mode
-          message-mode
-          git-commit-mode)
-         flyspell-mode)
+;; ;; Spelling:
+;; (use-package ispell
+;;   :straight (:type built-in)
+;;   :defer t
+;;   :init
+;;   (setq ispell-program-name "aspell"
+;;         ispell-extra-args '("--sug-mode=ultra"
+;;                             "--run-together")))
+;; (use-package flyspell
+;;   :straight (:type built-in)
+;;   :hook ((org-mode
+;;           markdown-mode
+;;           TeX-mode
+;;           rst-mode
+;;           mu4e-compose-mode
+;;           message-mode
+;;           git-commit-mode) .
+;;          flyspell-mode)
 
-  :hook ((yaml-mode
-          conf-mode
-          prog-mode)
-         flyspell-prog-mode)
-  :config
-  (provide 'ispell))
+;;   :hook ((yaml-mode
+;;           conf-mode
+;;           prog-mode) .
+;;          flyspell-prog-mode)
+;;   :config
+;;   (provide 'ispell))
 
-(use-package flyspell-correct
-  :after flyspell
-  :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
-(use-package flyspell-correct-ivy
-  :after flyspell-correct)
-(use-package flyspell-lazy)
+;; (use-package flyspell-correct
+;;   :after flyspell
+;;   :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
+;; (use-package flyspell-correct-ivy
+;;   :after flyspell-correct)
+;; (use-package flyspell-lazy)
 
 ;; Syntax:
 
@@ -314,9 +375,124 @@
   :config
   (projectile-mode +1))
 
-(use-package counsel-projectile
-  :after projectile
-  :config (counsel-projectile-mode))
+;;
+;;; Code and development:
+
+;; Favor spaces over tabs. Pls dun h8, but I think spaces (and 4 of them) is a
+;; more consistent default than 8-space tabs. It can be changed on a per-mode
+;; basis anyway (and is, where tabs are the canonical style, like go-mode).
+(setq-default indent-tabs-mode nil
+              tab-width 4)
+
+(use-package highlight-numbers
+  :hook ((prog-mode conf-mode) . highlight-numbers-mode)
+  :config (setq highlight-numbers-generic-regexp "\\_<[[:digit:]]+\\(?:\\.[0-9]*\\)?\\_>"))
+
+(use-package hl-todo
+  :hook (prog-mode . hl-todo-mode)
+  :hook (yaml-mode . hl-todo-mode)
+  :config
+  (setq hl-todo-highlight-punctuation ":"
+        hl-todo-keyword-faces
+        `(;; For things that need to be done, just not today.
+          ("TODO" warning bold)
+          ;; For problems that will become bigger problems later if not
+          ;; fixed ASAP.
+          ("FIXME" error bold)
+          ;; For tidbits that are unconventional and not intended uses of the
+          ;; constituent parts, and may break in a future update.
+          ("HACK" font-lock-constant-face bold)
+          ;; For things that were done hastily and/or hasn't been thoroughly
+          ;; tested. It may not even be necessary!
+          ("REVIEW" font-lock-keyword-face bold)
+          ;; For especially important gotchas with a given implementation,
+          ;; directed at another user other than the author.
+          ("NOTE" success bold)
+          ;; For things that just gotta go and will soon be gone.
+          ("DEPRECATED" font-lock-doc-face bold)
+          ;; For a known bug that needs a workaround
+          ("BUG" error bold)
+          ;; For warning about a problematic or misguiding code
+          ("XXX" font-lock-constant-face bold))))
+
+;; Web
+(use-package web-mode
+  :mode "\\.[px]?html?\\'"
+  :mode "\\.\\(?:tpl\\|blade\\)\\(?:\\.php\\)?\\'"
+  :mode "\\.erb\\'"
+  :mode "\\.[lh]?eex\\'"
+  :mode "\\.sface\\'"
+  :mode "\\.jsp\\'"
+  :mode "\\.as[cp]x\\'"
+  :mode "\\.ejs\\'"
+  :mode "\\.hbs\\'"
+  :mode "\\.mustache\\'"
+  :mode "\\.svelte\\'"
+  :mode "\\.twig\\'"
+  :mode "\\.jinja2?\\'"
+  :mode "\\.eco\\'"
+  :mode "wp-content/themes/.+/.+\\.php\\'"
+  :mode "templates/.+\\.php\\'"
+  :init
+  ;; If the user has installed `vue-mode' then, by appending this to
+  ;; `auto-mode-alist' rather than prepending it, its autoload will have
+  ;; priority over this one.
+  (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode) 'append)
+  :mode "\\.vue\\'")
+
+(use-package css-mode)
+
+(use-package sass-mode)
+
+(use-package counsel-css)
+
+(use-package company-web)
+
+;; TypeScript / JavaScript:
+(use-package rjsx-mode)
+
+(use-package typescript-mode)
+
+(use-package js2-refactor)
+
+(use-package npm-mode)
+
+(use-package add-node-modules-path)
+
+(use-package tide)
+
+(use-package xref-js2)
+
+;; LSP:
+(use-package lsp-mode
+  :hook (((html-mode-local-vars
+           web-mode-local-vars
+           nxml-mode-local-vars) . lsp-mode)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands (lsp lsp-install-server))
+
+(use-package lsp-ui
+  :after lsp-mode
+  :hook (lsp-mode . lsp-ui-mode)
+  :config
+  (setq lsp-ui-peek-enable t
+        lsp-ui-doc-max-height 8
+        lsp-ui-doc-max-width 72         ; 150 (default) is too wide
+        lsp-ui-doc-delay 0.75           ; 0.2 (default) is too naggy
+        lsp-ui-doc-show-with-mouse nil  ; don't disappear on mouseover
+        lsp-ui-doc-position 'at-point
+        lsp-ui-sideline-ignore-duplicate t
+        ;; Don't show symbol definitions in the sideline. They are pretty noisy,
+        ;; and there is a bug preventing Flycheck errors from being shown (the
+        ;; errors flash briefly and then disappear).
+        lsp-ui-sideline-show-hover nil
+        ;; Re-enable icon scaling (it's disabled by default upstream for Emacs
+        ;; 26.x compatibility; see emacs-lsp/lsp-ui#573)
+        lsp-ui-sideline-actions-icon lsp-ui-sideline-actions-icon-default))
+
+(use-package lsp-ivy
+  :after (lsp-mode ivy)
+  :commands lsp-ivy-workspace-symbol lsp-ivy-global-workspace-symbol)
 
 ;;
 ;;; Global key-bindings:
@@ -329,7 +505,7 @@
 Use normal find file functionality otherwise."
   (interactive)
   (if (projectile-project-p)
-      (counsel-projectile-find-file)
+      (projectile-find-file)
     (counsel-find-file)))
 
 (defun schemar/grep ()
@@ -364,6 +540,9 @@ Use normal find file functionality otherwise."
    "bb" '(ivy-switch-buffer :which-key "List buffers")
    "bd" '(kill-current-buffer :which-key "Close buffer")
 
+   "q" '(:ignore t :which-key "Quit")
+   "qr" '(restart-emacs :which-key "Restart")
+
    "p" '(:ignore t :which-key "Projects")
    "pp" '(counsel-projectile-switch-project :which-key "Switch project")
    "pa" '(counsel-projectile-add-known-project :which-key "Add project")))
@@ -371,7 +550,19 @@ Use normal find file functionality otherwise."
 ;;
 ;;; Clean up:
 
-;; Make gc pauses faster by decreasing the threshold.
-(setq gc-cons-threshold (* 2 1000 1000))
+;; Make sure to set up garbage collection!
+;; It was disabled in `early-init.el'. 
+(use-package gcmh
+  :init
+  ;; The GC introduces annoying pauses and stuttering into our Emacs experience,
+  ;; so we use `gcmh' to stave off the GC while we're using Emacs, and provoke it
+  ;; when it's idle. However, if the idle delay is too long, we run the risk of
+  ;; runaway memory usage in busy sessions. If it's too low, then we may as well
+  ;; not be using gcmh at all.
+  (setq gcmh-idle-delay 'auto  ; default is 15s
+        gcmh-auto-idle-delay-factor 10
+        gcmh-high-cons-threshold (* 128 1024 1024))  ; 128mb
+  :config
+  (gcmh-mode 1))
 
 ;;; init.el ends here
