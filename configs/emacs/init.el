@@ -245,47 +245,26 @@
             (ElispFeature  . ,(all-the-icons-material "stars"                    :face 'all-the-icons-orange))
             (ElispFace     . ,(all-the-icons-material "format_paint"             :face 'all-the-icons-pink))))))
 
-;;
-;;; Spelling and syntax checking:
-;; TODO: Spelling is still not working as intended.
-
-;; ;; Spelling:
-;; (use-package ispell
-;;   :straight (:type built-in)
-;;   :defer t
-;;   :init
-;;   (setq ispell-program-name "aspell"
-;;         ispell-extra-args '("--sug-mode=ultra"
-;;                             "--run-together")))
-;; (use-package flyspell
-;;   :straight (:type built-in)
-;;   :hook ((org-mode
-;;           markdown-mode
-;;           TeX-mode
-;;           rst-mode
-;;           mu4e-compose-mode
-;;           message-mode
-;;           git-commit-mode) .
-;;          flyspell-mode)
-
-;;   :hook ((yaml-mode
-;;           conf-mode
-;;           prog-mode) .
-;;          flyspell-prog-mode)
-;;   :config
-;;   (provide 'ispell))
-
-;; (use-package flyspell-correct
-;;   :after flyspell
-;;   :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
-;; (use-package flyspell-correct-ivy
-;;   :after flyspell-correct)
-;; (use-package flyspell-lazy)
 
 ;; Syntax:
 
 ;;; Terminal:
-(use-package vterm)
+(use-package vterm
+  :commands vterm-mode
+  :config
+  ;; Once vterm is dead, the vterm buffer is useless. Why keep it around? We can
+  ;; spawn another if want one.
+  (setq vterm-kill-buffer-on-exit t)
+
+  ;; 10_000 lines of scrollback, instead of 1000
+  (setq vterm-max-scrollback 10000)
+
+  (add-hook 'vterm-mode-hook
+            (lambda () (setq
+                        ;; Don't prompt about dying processes when killing vterm
+                        confirm-kill-processes nil
+                        ;; Prevent premature horizontal scrolling
+                        hscroll-margin 0))))
 
 ;;; Evil:
 
@@ -417,54 +396,6 @@
           ;; For warning about a problematic or misguiding code
           ("XXX" font-lock-constant-face bold))))
 
-;; Web
-(use-package web-mode
-  :mode "\\.[px]?html?\\'"
-  :mode "\\.\\(?:tpl\\|blade\\)\\(?:\\.php\\)?\\'"
-  :mode "\\.erb\\'"
-  :mode "\\.[lh]?eex\\'"
-  :mode "\\.sface\\'"
-  :mode "\\.jsp\\'"
-  :mode "\\.as[cp]x\\'"
-  :mode "\\.ejs\\'"
-  :mode "\\.hbs\\'"
-  :mode "\\.mustache\\'"
-  :mode "\\.svelte\\'"
-  :mode "\\.twig\\'"
-  :mode "\\.jinja2?\\'"
-  :mode "\\.eco\\'"
-  :mode "wp-content/themes/.+/.+\\.php\\'"
-  :mode "templates/.+\\.php\\'"
-  :init
-  ;; If the user has installed `vue-mode' then, by appending this to
-  ;; `auto-mode-alist' rather than prepending it, its autoload will have
-  ;; priority over this one.
-  (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode) 'append)
-  :mode "\\.vue\\'")
-
-(use-package css-mode)
-
-(use-package sass-mode)
-
-(use-package counsel-css)
-
-(use-package company-web)
-
-;; TypeScript / JavaScript:
-(use-package rjsx-mode)
-
-(use-package typescript-mode)
-
-(use-package js2-refactor)
-
-(use-package npm-mode)
-
-(use-package add-node-modules-path)
-
-(use-package tide)
-
-(use-package xref-js2)
-
 ;; LSP:
 (use-package lsp-mode
   :hook (((html-mode-local-vars
@@ -566,5 +497,93 @@ Use normal find file functionality otherwise."
         gcmh-high-cons-threshold (* 128 1024 1024))  ; 128mb
   :config
   (gcmh-mode 1))
+
+;;
+;;; TODO: Get these packages working.
+
+;;
+;;; Spelling and syntax checking:
+
+;; ;; Spelling:
+;; (use-package ispell
+;;   :straight (:type built-in)
+;;   :defer t
+;;   :init
+;;   (setq ispell-program-name "aspell"
+;;         ispell-extra-args '("--sug-mode=ultra"
+;;                             "--run-together")))
+;; (use-package flyspell
+;;   :straight (:type built-in)
+;;   :hook ((org-mode
+;;           markdown-mode
+;;           TeX-mode
+;;           rst-mode
+;;           mu4e-compose-mode
+;;           message-mode
+;;           git-commit-mode) .
+;;          flyspell-mode)
+
+;;   :hook ((yaml-mode
+;;           conf-mode
+;;           prog-mode) .
+;;          flyspell-prog-mode)
+;;   :config
+;;   (provide 'ispell))
+
+;; (use-package flyspell-correct
+;;   :after flyspell
+;;   :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
+;; (use-package flyspell-correct-ivy
+;;   :after flyspell-correct)
+;; (use-package flyspell-lazy)
+
+;;
+;;; Web
+;; (use-package web-mode
+;;   :mode "\\.[px]?html?\\'"
+;;   :mode "\\.\\(?:tpl\\|blade\\)\\(?:\\.php\\)?\\'"
+;;   :mode "\\.erb\\'"
+;;   :mode "\\.[lh]?eex\\'"
+;;   :mode "\\.sface\\'"
+;;   :mode "\\.jsp\\'"
+;;   :mode "\\.as[cp]x\\'"
+;;   :mode "\\.ejs\\'"
+;;   :mode "\\.hbs\\'"
+;;   :mode "\\.mustache\\'"
+;;   :mode "\\.svelte\\'"
+;;   :mode "\\.twig\\'"
+;;   :mode "\\.jinja2?\\'"
+;;   :mode "\\.eco\\'"
+;;   :mode "wp-content/themes/.+/.+\\.php\\'"
+;;   :mode "templates/.+\\.php\\'"
+;;   :init
+;;   ;; If the user has installed `vue-mode' then, by appending this to
+;;   ;; `auto-mode-alist' rather than prepending it, its autoload will have
+;;   ;; priority over this one.
+;;   (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode) 'append)
+;;   :mode "\\.vue\\'")
+
+;; (use-package css-mode)
+
+;; (use-package sass-mode)
+
+;; (use-package counsel-css)
+
+;; (use-package company-web)
+
+;; ;; TypeScript / JavaScript:
+;; (use-package rjsx-mode)
+
+;; (use-package typescript-mode)
+
+;; (use-package js2-refactor)
+
+;; (use-package npm-mode)
+
+;; (use-package add-node-modules-path)
+
+;; (use-package tide)
+
+;; (use-package xref-js2)
 
 ;;; init.el ends here
