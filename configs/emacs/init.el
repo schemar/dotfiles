@@ -728,6 +728,9 @@ Use normal find file functionality otherwise."
   "Grep for content in files."
   (interactive)
   (if (projectile-project-p)
+      ;; TODO: Counsel projecctile find-file looks ugly. Do I really
+      ;;       need counsel-projectile? I could try projectile-ripgrep
+      ;;       here if I install the `rg' package.
       (counsel-projectile-rg)
     (counsel-rg)))
 
@@ -751,6 +754,13 @@ Use normal find file functionality otherwise."
    "f" '(:ignore t :which-key "Files")
    "ff" '(counsel-find-file :which-key "Find file")
    "fs" '(save-buffer :which-key "Save buffer")
+
+   "o" '(:ignore t :which-key "Org")
+   "oa" '(org-agenda :which-key "Agenda")
+   "of" '(org-roam-node-find :which-key "Find node")
+
+   "g" '(:ignore t :which-key "Git")
+   "gg" '(magit-status :which-key "Status")
 
    "b" '(:ignore t :which-key "Buffers")
    "bb" '(ivy-switch-buffer :which-key "List buffers")
