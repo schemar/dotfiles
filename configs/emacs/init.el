@@ -28,6 +28,23 @@
 ;; use-package convenience macro:
 (straight-use-package 'use-package)
 
+;; Load this at the top so that the white frame disappears as quickly as possible.
+;;; Theme:
+(use-package doom-themes
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-nord t)
+
+  ;; Enable flashing mode-line on errors:
+  (doom-themes-visual-bell-config)
+  ;; Enable custom treemacs theme:
+  (setq doom-themes-treemacs-theme "doom-colors")
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+
 ;;
 ;;; Emacs fundamentals:
 
@@ -46,7 +63,7 @@
 
 (setq inhibit-startup-message t)
 
-;; We do not need two spaces after a sentence. One is fine.
+;; I do not need two spaces after a sentence. One is fine.
 (setq sentence-end-double-space nil)
 
 ;; Always end a file with a newline.
@@ -144,21 +161,6 @@
   (global-set-key [remap describe-key]      #'helpful-key)
   (global-set-key [remap describe-symbol]   #'helpful-symbol))
 
-;; Theme:
-(use-package doom-themes
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-nord t)
-
-  ;; Enable flashing mode-line on errors:
-  (doom-themes-visual-bell-config)
-  ;; Enable custom treemacs theme:
-  (setq doom-themes-treemacs-theme "doom-colors")
-  (doom-themes-treemacs-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
