@@ -284,11 +284,11 @@
 (use-package evil-collection
   :after evil
   :config
+  ;; NOTE: If you don’t like surprises but still want to use evil-collection-init, setting evil-collection-mode-list to nil and adding each mode manually might be a better option.
+  ;; See https://github.com/emacs-evil/evil-collection
   (evil-collection-init))
 
 (use-package evil-nerd-commenter)
-
-;;
 
 ;;
 ;;; Dired:
@@ -323,7 +323,6 @@
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode)
   :config
-
   ;; display icons with colors
   (setq all-the-icons-dired-monochrome nil))
 
@@ -332,14 +331,275 @@
   :init
   (global-set-key [remap find-dired] #'fd-dired))
 
+;;
+;;; Treemacs
+
+(use-package treemacs
+  :defer t
+  :init
+  (setq treemacs-follow-after-init t
+        treemacs-sorting 'alphabetic-case-insensitive-asc)
+  :config
+  ;; `'deferred' and `3' require python.
+  (treemacs-git-mode 'deferred)
+  (setq treemacs-collapse-dirs 3))
+
+(use-package treemacs-evil
+  :defer t
+  :after (treemacs evil)
+  :init
+  (with-eval-after-load 'treemacs (require 'treemacs-evil)))
+
+(use-package treemacs-projectile
+  :after treemacs)
+
+(use-package treemacs-magit
+  :after (treemacs magit))
+
+(use-package lsp-treemacs
+  :after (treemacs lsp))
+
+;;
+;;; Org
+
+(use-package org
+  :init
+  ;; Where my org(-roam) files are stored.
+  (setq org-directory "~/Documents/org/")
+  :config
+
+  ;; Show a ruler at the line column.
+  (add-hook 'org-mode-hook #'display-fill-column-indicator-mode)
+
+  ;; Disable latex in org mode as it slows down editing too much :(
+  (setq org-highlight-latex-and-related nil)
+
+  ;; Nicer folding and initial behavior.
+  (setq org-startup-folded 'show2levels
+        org-ellipsis " […]")
+
+  ;; Extend the priorities so that B is above none and D is low.
+  ;; See also setting of `org-fancy-priorities-list' after the `org' block.
+  (setq org-priority-lowest ?D
+        org-priority-default ?C)
+
+  (setq org-fontify-done-headline t
+        org-fontify-quote-and-verse-blocks t
+        org-fontify-whole-heading-line t
+        org-hide-leading-stars t
+        org-image-actual-width nil
+        org-imenu-depth 6
+        org-priority-faces
+        '((?A . error)
+          (?B . warning)
+          (?C . success)
+          (?D . success))
+        org-startup-indented t
+        org-tags-column 0
+        org-use-sub-superscripts '{}
+        ;; `showeverything' is org's default, but it doesn't respect
+        ;; `org-hide-block-startup' (#+startup: hideblocks), archive trees,
+        ;; hidden drawers, or VISIBILITY properties. `nil' is equivalent, but
+        ;; respects these settings.
+        org-startup-folded nil)
+
+
+  ;; Set up keywords incl. when to be asked to add a note.
+  ;; HACK Face specs fed directly to `org-todo-keyword-faces' don't respect
+  ;;      underlying faces like the `org-todo' face does, so we define our own
+  ;;      intermediary faces that extend from org-todo.
+  (with-no-warnings
+    (custom-declare-face '+org-todo-project '((t (:inherit (bold font-lock-doc-face org-todo)))) "")
+    (custom-declare-face '+org-todo-onhold  '((t (:inherit (bold warning org-todo)))) "")
+    (custom-declare-face '+org-todo-cancel  '((t (:inherit (bold error org-todo)))) ""))
+  (setq org-todo-keywords '((type "TODO(t!)"
+                                  "WAIT(w@/!)"
+                                  "HOLD(h@/!)"
+                                  "PROJ(p!)"
+                                  "|"
+                                  "DONE(d!)"
+                                  "DELEGATED(l@)"
+                                  "KILL(k@)"))
+        org-todo-keyword-faces
+        '(("WAIT" . +org-todo-onhold)
+          ("HOLD" . +org-todo-onhold)
+          ("PROJ" . +org-todo-project)
+          ("KILL" . +org-todo-cancel)))
+
+  ;; Make sure that tasks with sub-tasks or a sub-checklist cannot be marked
+  ;; done, if the sub-tasks/list aren't done.
+  (setq org-enforce-todo-dependencies t
+        org-enforce-todo-checkbox-dependencies t)
+
+  ;; Insert state change notes and time stamps into a drawer.
+  (setq org-log-into-drawer t)
+
+  ;; Include running timer in clock table
+  (setq org-clock-report-include-clocking-task t)
+
+
+  ;;
+  ;; Agenda
+  ;;
+
+  ;; Do not show DONE items in the agenda.
+  (setq org-agenda-skip-scheduled-if-done t
+        org-agenda-skip-deadline-if-done t
+
+        ;; Show Monday as first day of week.
+        org-agenda-start-on-weekday 1
+        calendar-week-start-day 1
+
+        ;; Start the agenda view today.
+        org-agenda-start-on-weekday nil
+        org-agenda-start-day nil
+
+        ;; Different colors for different priority levels
+        org-agenda-deadline-faces
+         '((1.001 . error)
+           (1.0 . org-warning)
+           (0.5 . org-upcoming-deadline)
+           (0.0 . org-upcoming-distant-deadline))
+         ;; Don't monopolize the whole frame just for the agenda
+        org-agenda-window-setup 'current-window
+        ;; Org agenda should get files from the org directory as well as the daily
+        ;; directory of `org-roam-dailies'.
+        org-agenda-files (directory-files-recursively "~/Documents/org/" "\\.org$"))
+
+  ;; [[https://d12frosted.io/posts/2020-06-24-task-management-with-roam-vol2.html][Source]].
+  ;; Vulpea functions are also available [[https://github.com/d12frosted/vulpea][here]].
+  (setq org-agenda-prefix-format
+        '((agenda . " %i %(vulpea-agenda-category 12)%?-12t% s")
+          (todo . " %i %(vulpea-agenda-category 12) ")
+          (tags . " %i %(vulpea-agenda-category 12) ")
+          (search . " %i %(vaulpea-agenda-category 12) ")))
+
+  (defun vulpea-agenda-category (&optional len)
+    "Get category of item at point for agenda.
+
+    Category is defined by one of the following items:
+
+    - CATEGORY property
+    - TITLE keyword
+    - TITLE property
+    - filename without directory and extension
+
+    When LEN is a number, resulting string is padded right with
+    spaces and then truncated with ... on the right if result is
+    longer than LEN.
+
+    Usage example:
+
+      (setq org-agenda-prefix-format
+            '((agenda . \" %(vulpea-agenda-category) %?-12t %12s\")))
+
+    Refer to `org-agenda-prefix-format' for more information."
+    (let* ((file-name (when buffer-file-name
+                        (file-name-sans-extension
+                         (file-name-nondirectory buffer-file-name))))
+           (title (vulpea-buffer-prop-get "title"))
+           (category (org-get-category))
+           (result
+            (or (if (and
+                     title
+                     (string-equal category file-name))
+                    title
+                  category)
+                "")))
+      (if (numberp len)
+          (s-truncate len (s-pad-right len " " result))
+        result)))
+
+  (defun vulpea-buffer-prop-get (name)
+    "Get a buffer property called NAME as a string."
+    (org-with-point-at 1
+      (when (re-search-forward (concat "^#\\+" name ": \\(.*\\)")
+                               (point-max) t)
+        (buffer-substring-no-properties
+         (match-beginning 1)
+         (match-end 1)))))
+
+  ;; Explicitly track when a task was closed (as a property that is also used by
+  ;; `ox-hugo').
+  (setq org-log-done 'time))
+
+(use-package evil-org
+  :after org
+  :hook (org-mode . evil-org-mode)
+  :hook (org-capture-mode . evil-insert-state)
+  :config
+  (add-hook 'evil-org-mode-hook #'evil-normalize-keymaps)
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
+(use-package org-appear)
+
+(use-package org-superstar
+  :hook (org-mode . org-superstar-mode)
+  :config
+  ;; Customize the bullet appearance of org headings.
+  (setq org-superstar-headline-bullets-list
+        '(9672 9671 9673 9675 9654 9655)))
+
+(use-package org-fancy-priorities
+  :hook ((org-mode org-agenda-mode) . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list '("" "" "" "")))
+
+(use-package org-roam
+  :init
+  ;; Don't display warning message dedicated for v1 users. Need to be set early.
+  (setq org-roam-v2-ack t)
+  :config
+  (setq org-roam-directory (file-truename "~/Documents/org")
+        org-roam-dailies-directory "daily/"
+        ;; Completion slows down the org buffers too much
+        org-roam-completion-everywhere nil
+        org-roam-dailies-capture-templates
+        '(("d" "default" entry
+           "* %?"
+           :target (file+head "%<%Y-%m-%d>.org"
+                              "#+title: %<%Y-%m-%d>\n"))))
+  ;; Org-roam provides the option org-roam-db-gc-threshold to
+  ;; temporarily change the threshold value for GC to be triggered
+  ;; during these memory-intensive operations. To reduce the number of
+  ;; garbage collection processes, one may set
+  ;; org-roam-db-gc-threshold to a high value (such as
+  ;; most-positive-fixnum):
+  (setq org-roam-db-gc-threshold most-positive-fixnum)
+  (org-roam-db-autosync-mode))
+
+(use-package org-ql
+  :defer t)
+
+(use-package org-super-agenda
+  :hook (org-agenda-mode . org-super-agenda-mode)
+  :config
+  (setq org-super-agenda-groups
+        '((:name "Today"
+           :time-grid t)
+          (:name "Futurice"
+           :tag "futurice")
+          (:name "Private"
+           :tag "private")))
+  ;; Need to fix header map of super agenda to not override evil bindings.
+  (setq org-super-agenda-header-map (make-sparse-keymap)))
+
+
+;;
 ;;; Git and VCS:
 
 ;; Magit:
-(use-package magit)
+(use-package magit
+  :commands magit-file-delete
+  :config
+  ;; Close transient with ESC
+  (define-key transient-map [escape] #'transient-quit-one))
 (use-package magit-todos
   :after magit
   :config
-  (setq magit-todos-keyword-suffix "\\(?:([^)]+)\\)?:?")) ; make colon optional
+  (setq magit-todos-keyword-suffix "\\(?:([^)]+)\\)?:?") ; make colon optional
+  (define-key magit-todos-section-map "j" nil))
 
 
 ;;
@@ -353,6 +613,16 @@
              projectile-locate-dominating-file
              projectile-relevant-known-projects)
   :custom ((projectile-completion-system 'ivy))
+  :init
+  ;; Auto-discovery is slow to do by default. Better to update the list
+  ;; when you need to (`projectile-discover-projects-in-search-path').
+  (setq projectile-auto-discover nil)
+  (setq projectile-kill-buffers-filter 'kill-only-files
+        projectile-ignored-projects '("~/"))
+
+  (global-set-key [remap evil-jump-to-tag] #'projectile-find-tag)
+  (global-set-key [remap find-tag]         #'projectile-find-tag)
+
   :config
   (projectile-mode +1))
 
@@ -370,8 +640,7 @@
   :config (setq highlight-numbers-generic-regexp "\\_<[[:digit:]]+\\(?:\\.[0-9]*\\)?\\_>"))
 
 (use-package hl-todo
-  :hook (prog-mode . hl-todo-mode)
-  :hook (yaml-mode . hl-todo-mode)
+  :hook ((prog-mode yaml-mode) . hl-todo-mode)
   :config
   (setq hl-todo-highlight-punctuation ":"
         hl-todo-keyword-faces
@@ -398,9 +667,8 @@
 
 ;; LSP:
 (use-package lsp-mode
-  :hook (((html-mode-local-vars
-           web-mode-local-vars
-           nxml-mode-local-vars) . lsp-mode)
+  ;; TODO: Add modes that should start lsp:
+  :hook (((XXX-mode) . lsp)
          (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-install-server))
 
