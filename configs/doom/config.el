@@ -167,6 +167,9 @@
     `(org-level-5 :weight normal :foreground ,(doom-color 'violet))
     `(link        :weight normal :foreground ,(doom-color 'blue)))
 
+  ;; Doom uses org-appear. We don't want all emphasis markers always.
+  (setq org-hide-emphasis-markers t)
+
   ;; Do not hightlight long lines in org-mode, as the links are usually longer
   ;; than they look.
   (setq-hook! 'org-mode-hook whitespace-style
