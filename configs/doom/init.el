@@ -22,6 +22,10 @@
 ;; This variable must be set before Evil is loaded.
 (setq evil-respect-visual-line-mode t)
 
+;; Change local leader key to be quicker.
+(setq doom-localleader-key ","
+      doom-localleader-alt-key "C-,")
+
 (doom! :input
        ;;chinese
        ;;japanese
