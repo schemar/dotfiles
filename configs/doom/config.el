@@ -229,10 +229,6 @@
   ;; Agenda
   ;;
 
-  ;; Do not show DONE items in the agenda.
-  (setq org-agenda-skip-scheduled-if-done t
-        org-agenda-skip-deadline-if-done t)
-
   ;; Show Monday as first day of week.
   (setq org-agenda-start-on-weekday 1)
   (setq calendar-week-start-day 1)
@@ -383,6 +379,8 @@
   (setq org-super-agenda-groups
         '((:name "Today"
            :time-grid t)
+          (:name "Done"
+           :todo ("DONE" "DELEGATED" "KILL"))
           (:name "Futurice"
            :tag "futurice")
           (:name "Private"
