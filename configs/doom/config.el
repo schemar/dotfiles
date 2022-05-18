@@ -107,9 +107,7 @@
 (after! company
   (map! :map company-active-map
         ;; Use `TAB' to select element, instead of cycling through candidates.
-        "<tab>" #'company-complete-selection
-        ;; Use `ESC' to exit company mode without leaving insert mode.
-        "<escape>" #'company-abort))
+        "<tab>" #'company-complete-selection))
 
 ;;; :tools lsp
 (after! lsp-mode
