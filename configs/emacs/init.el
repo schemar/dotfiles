@@ -526,6 +526,7 @@
 (use-package evil-org
   :after org
   :hook (org-mode . evil-org-mode)
+  ;; TODO: Same for magit
   :hook (org-capture-mode . evil-insert-state)
   :config
   (add-hook 'evil-org-mode-hook #'evil-normalize-keymaps)
