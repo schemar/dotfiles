@@ -61,3 +61,10 @@
 ;;; Tree Sitter for code ASTs
 (package! tree-sitter)
 (package! tree-sitter-langs)
+
+;;; Auto-commit git
+;; See https://github.com/ryuslash/git-auto-commit-mode for details.
+;; One option to enable it:
+;; Add a file `.dir-locals.el' to a directory which contains:
+;; `((nil . ((eval git-auto-commit-mode 1))))'
+(package! git-auto-commit-mode)

@@ -390,3 +390,9 @@
            :tag "private")))
   ;; Need to fix header map of super agenda to not override evil bindings.
   (setq org-super-agenda-header-map (make-sparse-keymap)))
+
+;;; git-auto-commit
+(setq gac-automatically-push-p t
+      gac-automatically-add-new-files-p t
+      gac-debounce-interval 10
+      gac-silent-message-p t)
