@@ -41,19 +41,6 @@
 ;; enable line numbers, set it to `t'.
 (setq display-line-numbers-type t)
 
-;; Prevents some cases of Emacs flickering.
-(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
-
-;; Allow 80 characters before highlighting a line as too long.
-(setq whitespace-line-column 80)
-
-;; Enable showing of whitespace.
-(global-whitespace-mode +1)
-
-;; Use pop-up search for default search with slash.
-;; Depends on the enabled :completion module (will be e.g. Swiper for Ivy).
-(map! :desc "Search" :n "/" #'+default/search-buffer)
-
 ;;; Packages
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -93,22 +80,8 @@
 ;; Focus new window after splitting.
 (setq evil-split-window-below t
       evil-vsplit-window-right t)
-;; Allow pint to move to end-of-line character
+;; Allow point to move to end-of-line character
 (setq evil-move-beyond-eol t)
-
-;;; :checkers spell
-;; Disable flyspell messages to improve performance.
-(setq flyspell-issue-message-flag nil
-      flyspell-issue-welcome-flag nil)
-
-;; Default to English.
-(after! ispell (setq ispell-dictionary "en"))
-
-;;; :completion company
-(after! company
-  (map! :map company-active-map
-        ;; Use `TAB' to select element, instead of cycling through candidates.
-        "<tab>" #'company-complete-selection))
 
 ;;; :tools lsp
 (after! lsp-mode
@@ -149,9 +122,6 @@
 ;;
 ;;; :lang org
 
-;; Use org-mode in the *scratch* buffer (`SPC x')
-(setq doom-scratch-initial-major-mode 'org-mode)
-
 ;; Use org mode when using Emacs everywhere.
 (setq emacs-everywhere-major-mode-function #'org-mode)
 
@@ -179,11 +149,6 @@
   ;; Show a ruler at the line column.
   (add-hook! 'org-mode-hook #'display-fill-column-indicator-mode)
 
-  ;; Use org-appear mode.
-  (add-hook! 'org-mode-hook #'org-appear-mode)
-
-  ;; Disable latex in org mode as it slows down editing too much :(
-  (setq org-highlight-latex-and-related nil)
 
   ;; Nicer folding and initial behavior.
   (setq org-startup-folded 'show2levels
@@ -226,9 +191,6 @@
   ;; Include running timer in clock table
   (setq org-clock-report-include-clocking-task t)
 
-  ;; Disable auto-completion with `company' in org-mode.
-  (setq-hook! org-mode company-idle-delay nil)
-
   ;;
   ;; Agenda
   ;;
@@ -248,20 +210,6 @@
   ;; Org key bindings.
   (map! :map org-agenda-mode-map
         :localleader :desc "log mode" "l" #'org-agenda-log-mode)
-
-  ;; Also add a hook so that the list is re-created on every agenda.
-  ;; It could be the case that new files were added in the meantime, which would
-  ;; not be considered by org-agenda otherwise.
-  ;; Note the removal of files that contain =.#= in their name.
-  ;; These are temporary files which I assume are created by org or org-roam.
-  ;; Org-agenda would complain any time it doesn't find these files anymore.
-  ;; Therefore we take them out of the list of files.
-  (setq-hook! org-agenda-mode
-    org-agenda-files
-    (cl-delete-if
-     (lambda (f)
-       (string-match-p "\\.#" f))
-     (directory-files-recursively "~/Documents/org/" "\\.org$")))
 
   ;; [[https://d12frosted.io/posts/2020-06-24-task-management-with-roam-vol2.html][Source]].
   ;; Vulpea functions are also available [[https://github.com/d12frosted/vulpea][here]].
@@ -326,8 +274,6 @@
 (after! org-roam
   (setq org-roam-directory (file-truename "~/Documents/org")
         org-roam-dailies-directory "daily/"
-        ;; Completion slows down the org buffers too much
-        org-roam-completion-everywhere nil
         org-roam-dailies-capture-templates
         '(("d" "default" entry
            "* %?"
@@ -378,26 +324,7 @@ SCHEDULED: <%<%Y-%m-%d %a>>
 
 ;; TODO: Enable fancy priorities with org-ql.
 (use-package! org-ql
-  :after org
-  :config
-  (setq org-ql-views '(
-                       ("Futurice Todo (Not Scheduled)"
-                        :buffers-files org-agenda-files
-                        :query (and
-                                (todo)
-                                (tags "futurice")
-                                (not
-                                 (or (scheduled) (deadline))))
-                        :super-groups ((:auto-priority))
-                        :sort (todo date)
-                        :title "Futurice Todo"))))
-  ;; ### Does not work
-  ;; :config
-  ;; (add-hook! 'org-agenda-finalize-hook :append (org-fancy-priorities-create-overlays)))
-  ;; ### Also does not work
-  ;; :after org-fancy-priorities
-  ;; :config
-  ;; (advice-add 'org-ql-view--add-priority-face :override (lambda (&rest _) (org-fancy-priorities-create-overlays))))
+  :after org)
 
 (use-package! org-super-agenda
   :after org-agenda
