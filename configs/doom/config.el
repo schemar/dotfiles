@@ -113,12 +113,12 @@
 ;;; :tools lsp
 (after! lsp-mode
   ;; Show where we are at the top of the buffer.
-  (setq lsp-headerline-breadcrumb-enable t))
+  (setq lsp-headerline-breadcrumb-enable t)
 
-;; Make sure that TypeScript files only get formatted once, with eslint when
-;; present.
-(setq-hook! 'typescript-mode-hook +format-with-lsp nil)
-(after! lsp-mode
+  ;; Make sure that TypeScript files only get formatted once, with eslint when
+  ;; present.
+  (setq-hook! 'typescript-mode-hook +format-with-lsp nil)
+
   (defun my/eslint-format ()
     (interactive
      (if-let ((eslint (-first (lambda (wks)
