@@ -51,6 +51,7 @@
 (global-whitespace-mode +1)
 
 ;; Use pop-up search for default search with slash.
+;; Depends on the enabled :completion module (will be e.g. Swiper for Ivy).
 (map! :desc "Search" :n "/" #'+default/search-buffer)
 
 ;;; Packages
