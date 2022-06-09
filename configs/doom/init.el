@@ -23,10 +23,8 @@
 (setq evil-respect-visual-line-mode t)
 
 ;; Change local leader key to be quicker.
-(setq doom-leader-key "SPC"
-      doom-leader-alt-key "C-SPC"
-      doom-localleader-key ","
-      doom-localleader-alt-key "C-,")
+(setq doom-localleader-key ","
+      doom-localleader-alt-key "M-,")
 
 (doom! :input
        ;;chinese
