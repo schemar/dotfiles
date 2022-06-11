@@ -14,8 +14,8 @@
 (setq user-full-name "Martin Schenck"
       user-mail-address "martinschenck@fastmail.com")
 
-;; Allow i3 to always float "everywhere".
-(setq emacs-everywhere-frame-name-format "emacs-everywhere")
+;; Allow i3 to always float "everywhere" by identifying it by its name.
+(setq emacs-everywhere-frame-name-format "emacs-everywhere-float")
 
 ;; Always keep a few lines around the point visible.
 (setq scroll-margin 8)
