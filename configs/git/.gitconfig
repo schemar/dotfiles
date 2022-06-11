@@ -3,7 +3,7 @@
 [user]
   name = Martin Schenck
 [core]
-  editor = emacsclient -c
+  editor = emacsclient -c -F '((name . \"emacs-git-float\"))'
   pager = delta
 [alias]
   o = switch
