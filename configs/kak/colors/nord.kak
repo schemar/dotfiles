@@ -1,1 +1,0 @@
-/home/masc/Projects/dotfiles/configs/kak/plugins/nord.kak

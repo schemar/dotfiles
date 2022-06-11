@@ -13,7 +13,6 @@ This repository contains configurations for my productivity stack and some basic
 * [(Doom) Emacs](https://github.com/hlissner/doom-emacs)❤️
 * [fd](https://github.com/sharkdp/fd)
 * [fzf](https://github.com/junegunn/fzf)
-* [kakoune editor](https://github.com/mawww/kakoune)❤️
 * [NeoVim](https://github.com/neovim/neovim)
 * [procs](https://github.com/dalance/procs)
 * [ranger](https://github.com/ranger/ranger)
@@ -64,20 +63,6 @@ Prefix is `<ctrl>-b`.
    Movement in copy mode is vim-like (e.g. `<ctrl>+{d,u}` to move down/up a page).
 * `<prefix> u` fuzzy find and open a URL from the buffer.
 * `<prefix> tab` fuzzy find any previous tmux output (words, lines, URLs, paths).
-
-### Kakoune
-
-Since kakoune has a helpful info panel, I don't need to list much here.
-Check the info panel when entering user mode with `,`.
-
-For example, you can select files to open with ranger or open tig's blame on the current line.
-
-There are some files in the .config/kak/autoload/ directory in addition to the .config/kak/kakrc file.
-Check there if something appears to be missing from kakrc.
-
-You can add custom hooks or configurations to a `.kakrc.local` in your project root for project specific settings.
-
-See https://github.com/schemar/kak-jsts/ for details on TypeScript formatting/linting.
 
 ### i3
 
