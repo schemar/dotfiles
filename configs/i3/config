@@ -263,7 +263,7 @@ for_window [class="Xfce4-power-manager-settings"] floating enable, move position
 for_window [instance="Godot_Engine"] floating enable, move position center
 for_window [title="settings-nmtui-connect"] floating enable, move position center
 for_window [title="emacs-everywhere-float"] floating enable
-for_window [title="emacs-git-float"] floating enable
+for_window [title="emacs-git-float"] floating enable, resize set 1750 900, move position center
 # browser pop-ups
 for_window [window_role="pop-up"] floating enable, move position center
 
