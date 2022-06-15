@@ -211,6 +211,14 @@
   (setq org-agenda-files
         (directory-files-recursively "~/Documents/org/" "\\.org$"))
 
+  ;; Add new files to the list of agenda files. This ensures that the agenda
+  ;; will list new TODOs from new files. The advice expects the new file to be
+  ;; saved to disk before the agenda command is invoked!
+  (defadvice! schemar/add-new-agenda-files (&rest _args)
+    :before #'org-agenda
+    (setq org-agenda-files
+          (directory-files-recursively "~/Documents/org/" "\\.org$")))
+
   ;; Org key bindings.
   (map! :map org-agenda-mode-map
         :localleader :desc "log mode" "l" #'org-agenda-log-mode)
