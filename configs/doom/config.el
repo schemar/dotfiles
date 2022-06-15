@@ -153,6 +153,8 @@
   ;; Show a ruler at the line column.
   (add-hook! 'org-mode-hook #'display-fill-column-indicator-mode)
 
+  ;; Always offer all tags.
+  (setq org-complete-tags-always-offer-all-agenda-tags t)
 
   ;; Nicer folding and initial behavior.
   (setq org-startup-folded 'show2levels
