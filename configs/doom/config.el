@@ -284,6 +284,23 @@
       "n r t" #'org-roam-dailies-goto-today)
 
 (after! org-roam
+  (defun org-roam-backlinks-sort (a b)
+    "Custom sorting function for backlinks A and B.
+This function overrides org-roam's default sorting function for
+backlinks in the roam buffer. It will always sort date nodes
+before other nodes. It will sort date nodes newest to
+oldest (descending). After the date nodes, it will sort all other
+nodes in alphabetical order (ascending)."
+    (let* ((title-a (org-roam-node-title (org-roam-backlink-source-node a)))
+           (title-b (org-roam-node-title (org-roam-backlink-source-node b)))
+           (date-regexp (rx (= 4 digit) "-" (= 2 digit) "-" (= 2 digit)))
+           (a-matches-date (string-match date-regexp title-a))
+           (b-matches-date (string-match date-regexp title-b)))
+      (cond ((and a-matches-date b-matches-date) (string< title-b title-a))
+            (a-matches-date t)
+            (b-matches-date nil)
+            (t (string< title-a title-b)))))
+
   (setq org-roam-directory (file-truename "~/Documents/org")
         org-roam-dailies-directory "daily/"
         org-roam-dailies-capture-templates
