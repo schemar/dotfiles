@@ -153,9 +153,6 @@
   ;; Show a ruler at the line column.
   (add-hook! 'org-mode-hook #'display-fill-column-indicator-mode)
 
-  ;; Always offer all tags.
-  (setq org-complete-tags-always-offer-all-agenda-tags t)
-
   ;; Nicer folding and initial behavior.
   (setq org-startup-folded 'show2levels
         org-ellipsis " […]")
@@ -288,6 +285,7 @@
 (after! org-roam
   (defun org-roam-backlinks-sort (a b)
     "Custom sorting function for backlinks A and B.
+
 This function overrides org-roam's default sorting function for
 backlinks in the roam buffer. It will always sort date nodes
 before other nodes. It will sort date nodes newest to
@@ -302,6 +300,18 @@ nodes in alphabetical order (ascending)."
             (a-matches-date t)
             (b-matches-date nil)
             (t (string< title-a title-b)))))
+
+  (defadvice! schemar/org-set-tags-from-roam (orig-fun &rest args)
+    "Offers tags from org-roam when setting regular org tags.
+
+Org-roam's `org-roam-tag-add' only adds tags to org-roam nodes.
+With this advice, the tag completion offers tags known to
+org-roam when adding regular org tags.
+
+It is much faster than the alternative `(setq org-complete-tags-always-offer-all-agenda-tags t)'"
+    :around #'org-set-tags-command
+    (let ((org-current-tag-alist (mapcar #'list (org-roam-tag-completions))))
+      (apply orig-fun args)))
 
   (setq org-roam-directory (file-truename "~/Documents/org")
         org-roam-dailies-directory "daily/"
