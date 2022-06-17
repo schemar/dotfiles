@@ -333,30 +333,7 @@ It is much faster than the alternative `(setq org-complete-tags-always-offer-all
         '(("d" "default" entry
            "* %?"
            :target (file+head "%<%Y-%m-%d>.org"
-                              "#+title: %<%Y-%m-%d>
-
-* [[id:217c4f1a-1445-482c-aa71-b15e1131ab04][Futurice]] :futurice:
-** TODO Morning routine
-SCHEDULED: <%<%Y-%m-%d %a>>
-- [ ] Calendar
-- [ ] Agenda/Tasks
-  - Also copy tasks from notebook.
-- [ ] Mail
-- [ ] Slack
-** TODO Afternoon routine
-SCHEDULED: <%<%Y-%m-%d %a>>
-- [ ] Mail
-- [ ] Calendar
-- [ ] Slack
-- [ ] Agenda/Tasks (also plan next day and copy private tasks to notebook)
-- [ ] Journaling
-- [ ] Hours
-* [[id:14c19d56-4715-493d-9b79-795f0b8efc5c][Private]] :private:
-* Report
-#+BEGIN: clocktable :scope file :hidefiles t :narrow 40 :tags t :link t :block %<%Y-%m-%d> :sort (1 . ?a)
-#+END
-")
-           :unnarrowed t))))
+                              "#+title: %<%Y-%m-%d>")))))
 
 (after! deft
   (setq deft-extensions '("org")
