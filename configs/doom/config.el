@@ -199,6 +199,12 @@
            (file+headline
             (lambda () (concat org-directory "daily/" (format-time-string "%Y-%m-%d") ".org"))
             "[[id:217c4f1a-1445-482c-aa71-b15e1131ab04][Futurice]]")
+           "** %? %^G"
+           :clock-in t)
+          ("l" "Futurice linked task in daily note" entry
+           (file+headline
+            (lambda () (concat org-directory "daily/" (format-time-string "%Y-%m-%d") ".org"))
+            "[[id:217c4f1a-1445-482c-aa71-b15e1131ab04][Futurice]]")
            "** %a%? %^G"
            :clock-in t)))
 
