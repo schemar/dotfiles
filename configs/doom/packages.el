@@ -68,3 +68,8 @@
 ;; Add a file `.dir-locals.el' to a directory which contains:
 ;; `((nil . ((eval git-auto-commit-mode 1))))'
 (package! git-auto-commit-mode)
+
+;;; Disabling org-fancy-priorities
+;; It is incompatible with org-ql and I want
+;; a consistent interface rather than a sometimes pretty one.
+(package! org-fancy-priorities :disable t)
