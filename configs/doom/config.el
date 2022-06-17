@@ -194,20 +194,6 @@
   ;; Include running timer in clock table
   (setq org-clock-report-include-clocking-task t)
 
-  (setq org-capture-templates
-        '(("t" "Futurice task in daily note" entry
-           (file+headline
-            (lambda () (concat org-directory "daily/" (format-time-string "%Y-%m-%d") ".org"))
-            "[[id:217c4f1a-1445-482c-aa71-b15e1131ab04][Futurice]]")
-           "** %? %^G"
-           :clock-in t)
-          ("l" "Futurice linked task in daily note" entry
-           (file+headline
-            (lambda () (concat org-directory "daily/" (format-time-string "%Y-%m-%d") ".org"))
-            "[[id:217c4f1a-1445-482c-aa71-b15e1131ab04][Futurice]]")
-           "** %a%? %^G"
-           :clock-in t)))
-
   ;;
   ;; Agenda
   ;;
@@ -328,12 +314,45 @@ It is much faster than the alternative `(setq org-complete-tags-always-offer-all
       (apply orig-fun args)))
 
   (setq org-roam-directory (file-truename org-directory)
-        org-roam-dailies-directory "daily/"
+        org-roam-capture-templates
+        '(("d" "default" entry "* %?"
+           :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+           :unnarrowed t)
+          ("c" "clock in" entry "* %u %?"
+           :target (file+olp "%<%Y%m%d%H%M%S>-${slug}.org" ("Clocking"))
+           :jump-to-captured t
+           :clock-in t
+           :prepend t)
+          ("t" "task" entry   "* TODO %?\n:LOGBOOK:\n- State \"TODO\"       from              %U \\\\\n  Created while at %a\n:END:"
+           :target (file+olp "%<%Y%m%d%H%M%S>-${slug}.org" ("Tasks"))
+           :prepend t)))
+
+  (setq org-roam-dailies-directory "daily/"
         org-roam-dailies-capture-templates
         '(("d" "default" entry
            "* %?"
            :target (file+head "%<%Y-%m-%d>.org"
-                              "#+title: %<%Y-%m-%d>")))))
+                              "#+title: %<%Y-%m-%d>"))))
+
+  (defun schemar/org-capture-clock ()
+    "Org roam capture with key c"
+    (interactive)
+    (org-roam-capture nil "c"))
+
+  (defun schemar/org-capture-task ()
+    "Org roam capture with key t"
+    (interactive)
+    (org-roam-capture nil "t"))
+
+  ;; Move scratch buffer over from `:leader x' to `:leader X'.
+  (map! :leader :desc "Pop up scratch buffer" "X" #'doom/open-scratch-buffer)
+  ;; Replace org capturing at `:leader X' with custom capture at `:leader x'.
+  ;; Unbind x first so that it can be used as a prefix after.
+  (map! :leader "x" nil)
+  (map! :leader
+        :prefix ("x" . "Capturing")
+        :desc "Clock" "c" #'schemar/org-capture-clock
+         :desc "Task"  "t" #'schemar/org-capture-task))
 
 (after! deft
   (setq deft-extensions '("org")
