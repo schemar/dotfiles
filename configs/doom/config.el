@@ -207,18 +207,20 @@
   ;; Start the agenda view today (default in Doom was `-3d').
   (setq org-agenda-start-day nil)
 
+  (defun schemar/org-agenda-files ()
+    "Recursively looks for all org files in the org directory."
+    (directory-files-recursively org-directory "\\.org$"))
+
   ;; Org agenda should get files from the org directory as well as the daily
   ;; directory of `org-roam-dailies'.
-  (setq org-agenda-files
-        (directory-files-recursively org-directory "\\.org$"))
+  (setq org-agenda-files (schemar/org-agenda-files))
 
   ;; Add new files to the list of agenda files. This ensures that the agenda
   ;; will list new TODOs from new files. The advice expects the new file to be
   ;; saved to disk before the agenda command is invoked!
   (defadvice! schemar/add-new-agenda-files (&rest _args)
     :before #'org-agenda
-    (setq org-agenda-files
-          (directory-files-recursively org-directory "\\.org$")))
+    (setq org-agenda-files (schemar/org-agenda-files)))
 
   ;; Org key bindings.
   (map! :map org-agenda-mode-map
@@ -334,7 +336,11 @@ It is much faster than the alternative `(setq org-complete-tags-always-offer-all
         '(("d" "default" entry
            "* %?"
            :target (file+head "%<%Y-%m-%d>.org"
-                              "#+title: %<%Y-%m-%d>"))))
+                              "#+title: %<%Y-%m-%d>\n
+* Report\n
+#+BEGIN: clocktable :scope schemar/org-agenda-files :hidefiles t :narrow 40 :tags t :link t :stepskip0 t :fileskip0 t :block %<%Y-%m-%d> :sort (1 . ?a)\n
+#+END
+"))))
 
   (defun schemar/org-capture-clock ()
     "Org roam capture with key c"
