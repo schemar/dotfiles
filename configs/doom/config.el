@@ -178,6 +178,8 @@
                                   "DONE(d!)"
                                   "DELEGATED(l@)"
                                   "KILL(k@)")))
+  ;; Explicitly set done keywords for org-ql.
+  (setq org-done-keywords '("DONE" "DELEGATED" "KILL"))
 
   ;; Explicitly track when a task was closed (as a property that is also used by
   ;; `ox-hugo').
