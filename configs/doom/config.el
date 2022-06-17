@@ -208,7 +208,7 @@
   ;; Org agenda should get files from the org directory as well as the daily
   ;; directory of `org-roam-dailies'.
   (setq org-agenda-files
-        (directory-files-recursively "~/Documents/org/" "\\.org$"))
+        (directory-files-recursively org-directory "\\.org$"))
 
   ;; Add new files to the list of agenda files. This ensures that the agenda
   ;; will list new TODOs from new files. The advice expects the new file to be
@@ -216,7 +216,7 @@
   (defadvice! schemar/add-new-agenda-files (&rest _args)
     :before #'org-agenda
     (setq org-agenda-files
-          (directory-files-recursively "~/Documents/org/" "\\.org$")))
+          (directory-files-recursively org-directory "\\.org$")))
 
   ;; Org key bindings.
   (map! :map org-agenda-mode-map
@@ -313,7 +313,7 @@ It is much faster than the alternative `(setq org-complete-tags-always-offer-all
     (let ((org-current-tag-alist (mapcar #'list (org-roam-tag-completions))))
       (apply orig-fun args)))
 
-  (setq org-roam-directory (file-truename "~/Documents/org")
+  (setq org-roam-directory (file-truename org-directory)
         org-roam-dailies-directory "daily/"
         org-roam-dailies-capture-templates
         '(("d" "default" entry
@@ -342,12 +342,12 @@ SCHEDULED: <%<%Y-%m-%d %a>>
 #+BEGIN: clocktable :scope file :hidefiles t :narrow 40 :tags t :link t :block %<%Y-%m-%d> :sort (1 . ?a)
 #+END
 ")
-           :unnarrowed t)))
-  )
+           :unnarrowed t))))
+
 
 (after! deft
   (setq deft-extensions '("org")
-        deft-directory "~/Documents/org"
+        deft-directory org-directory
         deft-recursive t
         deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n")
   ;; Use #+title as title:
