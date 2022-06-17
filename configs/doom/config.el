@@ -194,6 +194,14 @@
   ;; Include running timer in clock table
   (setq org-clock-report-include-clocking-task t)
 
+  (setq org-capture-templates
+        '(("t" "Futurice task in daily note" entry
+           (file+headline
+            (lambda () (concat org-directory "daily/" (format-time-string "%Y-%m-%d") ".org"))
+            "[[id:217c4f1a-1445-482c-aa71-b15e1131ab04][Futurice]]")
+           "** %a%? %^G"
+           :clock-in t)))
+
   ;;
   ;; Agenda
   ;;
@@ -343,7 +351,6 @@ SCHEDULED: <%<%Y-%m-%d %a>>
 #+END
 ")
            :unnarrowed t))))
-
 
 (after! deft
   (setq deft-extensions '("org")
