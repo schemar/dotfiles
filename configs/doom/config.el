@@ -324,9 +324,9 @@ It is much faster than the alternative `(setq org-complete-tags-always-offer-all
            :unnarrowed t)
           ("c" "clock in" entry "* %u %?"
            :target (file+olp "%<%Y%m%d%H%M%S>-${slug}.org" ("Clocking"))
-           :jump-to-captured t
            :clock-in t
-           :prepend t)
+           :prepend t
+           :jump-to-captured t)
           ("t" "task" entry   "* TODO %?\n:LOGBOOK:\n- State \"TODO\"       from              %U \\\\\n  Created while at %a\n:END:"
            :target (file+olp "%<%Y%m%d%H%M%S>-${slug}.org" ("Tasks"))
            :prepend t)))
