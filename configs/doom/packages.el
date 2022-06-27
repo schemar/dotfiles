@@ -58,10 +58,6 @@
 ;; org-ql to query org items.
 (package! org-ql)
 
-;;; Tree Sitter for code ASTs
-(package! tree-sitter)
-(package! tree-sitter-langs)
-
 ;;; Auto-commit git
 ;; See https://github.com/ryuslash/git-auto-commit-mode for details.
 ;; One option to enable it:
