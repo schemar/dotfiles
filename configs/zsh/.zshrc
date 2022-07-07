@@ -50,6 +50,11 @@ for dump in ~/.zcompdump(N.mh+24); do
 done
 compinit -C
 
+# Use Vi key bindings
+# The starship prompt indicates the mode:
+# `>` is insert mode, `<` is for other modes
+bindkey -v
+
 # Correct locale
 export LC_ALL=en_US.UTF-8
 
