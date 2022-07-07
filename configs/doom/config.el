@@ -45,6 +45,9 @@
 ;; enable line numbers, set it to `t'.
 (setq display-line-numbers-type t)
 
+;; Convert images from unknown formats to PNG.
+(setq image-use-external-converter t)
+
 ;;; Packages
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -144,6 +147,9 @@
   ;; Nicer folding and initial behavior.
   (setq org-startup-folded 'show2levels
         org-ellipsis " […]")
+
+  ;; if there is a #+ATTR.*: width="200", resize to 200, otherwise resize to 400
+  (setq org-image-actual-width '(400))
 
   ;; Extend the priorities so that B is above none and D is low.
   ;; See also setting of `org-fancy-priorities-list' after the `org' block.
