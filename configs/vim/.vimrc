@@ -104,6 +104,7 @@ Plug 'https://github.com/Xuyuanp/nerdtree-git-plugin'
 
 " Color themes:
 Plug 'https://github.com/lifepillar/vim-solarized8'
+Plug 'https://github.com/arcticicestudio/nord-vim'
 
 " Initialize plugin system
 call plug#end()
@@ -134,7 +135,7 @@ let g:rainbow_conf = {'guifgs': ['darkorange3', 'seagreen3', 'firebrick', 'light
 "
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'nord'
 let g:airline#extensions#ale#enabled = 1
 set laststatus=2
 
@@ -142,4 +143,7 @@ set laststatus=2
 set termguicolors
 syntax on
 set background=dark
-colorscheme solarized8_flat
+colorscheme nord
+
+" Highlight current line
+set cursorline
