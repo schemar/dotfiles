@@ -65,6 +65,10 @@
 ;; `((nil . ((eval git-auto-commit-mode 1))))'
 (package! git-auto-commit-mode)
 
+;;; Todoist
+;; For better task management on mobile.
+(package! todoist)
+
 ;;; Disabling org-fancy-priorities
 ;; It is incompatible with org-ql and I want
 ;; a consistent interface rather than a sometimes pretty one.

@@ -106,7 +106,7 @@
                                              (lsp--workspace-client wks))))
                               (lsp-workspaces))))
          (with-lsp-workspace eslint
-           (lsp-format-buffer))
+                             (lsp-format-buffer))
        (lsp-format-buffer))))
   (setq-hook! 'typescript-mode-hook +format-with 'my/eslint-format))
 
@@ -354,7 +354,7 @@ It is much faster than the alternative `(setq org-complete-tags-always-offer-all
   (map! :leader
         :prefix ("x" . "Capturing")
         :desc "Clock" "c" #'schemar/org-capture-clock
-         :desc "Task"  "t" #'schemar/org-capture-task))
+        :desc "Task"  "t" #'schemar/org-capture-task))
 
 (after! deft
   (setq deft-extensions '("org")
@@ -399,3 +399,15 @@ It is much faster than the alternative `(setq org-complete-tags-always-offer-all
       gac-automatically-add-new-files-p t
       gac-debounce-interval 10
       gac-silent-message-p t)
+
+;;; Todoist
+(after! todoist
+  (map! :leader :desc "Todoist" :n "d" #'todoist)
+
+  ;; Instead, set up shortcuts to actions directly?
+  (map! :localleader :map todoist-mode-map
+        :desc "Task menu" :n "t" #'todoist-task-menu
+        :desc "Project menu" :n "p" #'todoist-project-menu)
+  ;; TODO: How to handle API token?
+  ;; (setq todoist-token "")
+  )
