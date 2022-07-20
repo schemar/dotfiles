@@ -2,6 +2,8 @@
 
 This repository contains configurations for my productivity stack and some basic visual improvements.
 
+![Screenshot Fedora i3 Spin](./resources/2022-07-20_screenshot_fedora.png)
+
 ## Included Configurations
 
 ### Terminal
