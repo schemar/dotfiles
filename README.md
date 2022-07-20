@@ -13,6 +13,7 @@ This repository contains configurations for my productivity stack and some basic
 * [(Doom) Emacs](https://github.com/hlissner/doom-emacs)❤️
 * [fd](https://github.com/sharkdp/fd)
 * [fzf](https://github.com/junegunn/fzf)
+* [kmonad](https://github.com/david-janssen/kmonad)
 * [NeoVim](https://github.com/neovim/neovim)
 * [procs](https://github.com/dalance/procs)
 * [ranger](https://github.com/ranger/ranger)
@@ -23,7 +24,7 @@ This repository contains configurations for my productivity stack and some basic
 * [tmux](https://github.com/tmux/tmux)❤️
 * [Zsh](https://www.zsh.org/)
 
-### X Window System
+### Graphical System
 
 * [autorandr](https://github.com/phillipberndt/autorandr)
 * [dunst](https://github.com/dunst-project/dunst)
@@ -31,7 +32,6 @@ This repository contains configurations for my productivity stack and some basic
 * [feh](https://github.com/derf/feh)
 * [i3](https://github.com/i3/i3)❤️
 * [kitty](https://github.com/kovidgoyal/kitty)❤️
-* [kmonad](https://github.com/david-janssen/kmonad)
 * [picom](https://github.com/yshui/picom)
 * [redshift](https://github.com/jonls/redshift)
 * [rofi](https://github.com/davatorium/rofi)
@@ -66,7 +66,7 @@ Prefix is `<ctrl>-b`.
 
 ### i3
 
-Installation is based on Fedora i3 spin and replaces i3 with i3-gaps.
+Installation is based on Fedora i3 spin with i3 replaced with i3-gaps.
 
 See the i3 config for all keybindings. Most relevant:
 
