@@ -66,6 +66,12 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;;; :emacs dired
+;; Shortcut to open ranger.
+(map! :leader
+      :prefix "f"
+      :desc "Ranger" "m" #'ranger)
+
 ;;; :core projectile
 ;; Go to "other" file based on test file, not file extension (was the default).
 (after! projectile
