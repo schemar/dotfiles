@@ -43,6 +43,9 @@ unsetopt beep
 
 zstyle :compinstall filename "$HOME/.zshrc"
 
+# Allow adding ZSH hooks
+autoload -U add-zsh-hook
+
 autoload -Uz compinit
 # Only check for new stuff once a day to improve shell startup time
 for dump in ~/.zcompdump(N.mh+24); do
@@ -61,17 +64,6 @@ export LC_ALL=en_US.UTF-8
 # direnv to load environment (variables) per directory/project
 eval "$(direnv hook zsh)"
 
-# Do some things only if we are in a "smart" terminal
-# (not Emacs TRAMP)
-if [ "$TERM" != "dumb" ]; then
-  # staship shell prompt
-  export STARSHIP_CONFIG="$HOME/.config/starship.toml"
-  eval "$(starship init zsh)"
-else
-  # Emacs TRAMP
-  PS1=''
-fi
-
 # z for directory jumping
 eval "$(zoxide init zsh)"
 
@@ -88,6 +80,10 @@ export FZF_COMPLETION_TRIGGER=',,'
 export VISUAL="emacsclient -c"
 export EDITOR="emacsclient -t"
 
+#
+# Emacs
+#
+
 # custom functions required for vterm inside emacs
 vterm_printf(){
     if [ -n "$TMUX" ] && ([ "${TERM%%-*}" = "tmux" ] || [ "${TERM%%-*}" = "screen" ] ); then
@@ -103,3 +99,44 @@ vterm_printf(){
 if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
     alias clear='vterm_printf "51;Evterm-clear-scrollback";tput clear'
 fi
+
+# Do some things only if we are in a "smart" terminal
+# (not Emacs TRAMP)
+if [ "$TERM" != "dumb" ]; then
+  # staship shell prompt
+  export STARSHIP_CONFIG="$HOME/.config/starship.toml"
+  eval "$(starship init zsh)"
+else
+  # Emacs TRAMP
+  PS1=''
+fi
+
+# Hook to rename the vterm buffer
+add-zsh-hook -Uz chpwd (){ print -Pn "\e]2;%m:%2~\a" }
+
+# Sync directory between Emacs and vterm
+vterm_prompt_end() {
+    vterm_printf "51;A$(whoami)@$(hostname):$(pwd)";
+}
+setopt PROMPT_SUBST
+PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
+
+# Enable Emacs commands inside the vterm shell
+vterm_cmd() {
+    local vterm_elisp
+    vterm_elisp=""
+    while [ $# -gt 0 ]; do
+        vterm_elisp="$vterm_elisp""$(printf '"%s" ' "$(printf "%s" "$1" | sed -e 's|\\|\\\\|g' -e 's|"|\\"|g')")"
+        shift
+    done
+    vterm_printf "51;E$vterm_elisp"
+}
+
+## Commands
+
+## Run `find_file` inside vterm.
+## Without argument: open dired in current directory.
+## With argument: open buffer with file content.
+find_file() {
+    vterm_cmd find-file "$(realpath "${@:-.}")"
+}

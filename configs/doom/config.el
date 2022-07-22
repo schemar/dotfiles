@@ -116,6 +116,10 @@
        (lsp-format-buffer))))
   (setq-hook! 'typescript-mode-hook +format-with 'my/eslint-format))
 
+;;; :term vterm
+(after! vterm
+  (setq vterm-buffer-name-string "vterm %s"))
+
 ;;; Gemini/Gopher
 (use-package! elpher
   :defer t)
