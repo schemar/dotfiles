@@ -72,6 +72,10 @@
       :prefix "f"
       :desc "Ranger" "m" #'ranger)
 
+(after! ranger
+  ;; Show hidden files in ranger windows.
+  (setq ranger-show-hidden t))
+
 ;;; :core projectile
 ;; Go to "other" file based on test file, not file extension (was the default).
 (after! projectile
