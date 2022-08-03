@@ -36,8 +36,7 @@
   output (uinput-sink "kmonad"
     ;; To understand the importance of the following line, see the section on
     ;; Compose-key sequences at the near-bottom of this file.
-    "/usr/bin/sleep 0.2s && setxkbmap -layout us -option 'compose:menu' -option 'compose:prsc' && /usr/bin/xset r rate 300 60")
-    cmp-seq compose ;; Have to define a compose key so that kmonad can print ä, etc.
+    "/usr/bin/sleep 0.2s && setxkbmap -layout us -variant altgr-intl && /usr/bin/xset r rate 300 60")
 
   ;; Fallthrough to have default num block
   fallthrough true
@@ -50,7 +49,7 @@
     rad (tap-hold-next-release 500 (layer-switch default) ralt)
 
     lau (tap-hold-next-release 500 (layer-next super) lalt)
-    rau (tap-hold-next-release 500 (layer-switch super) ralt)
+    rau (tap-hold-next-release 500 (layer-switch super) lalt)
     lcs (tap-hold-next-release 500 (layer-next special) lctl)
     rcs (tap-hold-next-release 500 (layer-next special) rctl)
 
@@ -72,6 +71,14 @@
     -rc (tap-hold-next-release 500 - rctl)
     cec (tap-hold-next-release 500 esc lctl)
     scs (tap-hold-next-release 500 caps lsft)
+
+    ü (around ralt y)
+    ö (around ralt p)
+    ä (around ralt q)
+    ß (around ralt s)
+    Ü (around ralt Y)
+    Ö (around ralt P)
+    Ä (around ralt Q)
 )
 
 (deflayer default
@@ -104,8 +111,8 @@
 (deflayer special
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _
-  caps _    _    _    _    _    _    ü    ï    ö    _    _    _    _          _
-  @cec ä    ß    _    _    _    [    \(   \)   ]    =    _    _          _    _
+  caps _    _    _    _    _    _    @ü   _    @ö   _    _    _    _          _
+  @cec @ä   @ß   _    _    _    [    \(   \)   ]    =    _    _          _    _
   @sca _    _    _    _    _    _    _    _    _    _         @sca       _    _
   _    _    _              _              _    _    _               _    _    _
 )
@@ -113,8 +120,8 @@
 (deflayer specialcaps
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _
-  _    _    _    _    _    _    _    Ü    Ï    Ö    _    _    _    _          _
-  @cec Ä    ß    _    _    _    {    &    *    }    +    _    _          _    _
+  _    _    _    _    _    _    _    @Ü   _    @Ö   _    _    _    _          _
+  @cec @Ä   _    _    _    _    _    _    _    _    _    _    _          _    _
   _    _    _    _    _    _    _    _    _    _    _         _          _    _
   _    _    _              _              _    _    _               _    _    _
 )

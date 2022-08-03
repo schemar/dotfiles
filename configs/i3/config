@@ -51,7 +51,7 @@ exec --no-startup-id sleep 5 && xfce4-power-manager --daemon
 # Input changes
 # All input changes will be overridden by kmonad if active
 ## US Keyboard with Compose
-exec_always --no-startup-id setxkbmap -layout us  -option 'compose:menu' -option 'compose:prsc'
+exec_always --no-startup-id setxkbmap -layout us -variant altgr-intl
 ## Key repeat (typematic delay and rate)
 exec_always --no-startup-id xset r rate 300 60
 ## Natural scrolling (https://altendorfer.at/2020/andi/linux/i3/2020/03/20/i3xtermAndScrolling.html)
