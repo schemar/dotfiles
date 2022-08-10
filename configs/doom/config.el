@@ -97,8 +97,16 @@
 ;; Focus new window after splitting.
 (setq evil-split-window-below t
       evil-vsplit-window-right t)
-;; Allow point to move to end-of-line character
+;; Allow point to move to end-of-line character.
 (setq evil-move-beyond-eol t)
+
+(after! evil
+  ;; Switch windows with control key.
+  (map! "C-h" #'evil-window-left
+        "C-j" #'evil-window-down
+        "C-k" #'evil-window-up
+        "C-l" #'evil-window-right)
+  )
 
 ;;; :tools lsp
 (after! lsp-mode
