@@ -44,33 +44,34 @@
 
 ;; Aliases to have simpler layer mapping
 (defalias
-    las (tap-hold-next-release 500 (layer-next special) lalt)
-    raa (tap-hold-next-release 500 (layer-switch arrowkeys) ralt)
-    rad (tap-hold-next-release 500 (layer-switch default) ralt)
+    las (tap-hold-next-release 200 (layer-next special) lalt)
+    raa (tap-hold-next-release 200 (layer-switch arrowkeys) ralt)
+    rad (tap-hold-next-release 200 (layer-switch default) ralt)
 
-    lau (tap-hold-next-release 500 (layer-next super) lalt)
-    rau (tap-hold-next-release 500 (layer-switch super) lalt)
-    lcs (tap-hold-next-release 500 (layer-next special) lctl)
-    rcs (tap-hold-next-release 500 (layer-next special) rctl)
+    lau (tap-hold-next-release 200 (layer-next super) lalt)
+    rau (tap-hold-next-release 200 (layer-switch super) lalt)
+    lcs (tap-hold-next-release 200 (layer-next special) lctl)
+    rcs (tap-hold-next-release 200 (layer-next special) rctl)
 
     arr (layer-toggle arrowkeys)
     spc (layer-toggle special)
     sca (layer-toggle specialcaps)
 
-    alm (tap-hold-next-release 500 a lmet :timeout-button a)
-    sla (tap-hold-next-release 500 s lalt :timeout-button s)
-    dlc (tap-hold-next-release 500 d lctl :timeout-button d)
-    fls (tap-hold-next-release 500 f rsft :timeout-button f)
+    alm (tap-hold-next-release 200 a lmet)
+    sla (tap-hold-next-release 200 s lalt)
+    dlc (tap-hold-next-release 200 d lctl)
+    zlc (tap-hold-next-release 200 z lctl)
+    fls (tap-hold-next-release 200 f rsft)
 
-    jrs (tap-hold-next-release 500 j rsft :timeout-button j)
-    krc (tap-hold-next-release 500 k rctl :timeout-button k)
-    lra (tap-hold-next-release 500 l ralt :timeout-button l)
-    ;rm (tap-hold-next-release 500 ; rmet)
-    crm (tap-hold-next-release 500 cmp rmet)
-    'rc (tap-hold-next-release 500 ' rctl)
-    -rc (tap-hold-next-release 500 - rctl)
-    cec (tap-hold-next-release 500 esc lctl)
-    scs (tap-hold-next-release 500 caps lsft)
+    jrs (tap-hold-next-release 200 j rsft)
+    krc (tap-hold-next-release 200 k rctl)
+    lra (tap-hold-next-release 200 l ralt)
+    ;rm (tap-hold-next-release 200 ; rmet)
+    crm (tap-hold-next-release 200 cmp rmet)
+    'la (tap-hold-next-release 200 ' lalt)
+    /rc (tap-hold-next-release 200 / rctl)
+    ela (tap-hold-next-release 200 esc lalt)
+    scs (tap-hold-next-release 200 caps lsft)
 
     ü (around ralt y)
     ö (around ralt p)
@@ -85,8 +86,8 @@
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc  del  home
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \          end
-  @cec a    s    d    f    g    h    j    k    l    @;rm @'rc ret        ins  pgup
-  lsft z    x    c    v    b    n    m    ,    .    /         rsft       up   pgdn
+  @ela @alm s    d    f    g    h    j    k    l    @;rm @'la ret        ins  pgup
+  lsft @zlc x    c    v    b    n    m    ,    .    @/rc      rsft       up   pgdn
   @lcs lmet @lau           spc            @rau @crm @rcs            left down rght
 )
 
@@ -94,7 +95,7 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _
   _    \)   ]    }    @    -    5    6    7    8    9    +    _    _          _
-  @cec \(   [    {    !    \_   left down up   rght *    =    _          _    _
+  @ela \(   [    {    !    \_   left down up   rght *    =    _          _    _
   _    #    $    %    ^    &    0    1    2    3    4         _          _    _
   _    _    _              _              @rad _    _               _    _    _
 )
@@ -103,7 +104,7 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _
   _    _    _    up   _    _    home pgdn pgup end  _    _    _    _          _
-  @cec _    left down rght _    left down up   rght _    _    _          _    _
+  @ela _    left down rght _    left down up   rght _    _    _          _    _
   _    _    _    _    _    _    _    _    _    _    _         _          _    _
   _    _    _              _              @rad _    rctl            _    _    _
 )
@@ -112,7 +113,7 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _
   caps _    _    _    _    _    _    @ü   _    @ö   _    _    _    _          _
-  @cec @ä   @ß   _    _    _    [    \(   \)   ]    =    _    _          _    _
+  @ela @ä   @ß   _    _    _    [    \(   \)   ]    =    _    _          _    _
   @sca _    _    _    _    _    _    _    _    _    _         @sca       _    _
   _    _    _              _              _    _    _               _    _    _
 )
@@ -121,7 +122,7 @@
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _     _    _
   _    _    _    _    _    _    _    @Ü   _    @Ö   _    _    _    _          _
-  @cec @Ä   _    _    _    _    _    _    _    _    _    _    _          _    _
+  @ela @Ä   _    _    _    _    _    _    _    _    _    _    _          _    _
   _    _    _    _    _    _    _    _    _    _    _         _          _    _
   _    _    _              _              _    _    _               _    _    _
 )
