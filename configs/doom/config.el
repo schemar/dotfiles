@@ -101,6 +101,10 @@
 (setq evil-move-beyond-eol t)
 
 (after! evil
+  ;; Flip (horizontal) splitting.
+  (map! :leader :m "w s" #'evil-window-vsplit
+        :leader :m "w v" #'evil-window-split)
+
   ;; Switch windows with control key.
   (map! "C-h" #'evil-window-left
         "C-j" #'evil-window-down
