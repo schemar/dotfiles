@@ -76,7 +76,7 @@ bindsym XF86Display exec --no-startup-id arandr
 # Application starter
 bindsym $mod+d exec --no-startup-id rofi -show drun -theme icons >/tmp/rofi.log 2>&1
 bindsym $mod+Shift+d exec --no-startup-id rofi -show run -theme icons >/tmp/rofi.log 2>&1
-bindsym $mod+u exec --no-startup-id rofimoji --selector-args "-theme no_icons"
+bindsym $mod+u exec --no-startup-id rofimoji --selector-args "-theme no_icons" >/tmp/rofimoji.log 2>&1
 bindsym Mod1+Tab exec --no-startup-id rofi -show window -theme icons >/tmp/rofi.log 2>&1
 
 # Emacs
