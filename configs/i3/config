@@ -93,7 +93,7 @@ bindsym $mod+m exec $HOME/.config/rofi/scripts/settings.sh
 bindsym Control+Mod1+l exec --no-startup-id $lock
 
 # Start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec kitty tmux new-session -A -s kitty
 
 # Kill focused window
 bindsym $mod+Shift+q kill
