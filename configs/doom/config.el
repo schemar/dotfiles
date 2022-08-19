@@ -33,7 +33,7 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 (setq doom-font (font-spec :family "MonoLisa Nerd Font" :size 10.5)
-      doom-variable-pitch-font (font-spec :family "Roboto" :size 12.5))
+      doom-variable-pitch-font (font-spec :family "Bitter" :size 12))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -132,9 +132,22 @@
        (lsp-format-buffer))))
   (setq-hook! 'typescript-mode-hook +format-with 'my/eslint-format))
 
+;;; :tools dap
+(after! dap-mode
+  (dap-register-debug-template
+   "Node Run TS"
+   (list :type "node"
+         :cwd nil
+         :request "launch"
+         :program nil
+         :name "Node Run TS"
+         :sourceMaps t
+         :runtimeArgs ["--no-lazy" "-r" "ts-node/register"])))
+
 ;;; :term vterm
-(after! vterm
-  (setq vterm-buffer-name-string "vterm %s"))
+;; TODO: Disabled as it currently breaks Doom's "toggle" for vterm.
+;; (after! vterm
+;;   (setq vterm-buffer-name-string "vterm %s"))
 
 ;;; Gemini/Gopher
 (use-package! elpher
@@ -167,8 +180,9 @@
   (setq-hook! 'org-mode-hook whitespace-style
               (remove 'lines-tail whitespace-style))
 
-  ;; Show a ruler at the line column.
-  (add-hook! 'org-mode-hook #'display-fill-column-indicator-mode)
+  ;; Use mixed pitch mode for variable pitch font within org mode.
+  ;; TODO: Ensure the "size" of doom's variable pitch font is applied.
+  ;;(add-hook! 'org-mode-hook #'mixed-pitch-mode)
 
   ;; Nicer folding and initial behavior.
   (setq org-startup-folded 'show2levels
