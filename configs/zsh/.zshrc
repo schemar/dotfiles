@@ -112,7 +112,8 @@ else
 fi
 
 # Hook to rename the vterm buffer
-add-zsh-hook -Uz chpwd (){ print -Pn "\e]2;%m:%2~\a" }
+# TODO: Disabled as it currently breaks Doom's "toggle" for vterm.
+#add-zsh-hook -Uz chpwd (){ print -Pn "\e]2;%m:%2~\a" }
 
 # Sync directory between Emacs and vterm
 vterm_prompt_end() {
