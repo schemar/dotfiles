@@ -110,7 +110,7 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# Move focused window
+# Move focused window within workspace
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
@@ -121,6 +121,14 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+# Move focused window across outputs (with [/])
+bindsym $mod+braceleft move window to output left
+bindsym $mod+braceright move window to output right
+
+# Move workspace across ouputs (with [/])
+bindsym $mod+Shift+braceleft move workspace to output left
+bindsym $mod+Shift+braceright move workspace to output right
 
 # Split in horizontal orientation
 bindsym $mod+semicolon split h
