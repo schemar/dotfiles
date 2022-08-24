@@ -26,3 +26,5 @@
   line-numbers = true
 [init]
   defaultBranch = main
+[github]
+	user = schemar
