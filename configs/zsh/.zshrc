@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(fd yarn docker docker-compose)
+plugins=(asdf fd yarn docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -28,9 +28,6 @@ alias tmdo='tmux new-session -A -s dotfiles'
 alias tmta='tmux new-session -A -s tasks'
 
 # User configuration
-
-. "$HOME"/.asdf/asdf.sh
-fpath=(${ASDF_DIR}/completions $fpath)
 
 # Enable 256 colors in tmux
 alias tmux='tmux -2'
