@@ -103,14 +103,7 @@
 (after! evil
   ;; Flip (horizontal) splitting.
   (map! :leader :m "w s" #'evil-window-vsplit
-        :leader :m "w v" #'evil-window-split)
-
-  ;; Switch windows with control key.
-  (map! "C-h" #'evil-window-left
-        "C-j" #'evil-window-down
-        "C-k" #'evil-window-up
-        "C-l" #'evil-window-right)
-  )
+        :leader :m "w v" #'evil-window-split))
 
 ;;; :tools lsp
 (after! lsp-mode
