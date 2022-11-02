@@ -60,7 +60,6 @@ style = "fg:blue"
 modified = "M"
 deleted = "D"
 renamed = "R"
-stashed.count = true
 
 [golang]
 style = "fg:blue"
