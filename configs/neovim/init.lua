@@ -21,6 +21,12 @@ require("indent_blankline").setup {
 vim.keymap.set('', '<C-w>s', '<C-w>v', { noremap = true })
 vim.keymap.set('', '<C-w>v', '<C-w>s', { noremap = true })
 
+-- Neotree
+vim.keymap.set('n', '\\', ':Neotree toggle<CR>', { noremap = true })
+
+-- Neogit
+vim.keymap.set('n', '<leader>g', ':Neogit<CR>', { noremap = true })
+
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
@@ -142,6 +148,7 @@ require'nvim-treesitter.configs'.setup {
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
+local luasnip = require 'luasnip'
 local lspkind = require('lspkind')
 cmp.setup {
   snippet = {
