@@ -32,8 +32,8 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font (font-spec :family "MonoLisa Nerd Font" :size 10.5)
-      doom-variable-pitch-font (font-spec :family "Bitter" :size 12))
+(setq doom-font (font-spec :family "MonoLisa Nerd Font" :size 14.5)
+      doom-variable-pitch-font (font-spec :family "Bitter" :size 16))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -92,6 +92,12 @@
 (after! treemacs
   ;; Better git mode (requires Python 3).
   (setq treemacs-git-mode 'deferred))
+
+;;; :ui indent-guides
+(after! highlight-indent-guides
+  ;; Set the highlighting to bitmap instead of character to have consistent color.
+  (setq highlight-indent-guides-method 'bitmap))
+
 
 ;;; :editor evil
 ;; Focus new window after splitting.

@@ -73,3 +73,6 @@
 ;; It is incompatible with org-ql and I want
 ;; a consistent interface rather than a sometimes pretty one.
 (package! org-fancy-priorities :disable t)
+
+;;; Bolt mode to syntax highlight firebase.rules
+(package! bolt-mode)
