@@ -71,73 +71,12 @@ export FZF_COMPLETION_OPTS="--preview 'bat --style=numbers,changes --color=alway
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers,changes --color=always {}'"
 export FZF_COMPLETION_TRIGGER=',,'
 
-# default editor: Emacs
-# Visual: Graphical client
-# Editor: Terminal client
-export VISUAL="emacsclient -c"
-export EDITOR="emacsclient -t"
+export VISUAL="nvim"
+export EDITOR="nvim"
 
-#
-# Emacs
-#
-
-# custom functions required for vterm inside emacs
-vterm_printf(){
-    if [ -n "$TMUX" ] && ([ "${TERM%%-*}" = "tmux" ] || [ "${TERM%%-*}" = "screen" ] ); then
-        # Tell tmux to pass the escape sequences through
-        printf "\ePtmux;\e\e]%s\007\e\\" "$1"
-    elif [ "${TERM%%-*}" = "screen" ]; then
-        # GNU screen (screen, screen-256color, screen-256color-bce)
-        printf "\eP\e]%s\007\e\\" "$1"
-    else
-        printf "\e]%s\e\\" "$1"
-    fi
-}
-if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
-    alias clear='vterm_printf "51;Evterm-clear-scrollback";tput clear'
-fi
-
-# Do some things only if we are in a "smart" terminal
-# (not Emacs TRAMP)
-if [ "$TERM" != "dumb" ]; then
-  # staship shell prompt
-  export STARSHIP_CONFIG="$HOME/.config/starship.toml"
-  eval "$(starship init zsh)"
-else
-  # Emacs TRAMP
-  PS1=''
-fi
-
-# Hook to rename the vterm buffer
-# TODO: Disabled as it currently breaks Doom's "toggle" for vterm.
-#add-zsh-hook -Uz chpwd (){ print -Pn "\e]2;%m:%2~\a" }
-
-# Sync directory between Emacs and vterm
-vterm_prompt_end() {
-    vterm_printf "51;A$(whoami)@$(hostname):$(pwd)";
-}
-setopt PROMPT_SUBST
-PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
-
-# Enable Emacs commands inside the vterm shell
-vterm_cmd() {
-    local vterm_elisp
-    vterm_elisp=""
-    while [ $# -gt 0 ]; do
-        vterm_elisp="$vterm_elisp""$(printf '"%s" ' "$(printf "%s" "$1" | sed -e 's|\\|\\\\|g' -e 's|"|\\"|g')")"
-        shift
-    done
-    vterm_printf "51;E$vterm_elisp"
-}
-
-## Commands
-
-## Run `find_file` inside vterm.
-## Without argument: open dired in current directory.
-## With argument: open buffer with file content.
-find_file() {
-    vterm_cmd find-file "$(realpath "${@:-.}")"
-}
+# staship shell prompt
+export STARSHIP_CONFIG="$HOME/.config/starship.toml"
+eval "$(starship init zsh)"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/schemar/Projects/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/schemar/Projects/google-cloud-sdk/path.zsh.inc'; fi

@@ -12,11 +12,10 @@ This repository contains configurations for my productivity stack and some basic
 * [bat](https://github.com/sharkdp/bat)
 * [bottom](https://github.com/ClementTsang/bottom)
 * [direnv](https://github.com/direnv/direnv)
-* [(Doom) Emacs](https://github.com/hlissner/doom-emacs)❤️
 * [fd](https://github.com/sharkdp/fd)
 * [fzf](https://github.com/junegunn/fzf)
 * [kmonad](https://github.com/david-janssen/kmonad)
-* [NeoVim](https://github.com/neovim/neovim)
+* [NeoVim](https://github.com/neovim/neovim)❤️
 * [procs](https://github.com/dalance/procs)
 * [ranger](https://github.com/ranger/ranger)
 * [ripgrep](https://github.com/BurntSushi/ripgrep)
@@ -30,7 +29,6 @@ This repository contains configurations for my productivity stack and some basic
 
 * [autorandr](https://github.com/phillipberndt/autorandr)
 * [dunst](https://github.com/dunst-project/dunst)
-* [(Doom) Emacs](https://github.com/hlissner/doom-emacs)❤️
 * [feh](https://github.com/derf/feh)
 * [i3](https://github.com/i3/i3)❤️
 * [kitty](https://github.com/kovidgoyal/kitty)❤️

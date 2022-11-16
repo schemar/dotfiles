@@ -79,11 +79,6 @@ bindsym $mod+Shift+d exec --no-startup-id rofi -show run -theme icons >/tmp/rofi
 bindsym $mod+u exec --no-startup-id rofimoji --selector-args "-theme no_icons" >/tmp/rofimoji.log 2>&1
 bindsym Mod1+Tab exec --no-startup-id rofi -show window -theme icons >/tmp/rofi.log 2>&1
 
-# Emacs
-bindsym $mod+i exec emacsclient -c
-# Emacs everywhere
-bindsym $mod+Shift+i exec emacsclient --eval "(emacs-everywhere)"
-
 # Convenience menus
 bindsym $mod+Shift+e exec $HOME/.config/rofi/scripts/power.sh
 bindsym $mod+p exec --no-startup-id flameshot gui
@@ -270,8 +265,6 @@ for_window [class="Qalculate"] floating enable, move position center
 for_window [class="Xfce4-power-manager-settings"] floating enable, move position center
 for_window [instance="Godot_Engine"] floating enable, move position center
 for_window [title="settings-nmtui-connect"] floating enable, move position center
-for_window [title="emacs-everywhere-float"] floating enable
-for_window [title="emacs-git-float"] floating enable, resize set 1750 900, move position center
 # browser pop-ups
 for_window [window_role="pop-up"] floating enable, move position center
 
