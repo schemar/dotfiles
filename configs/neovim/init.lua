@@ -1,3 +1,7 @@
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- LEADER
 -- These keybindings need to be defined before the first /
 -- is called; otherwise, it will default to "\"
@@ -21,8 +25,9 @@ require("indent_blankline").setup {
 vim.keymap.set('', '<C-w>s', '<C-w>v', { noremap = true })
 vim.keymap.set('', '<C-w>v', '<C-w>s', { noremap = true })
 
--- Neotree
-vim.keymap.set('n', '\\', ':Neotree toggle<CR>', { noremap = true })
+-- File tree
+require("nvim-tree").setup()
+vim.keymap.set('n', '<leader>t', ':NvimTreeToggle<CR>', { noremap = true })
 
 -- Neogit
 vim.keymap.set('n', '<leader>g', ':Neogit<CR>', { noremap = true })
@@ -34,29 +39,63 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
 
+local telescope = require('telescope')
+local telescopeConfig = require("telescope.config")
+
+-- Clone the default Telescope configuration
+local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
+
+-- I want to search in hidden/dot files.
+table.insert(vimgrep_arguments, "--hidden")
+-- I don't want to search in the `.git` directory.
+table.insert(vimgrep_arguments, "--glob")
+table.insert(vimgrep_arguments, "!.git/*")
+
+telescope.setup {
+  defaults = {
+    -- `hidden = true` is not supported in text grep commands.
+    vimgrep_arguments = vimgrep_arguments,
+  },
+  pickers = {
+    find_files = {
+      -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+      find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
+      theme = 'dropdown',
+    },
+  },
+  extensions = {
+    file_browser = {
+      theme = 'dropdown',
+      hijack_netrw = true,
+    }
+  }
+}
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader><leader>', builtin.find_files, { noremap = true })
-vim.keymap.set('n', '<leader>ff', ':Telescope file_browser<CR>', {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-require("telescope").load_extension "file_browser"
+telescope.load_extension 'file_browser'
 
-vim.keymap.set("n", "sf", function()
+vim.keymap.set('n', '<leader>ff', function()
   telescope.extensions.file_browser.file_browser({
-    path = "%:p:h",
-    cwd = telescope_buffer_dir(),
-    respect_gitignore = false,
     hidden = true,
     grouped = true,
-    previewer = false,
     initial_mode = "normal",
-    layout_config = { height = 40 }
   })
-end)
+end, { noremap = true })
 
 
 -- LSP
+local lsp_servers = { 'ansiblels', 'bashls', 'cssls', 'dockerls', 'eslint', 'html', 'jsonls', 'sumneko_lua', 'tsserver', 'volar' }
+-- IMPORTANT: Mason must be set up before lspconfig
+-- Mason to manage external tools like language servers
+require('mason').setup()
+require('mason-lspconfig').setup({
+  ensure_installed = lsp_servers,
+  automatic_installation = true,
+})
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -90,19 +129,37 @@ local lsp_flags = {
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'tsserver' }
-for _, lsp in ipairs(servers) do
+for _, lsp in ipairs(lsp_servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
     flags = lsp_flags,
-    -- on_attach = my_custom_on_attach,
     capabilities = capabilities,
   }
 end
+
+-- Make `vim` a global in lua files
+require'lspconfig'.sumneko_lua.setup {
+  settings = {
+    Lua = {
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+    },
+  },
+}
+
+-- LSP Saga
+local saga = require("lspsaga")
+
+saga.init_lsp_saga({
+  code_action_lightbulb = {
+    enable = false,
+  }
+})
 
 
 -- Treesitter setup.
@@ -142,7 +199,18 @@ require'nvim-treesitter.configs'.setup {
 
   autotag = {
     enable = true -- Throught auto-tag plugin
-  }
+  },
+
+  textobjects = {
+    select = {
+      enable = true,
+      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+    },
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+    },
+  },
 }
 
 
@@ -203,7 +271,6 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = 'buffer' },
   },
 }
 
@@ -260,17 +327,17 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_b = {'diff', 'diagnostics'},
     lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_x = {'location', 'filetype'},
     lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_z = {}
   },
   inactive_sections = {
     lualine_a = {},
-    lualine_b = {},
+    lualine_b = {'branch'},
     lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_x = {'encoding', 'fileformat', 'filetype', 'location'},
     lualine_y = {},
     lualine_z = {}
   },
@@ -346,3 +413,25 @@ require'gitsigns'.setup()
 -- Neogit
 local neogit = require('neogit')
 neogit.setup {}
+
+
+-- Surround
+require("nvim-surround").setup({
+    -- Configuration here, or leave empty to use defaults
+})
+
+
+-- Which Key
+require("which-key").setup {
+-- your configuration comes here
+-- or leave it empty to use the default settings
+-- refer to the configuration section below
+}
+
+
+-- Comment
+require('Comment').setup()
+
+
+-- Auto pairs
+require("nvim-autopairs").setup()
