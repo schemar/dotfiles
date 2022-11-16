@@ -133,11 +133,25 @@ local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 for _, lsp in ipairs(lsp_servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    flags = lsp_flags,
-    capabilities = capabilities,
-  }
+  if (lsp == 'jsonls') then
+    lspconfig[lsp].setup {
+      on_attach = on_attach,
+      flags = lsp_flags,
+      capabilities = capabilities,
+      settings = {
+        json = {
+          schemas = require('schemastore').json.schemas(),
+          validate = { enable = true },
+        }
+      }
+    }
+  else
+    lspconfig[lsp].setup {
+      on_attach = on_attach,
+      flags = lsp_flags,
+      capabilities = capabilities,
+    }
+  end
 end
 
 -- Make `vim` a global in lua files

@@ -52,4 +52,5 @@ return require('packer').startup(function(use)
   })
   use 'williamboman/mason.nvim' -- Manage language servers, linters, etc.
   use 'williamboman/mason-lspconfig.nvim' -- Integration mason/lsp
+  use 'b0o/schemastore.nvim' -- Schemas for JSON files
 end)
