@@ -50,7 +50,7 @@ symbol = " "
 
 [git_branch]
 style = "fg:blue"
-symbol = " "
+symbol = " "
 
 [git_commit]
 style = "fg:blue"
@@ -67,7 +67,7 @@ symbol = " "
 
 [hg_branch]
 style = "fg:blue"
-symbol = " "
+symbol = " "
 
 [java]
 style = "fg:blue"
