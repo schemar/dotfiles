@@ -9,7 +9,7 @@ local ensure_packer = function()
   return false
 end
 
-local packer_bootstrap = ensure_packer()
+local _ = ensure_packer()
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
@@ -29,7 +29,13 @@ return require('packer').startup(function(use)
   use 'MunifTanjim/prettier.nvim' -- Prettier for TS/JS formatting
   use 'nvim-tree/nvim-web-devicons' -- Fancy icons in pop-ups
   use 'nvim-lualine/lualine.nvim' -- Modeline
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use {
+        'nvim-treesitter/nvim-treesitter',
+        run = function()
+            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+            ts_update()
+        end,
+    }
   use 'nvim-treesitter/nvim-treesitter-textobjects' -- Additional textobjects for treesitter
   use 'lukas-reineke/indent-blankline.nvim' -- Indent guides
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x' } -- Fancy picker (think fzf)
@@ -53,4 +59,5 @@ return require('packer').startup(function(use)
   use 'williamboman/mason.nvim' -- Manage language servers, linters, etc.
   use 'williamboman/mason-lspconfig.nvim' -- Integration mason/lsp
   use 'b0o/schemastore.nvim' -- Schemas for JSON files
+  use 'folke/todo-comments.nvim' -- Highlight and list TODOs, etc.
 end)

@@ -23,7 +23,7 @@ opt.list = true
 opt.ignorecase = true            -- bool: Ignore case in search patterns
 opt.smartcase = true             -- bool: Override ignorecase if search contains capitals
 opt.incsearch = true             -- bool: Use incremental search
-opt.hlsearch = false             -- bool: Highlight search matches
+opt.hlsearch = true             -- bool: Highlight search matches
 
 -- [[ Whitespace ]]
 opt.expandtab = true             -- bool: Use spaces instead of tabs
@@ -33,5 +33,5 @@ opt.tabstop = 2                  -- num:  Number of spaces tabs count for
 
 -- [[ Splits ]]
 opt.splitright = true            -- bool: Place new window to right of current one
-opt.splitbelow = true 
+opt.splitbelow = true
 

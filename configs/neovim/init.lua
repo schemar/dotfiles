@@ -29,15 +29,17 @@ vim.keymap.set('', '<C-w>v', '<C-w>s', { noremap = true })
 require("nvim-tree").setup()
 vim.keymap.set('n', '<leader>t', ':NvimTreeToggle<CR>', { noremap = true })
 
--- Neogit
-vim.keymap.set('n', '<leader>g', ':Neogit<CR>', { noremap = true })
+-- Neogit and Gitsigns
+vim.keymap.set('n', '<leader>gg', ':Neogit<CR>', { noremap = true })
+-- TODO: Auto-enable?
+vim.keymap.set('n', '<leader>gb', ':Gitsigns toggle_current_line_blame<CR>', { noremap = true })
 
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<leader>ce', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+vim.keymap.set('n', '<leader>cd', vim.diagnostic.setloclist, opts)
 
 local telescope = require('telescope')
 local telescopeConfig = require("telescope.config")
@@ -72,9 +74,9 @@ telescope.setup {
 }
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader><leader>', builtin.find_files, { noremap = true })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>/', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>bb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>h', builtin.help_tags, {})
 telescope.load_extension 'file_browser'
 
 vim.keymap.set('n', '<leader>ff', function()
@@ -110,16 +112,23 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wl', function()
+  vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+
+  -- Format based on client. For TypeScript, always use eslint and prettier
+  if (client.name == 'eslint' or client.name == 'tsserver') then
+    -- EslintFixAll is provided by lsp-config, Prettier is provided by the prettier plugin
+    vim.keymap.set('n', '<leader>bf', ':EslintFixAll<CR>:Prettier<CR>')
+  else
+    vim.keymap.set('n', '<leader>bf', function() vim.lsp.buf.format { async = true } end, bufopts)
+  end
 end
 
 local lsp_flags = {
@@ -133,25 +142,17 @@ local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 for _, lsp in ipairs(lsp_servers) do
-  if (lsp == 'jsonls') then
-    lspconfig[lsp].setup {
-      on_attach = on_attach,
-      flags = lsp_flags,
-      capabilities = capabilities,
-      settings = {
-        json = {
-          schemas = require('schemastore').json.schemas(),
-          validate = { enable = true },
-        }
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities,
+    settings = {
+      json = {
+        schemas = require('schemastore').json.schemas(),
+        validate = { enable = true },
       }
     }
-  else
-    lspconfig[lsp].setup {
-      on_attach = on_attach,
-      flags = lsp_flags,
-      capabilities = capabilities,
-    }
-  end
+  }
 end
 
 -- Make `vim` a global in lua files
@@ -186,7 +187,7 @@ require'nvim-treesitter.configs'.setup {
 
   -- Automatically install missing parsers when entering buffer
   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = false,
+  auto_install = true,
 
   -- List of parsers to ignore installing (for "all")
   -- ignore_install = {  },
@@ -212,7 +213,7 @@ require'nvim-treesitter.configs'.setup {
   },
 
   autotag = {
-    enable = true -- Throught auto-tag plugin
+    enable = true -- Through auto-tag plugin
   },
 
   textobjects = {
@@ -224,6 +225,10 @@ require'nvim-treesitter.configs'.setup {
       enable = true,
       set_jumps = true, -- whether to set jumps in the jumplist
     },
+  },
+
+  indent = { -- Indentation based on = operator (experimental)
+    enable = true,
   },
 }
 
@@ -250,7 +255,7 @@ cmp.setup {
 
       -- The function below will be called before any actual modifications from lspkind
       -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-      before = function (entry, vim_item)
+      before = function (_, vim_item)
         return vim_item
       end
     })
@@ -340,12 +345,18 @@ require('lualine').setup {
     }
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'diff', 'diagnostics'},
-    lualine_c = {'filename'},
-    lualine_x = {'location', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {}
+    lualine_a = {'mode', 'searchcount'},
+    lualine_b = {
+      'diff',
+    },
+    lualine_c = {
+      {'filename', path = 1, shorting_target = 70},
+    },
+    lualine_x = {
+      {'diagnostics', sources = {'nvim_lsp', 'nvim_diagnostic'}},
+    },
+    lualine_y = {'filetype'},
+    lualine_z = {'location', 'progress'},
   },
   inactive_sections = {
     lualine_a = {},
@@ -365,20 +376,16 @@ require('lualine').setup {
 -- NeoVim LSP server capabilities
 local null_ls = require("null-ls")
 
+local lsp_servers = { 'ansiblels', 'bashls', 'cssls', 'dockerls', 'eslint', 'html', 'jsonls', 'sumneko_lua', 'tsserver', 'volar' }
 null_ls.setup({
     sources = {
-        null_ls.builtins.diagnostics.eslint_d,
         null_ls.builtins.diagnostics.actionlint,
         null_ls.builtins.diagnostics.ansiblelint,
         null_ls.builtins.diagnostics.gitlint,
         null_ls.builtins.diagnostics.shellcheck,
-        null_ls.builtins.completion.spell,
-        null_ls.builtins.code_actions.eslint_d,
         null_ls.builtins.code_actions.gitrebase,
         null_ls.builtins.code_actions.gitsigns,
         null_ls.builtins.code_actions.shellcheck,
-        null_ls.builtins.formatting.eslint_d,
-        null_ls.builtins.formatting.prettierd,
         null_ls.builtins.formatting.stylua,
         -- There are *so* many more ...
     },
@@ -449,3 +456,16 @@ require('Comment').setup()
 
 -- Auto pairs
 require("nvim-autopairs").setup()
+
+
+-- TODO Comments
+require('todo-comments').setup({
+  highlight = {
+    pattern = [[.*<(KEYWORDS)\s*]], -- pattern or table of patterns, used for highlightng (vim regex)
+    -- Was [[.*<(KEYWORDS)\s*:]] including colon.
+  },
+  search = {
+    pattern = [[\b(KEYWORDS)]], -- ripgrep regex
+    -- Was [[\b(KEYWORDS):]] including colon.
+  },
+})
