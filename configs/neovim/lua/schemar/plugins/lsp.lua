@@ -17,14 +17,13 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { buffer=bufnr }
   local wk = require('which-key')
   wk.register({
     g = {
       d = {vim.lsp.buf.definition, 'Go to definition', buffer = bufnr},
       D = {vim.lsp.buf.declaration, 'Go to declaration', buffer = bufnr},
       i = {vim.lsp.buf.implementation, 'Go to implementation', buffer = bufnr},
-      r = {vim.lsp.buf.references, 'Go to references', buffer = bufnr},
+      r = {':TroubleToggle lsp_references<CR>', 'Go to references', buffer = bufnr},
       t = {vim.lsp.buf.type_definition, 'Go to type definition', buffer = bufnr},
     },
     K = {vim.lsp.buf.hover, 'Hover info', buffer = bufnr}
@@ -86,6 +85,14 @@ for _, lsp in ipairs(lsp_servers) do
       }
     }
   }
+end
+
+-- This is for diagnostic signs on the line number column.
+-- Use this to beautify the plain E W signs.
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl= hl, numhl = hl })
 end
 
 -- Make `vim` a global in lua files

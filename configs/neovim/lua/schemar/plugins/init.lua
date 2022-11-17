@@ -60,6 +60,7 @@ require('packer').startup(function(use)
   use 'williamboman/mason-lspconfig.nvim' -- Integration mason/lsp
   use 'b0o/schemastore.nvim' -- Schemas for JSON files
   use 'folke/todo-comments.nvim' -- Highlight and list TODOs, etc.
+  use 'folke/trouble.nvim' -- Better looking diagnostics, etc.
 end)
 
 
@@ -77,46 +78,10 @@ require("nvim-tree").setup()
 
 
 --
--- Telescope
-local telescope = require('telescope')
-local telescopeConfig = require("telescope.config")
-
--- Clone the default Telescope configuration
-local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
-
--- I want to search in hidden/dot files.
-table.insert(vimgrep_arguments, "--hidden")
--- I don't want to search in the `.git` directory.
-table.insert(vimgrep_arguments, "--glob")
-table.insert(vimgrep_arguments, "!.git/*")
-
-telescope.setup {
-  defaults = {
-    -- `hidden = true` is not supported in text grep commands.
-    vimgrep_arguments = vimgrep_arguments,
-  },
-  pickers = {
-    find_files = {
-      -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-      find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
-      theme = 'dropdown',
-    },
-  },
-  extensions = {
-    file_browser = {
-      theme = 'dropdown',
-      hijack_netrw = true,
-    }
-  }
-}
-telescope.load_extension 'file_browser'
-
-
---
 -- Treesitter setup.
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "bash", "typescript", "javascript", "html", "css", "json", "lua" },
+  ensure_installed = { "bash", "typescript", "javascript", "html", "css", "json", "lua", "markdown" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -308,6 +273,52 @@ require('todo-comments').setup({
     -- Was [[\b(KEYWORDS):]] including colon.
   },
 })
+
+
+--
+-- Trouble
+require('trouble').setup({})
+
+
+--
+-- Telescope
+local telescope = require('telescope')
+local telescopeConfig = require("telescope.config")
+
+-- Clone the default Telescope configuration
+local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
+
+-- I want to search in hidden/dot files.
+table.insert(vimgrep_arguments, "--hidden")
+-- I don't want to search in the `.git` directory.
+table.insert(vimgrep_arguments, "--glob")
+table.insert(vimgrep_arguments, "!.git/*")
+
+local trouble = require("trouble.providers.telescope")
+telescope.setup {
+  defaults = {
+    -- `hidden = true` is not supported in text grep commands.
+    vimgrep_arguments = vimgrep_arguments,
+    mappings = {
+      i = { ["<c-t>"] = trouble.open_with_trouble },
+      n = { ["<c-t>"] = trouble.open_with_trouble },
+    },
+  },
+  pickers = {
+    find_files = {
+      -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+      find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
+      theme = 'dropdown',
+    },
+  },
+  extensions = {
+    file_browser = {
+      theme = 'dropdown',
+      hijack_netrw = true,
+    }
+  }
+}
+telescope.load_extension 'file_browser'
 
 
 --

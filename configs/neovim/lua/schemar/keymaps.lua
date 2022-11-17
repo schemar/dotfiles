@@ -27,7 +27,8 @@ wk.register({
   },
   c = {
     name = 'Code',
-    d = {vim.diagnostic.setloclist, 'Show diagnostics'}
+    d = {':TroubleToggle document_diagnostics<CR>', 'Show diagnostics'},
+    D = {':TroubleToggle workspace_diagnostics<CR>', 'Show workspace diagnostics'},
   },
   f = {
     name = 'File',

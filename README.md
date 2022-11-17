@@ -64,6 +64,15 @@ Prefix is `<ctrl>-b`.
 * `<prefix> u` fuzzy find and open a URL from the buffer.
 * `<prefix> tab` fuzzy find any previous tmux output (words, lines, URLs, paths).
 
+### NeoVim
+
+Waiting for a short period opens `which-key` and lists all key options.
+Alternatively, you could `:WhichKey<CR>`.
+
+Below a list of valuable keymaps, which `which-key` usually does not show:
+
+* In [telescope](https://github.com/nvim-telescope/telescope.nvim), `<c-t>` opens the result list in a [trouble](https://github.com/folke/trouble.nvim) window.
+
 ### i3
 
 Installation is based on Fedora i3 spin with i3 replaced with i3-gaps.
