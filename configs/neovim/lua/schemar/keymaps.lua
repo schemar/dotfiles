@@ -1,3 +1,5 @@
+-- Note that additional keymaps are defined in the LSP and cmp files.
+
 -- Switch meaning of vertical and horizontal split
 vim.keymap.set('', '<C-w>s', '<C-w>v', { noremap = true })
 vim.keymap.set('', '<C-w>v', '<C-w>s', { noremap = true })
@@ -11,11 +13,13 @@ local builtin = require('telescope.builtin')
 wk.register({
   ['['] = {
     name = 'Previous',
-    d = {vim.diagnostic.goto_prev, 'Previous diagnostic'}
+    d = {vim.diagnostic.goto_prev, 'Previous diagnostic'},
+    b = {':bp<CR>', 'Previous buffer'},
   },
   [']'] = {
     name = 'Next',
-    d = {vim.diagnostic.goto_next, 'Next diagnostic'}
+    d = {vim.diagnostic.goto_next, 'Next diagnostic'},
+    b = {':bn<CR>', 'Next buffer'},
   },
 })
 wk.register({
@@ -24,11 +28,14 @@ wk.register({
   b = {
     name = 'Buffer',
     b = {builtin.buffers, 'Find buffer'},
+    n = {':bn<CR>', 'Next buffer'},
+    p = {':bp<CR>', 'Previous buffer'},
   },
   c = {
     name = 'Code',
     d = {':TroubleToggle document_diagnostics<CR>', 'Show diagnostics'},
     D = {':TroubleToggle workspace_diagnostics<CR>', 'Show workspace diagnostics'},
+    e = {vim.diagnostic.open_float, 'Floating diagnostic'},
   },
   f = {
     name = 'File',

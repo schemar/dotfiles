@@ -10,21 +10,36 @@ cmp.setup {
     end,
   },
   window = {
-    completion = cmp.config.window.bordered(),
+    -- Style completion window to have icons on the left.
+    -- In combination with `format` below.
+    completion = {
+      winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+      col_offset = -3,
+      side_padding = 0,
+    },
     documentation = cmp.config.window.bordered(),
   },
   formatting = {
-    format = lspkind.cmp_format({
-      mode = 'symbol', -- show only symbol annotations
-      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-      ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+    fields = { "kind", "abbr", "menu" },
+    format = function(entry, vim_item)
+      local kind = lspkind.cmp_format({
+        mode = "symbol_text",
+        maxwidth = 50,
+        -- Show source in pop-up
+        menu = ({
+          buffer = "[Buffer]",
+          nvim_lsp = "[LSP]",
+          luasnip = "[LuaSnip]",
+          path = "[Path]",
+        }),
+      })(entry, vim_item)
 
-      -- The function below will be called before any actual modifications from lspkind
-      -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-      before = function (_, vim_item)
-        return vim_item
-      end
-    })
+      local strings = vim.split(kind.kind, "%s", { trimempty = true })
+      kind.kind = " " .. strings[1] .. " "
+      kind.menu = "    (" .. strings[2] .. ")"
+
+      return kind
+    end,
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
@@ -54,7 +69,10 @@ cmp.setup {
     end, { 'i', 's' }),
   }),
   sources = {
+    -- Output will be prioritized according to order.
     { name = 'nvim_lsp' },
+    { name = 'path' },
+    { name = 'buffer' },
     { name = 'luasnip' },
   },
 }

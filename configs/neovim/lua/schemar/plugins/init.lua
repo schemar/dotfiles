@@ -37,6 +37,7 @@ require('packer').startup(function(use)
         end,
     }
   use 'nvim-treesitter/nvim-treesitter-textobjects' -- Additional textobjects for treesitter
+  use 'nvim-treesitter/nvim-treesitter-context' -- Keep e.g. function at top when scrolling below
   use 'lukas-reineke/indent-blankline.nvim' -- Indent guides
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x' } -- Fancy picker (think fzf)
   use 'nvim-telescope/telescope-file-browser.nvim' -- Think Emacs directory browser
@@ -47,6 +48,7 @@ require('packer').startup(function(use)
   use 'TimUntersberger/neogit' -- Think magit
   use 'folke/which-key.nvim' -- Like Emacs which key
   use 'numToStr/Comment.nvim' -- Easier (un)commenting
+  use 'JoosepAlviste/nvim-ts-context-commentstring' -- Improved comment management; integrates with Comment.nvim
   use 'nvim-tree/nvim-tree.lua' -- File browser
   use({
     "kylechui/nvim-surround", -- E.g. cs"' to replace surrounding " with '
@@ -61,6 +63,10 @@ require('packer').startup(function(use)
   use 'b0o/schemastore.nvim' -- Schemas for JSON files
   use 'folke/todo-comments.nvim' -- Highlight and list TODOs, etc.
   use 'folke/trouble.nvim' -- Better looking diagnostics, etc.
+  use 'ThePrimeagen/refactoring.nvim' -- Refactoring tools for code
+  use 'p00f/nvim-ts-rainbow' -- Rainbow parentheses
+  use 'ray-x/lsp_signature.nvim' -- Virtual text for function arguments
+  use 'booperlv/nvim-gomove' -- Alt-h/j/k/l to move line
 end)
 
 
@@ -81,7 +87,7 @@ require("nvim-tree").setup()
 -- Treesitter setup.
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "bash", "typescript", "javascript", "html", "css", "json", "lua", "markdown" },
+  ensure_installed = { "bash", "typescript", "javascript", "html", "css", "json", "lua", "markdown", "markdown_inline" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -113,6 +119,21 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 
+  rainbow = {
+    enable = true,
+    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    colors =
+      {
+        "#bf616a",
+        "#ebcb8b",
+        "#b48ead",
+        "#d08770",
+      },
+    -- termcolors = {} -- table of colour name strings
+  },
+
   autotag = {
     enable = true -- Through auto-tag plugin
   },
@@ -131,7 +152,13 @@ require'nvim-treesitter.configs'.setup {
   indent = { -- Indentation based on = operator (experimental)
     enable = true,
   },
+
+  context_commentstring = { -- For nvim-ts-context-commentstring plugin
+    enable = true,
+    enable_autocmd = false, -- Disabled when used with Comment.nvim
+  },
 }
+require'treesitter-context'.setup({})
 
 
 --
@@ -171,11 +198,19 @@ require('lualine').setup {
   },
   inactive_sections = {
     lualine_a = {},
-    lualine_b = {'branch'},
-    lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype', 'location'},
-    lualine_y = {},
-    lualine_z = {}
+    lualine_b = {
+      'mode',
+      'searchcount',
+      'diff',
+    },
+    lualine_c = {
+      {'filename', path = 1, shorting_target = 70},
+    },
+    lualine_x = {
+      {'diagnostics', sources = {'nvim_lsp', 'nvim_diagnostic'}},
+    },
+    lualine_y = {'filetype', 'locally', 'progress'},
+    lualine_z = {},
   },
   tabline = {},
   winbar = {},
@@ -253,7 +288,9 @@ require("which-key").setup {
 
 --
 -- Comment
-require('Comment').setup()
+require('Comment').setup({
+  pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+})
 
 
 --
@@ -319,6 +356,15 @@ telescope.setup {
   }
 }
 telescope.load_extension 'file_browser'
+
+
+--
+-- Go/Move
+require('gomove').setup()
+
+--
+-- Refactoring
+require('refactoring').setup({})
 
 
 --
