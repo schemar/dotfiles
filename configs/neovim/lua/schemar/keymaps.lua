@@ -19,7 +19,10 @@ wk.register({
     d = {vim.diagnostic.goto_next, 'Next diagnostic'},
     b = {':bn<CR>', 'Next buffer'},
   },
+  ['<esc>'] = {':nohlsearch<CR>', 'Disable search highlights'},
 })
+
+-- With leader prefix:
 wk.register({
   ['<leader>'] = {builtin.find_files, 'Find file'},
   ['/'] = {builtin.live_grep, 'Grep directory'},
