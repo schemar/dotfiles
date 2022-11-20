@@ -4,39 +4,35 @@ local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 local lspkind = require('lspkind')
 cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
+  snippet = {expand = function(args) luasnip.lsp_expand(args.body) end},
   window = {
     -- Style completion window to have icons on the left.
     -- In combination with `format` below.
     completion = {
-      winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+      winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
       col_offset = -3,
       side_padding = 0,
     },
     documentation = cmp.config.window.bordered(),
   },
   formatting = {
-    fields = { "kind", "abbr", "menu" },
+    fields = {'kind', 'abbr', 'menu'},
     format = function(entry, vim_item)
       local kind = lspkind.cmp_format({
-        mode = "symbol_text",
+        mode = 'symbol_text',
         maxwidth = 50,
         -- Show source in pop-up
         menu = ({
-          buffer = "[Buffer]",
-          nvim_lsp = "[LSP]",
-          luasnip = "[LuaSnip]",
-          path = "[Path]",
+          buffer = '[Buffer]',
+          nvim_lsp = '[LSP]',
+          luasnip = '[LuaSnip]',
+          path = '[Path]',
         }),
       })(entry, vim_item)
 
-      local strings = vim.split(kind.kind, "%s", { trimempty = true })
-      kind.kind = " " .. strings[1] .. " "
-      kind.menu = "    (" .. strings[2] .. ")"
+      local strings = vim.split(kind.kind, '%s', {trimempty = true})
+      kind.kind = ' ' .. strings[1] .. ' '
+      kind.menu = '    (' .. strings[2] .. ')'
 
       return kind
     end,
@@ -57,7 +53,7 @@ cmp.setup {
       else
         fallback()
       end
-    end, { 'i', 's' }),
+    end, {'i', 's'}),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -66,44 +62,29 @@ cmp.setup {
       else
         fallback()
       end
-    end, { 'i', 's' }),
+    end, {'i', 's'}),
   }),
   sources = {
     -- Output will be prioritized according to order.
-    { name = 'nvim_lsp' },
-    { name = 'path' },
-    { name = 'buffer' },
-    { name = 'luasnip' },
+    {name = 'nvim_lsp'}, {name = 'path'}, {name = 'buffer'}, {name = 'luasnip'},
   },
 }
 
 -- `/` cmdline setup.
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = 'buffer' }
-  }
+  sources = {{name = 'buffer'}},
 })
 
 -- `:` cmdline setup.
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    {
-      name = 'cmdline',
-      option = {
-        ignore_cmds = { 'Man', '!' }
-      }
-    }
-  })
+  sources = cmp.config.sources({{name = 'path'}}, {
+    {name = 'cmdline', option = {ignore_cmds = {'Man', '!'}}},
+  }),
 })
 
 -- Auto-pair setup.
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
-)
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 

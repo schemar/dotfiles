@@ -1,8 +1,12 @@
 local ensure_packer = function()
   local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  local install_path = fn.stdpath('data') ..
+                           '/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    fn.system({
+      'git', 'clone', '--depth', '1',
+      'https://github.com/wbthomason/packer.nvim', install_path,
+    })
     vim.cmd [[packadd packer.nvim]]
     return true
   end
@@ -30,16 +34,18 @@ require('packer').startup(function(use)
   use 'nvim-tree/nvim-web-devicons' -- Fancy icons in pop-ups
   use 'nvim-lualine/lualine.nvim' -- Modeline
   use {
-        'nvim-treesitter/nvim-treesitter',
-        run = function()
-            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-            ts_update()
-        end,
-    }
+    'nvim-treesitter/nvim-treesitter',
+    run = function()
+      local ts_update = require('nvim-treesitter.install').update({
+        with_sync = true,
+      })
+      ts_update()
+    end,
+  }
   use 'nvim-treesitter/nvim-treesitter-textobjects' -- Additional textobjects for treesitter
   use 'nvim-treesitter/nvim-treesitter-context' -- Keep e.g. function at top when scrolling below
   use 'lukas-reineke/indent-blankline.nvim' -- Indent guides
-  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x' } -- Fancy picker (think fzf)
+  use {'nvim-telescope/telescope.nvim', branch = '0.1.x'} -- Fancy picker (think fzf)
   use 'nvim-telescope/telescope-file-browser.nvim' -- Think Emacs directory browser
   use 'windwp/nvim-autopairs' -- Auto-pair tags, etc.
   use 'windwp/nvim-ts-autotag' -- Auto-tags for HTML, Vue, etc.
@@ -51,12 +57,12 @@ require('packer').startup(function(use)
   use 'JoosepAlviste/nvim-ts-context-commentstring' -- Improved comment management; integrates with Comment.nvim
   use 'nvim-tree/nvim-tree.lua' -- File browser
   use({
-    "kylechui/nvim-surround", -- E.g. cs"' to replace surrounding " with '
-    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    'kylechui/nvim-surround', -- E.g. cs"' to replace surrounding " with '
+    tag = '*', -- Use for stability; omit to use `main` branch for the latest features
   })
   use({
-    "glepnir/lspsaga.nvim", -- UI Improvements for LSP
-    branch = "main",
+    'glepnir/lspsaga.nvim', -- UI Improvements for LSP
+    branch = 'main',
   })
   use 'williamboman/mason.nvim' -- Manage language servers, linters, etc.
   use 'williamboman/mason-lspconfig.nvim' -- Integration mason/lsp
@@ -69,25 +75,25 @@ require('packer').startup(function(use)
   use 'booperlv/nvim-gomove' -- Alt-h/j/k/l to move line
 end)
 
-
 --
 -- Indent Guides.
-require("indent_blankline").setup {
-    show_current_context = true,
-    show_current_context_start = true,
+require('indent_blankline').setup {
+  show_current_context = true,
+  show_current_context_start = true,
 }
-
 
 --
 -- File tree
-require("nvim-tree").setup()
-
+require('nvim-tree').setup()
 
 --
 -- Treesitter setup.
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "bash", "typescript", "javascript", "html", "css", "json", "lua", "markdown", "markdown_inline" },
+  ensure_installed = {
+    'bash', 'typescript', 'javascript', 'html', 'css', 'json', 'lua',
+    'markdown', 'markdown_inline',
+  },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -124,18 +130,12 @@ require'nvim-treesitter.configs'.setup {
     -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
     extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
     max_file_lines = nil, -- Do not enable for files with more than n lines, int
-    colors =
-      {
-        "#bf616a",
-        "#ebcb8b",
-        "#b48ead",
-        "#d08770",
-      },
+    colors = {'#bf616a', '#ebcb8b', '#b48ead', '#d08770'},
     -- termcolors = {} -- table of colour name strings
   },
 
   autotag = {
-    enable = true -- Through auto-tag plugin
+    enable = true, -- Through auto-tag plugin
   },
 
   textobjects = {
@@ -160,131 +160,91 @@ require'nvim-treesitter.configs'.setup {
 }
 require'treesitter-context'.setup({})
 
-
 --
 -- Modeline
 require('lualine').setup {
   options = {
     icons_enabled = true,
     theme = 'nord',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {
-      statusline = {},
-      winbar = {},
-    },
+    component_separators = {left = '', right = ''},
+    section_separators = {left = '', right = ''},
+    disabled_filetypes = {statusline = {}, winbar = {}},
     ignore_focus = {},
     always_divide_middle = true,
     globalstatus = false,
-    refresh = {
-      statusline = 1000,
-      tabline = 1000,
-      winbar = 1000,
-    }
+    refresh = {statusline = 1000, tabline = 1000, winbar = 1000},
   },
   sections = {
     lualine_a = {'mode', 'searchcount'},
-    lualine_b = {
-      'diff',
-    },
-    lualine_c = {
-      {'filename', path = 1, shorting_target = 70},
-    },
-    lualine_x = {
-      {'diagnostics', sources = {'nvim_lsp', 'nvim_diagnostic'}},
-    },
+    lualine_b = {'diff'},
+    lualine_c = {{'filename', path = 1, shorting_target = 70}},
+    lualine_x = {{'diagnostics', sources = {'nvim_lsp', 'nvim_diagnostic'}}},
     lualine_y = {'filetype'},
     lualine_z = {'location', 'progress'},
   },
   inactive_sections = {
     lualine_a = {},
-    lualine_b = {
-      'mode',
-      'searchcount',
-      'diff',
-    },
-    lualine_c = {
-      {'filename', path = 1, shorting_target = 70},
-    },
-    lualine_x = {
-      {'diagnostics', sources = {'nvim_lsp', 'nvim_diagnostic'}},
-    },
+    lualine_b = {'mode', 'searchcount', 'diff'},
+    lualine_c = {{'filename', path = 1, shorting_target = 70}},
+    lualine_x = {{'diagnostics', sources = {'nvim_lsp', 'nvim_diagnostic'}}},
     lualine_y = {'filetype', 'locally', 'progress'},
     lualine_z = {},
   },
   tabline = {},
   winbar = {},
   inactive_winbar = {},
-  extensions = {}
+  extensions = {},
 }
-
 
 --
 -- Prettier plugin
-local prettier = require("prettier")
+local prettier = require('prettier')
 
 prettier.setup({
   bin = 'prettierd', -- or `'prettier'`
   filetypes = {
-    "css",
-    "graphql",
-    "html",
-    "javascript",
-    "javascriptreact",
-    "json",
-    "less",
-    "markdown",
-    "scss",
-    "typescript",
-    "typescriptreact",
-    "yaml",
+    'css', 'graphql', 'html', 'javascript', 'javascriptreact', 'json', 'less',
+    'markdown', 'scss', 'typescript', 'typescriptreact', 'yaml',
   },
 })
-
 
 --
 -- Fancy icons plugin
 require'nvim-web-devicons'.setup {
   -- globally enable different highlight colors per icon (default to true)
   -- if set to false all icons will have the default icon's color
-  color_icons = true;
+  color_icons = true,
   -- globally enable default icons (default to false)
   -- will get overriden by `get_icons` option
-  default = true;
+  default = true,
 }
-
 
 --
 -- Color highlighting
 require'colorizer'.setup()
 
-
 --
 -- Git gutter
 require'gitsigns'.setup()
-
 
 --
 -- Neogit
 local neogit = require('neogit')
 neogit.setup {}
 
-
 --
 -- Surround
-require("nvim-surround").setup({
-    -- Configuration here, or leave empty to use defaults
+require('nvim-surround').setup({
+  -- Configuration here, or leave empty to use defaults
 })
-
 
 --
 -- Which Key
-require("which-key").setup {
--- your configuration comes here
--- or leave it empty to use the default settings
--- refer to the configuration section below
+require('which-key').setup {
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+  -- refer to the configuration section below
 }
-
 
 --
 -- Comment
@@ -292,11 +252,9 @@ require('Comment').setup({
   pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
 })
 
-
 --
 -- Auto pairs
-require("nvim-autopairs").setup()
-
+require('nvim-autopairs').setup()
 
 --
 -- Todo Comments
@@ -311,52 +269,44 @@ require('todo-comments').setup({
   },
 })
 
-
 --
 -- Trouble
 require('trouble').setup({})
 
-
 --
 -- Telescope
 local telescope = require('telescope')
-local telescopeConfig = require("telescope.config")
+local telescopeConfig = require('telescope.config')
 
 -- Clone the default Telescope configuration
-local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
+local vimgrep_arguments = {unpack(telescopeConfig.values.vimgrep_arguments)}
 
 -- I want to search in hidden/dot files.
-table.insert(vimgrep_arguments, "--hidden")
+table.insert(vimgrep_arguments, '--hidden')
 -- I don't want to search in the `.git` directory.
-table.insert(vimgrep_arguments, "--glob")
-table.insert(vimgrep_arguments, "!.git/*")
+table.insert(vimgrep_arguments, '--glob')
+table.insert(vimgrep_arguments, '!.git/*')
 
-local trouble = require("trouble.providers.telescope")
+local trouble = require('trouble.providers.telescope')
 telescope.setup {
   defaults = {
     -- `hidden = true` is not supported in text grep commands.
     vimgrep_arguments = vimgrep_arguments,
     mappings = {
-      i = { ["<c-t>"] = trouble.open_with_trouble },
-      n = { ["<c-t>"] = trouble.open_with_trouble },
+      i = {['<c-t>'] = trouble.open_with_trouble},
+      n = {['<c-t>'] = trouble.open_with_trouble},
     },
   },
   pickers = {
     find_files = {
       -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-      find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
+      find_command = {'rg', '--files', '--hidden', '--glob', '!.git/*'},
       theme = 'dropdown',
     },
   },
-  extensions = {
-    file_browser = {
-      theme = 'dropdown',
-      hijack_netrw = true,
-    }
-  }
+  extensions = {file_browser = {theme = 'dropdown', hijack_netrw = true}},
 }
 telescope.load_extension 'file_browser'
-
 
 --
 -- Go/Move
@@ -366,11 +316,9 @@ require('gomove').setup()
 -- Refactoring
 require('refactoring').setup({})
 
-
 --
 -- Completion
 require 'schemar.plugins.cmp'
-
 
 --
 -- LSP

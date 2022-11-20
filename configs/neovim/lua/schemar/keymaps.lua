@@ -1,9 +1,7 @@
 -- Note that additional keymaps are defined in the LSP and cmp files.
-
 -- Switch meaning of vertical and horizontal split
-vim.keymap.set('', '<C-w>s', '<C-w>v', { noremap = true })
-vim.keymap.set('', '<C-w>v', '<C-w>s', { noremap = true })
-
+vim.keymap.set('', '<C-w>s', '<C-w>v', {noremap = true})
+vim.keymap.set('', '<C-w>v', '<C-w>s', {noremap = true})
 
 --
 -- Which-Key
@@ -28,13 +26,16 @@ wk.register({
   b = {
     name = 'Buffer',
     b = {builtin.buffers, 'Find buffer'},
+    d = {':bd<CR>', 'Delete buffer'},
     n = {':bn<CR>', 'Next buffer'},
     p = {':bp<CR>', 'Previous buffer'},
   },
   c = {
     name = 'Code',
     d = {':TroubleToggle document_diagnostics<CR>', 'Show diagnostics'},
-    D = {':TroubleToggle workspace_diagnostics<CR>', 'Show workspace diagnostics'},
+    D = {
+      ':TroubleToggle workspace_diagnostics<CR>', 'Show workspace diagnostics',
+    },
     e = {vim.diagnostic.open_float, 'Floating diagnostic'},
   },
   f = {
@@ -46,8 +47,7 @@ wk.register({
           grouped = true,
           initial_mode = 'normal',
         })
-      end,
-      'Browse files',
+      end, 'Browse files',
     },
     s = {':w<CR>', 'Save'},
     S = {':wa<CR>', 'Save all'},
@@ -61,12 +61,9 @@ wk.register({
   h = {builtin.help_tags, 'Help'},
   w = {
     name = 'Window',
-    c = {':close<CR>', 'Close'},
-    s = {':vsplit<CR>', 'Split'},
-    v = {':split<CR>', 'Vertical split'},
+    c = {':close<CR>', 'Close window'},
+    s = {':vsplit<CR>', 'Split window'},
+    v = {':split<CR>', 'Vertically split window'},
   },
-  q = {
-    name = 'Quit',
-    q = {':quitall<CR>', 'Quit all'},
-  },
+  q = {name = 'Quit', q = {':quitall<CR>', 'Quit all'}},
 }, {prefix = '<leader>'})
