@@ -16,11 +16,19 @@ require('mason-lspconfig').setup({
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
+local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+local format_timeout_ms = 2000
 local on_attach = function(client, bufnr)
-  -- Disable formatting for tsserver. Will be done by prettier instead.
-  -- (Using null-ls)
-  if (client.name == 'tsserver') then
-    client.server_capabilities.documentFormattingProvider = false
+  -- Auto-format on save
+  if client.supports_method('textDocument/formatting') then
+    vim.api.nvim_clear_autocmds({group = augroup, buffer = bufnr})
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.format({timeout_ms = format_timeout_ms})
+      end,
+    })
   end
 
   -- Enable completion triggered by <c-x><c-o>
@@ -79,7 +87,9 @@ local on_attach = function(client, bufnr)
   wk.register({
     b = {
       f = {
-        function() vim.lsp.buf.format {async = true} end,
+        function()
+          vim.lsp.buf.format {async = true, timeout_ms = format_timeout_ms}
+        end,
         'Format buffer',
         buffer = bufnr,
       },
