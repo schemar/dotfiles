@@ -49,6 +49,8 @@ wk.register({
       end,
       'Browse files',
     },
+    s = {':w<CR>', 'Save'},
+    S = {':wa<CR>', 'Save all'},
     t = {':NvimTreeToggle<CR>', 'Toggle file tree'},
   },
   g = {
@@ -57,4 +59,14 @@ wk.register({
     g = {':Neogit<CR>', 'Neogit'},
   },
   h = {builtin.help_tags, 'Help'},
+  w = {
+    name = 'Window',
+    c = {':close<CR>', 'Close'},
+    s = {':vsplit<CR>', 'Split'},
+    v = {':split<CR>', 'Vertical split'},
+  },
+  q = {
+    name = 'Quit',
+    q = {':quitall<CR>', 'Quit all'},
+  },
 }, {prefix = '<leader>'})

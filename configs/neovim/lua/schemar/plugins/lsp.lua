@@ -184,7 +184,7 @@ null_ls.setup({
         null_ls.builtins.diagnostics.eslint_d,
         null_ls.builtins.diagnostics.gitlint,
         null_ls.builtins.diagnostics.jsonlint,
-        null_ls.builtins.diagnostics.luacheck,
+        --null_ls.builtins.diagnostics.luacheck, -- No binary, yet
         --null_ls.builtins.diagnostics.markdownlint, -- Disabled, too noisy
         null_ls.builtins.diagnostics.shellcheck,
         null_ls.builtins.diagnostics.tidy,
