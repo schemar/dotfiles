@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(asdf fd yarn docker docker-compose)
+plugins=(asdf fd npm yarn docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
