@@ -55,6 +55,7 @@ wk.register({
     s = {':w<CR>', 'Save'},
     S = {':wa<CR>', 'Save all'},
     t = {':NvimTreeToggle<CR>', 'Toggle file tree'},
+    T = {':NvimTreeFindFile<CR>', 'Go to current file in file tree'},
   },
   g = {
     name = 'Git',

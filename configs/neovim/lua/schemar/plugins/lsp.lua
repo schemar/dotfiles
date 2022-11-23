@@ -18,6 +18,51 @@ require('mason-lspconfig').setup({
 -- after the language server attaches to the current buffer
 local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 local format_timeout_ms = 2000
+local navic = require('nvim-navic')
+local icons = require('schemar.icons').kind
+navic.setup({
+  icons = {
+    Array = icons.Array .. ' ',
+    Boolean = icons.Boolean,
+    Class = icons.Class .. ' ',
+    Color = icons.Color .. ' ',
+    Constant = icons.Constant .. ' ',
+    Constructor = icons.Constructor .. ' ',
+    Enum = icons.Enum .. ' ',
+    EnumMember = icons.EnumMember .. ' ',
+    Event = icons.Event .. ' ',
+    Field = icons.Field .. ' ',
+    File = icons.File .. ' ',
+    Folder = icons.Folder .. ' ',
+    Function = icons.Function .. ' ',
+    Interface = icons.Interface .. ' ',
+    Key = icons.Key .. ' ',
+    Keyword = icons.Keyword .. ' ',
+    Method = icons.Method .. ' ',
+    Module = icons.Module .. ' ',
+    Namespace = icons.Namespace .. ' ',
+    Null = icons.Null .. ' ',
+    Number = icons.Number .. ' ',
+    Object = icons.Object .. ' ',
+    Operator = icons.Operator .. ' ',
+    Package = icons.Package .. ' ',
+    Property = icons.Property .. ' ',
+    Reference = icons.Reference .. ' ',
+    Snippet = icons.Snippet .. ' ',
+    String = icons.String .. ' ',
+    Struct = icons.Struct .. ' ',
+    Text = icons.Text .. ' ',
+    TypeParameter = icons.TypeParameter .. ' ',
+    Unit = icons.Unit .. ' ',
+    Value = icons.Value .. ' ',
+    Variable = icons.Variable .. ' ',
+  },
+  highlight = true,
+  separator = ' ' .. require('schemar.icons').ui.ChevronShortRight .. ' ',
+  depth_limit = 0,
+  depth_limit_indicator = '..',
+  safe_output = true,
+})
 local on_attach = function(client, bufnr)
   -- Auto-format on save
   if client.supports_method('textDocument/formatting') then
@@ -29,6 +74,11 @@ local on_attach = function(client, bufnr)
         vim.lsp.buf.format({timeout_ms = format_timeout_ms})
       end,
     })
+  end
+
+  -- Attach navic for winbar breadcrumbs
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
   end
 
   -- Enable completion triggered by <c-x><c-o>
@@ -71,7 +121,8 @@ local on_attach = function(client, bufnr)
       },
     },
     g = {
-      d = {':Lspsaga peek_definition<CR>', 'Peek definition', buffer = bufnr},
+      d = {vim.lsp.buf.definition, 'Go to definition', buffer = bufnr},
+      D = {':Lspsaga peek_definition<CR>', 'Peek definition', buffer = bufnr},
       h = {':Lspsaga lsp_finder<CR>', 'Find symbol ...', buffer = bufnr},
       i = {vim.lsp.buf.implementation, 'Go to implementation', buffer = bufnr},
       r = {
@@ -157,7 +208,7 @@ end
 
 -- This is for diagnostic signs on the line number column.
 -- Use this to beautify the plain E W signs.
-local signs = {Error = ' ', Warn = ' ', Hint = ' ', Info = ' '}
+local signs = require('schemar.icons').diagnostics
 for type, icon in pairs(signs) do
   local hl = 'DiagnosticSign' .. type
   vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
@@ -180,7 +231,6 @@ require'lspconfig'.sumneko_lua.setup {
 local saga = require('lspsaga')
 
 saga.init_lsp_saga({
-  symbol_in_winbar = {enable = true, separator = '  '},
   code_action_lightbulb = {enable = false},
   finder_action_keys = {
     open = {'o', '<CR>'},
@@ -232,6 +282,6 @@ null_ls.setup({
 --
 -- LSP signature
 require'lsp_signature'.setup({
-  hint_prefix = ' ',
+  hint_prefix = require('schemar.icons').ui.ChevronShortRight .. ' ',
   floating_window = false, -- Virtual text for arg names and types only
 })

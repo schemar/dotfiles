@@ -18,7 +18,7 @@ local _ = ensure_packer()
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
   use 'nvim-lua/plenary.nvim' -- Plugin with util functions required by other plugins
-  use 'arcticicestudio/nord-vim' -- Color theme
+  use 'shaunsingh/nord.nvim' -- The better nord theme
   use 'christoomey/vim-tmux-navigator' -- Switch windows/panes vim/tmux
   use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
@@ -73,6 +73,7 @@ require('packer').startup(function(use)
   use 'p00f/nvim-ts-rainbow' -- Rainbow parentheses
   use 'ray-x/lsp_signature.nvim' -- Virtual text for function arguments
   use 'booperlv/nvim-gomove' -- Alt-h/j/k/l to move line
+  use 'SmiteshP/nvim-navic' -- Winbar breadcrumbs, e.g. for code context
 end)
 
 --
@@ -84,7 +85,85 @@ require('indent_blankline').setup {
 
 --
 -- File tree
-require('nvim-tree').setup()
+local lib = require('nvim-tree.lib')
+local view = require('nvim-tree.view')
+
+local function collapse_all()
+  require('nvim-tree.actions.tree-modifiers.collapse-all').fn()
+end
+
+local function edit_or_open()
+  -- open as vsplit on current node
+  local action = 'edit'
+  local node = lib.get_node_at_cursor()
+
+  -- Just copy what's done normally with vsplit
+  if node.link_to and not node.nodes then
+    require('nvim-tree.actions.node.open-file').fn(action, node.link_to)
+    view.close() -- Close the tree if file was opened
+
+  elseif node.nodes ~= nil then
+    lib.expand_or_collapse(node)
+
+  else
+    require('nvim-tree.actions.node.open-file').fn(action, node.absolute_path)
+    view.close() -- Close the tree if file was opened
+  end
+
+end
+
+local function vsplit_preview()
+  -- open as vsplit on current node
+  local action = 'vsplit'
+  local node = lib.get_node_at_cursor()
+
+  -- Just copy what's done normally with vsplit
+  if node.link_to and not node.nodes then
+    require('nvim-tree.actions.node.open-file').fn(action, node.link_to)
+
+  elseif node.nodes ~= nil then
+    lib.expand_or_collapse(node)
+
+  else
+    require('nvim-tree.actions.node.open-file').fn(action, node.absolute_path)
+
+  end
+
+  -- Finally refocus on tree if it was lost
+  view.focus()
+end
+
+local icons = require('schemar.icons').git
+require('nvim-tree').setup({
+  renderer = {
+    icons = {
+      git_placement = 'after',
+      glyphs = {
+        git = {
+          unstaged = icons.FileUnstaged,
+          staged = icons.FileStaged,
+          unmerged = icons.FileUnmerged,
+          renamed = icons.FileRenamed,
+          untracked = icons.FileUntracked,
+          deleted = icons.FileDeleted,
+          ignored = icons.FileIgnored,
+        },
+      },
+    },
+  },
+  view = {
+    mappings = {
+      custom_only = false,
+      list = {
+        {key = 'l', action = 'edit', action_cb = edit_or_open},
+        {key = 'L', action = 'vsplit_preview', action_cb = vsplit_preview},
+        {key = 'h', action = 'close_node'},
+        {key = 'H', action = 'collapse_all', action_cb = collapse_all},
+      },
+    },
+  },
+  actions = {open_file = {quit_on_open = false}},
+})
 
 --
 -- Treesitter setup.
@@ -162,6 +241,13 @@ require'treesitter-context'.setup({})
 
 --
 -- Modeline
+local branch_max_length = 15
+local function get_branch()
+  require('lualine.components.branch.git_branch').init()
+  local branch = require('lualine.components.branch.git_branch').get_branch()
+  return string.sub(branch, math.max(string.len(branch) - branch_max_length, 0),
+                    string.len(branch))
+end
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -176,7 +262,7 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = {'mode', 'searchcount'},
-    lualine_b = {'diff'},
+    lualine_b = {get_branch, 'diff'},
     lualine_c = {{'filename', path = 1, shorting_target = 70}},
     lualine_x = {{'diagnostics', sources = {'nvim_lsp', 'nvim_diagnostic'}}},
     lualine_y = {'filetype'},
@@ -184,7 +270,7 @@ require('lualine').setup {
   },
   inactive_sections = {
     lualine_a = {},
-    lualine_b = {'mode', 'searchcount', 'diff'},
+    lualine_b = {'mode', 'searchcount', get_branch, 'diff'},
     lualine_c = {{'filename', path = 1, shorting_target = 70}},
     lualine_x = {{'diagnostics', sources = {'nvim_lsp', 'nvim_diagnostic'}}},
     lualine_y = {'filetype', 'locally', 'progress'},

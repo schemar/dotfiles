@@ -3,6 +3,7 @@
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 local lspkind = require('lspkind')
+lspkind.init({mode = 'symbol_text', symbol_map = require('schemar.icons').kind})
 cmp.setup {
   snippet = {expand = function(args) luasnip.lsp_expand(args.body) end},
   window = {
@@ -18,17 +19,7 @@ cmp.setup {
   formatting = {
     fields = {'kind', 'abbr', 'menu'},
     format = function(entry, vim_item)
-      local kind = lspkind.cmp_format({
-        mode = 'symbol_text',
-        maxwidth = 50,
-        -- Show source in pop-up
-        menu = ({
-          buffer = '[Buffer]',
-          nvim_lsp = '[LSP]',
-          luasnip = '[LuaSnip]',
-          path = '[Path]',
-        }),
-      })(entry, vim_item)
+      local kind = lspkind.cmp_format({maxwidth = 50})(entry, vim_item)
 
       local strings = vim.split(kind.kind, '%s', {trimempty = true})
       kind.kind = ' ' .. strings[1] .. ' '

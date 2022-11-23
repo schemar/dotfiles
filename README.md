@@ -63,6 +63,7 @@ Prefix is `<ctrl>-b`.
    Movement in copy mode is vim-like (e.g. `<ctrl>+{d,u}` to move down/up a page).
 * `<prefix> u` fuzzy find and open a URL from the buffer.
 * `<prefix> tab` fuzzy find any previous tmux output (words, lines, URLs, paths).
+* `<prefix> <alt-1>` split all windows evenly horizontally (`<alt-2>` for vertically).
 
 ### NeoVim
 
