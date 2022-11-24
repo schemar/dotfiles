@@ -264,7 +264,10 @@ require('lualine').setup {
     theme = 'nord',
     component_separators = {left = '', right = ''},
     section_separators = {left = '', right = ''},
-    disabled_filetypes = {statusline = {}, winbar = {}},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {'NvimTree', 'NeogitCommitMessage', 'NeogitStatus'},
+    },
     ignore_focus = {},
     always_divide_middle = true,
     globalstatus = false,
@@ -287,9 +290,26 @@ require('lualine').setup {
     lualine_z = {},
   },
   tabline = {},
-  winbar = {},
-  inactive_winbar = {},
-  extensions = {},
+  winbar = {
+    lualine_a = {},
+    lualine_b = {{'filetype', icon_only = true }, 'filename'},
+    lualine_c = {function () return require('nvim-navic').get_location() end},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
+  },
+
+  inactive_winbar = {
+    lualine_a = {},
+    lualine_b = {{'filetype', icon_only = true }, 'filename'},
+    lualine_c = {function () return require('nvim-navic').get_location() end},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {},
+  },
+  extensions = {
+    'nvim-tree',
+  },
 }
 
 --

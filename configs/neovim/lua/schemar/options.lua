@@ -11,7 +11,6 @@ opt.colorcolumn = '80' -- str: Show col for max line length
 opt.number = true -- bool: Show line numbers
 opt.scrolloff = 10 -- int: Min num lines of context
 opt.signcolumn = 'yes' -- str: Show the sign column
-opt.winbar = '%{%v:lua.require\'nvim-navic\'.get_location()%}' -- str: Winbar to show navic breadcrumbs
 
 -- [[ Filetypes ]]
 opt.encoding = 'utf8' -- str: String encoding to use

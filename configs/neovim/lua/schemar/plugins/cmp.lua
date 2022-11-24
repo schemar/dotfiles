@@ -3,7 +3,37 @@
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 local lspkind = require('lspkind')
-lspkind.init({mode = 'symbol_text', symbol_map = require('schemar.icons').kind})
+local icons = require('schemar.icons').kind
+lspkind.init({
+  mode = 'symbol_text',
+ symbol_map = {
+      Class = icons.Class,
+      Color = icons.Color,
+      Constant = icons.Constant,
+      Constructor = icons.Constructor,
+      Enum = icons.Enum,
+      EnumMember = icons.Enum,
+      Event = icons.Event,
+      Field = icons.Field,
+      File = icons.File,
+      Folder = icons.Folder,
+      Function = icons.Function,
+      Interface = icons.Interface,
+      Keyword = icons.Keyword,
+      Method = icons.Method,
+      Module = icons.Module,
+      Operator = icons.Operator,
+      Property = icons.Property,
+      Reference = icons.Reference,
+      Snippet = icons.Snippet,
+      Struct = icons.Struct,
+      Text = icons.Text,
+      TypeParameter = icons.TypeParameter,
+      Unit = icons.Unit,
+      Value = icons.Value,
+      Variable = icons.Variable,
+    },
+})
 cmp.setup {
   snippet = {expand = function(args) luasnip.lsp_expand(args.body) end},
   window = {
