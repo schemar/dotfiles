@@ -75,6 +75,7 @@ require('packer').startup(function(use)
   use 'booperlv/nvim-gomove' -- Alt-h/j/k/l to move line
   use 'SmiteshP/nvim-navic' -- Winbar breadcrumbs, e.g. for code context
   use 'famiu/bufdelete.nvim' -- Keep windows around when deleting buffers
+  use 'rgroli/other.nvim' -- Go to alternative file, e.g. ts<->vue or test
 end)
 
 --
@@ -410,6 +411,25 @@ require('gomove').setup()
 --
 -- Refactoring
 require('refactoring').setup({})
+
+--
+-- Other files
+require('other-nvim').setup({
+  -- Map files to other files.
+  -- See documentation for details and more options.
+  mappings = {
+    {
+      pattern = '(.*)/(.*).ts',
+      target = '%1/%2.vue',
+      context = 'vue',
+    },
+    {
+      pattern = '(.*)/(.*).vue',
+      target = '%1/%2.ts',
+      context = 'vue',
+    },
+  },
+})
 
 --
 -- Completion

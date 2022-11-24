@@ -52,6 +52,8 @@ wk.register({
         })
       end, 'Browse files',
     },
+    o = {':Other<CR>', 'Open other file'},
+    O = {':OtherVSplit<CR>', 'Open other file in split'},
     s = {':w<CR>', 'Save'},
     S = {':wa<CR>', 'Save all'},
     t = {':NvimTreeToggle<CR>', 'Toggle file tree'},
