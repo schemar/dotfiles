@@ -74,6 +74,7 @@ require('packer').startup(function(use)
   use 'ray-x/lsp_signature.nvim' -- Virtual text for function arguments
   use 'booperlv/nvim-gomove' -- Alt-h/j/k/l to move line
   use 'SmiteshP/nvim-navic' -- Winbar breadcrumbs, e.g. for code context
+  use 'famiu/bufdelete.nvim' -- Keep windows around when deleting buffers
 end)
 
 --

@@ -107,7 +107,7 @@ local on_attach = function(client, bufnr)
     [']'] = {
       d = {
         ':Lspsaga diagnostic_jump_next<CR>',
-        'Previous diagnostic',
+        'Next diagnostic',
         buffer = bufnr,
       },
       D = {

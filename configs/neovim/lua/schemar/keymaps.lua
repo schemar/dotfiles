@@ -29,7 +29,7 @@ wk.register({
   b = {
     name = 'Buffer',
     b = {builtin.buffers, 'Find buffer'},
-    d = {':bd<CR>', 'Delete buffer'},
+    d = {':Bdelete<CR>', 'Delete buffer'},
     n = {':bn<CR>', 'Next buffer'},
     p = {':bp<CR>', 'Previous buffer'},
   },
