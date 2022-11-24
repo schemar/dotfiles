@@ -56,14 +56,14 @@ require('packer').startup(function(use)
   use 'numToStr/Comment.nvim' -- Easier (un)commenting
   use 'JoosepAlviste/nvim-ts-context-commentstring' -- Improved comment management; integrates with Comment.nvim
   use 'nvim-tree/nvim-tree.lua' -- File browser
-  use({
+  use {
     'kylechui/nvim-surround', -- E.g. cs"' to replace surrounding " with '
     tag = '*', -- Use for stability; omit to use `main` branch for the latest features
-  })
-  use({
+  }
+  use {
     'glepnir/lspsaga.nvim', -- UI Improvements for LSP
     branch = 'main',
-  })
+  }
   use 'williamboman/mason.nvim' -- Manage language servers, linters, etc.
   use 'williamboman/mason-lspconfig.nvim' -- Integration mason/lsp
   use 'b0o/schemastore.nvim' -- Schemas for JSON files
@@ -80,10 +80,10 @@ end)
 
 --
 -- Indent Guides.
-require('indent_blankline').setup {
+require('indent_blankline').setup({
   show_current_context = true,
   show_current_context_start = true,
-}
+})
 
 --
 -- File tree
@@ -110,8 +110,8 @@ local function edit_or_open()
   else
     require('nvim-tree.actions.node.open-file').fn(action, node.absolute_path)
     view.close() -- Close the tree if file was opened
-  end
 
+  end
 end
 
 local function vsplit_preview()
@@ -169,19 +169,11 @@ require('nvim-tree').setup({
 
 --
 -- Treesitter setup.
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup({
   -- A list of parser names, or "all"
   ensure_installed = {
-    'bash',
-    'css',
-    'gitcommit',
-    'html',
-    'javascript',
-    'json',
-    'lua',
-    'markdown',
-    'markdown_inline',
-    'typescript',
+    'bash', 'css', 'gitcommit', 'html', 'javascript', 'json', 'lua', 'markdown',
+    'markdown_inline', 'typescript',
   },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -246,7 +238,7 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
     enable_autocmd = false, -- Disabled when used with Comment.nvim
   },
-}
+})
 require'treesitter-context'.setup({})
 
 --
@@ -258,7 +250,7 @@ local function get_branch()
   return string.sub(branch, math.max(string.len(branch) - branch_max_length, 0),
                     string.len(branch))
 end
-require('lualine').setup {
+require('lualine').setup({
   options = {
     icons_enabled = true,
     theme = 'nord',
@@ -292,8 +284,8 @@ require('lualine').setup {
   tabline = {},
   winbar = {
     lualine_a = {},
-    lualine_b = {{'filetype', icon_only = true }, 'filename'},
-    lualine_c = {function () return require('nvim-navic').get_location() end},
+    lualine_b = {{'filetype', icon_only = true}, 'filename'},
+    lualine_c = {function() return require('nvim-navic').get_location() end},
     lualine_x = {},
     lualine_y = {},
     lualine_z = {},
@@ -301,16 +293,14 @@ require('lualine').setup {
 
   inactive_winbar = {
     lualine_a = {},
-    lualine_b = {{'filetype', icon_only = true }, 'filename'},
-    lualine_c = {function () return require('nvim-navic').get_location() end},
+    lualine_b = {{'filetype', icon_only = true}, 'filename'},
+    lualine_c = {function() return require('nvim-navic').get_location() end},
     lualine_x = {},
     lualine_y = {},
     lualine_z = {},
   },
-  extensions = {
-    'nvim-tree',
-  },
-}
+  extensions = {'nvim-tree'},
+})
 
 --
 -- Prettier plugin
@@ -326,14 +316,14 @@ prettier.setup({
 
 --
 -- Fancy icons plugin
-require'nvim-web-devicons'.setup {
+require('nvim-web-devicons').setup({
   -- globally enable different highlight colors per icon (default to true)
   -- if set to false all icons will have the default icon's color
   color_icons = true,
   -- globally enable default icons (default to false)
   -- will get overriden by `get_icons` option
   default = true,
-}
+})
 
 --
 -- Color highlighting
@@ -345,22 +335,15 @@ require'gitsigns'.setup()
 
 --
 -- Neogit
-local neogit = require('neogit')
-neogit.setup {}
+require('neogit').setup({})
 
 --
 -- Surround
-require('nvim-surround').setup({
-  -- Configuration here, or leave empty to use defaults
-})
+require('nvim-surround').setup({})
 
 --
 -- Which Key
-require('which-key').setup {
-  -- your configuration comes here
-  -- or leave it empty to use the default settings
-  -- refer to the configuration section below
-}
+require('which-key').setup({})
 
 --
 -- Comment
@@ -404,7 +387,7 @@ table.insert(vimgrep_arguments, '--glob')
 table.insert(vimgrep_arguments, '!.git/*')
 
 local trouble = require('trouble.providers.telescope')
-telescope.setup {
+telescope.setup({
   defaults = {
     -- `hidden = true` is not supported in text grep commands.
     vimgrep_arguments = vimgrep_arguments,
@@ -421,8 +404,8 @@ telescope.setup {
     },
   },
   extensions = {file_browser = {theme = 'dropdown', hijack_netrw = true}},
-}
-telescope.load_extension 'file_browser'
+})
+telescope.load_extension('file_browser')
 
 --
 -- Go/Move
@@ -438,23 +421,15 @@ require('other-nvim').setup({
   -- Map files to other files.
   -- See documentation for details and more options.
   mappings = {
-    {
-      pattern = '(.*)/(.*).ts',
-      target = '%1/%2.vue',
-      context = 'vue',
-    },
-    {
-      pattern = '(.*)/(.*).vue',
-      target = '%1/%2.ts',
-      context = 'vue',
-    },
+    {pattern = '(.*)/(.*).ts', target = '%1/%2.vue', context = 'vue'},
+    {pattern = '(.*)/(.*).vue', target = '%1/%2.ts', context = 'vue'},
   },
 })
 
 --
 -- Completion
-require 'schemar.plugins.cmp'
+require('schemar.plugins.cmp')
 
 --
 -- LSP
-require 'schemar.plugins.lsp'
+require('schemar.plugins.lsp')

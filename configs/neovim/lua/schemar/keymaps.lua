@@ -1,14 +1,17 @@
 -- Note that additional keymaps are defined in the LSP and cmp files.
--- Switch meaning of vertical and horizontal split
-vim.keymap.set('', '<C-w>s', '<C-w>v', {noremap = true})
-vim.keymap.set('', '<C-w>v', '<C-w>s', {noremap = true})
-
 --
 -- Which-Key
 local wk = require('which-key')
 local telescope = require('telescope')
 local builtin = require('telescope.builtin')
+
+-- Without prefix:
 wk.register({
+  ['<c-w>'] = {
+    name = 'Windows',
+    s = {':vsplit<CR>', 'Split window'},
+    v = {':split<CR>', 'Split window vertically'},
+  },
   ['['] = {
     name = 'Previous',
     d = {vim.diagnostic.goto_prev, 'Previous diagnostic'},

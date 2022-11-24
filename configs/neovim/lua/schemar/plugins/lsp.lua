@@ -63,6 +63,8 @@ navic.setup({
   depth_limit_indicator = '..',
   safe_output = true,
 })
+
+-- LSP custom function when client attaches to buffer.
 local on_attach = function(client, bufnr)
   -- Auto-format on save
   if client.supports_method('textDocument/formatting') then
@@ -87,6 +89,8 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local wk = require('which-key')
+
+  -- Without prefix:
   wk.register({
     ['['] = {
       d = {
@@ -135,11 +139,12 @@ local on_attach = function(client, bufnr)
     K = {':Lspsaga hover_doc<CR>', 'Hover doc', buffer = bufnr},
   })
 
+  -- With leader prefix:
   wk.register({
     b = {
       f = {
         function()
-          vim.lsp.buf.format {async = true, timeout_ms = format_timeout_ms}
+          vim.lsp.buf.format({async = true, timeout_ms = format_timeout_ms})
         end,
         'Format buffer',
         buffer = bufnr,
@@ -178,6 +183,7 @@ local on_attach = function(client, bufnr)
     },
   }, {prefix = '<leader>'})
 
+  -- Visual mode with leader prefix:
   wk.register({c = {a = {':Lspsaga code_action<CR>', buffer = bufnr}}},
               {prefix = '<leader>', mode = 'v'})
 end
@@ -193,7 +199,7 @@ local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 for _, lsp in ipairs(lsp_servers) do
-  lspconfig[lsp].setup {
+  lspconfig[lsp].setup({
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities,
@@ -203,7 +209,7 @@ for _, lsp in ipairs(lsp_servers) do
         validate = {enable = true},
       },
     },
-  }
+  })
 end
 
 -- This is for diagnostic signs on the line number column.
@@ -215,7 +221,7 @@ for type, icon in pairs(signs) do
 end
 
 -- Make `vim` a global in lua files
-require'lspconfig'.sumneko_lua.setup {
+require('lspconfig').sumneko_lua.setup({
   settings = {
     Lua = {
       diagnostics = {
@@ -224,7 +230,7 @@ require'lspconfig'.sumneko_lua.setup {
       },
     },
   },
-}
+})
 
 --
 -- LSP Saga
@@ -281,7 +287,7 @@ null_ls.setup({
 
 --
 -- LSP signature
-require'lsp_signature'.setup({
+require('lsp_signature').setup({
   hint_prefix = require('schemar.icons').ui.ChevronShortRight .. ' ',
   floating_window = false, -- Virtual text for arg names and types only
 })
