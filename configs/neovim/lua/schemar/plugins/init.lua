@@ -170,8 +170,16 @@ require('nvim-tree').setup({
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = {
-    'bash', 'typescript', 'javascript', 'html', 'css', 'json', 'lua',
-    'markdown', 'markdown_inline',
+    'bash',
+    'css',
+    'gitcommit',
+    'html',
+    'javascript',
+    'json',
+    'lua',
+    'markdown',
+    'markdown_inline',
+    'typescript',
   },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
