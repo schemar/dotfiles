@@ -19,6 +19,9 @@ require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
   use 'nvim-lua/plenary.nvim' -- Plugin with util functions required by other plugins
   use 'shaunsingh/nord.nvim' -- The better nord theme
+  use 'lukas-reineke/headlines.nvim' -- Highlight markdown (and other) headlines
+  use 'danilamihailov/beacon.nvim' -- Highlight cursor on jump
+  use 'RRethy/vim-illuminate' -- Highlight similar words (e.g. references with LSP)
   use 'christoomey/vim-tmux-navigator' -- Switch windows/panes vim/tmux
   use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
@@ -240,6 +243,38 @@ require('nvim-treesitter.configs').setup({
   },
 })
 require'treesitter-context'.setup({})
+
+
+--
+-- Nord theme
+vim.g.nord_contrast = true -- Different background for sidebars and pop-ups (e.g. Telescope)
+vim.g.nord_borders = true -- Borders between windows visible
+vim.g.nord_disable_background = false -- When true, use terminal background instead of theme background
+vim.g.nord_italic = true -- Italic highlights of text
+vim.g.nord_uniform_diff_background = true -- Colorful backgrounds in diff mode
+vim.g.nord_bold = false -- Bold highlights of text
+-- Load the colorscheme
+require('nord').set()
+
+
+--
+-- Headlines (compatible with Nord)
+require('headlines').setup({
+    markdown = {
+        headline_highlights = {
+            'Headline1',
+            'Headline2',
+            'Headline3',
+            'Headline4',
+            'Headline5',
+            'Headline6',
+        },
+        codeblock_highlight = 'CodeBlock',
+        dash_highlight = 'Dash',
+        quote_highlight = 'Quote',
+    },
+})
+
 
 --
 -- Modeline
