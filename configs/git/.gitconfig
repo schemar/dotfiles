@@ -25,5 +25,9 @@
   line-numbers = true
 [init]
   defaultBranch = main
+[merge]
+  tool = nvimdiff
+[mergetool]
+  keepBackup = false
 [github]
 	user = schemar
