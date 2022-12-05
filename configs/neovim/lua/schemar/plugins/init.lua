@@ -60,6 +60,7 @@ require('packer').startup(function(use)
   -- [[ Languages ]]
   use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
   use 'jose-elias-alvarez/null-ls.nvim' -- NeoVim as LSP server
+  use 'lukas-reineke/lsp-format.nvim' -- Easier management of auto-saving from LSP sources
   use 'MunifTanjim/prettier.nvim' -- Prettier for TS/JS formatting (for null-ls)
 
   use 'williamboman/mason.nvim' -- Manage language servers, linters, etc.

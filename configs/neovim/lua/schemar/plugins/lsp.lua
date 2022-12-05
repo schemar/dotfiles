@@ -33,7 +33,7 @@ require("mason-lspconfig").setup({
 	automatic_installation = true,
 })
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+-- Navic shows breadcrumbs in the buffer line
 local format_timeout_ms = 2000
 local navic = require("nvim-navic")
 local icons = require("schemar.icons").kind
@@ -81,21 +81,20 @@ navic.setup({
 	safe_output = true,
 })
 
+-- Formatting with LSP
+local lsp_format = require("lsp-format")
+lsp_format.setup({
+	typescript = {
+		order = { "tsserver", "eslint", "null-ls" },
+	},
+})
+
 -- LSP custom function when client attaches to buffer.
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
 	-- Auto-format on save
-	if client.supports_method("textDocument/formatting") then
-		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			group = augroup,
-			buffer = bufnr,
-			callback = function()
-				vim.lsp.buf.format({ timeout_ms = format_timeout_ms })
-			end,
-		})
-	end
+	lsp_format.on_attach(client)
 
 	-- Attach navic for winbar breadcrumbs
 	if client.server_capabilities.documentSymbolProvider then
@@ -163,7 +162,7 @@ local on_attach = function(client, bufnr)
 		b = {
 			f = {
 				function()
-					vim.lsp.buf.format({ async = true, timeout_ms = format_timeout_ms })
+					vim.lsp.buf.formatting_seq_sync({ timeout_ms = format_timeout_ms })
 				end,
 				"Format buffer",
 				buffer = bufnr,
