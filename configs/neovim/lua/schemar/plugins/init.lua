@@ -59,11 +59,12 @@ require('packer').startup(function(use)
 
   -- [[ Languages ]]
   use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
+  use 'jose-elias-alvarez/null-ls.nvim' -- NeoVim as LSP server
+  use 'MunifTanjim/prettier.nvim' -- Prettier for TS/JS formatting (for null-ls)
+
   use 'williamboman/mason.nvim' -- Manage language servers, linters, etc.
   use 'williamboman/mason-lspconfig.nvim' -- Integration mason/lsp
-
-  use 'jose-elias-alvarez/null-ls.nvim' -- NeoVim as LSP server
-  use 'MunifTanjim/prettier.nvim' -- Prettier for TS/JS formatting
+  use 'jayp0521/mason-null-ls.nvim' -- Integration mason/null-ls
 
   use 'ThePrimeagen/refactoring.nvim' -- Refactoring tools for code
   use 'ray-x/lsp_signature.nvim' -- Virtual text for function arguments
