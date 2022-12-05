@@ -162,7 +162,7 @@ local on_attach = function(client, bufnr)
 		b = {
 			f = {
 				function()
-					vim.lsp.buf.formatting_seq_sync({ timeout_ms = format_timeout_ms })
+					vim.lsp.buf.format({ async = true, timeout_ms = format_timeout_ms })
 				end,
 				"Format buffer",
 				buffer = bufnr,
@@ -283,11 +283,4 @@ require("mason-null-ls").setup({
 	ensure_installed = nil, -- nil, as taken from null_ls setup
 	automatic_installation = true,
 	automatic_setup = true,
-})
-
---
--- LSP signature
-require("lsp_signature").setup({
-	hint_prefix = require("schemar.icons").ui.ChevronShortRight .. " ",
-	floating_window = false, -- Virtual text for arg names and types only
 })
