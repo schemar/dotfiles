@@ -16,26 +16,71 @@ end
 local _ = ensure_packer()
 
 require('packer').startup(function(use)
+  -- [[ Utils ]]
   use 'wbthomason/packer.nvim' -- Package manager
   use 'nvim-lua/plenary.nvim' -- Plugin with util functions required by other plugins
-  use 'shaunsingh/nord.nvim' -- The better nord theme
-  use 'lukas-reineke/headlines.nvim' -- Highlight markdown (and other) headlines
-  use 'danilamihailov/beacon.nvim' -- Highlight cursor on jump
-  use 'RRethy/vim-illuminate' -- Highlight similar words (e.g. references with LSP)
-  use 'christoomey/vim-tmux-navigator' -- Switch windows/panes vim/tmux
-  use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
-  use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
-  use 'hrsh7th/cmp-buffer' -- LSP source for nvim-cmp
-  use 'hrsh7th/cmp-path' -- LSP source for nvim-cmp
-  use 'hrsh7th/cmp-cmdline' -- LSP source for nvim-cmp
-  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+
+  -- [[ Theming ]]
+  use 'shaunsingh/nord.nvim' -- The better nord theme
+  use 'p00f/nvim-ts-rainbow' -- Rainbow parentheses
+  use 'lukas-reineke/indent-blankline.nvim' -- Indent guides
+  use 'nvim-lualine/lualine.nvim' -- Modeline
+  use 'lewis6991/gitsigns.nvim' -- Git gutter
+
+  use 'folke/todo-comments.nvim' -- Highlight and list TODOs, etc.
+  use 'norcalli/nvim-colorizer.lua' -- Show color-codes colored
+  use 'danilamihailov/beacon.nvim' -- Highlight cursor on jump
+  use 'nvim-tree/nvim-web-devicons' -- Fancy icons in pop-ups
   use 'onsails/lspkind.nvim' -- Icons in completion dialogue
-  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+  use 'RRethy/vim-illuminate' -- Highlight similar words (e.g. references with LSP)
+
+  -- [[ Interface ]]
+  use 'christoomey/vim-tmux-navigator' -- Switch windows/panes vim/tmux
+
+  use {'nvim-telescope/telescope.nvim', branch = '0.1.x'} -- Fancy picker (think fzf)
+  use 'nvim-telescope/telescope-file-browser.nvim' -- Think Emacs directory browser
+  use 'folke/trouble.nvim' -- Better looking quicklist, diagnostics, etc.
+  use 'nvim-tree/nvim-tree.lua' -- File browser
+  use {
+    'kylechui/nvim-surround', -- E.g. cs"' to replace surrounding " with '
+    tag = '*', -- Use for stability; omit to use `main` branch for the latest features
+  }
+
+  use 'TimUntersberger/neogit' -- Think magit
+  use 'folke/which-key.nvim' -- Like Emacs which key
+
+  use 'numToStr/Comment.nvim' -- Easier (un)commenting
+  use 'JoosepAlviste/nvim-ts-context-commentstring' -- Improved comment management; integrates with Comment.nvim
+
+  use 'booperlv/nvim-gomove' -- Alt-h/j/k/l to move line
+  use 'famiu/bufdelete.nvim' -- Keep windows around when deleting buffers
+  use 'rgroli/other.nvim' -- Go to alternative file, e.g. ts<->vue or test
+
+  -- [[ Languages ]]
+  use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
+  use 'williamboman/mason.nvim' -- Manage language servers, linters, etc.
+  use 'williamboman/mason-lspconfig.nvim' -- Integration mason/lsp
+
   use 'jose-elias-alvarez/null-ls.nvim' -- NeoVim as LSP server
   use 'MunifTanjim/prettier.nvim' -- Prettier for TS/JS formatting
-  use 'nvim-tree/nvim-web-devicons' -- Fancy icons in pop-ups
-  use 'nvim-lualine/lualine.nvim' -- Modeline
+
+  use 'ThePrimeagen/refactoring.nvim' -- Refactoring tools for code
+  use 'ray-x/lsp_signature.nvim' -- Virtual text for function arguments
+  use 'SmiteshP/nvim-navic' -- Winbar breadcrumbs, e.g. for code context
+
+  use 'lukas-reineke/headlines.nvim' -- Highlight markdown (and other) headlines
+  use 'b0o/schemastore.nvim' -- Schemas for JSON files
+
+  use {
+    'glepnir/lspsaga.nvim', -- UI Improvements for LSP
+    branch = 'main',
+  }
+
+  use 'windwp/nvim-autopairs' -- Auto-pair tags, etc.
+  use 'windwp/nvim-ts-autotag' -- Auto-tags for HTML, Vue, etc.
+
+  -- Treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function()
@@ -47,38 +92,14 @@ require('packer').startup(function(use)
   }
   use 'nvim-treesitter/nvim-treesitter-textobjects' -- Additional textobjects for treesitter
   use 'nvim-treesitter/nvim-treesitter-context' -- Keep e.g. function at top when scrolling below
-  use 'lukas-reineke/indent-blankline.nvim' -- Indent guides
-  use {'nvim-telescope/telescope.nvim', branch = '0.1.x'} -- Fancy picker (think fzf)
-  use 'nvim-telescope/telescope-file-browser.nvim' -- Think Emacs directory browser
-  use 'windwp/nvim-autopairs' -- Auto-pair tags, etc.
-  use 'windwp/nvim-ts-autotag' -- Auto-tags for HTML, Vue, etc.
-  use 'norcalli/nvim-colorizer.lua' -- Show color-codes colored
-  use 'lewis6991/gitsigns.nvim' -- Git gutter
-  use 'TimUntersberger/neogit' -- Think magit
-  use 'folke/which-key.nvim' -- Like Emacs which key
-  use 'numToStr/Comment.nvim' -- Easier (un)commenting
-  use 'JoosepAlviste/nvim-ts-context-commentstring' -- Improved comment management; integrates with Comment.nvim
-  use 'nvim-tree/nvim-tree.lua' -- File browser
-  use {
-    'kylechui/nvim-surround', -- E.g. cs"' to replace surrounding " with '
-    tag = '*', -- Use for stability; omit to use `main` branch for the latest features
-  }
-  use {
-    'glepnir/lspsaga.nvim', -- UI Improvements for LSP
-    branch = 'main',
-  }
-  use 'williamboman/mason.nvim' -- Manage language servers, linters, etc.
-  use 'williamboman/mason-lspconfig.nvim' -- Integration mason/lsp
-  use 'b0o/schemastore.nvim' -- Schemas for JSON files
-  use 'folke/todo-comments.nvim' -- Highlight and list TODOs, etc.
-  use 'folke/trouble.nvim' -- Better looking diagnostics, etc.
-  use 'ThePrimeagen/refactoring.nvim' -- Refactoring tools for code
-  use 'p00f/nvim-ts-rainbow' -- Rainbow parentheses
-  use 'ray-x/lsp_signature.nvim' -- Virtual text for function arguments
-  use 'booperlv/nvim-gomove' -- Alt-h/j/k/l to move line
-  use 'SmiteshP/nvim-navic' -- Winbar breadcrumbs, e.g. for code context
-  use 'famiu/bufdelete.nvim' -- Keep windows around when deleting buffers
-  use 'rgroli/other.nvim' -- Go to alternative file, e.g. ts<->vue or test
+
+  -- [[ Completion ]]
+  use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+  use 'hrsh7th/cmp-buffer' -- Buffer source for nvim-cmp
+  use 'hrsh7th/cmp-path' -- Path source for nvim-cmp
+  use 'hrsh7th/cmp-cmdline' -- Command line source for nvim-cmp
+  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
 end)
 
 --
@@ -345,7 +366,7 @@ prettier.setup({
   bin = 'prettierd', -- or `'prettier'`
   filetypes = {
     'css', 'graphql', 'html', 'javascript', 'javascriptreact', 'json', 'less',
-    'markdown', 'scss', 'typescript', 'typescriptreact', 'yaml',
+    'markdown', 'scss', 'typescript', 'typescriptreact', 'vue', 'yaml',
   },
 })
 
@@ -435,10 +456,9 @@ telescope.setup({
     find_files = {
       -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
       find_command = {'rg', '--files', '--hidden', '--glob', '!.git/*'},
-      theme = 'dropdown',
     },
   },
-  extensions = {file_browser = {theme = 'dropdown', hijack_netrw = true}},
+  extensions = {file_browser = {hijack_netrw = true}},
 })
 telescope.load_extension('file_browser')
 
