@@ -311,7 +311,7 @@ require("headlines").setup({
 
 --
 -- Modeline
-local branch_max_length = 15
+local branch_max_length = 30
 local function get_branch()
 	require("lualine.components.branch.git_branch").init()
 	local branch = require("lualine.components.branch.git_branch").get_branch()
@@ -330,7 +330,7 @@ require("lualine").setup({
 		},
 		ignore_focus = {},
 		always_divide_middle = true,
-		globalstatus = false,
+		globalstatus = true,
 		refresh = { statusline = 1000, tabline = 1000, winbar = 1000 },
 	},
 	sections = {
