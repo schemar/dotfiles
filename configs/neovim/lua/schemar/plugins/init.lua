@@ -509,6 +509,10 @@ require("other-nvim").setup({
 	mappings = {
 		{ pattern = "(.*)/(.*).ts", target = "%1/%2.vue", context = "vue" },
 		{ pattern = "(.*)/(.*).vue", target = "%1/%2.ts", context = "vue" },
+		{ pattern = "(.*)/(.*).ts", target = "%1/%2.spec.ts", context = "spec" },
+		{ pattern = "(.*)/(.*).spec.ts", target = "%1/%2.ts", context = "spec" },
+		{ pattern = "(.*)/(.*).ts", target = "%1/%2.test.ts", context = "test" },
+		{ pattern = "(.*)/(.*).test.ts", target = "%1/%2.ts", context = "test" },
 	},
 })
 
