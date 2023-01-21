@@ -247,7 +247,7 @@ end
 -- LSP Saga
 local saga = require("lspsaga")
 
-saga.init_lsp_saga({
+saga.setup({
 	code_action_lightbulb = { enable = false },
 	finder_action_keys = {
 		open = { "o", "<CR>" },
