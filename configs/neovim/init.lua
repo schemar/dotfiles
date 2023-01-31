@@ -12,5 +12,6 @@ require("schemar.options")
 require("schemar.plugins")
 require("schemar.keymaps")
 
--- Colors.
+-- [[Colors]]
+-- Main theme.
 vim.cmd([[colorscheme nord]])
