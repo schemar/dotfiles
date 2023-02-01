@@ -78,3 +78,6 @@ wk.register({
 	},
 	q = { name = "Quit", q = { ":quitall<CR>", "Quit all" } },
 }, { prefix = "<leader>" })
+
+-- Terminal:
+wk.register({ ["<esc><esc>"] = { "<C-\\><C-n>", "Escape terminal mode." } }, { mode = "t" })
