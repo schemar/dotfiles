@@ -22,7 +22,6 @@ wk.register({
 		d = { vim.diagnostic.goto_next, "Next diagnostic" },
 		b = { ":bn<CR>", "Next buffer" },
 	},
-	["<esc>"] = { ":nohlsearch<CR>", "Disable search highlights" },
 })
 
 -- With leader prefix:
