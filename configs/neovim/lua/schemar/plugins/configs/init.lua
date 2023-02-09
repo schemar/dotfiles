@@ -31,7 +31,6 @@ return {
 		"kylechui/nvim-surround", -- E.g. cs"' to replace surrounding " with '
 		version = "*", -- Use for stability; omit to use `main` branch for the latest features
 	},
-	"TimUntersberger/neogit", -- Think magit
 	"folke/which-key.nvim", -- Like Emacs which key
 
 	"numToStr/Comment.nvim", -- Easier (un)commenting

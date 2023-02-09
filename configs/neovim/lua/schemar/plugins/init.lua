@@ -321,10 +321,6 @@ require("colorizer").setup()
 require("gitsigns").setup()
 
 --
--- Neogit
-require("neogit").setup({})
-
---
 -- Surround
 require("nvim-surround").setup({})
 
