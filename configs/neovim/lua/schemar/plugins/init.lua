@@ -396,9 +396,18 @@ telescope.setup({
 			find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
 		},
 	},
-	extensions = { file_browser = { hijack_netrw = true } },
+	extensions = {
+		file_browser = { hijack_netrw = true },
+		fzf = {
+			fuzzy = true, -- false will only do exact matching
+			override_generic_sorter = true, -- override the generic sorter
+			override_file_sorter = true, -- override the file sorter
+			case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+		},
+	},
 })
 telescope.load_extension("file_browser")
+telescope.load_extension("fzf")
 
 --
 -- Go/Move

@@ -37,9 +37,9 @@ wk.register({
 	},
 	c = {
 		name = "Code",
-		d = { ":TroubleToggle document_diagnostics<CR>", "Show diagnostics" },
+		d = { ":Trouble document_diagnostics<CR>", "Show diagnostics" },
 		D = {
-			":TroubleToggle workspace_diagnostics<CR>",
+			":Trouble workspace_diagnostics<CR>",
 			"Show workspace diagnostics",
 		},
 		e = { vim.diagnostic.open_float, "Floating diagnostic" },

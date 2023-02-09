@@ -22,6 +22,10 @@ return {
 
 	{ "nvim-telescope/telescope.nvim", branch = "0.1.x" }, -- Fancy picker (think fzf)
 	"nvim-telescope/telescope-file-browser.nvim", -- Think Emacs directory browser
+	{
+		"nvim-telescope/telescope-fzf-native.nvim", -- FZF algorithm for telescope
+		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+	},
 	"folke/trouble.nvim", -- Better looking quicklist, diagnostics, etc.
 	"nvim-tree/nvim-tree.lua", -- File browser
 	{
