@@ -128,8 +128,8 @@ local on_attach = function(client, bufnr)
 			d = { vim.lsp.buf.definition, "Go to definition", buffer = bufnr },
 			i = { vim.lsp.buf.implementation, "Go to implementation", buffer = bufnr },
 			r = {
-				":TroubleToggle lsp_references<CR>",
-				"Go to references",
+				":Trouble lsp_references<CR>",
+				"List references",
 				buffer = bufnr,
 			},
 			t = { vim.lsp.buf.type_definition, "Go to type definition", buffer = bufnr },
