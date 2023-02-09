@@ -14,13 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("schemar.plugins.configs")
 
 --
--- Indent Guides.
-require("indent_blankline").setup({
-	show_current_context = true,
-	show_current_context_start = true,
-})
-
---
 -- File tree
 local lib = require("nvim-tree.lib")
 local view = require("nvim-tree.view")

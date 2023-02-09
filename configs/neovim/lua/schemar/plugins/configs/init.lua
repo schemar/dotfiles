@@ -6,7 +6,6 @@ return {
 	-- [[ Theming ]]
 	"shaunsingh/nord.nvim", -- The better nord theme
 	"HiPhish/nvim-ts-rainbow2", -- Rainbow parentheses
-	"lukas-reineke/indent-blankline.nvim", -- Indent guides
 	"nvim-lualine/lualine.nvim", -- Modeline
 	"lewis6991/gitsigns.nvim", -- Git gutter
 

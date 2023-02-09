@@ -30,7 +30,7 @@ wk.register({
 	["/"] = { builtin.live_grep, "Grep directory" },
 	["?"] = { builtin.current_buffer_fuzzy_find, "Grep current buffer" },
 	[";"] = { builtin.command_history, "Command history" },
-	[":"] = { builtin.commands, "Command history" },
+	[":"] = { builtin.commands, "Commands" },
 	r = { builtin.resume, "Resume telescope" },
 	b = {
 		name = "Buffer",
