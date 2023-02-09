@@ -28,6 +28,10 @@ wk.register({
 wk.register({
 	["<leader>"] = { builtin.find_files, "Find file" },
 	["/"] = { builtin.live_grep, "Grep directory" },
+	["?"] = { builtin.current_buffer_fuzzy_find, "Grep current buffer" },
+	[";"] = { builtin.command_history, "Command history" },
+	[":"] = { builtin.commands, "Command history" },
+	r = { builtin.resume, "Resume telescope" },
 	b = {
 		name = "Buffer",
 		b = { builtin.buffers, "Find buffer" },
@@ -46,7 +50,8 @@ wk.register({
 	},
 	f = {
 		name = "File",
-		f = {
+		f = { builtin.oldfiles, "Find previously open file" },
+		F = {
 			function()
 				telescope.extensions.file_browser.file_browser({
 					hidden = true,
