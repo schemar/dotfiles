@@ -2,7 +2,8 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- LEADER
+-- [[ Leaders ]]
+-- These bindings must be set before initializing lazy.nvim
 -- These keybindings need to be defined before the first /
 -- is called; otherwise, it will default to "\"
 vim.g.mapleader = " "
@@ -12,6 +13,6 @@ require("schemar.options")
 require("schemar.plugins")
 require("schemar.keymaps")
 
--- [[Colors]]
+-- [[ Colors ]]
 -- Main theme.
 vim.cmd([[colorscheme nord]])
