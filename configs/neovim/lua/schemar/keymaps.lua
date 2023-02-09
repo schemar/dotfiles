@@ -60,8 +60,8 @@ wk.register({
 		O = { ":OtherVSplit<CR>", "Open other file in split" },
 		s = { ":w<CR>", "Save" },
 		S = { ":wa<CR>", "Save all" },
-		t = { ":NvimTreeToggle<CR>", "Toggle file tree" },
-		T = { ":NvimTreeFindFile<CR>", "Go to current file in file tree" },
+		t = { ":NvimTreeFindFile<CR>", "Go to current file in file tree" },
+		T = { ":NvimTreeToggle<CR>", "Toggle file tree" },
 	},
 	g = {
 		name = "Git",
