@@ -112,40 +112,20 @@ local on_attach = function(client, bufnr)
 	wk.register({
 		["["] = {
 			d = {
-				":Lspsaga diagnostic_jump_prev<CR>",
+				vim.lsp.diagnostic.goto_prev,
 				"Previous diagnostic",
-				buffer = bufnr,
-			},
-			D = {
-				function()
-					require("lspsaga.diagnostic").goto_prev({
-						severity = vim.diagnostic.severity.Error,
-					})
-				end,
-				"Previous error",
 				buffer = bufnr,
 			},
 		},
 		["]"] = {
 			d = {
-				":Lspsaga diagnostic_jump_next<CR>",
+				vim.lsp.diagnostic.goto_next,
 				"Next diagnostic",
-				buffer = bufnr,
-			},
-			D = {
-				function()
-					require("lspsaga.diagnostic").goto_next({
-						severity = vim.diagnostic.severity.Error,
-					})
-				end,
-				"Next error",
 				buffer = bufnr,
 			},
 		},
 		g = {
 			d = { vim.lsp.buf.definition, "Go to definition", buffer = bufnr },
-			D = { ":Lspsaga peek_definition<CR>", "Peek definition", buffer = bufnr },
-			h = { ":Lspsaga lsp_finder<CR>", "Find symbol ...", buffer = bufnr },
 			i = { vim.lsp.buf.implementation, "Go to implementation", buffer = bufnr },
 			r = {
 				":TroubleToggle lsp_references<CR>",
@@ -154,7 +134,7 @@ local on_attach = function(client, bufnr)
 			},
 			t = { vim.lsp.buf.type_definition, "Go to type definition", buffer = bufnr },
 		},
-		K = { ":Lspsaga hover_doc<CR>", "Hover doc", buffer = bufnr },
+		K = { vim.lsp.buf.hover, "Hover doc", buffer = bufnr },
 	})
 
 	-- With leader prefix:
@@ -169,15 +149,20 @@ local on_attach = function(client, bufnr)
 			},
 		},
 		c = {
-			a = { ":Lspsaga code_action<CR>", "Code actions", buffer = bufnr },
+			a = {
+				function()
+					vim.lsp.buf.code_action({ apply = true })
+				end,
+				"Code actions",
+				buffer = bufnr,
+			},
 			e = {
-				":Lspsaga show_line_diagnostics<CR>",
+				vim.lsp.diagnostic.open_float,
 				"Line diagnostics",
 				buffer = bufnr,
 			},
 			k = { vim.lsp.buf.signature_help, "Signature help", buffer = bufnr },
-			o = { ":Lspsaga outline_toggle<CR>", "Toggle outline", buffer = bufnr },
-			r = { ":Lspsaga rename <CR>", "Rename", buffer = bufnr },
+			r = { vim.lsp.buf.rename, "Rename", buffer = bufnr },
 		},
 		["<tab>"] = {
 			name = "Workspace",
@@ -202,7 +187,17 @@ local on_attach = function(client, bufnr)
 	}, { prefix = "<leader>" })
 
 	-- Visual mode with leader prefix:
-	wk.register({ c = { a = { ":Lspsaga code_action<CR>", buffer = bufnr } } }, { prefix = "<leader>", mode = "v" })
+	wk.register({
+		c = {
+			a = {
+				function()
+					vim.lsp.buf.code_action({ apply = true })
+				end,
+				"Code actions",
+				buffer = bufnr,
+			},
+		},
+	}, { prefix = "<leader>", mode = "v" })
 end
 
 local lsp_flags = {
@@ -242,30 +237,6 @@ for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
-
---
--- LSP Saga
-local saga = require("lspsaga")
-
-saga.setup({
-	code_action_lightbulb = { enable = false },
-	finder_action_keys = {
-		open = { "o", "<CR>" },
-		vsplit = "s",
-		split = "v",
-		tabe = "t",
-		quit = { "q", "<ESC>" },
-	},
-	code_action_keys = { quit = "q", exec = "<CR>" },
-	definition_action_keys = {
-		edit = "<C-c>o",
-		vsplit = "<C-c>s",
-		split = "<C-c>v",
-		tabe = "<C-c>t",
-		quit = "q",
-	},
-	rename_action_quit = "<C-c>",
-})
 
 --
 -- NeoVim LSP server capabilities

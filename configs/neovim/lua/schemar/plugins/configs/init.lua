@@ -54,10 +54,6 @@ return {
 	"lukas-reineke/headlines.nvim", -- Highlight markdown (and other) headlines
 	"b0o/schemastore.nvim", -- Schemas for JSON files
 
-	{
-		"glepnir/lspsaga.nvim", -- UI Improvements for LSP
-		branch = "main",
-	},
 	"windwp/nvim-autopairs", -- Auto-pair tags, etc.
 	"windwp/nvim-ts-autotag", -- Auto-tags for HTML, Vue, etc.
 
