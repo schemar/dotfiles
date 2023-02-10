@@ -226,7 +226,7 @@ require("lualine").setup({
 		section_separators = { left = "", right = "" },
 		disabled_filetypes = {
 			statusline = {},
-			winbar = { "NvimTree", "NeogitCommitMessage", "NeogitStatus" },
+			winbar = { "NvimTree", "NeogitCommitMessage", "NeogitStatus", "aerial" },
 		},
 		ignore_focus = {},
 		always_divide_middle = true,
