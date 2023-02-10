@@ -16,11 +16,13 @@ wk.register({
 		name = "Previous",
 		d = { vim.diagnostic.goto_prev, "Previous diagnostic" },
 		b = { ":bp<CR>", "Previous buffer" },
+		t = { ":tabprevious<CR>", "Previous tab" },
 	},
 	["]"] = {
 		name = "Next",
 		d = { vim.diagnostic.goto_next, "Next diagnostic" },
 		b = { ":bn<CR>", "Next buffer" },
+		t = { ":tabnext<CR>", "Next tab" },
 	},
 })
 
@@ -74,6 +76,13 @@ wk.register({
 		g = { ":Neogit<CR>", "Neogit" },
 	},
 	h = { builtin.help_tags, "Help" },
+	t = {
+		name = "Tab",
+		c = { ":tabclose<CR>", "Close tab" },
+		n = { ":tabnext<CR>", "Next tab" },
+		p = { ":tabprevious<CR>", "Previous tab" },
+		t = { ":tabnew<CR>", "New tab" },
+	},
 	w = {
 		name = "Window",
 		c = { ":close<CR>", "Close window" },
