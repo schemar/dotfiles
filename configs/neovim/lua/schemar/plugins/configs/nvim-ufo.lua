@@ -1,6 +1,7 @@
 return {
 	"kevinhwang91/nvim-ufo", -- Better folding
 	name = "ufo",
+	event = { "BufReadPost", "BufNewFile" },
 	dependencies = { "kevinhwang91/promise-async" },
 	priority = 1, -- Load after LSP, etc.
 	opts = {

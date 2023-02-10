@@ -1,5 +1,6 @@
 return {
 	"RRethy/vim-illuminate", -- Highlight similar words (e.g. references with LSP)
+	event = { "BufReadPost", "BufNewFile" },
 	opts = {
 		filetypes_denylist = {
 			"dirvish",
