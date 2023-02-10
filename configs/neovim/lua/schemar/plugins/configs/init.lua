@@ -17,7 +17,6 @@ return {
 	"danilamihailov/beacon.nvim", -- Highlight cursor on jump
 	"nvim-tree/nvim-web-devicons", -- Fancy icons in pop-ups
 	"onsails/lspkind.nvim", -- Icons in completion dialogue
-	"RRethy/vim-illuminate", -- Highlight similar words (e.g. references with LSP)
 
 	-- [[ Interface ]]
 	"christoomey/vim-tmux-navigator", -- Switch windows/panes vim/tmux
