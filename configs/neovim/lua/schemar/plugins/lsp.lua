@@ -16,7 +16,9 @@ local lsp_servers = {
 -- Actual setup of null-ls further below.
 local null_ls = require("null-ls")
 local null_ls_sources = {
-	null_ls.builtins.diagnostics.gitlint,
+	null_ls.builtins.diagnostics.gitlint.with({
+		filetypes = { "gitcommit", "NeogitCommitMessage" },
+	}),
 	null_ls.builtins.diagnostics.hadolint, -- Docker best practices
 	null_ls.builtins.diagnostics.shellcheck,
 	null_ls.builtins.formatting.jq,
