@@ -44,6 +44,7 @@
   "other.nvim": { "branch": "main", "commit": "9afecea37c9b5ffed65a21de9e585d548de7778a" },
   "plenary.nvim": { "branch": "master", "commit": "9a0d3bf7b832818c042aaf30f692b081ddd58bd9" },
   "prettier.nvim": { "branch": "main", "commit": "918b99f5ddd7a56395fd393767ab6a3c15a50789" },
+  "promise-async": { "branch": "main", "commit": "7fa127fa80e7d4d447e0e2c78e99af4355f4247b" },
   "refactoring.nvim": { "branch": "master", "commit": "57c32c6b7a211e5a3a5e4ddc4ad2033daff5cf9a" },
   "schemastore.nvim": { "branch": "main", "commit": "b37874a63ceac681a15b83d5c8e67f58fe571341" },
   "telescope-file-browser.nvim": { "branch": "master", "commit": "304508fb7bea78e3c0eeddd88c4837501e403ae8" },
@@ -51,6 +52,7 @@
   "telescope.nvim": { "branch": "0.1.x", "commit": "a1bd6866b539afdaa25305626c7aa6049b805d67" },
   "todo-comments.nvim": { "branch": "main", "commit": "74c7d28cb50b0713c881ef69bcb6cdd77d8907d1" },
   "trouble.nvim": { "branch": "main", "commit": "fc003424b02109f1453af6b40dadff6019b97187" },
+  "ufo": { "branch": "main", "commit": "b70c9ef0f8e2673a11387a39185ff249e00df19f" },
   "vim-illuminate": { "branch": "master", "commit": "49062ab1dd8fec91833a69f0a1344223dd59d643" },
   "vim-tmux-navigator": { "branch": "master", "commit": "cdd66d6a37d991bba7997d593586fc51a5b37aa8" },
   "which-key.nvim": { "branch": "main", "commit": "684e96c5e8477f1ee9b3f2e9a12d802fd12c5531" }
