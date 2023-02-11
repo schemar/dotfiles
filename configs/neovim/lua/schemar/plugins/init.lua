@@ -105,17 +105,6 @@ require("nvim-treesitter.configs").setup({
 require("treesitter-context").setup({})
 
 --
--- Nord theme
-vim.g.nord_contrast = true -- Different background for sidebars and pop-ups (e.g. Telescope)
-vim.g.nord_borders = true -- Borders between windows visible
-vim.g.nord_disable_background = false -- When true, use terminal background instead of theme background
-vim.g.nord_italic = true -- Italic highlights of text
-vim.g.nord_uniform_diff_background = true -- Colorful backgrounds in diff mode
-vim.g.nord_bold = false -- Bold highlights of text
--- Load the colorscheme
-require("nord").set()
-
---
 -- Headlines (compatible with Nord)
 require("headlines").setup({
 	markdown = {

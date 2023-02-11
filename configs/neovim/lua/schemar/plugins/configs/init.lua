@@ -4,10 +4,6 @@ return {
 	"L3MON4D3/LuaSnip", -- Snippets plugin
 
 	-- [[ Theming ]]
-	{
-		"shaunsingh/nord.nvim", -- The better nord theme
-		priority = 100,
-	},
 	"HiPhish/nvim-ts-rainbow2", -- Rainbow parentheses
 	"nvim-lualine/lualine.nvim", -- Modeline
 	"lewis6991/gitsigns.nvim", -- Git gutter
