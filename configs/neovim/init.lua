@@ -12,7 +12,3 @@ vim.g.localleader = ","
 require("schemar.options")
 require("schemar.plugins")
 require("schemar.keymaps")
-
--- [[ Colors ]]
--- Main theme.
-vim.cmd([[colorscheme nord]])

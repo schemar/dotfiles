@@ -1,7 +1,10 @@
 return {
 	"nvim-tree/nvim-tree.lua", -- File browser
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	cmd = { "NvimTreeFindFileToggle", "NvimTreeToggle" },
+	keys = {
+		{ "<leader>ft", ":NvimTreeFindFileToggle<CR>", desc = "Toggle file tree at current buffer" },
+		{ "<leader>fT", ":NvimTreeToggle<CR>", desc = "Toggle file tree" },
+	},
 	config = function()
 		local icons = require("schemar.icons").git
 		require("nvim-tree").setup({
