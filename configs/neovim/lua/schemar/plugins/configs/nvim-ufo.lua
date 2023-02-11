@@ -8,7 +8,7 @@ return {
 		close_fold_kinds = { "imports" },
 	},
 	config = function(_, opts)
-		vim.o.foldcolumn = "1" -- '0' is not bad
+		vim.o.foldcolumn = "0" -- '0' to hide or '1' to show
 		-- Disable the fold column for certain filetypes:
 		vim.api.nvim_create_autocmd("Filetype", {
 			pattern = {
