@@ -23,7 +23,6 @@ return {
 		"nvim-telescope/telescope-fzf-native.nvim", -- FZF algorithm for telescope
 		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 	},
-	"folke/trouble.nvim", -- Better looking quicklist, diagnostics, etc.
 	{
 		"kylechui/nvim-surround", -- E.g. cs"' to replace surrounding " with '
 		version = "*", -- Use for stability; omit to use `main` branch for the latest features

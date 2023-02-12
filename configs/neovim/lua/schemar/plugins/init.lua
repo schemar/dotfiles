@@ -246,10 +246,6 @@ require("todo-comments").setup({
 })
 
 --
--- Trouble
-require("trouble").setup({})
-
---
 -- Telescope
 local telescope = require("telescope")
 local telescopeConfig = require("telescope.config")

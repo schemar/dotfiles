@@ -17,6 +17,7 @@ return {
 				"NvimTree",
 				"NeogitCommitMessage",
 				"NeogitStatus",
+				"Trouble",
 			},
 			command = "set foldcolumn=0",
 		})
