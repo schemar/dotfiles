@@ -3,7 +3,6 @@
 This repository contains configurations for my productivity stack and some basic visual improvements.
 
 [![Screenshot NeoVim 2023](./resources/2023_neovim.jpg)](https://github.com/schemar/dotfiles/raw/main/resources/2023_neovim.png)
-[![Screenshot Terminal 2023](./resources/2023_terminal.jpg)](https://github.com/schemar/dotfiles/raw/main/resources/2023_terminal.png)
 
 
 ## Included Configurations
