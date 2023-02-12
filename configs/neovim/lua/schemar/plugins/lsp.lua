@@ -8,7 +8,7 @@ local lsp_servers = {
 	"eslint",
 	"html",
 	"jsonls",
-	"sumneko_lua",
+	"lua_ls",
 	"tsserver",
 }
 
