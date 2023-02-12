@@ -4,7 +4,7 @@ return {
 	"L3MON4D3/LuaSnip", -- Snippets plugin
 
 	-- [[ Theming ]]
-	"HiPhish/nvim-ts-rainbow2", -- Rainbow parentheses
+	"mrjones2014/nvim-ts-rainbow", -- Rainbow parentheses
 	"nvim-lualine/lualine.nvim", -- Modeline
 	"lewis6991/gitsigns.nvim", -- Git gutter
 
