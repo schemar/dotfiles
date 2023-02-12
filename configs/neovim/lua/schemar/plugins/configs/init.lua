@@ -50,7 +50,6 @@ return {
 	"ThePrimeagen/refactoring.nvim", -- Refactoring tools for code
 	"SmiteshP/nvim-navic", -- Winbar breadcrumbs, e.g. for code context
 
-	"lukas-reineke/headlines.nvim", -- Highlight markdown (and other) headlines
 	"b0o/schemastore.nvim", -- Schemas for JSON files
 
 	"windwp/nvim-autopairs", -- Auto-pair tags, etc.

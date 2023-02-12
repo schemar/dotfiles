@@ -105,24 +105,6 @@ require("nvim-treesitter.configs").setup({
 require("treesitter-context").setup({})
 
 --
--- Headlines (compatible with Nord)
-require("headlines").setup({
-	markdown = {
-		headline_highlights = {
-			"Headline1",
-			"Headline2",
-			"Headline3",
-			"Headline4",
-			"Headline5",
-			"Headline6",
-		},
-		codeblock_highlight = "CodeBlock",
-		dash_highlight = "Dash",
-		quote_highlight = "Quote",
-	},
-})
-
---
 -- Modeline
 local branch_max_length = 30
 local function get_branch()
