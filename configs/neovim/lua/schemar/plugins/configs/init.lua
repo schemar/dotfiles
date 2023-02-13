@@ -5,7 +5,6 @@ return {
 
 	-- [[ Theming ]]
 	"mrjones2014/nvim-ts-rainbow", -- Rainbow parentheses
-	"nvim-lualine/lualine.nvim", -- Modeline
 	"lewis6991/gitsigns.nvim", -- Git gutter
 
 	"folke/todo-comments.nvim", -- Highlight and list TODOs, etc.
