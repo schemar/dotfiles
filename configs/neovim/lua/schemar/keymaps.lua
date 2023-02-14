@@ -2,8 +2,6 @@
 --
 -- Which-Key
 local wk = require("which-key")
-local telescope = require("telescope")
-local builtin = require("telescope.builtin")
 
 -- Without prefix:
 wk.register({
@@ -28,15 +26,8 @@ wk.register({
 
 -- With leader prefix:
 wk.register({
-	["<leader>"] = { builtin.find_files, "Find file" },
-	["/"] = { builtin.live_grep, "Grep directory" },
-	["?"] = { builtin.current_buffer_fuzzy_find, "Grep current buffer" },
-	[";"] = { builtin.command_history, "Command history" },
-	[":"] = { builtin.commands, "Commands" },
-	r = { builtin.resume, "Resume telescope" },
 	b = {
 		name = "Buffer",
-		b = { builtin.buffers, "Find buffer" },
 		d = { ":Bdelete<CR>", "Delete buffer" },
 		n = { ":bn<CR>", "Next buffer" },
 		p = { ":bp<CR>", "Previous buffer" },
@@ -52,17 +43,6 @@ wk.register({
 	},
 	f = {
 		name = "File",
-		f = { builtin.oldfiles, "Find previously open file" },
-		F = {
-			function()
-				telescope.extensions.file_browser.file_browser({
-					hidden = true,
-					grouped = true,
-					initial_mode = "normal",
-				})
-			end,
-			"Browse files",
-		},
 		o = { ":Other<CR>", "Open other file" },
 		O = { ":OtherVSplit<CR>", "Open other file in split" },
 		s = { ":w<CR>", "Save" },
@@ -70,10 +50,9 @@ wk.register({
 	},
 	g = {
 		name = "Git",
-		b = { ":Gitsigns toggle_current_line_blame<CR>", "Toggle blame" },
+		t = { ":Gitsigns toggle_current_line_blame<CR>", "Toggle blame" },
 		g = { ":Neogit<CR>", "Neogit" },
 	},
-	h = { builtin.help_tags, "Help" },
 	t = {
 		name = "Tab",
 		c = { ":tabclose<CR>", "Close tab" },
