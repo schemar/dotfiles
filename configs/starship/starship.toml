@@ -16,18 +16,18 @@ error_symbol = "[>](red)"
 vicmd_symbol = "[<](blue)"
 
 [cmd_duration]
-format = "took [$duration](fg:blue) "
+format = "took [$duration](fg:yellow) "
 
 [directory]
 style = "fg:blue"
 truncate_to_repo = false
 
 [aws]
-style = "fg:blue"
+style = "fg:green"
 symbol = " "
 
 [gcloud]
-style = "fg:blue"
+style = "fg:green"
 symbol = " "
 
 [battery]
@@ -37,56 +37,56 @@ charging_symbol = ""
 discharging_symbol = ""
 
 [conda]
-style = "fg:blue"
+style = "fg:cyan"
 symbol = " "
 
 [docker_context]
-style = "fg:blue"
+style = "fg:green"
 symbol = " "
 
 [elixir]
-style = "fg:blue"
+style = "fg:cyan"
 symbol = " "
 
 [elm]
-style = "fg:blue"
+style = "fg:cyan"
 symbol = " "
 
 [git_branch]
-style = "fg:blue"
+style = "fg:purple"
 symbol = " "
 
 [git_commit]
-style = "fg:blue"
+style = "fg:purple"
 
 [git_status]
-style = "fg:blue"
+style = "fg:purple"
 modified = "M"
 deleted = "D"
 renamed = "R"
 
 [golang]
-style = "fg:blue"
+style = "fg:cyan"
 symbol = " "
 
 [hg_branch]
-style = "fg:blue"
+style = "fg:purple"
 symbol = " "
 
 [java]
-style = "fg:blue"
+style = "fg:cyan"
 symbol = " "
 
 [julia]
-style = "fg:blue"
+style = "fg:cyan"
 symbol = " "
 
 [memory_usage]
-style = "fg:blue"
+style = "fg:yellow"
 symbol = " "
 
 [nim]
-style = "fg:blue"
+style = "fg:cyan"
 symbol = " "
 
 [nix_shell]
@@ -94,7 +94,7 @@ style = "fg:blue"
 symbol = " "
 
 [nodejs]
-style = "fg:blue"
+style = "fg:cyan"
 symbol = " "
 
 [package]
@@ -102,17 +102,17 @@ style = "fg:blue"
 symbol = " "
 
 [php]
-style = "fg:blue"
+style = "fg:cyan"
 symbol = " "
 
 [python]
-style = "fg:blue"
+style = "fg:cyan"
 symbol = " "
 
 [ruby]
-style = "fg:blue"
+style = "fg:cyan"
 symbol = " "
 
 [rust]
-style = "fg:blue"
+style = "fg:cyan"
 symbol = " "
