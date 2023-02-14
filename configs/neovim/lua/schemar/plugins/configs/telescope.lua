@@ -3,6 +3,7 @@ return {
 		"nvim-telescope/telescope.nvim", -- Fancy picker (think fzf on steroids)
 		version = "*",
 		dependencies = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
+		cmd = { "Telescope" },
 		keys = {
 			{
 				"<leader><leader>",

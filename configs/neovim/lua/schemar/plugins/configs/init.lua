@@ -114,20 +114,6 @@ return {
 	},
 	"windwp/nvim-ts-autotag", -- Auto-tags for HTML, Vue, etc.
 
-	-- Treesitter
-	{
-		"nvim-treesitter/nvim-treesitter",
-		event = { "BufReadPost", "BufNewFile" },
-		build = function()
-			local ts_update = require("nvim-treesitter.install").update({
-				with_sync = true,
-			})
-			ts_update()
-		end,
-	},
-	"nvim-treesitter/nvim-treesitter-textobjects", -- Additional textobjects for treesitter
-	"nvim-treesitter/nvim-treesitter-context", -- Keep e.g. function at top when scrolling below
-
 	-- [[ Completion ]]
 	"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
 	"hrsh7th/cmp-nvim-lsp-signature-help", -- Function signature source for nvim-cmp
