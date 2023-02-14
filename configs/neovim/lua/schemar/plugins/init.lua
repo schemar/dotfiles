@@ -104,29 +104,6 @@ require("nvim-treesitter.configs").setup({
 require("treesitter-context").setup({})
 
 --
--- Prettier plugin
-local prettier = require("prettier")
-
-prettier.setup({
-	bin = "prettierd", -- or `'prettier'`
-	filetypes = {
-		"css",
-		"graphql",
-		"html",
-		"javascript",
-		"javascriptreact",
-		"json",
-		"less",
-		"markdown",
-		"scss",
-		"typescript",
-		"typescriptreact",
-		"vue",
-		"yaml",
-	},
-})
-
---
 -- Fancy icons plugin
 require("nvim-web-devicons").setup({
 	-- globally enable different highlight colors per icon (default to true)

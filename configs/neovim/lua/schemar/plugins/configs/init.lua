@@ -39,7 +39,6 @@ return {
 	"neovim/nvim-lspconfig", -- Configurations for Nvim LSP
 	"jose-elias-alvarez/null-ls.nvim", -- NeoVim as LSP server
 	"lukas-reineke/lsp-format.nvim", -- Easier management of auto-saving from LSP sources
-	"MunifTanjim/prettier.nvim", -- Prettier for TS/JS formatting (for null-ls)
 
 	"williamboman/mason.nvim", -- Manage language servers, linters, etc.
 	"williamboman/mason-lspconfig.nvim", -- Integration mason/lsp
