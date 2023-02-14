@@ -42,9 +42,8 @@ cmp.setup({
 	},
 	window = {
 		-- Style completion window to have icons on the left.
-		-- In combination with `format` below.
+		-- In combination with `formatting` below.
 		completion = {
-			winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
 			col_offset = -3,
 			side_padding = 0,
 		},
