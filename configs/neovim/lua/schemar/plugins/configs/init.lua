@@ -7,13 +7,13 @@ return {
 	"mrjones2014/nvim-ts-rainbow", -- Rainbow parentheses
 	{
 		"lewis6991/gitsigns.nvim", -- Git gutter
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile" },
 		config = true,
 	},
 
 	{
 		"folke/todo-comments.nvim", -- Highlight and list TODOs, etc.
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile" },
 		opts = {
 			highlight = {
 				pattern = [[.*<(KEYWORDS)\s*]], -- pattern or table of patterns, used for highlightng (vim regex)
@@ -27,7 +27,7 @@ return {
 	},
 	{
 		"norcalli/nvim-colorizer.lua", -- Show color-codes colored
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile" },
 		config = true,
 	},
 	"danilamihailov/beacon.nvim", -- Highlight cursor on jump
@@ -50,7 +50,7 @@ return {
 	{
 		"kylechui/nvim-surround", -- E.g. cs"' to replace surrounding " with '
 		version = "*", -- Use for stability; omit to use `main` branch for the latest features
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile" },
 		config = true,
 	},
 	{
@@ -61,7 +61,7 @@ return {
 	{
 		"numToStr/Comment.nvim", -- Easier (un)commenting
 		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile" },
 		opts = {
 			pre_hook = function()
 				return require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook()
@@ -72,7 +72,7 @@ return {
 
 	{
 		"booperlv/nvim-gomove", -- Alt-h/j/k/l to move line
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile" },
 		config = true,
 	},
 	"famiu/bufdelete.nvim", -- Keep windows around when deleting buffers
@@ -109,17 +109,8 @@ return {
 
 	{
 		"windwp/nvim-autopairs", -- Auto-pair tags, etc.
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile" },
 		config = true,
 	},
 	"windwp/nvim-ts-autotag", -- Auto-tags for HTML, Vue, etc.
-
-	-- [[ Completion ]]
-	"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
-	"hrsh7th/cmp-nvim-lsp-signature-help", -- Function signature source for nvim-cmp
-	"hrsh7th/cmp-buffer", -- Buffer source for nvim-cmp
-	"hrsh7th/cmp-path", -- Path source for nvim-cmp
-	"hrsh7th/cmp-cmdline", -- Command line source for nvim-cmp
-	"saadparwaiz1/cmp_luasnip", -- Snippets source for nvim-cmp
-	"hrsh7th/nvim-cmp", -- Autocompletion plugin
 }
