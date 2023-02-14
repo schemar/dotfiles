@@ -53,14 +53,14 @@ style = "fg:cyan"
 symbol = " "
 
 [git_branch]
-style = "fg:purple"
+style = "fg:yellow"
 symbol = " "
 
 [git_commit]
-style = "fg:purple"
+style = "fg:yellow"
 
 [git_status]
-style = "fg:purple"
+style = "fg:yellow"
 modified = "M"
 deleted = "D"
 renamed = "R"
@@ -95,7 +95,7 @@ symbol = " "
 
 [nodejs]
 style = "fg:cyan"
-symbol = " "
+symbol = " "
 
 [package]
 style = "fg:blue"
@@ -104,6 +104,10 @@ symbol = " "
 [php]
 style = "fg:cyan"
 symbol = " "
+
+[pulumi]
+style = "fg:purple"
+symbol = " "
 
 [python]
 style = "fg:cyan"
