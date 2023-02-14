@@ -2,6 +2,20 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- [[ Package manager installation ]]
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
+
 -- [[ Leaders ]]
 -- These bindings must be set before initializing lazy.nvim
 -- These keybindings need to be defined before the first /
@@ -10,11 +24,10 @@ vim.g.mapleader = " "
 vim.g.localleader = ","
 
 require("schemar.options")
-require("schemar.plugins")
+require("lazy").setup("schemar.plugins")
 require("schemar.keymaps")
 
---
--- Borders
+-- [[Borders]]
 local _border = "single"
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
