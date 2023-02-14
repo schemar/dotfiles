@@ -4,7 +4,6 @@ return {
 	"L3MON4D3/LuaSnip", -- Snippets plugin
 
 	-- [[ Theming ]]
-	"mrjones2014/nvim-ts-rainbow", -- Rainbow parentheses
 	{
 		"lewis6991/gitsigns.nvim", -- Git gutter
 		event = { "BufReadPost", "BufNewFile" },
@@ -68,7 +67,6 @@ return {
 			end,
 		},
 	},
-	"JoosepAlviste/nvim-ts-context-commentstring", -- Improved comment management; integrates with Comment.nvim
 
 	{
 		"booperlv/nvim-gomove", -- Alt-h/j/k/l to move line
@@ -112,5 +110,4 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		config = true,
 	},
-	"windwp/nvim-ts-autotag", -- Auto-tags for HTML, Vue, etc.
 }

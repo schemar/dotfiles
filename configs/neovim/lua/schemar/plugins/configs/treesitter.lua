@@ -8,6 +8,20 @@ return {
 			})
 			ts_update()
 		end,
+		dependencies = {
+			{
+				"nvim-treesitter/nvim-treesitter-textobjects", -- Additional textobjects for treesitter
+				event = { "BufReadPost", "BufNewFile" },
+			},
+			{
+				"nvim-treesitter/nvim-treesitter-context", -- Keep e.g. function at top when scrolling below
+				name = "treesitter-context",
+				event = { "BufReadPost", "BufNewFile" },
+				config = true,
+			},
+			"mrjones2014/nvim-ts-rainbow", -- Rainbow parentheses
+			"windwp/nvim-ts-autotag", -- Auto-tags for HTML, Vue, etc.
+		},
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				-- A list of parser names, or "all"
@@ -96,15 +110,5 @@ return {
 				},
 			})
 		end,
-	},
-	{
-		"nvim-treesitter/nvim-treesitter-textobjects", -- Additional textobjects for treesitter
-		event = { "BufReadPost", "BufNewFile" },
-	},
-	{
-		"nvim-treesitter/nvim-treesitter-context", -- Keep e.g. function at top when scrolling below
-		name = "treesitter-context",
-		event = { "BufReadPost", "BufNewFile" },
-		config = true,
 	},
 }
