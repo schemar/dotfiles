@@ -26,6 +26,10 @@ truncate_to_repo = false
 style = "fg:blue"
 symbol = " "
 
+[gcloud]
+style = "fg:blue"
+symbol = " "
+
 [battery]
 #style = "fg:blue"
 full_symbol = ""
