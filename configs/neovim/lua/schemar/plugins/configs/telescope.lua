@@ -2,7 +2,15 @@ return {
 	{
 		"nvim-telescope/telescope.nvim", -- Fancy picker (think fzf on steroids)
 		version = "*",
-		dependencies = { "nvim-lua/plenary.nvim", "folke/trouble.nvim" },
+		dependencies = {
+			"nvim-telescope/telescope-file-browser.nvim", -- Think Emacs directory browser
+			{
+				"nvim-telescope/telescope-fzf-native.nvim", -- FZF algorithm for telescope
+				build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+			},
+			"nvim-lua/plenary.nvim",
+			"folke/trouble.nvim",
+		},
 		cmd = { "Telescope" },
 		keys = {
 			{
@@ -142,10 +150,5 @@ return {
 			telescope.load_extension("file_browser")
 			telescope.load_extension("fzf")
 		end,
-	},
-	"nvim-telescope/telescope-file-browser.nvim", -- Think Emacs directory browser
-	{
-		"nvim-telescope/telescope-fzf-native.nvim", -- FZF algorithm for telescope
-		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 	},
 }

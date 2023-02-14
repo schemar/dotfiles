@@ -12,7 +12,3 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("schemar.plugins.configs")
-
---
--- LSP
-require("schemar.plugins.lsp")
