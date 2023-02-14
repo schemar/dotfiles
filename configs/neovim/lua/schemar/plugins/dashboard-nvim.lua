@@ -8,7 +8,7 @@ return {
 				enable = true,
 			},
 			shortcut = {
-				{ desc = "ﮮ Update", group = "@property", action = "Lazy update", key = "u" },
+				{ desc = " Update", group = "@property", action = "Lazy update", key = "u" },
 				{
 					desc = " Files",
 					group = "Label",
