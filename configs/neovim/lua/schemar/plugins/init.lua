@@ -102,6 +102,8 @@ return {
 				{ pattern = "(.*)/(.*).spec.ts", target = "%1/%2.ts", context = "spec" },
 				{ pattern = "(.*)/(.*).ts", target = "%1/%2.test.ts", context = "test" },
 				{ pattern = "(.*)/(.*).test.ts", target = "%1/%2.ts", context = "test" },
+				{ pattern = "(.*)/(.*).ts", target = "%1/%2.unit.test.ts", context = "test" },
+				{ pattern = "(.*)/(.*).unit.test.ts", target = "%1/%2.ts", context = "test" },
 			},
 		},
 	},
