@@ -11,10 +11,11 @@ return {
 				{ desc = " Update", group = "@property", action = "Lazy update", key = "u" },
 				{
 					desc = " Files",
-					group = "Label",
+					group = "@property",
 					action = "Telescope find_files",
 					key = "f",
 				},
+				{ desc = " Quit", group = "@property", action = "q", key = "q" },
 			},
 			footer = {},
 		},
