@@ -159,7 +159,12 @@ return {
 				"lukas-reineke/lsp-format.nvim", -- Easier management of auto-saving from LSP sources
 				opts = {
 					typescript = {
+						-- Prettier overrides LSP and ESLint
 						order = { "tsserver", "eslint", "null-ls" },
+					},
+					lua = {
+						-- StyLua overrides LSP
+						order = { "lua_ls", "null-ls" },
 					},
 				},
 			},
