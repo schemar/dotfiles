@@ -1,27 +1,34 @@
 return {
 	{
-		"nvim-treesitter/nvim-treesitter",
+		"nvim-treesitter/nvim-treesitter-textobjects", -- Additional textobjects for treesitter
 		event = { "BufReadPost", "BufNewFile" },
+		dependencies = "nvim-treesitter/nvim-treesitter",
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-context", -- Keep e.g. function at top when scrolling below
+		name = "treesitter-context",
+		event = { "BufReadPost", "BufNewFile" },
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		config = true,
+	},
+	{
+		"mrjones2014/nvim-ts-rainbow", -- Rainbow parentheses
+		event = { "BufReadPost", "BufNewFile" },
+		dependencies = "nvim-treesitter/nvim-treesitter",
+	},
+	{
+		"windwp/nvim-ts-autotag", -- Auto-tags for HTML, Vue, etc.
+		event = { "BufReadPost", "BufNewFile" },
+		dependencies = "nvim-treesitter/nvim-treesitter",
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
 		build = function()
 			local ts_update = require("nvim-treesitter.install").update({
 				with_sync = true,
 			})
 			ts_update()
 		end,
-		dependencies = {
-			{
-				"nvim-treesitter/nvim-treesitter-textobjects", -- Additional textobjects for treesitter
-				event = { "BufReadPost", "BufNewFile" },
-			},
-			{
-				"nvim-treesitter/nvim-treesitter-context", -- Keep e.g. function at top when scrolling below
-				name = "treesitter-context",
-				event = { "BufReadPost", "BufNewFile" },
-				config = true,
-			},
-			"mrjones2014/nvim-ts-rainbow", -- Rainbow parentheses
-			"windwp/nvim-ts-autotag", -- Auto-tags for HTML, Vue, etc.
-		},
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				-- A list of parser names, or "all"
@@ -93,10 +100,39 @@ return {
 					select = {
 						enable = true,
 						lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+						keymaps = {
+							-- You can use the capture groups defined in textobjects.scm
+							-- You can optionally set descriptions to the mappings (used in the desc parameter of
+							-- nvim_buf_set_keymap) which plugins like which-key display
+							["af"] = { query = "@function.outer", desc = "Select inner part of a class region" },
+							["if"] = { query = "@function.inner", desc = "Select inner part of a class region" },
+							["ac"] = { query = "@class.outer", desc = "Select inner part of a class region" },
+							["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+						},
 					},
 					move = {
 						enable = true,
 						set_jumps = true, -- whether to set jumps in the jumplist
+						goto_next_start = {
+							["]f"] = { query = "@function.outer", desc = "Next function start" },
+							["]l"] = { query = "@loop.*", desc = "Next loop start" },
+							["]c"] = { query = "@conditional.outer", desc = "Next conditional start" },
+						},
+						goto_next_end = {
+							["]F"] = { query = "@function.outer", desc = "Next function end" },
+							["]L"] = { query = "@loop.*", desc = "Next loop end" },
+							["]C"] = { query = "@conditional.outer", desc = "Next conditional end" },
+						},
+						goto_previous_start = {
+							["[f"] = { query = "@function.outer", desc = "Previous function start" },
+							["[l"] = { query = "@loop.*", desc = "Previous loop start" },
+							["[c"] = { query = "@conditional.outer", desc = "Previous conditional start" },
+						},
+						goto_previous_end = {
+							["[F"] = { query = "@function.outer", desc = "Previous function end" },
+							["[L"] = { query = "@loop.*", desc = "Previous loop end" },
+							["[C"] = { query = "@conditional.outer", desc = "Previous conditional end" },
+						},
 					},
 				},
 
