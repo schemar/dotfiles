@@ -32,10 +32,10 @@ This repository contains configurations for my productivity stack and some basic
 * [dunst](https://github.com/dunst-project/dunst)
 * [feh](https://github.com/derf/feh)
 * [i3](https://github.com/i3/i3)❤️
-* [kitty](https://github.com/kovidgoyal/kitty)❤️
 * [picom](https://github.com/yshui/picom)
 * [redshift](https://github.com/jonls/redshift)
 * [rofi](https://github.com/davatorium/rofi)
+* [wezterm](https://github.com/wez/wezterm)❤️
 
 ## Usage
 
