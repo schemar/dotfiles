@@ -1,8 +1,3 @@
-# Change all styles to include `bg:black` once it is supported for the whole string
-# https://github.com/starship/starship/issues/1057
-#
-# Custom symbols as per https://starship.rs/presets/#nerd-font-symbols
-
 [username]
 style_root = "fg:red"
 style_user = "fg:purple"
@@ -25,10 +20,12 @@ truncate_to_repo = false
 [aws]
 style = "fg:green"
 symbol = " "
+disabled = true
 
 [gcloud]
 style = "fg:green"
 symbol = " "
+disabled = true
 
 [battery]
 #style = "fg:blue"
@@ -108,6 +105,7 @@ symbol = " "
 [pulumi]
 style = "fg:purple"
 symbol = " "
+disabled = true
 
 [python]
 style = "fg:cyan"
