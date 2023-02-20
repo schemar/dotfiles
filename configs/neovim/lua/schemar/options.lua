@@ -9,7 +9,7 @@ opt.clipboard = "unnamedplus" -- str: Clipboard integration with macOS
 -- [[ Context ]]
 opt.colorcolumn = "80" -- str: Show col for max line length
 opt.number = true -- bool: Show line numbers
-opt.scrolloff = 10 -- int: Min num lines of context
+opt.scrolloff = 5 -- int: Min num lines of context
 opt.signcolumn = "yes" -- str: Show the sign column
 
 -- [[ Filetypes ]]
