@@ -61,14 +61,19 @@ return {
 	},
 
 	{
-		"numToStr/Comment.nvim", -- Easier (un)commenting
-		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
-		event = { "BufReadPost", "BufNewFile" },
+		"echasnovski/mini.comment", -- Easier (un)commenting,
+		version = false,
+		event = "VeryLazy",
 		opts = {
-			pre_hook = function()
-				return require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook()
-			end,
+			hooks = {
+				pre = function()
+					require("ts_context_commentstring.internal").update_commentstring()
+				end,
+			},
 		},
+		config = function(_, opts)
+			require("mini.comment").setup(opts)
+		end,
 	},
 
 	{

@@ -22,6 +22,12 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		name = "ts_context_commentstring",
+		event = { "BufReadPost", "BufNewFile" },
+		dependencies = "nvim-treesitter/nvim-treesitter",
+	},
+	{
 		"nvim-treesitter/nvim-treesitter",
 		build = function()
 			local ts_update = require("nvim-treesitter.install").update({
