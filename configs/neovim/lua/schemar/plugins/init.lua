@@ -61,22 +61,6 @@ return {
 	},
 
 	{
-		"echasnovski/mini.comment", -- Easier (un)commenting,
-		version = false,
-		event = "VeryLazy",
-		opts = {
-			hooks = {
-				pre = function()
-					require("ts_context_commentstring.internal").update_commentstring()
-				end,
-			},
-		},
-		config = function(_, opts)
-			require("mini.comment").setup(opts)
-		end,
-	},
-
-	{
 		"booperlv/nvim-gomove", -- Alt-h/j/k/l to move line
 		event = { "BufReadPost", "BufNewFile" },
 		config = true,
