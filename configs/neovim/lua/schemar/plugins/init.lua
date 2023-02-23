@@ -49,12 +49,6 @@ return {
 	},
 
 	{
-		"kylechui/nvim-surround", -- E.g. cs"' to replace surrounding " with '
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
-		event = { "BufReadPost", "BufNewFile" },
-		config = true,
-	},
-	{
 		"folke/which-key.nvim", -- Like Emacs which key
 		event = { "VeryLazy" },
 		config = true,

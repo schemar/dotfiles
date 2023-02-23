@@ -1,5 +1,6 @@
 return {
 	{
+		-- Used by mini.ai. No need to specify the text objects within treesitter config.
 		"nvim-treesitter/nvim-treesitter-textobjects", -- Additional textobjects for treesitter
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = "nvim-treesitter/nvim-treesitter",
@@ -100,46 +101,6 @@ return {
 
 				autotag = {
 					enable = true, -- Through auto-tag plugin
-				},
-
-				textobjects = {
-					select = {
-						enable = true,
-						lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-						keymaps = {
-							-- You can use the capture groups defined in textobjects.scm
-							-- You can optionally set descriptions to the mappings (used in the desc parameter of
-							-- nvim_buf_set_keymap) which plugins like which-key display
-							["af"] = { query = "@function.outer", desc = "Select inner part of a class region" },
-							["if"] = { query = "@function.inner", desc = "Select inner part of a class region" },
-							["ac"] = { query = "@class.outer", desc = "Select inner part of a class region" },
-							["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-						},
-					},
-					move = {
-						enable = true,
-						set_jumps = true, -- whether to set jumps in the jumplist
-						goto_next_start = {
-							["]f"] = { query = "@function.outer", desc = "Next function start" },
-							["]l"] = { query = "@loop.*", desc = "Next loop start" },
-							["]c"] = { query = "@conditional.outer", desc = "Next conditional start" },
-						},
-						goto_next_end = {
-							["]F"] = { query = "@function.outer", desc = "Next function end" },
-							["]L"] = { query = "@loop.*", desc = "Next loop end" },
-							["]C"] = { query = "@conditional.outer", desc = "Next conditional end" },
-						},
-						goto_previous_start = {
-							["[f"] = { query = "@function.outer", desc = "Previous function start" },
-							["[l"] = { query = "@loop.*", desc = "Previous loop start" },
-							["[c"] = { query = "@conditional.outer", desc = "Previous conditional start" },
-						},
-						goto_previous_end = {
-							["[F"] = { query = "@function.outer", desc = "Previous function end" },
-							["[L"] = { query = "@loop.*", desc = "Previous loop end" },
-							["[C"] = { query = "@conditional.outer", desc = "Previous conditional end" },
-						},
-					},
 				},
 
 				indent = { -- Indentation based on = operator (experimental)
