@@ -104,11 +104,11 @@ return {
 		},
 		config = function()
 			local telescope = require("telescope")
-			local telescopeConfig = require("telescope.config")
+			local telescope_config = require("telescope.config")
 			local actions = require("telescope.actions")
 
 			-- Clone the default Telescope configuration
-			local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
+			local vimgrep_arguments = { unpack(telescope_config.values.vimgrep_arguments) }
 
 			-- I want to search in hidden/dot files.
 			table.insert(vimgrep_arguments, "--hidden")
@@ -129,6 +129,12 @@ return {
 							["<esc>"] = actions.close, -- Close on first press of esc. No "normal" mode.
 						},
 						n = { ["<c-t>"] = trouble.open_with_trouble },
+					},
+					-- Themeing
+					sorting_strategy = "ascending",
+					layout_strategy = "horizontal",
+					layout_config = {
+						prompt_position = "top",
 					},
 				},
 				pickers = {
