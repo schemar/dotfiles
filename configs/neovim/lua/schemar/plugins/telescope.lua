@@ -8,6 +8,7 @@ return {
 				"nvim-telescope/telescope-fzf-native.nvim", -- FZF algorithm for telescope
 				build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 			},
+			"aaronhallaert/advanced-git-search.nvim",
 			"nvim-lua/plenary.nvim",
 			"folke/trouble.nvim",
 		},
@@ -95,6 +96,13 @@ return {
 				desc = "Branches",
 			},
 			{
+				"<leader>gs",
+				function()
+					require("telescope").extensions.advanced_git_search.show_custom_functions()
+				end,
+				desc = "NeoVim help tags",
+			},
+			{
 				"<leader>h",
 				function()
 					require("telescope.builtin").help_tags()
@@ -155,6 +163,7 @@ return {
 			})
 			telescope.load_extension("file_browser")
 			telescope.load_extension("fzf")
+			telescope.load_extension("advanced_git_search")
 		end,
 	},
 }
