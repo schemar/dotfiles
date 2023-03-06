@@ -96,11 +96,30 @@ return {
 				desc = "Branches",
 			},
 			{
+				"<leader>gf",
+				function()
+					require("telescope").extensions.advanced_git_search.search_log_content_file()
+				end,
+				desc = "Search history for current file",
+			},
+			{
+				"<leader>gl",
+				"V:'<,'> lua require('telescope').extensions.advanced_git_search.diff_commit_line()<CR>",
+				mode = "n",
+				desc = "Search history for current line",
+			},
+			{
+				"<leader>gl",
+				":'<,'> lua require('telescope').extensions.advanced_git_search.diff_commit_line()<CR>",
+				mode = "v",
+				desc = "Search history for selected lines",
+			},
+			{
 				"<leader>gs",
 				function()
-					require("telescope").extensions.advanced_git_search.show_custom_functions()
+					require("telescope").extensions.advanced_git_search.search_log_content()
 				end,
-				desc = "NeoVim help tags",
+				desc = "Search in repository log",
 			},
 			{
 				"<leader>h",
