@@ -71,8 +71,8 @@ return {
 					folder_open = icons.FolderOpen,
 				},
 				signs = {
-					fold_closed = icons.ChevronShortRight,
-					fold_open = icons.ChevronShortDown,
+					fold_closed = icons.ui.ChevronShortRight,
+					fold_open = icons.ui.ChevronShortDown,
 					done = icons.BoxChecked,
 				},
 				keymaps = {
