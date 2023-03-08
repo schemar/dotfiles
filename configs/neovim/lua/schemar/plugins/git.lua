@@ -42,13 +42,50 @@ return {
 		end,
 	},
 	{
-		"tpope/vim-fugitive",
+		"tpope/vim-fugitive", -- For :Git
 		cmd = { "Git", "Gedit", "Gdiffsplit", "Gvdiffsplit" },
 	},
 	{
 		"sindrets/diffview.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
 		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+		config = function()
+			local icons = require("schemar.icons")
+			local actions = require("diffview.actions")
+
+			require("diffview").setup({
+				icons = { -- Only applies when use_icons is true.
+					folder_closed = icons.Folder,
+					folder_open = icons.FolderOpen,
+				},
+				signs = {
+					fold_closed = icons.ChevronShortRight,
+					fold_open = icons.ChevronShortDown,
+					done = icons.BoxChecked,
+				},
+				keymaps = {
+					view = {
+						{ "n", "<leader>ft", actions.toggle_files },
+					},
+					file_panel = {
+						{ "n", "j", actions.select_next_entry },
+						{ "n", "k", actions.select_prev_entry },
+						{ "n", "q", ":tabclose<CR>" },
+						{ "n", "<cr>", "<c-w>k" },
+						{ "n", "o", actions.close },
+						{ "n", "<leader>ft", actions.toggle_files },
+					},
+					file_history_panel = {
+						{ "n", "j", actions.select_next_entry },
+						{ "n", "k", actions.select_prev_entry },
+						{ "n", "q", ":tabclose<CR>" },
+						{ "n", "<cr>", "<c-w>k" },
+						{ "n", "o", actions.close },
+						{ "n", "<leader>ft", actions.toggle_files },
+					},
+				},
+			})
+		end,
 	},
 	{
 		"TimUntersberger/neogit", -- Think magit
