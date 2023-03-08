@@ -40,6 +40,10 @@ return {
 			},
 		})
 
+		-- [[jumping]]
+		-- Use f/F/t/T again to continue jumping
+		require("mini.jump").setup()
+
 		-- [[surround]]
 		require("mini.surround").setup({ -- Manipulate "surrounding" characters.
 			mappings = {
