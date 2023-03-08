@@ -77,12 +77,20 @@ return {
 					end,
 				},
 				mapping = cmp.mapping.preset.insert({
+					-- Use <C-j/k> to select candidates:
+					["<C-j>"] = cmp.mapping(function()
+						cmp.select_next_item()
+					end),
+					["<C-k>"] = cmp.mapping(function()
+						cmp.select_prev_item()
+					end),
+					-- Other mappings:
 					["<C-d>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<CR>"] = cmp.mapping.confirm({
 						behavior = cmp.ConfirmBehavior.Replace,
-						select = true,
+						select = false, -- Selection required to complete on "Enter".
 					}),
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
