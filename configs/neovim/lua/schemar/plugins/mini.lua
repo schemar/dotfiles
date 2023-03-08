@@ -16,6 +16,14 @@ return {
 			},
 		})
 
+		-- [[sane defaults]]
+		require("mini.basics").setup({
+			options = {
+				basic = true,
+				extra_ui = true,
+			},
+		})
+
 		-- [[next/previous]]
 		require("mini.bracketed").setup({
 			-- Disable some mappings:
