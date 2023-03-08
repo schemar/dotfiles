@@ -11,6 +11,7 @@ return {
 				dashboard = true,
 				fidget = true,
 				gitsigns = true,
+				hop = true,
 				illuminate = true,
 				indent_blankline = {
 					enabled = true,
