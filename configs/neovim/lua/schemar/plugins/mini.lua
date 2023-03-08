@@ -38,5 +38,8 @@ return {
 				replace = "sc",
 			},
 		})
+
+		-- [[highlight trailing spaces]]
+		require("mini.trailspace").setup()
 	end,
 }
