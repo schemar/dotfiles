@@ -13,8 +13,15 @@ wk.register({
 		d = { ":DiffviewOpen<CR>", "Diff view" },
 		f = { ":DiffviewFileHistory -f %<CR>", "File history" },
 		g = { ":Neogit<CR>", "Neogit" },
+		h = {
+			name = "Highlighting",
+			b = { ":Gitsigns toggle_current_line_blame<CR>", "Toggle blame" },
+			l = { ":Gitsigns toggle_linehl<CR>", "Toggle line highlighting" },
+			n = { ":Gitsigns toggle_numhl<CR>", "Toggle number highlighting" },
+			s = { ":Gitsigns toggle_signs<CR>", "Toggle signs" },
+			w = { ":Gitsigns toggle_current_word_diff<CR>", "Toggle word diff" },
+		},
 		l = { "V:'<,'>DiffviewFileHistory -f<CR>", "Line history" },
-		t = { ":Gitsigns toggle_current_line_blame<CR>", "Toggle blame" },
 	},
 }, { prefix = "<leader>" })
 
@@ -30,8 +37,13 @@ return {
 	{
 		"lewis6991/gitsigns.nvim", -- Git gutter
 		event = { "BufReadPost", "BufNewFile" },
-		config = function(_, opts)
-			require("gitsigns").setup(opts)
+		config = function()
+			require("gitsigns").setup({
+				current_line_blame = true,
+				current_line_blame_opts = {
+					delay = 100,
+				},
+			})
 			-- This is for diagnostic signs on the line number column.
 			-- Use this to beautify the plain E W signs.
 			local signs = require("schemar.icons").diagnostics
