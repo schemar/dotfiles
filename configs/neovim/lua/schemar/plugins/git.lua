@@ -101,9 +101,29 @@ return {
 	},
 	{
 		"TimUntersberger/neogit", -- Think magit
+		dependencies = { "sindrets/diffview.nvim" },
 		cmd = "Neogit",
-		opts = {
-			disable_builtin_notifications = true,
-		},
+		config = function()
+			local icons = require("schemar.icons")
+
+			require("neogit").setup({
+				disable_builtin_notifications = true,
+				disable_commit_confirmation = true,
+				disable_insert_on_commit = false,
+				integrations = {
+					diffview = true,
+				},
+				signs = {
+					section = { icons.ui.ChevronShortRight, icons.ui.ChevronShortDown },
+					item = { icons.ui.ChevronShortRight, icons.ui.ChevronShortDown },
+				},
+				mappings = {
+					status = {
+						["zM"] = "Depth1",
+						["zR"] = "Depth4",
+					},
+				},
+			})
+		end,
 	},
 }
