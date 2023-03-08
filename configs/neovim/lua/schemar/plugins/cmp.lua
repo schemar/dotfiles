@@ -1,7 +1,7 @@
 return {
 	{
 		"hrsh7th/nvim-cmp", -- Autocompletion plugin
-		event = "VeryLazy",
+		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
 			"hrsh7th/cmp-nvim-lsp-signature-help", -- Function signature source for nvim-cmp

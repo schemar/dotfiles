@@ -1,6 +1,9 @@
 return {
 	-- [[ Utils ]]
-	"nvim-lua/plenary.nvim", -- Plugin with util functions required by other plugins
+	{
+		"nvim-lua/plenary.nvim", -- Plugin with util functions required by other plugins
+		lazy = true,
+	},
 
 	-- [[ Theming ]]
 	{
