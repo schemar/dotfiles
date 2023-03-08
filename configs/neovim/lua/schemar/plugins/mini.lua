@@ -16,6 +16,13 @@ return {
 			},
 		})
 
+		-- [[next/previous]]
+		require("mini.bracketed").setup({
+			-- Disable some mappings:
+			location = { suffix = "", options = {} },
+			quickfix = { suffix = "", options = {} },
+		})
+
 		-- [[comment]]
 		require("mini.comment").setup({ -- Easier (un)commenting.
 			hooks = {
