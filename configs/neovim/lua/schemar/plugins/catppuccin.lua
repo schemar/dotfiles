@@ -17,7 +17,7 @@ return {
 					enabled = true,
 					-- To enable to following, check the documentation:
 					-- https://github.com/catppuccin/nvim#special-integrations
-					colored_indent_levels = true,
+					colored_indent_levels = false,
 				},
 				lsp_trouble = true,
 				markdown = true,
