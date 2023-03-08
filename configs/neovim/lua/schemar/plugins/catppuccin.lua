@@ -6,6 +6,7 @@ return {
 		require("catppuccin").setup({
 			integrations = {
 				aerial = true,
+				beacon = true,
 				cmp = true,
 				dashboard = true,
 				fidget = true,
@@ -15,11 +16,12 @@ return {
 					enabled = true,
 					-- To enable to following, check the documentation:
 					-- https://github.com/catppuccin/nvim#special-integrations
-					colored_indent_levels = false,
+					colored_indent_levels = true,
 				},
 				lsp_trouble = true,
 				markdown = true,
 				mason = true,
+				mini = true,
 				native_lsp = {
 					-- To see more options, check the documentation:
 					-- https://github.com/catppuccin/nvim#special-integrations

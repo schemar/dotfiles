@@ -211,7 +211,7 @@ return {
 							Value = icons.Value .. " ",
 							Variable = icons.Variable .. " ",
 						},
-						highlight = true,
+						highlight = true, -- Required for catppuccin theme
 						separator = " " .. require("schemar.icons").ui.ChevronShortRight .. " ",
 						depth_limit = 0,
 						depth_limit_indicator = "..",

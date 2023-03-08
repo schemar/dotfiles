@@ -5,8 +5,8 @@ return {
 		text = {
 			spinner = "arc",
 		},
-		window = {
-			blend = 0,
-		},
+	},
+	window = {
+		blend = 0,
 	},
 }
