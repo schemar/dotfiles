@@ -8,7 +8,6 @@ return {
 				"nvim-telescope/telescope-fzf-native.nvim", -- FZF algorithm for telescope
 				build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 			},
-			"aaronhallaert/advanced-git-search.nvim",
 			"nvim-lua/plenary.nvim",
 			"folke/trouble.nvim",
 		},
@@ -89,39 +88,6 @@ return {
 				desc = "Browse files",
 			},
 			{
-				"<leader>gb",
-				function()
-					require("telescope.builtin").git_branches()
-				end,
-				desc = "Branches",
-			},
-			{
-				"<leader>gf",
-				function()
-					require("telescope").extensions.advanced_git_search.search_log_content_file()
-				end,
-				desc = "Search history for current file",
-			},
-			{
-				"<leader>gl",
-				"V:'<,'> lua require('telescope').extensions.advanced_git_search.diff_commit_line()<CR>",
-				mode = "n",
-				desc = "Search history for current line",
-			},
-			{
-				"<leader>gl",
-				":'<,'> lua require('telescope').extensions.advanced_git_search.diff_commit_line()<CR>",
-				mode = "v",
-				desc = "Search history for selected lines",
-			},
-			{
-				"<leader>gs",
-				function()
-					require("telescope").extensions.advanced_git_search.search_log_content()
-				end,
-				desc = "Search in repository log",
-			},
-			{
 				"<leader>h",
 				function()
 					require("telescope.builtin").help_tags()
@@ -182,7 +148,6 @@ return {
 			})
 			telescope.load_extension("file_browser")
 			telescope.load_extension("fzf")
-			telescope.load_extension("advanced_git_search")
 		end,
 	},
 }

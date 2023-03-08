@@ -48,11 +48,6 @@ wk.register({
 		s = { ":w<CR>", "Save" },
 		S = { ":wa<CR>", "Save all" },
 	},
-	g = {
-		name = "Git",
-		t = { ":Gitsigns toggle_current_line_blame<CR>", "Toggle blame" },
-		g = { ":Neogit<CR>", "Neogit" },
-	},
 	t = {
 		name = "Tab",
 		c = { ":tabclose<CR>", "Close tab" },
