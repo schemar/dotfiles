@@ -27,7 +27,13 @@ require("schemar.options")
 require("lazy").setup("schemar.plugins")
 require("schemar.keymaps")
 
--- [[Borders]]
+-- [[ Highlight Yanking ]]
+vim.cmd([[augroup SchemarYankingAutocommand]])
+vim.cmd([[autocmd!]])
+vim.cmd([[autocmd TextYankPost * silent! lua vim.highlight.on_yank()]])
+vim.cmd([[augroup END]])
+
+-- [[ Borders ]]
 local _border = "single"
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
