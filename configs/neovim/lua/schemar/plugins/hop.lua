@@ -7,7 +7,7 @@ return {
 
 		local wk = require("which-key")
 		wk.register({
-			["<CR>"] = { ":HopWord<CR>", "Move cursor to word" },
+			["m"] = { ":HopWord<CR>", "Move cursor to word" },
 		})
 	end,
 }
