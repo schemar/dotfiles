@@ -3,11 +3,11 @@ return {
 	branch = "v2", -- optional but strongly recommended
 	event = { "BufReadPost", "BufNewFile" },
 	config = function()
-		require("hop").setup({ keys = "asdfghjkl;" })
+		require("hop").setup({ keys = "asdfghjkl;qwerpoiuzxcv.,mn" })
 
 		local wk = require("which-key")
 		wk.register({
-			["m"] = { ":HopWord<CR>", "Move cursor to word" },
+			["<leader>s"] = { ":HopWord<CR>", "Move cursor to word" },
 		})
 	end,
 }
