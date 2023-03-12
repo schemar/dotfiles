@@ -47,7 +47,13 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		config = true,
 	},
-	"famiu/bufdelete.nvim", -- Keep windows around when deleting buffers
+	{
+		"famiu/bufdelete.nvim", -- Keep windows around when deleting buffers
+		cmd = "Bdelete",
+		keys = {
+			{ "<leader>bd", ":Bdelete<CR>", desc = "Delete buffer" },
+		},
+	},
 	{
 		"rgroli/other.nvim", -- Go to alternative file, e.g. ts<->vue or test
 		name = "other-nvim",

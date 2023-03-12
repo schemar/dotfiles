@@ -16,7 +16,6 @@ wk.register({
 wk.register({
 	b = {
 		name = "Buffer",
-		d = { ":Bdelete<CR>", "Delete buffer" },
 		n = { ":bn<CR>", "Next buffer" },
 		p = { ":bp<CR>", "Previous buffer" },
 	},

@@ -27,6 +27,11 @@ require("schemar.options")
 require("lazy").setup("schemar.plugins")
 require("schemar.keymaps")
 
+-- [[ Terminal ]]
+-- Auto-close without losing window (see capital `B` in `Bdelete`):
+-- See also https://github.com/neovim/neovim/issues/14986
+vim.cmd([[autocmd TermClose * execute 'Bdelete! ' . expand('<abuf>')]])
+
 -- [[ Highlight Yanking ]]
 vim.cmd([[augroup SchemarYankingAutocommand]])
 vim.cmd([[autocmd!]])
