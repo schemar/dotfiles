@@ -33,10 +33,7 @@ require("schemar.keymaps")
 vim.cmd([[autocmd TermClose * execute 'Bdelete! ' . expand('<abuf>')]])
 
 -- [[ Highlight Yanking ]]
-vim.cmd([[augroup SchemarYankingAutocommand]])
-vim.cmd([[autocmd!]])
 vim.cmd([[autocmd TextYankPost * silent! lua vim.highlight.on_yank()]])
-vim.cmd([[augroup END]])
 
 -- [[ Borders ]]
 local _border = "single"
@@ -50,5 +47,13 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 })
 
 vim.diagnostic.config({
-	float = { border = _border },
+	float = {
+		border = _border,
+		source = "always",
+	},
+	signs = true,
+	underline = true,
+	update_in_insert = false,
+	virtual_text = true,
+	severity_sort = true,
 })
