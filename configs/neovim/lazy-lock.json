@@ -28,6 +28,7 @@
   "mini.nvim": { "branch": "main", "commit": "1adfdeb899df23fe740fc8596e6513445f8042bc" },
   "mini.starter": { "branch": "main", "commit": "1aa4c1e944f86a590a9ef07740c9102dae9f1100" },
   "neogit": { "branch": "master", "commit": "c4068a22a60981f1bedd9672cdad34b79411ed7a" },
+  "neoscroll.nvim": { "branch": "master", "commit": "d7601c26c8a183fa8994ed339e70c2d841253e93" },
   "null-ls.nvim": { "branch": "main", "commit": "09e99259f4cdd929e7fb5487bf9d92426ccf7cc1" },
   "nvim-autopairs": { "branch": "master", "commit": "e755f366721bc9e189ddecd39554559045ac0a18" },
   "nvim-cmp": { "branch": "main", "commit": "feed47fd1da7a1bad2c7dca456ea19c8a5a9823a" },
