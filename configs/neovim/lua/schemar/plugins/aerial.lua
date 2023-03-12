@@ -1,7 +1,7 @@
 return {
 	"stevearc/aerial.nvim", -- Code file overview
 	keys = {
-		{ "<leader>co", ":AerialToggle<CR>", desc = "Toggle overview" },
+		{ "<localleader>o", ":AerialToggle<CR>", desc = "Toggle overview" },
 	},
 	opts = {
 		-- Priority list of preferred backends for aerial.

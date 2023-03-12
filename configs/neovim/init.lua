@@ -21,7 +21,7 @@ vim.opt.rtp:prepend(lazypath)
 -- These keybindings need to be defined before the first /
 -- is called; otherwise, it will default to "\"
 vim.g.mapleader = " "
-vim.g.localleader = ","
+vim.g.maplocalleader = ","
 
 require("schemar.options")
 require("lazy").setup("schemar.plugins")

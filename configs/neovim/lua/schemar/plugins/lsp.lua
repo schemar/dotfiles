@@ -58,33 +58,30 @@ local on_attach = function(client, bufnr)
 		K = { vim.lsp.buf.hover, "Hover doc", buffer = bufnr },
 	})
 
-	-- With leader prefix:
+	-- With localleader prefix:
 	wk.register({
-		b = {
-			f = {
-				function()
-					vim.lsp.buf.format({ async = true, timeout_ms = format_timeout_ms })
-				end,
-				"Format buffer",
-				buffer = bufnr,
-			},
+		a = {
+			function()
+				vim.lsp.buf.code_action({ apply = true })
+			end,
+			"Code actions",
+			buffer = bufnr,
 		},
-		c = {
-			a = {
-				function()
-					vim.lsp.buf.code_action({ apply = true })
-				end,
-				"Code actions",
-				buffer = bufnr,
-			},
-			e = {
-				vim.lsp.diagnostic.open_float,
-				"Line diagnostics",
-				buffer = bufnr,
-			},
-			k = { vim.lsp.buf.signature_help, "Signature help", buffer = bufnr },
-			r = { vim.lsp.buf.rename, "Rename", buffer = bufnr },
+		d = { ":Trouble document_diagnostics<CR>", "Show diagnostics" },
+		D = {
+			":Trouble workspace_diagnostics<CR>",
+			"Show workspace diagnostics",
 		},
+		e = { vim.diagnostic.open_float, "Floating diagnostic" },
+		f = {
+			function()
+				vim.lsp.buf.format({ async = true, timeout_ms = format_timeout_ms })
+			end,
+			"Format buffer",
+			buffer = bufnr,
+		},
+		k = { vim.lsp.buf.signature_help, "Signature help", buffer = bufnr },
+		r = { vim.lsp.buf.rename, "Rename", buffer = bufnr },
 		["<tab>"] = {
 			name = "Workspace",
 			a = {
@@ -105,20 +102,18 @@ local on_attach = function(client, bufnr)
 				buffer = bufnr,
 			},
 		},
-	}, { prefix = "<leader>" })
+	}, { prefix = "<localleader>" })
 
-	-- Visual mode with leader prefix:
+	-- Visual mode with localleader prefix:
 	wk.register({
-		c = {
-			a = {
-				function()
-					vim.lsp.buf.code_action({ apply = true })
-				end,
-				"Code actions",
-				buffer = bufnr,
-			},
+		a = {
+			function()
+				vim.lsp.buf.code_action({ apply = true })
+			end,
+			"Code actions",
+			buffer = bufnr,
 		},
-	}, { prefix = "<leader>", mode = "v" })
+	}, { prefix = "<localleader>", mode = "v" })
 end
 
 return {
