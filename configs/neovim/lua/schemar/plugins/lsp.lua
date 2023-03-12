@@ -122,6 +122,7 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
 			"b0o/schemastore.nvim", -- Schemas for JSON files
+			"jose-elias-alvarez/typescript.nvim",
 			"hrsh7th/cmp-nvim-lsp", -- See cmp.lua for more info
 			{
 				"williamboman/mason.nvim", -- Manage language servers, linters, etc.
@@ -228,29 +229,47 @@ return {
 
 			-- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 			for _, lsp in ipairs(lsp_servers) do
-				lspconfig[lsp].setup({
+				if lsp ~= "tsserver" then -- tsserver is managed by "typescript" plugin below
+					lspconfig[lsp].setup({
+						on_attach = on_attach,
+						flags = lsp_flags,
+						capabilities = capabilities,
+						settings = {
+							json = {
+								schemas = require("schemastore").json.schemas(),
+								validate = { enable = true },
+							},
+							Lua = {
+								diagnostics = {
+									-- Get the language server to recognize the `vim` global
+									globals = { "vim" },
+								},
+							},
+						},
+					})
+				end
+			end
+
+			require("typescript").setup({
+				disable_commands = false, -- prevent the plugin from creating Vim commands
+				debug = false, -- enable debug logging for commands
+				go_to_source_definition = {
+					fallback = true, -- fall back to standard LSP definition on failure
+				},
+				server = { -- pass options to lspconfig's setup method
 					on_attach = on_attach,
 					flags = lsp_flags,
 					capabilities = capabilities,
-					settings = {
-						json = {
-							schemas = require("schemastore").json.schemas(),
-							validate = { enable = true },
-						},
-						Lua = {
-							diagnostics = {
-								-- Get the language server to recognize the `vim` global
-								globals = { "vim" },
-							},
-						},
-					},
-				})
-			end
+				},
+			})
 		end,
 	},
 	{
 		"jose-elias-alvarez/null-ls.nvim", -- NeoVim as LSP server
 		event = { "BufReadPost", "BufNewFile" },
+		dependencies = {
+			"jose-elias-alvarez/typescript.nvim",
+		},
 		config = function()
 			local null_ls = require("null-ls")
 			local null_ls_sources = {
@@ -263,6 +282,7 @@ return {
 				null_ls.builtins.formatting.shfmt, -- Shell
 				null_ls.builtins.formatting.stylua,
 				null_ls.builtins.formatting.yamlfmt,
+				require("typescript.extensions.null-ls.code-actions"),
 			}
 			--
 			-- NeoVim LSP server capabilities
