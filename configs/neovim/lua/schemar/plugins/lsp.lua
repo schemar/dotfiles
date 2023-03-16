@@ -125,18 +125,6 @@ return {
 			"jose-elias-alvarez/typescript.nvim",
 			"hrsh7th/cmp-nvim-lsp", -- See cmp.lua for more info
 			{
-				"VidocqH/lsp-lens.nvim",
-				opts = {
-					enable = true,
-					include_declaration = false, -- Reference include declaration
-					sections = { -- Enable / Disable specific request
-						definition = false,
-						references = true,
-						implementation = false,
-					},
-				},
-			},
-			{
 				"williamboman/mason.nvim", -- Manage language servers, linters, etc.
 				-- IMPORTANT: Mason must be set up before lspconfig and null-ls
 				priority = 500,
