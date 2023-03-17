@@ -114,6 +114,11 @@ local on_attach = function(client, bufnr)
 			buffer = bufnr,
 		},
 	}, { prefix = "<localleader>", mode = "v" })
+
+	-- Server specific keymaps:
+	if client.name == "eslint" then
+		wk.register({ F = { ":EslintFixAll<CR>", "ESLint fix all", buffer = bufnr } }, { prefix = "<localleader>" })
+	end
 end
 
 return {
