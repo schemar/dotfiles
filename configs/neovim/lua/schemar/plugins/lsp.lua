@@ -53,7 +53,6 @@ local on_attach = function(client, bufnr)
 				"List references",
 				buffer = bufnr,
 			},
-			t = { vim.lsp.buf.type_definition, "Go to type definition", buffer = bufnr },
 		},
 		K = { vim.lsp.buf.hover, "Hover doc", buffer = bufnr },
 	})
@@ -82,6 +81,7 @@ local on_attach = function(client, bufnr)
 		},
 		k = { vim.lsp.buf.signature_help, "Signature help", buffer = bufnr },
 		r = { vim.lsp.buf.rename, "Rename", buffer = bufnr },
+		t = { vim.lsp.buf.type_definition, "Go to type definition", buffer = bufnr },
 		["<tab>"] = {
 			name = "Workspace",
 			a = {
