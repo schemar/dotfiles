@@ -26,14 +26,6 @@ wk.register({
 		s = { ":w<CR>", "Save" },
 		S = { ":wa<CR>", "Save all" },
 	},
-	t = {
-		name = "Tab",
-		c = { ":tabclose<CR>", "Close tab" },
-		n = { ":tabnext<CR>", "Next tab" },
-		p = { ":tabprevious<CR>", "Previous tab" },
-		s = { ":tab split<CR>", "Split tab with current buffer" },
-		t = { ":tabnew<CR>", "New tab" },
-	},
 	w = {
 		name = "Window",
 		c = { ":close<CR>", "Close window" },
