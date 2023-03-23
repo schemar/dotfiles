@@ -33,6 +33,8 @@ wk.register({
 		v = { ":split<CR>", "Vertically split window" },
 	},
 	q = { name = "Quit", q = { ":quitall<CR>", "Quit all" } },
+	z = { ":tab split<CR>", "Zoom buffer in new tab" },
+	Z = { ":tabclose<CR>", "Unzoom by closing tab" },
 }, { prefix = "<leader>" })
 
 -- Terminal:
