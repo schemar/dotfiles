@@ -29,9 +29,9 @@ disabled = true
 
 [battery]
 #style = "fg:blue"
-full_symbol = ""
-charging_symbol = ""
-discharging_symbol = ""
+full_symbol = "󰁹"
+charging_symbol = "󰂄"
+discharging_symbol = "󰂃"
 
 [conda]
 style = "fg:cyan"
@@ -80,11 +80,11 @@ symbol = " "
 
 [memory_usage]
 style = "fg:yellow"
-symbol = " "
+symbol = "󰍛 "
 
 [nim]
 style = "fg:cyan"
-symbol = " "
+symbol = "󰆥 "
 
 [nix_shell]
 style = "fg:blue"
@@ -96,7 +96,7 @@ symbol = " "
 
 [package]
 style = "fg:blue"
-symbol = " "
+symbol = "󰏗 "
 
 [php]
 style = "fg:cyan"

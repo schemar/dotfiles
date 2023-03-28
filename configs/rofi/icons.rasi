@@ -2,7 +2,7 @@ configuration {
   display-drun: " ";
   display-run: " ";
   display-window: " ";
-  display-ssh: " ";
+  display-ssh: "󰌘 ";
   drun-display-format: "{name}";
   show-icons: true;
   font: "Roboto 16";

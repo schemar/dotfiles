@@ -7,7 +7,7 @@ two="2.0"
 
 options="${one}\n${onefive}\n${two}"
 
-selected="$(echo -e ${options} | rofi -dmenu -i -p ' ' -theme no_icons)"
+selected="$(echo -e ${options} | rofi -dmenu -i -p '󰍹 ' -theme no_icons)"
 
 case $selected in
     $one)
