@@ -16,9 +16,9 @@ return {
 			{
 				"<leader><leader>",
 				function()
-					require("telescope.builtin").find_files()
+					require("telescope.builtin").oldfiles()
 				end,
-				desc = "Find file",
+				desc = "Find previously opened file",
 			},
 			{
 				"<leader>/",
@@ -72,9 +72,9 @@ return {
 			{
 				"<leader>ff",
 				function()
-					require("telescope.builtin").oldfiles()
+					require("telescope.builtin").find_files()
 				end,
-				desc = "Find previously opened file",
+				desc = "Find file",
 			},
 			{
 				"<leader>fF",
