@@ -49,7 +49,7 @@ return {
 	},
 	{
 		"famiu/bufdelete.nvim", -- Keep windows around when deleting buffers
-		cmd = "Bdelete",
+		cmd = { "Bdelete", "Bwipeout" },
 		keys = {
 			{ "<leader>bd", ":Bdelete<CR>", desc = "Delete buffer" },
 		},

@@ -4,6 +4,7 @@
 
 return {
 	"nanozuki/tabby.nvim", -- Alternatives: "akinsho/bufferline.nvim", "nanozuki/tabby.nvim"(, "kdheepak/tabline.nvim")
+	dependencies = { "folke/which-key.nvim" },
 	config = function()
 		local wk = require("which-key")
 		wk.register({
