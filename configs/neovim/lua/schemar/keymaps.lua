@@ -33,6 +33,13 @@ wk.register({
 		v = { ":split<CR>", "Vertically split window" },
 	},
 	q = { name = "Quit", q = { ":quitall<CR>", "Quit all" } },
+	u = {
+		function()
+			require("lazy").update({ show = false })
+			require("mason-registry").refresh(function() end) -- Providing an empty fallback to make sure the refresh is async.
+		end,
+		"Update",
+	},
 	z = { ":tab split<CR>", "Zoom buffer in new tab" },
 	Z = { ":tabclose<CR>", "Unzoom by closing tab" },
 }, { prefix = "<leader>" })
