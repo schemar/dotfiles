@@ -10,13 +10,18 @@ return {
 			},
 			"nvim-lua/plenary.nvim",
 			"folke/trouble.nvim",
+			{
+				"danielfalk/smart-open.nvim",
+				branch = "0.1.x",
+				dependencies = { "kkharji/sqlite.lua" },
+			},
 		},
 		cmd = { "Telescope" },
 		keys = {
 			{
 				"<leader><leader>",
 				function()
-					require("telescope.builtin").find_files()
+					require("telescope").extensions.smart_open.smart_open()
 				end,
 				desc = "Find file",
 			},
@@ -72,7 +77,7 @@ return {
 			{
 				"<leader>ff",
 				function()
-					require("telescope.builtin").oldfiles()
+					require("telescope.builtin").find_files()
 				end,
 				desc = "Find previously opened file",
 			},
@@ -144,10 +149,15 @@ return {
 						override_file_sorter = true, -- override the file sorter
 						case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 					},
+					smart_open = {
+						ignore_patterns = { "*.git/*", "*/tmp/*", "*/node_modules/*" },
+						match_algorithm = "fzf",
+					},
 				},
 			})
 			telescope.load_extension("file_browser")
 			telescope.load_extension("fzf")
+			telescope.load_extension("smart_open")
 		end,
 	},
 }
