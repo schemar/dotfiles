@@ -140,6 +140,7 @@ return {
 			{
 				"williamboman/mason.nvim", -- Manage language servers, linters, etc.
 				-- IMPORTANT: Mason must be set up before lspconfig and null-ls
+				cmd = { "Mason" },
 				priority = 500,
 				config = function()
 					-- Mason to manage external tools like language servers
@@ -229,7 +230,6 @@ return {
 				end,
 			},
 		},
-
 		config = function()
 			local lsp_flags = {
 				-- This is the default in Nvim 0.7+
@@ -269,7 +269,8 @@ return {
 				go_to_source_definition = {
 					fallback = true, -- fall back to standard LSP definition on failure
 				},
-				server = { -- pass options to lspconfig's setup method
+				server = {
+					-- pass options to lspconfig's setup method
 					on_attach = on_attach,
 					flags = lsp_flags,
 					capabilities = capabilities,
