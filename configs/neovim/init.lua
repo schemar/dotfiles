@@ -30,6 +30,15 @@ require("schemar.keymaps")
 -- [[ Highlight Yanking ]]
 vim.cmd([[autocmd TextYankPost * silent! lua vim.highlight.on_yank()]])
 
+-- Keep window around when terminal closes
+vim.api.nvim_create_autocmd("TermClose", {
+	callback = function()
+		local buf = vim.api.nvim_get_current_buf()
+		vim.api.nvim_buf_set_keymap(buf, "n", "<Esc>", ":Bdelete<CR>", { noremap = true })
+		vim.api.nvim_buf_set_keymap(buf, "t", "<Esc>", ":Bdelete<CR>", { noremap = true })
+	end,
+})
+
 -- [[ Borders ]]
 local _border = "single"
 
