@@ -46,8 +46,16 @@ local on_attach = function(client, bufnr)
 			},
 		},
 		g = {
-			d = { vim.lsp.buf.definition, "Go to definition", buffer = bufnr },
-			i = { vim.lsp.buf.implementation, "Go to implementation", buffer = bufnr },
+			d = {
+				":Trouble lsp_definitions<CR>",
+				"List definitions",
+				buffer = bufnr,
+			},
+			i = {
+				":Trouble lsp_implementations<CR>",
+				"List implementations",
+				buffer = bufnr,
+			},
 			r = {
 				":Trouble lsp_references<CR>",
 				"List references",
