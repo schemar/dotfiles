@@ -136,13 +136,37 @@ return {
 
 			-- `/` cmdline setup.
 			cmp.setup.cmdline("/", {
-				mapping = cmp.mapping.preset.cmdline(),
+				mapping = cmp.mapping.preset.cmdline({
+					-- Use <C-j/k> to select candidates:
+					["<C-j>"] = {
+						c = function()
+							cmp.select_next_item()
+						end,
+					},
+					["<C-k>"] = {
+						c = function()
+							cmp.select_prev_item()
+						end,
+					},
+				}),
 				sources = { { name = "buffer" } },
 			})
 
 			-- `:` cmdline setup.
 			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
+				mapping = cmp.mapping.preset.cmdline({
+					-- Use <C-j/k> to select candidates:
+					["<C-j>"] = {
+						c = function()
+							cmp.select_next_item()
+						end,
+					},
+					["<C-k>"] = {
+						c = function()
+							cmp.select_prev_item()
+						end,
+					},
+				}),
 				sources = cmp.config.sources({ { name = "path" } }, {
 					{ name = "cmdline", option = { ignore_cmds = { "Man", "!" } } },
 				}),
