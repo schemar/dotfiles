@@ -45,4 +45,12 @@ wk.register({
 }, { prefix = "<leader>" })
 
 -- Terminal:
-wk.register({ ["<esc><esc>"] = { "<C-\\><C-n>", "Escape terminal mode." } }, { mode = "t" })
+local terminal_escape = require("schemar.utils").terminal_escape
+local terminal_command = require("schemar.utils").terminal_command
+wk.register({
+	["<esc><esc>"] = { terminal_escape("<C-\\><C-N>"), "Escape terminal mode" },
+	["<C-h>"] = { terminal_command("TmuxNavigateLeft"), "Tmux left" },
+	["<C-j>"] = { terminal_command("TmuxNavigateDown"), "Tmux down" },
+	["<C-k>"] = { terminal_command("TmuxNavigateUp"), "Tmux up" },
+	["<C-l>"] = { terminal_command("TmuxNavigateRight"), "Tmux right" },
+}, { mode = "t" })
