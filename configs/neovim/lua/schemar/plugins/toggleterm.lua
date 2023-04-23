@@ -16,6 +16,7 @@ return {
 				return vim.o.columns * 0.4
 			end
 		end,
-		start_in_insert = false,
+		start_in_insert = true,
+		close_on_exit = false,
 	},
 }
