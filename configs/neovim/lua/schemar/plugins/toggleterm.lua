@@ -1,9 +1,9 @@
 return {
 	"akinsho/toggleterm.nvim", -- Toggle terminals like Doom Emacs
 	version = "*",
+	event = "VeryLazy",
 	cmd = { "ToggleTerm", "ToggleTermToggleAll" },
 	keys = {
-		{ "<leader>l", desc = "Toggle terminal" },
 		{ "<leader>L", ":ToggleTermToggleAll<CR>", silent = true, desc = "Toggle all terminals" },
 	},
 	opts = {
@@ -16,7 +16,7 @@ return {
 				return vim.o.columns * 0.4
 			end
 		end,
-		open_mapping = [[<leader>l]],
+		open_mapping = [[<C-\>]],
 		start_in_insert = true,
 		close_on_exit = false,
 	},
