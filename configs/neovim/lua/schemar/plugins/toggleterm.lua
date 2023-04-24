@@ -3,7 +3,7 @@ return {
 	version = "*",
 	cmd = { "ToggleTerm", "ToggleTermToggleAll" },
 	keys = {
-		{ "<leader>l", ":ToggleTerm<CR>", silent = true, desc = "Toggle terminal" },
+		{ "<leader>l", desc = "Toggle terminal" },
 		{ "<leader>L", ":ToggleTermToggleAll<CR>", silent = true, desc = "Toggle all terminals" },
 	},
 	opts = {
@@ -16,6 +16,7 @@ return {
 				return vim.o.columns * 0.4
 			end
 		end,
+		open_mapping = [[<leader>l]],
 		start_in_insert = true,
 		close_on_exit = false,
 	},
