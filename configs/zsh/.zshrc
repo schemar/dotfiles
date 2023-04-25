@@ -16,9 +16,8 @@ source $ZSH/oh-my-zsh.sh
 alias g='git'
 alias y='yarn'
 
-alias l='exa -al --git --icons'
-# Use ll as interactive ls replacement
-alias ll='br -sdp'
+alias l='lsd -al'
+alias ll='lsd -al --tree'
 
 alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 

@@ -16,6 +16,7 @@ This repository contains configurations for my productivity stack and some basic
 * [fd](https://github.com/sharkdp/fd)
 * [fzf](https://github.com/junegunn/fzf)
 * [kmonad](https://github.com/david-janssen/kmonad)
+* [lsd](https://github.com/lsd-rs/lsd)
 * [NeoVim](https://github.com/neovim/neovim)❤️
 * [procs](https://github.com/dalance/procs)
 * [ranger](https://github.com/ranger/ranger)
