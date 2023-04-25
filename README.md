@@ -57,7 +57,7 @@ Prefix is `<ctrl>-b`.
 
 * `<prefix> {c,n,p}` create/next/previous window.
 * `<prefix> {v,s}` split pane vertically/horizontally.
-* `<ctrl>+{h,j,k,l}` to move curser across panes (works also with vim windows).
+* `<ctrl>+{h,j,k,l}` to move cursor across panes (works also with vim windows).
 * `<prefix> z` to (un)zoom the current pane.
 * `<prefix> {<,>,+,-}` resize panes by fixed amount left/right/up/down.
 * `<prefix> [` to enable copy mode. Use e.g. to scroll up to see older output.
