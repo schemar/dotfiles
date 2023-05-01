@@ -40,8 +40,23 @@ wk.register({
 		end,
 		"Update",
 	},
-	z = { ":tab split<CR>", "Zoom buffer in new tab" },
-	Z = { ":tabclose<CR>", "Unzoom by closing tab" },
+	z = {
+		function()
+			-- If there is more than one window, zoom it by opening a new tab with only
+			-- one window with the current buffer.
+			-- If there is only one window, close the tabpage.
+			-- This way, you can "zoom" and "unzoom" a buffer.
+			local windowCount = #(vim.api.nvim_tabpage_list_wins(0))
+			if windowCount > 1 then
+				vim.cmd([[tab split]])
+			else
+				if vim.api.nvim_call_function("tabpagenr", { "$" }) > 1 then -- Check if we have more than one tabpage.
+					vim.cmd([[tabclose]])
+				end
+			end
+		end,
+		"(Un)Zoom buffer in new tab",
+	},
 }, { prefix = "<leader>" })
 
 -- Terminal:
