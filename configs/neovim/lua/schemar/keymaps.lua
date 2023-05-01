@@ -46,11 +46,23 @@ wk.register({
 			-- one window with the current buffer.
 			-- If there is only one window, close the tabpage.
 			-- This way, you can "zoom" and "unzoom" a buffer.
-			local windowCount = #(vim.api.nvim_tabpage_list_wins(0))
+
+			-- allWindows includes windows like LSP messages.
+			local allWindows = vim.api.nvim_tabpage_list_wins(0)
+			-- normalWindows are only the "normal" ones that show buffers to edit.
+			local normalWindows = vim.tbl_filter(function(key)
+				return vim.api.nvim_win_get_config(key).relative == ""
+			end, allWindows)
+			-- We want the count of "normal" windows to decide whether to zoom or
+			-- unzoom.
+			local windowCount = #normalWindows
+
 			if windowCount > 1 then
 				vim.cmd([[tab split]])
 			else
-				if vim.api.nvim_call_function("tabpagenr", { "$" }) > 1 then -- Check if we have more than one tabpage.
+				-- Check if we have more than one tabpage.
+				-- Cannot close the last tabpage.
+				if vim.api.nvim_call_function("tabpagenr", { "$" }) > 1 then
 					vim.cmd([[tabclose]])
 				end
 			end
