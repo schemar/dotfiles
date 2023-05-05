@@ -19,6 +19,8 @@ alias y='yarn'
 alias l='lsd -al'
 alias ll='lsd -al --tree'
 
+alias h='function hdi(){ howdoi $* -c -n 5; }; hdi'
+
 alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
 # Tmux usability aliases
