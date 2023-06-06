@@ -1,5 +1,9 @@
 return {
 	"stevearc/aerial.nvim", -- Code file overview
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter",
+		"nvim-tree/nvim-web-devicons",
+	},
 	keys = {
 		{ "<localleader>o", ":AerialToggle<CR>", desc = "Toggle overview" },
 	},
@@ -21,8 +25,11 @@ return {
 			["<TAB>"] = "actions.scroll",
 			["o"] = {
 				callback = function()
+					-- Temporarily set close_on_select to true so that aerial
+					-- closes when we jump to a definition.
+					require("aerial.config").close_on_select = true
 					require("aerial").select()
-					require("aerial").close()
+					require("aerial.config").close_on_select = false
 				end,
 				desc = "Jump and quit",
 				nowait = true,
