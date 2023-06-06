@@ -47,20 +47,37 @@ local on_attach = function(client, bufnr)
 		},
 		g = {
 			d = {
-				":Trouble lsp_definitions<CR>",
+				":Telescope lsp_definitions<CR>",
 				"List definitions",
 				buffer = bufnr,
 			},
 			i = {
-				":Trouble lsp_implementations<CR>",
+				":Telescope lsp_implementations<CR>",
 				"List implementations",
 				buffer = bufnr,
 			},
 			r = {
-				":Trouble lsp_references<CR>",
+				":Telescope lsp_references<CR>",
 				"List references",
 				buffer = bufnr,
 			},
+
+			-- 😭
+			-- d = {
+			-- 	":Trouble lsp_definitions<CR>",
+			-- 	"List definitions",
+			-- 	buffer = bufnr,
+			-- },
+			-- i = {
+			-- 	":Trouble lsp_implementations<CR>",
+			-- 	"List implementations",
+			-- 	buffer = bufnr,
+			-- },
+			-- r = {
+			-- 	":Trouble lsp_references<CR>",
+			-- 	"List references",
+			-- 	buffer = bufnr,
+			-- },
 		},
 		K = { vim.lsp.buf.hover, "Hover doc", buffer = bufnr },
 	})

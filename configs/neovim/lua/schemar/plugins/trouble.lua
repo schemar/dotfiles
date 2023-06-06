@@ -1,5 +1,6 @@
 return {
 	"folke/trouble.nvim", -- Better looking quicklist, diagnostics, etc.
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 	cmd = "Trouble",
 	config = function(_, opts)
 		require("trouble").setup(opts)
