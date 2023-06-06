@@ -89,6 +89,8 @@ local on_attach = function(client, bufnr)
 		},
 		k = { vim.lsp.buf.signature_help, "Signature help", buffer = bufnr },
 		r = { vim.lsp.buf.rename, "Rename", buffer = bufnr },
+		s = { ":Telescope lsp_document_symbols<CR>", "Document Symbols" },
+		S = { ":Telescope lsp_dynamic_workspace_symbols<CR>", "Workspace Symbols" },
 		t = { vim.lsp.buf.type_definition, "Go to type definition", buffer = bufnr },
 		["<tab>"] = {
 			name = "Workspace",
