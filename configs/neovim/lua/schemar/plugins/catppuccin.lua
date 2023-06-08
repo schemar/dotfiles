@@ -38,7 +38,7 @@ return {
 				telescope = true,
 				treesitter = true,
 				treesitter_context = true,
-				ts_rainbow = true,
+				ts_rainbow2 = true,
 				which_key = true,
 			},
 		})

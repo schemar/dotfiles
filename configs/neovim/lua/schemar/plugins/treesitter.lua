@@ -13,7 +13,7 @@ return {
 		config = true,
 	},
 	{
-		"mrjones2014/nvim-ts-rainbow", -- Rainbow parentheses
+		"HiPhish/nvim-ts-rainbow2", -- Rainbow parentheses
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
@@ -97,7 +97,17 @@ return {
 
 				rainbow = {
 					enable = true,
-					extended_mode = true,
+					strategy = {
+						require("ts-rainbow").strategy["global"],
+						html = require("ts-rainbow").strategy["local"],
+						vue = require("ts-rainbow").strategy["local"],
+					},
+					query = {
+						"rainbow-parens",
+						html = "rainbow-tags",
+						vue = "rainbow-tags",
+						latex = "rainbow-blocks",
+					},
 				},
 
 				autotag = {
@@ -108,7 +118,8 @@ return {
 					enable = true,
 				},
 
-				context_commentstring = { -- For nvim-ts-context-commentstring plugin
+				-- For nvim-ts-context-commentstring plugin
+				context_commentstring = {
 					enable = true,
 					enable_autocmd = false, -- Disabled when used with Comment.nvim
 				},
