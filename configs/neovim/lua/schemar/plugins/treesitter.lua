@@ -13,7 +13,7 @@ return {
 		config = true,
 	},
 	{
-		"HiPhish/nvim-ts-rainbow2", -- Rainbow parentheses
+		"mrjones2014/nvim-ts-rainbow", -- Rainbow parentheses
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
@@ -97,17 +97,7 @@ return {
 
 				rainbow = {
 					enable = true,
-					strategy = {
-						require("ts-rainbow").strategy["global"],
-						html = require("ts-rainbow").strategy["local"],
-						vue = require("ts-rainbow").strategy["local"],
-					},
-					query = {
-						"rainbow-parens",
-						html = "rainbow-tags",
-						vue = "rainbow-tags",
-						latex = "rainbow-blocks",
-					},
+					extended_mode = true,
 				},
 
 				autotag = {
