@@ -314,7 +314,7 @@ return {
 			local null_ls_sources = {
 				-- null_ls.builtins.diagnostics.cspell, -- Spell check code
 				-- null_ls.builtins.code_actions.cspell, -- Spell check code
-				null_ls.builtins.diagnostics.codespell, -- Find typically misspelled code
+				-- null_ls.builtins.diagnostics.codespell, -- Find typically misspelled code
 				null_ls.builtins.diagnostics.gitlint.with({
 					filetypes = { "gitcommit", "NeogitCommitMessage" },
 				}),
