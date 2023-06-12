@@ -66,7 +66,8 @@ return {
 			local actions = require("diffview.actions")
 
 			require("diffview").setup({
-				icons = { -- Only applies when use_icons is true.
+				icons = {
+					-- Only applies when use_icons is true.
 					folder_closed = icons.Folder,
 					folder_open = icons.FolderOpen,
 				},
@@ -129,10 +130,10 @@ return {
 	{
 		"pwntester/octo.nvim", -- GitHub inside Neovim
 		cmd = "Octo",
-		requires = {
+		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
-			"kyazdani42/nvim-web-devicons",
+			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
 			require("octo").setup()
