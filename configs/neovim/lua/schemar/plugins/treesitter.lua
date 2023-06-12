@@ -13,6 +13,7 @@ return {
 		config = true,
 	},
 	{
+		-- This still works so much better than HiPhish/nvim-ts-rainbow2 ...
 		"mrjones2014/nvim-ts-rainbow", -- Rainbow parentheses
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = "nvim-treesitter/nvim-treesitter",
