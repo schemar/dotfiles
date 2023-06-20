@@ -23,17 +23,6 @@ alias h='function hdi(){ howdoi $* -c -n 5; }; hdi'
 
 alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
-alias fp='gt repo sync --restack'
-alias fh='gt stack submit'
-alias fl='gt log short'
-alias fa='gt commit amend'
-alias fo='gt branch checkout'
-alias fc='gt branch create'
-alias fu='gt branch up'
-alias fd='gt branch down'
-alias ft='gt branch top'
-alias fb='gt branch bottom'
-
 # Tmux usability aliases
 alias tmde='tmux new-session -A -s development'
 alias tmdo='tmux new-session -A -s dotfiles'
