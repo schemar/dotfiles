@@ -302,8 +302,11 @@ return {
 				null_ls.builtins.diagnostics.gitlint.with({
 					filetypes = { "gitcommit", "NeogitCommitMessage" },
 				}),
+				null_ls.builtins.diagnostics.flake8, -- Python
 				null_ls.builtins.diagnostics.hadolint, -- Docker best practices
 				null_ls.builtins.diagnostics.shellcheck,
+				null_ls.builtins.formatting.isort, -- Python
+				null_ls.builtins.formatting.black, -- Python
 				null_ls.builtins.formatting.jq,
 				null_ls.builtins.formatting.shfmt, -- Shell
 				null_ls.builtins.formatting.stylua,
