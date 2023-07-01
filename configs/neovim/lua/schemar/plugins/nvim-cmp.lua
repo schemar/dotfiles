@@ -1,6 +1,6 @@
 return {
 	"hrsh7th/nvim-cmp",
-	event = { "BufReadPost", "BufNewFile" },
+	event = { "VeryLazy" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
 		"hrsh7th/cmp-nvim-lsp-signature-help", -- Function signature source for nvim-cmp
@@ -37,11 +37,41 @@ return {
 				documentation = cmp.config.window.bordered(),
 			},
 			mapping = cmp.mapping.preset.insert({
+				-- Use <C-j/k> to select candidates:
+				["<C-j>"] = cmp.mapping(function()
+					cmp.select_next_item()
+				end),
+				["<C-k>"] = cmp.mapping(function()
+					cmp.select_prev_item()
+				end),
 				["<C-b>"] = cmp.mapping.scroll_docs(-4),
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
 				["<C-Space>"] = cmp.mapping.complete(),
 				["<C-e>"] = cmp.mapping.abort(),
-				["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+				["<CR>"] = cmp.mapping.confirm({
+					behavior = cmp.ConfirmBehavior.Replace,
+					select = false, -- Selection required to complete on "Enter".
+				}),
+				-- For (S-)Tab, prefer snippet over completion.
+				-- (Prefer C-j/k for completion anyway)
+				["<Tab>"] = cmp.mapping(function(fallback)
+					if luasnip.expand_or_jumpable() then
+						luasnip.expand_or_jump()
+					elseif cmp.visible() then
+						cmp.select_next_item()
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
+				["<S-Tab>"] = cmp.mapping(function(fallback)
+					if luasnip.jumpable(-1) then
+						luasnip.jump(-1)
+					elseif cmp.visible() then
+						cmp.select_prev_item()
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
 			}),
 			sources = cmp.config.sources({
 				-- Output will be prioritized according to order.
@@ -66,7 +96,19 @@ return {
 
 		-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 		cmp.setup.cmdline({ "/", "?" }, {
-			mapping = cmp.mapping.preset.cmdline(),
+			mapping = cmp.mapping.preset.cmdline({
+				-- Use <C-j/k> to select candidates:
+				["<C-j>"] = {
+					c = function()
+						cmp.select_next_item()
+					end,
+				},
+				["<C-k>"] = {
+					c = function()
+						cmp.select_prev_item()
+					end,
+				},
+			}),
 			sources = {
 				{ name = "buffer" },
 			},
@@ -74,7 +116,19 @@ return {
 
 		-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 		cmp.setup.cmdline(":", {
-			mapping = cmp.mapping.preset.cmdline(),
+			mapping = cmp.mapping.preset.cmdline({
+				-- Use <C-j/k> to select candidates:
+				["<C-j>"] = {
+					c = function()
+						cmp.select_next_item()
+					end,
+				},
+				["<C-k>"] = {
+					c = function()
+						cmp.select_prev_item()
+					end,
+				},
+			}),
 			sources = cmp.config.sources({
 				{ name = "path" },
 			}, {
