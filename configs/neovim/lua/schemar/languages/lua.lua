@@ -21,6 +21,7 @@ lsp_config.lua_ls.setup({
 			},
 		},
 	},
+	on_attach = require("schemar.languages.on-attach"),
 })
 
 local null_ls = require("null-ls")
