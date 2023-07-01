@@ -25,6 +25,8 @@ wk.register({
 -- <leader> prefix:
 wk.register({
 	["<leader>"] = { "<cmd>Telescope smart_open<cr>", "Search file" },
+	["/"] = { "<cmd>Telescope live_grep<cr>", "Grep" },
+	r = { "<cmd>Telescope resume<cr>", "Resume telescope" },
 	b = {
 		name = "Buffer",
 		b = { "<cmd>Telescope buffers<cr>", "Find buffer" },

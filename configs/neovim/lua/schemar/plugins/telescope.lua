@@ -18,11 +18,13 @@ return {
 				"nvim-telescope/telescope-fzf-native.nvim",
 			},
 		},
+		"folke/trouble.nvim",
 	},
 	config = function()
 		local telescope = require("telescope")
 		local telescope_config = require("telescope.config")
 		local actions = require("telescope.actions")
+		local trouble = require("trouble.providers.telescope")
 
 		-- Clone the default Telescope configuration
 		local vimgrep_arguments = { unpack(telescope_config.values.vimgrep_arguments) }
@@ -42,6 +44,10 @@ return {
 						["<c-j>"] = actions.move_selection_next,
 						["<c-k>"] = actions.move_selection_previous,
 						["<esc>"] = actions.close, -- Close on first press of esc. No "normal" mode.
+						["<c-t>"] = trouble.open_with_trouble,
+					},
+					n = {
+						["<c-t>"] = trouble.open_with_trouble,
 					},
 				},
 				-- Themeing
