@@ -1,4 +1,6 @@
-require("lspconfig").lua_ls.setup({
+local lsp_config = require("lspconfig")
+
+lsp_config.lua_ls.setup({
 	settings = {
 		Lua = {
 			runtime = {
@@ -20,3 +22,6 @@ require("lspconfig").lua_ls.setup({
 		},
 	},
 })
+
+local null_ls = require("null-ls")
+null_ls.register({ null_ls.builtins.formatting.stylua })
