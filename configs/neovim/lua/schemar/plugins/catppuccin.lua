@@ -6,6 +6,7 @@ return {
 		integrations = {
 			cmp = true,
 			fidget = true,
+			lsp_trouble = true,
 			markdown = true,
 			mason = true,
 			native_lsp = {
@@ -28,6 +29,7 @@ return {
 			},
 			telescope = true,
 			treesitter = true,
+			which_key = true,
 		},
 	},
 }

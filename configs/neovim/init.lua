@@ -1,3 +1,9 @@
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- These bindings must be set before initializing lazy.nvim
+vim.g.mapleader = " "
+
 require("schemar.options")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -18,3 +24,4 @@ require("lazy").setup("schemar.plugins", { defaults = { lazy = true } })
 vim.cmd.colorscheme("catppuccin")
 
 require("schemar.languages")
+require("schemar.keymaps")

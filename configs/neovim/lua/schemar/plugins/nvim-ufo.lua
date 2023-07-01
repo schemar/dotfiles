@@ -4,7 +4,7 @@ return {
 	event = { "BufReadPost", "BufNewFile" },
 	dependencies = { "kevinhwang91/promise-async" },
 	priority = 1, -- Load after LSP, etc.
-	config = function(_, opts)
+	config = function()
 		vim.o.foldcolumn = "0" -- '0' to hide or '1' to show
 
 		vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
