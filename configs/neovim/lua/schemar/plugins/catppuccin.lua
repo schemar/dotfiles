@@ -5,6 +5,8 @@ return {
 	opts = {
 		integrations = {
 			cmp = true,
+			fidget = true,
+			markdown = true,
 			mason = true,
 			native_lsp = {
 				enabled = true,
