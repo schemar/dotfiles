@@ -14,3 +14,5 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("schemar.plugins", { defaults = { lazy = true } })
 
 vim.cmd.colorscheme("catppuccin")
+
+require("schemar.languages")
