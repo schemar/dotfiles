@@ -57,4 +57,8 @@ wk.register({
 		f = { "<cmd>Telescope find_files<cr>", "Find file" },
 		r = { "<cmd>Telescope oldfiles<cr>", "Open recent file" },
 	},
+	g = {
+		name = "Git",
+		g = { "<cmd>Neogit<cr>", "Git Overview" },
+	},
 }, { prefix = "<leader>" })
