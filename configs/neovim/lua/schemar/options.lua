@@ -20,7 +20,7 @@ opt.fileencoding = "utf8" -- str: File encoding to use
 opt.syntax = "ON" -- str: Allow syntax highlighting
 opt.termguicolors = true -- bool: If term supports ui color then enable
 opt.cursorline = true -- bool: Highlight current line
-opt.listchars = "space:·,tab:>~,trail:~,extends:>,precedes:<" -- ",eol:󰌑"
+opt.listchars = "space:·,tab:>~,trail:~,extends:>,precedes:<,eol:󰌑"
 opt.list = true
 
 -- [[ Search ]]

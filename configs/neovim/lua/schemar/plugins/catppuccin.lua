@@ -6,6 +6,7 @@ return {
 		integrations = {
 			cmp = true,
 			fidget = true,
+			gitsigns = true,
 			lsp_trouble = true,
 			markdown = true,
 			mason = true,
