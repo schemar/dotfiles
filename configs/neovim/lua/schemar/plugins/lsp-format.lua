@@ -4,6 +4,7 @@ return {
 		typescript = {
 			-- Prettier overrides LSP and ESLint
 			order = { "tsserver", "eslint", "null-ls" },
+			sync = true,
 		},
 		lua = {
 			-- StyLua overrides LSP
