@@ -29,6 +29,7 @@ return {
 				},
 			},
 			neogit = true,
+			notify = true,
 			telescope = true,
 			treesitter = true,
 			which_key = true,
