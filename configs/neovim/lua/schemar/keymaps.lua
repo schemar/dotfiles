@@ -2,6 +2,11 @@ local wk = require("which-key")
 
 -- No prefix<cmd>
 wk.register({
+	["<c-w>"] = {
+		name = "Window",
+		s = { "<cmd>vsplit<cr>", "Split window" },
+		v = { "<cmd>split<cr>", "Split window verticallly" },
+	},
 	g = {
 		name = "Go",
 		d = {
@@ -52,8 +57,8 @@ wk.register({
 	},
 	f = {
 		name = "File",
-		b = { "<cmd>Telescope file_browser<cr>", "Browse files" },
-		B = { "<cmd>Telescope file_browser path=%<cmd>p<cmd>h select_buffer=true<cr>", "Browse files (curr. dir.)" },
+		b = { "<cmd>NvimTreeToggle<cr>", "Browse files" },
+		B = { "<cmd>NvimTreeFindFileToggle<cr>", "Browse files (curr. dir.)" },
 		f = { "<cmd>Telescope find_files<cr>", "Find file" },
 		r = { "<cmd>Telescope oldfiles<cr>", "Open recent file" },
 	},

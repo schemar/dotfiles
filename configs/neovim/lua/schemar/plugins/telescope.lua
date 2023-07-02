@@ -3,7 +3,6 @@ return {
 	branch = "0.1.x",
 	cmd = { "Telescope" },
 	dependencies = {
-		"nvim-telescope/telescope-file-browser.nvim", -- Think Emacs directory browser
 		{
 			"nvim-telescope/telescope-fzf-native.nvim", -- FZF algorithm for telescope
 			build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
@@ -67,7 +66,6 @@ return {
 				},
 			},
 			extensions = {
-				file_browser = { hijack_netrw = true },
 				fzf = {
 					fuzzy = true, -- false will only do exact matching
 					override_generic_sorter = true, -- override the generic sorter
@@ -80,7 +78,6 @@ return {
 				},
 			},
 		})
-		telescope.load_extension("file_browser")
 		telescope.load_extension("fzf")
 		telescope.load_extension("smart_open")
 	end,
