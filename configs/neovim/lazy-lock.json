@@ -1,5 +1,6 @@
 {
   "LuaSnip": { "branch": "master", "commit": "105b5f7f72c13e682a3aa5d29eac2408ae513b22" },
+  "auto-hlsearch": { "branch": "main", "commit": "8f28246d53e9478717ca3b51c8112083fbebd7e3" },
   "catppuccin": { "branch": "main", "commit": "12894370fa3c9e2200f3724c4184354d6b79733a" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-cmdline": { "branch": "main", "commit": "8ee981b4a91f536f52add291594e89fb6645e451" },
