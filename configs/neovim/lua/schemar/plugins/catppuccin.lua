@@ -4,12 +4,14 @@ return {
 	priority = 1000,
 	opts = {
 		integrations = {
+			alpha = true,
 			cmp = true,
 			fidget = true,
 			gitsigns = true,
 			lsp_trouble = true,
 			markdown = true,
 			mason = true,
+			mini = true,
 			native_lsp = {
 				enabled = true,
 				virtual_text = {
