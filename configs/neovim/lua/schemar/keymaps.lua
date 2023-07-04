@@ -1,6 +1,6 @@
 local wk = require("which-key")
 
--- No prefix<cmd>
+-- No prefix:
 wk.register({
 	["<c-w>"] = {
 		name = "Window",
@@ -61,6 +61,8 @@ wk.register({
 		b = { "<cmd>NvimTreeToggle<cr>", "Browse files" },
 		B = { "<cmd>NvimTreeFindFileToggle<cr>", "Browse files (curr. dir.)" },
 		f = { "<cmd>Telescope find_files<cr>", "Find file" },
+		o = { "<cmd>Other<cr>", "Open 'other' file" },
+		O = { "<cmd>OtherVSplit<cr>", "Open 'other' file" },
 		r = { "<cmd>Telescope oldfiles<cr>", "Open recent file" },
 	},
 	g = {
