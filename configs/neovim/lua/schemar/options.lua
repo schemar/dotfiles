@@ -3,6 +3,7 @@ local opt = vim.opt
 
 -- [[ Misc ]]
 opt.timeoutlen = 300 -- num: Timeout, e.g. for which-key
+opt.updatetime = 1000 -- num: Timeout for "cursor hold" event
 opt.clipboard = "unnamedplus" -- str: Clipboard integration with macOS
 opt.splitkeep = "cursor" -- The default "screen" moves the cursor wrongly, which leads to problems, e.g. with Trouble
 

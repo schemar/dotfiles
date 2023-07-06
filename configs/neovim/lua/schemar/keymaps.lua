@@ -2,6 +2,26 @@ local wk = require("which-key")
 
 -- No prefix:
 wk.register({
+	["["] = {
+		name = "Previous",
+		e = { vim.diagnostic.goto_prev, "Previous diagnostic" },
+		E = {
+			function()
+				vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+			end,
+			"Previous error diagnostic",
+		},
+	},
+	["]"] = {
+		name = "Next",
+		e = { vim.diagnostic.goto_next, "Next diagnostic" },
+		E = {
+			function()
+				vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+			end,
+			"Next error diagnostic",
+		},
+	},
 	["<c-w>"] = {
 		name = "Window",
 		s = { "<cmd>vsplit<cr>", "Split window" },
@@ -37,7 +57,20 @@ wk.register({
 		b = { "<cmd>Telescope buffers<cr>", "Find buffer" },
 		d = { "<cmd>bdelete<cr>", "Delete buffer" },
 	},
-	c = {
+	f = {
+		name = "File",
+		b = { "<cmd>NvimTreeToggle<cr>", "Browse files" },
+		B = { "<cmd>NvimTreeFindFileToggle<cr>", "Browse files (curr. dir.)" },
+		f = { "<cmd>Telescope find_files<cr>", "Find file" },
+		o = { "<cmd>Other<cr>", "Open 'other' file" },
+		O = { "<cmd>OtherVSplit<cr>", "Open 'other' file" },
+		r = { "<cmd>Telescope oldfiles<cr>", "Open recent file" },
+	},
+	g = {
+		name = "Git",
+		g = { "<cmd>Neogit<cr>", "Git Overview" },
+	},
+	l = {
 		name = "Code",
 		f = { "<cmd>Format<cr>", "Format file" },
 		a = {
@@ -55,18 +88,5 @@ wk.register({
 		r = { vim.lsp.buf.rename, "Rename" },
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document symbols" },
 		S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace symbols" },
-	},
-	f = {
-		name = "File",
-		b = { "<cmd>NvimTreeToggle<cr>", "Browse files" },
-		B = { "<cmd>NvimTreeFindFileToggle<cr>", "Browse files (curr. dir.)" },
-		f = { "<cmd>Telescope find_files<cr>", "Find file" },
-		o = { "<cmd>Other<cr>", "Open 'other' file" },
-		O = { "<cmd>OtherVSplit<cr>", "Open 'other' file" },
-		r = { "<cmd>Telescope oldfiles<cr>", "Open recent file" },
-	},
-	g = {
-		name = "Git",
-		g = { "<cmd>Neogit<cr>", "Git Overview" },
 	},
 }, { prefix = "<leader>" })

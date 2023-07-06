@@ -1,6 +1,9 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	lazy = false,
+	dependencies = {
+		"JoosepAlviste/nvim-ts-context-commentstring",
+	},
 	build = function()
 		require("nvim-treesitter.install").update({ with_sync = true })
 	end,
@@ -18,6 +21,10 @@ return {
 			},
 			indent = {
 				enable = true,
+			},
+			context_commentstring = {
+				enable = true,
+				enable_autocmd = false, -- Disabled due to integration with Comment.nvim
 			},
 		})
 	end,
