@@ -6,9 +6,17 @@ require("schemar.languages.typescript")
 require("schemar.languages.web")
 
 -- [[LSP Settings]]
+local border = "rounded"
 vim.diagnostic.config({
-	float = { border = "rounded" },
+	float = { border = border },
 })
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+	border = border,
+})
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+	border = border,
+})
+
 -- Function to check if a floating dialog exists and if not
 -- then check for diagnostics under the cursor
 function OpenDiagnosticIfNoFloat()
