@@ -9,6 +9,7 @@ return {
 			cmp = true,
 			fidget = true,
 			gitsigns = true,
+			illuminate = true,
 			lsp_trouble = true,
 			markdown = true,
 			mason = true,
