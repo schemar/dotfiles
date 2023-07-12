@@ -4,6 +4,7 @@ return {
 	priority = 1000,
 	opts = {
 		integrations = {
+			aerial = true,
 			alpha = true,
 			cmp = true,
 			fidget = true,

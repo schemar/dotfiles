@@ -85,6 +85,7 @@ wk.register({
 			"Show workspace diagnostics",
 		},
 		e = { vim.diagnostic.open_float, "Floating diagnostic" },
+		o = { "<cmd>AerialToggle<cr>", "Toggle code outline" },
 		r = { vim.lsp.buf.rename, "Rename" },
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document symbols" },
 		S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace symbols" },
