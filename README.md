@@ -72,6 +72,15 @@ Prerequisites:
 
 - `npm install -g tree-sitter`
 
+Usage:
+
+- When you first run NeoVim, `lazy.nvim` will install itself.
+  After, run: `:Lazy` and `I` to `install` all plugins.
+  Restart NeoVim.
+- When you re-start NeoVim, `treesitter` should install its packages and `mason`
+  should install all kinds of language servers and tools.
+  Restart NeoVim.
+
 ### i3
 
 Installation is based on Fedora i3 spin with i3 replaced with i3-gaps.
