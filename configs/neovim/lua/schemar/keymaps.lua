@@ -90,4 +90,35 @@ wk.register({
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document symbols" },
 		S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace symbols" },
 	},
+	s = {
+		name = "Cursor",
+		r = {
+			function()
+				require("flash").remote()
+			end,
+			"Jump (remote)",
+			mode = "o",
+		},
+		R = {
+			function()
+				require("flash").treesitter_search()
+			end,
+			"Treesitter search",
+			mode = { "x", "o" },
+		},
+		s = {
+			function()
+				require("flash").jump()
+			end,
+			"Jump",
+			mode = { "n", "x", "o" },
+		},
+		S = {
+			function()
+				require("flash").treesitter()
+			end,
+			"Jump (treesitter)",
+			mode = { "n", "x", "o" },
+		},
+	},
 }, { prefix = "<leader>" })

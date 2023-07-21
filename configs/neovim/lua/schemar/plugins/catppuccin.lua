@@ -9,6 +9,7 @@ return {
 			beacon = true,
 			cmp = true,
 			fidget = true,
+			flash = true,
 			gitsigns = true,
 			illuminate = true,
 			lsp_trouble = true,
