@@ -4,6 +4,12 @@ local wk = require("which-key")
 wk.register({
 	["["] = {
 		name = "Previous",
+		c = {
+			function()
+				require("gitsigns").prev_hunk()
+			end,
+			"Previous hunk",
+		},
 		e = { vim.diagnostic.goto_prev, "Previous diagnostic" },
 		E = {
 			function()
@@ -11,9 +17,16 @@ wk.register({
 			end,
 			"Previous error diagnostic",
 		},
+		t = { "<cmd>tabprevious<cr>", "Previous tab" },
 	},
 	["]"] = {
 		name = "Next",
+		c = {
+			function()
+				require("gitsigns").next_hunk()
+			end,
+			"Next hunk",
+		},
 		e = { vim.diagnostic.goto_next, "Next diagnostic" },
 		E = {
 			function()
@@ -21,6 +34,7 @@ wk.register({
 			end,
 			"Next error diagnostic",
 		},
+		t = { "<cmd>tabnext<cr>", "Next tab" },
 	},
 	["<c-w>"] = {
 		name = "Window",
@@ -70,6 +84,30 @@ wk.register({
 	g = {
 		name = "Git",
 		g = { "<cmd>Neogit<cr>", "Git Overview" },
+		d = {
+			function()
+				require("gitsigns").toggle_deleted()
+			end,
+			"Show deleted lines",
+		},
+		s = {
+			function()
+				require("gitsigns").stage_hunk()
+			end,
+			"Stage hunk",
+		},
+		u = {
+			function()
+				require("gitsigns").undo_stage_hunk()
+			end,
+			"Unstage hunk",
+		},
+		x = {
+			function()
+				require("gitsigns").reset_hunk()
+			end,
+			"Reset hunk",
+		},
 	},
 	l = {
 		name = "Code",
