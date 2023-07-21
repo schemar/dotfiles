@@ -12,6 +12,10 @@ return {
 			flash = true,
 			gitsigns = true,
 			illuminate = true,
+			indent_blankline = {
+				enabled = true,
+				colored_indent_levels = true,
+			},
 			lsp_trouble = true,
 			markdown = true,
 			mason = true,
