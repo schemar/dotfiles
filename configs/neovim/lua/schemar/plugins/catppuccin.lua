@@ -6,6 +6,7 @@ return {
 		integrations = {
 			aerial = true,
 			alpha = true,
+			beacon = true,
 			cmp = true,
 			fidget = true,
 			gitsigns = true,

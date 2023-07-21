@@ -4,6 +4,7 @@
   "aerial.nvim": { "branch": "master", "commit": "fb1f08c9f90e8b0c04b2f2c5d95d06288a14c5b2" },
   "alpha-nvim": { "branch": "main", "commit": "e4fc5e29b731bdf55d204c5c6a11dc3be70f3b65" },
   "auto-hlsearch": { "branch": "main", "commit": "8f28246d53e9478717ca3b51c8112083fbebd7e3" },
+  "beacon.nvim": { "branch": "master", "commit": "a786c9a89b2c739c69f9500a2f70f2586c06ec27" },
   "catppuccin": { "branch": "main", "commit": "a84ee1848bfac4601771805396552bdbaa0a0e91" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-cmdline": { "branch": "main", "commit": "8ee981b4a91f536f52add291594e89fb6645e451" },
