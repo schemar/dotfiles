@@ -41,7 +41,8 @@ wk.register({
 			"<cmd>Trouble lsp_references<cr>",
 			"Go to references",
 		},
-		t = { vim.lsp.buf.type_definition, "Go to type definition" },
+		t = { "<cmd>tabnext<cr>", "Next tab" },
+		T = { "<cmd>tabprevious<cr>", "Previous tab" },
 	},
 
 	K = { vim.lsp.buf.hover, "Hover Doc" },
@@ -120,5 +121,12 @@ wk.register({
 			"Jump (treesitter)",
 			mode = { "n", "x", "o" },
 		},
+	},
+	t = {
+		name = "Tab",
+		t = { "<cmd>tabnew<cr>", "New tab" },
+		j = { "<cmd>tabnext<cr>", "Next tab" },
+		k = { "<cmd>tabprevious<cr>", "Previous tab" },
+		c = { "<cmd>tabclose<cr>", "Close tab" },
 	},
 }, { prefix = "<leader>" })
