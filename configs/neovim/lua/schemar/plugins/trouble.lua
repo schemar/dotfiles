@@ -4,7 +4,7 @@ return {
 	cmd = "Trouble",
 	config = function()
 		require("trouble").setup({
-			auto_fold = true, -- automatically fold a file trouble list at creation
+			auto_fold = false, -- automatically fold a file trouble list at creation
 		})
 
 		-- Disable width ruler in trouble window:
