@@ -83,8 +83,14 @@ wk.register({
 	},
 	g = {
 		name = "Git",
-		g = { "<cmd>Neogit<cr>", "Git Overview" },
+		g = { "<cmd>Neogit<cr>", "Git overview" },
 		d = {
+			name = "Diff",
+			d = { "<cmd>DiffviewOpen<cr>", "Diff view" },
+			b = { "<cmd>DiffviewFileHistory<cr>", "Diff branch" },
+			f = { "<cmd>DiffviewFileHistory %<cr>", "Diff file" },
+		},
+		D = {
 			function()
 				require("gitsigns").toggle_deleted()
 			end,
