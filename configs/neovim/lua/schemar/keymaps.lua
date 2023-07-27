@@ -78,7 +78,8 @@ wk.register({
 		B = { "<cmd>NvimTreeFindFileToggle<cr>", "Browse files (curr. dir.)" },
 		f = { "<cmd>Telescope find_files<cr>", "Find file" },
 		o = { "<cmd>Other<cr>", "Open 'other' file" },
-		O = { "<cmd>OtherVSplit<cr>", "Open 'other' file" },
+		O = { "<cmd>OtherClear<cr><cmd>Other<cr>", "Open 'other' file with select" },
+		["<c-o>"] = { "<cmd>OtherVSplit<cr>", "Open 'other' file" },
 		r = { "<cmd>Telescope oldfiles<cr>", "Open recent file" },
 	},
 	g = {
