@@ -4,6 +4,12 @@ local wk = require("which-key")
 wk.register({
 	["["] = {
 		name = "Previous",
+		a = {
+			function()
+				require("todo-comments").jump_prev()
+			end,
+			"Previous todo comment",
+		},
 		c = {
 			function()
 				require("gitsigns").prev_hunk()
@@ -21,6 +27,12 @@ wk.register({
 	},
 	["]"] = {
 		name = "Next",
+		a = {
+			function()
+				require("todo-comments").jump_next()
+			end,
+			"Next todo comment",
+		},
 		c = {
 			function()
 				require("gitsigns").next_hunk()
@@ -66,7 +78,11 @@ wk.register({
 wk.register({
 	["<leader>"] = { "<cmd>Telescope smart_open<cr>", "Search file" },
 	["/"] = { "<cmd>Telescope live_grep<cr>", "Grep" },
-	r = { "<cmd>Telescope resume<cr>", "Resume telescope" },
+	a = {
+		name = "Todo",
+		a = { "<cmd>TodoTrouble<cr>", "Project todos" },
+		m = { "<cmd>TodoTrouble keywords=TODOMS<cr>", "Project todos MS" },
+	},
 	b = {
 		name = "Buffer",
 		b = { "<cmd>Telescope buffers<cr>", "Find buffer" },
@@ -136,6 +152,7 @@ wk.register({
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document symbols" },
 		S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace symbols" },
 	},
+	r = { "<cmd>Telescope resume<cr>", "Resume telescope" },
 	s = {
 		name = "Cursor",
 		r = {
