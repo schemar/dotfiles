@@ -29,9 +29,9 @@ disabled = true
 
 [battery]
 #style = "fg:blue"
-full_symbol = "󰁹"
-charging_symbol = "󰂄"
-discharging_symbol = "󰂃"
+full_symbol = "󰁹 "
+charging_symbol = "󰂄 "
+discharging_symbol = "󰂃 "
 
 [conda]
 style = "fg:cyan"
