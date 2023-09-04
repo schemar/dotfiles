@@ -1,6 +1,9 @@
 return {
 	"nanozuki/tabby.nvim",
 	event = { "VeryLazy" },
+	init = function()
+		vim.o.showtabline = 2
+	end,
 	config = function()
 		local theme = {
 			fill = "TabLineFill",
@@ -21,7 +24,7 @@ return {
 					local hl = tab.is_current() and theme.current_tab or theme.tab
 					return {
 						line.sep("", hl, theme.fill),
-						tab.is_current() and "" or "󰆣",
+						tab.is_current() and "" or "",
 						tab.number(),
 						tab.name(),
 						tab.close_btn(),
