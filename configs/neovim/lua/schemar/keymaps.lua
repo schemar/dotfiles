@@ -71,6 +71,8 @@ wk.register({
 		T = { "<cmd>tabprevious<cr>", "Previous tab" },
 	},
 
+	H = { "<cmd>tabprevious<cr>", "Previous tab" },
+	L = { "<cmd>tabnext<cr>", "Next tab" },
 	K = { vim.lsp.buf.hover, "Hover Doc" },
 })
 
@@ -187,8 +189,8 @@ wk.register({
 	t = {
 		name = "Tab",
 		t = { "<cmd>tabnew<cr>", "New tab" },
-		j = { "<cmd>tabnext<cr>", "Next tab" },
-		k = { "<cmd>tabprevious<cr>", "Previous tab" },
+		h = { "<cmd>tabprevious<cr>", "Previous tab" },
+		l = { "<cmd>tabnext<cr>", "Next tab" },
 		c = { "<cmd>tabclose<cr>", "Close tab" },
 	},
 }, { prefix = "<leader>" })
