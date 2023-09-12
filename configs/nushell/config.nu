@@ -812,6 +812,9 @@ $env.config = {
 # Enable 256 colors in tmux
 alias tmux = tmux -2
 
+alias g = git
+alias l = ls -al
+
 use ~/.cache/starship/init.nu
 
 $env.ASDF_NU_DIR = (brew --prefix asdf | str trim | into string | path join 'libexec')
