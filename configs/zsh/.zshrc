@@ -71,6 +71,11 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude ".git/"'
 export FZF_COMPLETION_OPTS="--preview 'bat --style=numbers,changes --color=always {}'"
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers,changes --color=always {}'"
 export FZF_COMPLETION_TRIGGER=',,'
+## FZF Catppuccin
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39 \
+--color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
+--color=marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
 
 export VISUAL="nvim"
 export EDITOR="nvim"

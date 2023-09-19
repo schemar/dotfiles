@@ -6,7 +6,7 @@ return {
 	opts = {
 		options = {
 			icons_enabled = true,
-			theme = "tokyonight",
+			theme = "catppuccin",
 			disabled_filetypes = {
 				statusline = {
 					"aerial",

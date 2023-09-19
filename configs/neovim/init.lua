@@ -21,7 +21,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("schemar.plugins", { defaults = { lazy = true } })
 
-vim.cmd.colorscheme("tokyonight-day")
+vim.cmd.colorscheme("catppuccin-latte")
 
 require("schemar.languages")
 require("schemar.keymaps")
