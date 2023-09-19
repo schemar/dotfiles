@@ -17,6 +17,7 @@ module.exports = {
         "temporal.io/*",
         "cloud.temporal.io/*",
         "pulumi.com/*",
+        finicky.matchDomains(/.*\.figma.com/),
         "personio.de/*",
         "peerdom.org/*",
       ],
