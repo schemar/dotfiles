@@ -3,6 +3,23 @@ return {
 	name = "catppuccin",
 	priority = 1000,
 	opts = {
+		dim_inactive = {
+			enabled = true, -- dims the background color of inactive window
+			shade = "dark",
+			percentage = 0.15, -- percentage of the shade to apply to the inactive window
+		},
+		highlight_overrides = {
+			latte = function(colors)
+				return {
+					-- Make sure the telescope border is not dimmed as "inactive":
+					TelescopeBorder = {
+						fg = colors.blue,
+						bg = colors.base,
+					},
+				}
+			end,
+		},
+		integration_default = true,
 		integrations = {
 			aerial = true,
 			alpha = true,
@@ -40,7 +57,10 @@ return {
 			},
 			neogit = true,
 			notify = true,
-			telescope = true,
+			telescope = {
+				enabled = true,
+				-- style = "nvchad",
+			},
 			treesitter = true,
 			treesitter_context = true,
 			which_key = true,
