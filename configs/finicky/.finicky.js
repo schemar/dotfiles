@@ -17,6 +17,7 @@ module.exports = {
         "temporal.io/*",
         "cloud.temporal.io/*",
         "pulumi.com/*",
+        "app.pulumi.com/*",
         "personio.de/*",
         "peerdom.org/*",
       ],
