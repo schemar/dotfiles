@@ -3,9 +3,9 @@ local wezterm = require("wezterm")
 return {
 	font = wezterm.font_with_fallback({
 		{
-			family = "MonoLisa",
+			family = "IBM Plex Mono",
 			-- Disable all ligatures:
-			harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+			-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 		},
 		{
 			family = "Symbols Nerd Font Mono",
