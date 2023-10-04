@@ -20,6 +20,7 @@ module.exports = {
         "app.pulumi.com/*",
         "personio.de/*",
         "peerdom.org/*",
+        finicky.matchDomains(/afilio.freshdesk.com/),
       ],
       browser: "Google Chrome",
     },
