@@ -32,6 +32,7 @@ return {
 			indent_blankline = {
 				enabled = true,
 				colored_indent_levels = true,
+				scope_color = "lavender",
 			},
 			lsp_trouble = true,
 			markdown = true,
