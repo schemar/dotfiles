@@ -84,12 +84,6 @@ export EDITOR="nvim"
 export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 eval "$(starship init zsh)"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/schemar/Projects/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/schemar/Projects/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/schemar/Projects/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/schemar/Projects/google-cloud-sdk/completion.zsh.inc'; fi
-
 #compdef gt
 ###-begin-gt-completions-###
 #
@@ -110,3 +104,9 @@ _gt_yargs_completions()
 compdef _gt_yargs_completions gt
 ###-end-gt-completions-###
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/schemar/Projects/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/schemar/Projects/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/schemar/Projects/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/schemar/Projects/google-cloud-sdk/completion.zsh.inc'; fi
