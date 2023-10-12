@@ -21,6 +21,7 @@ module.exports = {
         "personio.de/*",
         "peerdom.org/*",
         finicky.matchDomains(/afilio.freshdesk.com/),
+        finicky.matchDomains(/github.com/),
       ],
       browser: "Google Chrome",
     },
@@ -33,7 +34,7 @@ module.exports = {
       browser: "/Applications/Figma.app",
     },
     {
-      match: /notion\.so/,
+      match: [finicky.matchDomains(/www.notion.so/)],
       browser: "/Applications/Notion.app",
     },
   ],
