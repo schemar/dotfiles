@@ -13,7 +13,7 @@ return {
 	}),
 	font_size = 13,
 
-	color_scheme = "Catppuccin Latte",
+	color_scheme = "Catppuccin Mocha",
 
 	hide_tab_bar_if_only_one_tab = true,
 	window_decorations = "RESIZE",

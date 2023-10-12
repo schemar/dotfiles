@@ -121,7 +121,7 @@ let catppuccin = {
   }
 }
 
-let stheme = $catppuccin.latte
+let stheme = $catppuccin.macchiato
 
 let catppuccin_theme = {
   separator: $stheme.overlay0
