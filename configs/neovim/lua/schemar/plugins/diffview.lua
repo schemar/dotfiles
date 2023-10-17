@@ -3,14 +3,7 @@ return {
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
-	cmd = {
-		"DiffviewFileHistory",
-		"DiffviewOpen",
-		"DiffviewClose",
-		"DiffviewToggleFiles",
-		"DiffviewFocusFiles",
-		"DiffviewRefresh",
-	},
+	lazy = false,
 	opts = {
 		keymaps = {
 			disable_defaults = false,
