@@ -22,6 +22,7 @@ module.exports = {
         "peerdom.org/*",
         finicky.matchDomains(/afilio.freshdesk.com/),
         finicky.matchDomains(/github.com/),
+        finicky.matchDomains(/app.eu.amplitude.com/),
       ],
       browser: "Google Chrome",
     },
