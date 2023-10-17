@@ -11,4 +11,18 @@ return {
 		"DiffviewFocusFiles",
 		"DiffviewRefresh",
 	},
+	opts = {
+		keymaps = {
+			disable_defaults = false,
+			view = {
+				{ "n", "q", ":DiffviewClose<CR>", { desc = "Close DiffView" } },
+			},
+			file_panel = {
+				{ "n", "q", ":DiffviewClose<CR>", { desc = "Close DiffView" } },
+			},
+			file_history_panel = {
+				{ "n", "q", ":DiffviewClose<CR>", { desc = "Close DiffView" } },
+			},
+		},
+	},
 }
