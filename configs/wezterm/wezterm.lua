@@ -19,7 +19,7 @@ return {
 	window_decorations = "RESIZE",
 	window_close_confirmation = "NeverPrompt",
 	macos_window_background_blur = 60,
-	window_background_opacity = 0.96,
+	window_background_opacity = 0.91,
 	window_background_gradient = {
 		-- Can be "Vertical" or "Horizontal".  Specifies the direction
 		-- in which the color gradient varies.  The default is "Horizontal",
