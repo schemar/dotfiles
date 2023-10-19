@@ -29,7 +29,7 @@ return {
 		require("ibl").setup({
 			indent = {
 				highlight = highlight,
-				char = "┆", -- Examples: │ ┃ ┊ ┆ ┇ ┋ ╏
+				char = "┊", -- Examples: │ ┃ ┊ ┆ ┇ ┋ ╏
 			},
 			scope = {
 				enabled = false,
