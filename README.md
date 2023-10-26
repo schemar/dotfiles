@@ -12,6 +12,7 @@ This repository contains configurations for my productivity stack and some basic
 - [bat](https://github.com/sharkdp/bat)
 - [bottom](https://github.com/ClementTsang/bottom)
 - [direnv](https://github.com/direnv/direnv)
+- [efm](https://github.com/mattn/efm-langserver)
 - [fd](https://github.com/sharkdp/fd)
 - [fzf](https://github.com/junegunn/fzf)
 - [kmonad](https://github.com/david-janssen/kmonad)
@@ -71,6 +72,7 @@ Prefix is `<ctrl>-a`.
 Prerequisites:
 
 - `npm install -g tree-sitter`
+- And possibly language tools which weren't automatically installed via mason.
 
 Usage:
 
