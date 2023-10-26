@@ -73,6 +73,7 @@ Prerequisites:
 
 - `npm install -g tree-sitter`
 - And possibly language tools which weren't automatically installed via mason.
+  - For example `npm install -g eslint_d` after setup of `asdf` is complete.
 
 Usage:
 

@@ -1,16 +1,23 @@
 version: 2
 root-markers:
   - .git/
-lint-debounce: 1s
 
 tools:
   javascript-eslint: &javascript-eslint
-    lint-command: "eslint -f visualstudio --stdin --stdin-filename ${INPUT}"
+    lint-command: >
+      eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}
     lint-ignore-exit-code: true
     lint-stdin: true
     lint-formats:
       - "%f(%l,%c): %tarning %m"
       - "%f(%l,%c): %rror %m"
+    format-command: >
+      eslint_d --stdin --fix-to-stdout --stdin-filename ${INPUT}
+    format-stdin: true
+    require-marker: false
+    root-markers:
+      - .eslintrc
+      - .eslintrc.js
 
   prettier: &prettier
     format-command: >
@@ -40,10 +47,12 @@ tools:
 
 languages:
   javascript:
-    - <<: *javascript-eslint
+    # Order is important
     - <<: *prettier
+    - <<: *javascript-eslint
   lua:
     - <<: *stylua
   typescript:
-    - <<: *javascript-eslint
+    # Order is important
     - <<: *prettier
+    - <<: *javascript-eslint
