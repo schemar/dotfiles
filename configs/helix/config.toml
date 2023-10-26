@@ -3,6 +3,8 @@ theme = "catppuccin_mocha"
 [editor]
 line-number = "absolute"
 cursorline = true
+# Required, as helix does not identify true-color support in tmux:
+true-color = true
 color-modes = true
 
 [editor.cursor-shape]
