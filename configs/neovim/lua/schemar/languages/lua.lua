@@ -24,6 +24,8 @@ lsp_config.lua_ls.setup({
 	on_attach = require("schemar.languages.shared").on_attach,
 	capabilities = require("schemar.languages.shared").capabilities,
 })
-
-local null_ls = require("null-ls")
-null_ls.register({ null_ls.builtins.formatting.stylua })
+lsp_config.efm.setup({
+	on_attach = require("schemar.languages.shared").on_attach,
+	init_options = { documentFormatting = true },
+	filetypes = { "lua" },
+})

@@ -1,6 +1,3 @@
--- Setting up null-ls here so that we can re-use on_attach non-circular
-require("null-ls").setup({ on_attach = require("schemar.languages.shared").on_attach })
-
 require("schemar.languages.lua")
 require("schemar.languages.typescript")
 require("schemar.languages.web")
