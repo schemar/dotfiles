@@ -53,7 +53,7 @@ Check the files' contents for more details.
 Tmux sessions will be stored every 15 minutes and auto-restored when starting tmux the next time.
 Persists across restarts.
 
-Prefix is `<ctrl>-b`.
+Prefix is `<ctrl>-a`.
 
 - `<prefix> {c,n,p}` create/next/previous window.
 - `<prefix> {v,s}` split pane vertically/horizontally.
