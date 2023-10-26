@@ -6,8 +6,6 @@ This repository contains configurations for my productivity stack and some basic
 
 ## Included Configurations
 
-⚠️ Remember `git submodule init` and `git submodule update` after cloning.
-
 ### Terminal
 
 - [asdf](https://github.com/asdf-vm/asdf)

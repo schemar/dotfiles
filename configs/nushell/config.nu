@@ -821,12 +821,3 @@ $env.ASDF_NU_DIR = (brew --prefix asdf | str trim | into string | path join 'lib
 source /opt/homebrew/opt/asdf/libexec/asdf.nu
 
 source ~/.zoxide.nu
-
-# Use nu_scripts
-use ~/Projects/dotfiles/nu_scripts/custom-completions/cargo/cargo-completions.nu *
-use ~/Projects/dotfiles/nu_scripts/custom-completions/git/git-completions.nu *
-use ~/Projects/dotfiles/nu_scripts/custom-completions/make/make-completions.nu *
-use ~/Projects/dotfiles/nu_scripts/custom-completions/man/man-completions.nu *
-use ~/Projects/dotfiles/nu_scripts/custom-completions/npm/npm-completions.nu *
-use ~/Projects/dotfiles/nu_scripts/custom-completions/tealdeer/tldr-completions.nu *
-use ~/Projects/dotfiles/nu_scripts/custom-completions/yarn/yarn-completion.nu *
