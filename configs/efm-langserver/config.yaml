@@ -27,8 +27,7 @@ tools:
 
   prettier: &prettier
     format-command: >
-      npx prettier --stdin-filepath ${INPUT} ${--range-start=charStart} ${--range-end=charEnd} \
-        ${--tab-width=tabSize}
+      npx prettier --stdin-filepath ${INPUT} ${--range-start=charStart} ${--range-end=charEnd}
     format-stdin: true
     require-marker: false
     root-markers:
@@ -52,15 +51,25 @@ tools:
       - .stylua.toml
 
 languages:
+  html:
+    - <<: *prettier
   javascript:
     # Order is important (prettier first formats last)
     - <<: *prettier
     - <<: *eslint-format
     - <<: *eslint
+  json:
+    - <<: *prettier
   lua:
     - <<: *stylua
+  markdown:
+    - <<: *prettier
+  scss:
+    - <<: *prettier
   typescript:
     # Order is important
     - <<: *prettier
     - <<: *eslint-format
     - <<: *eslint
+  vue:
+    - <<: *prettier

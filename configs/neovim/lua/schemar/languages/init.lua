@@ -1,5 +1,7 @@
 require("schemar.languages.lua")
+require("schemar.languages.markdown")
 require("schemar.languages.typescript")
+require("schemar.languages.vue")
 require("schemar.languages.web")
 
 -- [[LSP Settings]]

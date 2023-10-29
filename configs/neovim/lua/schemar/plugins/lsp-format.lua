@@ -1,14 +1,28 @@
 return {
 	"lukas-reineke/lsp-format.nvim",
 	opts = {
-		typescript = {
-			-- prettier and eslint override LSP
-			order = { "typescript-tools", "tsserver", "efm" },
+		html = {
+			order = { "html", "efm" },
+			sync = true,
+		},
+		json = {
+			order = { "jsonls", "efm" },
 			sync = true,
 		},
 		lua = {
-			-- StyLua overrides LSP
 			order = { "lua_ls", "efm" },
+			sync = true,
+		},
+		markdown = {
+			order = { "efm" },
+			sync = true,
+		},
+		scss = {
+			order = { "cssls", "efm" },
+			sync = true,
+		},
+		typescript = {
+			order = { "typescript-tools", "tsserver", "efm" },
 			sync = true,
 		},
 	},

@@ -12,3 +12,12 @@ lsp_config.jsonls.setup({
 	on_attach = require("schemar.languages.shared").on_attach,
 	capabilities = require("schemar.languages.shared").capabilities,
 })
+lsp_config.efm.setup({
+	on_attach = require("schemar.languages.shared").on_attach,
+	init_options = { documentFormatting = true },
+	filetypes = {
+		"html",
+		"json",
+		"scss",
+	},
+})
