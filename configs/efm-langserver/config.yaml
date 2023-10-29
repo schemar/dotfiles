@@ -73,3 +73,5 @@ languages:
     - <<: *eslint
   vue:
     - <<: *prettier
+    - <<: *eslint-format
+    - <<: *eslint
