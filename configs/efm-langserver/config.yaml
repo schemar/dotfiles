@@ -41,6 +41,22 @@ tools:
       - .prettierrc.cjs
       - .prettierrc.toml
 
+  stylelint: &stylelint
+    lint-command: >
+      npx stylelint --stdin --stdin-filename ${INPUT} --formatter unix
+    lint-stdin: true
+    require-marker: false
+    root-markers:
+      - stylelint.config.js
+
+  stylelint-format: &stylelint-format
+    format-command: >
+      npx stylelint --stdin --stdin-filename ${INPUT} --fix
+    format-stdin: true
+    require-marker: false
+    root-markers:
+      - stylelint.config.js
+
   stylua: &stylua
     format-command: >
       stylua --color Never ${--range-start:charStart} ${--range-end:charEnd} -
@@ -66,6 +82,8 @@ languages:
     - <<: *prettier
   scss:
     - <<: *prettier
+    - <<: *stylelint-format
+    - <<: *stylelint
   typescript:
     # Order is important
     - <<: *prettier
@@ -74,4 +92,6 @@ languages:
   vue:
     - <<: *prettier
     - <<: *eslint-format
+    - <<: *stylelint-format
     - <<: *eslint
+    - <<: *stylelint
