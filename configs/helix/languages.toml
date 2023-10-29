@@ -1,0 +1,11 @@
+[language-server.efm]
+command = "efm-langserver"
+config.documentFormatting = true
+
+[[language]]
+name = "typescript"
+auto-format = true
+language-servers = [
+  { name = "typescript-language-server", except-features = ["format"] },
+  { name = "efm" },
+]
