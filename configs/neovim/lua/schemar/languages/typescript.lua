@@ -1,9 +1,9 @@
 local lsp_config = require("lspconfig")
 
 require("typescript-tools").setup({
-	on_attach = function(client)
-		-- No formatting from typescript. EFM will handle it.
-		client.resolved_capabilities.document_formatting = false
+	on_attach = function()
+		-- Don't use the shared on_attach function to prevent formatter attachment.
+		-- Formatting will be done by EFM exclusively.
 	end,
 })
 lsp_config.efm.setup({
