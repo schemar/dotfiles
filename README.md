@@ -11,31 +11,17 @@ This repository contains configurations for my productivity stack and some basic
 - [asdf](https://github.com/asdf-vm/asdf)
 - [bat](https://github.com/sharkdp/bat)
 - [bottom](https://github.com/ClementTsang/bottom)
-- [direnv](https://github.com/direnv/direnv)
 - [efm](https://github.com/mattn/efm-langserver)
-- [fd](https://github.com/sharkdp/fd)
 - [fzf](https://github.com/junegunn/fzf)
-- [kmonad](https://github.com/david-janssen/kmonad)
 - [lsd](https://github.com/lsd-rs/lsd)
 - [NeoVim](https://github.com/neovim/neovim)❤️
-- [procs](https://github.com/dalance/procs)
 - [ranger](https://github.com/ranger/ranger)
-- [ripgrep](https://github.com/BurntSushi/ripgrep)
 - [starship](https://github.com/starship/starship)
-- [tealdeer](https://github.com/dbrgn/tealdeer)
-- [tig](https://github.com/jonas/tig)
 - [tmux](https://github.com/tmux/tmux)❤️
 - [Zsh](https://www.zsh.org/)
 
 ### Graphical System
 
-- [autorandr](https://github.com/phillipberndt/autorandr)
-- [dunst](https://github.com/dunst-project/dunst)
-- [feh](https://github.com/derf/feh)
-- [i3](https://github.com/i3/i3)❤️
-- [picom](https://github.com/yshui/picom)
-- [redshift](https://github.com/jonls/redshift)
-- [rofi](https://github.com/davatorium/rofi)
 - [wezterm](https://github.com/wez/wezterm)❤️
 
 ## Usage
@@ -83,24 +69,3 @@ Usage:
 - When you re-start NeoVim, `treesitter` should install its packages and `mason`
   should install all kinds of language servers and tools.
   Restart NeoVim.
-
-### i3
-
-Installation is based on Fedora i3 spin with i3 replaced with i3-gaps.
-
-See the i3 config for all keybindings. Most relevant:
-
-- `$mod` is by default "super"/"windows".
-- `$mod+d` to launch application.
-- `$mod+m` to see configuration options.
-- `$mod+Shift+e` to exit, lock, etc.
-- `$mod+r` to resize.
-- `$mod+p` to take a screenshot.
-- `$mod+Shift+c` to reload config.
-
-#### Monitor layouts
-
-The system includes [autorandr](https://github.com/phillipberndt/autorandr) to automatically detect and apply screen layouts based on the connected monitors.
-If you have a new layout set up using for example arandr, run `autorandr --save <name>` to save the layout with the given name.
-Autorandr should automatically apply this layout the next time the monitors are connected identically.
-You can manually load a profile using `autorandr --load <name>`.
