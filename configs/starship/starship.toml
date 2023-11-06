@@ -118,3 +118,7 @@ symbol = " "
 [rust]
 style = "fg:cyan"
 symbol = " "
+
+[time]
+style = "fg:purple"
+disabled = false
