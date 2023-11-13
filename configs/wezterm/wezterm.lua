@@ -3,8 +3,20 @@ local wezterm = require("wezterm")
 return {
 	font = wezterm.font_with_fallback({
 		{
-			family = "IBM Plex Mono",
-			-- Disable all ligatures:
+			family = "Monaspace Neon",
+			harfbuzz_features = {
+				"calt=1",
+				"dlig=1",
+				"ss01=1",
+				"ss02=1",
+				"ss03=1",
+				"ss04=1",
+				"ss05=1",
+				"ss06=1",
+				"ss07=1",
+				"ss08=1",
+			},
+			-- Disable all MonaLisa ligatures:
 			-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 		},
 		{
