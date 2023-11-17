@@ -7,8 +7,10 @@ return {
 		text = {
 			spinner = "arc",
 		},
-		window = {
-			blend = 0,
+		notification = {
+			window = {
+				blend = 0,
+			},
 		},
 	},
 }
