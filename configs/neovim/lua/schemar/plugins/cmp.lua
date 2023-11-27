@@ -75,6 +75,7 @@ return {
 			}),
 			sources = cmp.config.sources({
 				-- Output will be prioritized according to order.
+				{ name = "copilot", group_index = 2 },
 				{ name = "nvim_lsp" },
 				{ name = "path" },
 				{ name = "buffer" },
