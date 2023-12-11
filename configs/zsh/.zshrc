@@ -1,3 +1,7 @@
+# Temp fix for compinit:
+# Silences error on ZSH startup on macOS with multiple users.
+ZSH_DISABLE_COMPFIX=true
+
 export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
@@ -130,3 +134,10 @@ if [ -f '/Users/schemar/Projects/google-cloud-sdk/path.zsh.inc' ]; then . '/User
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/schemar/Projects/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/schemar/Projects/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Brew as brew user.
+# Brew user can be different, e.g. on a multi-user macOS system.
+# Ignore errors when unaliasing (e.g. first run).
+unalias brew 2>/dev/null
+brewser=$(stat -f "%Su" $(which brew))
+alias brew='sudo -Hu '$brewser' brew'
