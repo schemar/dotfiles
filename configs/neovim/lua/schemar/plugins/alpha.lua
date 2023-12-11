@@ -24,7 +24,7 @@ return {
 		dashboard.section.buttons.val = {
 			dashboard.button(
 				"f",
-				"  " .. icons.ChevronShortRight .. " Search file",
+				"󰍉  " .. icons.ChevronShortRight .. " Search file",
 				"<cmd>Telescope smart_open<cr>"
 			),
 			dashboard.button("r", "  " .. icons.ChevronShortRight .. " Recent", "<cmd>Telescope oldfiles<cr>"),
@@ -34,7 +34,7 @@ return {
 				"  " .. icons.ChevronShortRight .. " Settings",
 				"<cmd>e $MYVIMRC | :cd %:p:h | split . | wincmd k <cr>"
 			),
-			dashboard.button("q", "  " .. icons.ChevronShortRight .. " Quit NVIM", "<cmd>qa<cr>"),
+			dashboard.button("q", "󰅙  " .. icons.ChevronShortRight .. " Quit NVIM", "<cmd>qa<cr>"),
 		}
 
 		-- Send config to alpha
