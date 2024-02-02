@@ -128,14 +128,6 @@ _gt_yargs_completions()
 compdef _gt_yargs_completions gt
 ###-end-gt-completions-###
 
-
-# Brew as brew user.
-# Brew user can be different, e.g. on a multi-user macOS system.
-# Ignore errors when unaliasing (e.g. first run).
-unalias brew 2>/dev/null
-brewser=$(stat -f "%Su" $(which brew))
-alias brew='sudo -Hu '$brewser' brew'
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/schemar/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/schemar/google-cloud-sdk/path.zsh.inc'; fi
 
