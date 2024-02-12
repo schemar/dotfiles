@@ -4,6 +4,8 @@ root-markers:
 
 tools:
   eslint: &eslint
+    # Remember to set env `ESLINT_USE_FLAT_CONFIG=true` in .envrc for projects
+    # that require it!
     lint-command: >
       eslint_d -f visualstudio --stdin --stdin-filename ${INPUT}
     lint-ignore-exit-code: true
