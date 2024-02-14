@@ -1,84 +1,90 @@
 local wezterm = require("wezterm")
 
 return {
-	font = wezterm.font_with_fallback({
-		{
-			family = "Monaspace Neon",
-			harfbuzz_features = {
-				"calt=1",
-				"dlig=1",
-				"ss01=1",
-				"ss02=1",
-				"ss03=1",
-				"ss04=1",
-				"ss05=1",
-				"ss06=1",
-				"ss07=1",
-				"ss08=1",
-			},
-			-- Disable all MonaLisa ligatures:
-			-- harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
-		},
-		{
-			family = "Symbols Nerd Font Mono",
-		},
-	}),
-	font_size = 13,
+  -- Allows to compose umlauts, etc. with left option key.
+  -- Means a backup "real" Alt-key is the right option key.
+  send_composed_key_when_left_alt_is_pressed = true,
+  send_composed_key_when_right_alt_is_pressed = false,
 
-	color_scheme = "Catppuccin Mocha",
+  font = wezterm.font_with_fallback({
+    {
+      family = "Monaspace Neon",
+      harfbuzz_features = {
+        "calt=1",
+        "dlig=1",
+        "ss01=1",
+        "ss02=1",
+        "ss03=1",
+        "ss04=1",
+        "ss05=1",
+        "ss06=1",
+        "ss07=1",
+        "ss08=1",
+      },
+      -- Disable all MonaLisa ligatures:
+      -- harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+    },
+    {
+      family = "Symbols Nerd Font Mono",
+    },
+  }),
+  font_size = 13,
 
-	hide_tab_bar_if_only_one_tab = true,
-	window_decorations = "RESIZE",
-	window_close_confirmation = "NeverPrompt",
-	macos_window_background_blur = 60,
-	window_background_opacity = 0.91,
-	window_background_gradient = {
-		-- Can be "Vertical" or "Horizontal".  Specifies the direction
-		-- in which the color gradient varies.  The default is "Horizontal",
-		-- with the gradient going from left-to-right.
-		-- Linear and Radial gradients are also supported; see the other
-		-- examples below
-		orientation = { Linear = { angle = -45.0 } },
+  color_scheme = "Catppuccin Mocha",
 
-		-- Specifies the set of colors that are interpolated in the gradient.
-		-- Accepts CSS style color specs, from named colors, through rgb
-		-- strings and more
-		colors = {
-			"#24273a",
-			"#1e2030",
-		},
+  hide_tab_bar_if_only_one_tab = true,
 
-		-- Instead of specifying `colors`, you can use one of a number of
-		-- predefined, preset gradients.
-		-- A list of presets is shown in a section below.
-		-- preset = "Warm",
+  window_decorations = "RESIZE",
+  window_close_confirmation = "NeverPrompt",
+  macos_window_background_blur = 60,
+  window_background_opacity = 0.91,
+  window_background_gradient = {
+    -- Can be "Vertical" or "Horizontal".  Specifies the direction
+    -- in which the color gradient varies.  The default is "Horizontal",
+    -- with the gradient going from left-to-right.
+    -- Linear and Radial gradients are also supported; see the other
+    -- examples below
+    orientation = { Linear = { angle = -45.0 } },
 
-		-- Specifies the interpolation style to be used.
-		-- "Linear", "Basis" and "CatmullRom" as supported.
-		-- The default is "Linear".
-		interpolation = "Linear",
+    -- Specifies the set of colors that are interpolated in the gradient.
+    -- Accepts CSS style color specs, from named colors, through rgb
+    -- strings and more
+    colors = {
+      "#24273a",
+      "#1e2030",
+    },
 
-		-- How the colors are blended in the gradient.
-		-- "Rgb", "LinearRgb", "Hsv" and "Oklab" are supported.
-		-- The default is "Rgb".
-		blend = "Oklab",
+    -- Instead of specifying `colors`, you can use one of a number of
+    -- predefined, preset gradients.
+    -- A list of presets is shown in a section below.
+    -- preset = "Warm",
 
-		-- To avoid vertical color banding for horizontal gradients, the
-		-- gradient position is randomly shifted by up to the `noise` value
-		-- for each pixel.
-		-- Smaller values, or 0, will make bands more prominent.
-		-- The default value is 64 which gives decent looking results
-		-- on a retina macbook pro display.
-		noise = 128,
+    -- Specifies the interpolation style to be used.
+    -- "Linear", "Basis" and "CatmullRom" as supported.
+    -- The default is "Linear".
+    interpolation = "Linear",
 
-		-- By default, the gradient smoothly transitions between the colors.
-		-- You can adjust the sharpness by specifying the segment_size and
-		-- segment_smoothness parameters.
-		-- segment_size configures how many segments are present.
-		-- segment_smoothness is how hard the edge is; 0.0 is a hard edge,
-		-- 1.0 is a soft edge.
+    -- How the colors are blended in the gradient.
+    -- "Rgb", "LinearRgb", "Hsv" and "Oklab" are supported.
+    -- The default is "Rgb".
+    blend = "Oklab",
 
-		-- segment_size = 11,
-		-- segment_smoothness = 1.0,
-	},
+    -- To avoid vertical color banding for horizontal gradients, the
+    -- gradient position is randomly shifted by up to the `noise` value
+    -- for each pixel.
+    -- Smaller values, or 0, will make bands more prominent.
+    -- The default value is 64 which gives decent looking results
+    -- on a retina macbook pro display.
+    noise = 128,
+
+    -- By default, the gradient smoothly transitions between the colors.
+    -- You can adjust the sharpness by specifying the segment_size and
+    -- segment_smoothness parameters.
+    -- segment_size configures how many segments are present.
+    -- segment_smoothness is how hard the edge is; 0.0 is a hard edge,
+    -- 1.0 is a soft edge.
+
+    -- segment_size = 11,
+    -- segment_smoothness = 1.0,
+  },
 }
