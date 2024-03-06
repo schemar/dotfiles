@@ -70,6 +70,24 @@ tools:
       - stylua.toml
       - .stylua.toml
 
+  gdformat: &gdformat
+    format-command: >
+      cat "${INPUT}" | gdformat -
+    format-stdin: true
+    require-marker: true
+    root-markers:
+      - project.godot
+
+  gdlint: &gdlint
+    # Unfortunately this only lints after every write
+    lint-command: >
+      gdlint ${INPUT}
+    lint-stdin: false
+    require-marker: true
+    root-markers:
+      - project.godot
+
+
 languages:
   html:
     - <<: *prettier
@@ -99,3 +117,6 @@ languages:
     - <<: *stylelint-format
     - <<: *eslint
     - <<: *stylelint
+  gdscript:
+    - <<: *gdformat
+    - <<: *gdlint
