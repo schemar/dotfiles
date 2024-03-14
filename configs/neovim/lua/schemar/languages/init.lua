@@ -1,9 +1,11 @@
 require("schemar.languages.gdscript")
+require("schemar.languages.json")
 require("schemar.languages.lua")
 require("schemar.languages.markdown")
 require("schemar.languages.typescript")
 require("schemar.languages.vue")
 require("schemar.languages.web")
+require("schemar.languages.yaml")
 
 -- [[LSP Settings]]
 local border = "rounded"
