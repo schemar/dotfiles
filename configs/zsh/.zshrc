@@ -28,9 +28,9 @@ alias h='function hdi(){ howdoi $* -c -n 5; }; hdi'
 alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
 # Tmux usability aliases
-alias tmde='tmux new-session -A -s development'
-alias tmdo='tmux new-session -A -s dotfiles'
-alias tmta='tmux new-session -A -s tasks'
+alias tma='tmux new-session -A -s afilio'
+alias tmd='tmux new-session -A -s dotfiles'
+alias tme='tmux new-session -A -s eoi'
 
 # User configuration
 
