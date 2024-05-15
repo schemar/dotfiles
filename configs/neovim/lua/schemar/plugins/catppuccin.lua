@@ -3,6 +3,7 @@ return {
   name = "catppuccin",
   priority = 1000,
   opts = {
+    flavour = "latte",  -- auto, latte, frappe, macchiato, mocha
     dim_inactive = {
       enabled = true,   -- dims the background color of inactive window
       shade = "dark",
