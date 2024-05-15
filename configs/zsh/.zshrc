@@ -29,7 +29,7 @@ alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
 # Tmux usability aliases
 alias tma='tmux new-session -A -s afilio'
-alias tmd='tmux new-session -A -s dotfiles'
+alias tmd='tmux new-session -A -s dots'
 alias tme='tmux new-session -A -s eoi'
 
 # User configuration
