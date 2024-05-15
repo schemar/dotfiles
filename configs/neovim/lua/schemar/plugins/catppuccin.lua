@@ -30,6 +30,7 @@ return {
         enabled = true,
         color = "yellow",
       },
+      diffview = true,
       fidget = true,
       flash = true,
       gitsigns = true,
