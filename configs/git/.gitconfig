@@ -31,4 +31,6 @@
 [mergetool]
   keepBackup = false
 [github]
-	user = schemar
+  user = schemar
+[log]
+  follow = true
