@@ -56,7 +56,10 @@ wk.register({
   g = {
     name = "Go",
     d = {
-      "<cmd>Trouble lsp_definitions<cr>",
+      -- While Trouble provides this, at least for TypeScript it says there are
+      -- no definitions, so we fall back to NeoVim LSP's default function to go
+      -- to definition.
+      vim.lsp.buf.definition,
       "Go to definition",
     },
     i = {
