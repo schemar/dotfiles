@@ -21,10 +21,14 @@ return {
 			local null_ls = require("null-ls")
 			null_ls.setup({
 				sources = {
+					null_ls.builtins.diagnostics.ansiblelint,
+					null_ls.builtins.diagnostics.yamllint,
+					null_ls.builtins.diagnostics.zsh,
 					-- [[ Formatters, etc. go here ]]
 					-- !! Remember to add your formatters in formatter.lua
 					null_ls.builtins.formatting.stylua,
 					null_ls.builtins.formatting.prettier,
+					null_ls.builtins.formatting.yamlfix,
 				},
 			})
 			require("mason-null-ls").setup({
@@ -57,10 +61,10 @@ return {
 		},
 		config = function()
 			local lspconfig = require("lspconfig")
+			-- nvim-cmp:
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			-- [[ Language Servers go here ]]
-			-- TypeScript:
-			lspconfig.vtsls.setup({})
 			lspconfig.eslint.setup({})
 			lspconfig.jsonls.setup({
 				settings = {
@@ -70,7 +74,22 @@ return {
 					},
 				},
 			})
-			lspconfig.lua_ls.setup({})
+			lspconfig.lua_ls.setup({
+				capabilities = capabilities,
+			})
+			-- TypeScript:
+			lspconfig.vtsls.setup({})
+			lspconfig.yamlls.setup({
+				capabilities = {
+					textDocument = {
+						foldingRange = {
+							-- Both required to not get an error with ufo:
+							dynamicRegistration = false,
+							lineFoldingOnly = true,
+						},
+					},
+				},
+			})
 		end,
 	},
 	{

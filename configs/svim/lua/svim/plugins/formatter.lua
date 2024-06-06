@@ -6,10 +6,11 @@ return {
 		-- Set up format-on-save
 		format_on_save = { timeout_ms = 500, lsp_fallback = true },
 		formatters_by_ft = {
-			lua = { "stylua" },
 			javascript = { "eslint_d", "prettier" },
-			typescript = { "eslint_d", "prettier" },
 			json = { "jq" },
+			lua = { "stylua" },
+			typescript = { "eslint_d", "prettier" },
+			yaml = { "yamlfix" },
 			-- Conform will run multiple formatters sequentially
 			-- python = { "isort", "black" },
 			-- Use a sub-list to run only the first available formatter
