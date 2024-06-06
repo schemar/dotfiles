@@ -27,6 +27,8 @@ alias h='function hdi(){ howdoi $* -c -n 5; }; hdi'
 
 alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
+alias svim='NVIM_APPNAME=svim nvim'
+
 # Tmux usability aliases
 alias tma='tmux new-session -A -s afilio'
 alias tmd='tmux new-session -A -s dots'
