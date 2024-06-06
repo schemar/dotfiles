@@ -7,8 +7,17 @@ return {
 		flavour = "mocha", -- latte, frappe, macchiato, mocha
 		integrations = {
 			aerial = true,
+			cmp = true,
+			diffview = true,
+			fidget = true,
 			gitsigns = true,
-			neogit = true,
+			indent_blankline = {
+				enabled = true,
+				scope_color = "", -- catppuccin color (eg. `lavender`) Default: text
+				-- colored_indent_levels enables char highlights per indent level. Follow the instructions here to set the latter up.
+				colored_indent_levels = false,
+			},
+			markdown = true,
 			mason = true,
 			native_lsp = {
 				enabled = true,
@@ -30,7 +39,11 @@ return {
 					background = true,
 				},
 			},
+			neogit = true,
+			nvimtree = true,
+			treesitter = true,
 			ufo = true,
+			which_key = true,
 		},
 	},
 }

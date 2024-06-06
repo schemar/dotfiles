@@ -9,6 +9,15 @@ return {
 				s = { "<cmd>vsplit<cr>", "Split window" },
 				v = { "<cmd>split<cr>", "Split window verticallly" },
 			},
+			["<leader>"] = {
+				name = "Leader",
+				g = "Git",
+				l = {
+					name = "Code",
+
+					r = { vim.lsp.buf.rename, "Rename" },
+				},
+			},
 		})
 	end,
 }
