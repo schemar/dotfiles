@@ -67,7 +67,7 @@ return {
 				function()
 					require("neogit").open()
 				end,
-				desc = "NeoGit",
+				desc = "Neogit",
 			},
 		},
 		config = function()
