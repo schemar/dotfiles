@@ -10,7 +10,6 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-nvim-lsp-document-symbol",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"hrsh7th/cmp-emoji",
 			"hrsh7th/cmp-nvim-lua",
 			"petertriho/cmp-git",
 			"David-Kunz/cmp-npm",
@@ -61,7 +60,6 @@ return {
 					{ name = "nvim_lsp_document_symbol" },
 					{ name = "nvim_lsp_signature_help" },
 					{ name = "nvim_lua" },
-					{ name = "emoji" },
 					{ name = "npm", keyword_length = 4 },
 				}, {
 					{ name = "buffer" },

@@ -109,8 +109,8 @@ export FZF_DEFAULT_OPTS=" \
 # --color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
 # --color=marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
 
-export VISUAL="nvim"
-export EDITOR="nvim"
+export VISUAL="svim"
+export EDITOR="svim"
 
 # staship shell prompt
 export STARSHIP_CONFIG="$HOME/.config/starship.toml"

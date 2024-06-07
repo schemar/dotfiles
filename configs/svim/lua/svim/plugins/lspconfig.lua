@@ -58,6 +58,7 @@ return {
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
 			"b0o/schemastore.nvim",
+			"yioneko/nvim-vtsls",
 		},
 		config = function()
 			local lspconfig = require("lspconfig")

@@ -4,7 +4,7 @@ return {
 	cmd = { "ConformInfo" },
 	opts = {
 		-- Set up format-on-save
-		format_on_save = { timeout_ms = 500, lsp_fallback = true },
+		format_on_save = { timeout_ms = 5000, lsp_fallback = true },
 		formatters_by_ft = {
 			javascript = { "eslint_d", "prettier" },
 			json = { "jq" },

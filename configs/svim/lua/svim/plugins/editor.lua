@@ -32,6 +32,13 @@ return {
 				desc = "Grep Project",
 			},
 			{
+				"<leader>?",
+				function()
+					require("fzf-lua").grep()
+				end,
+				desc = "Grep Project and FZF",
+			},
+			{
 				"<leader>*",
 				function()
 					require("fzf-lua").grep_cword()
