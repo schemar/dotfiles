@@ -54,13 +54,13 @@ keybindings:
       command: >
         tmux new-window -c {{.RepoPath}} '
           gh pr checkout {{.PrNumber}} &&
-          svim -c ":DiffviewOpen main...{{.HeadRefName}}"
+          nvim -c ":DiffviewOpen main...{{.HeadRefName}}"
         '
     - key: v
       command: >
         cd {{.RepoPath}} &&
         gt get {{.HeadRefName}} &&
-        svim
+        nvim
 repoPaths:
   :owner/:repo: ~/Projects/:repo
 theme:

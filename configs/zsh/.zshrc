@@ -27,8 +27,6 @@ alias h='function hdi(){ howdoi $* -c -n 5; }; hdi'
 
 alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
-alias svim='NVIM_APPNAME=svim nvim'
-
 # Tmux usability aliases
 alias tma='tmux new-session -A -s afilio'
 alias tmd='tmux new-session -A -s dots'
@@ -109,8 +107,8 @@ export FZF_DEFAULT_OPTS=" \
 # --color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
 # --color=marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
 
-export VISUAL="svim"
-export EDITOR="svim"
+export VISUAL="nvim"
+export EDITOR="nvim"
 
 # staship shell prompt
 export STARSHIP_CONFIG="$HOME/.config/starship.toml"
