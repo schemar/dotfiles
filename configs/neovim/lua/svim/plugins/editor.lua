@@ -53,6 +53,13 @@ return {
 				desc = "Resume FZF",
 			},
 			{
+				"<leader>la",
+				function()
+					require("fzf-lua").lsp_code_actions()
+				end,
+				desc = "Code actions",
+			},
+			{
 				"gd",
 				function()
 					require("fzf-lua").lsp_definitions()
