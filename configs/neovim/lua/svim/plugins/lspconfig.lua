@@ -224,4 +224,9 @@ return {
 			-- ... the rest of your fidget config
 		},
 	},
+	{
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {},
+	},
 }
