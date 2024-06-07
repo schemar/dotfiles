@@ -92,6 +92,45 @@ return {
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
-		opts = {},
+		keys = {
+			{ "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Branch history" },
+			{ "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", desc = "File history" },
+		},
+		config = function()
+			require("diffview").setup({
+				default_args = {
+					DiffviewOpen = { "--imply-local" },
+				},
+				keymaps = {
+					disable_defaults = false, -- Disable the default keymaps
+					view = {
+						-- The `view` bindings are active in the diff buffers, only when the current
+						-- tabpage is a Diffview.
+						{
+							"n",
+							"q",
+							"<cmd>DiffviewClose<cr>",
+							{ desc = "Close Diffview" },
+						},
+					},
+					file_panel = {
+						{
+							"n",
+							"q",
+							"<cmd>DiffviewClose<cr>",
+							{ desc = "Close Diffview" },
+						},
+					},
+					file_history_panel = {
+						{
+							"n",
+							"q",
+							"<cmd>DiffviewClose<cr>",
+							{ desc = "Close Diffview" },
+						},
+					},
+				},
+			})
+		end,
 	},
 }
