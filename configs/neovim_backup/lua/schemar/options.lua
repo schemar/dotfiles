@@ -35,4 +35,3 @@ opt.expandtab = true -- bool: Use spaces instead of tabs
 opt.shiftwidth = 2 -- num: Size of an indent
 opt.softtabstop = 2 -- num: Number of spaces tabs count for in insert mode
 opt.tabstop = 2 -- num: Number of spaces tabs count for
-

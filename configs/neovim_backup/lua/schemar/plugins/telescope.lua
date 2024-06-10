@@ -5,8 +5,7 @@ return {
   dependencies = {
     {
       "nvim-telescope/telescope-fzf-native.nvim", -- FZF algorithm for telescope
-      build =
-      "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+      build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
     },
     "nvim-lua/plenary.nvim",
     {
@@ -68,10 +67,10 @@ return {
       },
       extensions = {
         fzf = {
-          fuzzy = true,                   -- false will only do exact matching
+          fuzzy = true, -- false will only do exact matching
           override_generic_sorter = true, -- override the generic sorter
-          override_file_sorter = true,    -- override the file sorter
-          case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+          override_file_sorter = true, -- override the file sorter
+          case_mode = "smart_case", -- or "ignore_case" or "respect_case"
         },
         smart_open = {
           ignore_patterns = { "*.git/*", "*/tmp/*", "*/node_modules/*" },

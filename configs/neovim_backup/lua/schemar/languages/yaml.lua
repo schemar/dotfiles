@@ -1,6 +1,6 @@
 local lsp_config = require("lspconfig")
 
-lsp_config.yamlls.setup {
+lsp_config.yamlls.setup({
   on_attach = require("schemar.languages.shared").on_attach,
   capabilities = require("schemar.languages.shared").capabilities,
   settings = {
@@ -12,7 +12,7 @@ lsp_config.yamlls.setup {
         -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
         url = "",
       },
-      schemas = require('schemastore').yaml.schemas(),
+      schemas = require("schemastore").yaml.schemas(),
     },
   },
-}
+})

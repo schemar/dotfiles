@@ -4,7 +4,7 @@ return {
   version = "*",
   opts = {
     open_mapping = [[<C-e>]],
-    insert_mappings = true,   -- whether or not the open mapping applies in insert mode
+    insert_mappings = true, -- whether or not the open mapping applies in insert mode
     terminal_mappings = true, -- whether or not the open mapping applies in the opened terminals
     direction = "horizontal",
     close_on_exit = false,
@@ -15,6 +15,6 @@ return {
       elseif term.direction == "vertical" then
         return vim.o.columns * 0.4
       end
-    end
+    end,
   },
 }

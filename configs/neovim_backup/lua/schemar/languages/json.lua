@@ -5,7 +5,7 @@ lsp_config.jsonls.setup({
   capabilities = require("schemar.languages.shared").capabilities,
   settings = {
     json = {
-      schemas = require('schemastore').json.schemas(),
+      schemas = require("schemastore").json.schemas(),
       validate = { enable = true },
     },
   },

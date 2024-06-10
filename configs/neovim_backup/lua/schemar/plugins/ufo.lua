@@ -3,7 +3,7 @@ return {
   name = "ufo",
   event = { "BufReadPost", "BufNewFile" },
   dependencies = { "kevinhwang91/promise-async" },
-  priority = 1,          -- Load after LSP, etc.
+  priority = 1, -- Load after LSP, etc.
   config = function()
     vim.o.foldcolumn = "0" -- '0' to hide or '1' to show
 
