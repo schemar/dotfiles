@@ -22,7 +22,7 @@
 [pull]
   rebase = false
 [delta]
-  syntax-theme = Catppuccin-mocha
+  syntax-theme = Catppuccin Macchiato
   line-numbers = true
 [init]
   defaultBranch = main

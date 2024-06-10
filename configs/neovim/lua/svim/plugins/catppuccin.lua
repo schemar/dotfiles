@@ -4,7 +4,7 @@ return {
 	priority = 1000,
 	lazy = true,
 	opts = {
-		flavour = "mocha", -- latte, frappe, macchiato, mocha
+		flavour = "macchiato", -- latte, frappe, macchiato, mocha
 		integrations = {
 			aerial = true,
 			cmp = true,
