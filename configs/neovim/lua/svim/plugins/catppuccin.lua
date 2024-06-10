@@ -6,7 +6,6 @@ return {
   opts = {
     flavour = "macchiato", -- latte, frappe, macchiato, mocha
     integrations = {
-      aerial = true,
       cmp = true,
       diffview = true,
       fidget = true,
@@ -17,6 +16,7 @@ return {
         -- colored_indent_levels enables char highlights per indent level. Follow the instructions here to set the latter up.
         colored_indent_levels = false,
       },
+      lsp_trouble = true,
       markdown = true,
       mason = true,
       native_lsp = {

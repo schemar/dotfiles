@@ -1,7 +1,82 @@
 return {
   {
+    "folke/trouble.nvim",
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics",
+      },
+      {
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics",
+      },
+      {
+        "<leader>lo",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols",
+      },
+      {
+        "<leader>ll",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP definitions, references, ...",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location list",
+      },
+      {
+        "<leader>xQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix list",
+      },
+      {
+        "gd",
+        "<cmd>Trouble lsp_definitions toggle focus=true<cr>",
+        desc = "Definitions",
+      },
+      {
+        "gD",
+        "<cmd>Trouble lsp_type_definitions toggle focus=true<cr>",
+        desc = "Type definitions",
+      },
+      {
+        "gr",
+        "<cmd>Trouble lsp_references toggle focus=true<cr>",
+        desc = "References",
+      },
+    },
+  },
+  {
     "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "folke/trouble.nvim" },
+    config = function()
+      -- Open results in Trouble:
+      local config = require("fzf-lua.config")
+      local actions = require("trouble.sources.fzf").actions
+      config.defaults.actions.files["ctrl-t"] = actions.open
+
+      -- Profiles
+      -- Conveniently, fzf-lua comes with a set of preconfigured profiles, notably:
+      --
+      -- Profile	Details
+      -- default	fzf-lua defaults, uses neovim "builtin" previewer and devicons (if available) for git/files/buffers
+      -- fzf-native	utilizes fzf's native previewing ability in the terminal where possible using bat for previews
+      -- fzf-tmux	similar to fzf-native and opens in a tmux popup (requires tmux > 3.2)
+      -- fzf-vim	closest to fzf.vim's defaults (+icons), also sets up user commands (:Files, :Rg, etc)
+      -- max-perf	similar to fzf-native and disables icons globally for max performance
+      -- telescope	closest match to telescope defaults in look and feel and keybinds
+      -- skim	uses skim as an fzf alternative, (requires the sk binary)
+      -- Use :FzfLua profiles to experiment with the different profiles, once you've found what you like and wish to make the profile persist, send a string argument at the first index of the table sent to the setup function:
+      --
+      -- require('fzf-lua').setup({'fzf-native'})
+      -- Note: setup can be called multiple times for profile "live" switching
+      require("fzf-lua").setup({ "default" })
+    end,
     keys = {
       {
         "<leader>f",
@@ -59,88 +134,7 @@ return {
         end,
         desc = "Code actions",
       },
-      {
-        "gd",
-        function()
-          require("fzf-lua").lsp_definitions()
-        end,
-        desc = "Definitions",
-      },
-      {
-        "gr",
-        function()
-          require("fzf-lua").lsp_references()
-        end,
-        desc = "References",
-      },
     },
-    config = function()
-      -- Profiles
-      -- Conveniently, fzf-lua comes with a set of preconfigured profiles, notably:
-      --
-      -- Profile	Details
-      -- default	fzf-lua defaults, uses neovim "builtin" previewer and devicons (if available) for git/files/buffers
-      -- fzf-native	utilizes fzf's native previewing ability in the terminal where possible using bat for previews
-      -- fzf-tmux	similar to fzf-native and opens in a tmux popup (requires tmux > 3.2)
-      -- fzf-vim	closest to fzf.vim's defaults (+icons), also sets up user commands (:Files, :Rg, etc)
-      -- max-perf	similar to fzf-native and disables icons globally for max performance
-      -- telescope	closest match to telescope defaults in look and feel and keybinds
-      -- skim	uses skim as an fzf alternative, (requires the sk binary)
-      -- Use :FzfLua profiles to experiment with the different profiles, once you've found what you like and wish to make the profile persist, send a string argument at the first index of the table sent to the setup function:
-      --
-      -- require('fzf-lua').setup({'fzf-native'})
-      -- Note: setup can be called multiple times for profile "live" switching
-      require("fzf-lua").setup({ "default" })
-    end,
-  },
-  {
-    "stevearc/aerial.nvim",
-    -- Optional dependencies
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-    keys = {
-      { "<leader>lo", "<cmd>AerialToggle<cr>", desc = "Aerial (Symbols)" },
-    },
-    config = function()
-      local icons = vim.deepcopy(require("svim.config").icons.kinds)
-      -- HACK: fix lua's weird choice for `Package` for control
-      -- structures like if/else/for/etc.
-      icons.lua = { Package = icons.Control }
-
-      require("aerial").setup({
-        attach_mode = "global",
-        backends = { "lsp", "treesitter", "markdown", "man" },
-        show_guides = true,
-        icons = icons,
-        guides = {
-          mid_item = "├╴",
-          last_item = "└╴",
-          nested_top = "│ ",
-          whitespace = "  ",
-        },
-        -- Keymaps in aerial window. Can be any value that `vim.keymap.set` accepts OR a table of keymap
-        -- options with a `callback` (e.g. { callback = function() ... end, desc = "", nowait = true })
-        -- Additionally, if it is a string that matches "actions.<name>",
-        -- it will use the mapping at require("aerial.actions").<name>
-        -- Set to `false` to remove a keymap
-        keymaps = {
-          ["<TAB>"] = "actions.scroll",
-          ["o"] = {
-            callback = function()
-              -- Temporarily set close_on_select to true so that aerial
-              -- closes when we jump to a definition.
-              require("aerial.config").close_on_select = true
-              require("aerial").select()
-              require("aerial.config").close_on_select = false
-            end,
-            desc = "Jump and quit",
-            nowait = true,
-          },
-        },
-      })
-    end,
   },
   {
     "christoomey/vim-tmux-navigator", -- Switch windows/panes vim/tmux
