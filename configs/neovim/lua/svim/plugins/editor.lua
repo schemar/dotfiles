@@ -75,7 +75,7 @@ return {
       --
       -- require('fzf-lua').setup({'fzf-native'})
       -- Note: setup can be called multiple times for profile "live" switching
-      require("fzf-lua").setup({ "default" })
+      require("fzf-lua").setup({ "default", fzf_colors = true })
     end,
     keys = {
       {
