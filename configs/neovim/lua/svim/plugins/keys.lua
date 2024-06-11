@@ -18,6 +18,7 @@ return {
           e = { vim.diagnostic.open_float, "Floating diagnostic" },
           r = { vim.lsp.buf.rename, "Rename" },
         },
+        t = "Todos",
       },
     })
   end,
