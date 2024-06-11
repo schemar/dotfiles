@@ -66,9 +66,25 @@ return {
       -- nvim-cmp:
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+      -- Extend for lua:
+      local capabilities_lua = {}
+      -- Copy capabilities table
+      for k, v in pairs(capabilities) do
+        capabilities_lua[k] = v
+      end
+      -- And add lua specifics
+      capabilities_lua.textDocument.foldingRange = {
+        -- Both required to not get an error with ufo:
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
+
       -- [[ Language Servers go here ]]
-      lspconfig.eslint.setup({})
+      lspconfig.eslint.setup({
+        capabilities = capabilities,
+      })
       lspconfig.jsonls.setup({
+        capabilities = capabilities,
         settings = {
           json = {
             schemas = require("schemastore").json.schemas(),
@@ -80,17 +96,12 @@ return {
         capabilities = capabilities,
       })
       -- TypeScript:
-      lspconfig.vtsls.setup({})
+      lspconfig.vtsls.setup({
+        capabilities = capabilities,
+      })
       lspconfig.yamlls.setup({
-        capabilities = {
-          textDocument = {
-            foldingRange = {
-              -- Both required to not get an error with ufo:
-              dynamicRegistration = false,
-              lineFoldingOnly = true,
-            },
-          },
-        },
+        capabilities = capabilities_lua,
+      })
       })
     end,
   },
