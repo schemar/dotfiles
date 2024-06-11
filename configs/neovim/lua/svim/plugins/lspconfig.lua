@@ -56,9 +56,10 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
       "b0o/schemastore.nvim",
+      "williamboman/mason-lspconfig.nvim",
       "yioneko/nvim-vtsls",
+      "j-hui/fidget.nvim",
     },
     config = function()
       local lspconfig = require("lspconfig")
@@ -197,6 +198,7 @@ return {
   },
   {
     "windwp/nvim-ts-autotag",
+    event = { "BufRead", "BufNewFile" },
     opts = {
       opts = {
         enable_close = true, -- Auto close tags
@@ -215,6 +217,7 @@ return {
   },
   {
     "j-hui/fidget.nvim",
+    lazy = true,
     opts = {
       notification = {
         window = {
