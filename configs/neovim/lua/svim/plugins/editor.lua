@@ -16,11 +16,6 @@ return {
         desc = "Buffer Diagnostics",
       },
       {
-        "<leader>lo",
-        "<cmd>Trouble symbols toggle focus=false<cr>",
-        desc = "Symbols",
-      },
-      {
         "<leader>ll",
         "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
         desc = "LSP definitions, references, ...",
@@ -395,5 +390,54 @@ return {
         lualine_z = {},
       },
     },
+  },
+  {
+    "stevearc/aerial.nvim",
+    -- Optional dependencies
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    keys = {
+      { "<leader>lo", "<cmd>AerialToggle<cr>", desc = "Aerial (Symbols)" },
+    },
+    config = function()
+      local icons = vim.deepcopy(require("svim.config").icons.kinds)
+      -- HACK: fix lua's weird choice for `Package` for control
+      -- structures like if/else/for/etc.
+      icons.lua = { Package = icons.Control }
+
+      require("aerial").setup({
+        attach_mode = "global",
+        backends = { "lsp", "treesitter", "markdown", "man" },
+        show_guides = true,
+        icons = icons,
+        guides = {
+          mid_item = "├╴",
+          last_item = "└╴",
+          nested_top = "│ ",
+          whitespace = "  ",
+        },
+        -- Keymaps in aerial window. Can be any value that `vim.keymap.set` accepts OR a table of keymap
+        -- options with a `callback` (e.g. { callback = function() ... end, desc = "", nowait = true })
+        -- Additionally, if it is a string that matches "actions.<name>",
+        -- it will use the mapping at require("aerial.actions").<name>
+        -- Set to `false` to remove a keymap
+        keymaps = {
+          ["<TAB>"] = "actions.scroll",
+          ["o"] = {
+            callback = function()
+              -- Temporarily set close_on_select to true so that aerial
+              -- closes when we jump to a definition.
+              require("aerial.config").close_on_select = true
+              require("aerial").select()
+              require("aerial.config").close_on_select = false
+            end,
+            desc = "Jump and quit",
+            nowait = true,
+          },
+        },
+      })
+    end,
   },
 }
