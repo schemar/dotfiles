@@ -389,6 +389,16 @@ return {
         lualine_y = {},
         lualine_z = {},
       },
+      extenstions = {
+        "aerial",
+        "fzf",
+        "lazy",
+        "man",
+        "nvim-tree",
+        "quickfix",
+        "toggleterm",
+        "trouble",
+      },
     },
   },
   {
