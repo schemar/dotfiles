@@ -89,89 +89,130 @@ return {
     },
   },
   {
-    "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons", "folke/trouble.nvim" },
-    config = function()
-      -- Open results in Trouble:
-      local config = require("fzf-lua.config")
-      local actions = require("trouble.sources.fzf").actions
-      config.defaults.actions.files["ctrl-t"] = actions.open
-
-      -- Profiles
-      -- Conveniently, fzf-lua comes with a set of preconfigured profiles, notably:
-      --
-      -- Profile	Details
-      -- default	fzf-lua defaults, uses neovim "builtin" previewer and devicons (if available) for git/files/buffers
-      -- fzf-native	utilizes fzf's native previewing ability in the terminal where possible using bat for previews
-      -- fzf-tmux	similar to fzf-native and opens in a tmux popup (requires tmux > 3.2)
-      -- fzf-vim	closest to fzf.vim's defaults (+icons), also sets up user commands (:Files, :Rg, etc)
-      -- max-perf	similar to fzf-native and disables icons globally for max performance
-      -- telescope	closest match to telescope defaults in look and feel and keybinds
-      -- skim	uses skim as an fzf alternative, (requires the sk binary)
-      -- Use :FzfLua profiles to experiment with the different profiles, once you've found what you like and wish to make the profile persist, send a string argument at the first index of the table sent to the setup function:
-      --
-      -- require('fzf-lua').setup({'fzf-native'})
-      -- Note: setup can be called multiple times for profile "live" switching
-      require("fzf-lua").setup({ "default", fzf_colors = true })
-    end,
+    "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "folke/trouble.nvim",
+      "nvim-telescope/telescope-ui-select.nvim",
+      {
+        "nvim-telescope/telescope-fzf-native.nvim", -- FZF algorithm for telescope
+        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+      },
+      {
+        "danielfalk/smart-open.nvim",
+        branch = "0.2.x",
+        dependencies = {
+          "kkharji/sqlite.lua",
+          "nvim-tree/nvim-web-devicons",
+          "nvim-telescope/telescope-fzf-native.nvim",
+        },
+      },
+    },
     keys = {
       {
+        "<leader><leader>",
+        "<cmd>Telescope smart_open<cr>",
+        desc = "Open",
+      },
+      {
         "<leader>f",
-        function()
-          require("fzf-lua").files()
-        end,
+        "<cmd>Telescope find_files<cr>",
         desc = "Files",
       },
       {
         "<leader>F",
-        function()
-          require("fzf-lua").oldfiles()
-        end,
+        "<cmd>Telescope oldfiles<cr>",
         desc = "Files (opened)",
       },
       {
         "<leader>b",
-        function()
-          require("fzf-lua").buffers()
-        end,
+        "<cmd>Telescope buffers<cr>",
         desc = "Buffers",
       },
       {
         "<leader>/",
-        function()
-          require("fzf-lua").live_grep()
-        end,
+        "<cmd>Telescope live_grep<cr>",
         desc = "Grep Project",
       },
       {
-        "<leader>?",
-        function()
-          require("fzf-lua").grep()
-        end,
-        desc = "Grep Project and FZF",
-      },
-      {
         "<leader>*",
-        function()
-          require("fzf-lua").grep_cword()
-        end,
-        desc = "Grep project (word under cursor)",
+        "<cmd>Telescope grep_string<cr>",
+        desc = "Grep project (selection)",
       },
       {
         "<leader>r",
-        function()
-          require("fzf-lua").resume()
-        end,
-        desc = "Resume FZF",
-      },
-      {
-        "<leader>la",
-        function()
-          require("fzf-lua").lsp_code_actions()
-        end,
-        desc = "Code actions",
+        "<cmd>Telescope resume<cr>",
+        desc = "Resume Telescope",
       },
     },
+    config = function()
+      local open_with_trouble = require("trouble.sources.telescope").open
+
+      local telescope = require("telescope")
+      local actions = require("telescope.actions")
+
+      telescope.setup({
+        defaults = {
+          mappings = {
+            i = {
+              ["<c-j>"] = actions.move_selection_next,
+              ["<c-k>"] = actions.move_selection_previous,
+              ["<esc>"] = actions.close, -- Close on first press of esc. No "normal" mode.
+              ["<c-t>"] = open_with_trouble,
+            },
+            n = { ["<c-t>"] = open_with_trouble },
+          },
+          -- Themeing
+          sorting_strategy = "ascending", -- List from the top down
+          layout_strategy = "horizontal",
+          layout_config = {
+            prompt_position = "top",
+          },
+        },
+        extensions = {
+          fzf = {
+            fuzzy = true, -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true, -- override the file sorter
+            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+            -- the default case_mode is "smart_case"
+          },
+          smart_open = {
+            match_algorithm = "fzf",
+            disable_devicons = false,
+          },
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown({
+              -- even more opts
+            }),
+
+            -- pseudo code / specification for writing custom displays, like the one
+            -- for "codeactions"
+            -- specific_opts = {
+            --   [kind] = {
+            --     make_indexed = function(items) -> indexed_items, width,
+            --     make_displayer = function(widths) -> displayer
+            --     make_display = function(displayer) -> function(e)
+            --     make_ordinal = function(e) -> string
+            --   },
+            --   -- for example to disable the custom builtin "codeactions" display
+            --      do the following
+            --   codeactions = false,
+            -- }
+          },
+        },
+      })
+
+      -- To get fzf loaded and working with telescope, you need to call
+      -- load_extension, somewhere after setup function:
+      require("telescope").load_extension("fzf")
+      require("telescope").load_extension("smart_open")
+
+      -- To get ui-select loaded and working with telescope, you need to call
+      -- load_extension, somewhere after setup function:
+      require("telescope").load_extension("ui-select")
+    end,
   },
   {
     "christoomey/vim-tmux-navigator", -- Switch windows/panes vim/tmux

@@ -15,6 +15,7 @@ return {
         l = {
           name = "Code",
 
+          a = { vim.lsp.buf.code_action, "Code actions" },
           e = { vim.diagnostic.open_float, "Floating diagnostic" },
           r = { vim.lsp.buf.rename, "Rename" },
         },

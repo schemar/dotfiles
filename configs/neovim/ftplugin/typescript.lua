@@ -1,4 +1,4 @@
--- Use VTSLS' code actions, as they provide more options than FZF-Lua's LSP code
+-- Use VTSLS' code actions, as they provide more options than NVim's LSP code
 -- actions.
 vim.api.nvim_set_keymap(
   "n",

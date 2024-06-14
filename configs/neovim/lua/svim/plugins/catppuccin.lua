@@ -41,6 +41,7 @@ return {
       },
       neogit = true,
       nvimtree = true,
+      telescope = { enabled = true },
       treesitter = true,
       ufo = true,
       which_key = true,
