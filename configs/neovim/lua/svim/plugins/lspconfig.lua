@@ -22,12 +22,10 @@ return {
       null_ls.setup({
         sources = {
           null_ls.builtins.diagnostics.ansiblelint,
-          null_ls.builtins.formatting.gdlint,
           null_ls.builtins.diagnostics.yamllint,
           null_ls.builtins.diagnostics.zsh,
           -- [[ Formatters, etc. go here ]]
           -- !! Remember to add your formatters in formatter.lua
-          null_ls.builtins.formatting.gdformat,
           null_ls.builtins.formatting.prettier,
           null_ls.builtins.formatting.stylua,
           null_ls.builtins.formatting.yamlfix,
@@ -37,7 +35,7 @@ return {
         -- I install some formatters here rather than through null_ls, as mason
         -- does not automatically pick those up.
         -- Add these here as Mason does not pick them up from the null_ls config:
-        ensure_installed = { "eslint_d", "gdtoolkit", "jq" },
+        ensure_installed = { "eslint_d", "jq" },
         automatic_installation = true,
       })
     end,
@@ -124,7 +122,6 @@ return {
       configs.setup({
         -- A list of parser names, or "all" (the five listed parsers should always be installed)
         ensure_installed = {
-          "gdscript",
           "bash",
           "c",
           "c_sharp",
@@ -134,6 +131,7 @@ return {
           "diff",
           "dockerfile",
           "earthfile",
+          "gdscript",
           "gdshader",
           "git_config",
           "git_rebase",
