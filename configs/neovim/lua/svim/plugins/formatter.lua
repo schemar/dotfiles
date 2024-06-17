@@ -1,31 +1,36 @@
 return {
-  "stevearc/conform.nvim",
-  event = { "BufWritePre" },
-  cmd = { "ConformInfo" },
+  "lukas-reineke/lsp-format.nvim",
   opts = {
-    -- Set up format-on-save
-    format_on_save = { timeout_ms = 5000, lsp_fallback = true },
-    formatters_by_ft = {
-      gdscript = { "gdformat" },
-      javascript = { "eslint_d", "prettier" },
-      json = { "jq" },
-      lua = { "stylua" },
-      typescript = { "eslint_d", "prettier" },
-      yaml = { "yamlfix" },
-      -- Conform will run multiple formatters sequentially
-      -- python = { "isort", "black" },
-      -- Use a sub-list to run only the first available formatter
-      -- javascript = { { "prettierd", "prettier" } },
+    gdscript = { "gdformat" },
+    html = {
+      order = { "html", "efm" },
+      sync = true,
     },
-    -- Customize formatters
-    -- formatters = {
-    -- 	shfmt = {
-    -- 		prepend_args = { "-i", "2" },
-    -- 	},
-    -- },
+    javascript = { "eslint_d", "prettier" },
+    json = {
+      order = { "jsonls", "efm" },
+      sync = true,
+    },
+    lua = {
+      order = { "lua_ls", "efm" },
+      sync = true,
+    },
+    markdown = {
+      order = { "efm" },
+      sync = true,
+    },
+    scss = {
+      order = { "cssls", "efm" },
+      sync = true,
+    },
+    typescript = {
+      order = { "typescript-tools", "tsserver", "efm" },
+      sync = true,
+    },
+    vue = {
+      order = { "efm" },
+      sync = true,
+    },
+    yaml = { "yamlfix", "efm" },
   },
-  -- init = function()
-  --   -- If you want the formatexpr, here is the place to set it
-  --   vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-  -- end,
 }

@@ -5,49 +5,13 @@ return {
     config = true,
   },
   {
-    "jay-babu/mason-null-ls.nvim",
-    lazy = true,
-    dependencies = { "williamboman/mason.nvim" },
-    -- Do not run setup here, will be done by none-ls.
-  },
-  {
-    "nvimtools/none-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "jay-babu/mason-null-ls.nvim",
-    },
-    config = function()
-      local null_ls = require("null-ls")
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.diagnostics.ansiblelint,
-          null_ls.builtins.diagnostics.yamllint,
-          null_ls.builtins.diagnostics.zsh,
-          -- [[ Formatters, etc. go here ]]
-          -- !! Remember to add your formatters in formatter.lua
-          null_ls.builtins.formatting.prettier,
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.yamlfix,
-        },
-      })
-      require("mason-null-ls").setup({
-        -- I install some formatters here rather than through null_ls, as mason
-        -- does not automatically pick those up.
-        -- Add these here as Mason does not pick them up from the null_ls config:
-        ensure_installed = { "eslint_d", "jq" },
-        automatic_installation = true,
-      })
-    end,
-  },
-  {
     "williamboman/mason-lspconfig.nvim",
     lazy = true,
     dependencies = {
-
       "williamboman/mason.nvim",
     },
     opts = {
+      ensure_installed = { "stylua" },
       automatic_installation = true,
     },
   },
@@ -62,6 +26,11 @@ return {
     },
     config = function()
       local lspconfig = require("lspconfig")
+      -- format:
+      local on_attach = function(client, bufnr)
+        require("lsp-format").on_attach(client, bufnr)
+      end
+
       -- nvim-cmp:
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -79,11 +48,38 @@ return {
       }
 
       -- [[ Language Servers go here ]]
+      lspconfig.cssls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+      lspconfig.efm.setup({
+        -- See also separate efm config in repo (outside nvim).
+        capabilities = capabilities,
+        on_attach = on_attach,
+        init_options = { documentFormatting = true },
+        filetypes = {
+          "gdscript",
+          "html",
+          "javascript",
+          "javascript.jsx",
+          "javascriptreact",
+          "json",
+          "lua",
+          "markdown",
+          "scss",
+          "typescript",
+          "typescript.tsx",
+          "typescriptreact",
+          "vue",
+        },
+      })
       lspconfig.eslint.setup({
         capabilities = capabilities,
+        on_attach = on_attach,
       })
       lspconfig.jsonls.setup({
         capabilities = capabilities,
+        on_attach = on_attach,
         settings = {
           json = {
             schemas = require("schemastore").json.schemas(),
@@ -91,21 +87,43 @@ return {
           },
         },
       })
+      lspconfig.html.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        filetypes = { "html", "templ", "vue" },
+      })
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
+        on_attach = on_attach,
       })
       -- TypeScript:
       lspconfig.vtsls.setup({
         capabilities = capabilities,
+        on_attach = on_attach,
       })
       lspconfig.yamlls.setup({
         capabilities = capabilities_lua,
+        on_attach = on_attach,
+        settings = {
+          yaml = {
+            schemaStore = {
+              -- You must disable built-in schemaStore support if you want to use
+              -- this plugin and its advanced options like `ignore`.
+              enable = false,
+              -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+              url = "",
+            },
+            schemas = require("schemastore").yaml.schemas(),
+          },
+        },
       })
       lspconfig.gdscript.setup({
         capabilities = capabilities,
+        on_attach = on_attach,
       })
       lspconfig.gdshader_lsp.setup({
         capabilities = capabilities,
+        on_attach = on_attach,
       })
     end,
   },
