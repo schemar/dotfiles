@@ -89,7 +89,8 @@ return {
       })
       lspconfig.html.setup({
         capabilities = capabilities,
-        on_attach = on_attach,
+        -- No formatting with HTML (confuses afilio).
+        -- on_attach = on_attach,
         filetypes = { "html", "templ", "vue" },
       })
       lspconfig.lua_ls.setup({

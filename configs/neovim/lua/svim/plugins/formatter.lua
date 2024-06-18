@@ -3,7 +3,7 @@ return {
   opts = {
     gdscript = { "gdformat" },
     html = {
-      order = { "html", "efm" },
+      order = { "efm" },
       sync = true,
     },
     javascript = { "eslint_d", "prettier" },
