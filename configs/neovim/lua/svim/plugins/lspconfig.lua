@@ -11,7 +11,6 @@ return {
       "williamboman/mason.nvim",
     },
     opts = {
-      ensure_installed = { "stylua" },
       automatic_installation = true,
     },
   },
