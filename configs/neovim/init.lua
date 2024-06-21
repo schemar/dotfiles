@@ -18,14 +18,3 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("svim.plugins")
 
 vim.cmd.colorscheme("catppuccin")
-
--- Open file picker if no file was opened as argument to nvim:
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    if vim.fn.argc(-1) == 0 then
-      require("telescope").extensions.smart_open.smart_open({
-        cwd_only = true,
-      })
-    end
-  end,
-})
