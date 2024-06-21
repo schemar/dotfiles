@@ -460,7 +460,7 @@ return {
 
       require("aerial").setup({
         attach_mode = "global",
-        backends = { "lsp", "treesitter", "markdown", "man" },
+        backends = { "treesitter", "lsp", "markdown", "man" },
         show_guides = true,
         icons = icons,
         guides = {
