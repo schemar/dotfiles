@@ -491,4 +491,94 @@ return {
       })
     end,
   },
+  {
+    "goolord/alpha-nvim",
+    event = "VimEnter",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      local alpha = require("alpha")
+      local dashboard = require("alpha.themes.dashboard")
+
+      local icons = require("svim.config").icons.ui
+
+      -- Set header
+      dashboard.section.header.val = {
+        [[                                  __]],
+        [[     ___     ___    ___   __  __ /\_\    ___ ___]],
+        [[    / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\]],
+        [[   /\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \]],
+        [[   \ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
+        [[    \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+      }
+      -- dashboard.section.header.val = {
+      --   "                                                     ",
+      --   "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
+      --   "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
+      --   "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
+      --   "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
+      --   "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
+      --   "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
+      --   "                                                     ",
+      -- }
+      -- dashboard.section.header.val = {
+      --   [[                                                                       ]],
+      --   [[                                                                       ]],
+      --   [[                                                                       ]],
+      --   [[                                                                       ]],
+      --   [[                                                                       ]],
+      --   [[                                                                       ]],
+      --   [[                                                                       ]],
+      --   [[                                                                     ]],
+      --   [[       ████ ██████           █████      ██                     ]],
+      --   [[      ███████████             █████                             ]],
+      --   [[      █████████ ███████████████████ ███   ███████████   ]],
+      --   [[     █████████  ███    █████████████ █████ ██████████████   ]],
+      --   [[    █████████ ██████████ █████████ █████ █████ ████ █████   ]],
+      --   [[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]],
+      --   [[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
+      --   [[                                                                       ]],
+      --   [[                                                                       ]],
+      --   [[                                                                       ]],
+      -- }
+      -- dashboard.section.header.val = {
+      --   [[ ███       ███ ]],
+      --   [[█████      ████]],
+      --   [[███████     █████]],
+      --   [[████████    █████]],
+      --   [[█████████   █████]],
+      --   [[█████████  █████]],
+      --   [[█████ ████ █████]],
+      --   [[█████  █████████]],
+      --   [[█████   █████████]],
+      --   [[█████    ████████]],
+      --   [[█████     ███████]],
+      --   [[████      █████]],
+      --   [[ ███       ███ ]],
+      --   [[                  ]],
+      --   [[ N  E  O  V  I  M ]],
+      -- }
+
+      -- Set menu
+      dashboard.section.buttons.val = {
+        dashboard.button(
+          "f",
+          "  " .. icons.ChevronShortRight .. " Search file",
+          "<cmd>Telescope smart_open<cr>"
+        ),
+        dashboard.button(
+          "/",
+          "󰍉  " .. icons.ChevronShortRight .. " Grep",
+          "<cmd>Telescope live_grep<cr>"
+        ),
+        dashboard.button("g", "  " .. icons.ChevronShortRight .. " Git", "<cmd>Neogit<cr>"),
+        dashboard.button("q", "󰅙  " .. icons.ChevronShortRight .. " Quit NVIM", "<cmd>qa<cr>"),
+      }
+
+      -- Send config to alpha
+      alpha.setup(dashboard.opts)
+
+      -- Disable folding on alpha buffer
+      vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
+    end,
+  },
 }
