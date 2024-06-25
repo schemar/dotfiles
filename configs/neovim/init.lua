@@ -15,6 +15,15 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-require("lazy").setup("svim.plugins")
+require("lazy").setup("svim.plugins", {
+  pkg = {
+    -- the first package source that is found for a plugin will be used.
+    sources = {
+      "lazy",
+      -- "rockspec",
+      "packspec",
+    },
+  },
+})
 
 vim.cmd.colorscheme("catppuccin")
