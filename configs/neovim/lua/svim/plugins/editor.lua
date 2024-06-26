@@ -572,6 +572,13 @@ return {
           "<cmd>Telescope live_grep<cr>"
         ),
         dashboard.button("g", "  " .. icons.ChevronShortRight .. " Git", "<cmd>Neogit<cr>"),
+        dashboard.button("l", "󰒲  " .. icons.ChevronShortRight .. " Lazy", "<cmd>Lazy<cr>"),
+        dashboard.button("m", "󰣪  " .. icons.ChevronShortRight .. " Mason", "<cmd>Mason<cr>"),
+        dashboard.button(
+          "t",
+          "  " .. icons.ChevronShortRight .. " TSUpdate",
+          "<cmd>TSUpdate<cr>"
+        ),
         dashboard.button("q", "󰅙  " .. icons.ChevronShortRight .. " Quit NVIM", "<cmd>qa<cr>"),
       }
 
