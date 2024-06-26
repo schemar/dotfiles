@@ -563,7 +563,7 @@ return {
       dashboard.section.buttons.val = {
         dashboard.button(
           "f",
-          "  " .. icons.ChevronShortRight .. " Search file",
+          "  " .. icons.ChevronShortRight .. " File",
           "<cmd>Telescope smart_open<cr>"
         ),
         dashboard.button(
@@ -579,7 +579,7 @@ return {
           "  " .. icons.ChevronShortRight .. " TSUpdate",
           "<cmd>TSUpdate<cr>"
         ),
-        dashboard.button("q", "󰅙  " .. icons.ChevronShortRight .. " Quit NVIM", "<cmd>qa<cr>"),
+        dashboard.button("q", "󰅙  " .. icons.ChevronShortRight .. " Quit", "<cmd>qa<cr>"),
       }
 
       -- Send config to alpha
