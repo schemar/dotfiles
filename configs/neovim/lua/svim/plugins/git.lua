@@ -92,6 +92,10 @@ return {
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
+    cmd = {
+      "DiffviewOpen",
+      "DiffviewFileHistory",
+    },
     keys = {
       { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Branch history" },
       { "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", desc = "File history" },
