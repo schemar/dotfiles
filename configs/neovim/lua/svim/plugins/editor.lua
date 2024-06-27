@@ -567,6 +567,11 @@ return {
           "<cmd>Telescope smart_open<cr>"
         ),
         dashboard.button(
+          "e",
+          "󰙅  " .. icons.ChevronShortRight .. " Explorer",
+          "<cmd>NvimTreeOpen<cr>"
+        ),
+        dashboard.button(
           "/",
           "󰍉  " .. icons.ChevronShortRight .. " Grep",
           "<cmd>Telescope live_grep<cr>"
