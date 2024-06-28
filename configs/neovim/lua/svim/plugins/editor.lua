@@ -225,10 +225,13 @@ return {
     opts = {
       indent = {
         char = "│", -- Examples: │ ┃ ┊ ┆ ┇ ┋ ╏
+        tab_char = "│",
       },
-      -- scope = {
-      -- 	enabled = false,
-      -- },
+      scope = {
+        enabled = true,
+        show_start = false,
+        show_end = false,
+      },
     },
   },
   {
