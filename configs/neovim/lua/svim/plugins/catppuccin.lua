@@ -6,9 +6,11 @@ return {
   opts = {
     flavour = "macchiato", -- latte, frappe, macchiato, mocha
     integrations = {
+      beacon = true,
       cmp = true,
       diffview = true,
       fidget = true,
+      flash = true,
       gitsigns = true,
       indent_blankline = {
         enabled = true,
