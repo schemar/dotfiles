@@ -499,7 +499,17 @@ return {
     "danilamihailov/beacon.nvim",
     event = { "CursorMoved", "WinEnter", "FocusGained" },
     opts = {
-      enabled = true, --- (boolean | fun():boolean) check if enabled
+      enabled = function()
+        local disabledFiletypes = {
+          alpha = true,
+        }
+
+        if vim.bo.ft:find("Neogit") or disabledFiletypes[vim.bo.ft] then
+          return false
+        end
+
+        return true
+      end,
       speed = 2, --- integer speed at wich animation goes
       width = 40, --- integer width of the beacon window
       winblend = 70, --- integer starting transparency of beacon window :h winblend
