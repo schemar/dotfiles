@@ -12,6 +12,10 @@ return {
       fidget = true,
       flash = true,
       gitsigns = true,
+      illuminate = {
+        enabled = true,
+        lsp = false,
+      },
       indent_blankline = {
         enabled = true,
         scope_color = "", -- catppuccin color (eg. `lavender`) Default: text
