@@ -230,6 +230,11 @@ return {
     end,
   },
   {
+    "nvim-treesitter/nvim-treesitter-context",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = true,
+  },
+  {
     "windwp/nvim-ts-autotag",
     event = { "BufRead", "BufNewFile" },
     opts = {

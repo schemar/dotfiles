@@ -49,6 +49,7 @@ return {
       nvimtree = true,
       telescope = { enabled = true },
       treesitter = true,
+      treesitter_context = true,
       ufo = true,
       which_key = true,
     },
