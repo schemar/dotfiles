@@ -422,7 +422,19 @@ return {
         lualine_a = { "mode", "searchcount" },
         lualine_b = { "diff", "diagnostics" },
         lualine_c = { { "filename", path = 1 } },
-        lualine_x = { "filetype" },
+        lualine_x = {
+          {
+            "branch",
+            fmt = function(str)
+              if string.len(str) < 20 then
+                return str
+              else
+                return string.sub(str, 0, 9) .. "..." .. string.sub(str, string.len(str) - 8)
+              end
+            end,
+          },
+          "filetype",
+        },
         lualine_y = { "progress" },
         lualine_z = { "location" },
       },
