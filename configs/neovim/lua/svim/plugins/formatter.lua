@@ -1,7 +1,7 @@
 return {
   "lukas-reineke/lsp-format.nvim",
   opts = {
-    gdscript = { "gdformat" },
+    gdscript = { "efm" },
     html = {
       order = { "efm" },
       sync = true,
