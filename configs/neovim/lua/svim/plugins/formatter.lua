@@ -24,7 +24,7 @@ return {
       sync = true,
     },
     typescript = {
-      order = { "typescript-tools", "tsserver", "efm" },
+      order = { "typescript-tools", "tsserver", "ts_ls", "efm" },
       sync = true,
     },
     vue = {
