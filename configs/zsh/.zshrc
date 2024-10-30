@@ -25,6 +25,9 @@ alias ll='lsd -al --tree'
 
 alias h='function hdi(){ howdoi $* -c -n 5; }; hdi'
 
+alias n='nvim'
+alias ng='rm -f /Users/schemar/.cache/godothost && nvim --listen /Users/schemar/.cache/godothost'
+
 alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
 # Tmux usability aliases
