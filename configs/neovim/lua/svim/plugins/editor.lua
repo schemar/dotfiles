@@ -2,22 +2,27 @@ return {
   {
     "folke/trouble.nvim",
     dependencies = { "folke/todo-comments.nvim" },
-    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    opts = {
+      auto_jump = true, -- auto jump to the item when there's only one
+      auto_preview = true, -- automatically open preview when going through items in Trouble
+      auto_refresh = false, -- auto refresh when open (update which references to show in Trouble when going to another item in the buffer)
+      follow = true, -- follow the current item (move in Trouble list when going to another item in the buffer)
+    }, -- for default options, refer to the configuration section for custom setup.
     cmd = "Trouble",
     keys = {
       {
         "<leader>ld",
-        "<cmd>Trouble diagnostics toggle<cr>",
+        "<cmd>Trouble diagnostics focus=true<cr>",
         desc = "Diagnostics",
       },
       {
         "<leader>lD",
-        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        "<cmd>Trouble diagnostics filter.buf=0 focus=true<cr>",
         desc = "Buffer Diagnostics",
       },
       {
         "<leader>ll",
-        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        "<cmd>Trouble lsp focus=false win.position=right<cr>",
         desc = "LSP definitions, references, ...",
       },
       {
@@ -27,27 +32,27 @@ return {
       },
       {
         "<leader>tm",
-        "<cmd>Trouble todo focus=true filter = {tag = {TODOMS}}<cr>", -- Trouble todo filter = {tag = {TODO,FIX,FIXME}}
+        "<cmd>Trouble todo filter.tag={TODOMS} focus=true<cr>", -- Trouble todo filter = {tag = {TODO,FIX,FIXME}}
         desc = "Todos MS",
       },
       {
         "<leader>tb",
-        "<cmd>Trouble todo focus=true filter = {buf = 0}<cr>", -- Trouble todo filter = {tag = {TODO,FIX,FIXME}}
+        "<cmd>Trouble todo filter.buf=0 focus=true<cr>", -- Trouble todo filter = {tag = {TODO,FIX,FIXME}}
         desc = "Todos (curr. buffer)",
       },
       {
         "gd",
-        "<cmd>Trouble lsp_definitions toggle focus=true<cr>",
+        "<cmd>Trouble lsp_definitions focus=true<cr>",
         desc = "Definitions",
       },
       {
         "gD",
-        "<cmd>Trouble lsp_type_definitions toggle focus=true<cr>",
+        "<cmd>Trouble lsp_type_definitions focus=true<cr>",
         desc = "Type definitions",
       },
       {
         "gr",
-        "<cmd>Trouble lsp_references toggle focus=true<cr>",
+        "<cmd>Trouble lsp_references focus=true<cr>",
         desc = "References",
       },
     },
