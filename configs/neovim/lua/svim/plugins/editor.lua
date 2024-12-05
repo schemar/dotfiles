@@ -366,8 +366,8 @@ return {
 
         vim.keymap.set("n", "l", api.node.open.edit, opts("Open"))
         vim.keymap.set("n", "h", api.node.navigate.parent_close, opts("Close Directory"))
-        vim.keymap.set("n", "o", function()
-          api.node.open.edit()
+        vim.keymap.set("n", "o", function(node)
+          api.node.open.edit(node)
           api.tree.close()
         end, opts("edit_and_close"))
       end
