@@ -414,14 +414,18 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
-      options = { theme = "catppuccin" },
-      disabled_filetypes = {
-        statusline = {
-          "aerial",
-          "NeogitCommitPopup",
-          "NeogitStatus",
+      options = {
+        theme = "catppuccin",
+        disabled_filetypes = {
+          statusline = {
+            "aerial",
+            "alpha",
+            "gitcommit",
+            "NeogitStatus",
+            "NvimTree",
+          },
+          winbar = {},
         },
-        winbar = {},
       },
       sections = {
         lualine_a = { "mode", "searchcount" },
@@ -456,8 +460,8 @@ return {
         "fzf",
         "lazy",
         "man",
+        "mason",
         "nvim-tree",
-        "quickfix",
         "toggleterm",
         "trouble",
       },
