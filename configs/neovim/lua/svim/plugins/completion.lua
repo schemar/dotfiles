@@ -87,7 +87,7 @@ return {
           },
           ["<C-k>"] = {
             c = function()
-              cmp.select_next_item()
+              cmp.select_prev_item()
             end,
           },
         }),
@@ -106,7 +106,7 @@ return {
           },
           ["<C-k>"] = {
             c = function()
-              cmp.select_next_item()
+              cmp.select_prev_item()
             end,
           },
         }),
