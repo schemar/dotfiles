@@ -558,9 +558,13 @@ return {
     opts = {
       incremental = true,
     },
+    -- ⚠️ When creating the keymaps manually either use a lua function like
+    -- `function() require("flash").jump() end` as the rhs, or a string like
+    -- `<cmd>lua require("flash").jump()<cr>`.
+    -- DO NOT use `:lua`, since that will break dot-repeat.
     keys = {
       {
-        "s",
+        "m",
         mode = { "n", "x", "o" },
         function()
           require("flash").jump()
@@ -568,7 +572,7 @@ return {
         desc = "Flash",
       },
       {
-        "S",
+        "M",
         mode = { "n", "x", "o" },
         function()
           require("flash").treesitter()
