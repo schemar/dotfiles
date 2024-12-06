@@ -47,6 +47,11 @@ return {
       }
 
       -- [[ Language Servers go here ]]
+      lspconfig.bashls.setup({
+        -- bashls includes shellcheck and shfmt
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
       lspconfig.cssls.setup({
         capabilities = capabilities,
         on_attach = on_attach,
