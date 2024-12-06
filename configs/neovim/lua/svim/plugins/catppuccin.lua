@@ -8,6 +8,7 @@ return {
     integrations = {
       beacon = true,
       cmp = true,
+      copilot_vim = true,
       diffview = true,
       fidget = true,
       flash = true,

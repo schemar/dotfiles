@@ -1,5 +1,8 @@
 return {
   {
+    "github/copilot.vim",
+  },
+  {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "nvim-lua/plenary.nvim", -- for petertriho/cmp-git
