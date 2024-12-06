@@ -23,7 +23,6 @@ This repository contains configurations for my productivity stack and some basic
 ### Graphical System
 
 - [wezterm](https://github.com/wez/wezterm)❤️
-- [Godot](https://github.com/godotengine/godot)❤️
 
 ## Usage
 
