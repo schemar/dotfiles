@@ -8,12 +8,12 @@ This repository contains configurations for my productivity stack and some basic
 
 ### Terminal
 
-- [asdf](https://github.com/asdf-vm/asdf)
 - [bat](https://github.com/sharkdp/bat)
 - [bottom](https://github.com/ClementTsang/bottom)
 - [efm](https://github.com/mattn/efm-langserver)
 - [fzf](https://github.com/junegunn/fzf)
 - [lsd](https://github.com/lsd-rs/lsd)
+- [mise](https://github.com/jdx/mise)
 - [NeoVim](https://github.com/neovim/neovim)❤️
 - [ranger](https://github.com/ranger/ranger)
 - [starship](https://github.com/starship/starship)
