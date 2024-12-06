@@ -27,3 +27,6 @@ require("lazy").setup("svim.plugins", {
 })
 
 vim.cmd.colorscheme("catppuccin")
+
+-- Prepend mise shims to PATH
+vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
