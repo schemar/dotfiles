@@ -2,21 +2,7 @@
 # Silences error on ZSH startup on macOS with multiple users.
 ZSH_DISABLE_COMPFIX=true
 
-export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$PATH"
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(npm yarn)
-
-source $ZSH/oh-my-zsh.sh
-eval "$(mise activate zsh)"
-
+export PATH="$HOME/.local/bin:$PATH"
 
 alias g='git'
 alias y='yarn'
@@ -87,6 +73,10 @@ precmd_functions+=(_fix_cursor)
 
 # Correct locale
 export LC_ALL=en_US.UTF-8
+
+eval "$(mise activate zsh)"
+
+source <(npm completion)
 
 # direnv to load environment (variables) per directory/project
 eval "$(direnv hook zsh)"
