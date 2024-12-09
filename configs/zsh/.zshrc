@@ -2,7 +2,13 @@
 # Silences error on ZSH startup on macOS with multiple users.
 ZSH_DISABLE_COMPFIX=true
 
+#
+# ENVIRONMENT
+#
+
 export PATH="$HOME/.local/bin:$PATH"
+export VISUAL="nvim"
+export EDITOR="nvim"
 
 alias g='git'
 alias y='yarn'
@@ -23,8 +29,6 @@ alias tmd='tmux new-session -A -s dots'
 alias tme='tmux new-session -A -s eoi'
 alias tmh='tmux new-session -A -s home-as'
 
-# User configuration
-
 # Enable 256 colors in tmux
 alias tmux='tmux -2'
 
@@ -34,17 +38,10 @@ HISTSIZE=10000
 SAVEHIST=10000
 unsetopt beep
 
+# Completion
 zstyle :compinstall filename "$HOME/.zshrc"
-
-# Allow adding ZSH hooks
-autoload -U add-zsh-hook
-
 autoload -Uz compinit
-# Only check for new stuff once a day to improve shell startup time
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
+compinit
 
 # Use Vi key bindings
 # The starship prompt indicates the mode:
@@ -74,9 +71,15 @@ precmd_functions+=(_fix_cursor)
 # Correct locale
 export LC_ALL=en_US.UTF-8
 
-eval "$(mise activate zsh)"
+#
+# TOOLS
+#
 
-source <(npm completion)
+# staship shell prompt
+export STARSHIP_CONFIG="$HOME/.config/starship.toml"
+eval "$(starship init zsh)"
+
+eval "$(mise activate zsh)"
 
 # direnv to load environment (variables) per directory/project
 eval "$(direnv hook zsh)"
@@ -106,12 +109,21 @@ export FZF_DEFAULT_OPTS=" \
 # --color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
 # --color=marker:#dc8a78,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39"
 
-export VISUAL="nvim"
-export EDITOR="nvim"
+#
+# COMPLETIONS
+#
 
-# staship shell prompt
-export STARSHIP_CONFIG="$HOME/.config/starship.toml"
-eval "$(starship init zsh)"
+# npm run scripts
+_npm_completion() {
+  local si=$IFS
+  compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+               COMP_LINE=$BUFFER \
+               COMP_POINT=0 \
+               npm completion -- "${words[@]}" \
+               2>/dev/null)
+  IFS=$si
+}
+compdef _npm_completion npm
 
 #compdef gt
 ###-begin-gt-completions-###
