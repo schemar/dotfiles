@@ -292,7 +292,7 @@ return {
       },
       {
         "<leader>E",
-        "<cmd>NvimTreeFindFileToggle<cr>",
+        "<cmd>NvimTreeFindFile<cr>",
         desc = "Explorer (curr. dir.)",
       },
     },
