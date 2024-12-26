@@ -1,6 +1,12 @@
 return {
   {
     "github/copilot.vim",
+    init = function()
+      vim.keymap.set("i", "<C-e>", "<Plug>(copilot-next)")
+      vim.keymap.set("i", "<C-q>", "<Plug>(copilot-previous)")
+      -- Doesn't work:
+      -- vim.keymap.set("i", "<C-\\>", "<Plug>(copilot-suggest)")
+    end,
   },
   {
     "hrsh7th/nvim-cmp",
