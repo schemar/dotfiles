@@ -1,11 +1,35 @@
 return {
   {
-    "github/copilot.vim",
-    init = function()
-      vim.keymap.set("i", "<C-e>", "<Plug>(copilot-next)")
-      vim.keymap.set("i", "<C-q>", "<Plug>(copilot-previous)")
-      -- Doesn't work:
-      -- vim.keymap.set("i", "<C-\\>", "<Plug>(copilot-suggest)")
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        -- panel and suggestions are disabled as per recommendation for copilot-cmp.
+        -- To enable, see more config options in documentation.
+        panel = { enabled = false },
+        suggestion = { enabled = false },
+        filetypes = {
+          yaml = false,
+          markdown = false,
+          help = false,
+          gitcommit = false,
+          gitrebase = false,
+          hgcommit = false,
+          svn = false,
+          cvs = false,
+          ["."] = false,
+        },
+        copilot_node_command = "node", -- Node.js version must be > 18.x
+        server_opts_overrides = {},
+      })
+    end,
+  },
+  {
+    -- See also nvim-cmp
+    "zbirenbaum/copilot-cmp",
+    config = function()
+      require("copilot_cmp").setup()
     end,
   },
   {
@@ -59,6 +83,8 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = cmp.config.sources({
+          -- See also zbirenbaum/copilot.lua
+          { name = "copilot", group_index = 2 },
           { name = "nvim_lsp" },
           -- { name = "vsnip" }, -- For vsnip users.
           { name = "luasnip" }, -- For luasnip users.
