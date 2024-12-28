@@ -1,10 +1,9 @@
 local wezterm = require("wezterm")
 
 return {
-  -- Allows to compose umlauts, etc. with left option key.
-  -- Means a backup "real" Alt-key is the right option key.
-  send_composed_key_when_left_alt_is_pressed = true,
-  send_composed_key_when_right_alt_is_pressed = false,
+  -- -- Allows to compose umlauts, etc. with left option key.
+  -- send_composed_key_when_left_alt_is_pressed = true,
+  -- send_composed_key_when_right_alt_is_pressed = false,
 
   font = wezterm.font_with_fallback({
     {

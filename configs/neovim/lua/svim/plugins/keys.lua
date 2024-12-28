@@ -20,6 +20,7 @@ return {
     wk.add({
       { "<c-w>", group = "Window" },
       { "<c-w>s", "<cmd>vsplit<cr>", desc = "Split window" },
+      { "<m-s>", "<cmd>vsplit<cr>", desc = "Split window" },
       { "<c-w>v", "<cmd>split<cr>", desc = "Split window verticallly" },
       { "<leader>", group = "Leader" },
       { "<leader>g", desc = "Git" },
