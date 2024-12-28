@@ -1,6 +1,7 @@
 theme = "catppuccin_macchiato"
 
 [editor]
+mouse = false
 line-number = "absolute"
 cursorline = true
 # Required, as helix does not identify true-color support in tmux:
