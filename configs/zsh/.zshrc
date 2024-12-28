@@ -21,6 +21,9 @@ alias h='function hdi(){ howdoi $* -c -n 5; }; hdi'
 alias n='nvim'
 alias ng='rm -f /Users/schemar/.cache/godothost && nvim --listen /Users/schemar/.cache/godothost'
 
+# Required for gitui to work with git push via SSH:
+alias 'gitui'='eval $(ssh-agent) && ssh-add ~/.ssh/id_rsa && gitui'
+
 alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
 
 # Tmux usability aliases
