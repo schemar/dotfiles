@@ -7,8 +7,8 @@ ZSH_DISABLE_COMPFIX=true
 #
 
 export PATH="$HOME/.local/bin:$PATH"
-export VISUAL="nvim"
-export EDITOR="nvim"
+export VISUAL="hx"
+export EDITOR="hx"
 
 alias g='git'
 alias y='yarn'
