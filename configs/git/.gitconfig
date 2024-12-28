@@ -34,3 +34,5 @@
   user = schemar
 [log]
   follow = true
+[credential]
+	helper = store
