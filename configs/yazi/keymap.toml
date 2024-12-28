@@ -1,0 +1,4 @@
+[[manager.prepend_keymap]]
+on = ["F"]
+# See in plugins directory:
+run = "plugin layout-tree-only"
