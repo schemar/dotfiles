@@ -12,12 +12,15 @@ This repository contains configurations for my productivity stack and some basic
 - [bottom](https://github.com/ClementTsang/bottom)
 - [efm](https://github.com/mattn/efm-langserver)
 - [fzf](https://github.com/junegunn/fzf)
+- [gitui](https://github.com/extrawurst/gitui)
+- [helix](https://github.com/helix-editor/helix)
 - [lsd](https://github.com/lsd-rs/lsd)
 - [mise](https://github.com/jdx/mise)
 - [NeoVim](https://github.com/neovim/neovim)❤️
 - [ranger](https://github.com/ranger/ranger)
 - [starship](https://github.com/starship/starship)
 - [tmux](https://github.com/tmux/tmux)❤️
+- [yazi](https://github.com/sxyazi/yazi)
 - [Zsh](https://www.zsh.org/)
 
 ### Graphical System
@@ -69,3 +72,8 @@ Usage:
 - When you re-start NeoVim, `treesitter` should install its packages and `mason`
   should install all kinds of language servers and tools.
   Restart NeoVim.
+
+### Yazi
+
+- `F` to change view to single-column
+- `o` to open file "in other tmux pane" with helix's `:open` command
