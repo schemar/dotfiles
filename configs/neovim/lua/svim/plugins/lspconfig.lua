@@ -122,6 +122,10 @@ return {
           },
         },
       })
+      lspconfig.zls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
       lspconfig.gdscript.setup({
         capabilities = capabilities,
         on_attach = on_attach,
