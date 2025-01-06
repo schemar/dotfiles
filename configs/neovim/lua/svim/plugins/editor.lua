@@ -438,7 +438,6 @@ return {
           statusline = {
             "aerial",
             "alpha",
-            "gitcommit",
             "NeogitStatus",
             "NvimTree",
           },
@@ -633,8 +632,6 @@ return {
           "fugitive",
           "aerial",
           "NvimTree",
-          "NeogitCommitMessage",
-          "NeogitStatus",
         },
       })
     end,
