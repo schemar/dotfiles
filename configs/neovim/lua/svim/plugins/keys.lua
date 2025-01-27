@@ -54,6 +54,16 @@ return {
         desc = "Sync",
       },
       {
+        "<leader>gtp",
+        "<cmd>terminal gt submit --publish --no-edit<cr>",
+        desc = "Submit (publish)",
+      },
+      {
+        "<leader>gtP",
+        "<cmd>terminal gt submit --draft --no-edit<cr>",
+        desc = "Submit (draft)",
+      },
+      {
         "<leader>gtS",
         "<cmd>terminal gt sync --all<cr>",
         desc = "Sync interactive",
