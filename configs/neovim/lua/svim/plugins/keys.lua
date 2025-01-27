@@ -1,3 +1,35 @@
+local term_command = "split | terminal "
+
+local term = function(command)
+  vim.cmd(term_command .. command)
+end
+
+local term_and_edit = function(command)
+  local prev_bufnr = vim.api.nvim_get_current_buf()
+
+  -- Open a terminal and run the command
+  term(command)
+  local term_bufnr = vim.api.nvim_get_current_buf()
+
+  -- React when the terminal command finishes
+  vim.api.nvim_create_autocmd("TermClose", {
+    buffer = term_bufnr,
+    once = true,
+    callback = function()
+      -- Wait for user input before removing the buffer
+      vim.api.nvim_echo({ { "\nPress <CR> to close the terminal", "WarningMsg" } }, false, {})
+      -- Force close the current (terminal) window
+      vim.api.nvim_win_close(0, true)
+      -- Force close the terminal buffer
+      vim.api.nvim_buf_delete(term_bufnr, { force = true })
+      -- Go back to the previous buffer
+      vim.api.nvim_set_current_buf(prev_bufnr)
+      -- Call `edit` to re-load file content
+      vim.cmd("edit")
+    end,
+  })
+end
+
 return {
   "folke/which-key.nvim",
   event = "VeryLazy",
@@ -36,55 +68,63 @@ return {
         desc = "Split window verticallly",
       },
       { "<leader>", group = "Leader" },
+      { "<leader>b", desc = "Buffers" },
       { "<leader>g", desc = "Git" },
-      { "<leader>gt", group = "Graphite" },
+      { "<leader>a", group = "Graphite" },
       {
-        "<leader>gtl",
+        "<leader>al",
         "<cmd>!gt ls<cr>",
         desc = "List stacks",
       },
       {
-        "<leader>gtc",
-        "<cmd>terminal gt create<cr>",
-        desc = "Create interactive",
+        "<leader>ac",
+        function()
+          term("gt create")
+        end,
+        desc = "Create",
       },
       {
-        "<leader>gts",
-        "<cmd>!gt sync --all --no-interactive --quiet<cr><cmd>edit<cr>",
+        "<leader>as",
+        function()
+          term_and_edit("gt sync")
+        end,
         desc = "Sync",
       },
       {
-        "<leader>gtp",
-        "<cmd>terminal gt submit --publish --no-edit<cr>",
+        "<leader>ap",
+        function()
+          term("gt submit --no-edit")
+        end,
+        desc = "Submit",
+      },
+      {
+        "<leader>aP",
+        function()
+          term("gt submit --no-edit --publish")
+        end,
         desc = "Submit (publish)",
       },
       {
-        "<leader>gtP",
-        "<cmd>terminal gt submit --draft --no-edit<cr>",
-        desc = "Submit (draft)",
-      },
-      {
-        "<leader>gtS",
-        "<cmd>terminal gt sync --all<cr>",
-        desc = "Sync interactive",
-      },
-      {
-        "<leader>gtm",
-        "<cmd>!gt modify --no-interactive --quiet<cr><cmd>edit<cr>",
+        "<leader>am",
+        function()
+          term("gt modify")
+        end,
         desc = "Modify",
       },
       {
-        "<leader>gtM",
-        "<cmd>terminal gt modify",
-        desc = "Modify interactive",
+        "<leader>ao",
+        function()
+          term_and_edit("gt checkout")
+        end,
+        desc = "Checkout",
       },
       {
-        "<leader>gtu",
+        "<leader>au",
         "<cmd>!gt up --no-interactive --quiet<cr><cmd>edit<cr>",
         desc = "Up",
       },
       {
-        "<leader>gtd",
+        "<leader>ad",
         "<cmd>!gt down --no-interactive --quiet<cr><cmd>edit<cr>",
         desc = "Down",
       },
