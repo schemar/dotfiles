@@ -28,5 +28,11 @@ require("lazy").setup("svim.plugins", {
 
 vim.cmd.colorscheme("catppuccin")
 
+-- Start terminal in insert mode
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+  pattern = "*",
+  command = "startinsert",
+})
+
 -- Prepend mise shims to PATH
 vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
