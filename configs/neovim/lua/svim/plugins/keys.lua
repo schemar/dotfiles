@@ -44,14 +44,29 @@ return {
         desc = "List stacks",
       },
       {
+        "<leader>gtc",
+        "<cmd>terminal gt create<cr>",
+        desc = "Create interactive",
+      },
+      {
         "<leader>gts",
         "<cmd>!gt sync --all --no-interactive --quiet<cr><cmd>edit<cr>",
         desc = "Sync",
       },
       {
+        "<leader>gtS",
+        "<cmd>terminal gt sync --all<cr>",
+        desc = "Sync interactive",
+      },
+      {
         "<leader>gtm",
         "<cmd>!gt modify --no-interactive --quiet<cr><cmd>edit<cr>",
         desc = "Modify",
+      },
+      {
+        "<leader>gtM",
+        "<cmd>terminal gt modify",
+        desc = "Modify interactive",
       },
       {
         "<leader>gtu",

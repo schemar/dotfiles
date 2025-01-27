@@ -133,8 +133,17 @@ return {
       },
       {
         "<leader>b",
+        group = "Buffer",
+      },
+      {
+        "<leader>bb",
         "<cmd>Telescope buffers<cr>",
-        desc = "Buffers",
+        desc = "List buffers",
+      },
+      {
+        "<leader>bd",
+        "<cmd>bd<cr>",
+        desc = "Delete buffer",
       },
       {
         "<leader>/",
