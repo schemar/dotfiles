@@ -456,6 +456,7 @@ return {
         -- then tabline will always show. If set to false, then tabline will be displayed
         -- only when there are more than 1 tab. (see :h showtabline)
         always_show_tabline = false,
+        globalstatus = true,
       },
       sections = {
         lualine_a = { "mode", "searchcount" },
