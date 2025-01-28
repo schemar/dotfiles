@@ -1,3 +1,10 @@
+local is_file_buffer = function(bufnr)
+  -- A file buffer typically has a name (file) and no type (like a special buffer)
+  local buftype = vim.api.nvim_get_option_value("buftype", { buf = bufnr })
+  local bufname = vim.api.nvim_buf_get_name(bufnr)
+  return buftype == "" and bufname ~= ""
+end
+
 local term_command = "split | terminal "
 
 local term = function(command)
@@ -16,8 +23,6 @@ local term_and_edit = function(command)
     buffer = term_bufnr,
     once = true,
     callback = function()
-      -- Wait for user input before removing the buffer
-      vim.api.nvim_echo({ { "\nPress <CR> to close the terminal", "WarningMsg" } }, false, {})
       -- Force close the current (terminal) window
       vim.api.nvim_win_close(0, true)
       -- Force close the terminal buffer
@@ -25,9 +30,23 @@ local term_and_edit = function(command)
       -- Go back to the previous buffer
       vim.api.nvim_set_current_buf(prev_bufnr)
       -- Call `edit` to re-load file content
-      vim.cmd("edit")
+      if is_file_buffer(prev_bufnr) then
+        vim.cmd("edit")
+      end
     end,
   })
+end
+
+local cmd_edit_ls = function(command)
+  vim.cmd("!gt " .. command .. " --no-interactive --quiet")
+
+  -- Show where we are:
+  vim.cmd("!gt ls")
+
+  -- Edit a file buffer (0 is current buffer):
+  if is_file_buffer(0) then
+    vim.cmd("edit")
+  end
 end
 
 return {
@@ -120,12 +139,16 @@ return {
       },
       {
         "<leader>au",
-        "<cmd>!gt up --no-interactive --quiet<cr><cmd>edit<cr>",
+        function()
+          cmd_edit_ls("up")
+        end,
         desc = "Up",
       },
       {
         "<leader>ad",
-        "<cmd>!gt down --no-interactive --quiet<cr><cmd>edit<cr>",
+        function()
+          cmd_edit_ls("down")
+        end,
         desc = "Down",
       },
       { "<leader>l", group = "Code" },
