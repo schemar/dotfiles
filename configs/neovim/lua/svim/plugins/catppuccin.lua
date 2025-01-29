@@ -5,6 +5,7 @@ return {
   lazy = true,
   opts = {
     flavour = "macchiato", -- latte, frappe, macchiato, mocha
+    term_colors = true,
     integrations = {
       beacon = true,
       cmp = true,
