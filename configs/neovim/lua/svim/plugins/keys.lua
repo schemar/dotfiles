@@ -131,6 +131,13 @@ return {
         desc = "Modify",
       },
       {
+        "<leader>aM",
+        function()
+          term_and_edit("gt modify && gt sync && gt submit --no-edit")
+        end,
+        desc = "Modify, Sync, Submit",
+      },
+      {
         "<leader>ao",
         function()
           term_and_edit("gt checkout")
