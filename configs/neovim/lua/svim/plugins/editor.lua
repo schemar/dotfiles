@@ -445,10 +445,7 @@ return {
         theme = "catppuccin",
         disabled_filetypes = {
           statusline = {
-            "aerial",
-            "alpha",
             "NeogitStatus",
-            "NvimTree",
           },
           winbar = {},
         },
@@ -497,12 +494,10 @@ return {
       },
       extenstions = {
         "aerial",
-        "fzf",
         "lazy",
         "man",
         "mason",
         "nvim-tree",
-        "toggleterm",
         "trouble",
       },
     },
