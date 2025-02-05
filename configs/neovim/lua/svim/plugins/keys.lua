@@ -171,6 +171,37 @@ return {
       },
       { "<leader>lr", vim.lsp.buf.rename, desc = "Rename" },
       { "<leader>t", desc = "Todos" },
+      { "<leader>j", group = "Tabs" },
+      {
+        "<leader>jn",
+        "<cmd>tabnew<cr>",
+        desc = "New",
+      },
+      {
+        "<leader>jj",
+        "<cmd>tabnext<cr>",
+        desc = "Next",
+      },
+      {
+        "<leader>jJ",
+        "<cmd>tablast<cr>",
+        desc = "Last",
+      },
+      {
+        "<leader>jk",
+        "<cmd>tabprevious<cr>",
+        desc = "Previous",
+      },
+      {
+        "<leader>jK",
+        "<cmd>tabfirst<cr>",
+        desc = "First",
+      },
+      {
+        "<leader>jc",
+        "<cmd>tabclose<cr>",
+        desc = "Close",
+      },
     })
   end,
 }
