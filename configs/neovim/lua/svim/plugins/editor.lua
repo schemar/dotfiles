@@ -42,7 +42,7 @@ return {
       },
       {
         "gd",
-        vim.lsp.buf.definition,
+        "<cmd>Trouble lsp_definitions focus=true<cr>",
         desc = "Definitions",
       },
       {
