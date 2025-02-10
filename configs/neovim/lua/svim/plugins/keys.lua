@@ -112,14 +112,14 @@ return {
       {
         "<leader>ap",
         function()
-          term("gt submit --no-edit")
+          term("gt submit --no-edit --stack --update-only")
         end,
         desc = "Submit",
       },
       {
         "<leader>aP",
         function()
-          term("gt submit --no-edit --publish")
+          term("gt submit --no-edit --publish --stack --update-only")
         end,
         desc = "Submit (publish)",
       },
@@ -133,7 +133,7 @@ return {
       {
         "<leader>aM",
         function()
-          term_and_edit("gt modify && gt sync && gt submit --no-edit")
+          term_and_edit("gt modify && gt sync && gt submit --no-edit --stack --update-only")
         end,
         desc = "Modify, Sync, Submit",
       },
