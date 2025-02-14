@@ -170,6 +170,7 @@ return {
         desc = "Floating diagnostic",
       },
       { "<leader>lr", vim.lsp.buf.rename, desc = "Rename" },
+      { "<leader>ls", "<cmd>Copilot<cr>", desc = "Copilot completions" },
       { "<leader>t", desc = "Todos" },
       { "<leader>j", group = "Tabs" },
       {
