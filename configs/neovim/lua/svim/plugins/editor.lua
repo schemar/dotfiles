@@ -587,7 +587,7 @@ return {
     -- DO NOT use `:lua`, since that will break dot-repeat.
     keys = {
       {
-        "s",
+        "<C-s>",
         mode = { "n", "x", "o" },
         function()
           require("flash").jump()
@@ -595,7 +595,7 @@ return {
         desc = "Flash",
       },
       {
-        "S",
+        "<C-x>",
         mode = { "n", "x", "o" },
         function()
           require("flash").treesitter()
@@ -619,7 +619,7 @@ return {
         desc = "Treesitter Search",
       },
       {
-        "<c-s>",
+        "<C-s>",
         mode = { "c" },
         function()
           require("flash").toggle()
