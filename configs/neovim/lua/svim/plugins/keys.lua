@@ -87,8 +87,8 @@ return {
         desc = "Split window verticallly",
       },
       { "<leader>", group = "Leader" },
-      { "<leader>b", desc = "Buffers" },
-      { "<leader>g", desc = "Git" },
+      { "<leader>b", group = "Buffers" },
+      { "<leader>g", group = "Git" },
       { "<leader>a", group = "Graphite" },
       {
         "<leader>al",
