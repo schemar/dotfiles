@@ -20,7 +20,7 @@
   r = rebase
   s = status
 [pull]
-  rebase = false
+  rebase = true
 [delta]
   syntax-theme = Catppuccin Macchiato
   line-numbers = true
