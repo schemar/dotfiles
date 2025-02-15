@@ -1,7 +1,3 @@
-[include]
-  path = ~/.gitconfigemail
-[user]
-  name = Martin Schenck
 [core]
   pager = delta
 [alias]
@@ -34,3 +30,7 @@
   user = schemar
 [log]
   follow = true
+[includeIf "gitdir:*"]
+  path = ~/.gitconfigprivate
+[includeIf "gitdir:afilio*/"]
+  path = ~/.gitconfigafilio
