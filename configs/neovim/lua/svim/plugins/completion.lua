@@ -2,8 +2,14 @@ return {
   { "github/copilot.vim" },
   {
     "saghen/blink.cmp",
-    -- optional: provides snippets for the snippet source
-    -- dependencies = "rafamadriz/friendly-snippets",
+    dependencies = {
+      {
+        "Kaiser-Yang/blink-cmp-git",
+        dependencies = { "nvim-lua/plenary.nvim" },
+      },
+      -- optional: provides snippets for the snippet source
+      "rafamadriz/friendly-snippets",
+    },
 
     -- use a release tag to download pre-built binaries
     version = "*",
@@ -41,7 +47,22 @@ return {
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = { "git", "lsp", "path", "snippets", "buffer" },
+        providers = {
+          git = {
+            module = "blink-cmp-git",
+            name = "Git",
+            -- only enable this source when filetype is gitcommit, markdown, or 'octo'
+            enabled = function()
+              return vim.tbl_contains({ "octo", "gitcommit", "markdown" }, vim.bo.filetype)
+            end,
+            --- @module 'blink-cmp-git'
+            --- @type blink-cmp-git.Options
+            opts = {
+              -- options for the blink-cmp-git
+            },
+          },
+        },
       },
 
       signature = { enabled = true },
