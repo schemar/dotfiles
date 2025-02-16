@@ -19,9 +19,10 @@ return {
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     dependencies = {
       "b0o/schemastore.nvim",
+      "j-hui/fidget.nvim",
+      "saghen/blink.cmp",
       "williamboman/mason-lspconfig.nvim",
       "yioneko/nvim-vtsls",
-      "j-hui/fidget.nvim",
     },
     config = function()
       local lspconfig = require("lspconfig")
@@ -30,8 +31,8 @@ return {
         require("lsp-format").on_attach(client, bufnr)
       end
 
-      -- nvim-cmp:
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      -- blink.cmp:
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       -- Extend for lua:
       local capabilities_lua = {}

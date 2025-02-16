@@ -47,7 +47,7 @@ Prefix is `<ctrl>-a`.
 
 - `<prefix> {c,n,p}` create/next/previous window.
 - `<prefix> {v,s}` split pane vertically/horizontally.
-- `<ctrl>+{h,j,k,l}` to move cursor across panes (works also with vim windows).
+- `<alt>+{h,j,k,l}` to move cursor across panes (works also with vim windows).
 - `<prefix> z` to (un)zoom the current pane.
 - `<prefix> {<,>,+,-}` resize panes by fixed amount left/right/up/down.
 - `<prefix> [` to enable copy mode. Use e.g. to scroll up to see older output.
@@ -62,7 +62,7 @@ Prerequisites:
 
 - `npm install -g tree-sitter`
 - And possibly language tools which weren't automatically installed via mason.
-  - For example `npm install -g eslint_d` after setup of `asdf` is complete.
+  - For example `npm install -g eslint_d` after setup of `mise` is complete.
 
 Usage:
 
@@ -72,6 +72,7 @@ Usage:
 - When you re-start NeoVim, `treesitter` should install its packages and `mason`
   should install all kinds of language servers and tools.
   Restart NeoVim.
+- Accept auto-completion with `<C-y>`.
 
 ### Yazi
 

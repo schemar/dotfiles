@@ -8,7 +8,7 @@ return {
     term_colors = true,
     integrations = {
       beacon = true,
-      cmp = true,
+      blink_cmp = true,
       copilot_vim = true,
       diffview = true,
       fidget = true,
