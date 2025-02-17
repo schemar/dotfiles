@@ -287,7 +287,7 @@ return {
       -- pattern matching. Selecting the files will create the file.
       showMissingFiles = false,
       style = {
-        border = "rounded",
+        border = require("svim.config").border,
       },
       -- Map files to other files.
       -- See documentation for details and more options.

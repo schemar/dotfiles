@@ -49,13 +49,21 @@ return {
       },
 
       completion = {
-        menu = { border = "single" },
-        documentation = { window = { border = "single" } },
+        menu = {
+          border = require("svim.config").border,
+        },
+        documentation = {
+          window = {
+            border = require("svim.config").border,
+          },
+        },
       },
 
       signature = {
         enabled = true,
-        window = { border = "single" },
+        window = {
+          border = require("svim.config").border,
+        },
       },
 
       -- Default list of enabled providers defined so that you can extend it

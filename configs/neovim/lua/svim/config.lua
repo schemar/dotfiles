@@ -1,4 +1,5 @@
 local M = {
+  border = "rounded",
   -- icons used by other plugins
   icons = {
     misc = {
@@ -211,17 +212,5 @@ vim.fn.sign_define("DiagnosticSignError", { text = icons.Error, texthl = "Diagno
 vim.fn.sign_define("DiagnosticSignWarn", { text = icons.Warn, texthl = "DiagnosticSignWarn" })
 vim.fn.sign_define("DiagnosticSignInfo", { text = icons.Info, texthl = "DiagnosticSignInfo" })
 vim.fn.sign_define("DiagnosticSignHint", { text = icons.Hint, texthl = "DiagnosticSignHint" })
-
--- [[LSP Settings]]
-local border = "rounded"
-vim.diagnostic.config({
-  float = { border = border },
-})
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = border,
-})
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = border,
-})
 
 return M
