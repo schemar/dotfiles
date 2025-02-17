@@ -7,6 +7,8 @@ config.load_autoconfig()
 # last argument (optional, default is False): enable the plain look for the
 # menu rows
 catppuccin.setup(c, 'macchiato', False)
+# override web bg color to keep the www readable...
+c.colors.webpage.bg = 'white'
 
 # Always restore open sites when qutebrowser is reopened. Without this option
 # set, :wq (:quit --save) needs to be used to save open tabs (and restore
