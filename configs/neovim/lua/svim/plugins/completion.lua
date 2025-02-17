@@ -21,6 +21,10 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
+      -- For details, see:
+      -- 1. Recipes: https://cmp.saghen.dev/recipes.html
+      -- 2. Sources: https://cmp.saghen.dev/configuration/sources.html
+
       -- 'default' for mappings similar to built-in completion
       -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
       -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
@@ -45,15 +49,13 @@ return {
       },
 
       completion = {
-        menu = {
-          border = "rounded",
-          winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
-        },
-        documentation = {
-          window = {
-            border = "rounded",
-          },
-        },
+        menu = { border = "single" },
+        documentation = { window = { border = "single" } },
+      },
+
+      signature = {
+        enabled = true,
+        window = { border = "single" },
       },
 
       -- Default list of enabled providers defined so that you can extend it
@@ -76,8 +78,6 @@ return {
           },
         },
       },
-
-      signature = { enabled = true },
     },
     opts_extend = { "sources.default" },
   },
