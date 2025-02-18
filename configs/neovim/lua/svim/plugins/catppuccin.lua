@@ -49,6 +49,7 @@ return {
       },
       neogit = true,
       nvimtree = true,
+      render_markdown = true,
       telescope = { enabled = true },
       treesitter = true,
       treesitter_context = true,

@@ -34,6 +34,7 @@
   "other-nvim": { "branch": "main", "commit": "933aa489ad02f8f973269a565bfea16cc784cbbf" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
+  "render-markdown.nvim": { "branch": "main", "commit": "4a28c135bc3548e398ba38178fec3f705cb26fe6" },
   "schemastore.nvim": { "branch": "main", "commit": "6d840a01545b9be71c45843f2aabcc384d4fafbf" },
   "smart-open.nvim": { "branch": "0.2.x", "commit": "7770b01ce4d551c143d7ec8589879320796621b9" },
   "sqlite.lua": { "branch": "master", "commit": "b487fcc8937b683942a1f7d9662fcf50ca5acd58" },
