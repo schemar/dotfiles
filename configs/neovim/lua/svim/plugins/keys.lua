@@ -164,13 +164,18 @@ return {
         vim.lsp.buf.code_action,
         desc = "Code actions",
       },
+      { "<leader>lc", "<cmd>Copilot<cr>", desc = "Copilot completions" },
       {
         "<leader>le",
         vim.diagnostic.open_float,
         desc = "Floating diagnostic",
       },
       { "<leader>lr", vim.lsp.buf.rename, desc = "Rename" },
-      { "<leader>ls", "<cmd>Copilot<cr>", desc = "Copilot completions" },
+      {
+        "<leader>ls",
+        "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+        desc = "Workspace symbols",
+      },
       { "<leader>t", desc = "Todos" },
       { "<leader>j", group = "Tabs" },
       {
