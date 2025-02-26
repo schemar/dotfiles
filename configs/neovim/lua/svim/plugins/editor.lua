@@ -335,6 +335,7 @@ return {
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
+    event = "VeryLazy",
     keys = {
       {
         "<leader>e",
