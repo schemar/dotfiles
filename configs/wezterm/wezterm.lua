@@ -19,6 +19,8 @@ return {
         "ss06=1",
         "ss07=1",
         "ss08=1",
+        "ss09=1",
+        "ss10=1",
       },
       -- Disable all MonaLisa ligatures:
       -- harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
