@@ -179,9 +179,14 @@ return {
       { "<leader>t", desc = "Todos" },
       { "<leader>j", group = "Tabs" },
       {
-        "<leader>jn",
+        "<leader>jc",
         "<cmd>tabnew<cr>",
-        desc = "New",
+        desc = "Create",
+      },
+      {
+        "<a-n>",
+        "<cmd>tabnext<cr>",
+        desc = "Next",
       },
       {
         "<leader>jj",
@@ -194,6 +199,11 @@ return {
         desc = "Last",
       },
       {
+        "<a-p>",
+        "<cmd>tabprevious<cr>",
+        desc = "Previous",
+      },
+      {
         "<leader>jk",
         "<cmd>tabprevious<cr>",
         desc = "Previous",
@@ -204,9 +214,9 @@ return {
         desc = "First",
       },
       {
-        "<leader>jc",
+        "<leader>jd",
         "<cmd>tabclose<cr>",
-        desc = "Close",
+        desc = "Delete",
       },
     })
   end,
