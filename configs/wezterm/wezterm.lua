@@ -1,16 +1,18 @@
 local wezterm = require("wezterm")
 
 return {
-  -- -- Allows to compose umlauts, etc. with left option key.
+  -- Allows to compose umlauts, etc. with left option key.
   -- send_composed_key_when_left_alt_is_pressed = true,
   -- send_composed_key_when_right_alt_is_pressed = false,
 
   font = wezterm.font_with_fallback({
     {
       family = "Monaspace Neon",
+      weight = "Regular",
       harfbuzz_features = {
         "calt=1",
         "dlig=1",
+        "cv01=2", -- Slashed zero
         "ss01=1",
         "ss02=1",
         "ss03=1",
@@ -22,8 +24,6 @@ return {
         "ss09=1",
         "ss10=1",
       },
-      -- Disable all MonaLisa ligatures:
-      -- harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
     },
     {
       family = "Symbols Nerd Font Mono",
