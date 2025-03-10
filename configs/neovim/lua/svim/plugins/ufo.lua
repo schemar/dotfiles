@@ -15,7 +15,7 @@ return {
     -- Use Option 2 as source: nvim lsp as LSP client.
     -- Only this option allows to fold the imports.
     require("ufo").setup({
-      close_fold_kinds_for_ft = { default = { "imports" } },
+      close_fold_kinds_for_ft = { default = { "imports", "region" } },
     })
   end,
 }
