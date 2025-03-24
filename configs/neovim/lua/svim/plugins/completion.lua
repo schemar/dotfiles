@@ -49,8 +49,23 @@ return {
           border = require("svim.config").border,
         },
         documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 0,
           window = {
             border = require("svim.config").border,
+          },
+        },
+        list = {
+          selection = {
+            -- When `true`, will automatically select the first item in the completion list
+            preselect = false,
+            -- preselect = function(ctx) return vim.bo.filetype ~= 'markdown' end,
+
+            -- When `true`, inserts the completion item automatically when selecting it
+            -- You may want to bind a key to the `cancel` command (default <C-e>) when using this option,
+            -- which will both undo the selection and hide the completion menu
+            auto_insert = true,
+            -- auto_insert = function(ctx) return vim.bo.filetype ~= 'markdown' end
           },
         },
       },
@@ -79,6 +94,25 @@ return {
             opts = {
               -- options for the blink-cmp-git
             },
+          },
+        },
+      },
+
+      cmdline = {
+        enabled = true,
+        keymap = {
+          preset = "inherit",
+          ["<C-k>"] = { "select_prev", "fallback" },
+          ["<C-j>"] = { "select_next", "fallback" },
+        },
+        completion = {
+          list = {
+            selection = {
+              preselect = false,
+            },
+          },
+          menu = {
+            auto_show = true,
           },
         },
       },
