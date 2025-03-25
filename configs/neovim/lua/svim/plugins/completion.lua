@@ -36,6 +36,7 @@ return {
 
         ["<C-k>"] = { "select_prev", "fallback" },
         ["<C-j>"] = { "select_next", "fallback" },
+        ["<CR>"] = { "accept", "fallback" },
       },
 
       appearance = {
@@ -101,7 +102,7 @@ return {
       cmdline = {
         enabled = true,
         keymap = {
-          preset = "inherit",
+          preset = "cmdline",
           ["<C-k>"] = { "select_prev", "fallback" },
           ["<C-j>"] = { "select_next", "fallback" },
         },
