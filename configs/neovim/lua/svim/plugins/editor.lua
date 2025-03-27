@@ -432,21 +432,25 @@ local M = {
         end, opts("edit_and_close"))
       end
 
-      local icons = require("svim.config").icons.git
+      local icons = require("svim.config").icons
       require("nvim-tree").setup({
         on_attach = on_attach,
         renderer = {
           icons = {
             git_placement = "after",
             glyphs = {
+              folder = {
+                arrow_open = icons.ui.ChevronShortDown,
+                arrow_closed = icons.ui.ChevronShortRight,
+              },
               git = {
-                unstaged = icons.FileUnstaged,
-                staged = icons.FileStaged,
-                unmerged = icons.FileUnmerged,
-                renamed = icons.FileRenamed,
-                untracked = icons.FileUntracked,
-                deleted = icons.FileDeleted,
-                ignored = icons.FileIgnored,
+                unstaged = icons.git.FileUnstaged,
+                staged = icons.git.FileStaged,
+                unmerged = icons.git.FileUnmerged,
+                renamed = icons.git.FileRenamed,
+                untracked = icons.git.FileUntracked,
+                deleted = icons.git.FileDeleted,
+                ignored = icons.git.FileIgnored,
               },
             },
           },
