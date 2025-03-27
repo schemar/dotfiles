@@ -11,19 +11,8 @@ return {
       blink_cmp = true,
       copilot_vim = true,
       diffview = true,
-      fidget = true,
       flash = true,
       gitsigns = true,
-      illuminate = {
-        enabled = true,
-        lsp = false,
-      },
-      indent_blankline = {
-        enabled = true,
-        scope_color = "", -- catppuccin color (eg. `lavender`) Default: text
-        -- colored_indent_levels enables char highlights per indent level. Follow the instructions here to set the latter up.
-        colored_indent_levels = false,
-      },
       lsp_trouble = true,
       markdown = true,
       mason = true,
@@ -50,6 +39,10 @@ return {
       neogit = true,
       nvimtree = true,
       render_markdown = true,
+      snacks = {
+        enabled = true,
+        indent_scope_color = "lavender", -- catppuccin color (eg. `lavender`) Default: text
+      },
       telescope = { enabled = true },
       treesitter = true,
       treesitter_context = true,

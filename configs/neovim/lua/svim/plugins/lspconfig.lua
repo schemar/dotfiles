@@ -40,7 +40,6 @@ return {
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     dependencies = {
       "b0o/schemastore.nvim",
-      "j-hui/fidget.nvim",
       "saghen/blink.cmp",
       "williamboman/mason-lspconfig.nvim",
       "yioneko/nvim-vtsls",
@@ -371,18 +370,6 @@ return {
       -- 		enable_close = false,
       -- 	},
       -- },
-    },
-  },
-  {
-    "j-hui/fidget.nvim",
-    lazy = true,
-    opts = {
-      notification = {
-        window = {
-          winblend = 0,
-        },
-      },
-      -- ... the rest of your fidget config
     },
   },
   {

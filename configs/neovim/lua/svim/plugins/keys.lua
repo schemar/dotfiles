@@ -86,6 +86,13 @@ return {
         "<cmd>split<cr>",
         desc = "Split window verticallly",
       },
+      {
+        "]w",
+        function()
+          Snacks.words.jump(1, true)
+        end,
+        desc = "Next matching word",
+      },
       { "<leader>", group = "Leader" },
       { "<leader>b", group = "Buffers" },
       { "<leader>g", group = "Git" },

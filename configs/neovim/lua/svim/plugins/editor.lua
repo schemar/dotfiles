@@ -1,4 +1,4 @@
-return {
+local M = {
   {
     "folke/trouble.nvim",
     dependencies = { "folke/todo-comments.nvim" },
@@ -106,8 +106,17 @@ return {
       },
       {
         "<leader>bd",
-        "<cmd>bd<cr>",
+        function()
+          Snacks.bufdelete()
+        end,
         desc = "Delete buffer",
+      },
+      {
+        "<leader>bD",
+        function()
+          Snacks.bufdelete.other()
+        end,
+        desc = "Delete other buffers",
       },
       {
         "<leader>/",
@@ -228,21 +237,6 @@ return {
       { "<m-k>", "<cmd>TmuxNavigateUp<cr>" },
       { "<m-l>", "<cmd>TmuxNavigateRight<cr>" },
       { "<m-\\>", "<cmd>TmuxNavigatePrevious<cr>" },
-    },
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    opts = {
-      indent = {
-        char = "│", -- Examples: │ ┃ ┊ ┆ ┇ ┋ ╏
-        tab_char = "│",
-      },
-      scope = {
-        enabled = true,
-        show_start = false,
-        show_end = false,
-      },
     },
   },
   {
@@ -596,7 +590,7 @@ return {
     opts = {
       enabled = function()
         local disabledFiletypes = {
-          alpha = true,
+          snacks_dashboard = true,
         }
 
         if vim.bo.ft:find("Neogit") or disabledFiletypes[vim.bo.ft] then
@@ -667,120 +661,21 @@ return {
       },
     },
   },
-  {
-    "RRethy/vim-illuminate", -- Highlight similar words (e.g. references with LSP)
-    event = { "BufReadPost", "BufNewFile" },
-    config = function()
-      require("illuminate").configure({
-        filetypes_denylist = {
-          "dirvish",
-          "fugitive",
-          "aerial",
-          "NvimTree",
-        },
-      })
-    end,
-  },
-  {
-    "goolord/alpha-nvim",
-    event = "VimEnter",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      local alpha = require("alpha")
-      local dashboard = require("alpha.themes.dashboard")
-
-      local icons = require("svim.config").icons.ui
-
-      -- Set header
-      dashboard.section.header.val = {
-        [[                                  __]],
-        [[     ___     ___    ___   __  __ /\_\    ___ ___]],
-        [[    / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\]],
-        [[   /\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \]],
-        [[   \ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-        [[    \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
-      }
-      -- dashboard.section.header.val = {
-      --   "                                                     ",
-      --   "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
-      --   "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
-      --   "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
-      --   "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
-      --   "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
-      --   "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
-      --   "                                                     ",
-      -- }
-      -- dashboard.section.header.val = {
-      --   [[                                                                       ]],
-      --   [[                                                                       ]],
-      --   [[                                                                       ]],
-      --   [[                                                                       ]],
-      --   [[                                                                       ]],
-      --   [[                                                                       ]],
-      --   [[                                                                       ]],
-      --   [[                                                                     ]],
-      --   [[       ████ ██████           █████      ██                     ]],
-      --   [[      ███████████             █████                             ]],
-      --   [[      █████████ ███████████████████ ███   ███████████   ]],
-      --   [[     █████████  ███    █████████████ █████ ██████████████   ]],
-      --   [[    █████████ ██████████ █████████ █████ █████ ████ █████   ]],
-      --   [[  ███████████ ███    ███ █████████ █████ █████ ████ █████  ]],
-      --   [[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
-      --   [[                                                                       ]],
-      --   [[                                                                       ]],
-      --   [[                                                                       ]],
-      -- }
-      -- dashboard.section.header.val = {
-      --   [[ ███       ███ ]],
-      --   [[█████      ████]],
-      --   [[███████     █████]],
-      --   [[████████    █████]],
-      --   [[█████████   █████]],
-      --   [[█████████  █████]],
-      --   [[█████ ████ █████]],
-      --   [[█████  █████████]],
-      --   [[█████   █████████]],
-      --   [[█████    ████████]],
-      --   [[█████     ███████]],
-      --   [[████      █████]],
-      --   [[ ███       ███ ]],
-      --   [[                  ]],
-      --   [[ N  E  O  V  I  M ]],
-      -- }
-
-      -- Set menu
-      dashboard.section.buttons.val = {
-        dashboard.button(
-          "f",
-          "  " .. icons.ChevronShortRight .. " File",
-          "<cmd>Telescope smart_open<cr>"
-        ),
-        dashboard.button(
-          "e",
-          "󰙅  " .. icons.ChevronShortRight .. " Explorer",
-          "<cmd>NvimTreeOpen<cr>"
-        ),
-        dashboard.button(
-          "/",
-          "󰍉  " .. icons.ChevronShortRight .. " Grep",
-          "<cmd>Telescope live_grep<cr>"
-        ),
-        dashboard.button("g", "  " .. icons.ChevronShortRight .. " Git", "<cmd>Neogit<cr>"),
-        dashboard.button("l", "󰒲  " .. icons.ChevronShortRight .. " Lazy", "<cmd>Lazy<cr>"),
-        dashboard.button("m", "󰣪  " .. icons.ChevronShortRight .. " Mason", "<cmd>Mason<cr>"),
-        dashboard.button(
-          "t",
-          "  " .. icons.ChevronShortRight .. " TSUpdate",
-          "<cmd>TSUpdate<cr>"
-        ),
-        dashboard.button("q", "󰅙  " .. icons.ChevronShortRight .. " Quit", "<cmd>qa<cr>"),
-      }
-
-      -- Send config to alpha
-      alpha.setup(dashboard.opts)
-
-      -- Disable folding on alpha buffer
-      vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
-    end,
-  },
 }
+
+-- LSP renaming support for nvim-tree using Snacks
+local prev = { new_name = "", old_name = "" } -- Prevents duplicate events
+vim.api.nvim_create_autocmd("User", {
+  pattern = "NvimTreeSetup",
+  callback = function()
+    local events = require("nvim-tree.api").events
+    events.subscribe(events.Event.NodeRenamed, function(data)
+      if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
+        prev = data
+        Snacks.rename.on_rename_file(data.old_name, data.new_name)
+      end
+    end)
+  end,
+})
+
+return M
