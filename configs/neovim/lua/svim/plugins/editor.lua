@@ -191,6 +191,21 @@ return {
       -- To get ui-select loaded and working with telescope, you need to call
       -- load_extension, somewhere after setup function:
       require("telescope").load_extension("ui-select")
+
+      -- Workaround to use 0.11's option of a global border
+      -- See https://github.com/nvim-telescope/telescope.nvim/issues/3436
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "TelescopeFindPre",
+        callback = function()
+          vim.opt_local.winborder = "none"
+          vim.api.nvim_create_autocmd("WinLeave", {
+            once = true,
+            callback = function()
+              vim.opt_local.winborder = require("svim.config").border
+            end,
+          })
+        end,
+      })
     end,
   },
   {
@@ -236,7 +251,6 @@ return {
     event = "VeryLazy",
     name = "auto-hlsearch",
     config = true,
-    version = "*",
   },
   {
     "rgroli/other.nvim", -- Go to alternative file, e.g. ts<->vue or test

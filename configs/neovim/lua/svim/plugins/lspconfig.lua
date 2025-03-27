@@ -1,13 +1,22 @@
-local border = require("svim.config").border
+local icons = require("svim.config").icons.diagnostics
+
 -- [[LSP Settings]]
 vim.diagnostic.config({
-  float = { border = border },
-})
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = border,
-})
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = border,
+  virtual_lines = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = icons.Error,
+      [vim.diagnostic.severity.WARN] = icons.Warn,
+      [vim.diagnostic.severity.INFO] = icons.Info,
+      [vim.diagnostic.severity.HINT] = icons.Hint,
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+      [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+      [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+      [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+    },
+  },
 })
 
 return {

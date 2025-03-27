@@ -194,6 +194,7 @@ opt.cursorline = true -- bool: Highlight current line
 -- opt.listchars = "space:·,tab:>~,trail:~,extends:>,precedes:<,eol:󰌑"
 opt.listchars = "tab:~~,trail:~"
 opt.list = true
+vim.o.winborder = M.border
 
 -- [[ Search ]]
 opt.ignorecase = true -- bool: Ignore case in search patterns
@@ -205,12 +206,5 @@ opt.expandtab = true -- bool: Use spaces instead of tabs
 opt.shiftwidth = 2 -- num: Size of an indent
 opt.softtabstop = 2 -- num: Number of spaces tabs count for in insert mode
 opt.tabstop = 2 -- num: Number of spaces tabs count for
-
--- [[ Icons ]]
-local icons = M.icons.diagnostics
-vim.fn.sign_define("DiagnosticSignError", { text = icons.Error, texthl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = icons.Warn, texthl = "DiagnosticSignWarn" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = icons.Info, texthl = "DiagnosticSignInfo" })
-vim.fn.sign_define("DiagnosticSignHint", { text = icons.Hint, texthl = "DiagnosticSignHint" })
 
 return M
