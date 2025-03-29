@@ -2,8 +2,6 @@
 
 This repository contains configurations for my productivity stack and some basic visual improvements.
 
-[![Screenshot NeoVim 2023](./resources/2023_neovim.jpg)](https://github.com/schemar/dotfiles/raw/main/resources/2023_neovim.png)
-
 ## Included Configurations
 
 ### Terminal
@@ -26,6 +24,10 @@ This repository contains configurations for my productivity stack and some basic
 ### Graphical System
 
 - [wezterm](https://github.com/wez/wezterm)❤️
+
+### Remote
+
+- [Q1 Max QMK Firmware](https://github.com/schemar/qmk_firmware/blob/wireless_playground/keyboards/keychron/q1_max/ansi_encoder/keymaps/schemar/keymap.c)
 
 ## Usage
 
