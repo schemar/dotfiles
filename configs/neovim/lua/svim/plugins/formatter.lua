@@ -1,36 +1,36 @@
 return {
   "lukas-reineke/lsp-format.nvim",
   opts = {
-    gdscript = { "efm" },
+    gdscript = { "null-ls" },
     html = {
-      order = { "efm" },
+      order = { "html", "null-ls" },
       sync = true,
     },
     javascript = { "eslint_d", "prettier" },
     json = {
-      order = { "jsonls", "efm" },
+      order = { "jsonls", "null-ls" },
       sync = true,
     },
     lua = {
-      order = { "lua_ls", "efm" },
+      order = { "lua_ls", "null-ls" },
       sync = true,
     },
     markdown = {
-      order = { "efm" },
+      order = { "null-ls" },
       sync = true,
     },
     scss = {
-      order = { "cssls", "efm" },
+      order = { "cssls", "null-ls" },
       sync = true,
     },
     typescript = {
-      order = { "typescript-tools", "tsserver", "ts_ls", "efm" },
+      order = { "vtsls", "eslint", "null-ls" },
       sync = true,
     },
     vue = {
-      order = { "efm" },
+      order = { "html", "null-ls" },
       sync = true,
     },
-    yaml = { "yamlfix", "efm" },
+    yaml = { "yamlfix", "null-ls" },
   },
 }

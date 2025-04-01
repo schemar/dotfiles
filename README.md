@@ -8,7 +8,6 @@ This repository contains configurations for my productivity stack and some basic
 
 - [bat](https://github.com/sharkdp/bat)
 - [bottom](https://github.com/ClementTsang/bottom)
-- [efm](https://github.com/mattn/efm-langserver)
 - [fzf](https://github.com/junegunn/fzf)
 - [gitui](https://github.com/extrawurst/gitui)
 - [helix](https://github.com/helix-editor/helix)

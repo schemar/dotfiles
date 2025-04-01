@@ -19,6 +19,15 @@ vim.diagnostic.config({
   },
 })
 
+-- format:
+local on_attach = function(client, bufnr)
+  require("lsp-format").on_attach(client, bufnr)
+end
+-- blink.cmp:
+local capabilities = function()
+  return require("blink.cmp").get_lsp_capabilities()
+end
+
 return {
   {
     "williamboman/mason.nvim",
@@ -36,6 +45,43 @@ return {
     },
   },
   {
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "nvimtools/none-ls.nvim",
+      "nvim-lua/plenary.nvim",
+      "saghen/blink.cmp",
+      "lukas-reineke/lsp-format.nvim",
+    },
+    config = function()
+      local null_ls = require("null-ls")
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.formatting.prettier,
+          null_ls.builtins.diagnostics.stylelint.with({
+            extra_filetypes = { "vue" },
+          }),
+          null_ls.builtins.formatting.stylelint.with({
+            extra_filetypes = { "vue" },
+          }),
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.shfmt,
+          null_ls.builtins.diagnostics.gdlint,
+          null_ls.builtins.formatting.gdformat,
+        },
+        on_attach = on_attach,
+        capabilities = capabilities(),
+      })
+
+      require("mason-null-ls").setup({
+        ensure_installed = nil,
+        -- Should install everything as set up above with null_ls/none-ls:
+        automatic_installation = true,
+      })
+    end,
+  },
+  {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     dependencies = {
@@ -43,21 +89,15 @@ return {
       "saghen/blink.cmp",
       "williamboman/mason-lspconfig.nvim",
       "yioneko/nvim-vtsls",
+      "lukas-reineke/lsp-format.nvim",
     },
     config = function()
       local lspconfig = require("lspconfig")
-      -- format:
-      local on_attach = function(client, bufnr)
-        require("lsp-format").on_attach(client, bufnr)
-      end
-
-      -- blink.cmp:
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
 
       -- Extend for lua:
       local capabilities_lua = {}
       -- Copy capabilities table
-      for k, v in pairs(capabilities) do
+      for k, v in pairs(capabilities()) do
         capabilities_lua[k] = v
       end
       -- And add lua specifics
@@ -70,40 +110,19 @@ return {
       -- [[ Language Servers go here ]]
       lspconfig.bashls.setup({
         -- bashls includes shellcheck and shfmt
-        capabilities = capabilities,
+        capabilities = capabilities(),
         on_attach = on_attach,
       })
       lspconfig.cssls.setup({
-        capabilities = capabilities,
+        capabilities = capabilities(),
         on_attach = on_attach,
-      })
-      lspconfig.efm.setup({
-        -- See also separate efm config in repo (outside nvim).
-        capabilities = capabilities,
-        on_attach = on_attach,
-        init_options = { documentFormatting = true },
-        filetypes = {
-          "gdscript",
-          "html",
-          "javascript",
-          "javascript.jsx",
-          "javascriptreact",
-          "json",
-          "lua",
-          "markdown",
-          "scss",
-          "typescript",
-          "typescript.tsx",
-          "typescriptreact",
-          "vue",
-        },
       })
       lspconfig.eslint.setup({
-        capabilities = capabilities,
+        capabilities = capabilities(),
         on_attach = on_attach,
       })
       lspconfig.jsonls.setup({
-        capabilities = capabilities,
+        capabilities = capabilities(),
         on_attach = on_attach,
         settings = {
           json = {
@@ -113,18 +132,18 @@ return {
         },
       })
       lspconfig.html.setup({
-        capabilities = capabilities,
+        capabilities = capabilities(),
         -- No formatting with HTML (confuses afilio).
         -- on_attach = on_attach,
         filetypes = { "html", "templ", "vue" },
       })
       lspconfig.lua_ls.setup({
-        capabilities = capabilities,
+        capabilities = capabilities(),
         on_attach = on_attach,
       })
       -- TypeScript:
       lspconfig.vtsls.setup({
-        capabilities = capabilities,
+        capabilities = capabilities(),
         on_attach = on_attach,
       })
       lspconfig.yamlls.setup({
@@ -144,15 +163,15 @@ return {
         },
       })
       lspconfig.zls.setup({
-        capabilities = capabilities,
+        capabilities = capabilities(),
         on_attach = on_attach,
       })
       lspconfig.gdscript.setup({
-        capabilities = capabilities,
+        capabilities = capabilities(),
         on_attach = on_attach,
       })
       lspconfig.gdshader_lsp.setup({
-        capabilities = capabilities,
+        capabilities = capabilities(),
         on_attach = on_attach,
       })
     end,
