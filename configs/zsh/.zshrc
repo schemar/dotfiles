@@ -157,3 +157,51 @@ if [ -f '/Users/schemar/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/s
 # Themed syntax highlighting.
 source ~/.config/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Set git branch in tmux
+# See also ~/.tmux.conf which reads the branch variable for status-right
+find_git_repo () {
+  local dir=.
+  until [ "$dir" -ef / ]; do
+    if [ -f "$dir/.git/HEAD" ]; then
+      printf '%s' "$(greadlink -e $dir)/"
+    fi
+    dir="../$dir"
+  done
+
+  printf '%s' ""
+}
+
+tmux_pane_id () {
+  printf '%s' "$(tmux display -p "#D" | tr -d %)"
+}
+
+tmux_set_git() {
+  if [[ -z  "$TMUX" ]]; then
+    # Only run if in tmux
+    return
+  fi
+
+  local pane_id=$(tmux_pane_id)
+  local cwd=`greadlink -e "$(pwd)"`/
+  local last_repo_len=${#TMUX_GIT_LAST_REPO}
+
+  local repo_dir="$(find_git_repo)"
+
+  # Could optimize here by not updating when staying in same repo:
+  if [[ -z ${repo_dir} ]]; then
+    # No git repo found
+    tmux set-env -g TMUX_GIT_BRANCH_$pane_id  ' (not git)'
+  else
+    local branch='(unknown)'
+    local head=$(< "${repo_dir}.git/HEAD")
+    if [[ $head == ref:\ refs/heads/* ]]; then
+        branch=${head#*/*/}
+    elif [[ $head != '' ]]; then
+        branch='(detached)'
+    fi
+    tmux set-env -g TMUX_GIT_BRANCH_$pane_id  " ${branch}"
+  fi
+}
+
+add-zsh-hook precmd tmux_set_git

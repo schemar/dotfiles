@@ -50,17 +50,24 @@ style = "fg:cyan"
 symbol = " "
 
 [git_branch]
+# Use tmux status right instead
+disabled = true
 style = "fg:yellow"
 symbol = " "
 
 [git_commit]
 style = "fg:yellow"
 
+[git_state]
+style = "fg:yellow"
+
 [git_status]
 style = "fg:yellow"
-modified = "M"
-deleted = "D"
-renamed = "R"
+modified = ""
+deleted = ""
+untracked = "U"
+staged = "S"
+renamed = "➜"
 
 [golang]
 style = "fg:cyan"
