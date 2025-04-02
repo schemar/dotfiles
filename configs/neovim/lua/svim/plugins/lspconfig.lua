@@ -2,7 +2,7 @@ local icons = require("svim.config").icons.diagnostics
 
 -- [[LSP Settings]]
 vim.diagnostic.config({
-  virtual_lines = true,
+  virtual_lines = false,
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = icons.Error,
