@@ -548,24 +548,34 @@ local M = {
     },
     keys = {
       { "<leader>lo", "<cmd>AerialToggle<cr>", desc = "Aerial (Symbols)" },
+      { "<leader>lO", "<cmd>AerialNavToggle<cr>", desc = "Aerial (Symbols)" },
+    },
+    cmd = {
+      "AerialToggle",
+      "AerialOpen",
+      "AerialOpenAll",
+      "AerialNavToggle",
+      "AerialNavOpen",
     },
     config = function()
       local icons = vim.deepcopy(require("svim.config").icons.kinds)
-      -- HACK: fix lua's weird choice for `Package` for control
+      -- Fix lua's weird choice for `Package` for control
       -- structures like if/else/for/etc.
       icons.lua = { Package = icons.Control }
 
       require("aerial").setup({
         attach_mode = "global",
-        backends = { "treesitter", "lsp", "markdown", "man" },
-        show_guides = true,
+        backends = { "treesitter", "lsp", "markdown", "asciidoc", "man" },
+        close_automatic_events = { "switch_buffer" },
         icons = icons,
+        show_guides = true,
         guides = {
           mid_item = "├╴",
           last_item = "└╴",
           nested_top = "│ ",
           whitespace = "  ",
         },
+        filter_kind = false,
         -- Keymaps in aerial window. Can be any value that `vim.keymap.set` accepts OR a table of keymap
         -- options with a `callback` (e.g. { callback = function() ... end, desc = "", nowait = true })
         -- Additionally, if it is a string that matches "actions.<name>",
@@ -583,6 +593,19 @@ local M = {
             end,
             desc = "Jump and quit",
             nowait = true,
+          },
+        },
+        nav = {
+          keymaps = {
+            ["<CR>"] = "actions.jump",
+            ["o"] = "actions.jump",
+            ["<2-LeftMouse>"] = "actions.jump",
+            ["<C-s>"] = "actions.jump_vsplit",
+            ["<C-v>"] = "actions.jump_split",
+            ["h"] = "actions.left",
+            ["l"] = "actions.right",
+            ["<C-c>"] = "actions.close",
+            ["<C-e>"] = "actions.close",
           },
         },
       })
