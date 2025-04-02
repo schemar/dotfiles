@@ -158,6 +158,14 @@ local M = {
             prompt_position = "top",
           },
         },
+        pickers = {
+          live_grep = {
+            mappings = {
+              -- Press `<c-f>` to restart search within the current results
+              i = { ["<c-f>"] = actions.to_fuzzy_refine },
+            },
+          },
+        },
         extensions = {
           fzf = {
             fuzzy = true, -- false will only do exact matching
