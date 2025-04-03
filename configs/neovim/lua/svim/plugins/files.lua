@@ -17,7 +17,7 @@ return {
       desc = "Open the file manager in nvim's working directory",
     },
     {
-      "<leader>u",
+      "<leader>h",
       "<cmd>Yazi toggle<cr>",
       desc = "Resume the last yazi session",
     },
