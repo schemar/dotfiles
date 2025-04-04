@@ -31,7 +31,7 @@ return {
   }),
   font_size = 13,
 
-  color_scheme = "Catppuccin Macchiato",
+  color_scheme = "Catppuccin Latte",
 
   hide_tab_bar_if_only_one_tab = true,
 
