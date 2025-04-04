@@ -4,7 +4,17 @@ default: help
 help:
   just --list --unsorted
 
-theme-macchiato:
+theme-dark: theme-system-dark theme-terminal-macchiato
+
+theme-light: theme-system-light theme-terminal-latte
+
+theme-system-dark:
+  osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
+
+theme-system-light:
+  osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to false'
+
+theme-terminal-macchiato:
   sd 'theme="(.*)"' 'theme="Catppuccin Macchiato"' configs/bat/config
   sd 'syntax-theme = (.*)' 'syntax-theme = Catppuccin Macchiato' configs/git/.gitconfig
   sd 'flavour = "(.*)"' 'flavour = "macchiato"' configs/neovim/lua/svim/plugins/catppuccin.lua
@@ -28,7 +38,7 @@ theme-macchiato:
   # ⚠️ Remember to reload tmux and zsh sessions to apply the changes.
   #
 
-theme-latte:
+theme-terminal-latte:
   sd 'theme="(.*)"' 'theme="Catppuccin Latte"' configs/bat/config
   sd 'syntax-theme = (.*)' 'syntax-theme = Catppuccin Latte' configs/git/.gitconfig
   sd 'flavour = "(.*)"' 'flavour = "latte"' configs/neovim/lua/svim/plugins/catppuccin.lua
