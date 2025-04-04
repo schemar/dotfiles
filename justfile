@@ -5,8 +5,10 @@ help:
   just --list --unsorted
 
 theme-dark: theme-system-dark theme-terminal-macchiato
+  # Slack: #24273A,#C6A0F6,#C6A0F6,#91D7E3
 
 theme-light: theme-system-light theme-terminal-latte
+  # Slack: #EFF1F5,#8839EF,#8839EF,#04A5E5
 
 theme-system-dark:
   osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
