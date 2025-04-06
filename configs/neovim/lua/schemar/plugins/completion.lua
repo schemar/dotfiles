@@ -47,13 +47,13 @@ return {
 
       completion = {
         menu = {
-          border = require("svim.config").border,
+          border = require("schemar.config.options").border,
         },
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 0,
           window = {
-            border = require("svim.config").border,
+            border = require("schemar.config.options").border,
           },
         },
         list = {
@@ -74,7 +74,7 @@ return {
       signature = {
         enabled = true,
         window = {
-          border = require("svim.config").border,
+          border = require("schemar.config.options").border,
         },
       },
 

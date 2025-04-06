@@ -1,8 +1,83 @@
+-- Options.
+local error = "󰅚"
+local warn = "󰀪"
+local info = "󰋽"
+local hint = "󰌶"
+
 local arrow_right = ""
 
-local M = {
-  border = "rounded",
-  -- icons used by other plugins
+local border = "rounded"
+
+local opt = vim.opt
+
+-- [[ Leaders ]]
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+-- [[ Folding ]]
+vim.o.foldcolumn = "0" -- '0' to hide or '1' to show
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+-- [[ Misc ]]
+opt.timeout = true
+opt.timeoutlen = 300 -- num: Timeout, e.g. for which-key
+opt.updatetime = 1000 -- num: Timeout for "cursor hold" event
+opt.clipboard = "unnamedplus" -- str: Clipboard integration with macOS
+opt.splitkeep = "cursor" -- The default "screen" moves the cursor wrongly, which leads to problems, e.g. with Trouble
+
+-- [[ Context ]]
+opt.colorcolumn = "80" -- str: Show col for max line length
+opt.number = true -- bool: Show line numbers
+opt.scrolloff = 5 -- int: Min num lines of context
+opt.signcolumn = "yes" -- str: Show the sign column
+
+-- [[ Filetypes ]]
+opt.encoding = "utf8" -- str: String encoding to use
+opt.fileencoding = "utf8" -- str: File encoding to use
+
+-- [[ Theme ]]
+opt.syntax = "ON" -- str: Allow syntax highlighting
+opt.termguicolors = true -- bool: If term supports ui color then enable
+opt.cursorline = true -- bool: Highlight current line
+-- opt.listchars = "space:·,tab:>~,trail:~,extends:>,precedes:<,eol:󰌑"
+opt.listchars = "tab:~~,trail:~"
+opt.list = true
+vim.o.winborder = border
+
+-- [[ Search ]]
+opt.ignorecase = true -- bool: Ignore case in search patterns
+opt.smartcase = true -- bool: Override ignorecase if search contains capitals
+opt.incsearch = true -- bool: Use incremental search
+
+-- [[ Whitespace ]]
+opt.expandtab = true -- bool: Use spaces instead of tabs
+opt.shiftwidth = 2 -- num: Size of an indent
+opt.softtabstop = 2 -- num: Number of spaces tabs count for in insert mode
+opt.tabstop = 2 -- num: Number of spaces tabs count for
+
+-- [[LSP Settings]]
+vim.diagnostic.config({
+  virtual_lines = false,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = error,
+      [vim.diagnostic.severity.WARN] = warn,
+      [vim.diagnostic.severity.INFO] = info,
+      [vim.diagnostic.severity.HINT] = hint,
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+      [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+      [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+      [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+    },
+  },
+})
+
+return {
+  border = border,
   icons = {
     misc = {
       dots = "󰇘",
@@ -19,15 +94,15 @@ local M = {
     },
     diagnostics = {
       BoldError = "",
-      Error = "󰅚",
+      Error = error,
       BoldWarn = "",
-      Warn = "󰀪",
+      Warn = warn,
       BoldInfo = "",
-      Info = "󰋽",
+      Info = info,
       BoldQuestion = "",
       Question = "",
       BoldHint = "󰌵",
-      Hint = "󰌶",
+      Hint = hint,
       Debug = "",
       Trace = "✎",
       Ok = "",
@@ -110,7 +185,7 @@ local M = {
       Watches = "󰂥",
       DebugConsole = "",
       Calendar = "",
-      Check = "󰄬",
+      Check = "",
       ChevronShortDown = "",
       ChevronShortLeft = "",
       ChevronShortRight = arrow_right,
@@ -167,45 +242,3 @@ local M = {
     },
   },
 }
-
--- Options.
-local opt = vim.opt
-
--- [[ Misc ]]
-opt.timeout = true
-opt.timeoutlen = 300 -- num: Timeout, e.g. for which-key
-opt.updatetime = 1000 -- num: Timeout for "cursor hold" event
-opt.clipboard = "unnamedplus" -- str: Clipboard integration with macOS
-opt.splitkeep = "cursor" -- The default "screen" moves the cursor wrongly, which leads to problems, e.g. with Trouble
-
--- [[ Context ]]
-opt.colorcolumn = "80" -- str: Show col for max line length
-opt.number = true -- bool: Show line numbers
-opt.scrolloff = 5 -- int: Min num lines of context
-opt.signcolumn = "yes" -- str: Show the sign column
-
--- [[ Filetypes ]]
-opt.encoding = "utf8" -- str: String encoding to use
-opt.fileencoding = "utf8" -- str: File encoding to use
-
--- [[ Theme ]]
-opt.syntax = "ON" -- str: Allow syntax highlighting
-opt.termguicolors = true -- bool: If term supports ui color then enable
-opt.cursorline = true -- bool: Highlight current line
--- opt.listchars = "space:·,tab:>~,trail:~,extends:>,precedes:<,eol:󰌑"
-opt.listchars = "tab:~~,trail:~"
-opt.list = true
-vim.o.winborder = M.border
-
--- [[ Search ]]
-opt.ignorecase = true -- bool: Ignore case in search patterns
-opt.smartcase = true -- bool: Override ignorecase if search contains capitals
-opt.incsearch = true -- bool: Use incremental search
-
--- [[ Whitespace ]]
-opt.expandtab = true -- bool: Use spaces instead of tabs
-opt.shiftwidth = 2 -- num: Size of an indent
-opt.softtabstop = 2 -- num: Number of spaces tabs count for in insert mode
-opt.tabstop = 2 -- num: Number of spaces tabs count for
-
-return M

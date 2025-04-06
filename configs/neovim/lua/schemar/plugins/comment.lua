@@ -2,6 +2,7 @@ return {
   {
     "numToStr/Comment.nvim",
     dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+    event = { "BufEnter" },
     config = function()
       require("Comment").setup({
         pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
@@ -11,26 +12,13 @@ return {
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    event = { "VeryLazy" },
-    keys = {
-      {
-        "]t",
-        function()
-          require("todo-comments").jump_next()
-        end,
-        desc = "Next todo comment",
-      },
-      {
-        "[t",
-        function()
-          require("todo-comments").jump_prev()
-        end,
-        desc = "Previous todo comment",
-      },
-    },
+    event = { "BufEnter" },
     opts = {
       keywords = {
-        TODOMS = { icon = " ", color = "info" },
+        TODOMS = {
+          icon = require("schemar.config.options").icons.ui.Check .. " ",
+          color = "info",
+        },
       },
       highlight = {
         -- Remove required trailing colon:

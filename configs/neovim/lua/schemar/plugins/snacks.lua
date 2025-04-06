@@ -42,56 +42,7 @@ local dashboard = {
   width = 80,
   preset = {
     header = "Don't be lazy; don't be shit ",
-    keys = {
-      {
-        key = "f",
-        icon = "",
-        desc = "File",
-        action = "<cmd>Telescope smart_open<cr>",
-      },
-      {
-        key = "e",
-        icon = "󰙅",
-        desc = "Explorer",
-        action = "<cmd>NvimTreeOpen<cr>",
-      },
-      {
-        key = "/",
-        icon = "󰍉",
-        desc = "Grep",
-        action = "<cmd>Telescope live_grep<cr>",
-      },
-      {
-        key = "g",
-        icon = "",
-        desc = "Git",
-        action = "<cmd>Neogit<cr>",
-      },
-      {
-        key = "l",
-        icon = "󰒲",
-        desc = "Lazy",
-        action = "<cmd>Lazy<cr>",
-      },
-      {
-        key = "m",
-        icon = "󰣪",
-        desc = "Mason",
-        action = "<cmd>Mason<cr>",
-      },
-      {
-        key = "t",
-        icon = "",
-        desc = "TSUpdate",
-        action = "<cmd>TSUpdate<cr>",
-      },
-      {
-        key = "q",
-        icon = "󰅙",
-        desc = "Quit",
-        action = "<cmd>qa<cr>",
-      },
-    },
+    keys = require("schemar.config.keymaps").dashboard(),
   },
   sections = {
     { section = "header" },
