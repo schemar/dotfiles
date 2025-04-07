@@ -88,6 +88,7 @@ return {
         },
       },
       "debugloop/telescope-undo.nvim",
+      "pfdzm/graphite-picker",
     },
     cmd = { "Telescope" },
     config = function()
@@ -146,6 +147,7 @@ return {
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("smart_open")
       require("telescope").load_extension("undo")
+      require("telescope").load_extension("graphite_picker")
 
       -- To get ui-select loaded and working with telescope, you need to call
       -- load_extension, somewhere after setup function:
