@@ -10,60 +10,70 @@ end
 return {
   {
     "williamboman/mason.nvim",
+    event = "VeryLazy",
     cmd = "Mason",
-    opts = {},
+    -- Extended by plugins/languages/
+    opts = {
+      ensure_installed = {},
+    },
+    config = function(_, opts)
+      require("mason").setup(opts)
+
+      local mason_registry = require("mason-registry")
+      for _, package_name in ipairs(opts.ensure_installed) do
+        local ok, pkg = pcall(mason_registry.get_package, package_name)
+        if ok then
+          if not pkg:is_installed() then
+            vim.notify(
+              "Installing " .. package_name .. " with Mason",
+              vim.log.levels.INFO,
+              { title = "Mason" }
+            )
+            pkg:install() -- Install the package if not already installed
+          end
+        else
+          print("Package not found: " .. package_name)
+        end
+      end
+    end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    lazy = true,
+    event = "VeryLazy",
     dependencies = {
       "williamboman/mason.nvim",
     },
+    -- Extended by plugins/languages/
     opts = {
-      automatic_installation = true,
+      ensure_installed = {
+        "bashls",
+        "cssls",
+        "eslint",
+        "jsonls",
+        "html",
+        "lua_ls",
+        "vtsls",
+        "yamlls",
+        "zls",
+      },
     },
   },
   {
-    "jay-babu/mason-null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "williamboman/mason.nvim",
-      "nvimtools/none-ls.nvim",
-      "nvim-lua/plenary.nvim",
-      "saghen/blink.cmp",
-      "lukas-reineke/lsp-format.nvim",
-    },
-    config = function()
+    "nvimtools/none-ls.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    -- Extended by plugins/languages/
+    opts = { sources = {} },
+    config = function(_, opts)
       local null_ls = require("null-ls")
+      opts.on_attach = on_attach
 
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.formatting.prettier,
-          null_ls.builtins.diagnostics.stylelint.with({
-            extra_filetypes = { "vue" },
-          }),
-          null_ls.builtins.formatting.stylelint.with({
-            extra_filetypes = { "vue" },
-          }),
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.shfmt,
-          null_ls.builtins.diagnostics.gdlint,
-          null_ls.builtins.formatting.gdformat,
-        },
-        on_attach = on_attach,
-        capabilities = capabilities(),
-      })
-
-      require("mason-null-ls").setup({
-        ensure_installed = nil,
-        -- Should install everything as set up above with null_ls/none-ls:
-        automatic_installation = true,
-      })
+      null_ls.setup(opts)
     end,
   },
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    event = "VeryLazy",
     dependencies = {
       "b0o/schemastore.nvim",
       "saghen/blink.cmp",
