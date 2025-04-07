@@ -1,10 +1,12 @@
 return {
-  "lukas-reineke/lsp-format.nvim",
-  -- Extends plugins/format.lua
-  opts = {
-    lua = {
-      order = { "lua_ls", "null-ls" },
-      sync = true,
+  {
+    "lukas-reineke/lsp-format.nvim",
+    -- Extends plugins/format.lua
+    opts = {
+      lua = {
+        order = { "lua_ls", "null-ls" },
+        sync = true,
+      },
     },
   },
   {
@@ -24,6 +26,14 @@ return {
       opts.ensure_installed = opts.ensure_installed or {}
 
       table.insert(opts.ensure_installed, "stylua")
+    end,
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    -- Extends plugins/lsp.lua
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      table.insert(opts.ensure_installed, "lua_ls")
     end,
   },
 }

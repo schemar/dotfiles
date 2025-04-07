@@ -44,19 +44,9 @@ return {
       "williamboman/mason.nvim",
     },
     -- Extended by plugins/languages/
-    opts = {
-      ensure_installed = {
-        "bashls",
-        "cssls",
-        "eslint",
-        "jsonls",
-        "html",
-        "lua_ls",
-        "vtsls",
-        "yamlls",
-        "zls",
-      },
-    },
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+    end,
   },
   {
     "nvimtools/none-ls.nvim",
@@ -81,21 +71,10 @@ return {
       "yioneko/nvim-vtsls",
       "lukas-reineke/lsp-format.nvim",
     },
+    -- Extended by plugins/languages/
+    opts = { servers = {} },
     config = function()
       local lspconfig = require("lspconfig")
-
-      -- Extend for lua:
-      local capabilities_lua = {}
-      -- Copy capabilities table
-      for k, v in pairs(capabilities()) do
-        capabilities_lua[k] = v
-      end
-      -- And add lua specifics
-      capabilities_lua.textDocument.foldingRange = {
-        -- Both required to not get an error with ufo:
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
-      }
 
       -- [[ Language Servers go here ]]
       lspconfig.bashls.setup({
@@ -137,7 +116,7 @@ return {
         on_attach = on_attach,
       })
       lspconfig.yamlls.setup({
-        capabilities = capabilities_lua,
+        capabilities = capabilities(),
         on_attach = on_attach,
         settings = {
           yaml = {

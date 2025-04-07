@@ -1,8 +1,10 @@
 return {
-  "lukas-reineke/lsp-format.nvim",
-  -- Extends plugins/format.lua
-  opts = {
-    gdscript = { "null-ls" },
+  {
+    "lukas-reineke/lsp-format.nvim",
+    -- Extends plugins/format.lua
+    opts = {
+      gdscript = { "null-ls" },
+    },
   },
   {
     "nvimtools/none-ls.nvim",
