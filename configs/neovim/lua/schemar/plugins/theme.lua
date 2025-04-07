@@ -4,7 +4,7 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
-    flavour = "latte", -- latte, frappe, macchiato, mocha
+    flavour = "macchiato", -- latte, frappe, macchiato, mocha
     term_colors = true,
     integrations = {
       beacon = true,
