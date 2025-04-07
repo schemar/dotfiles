@@ -19,7 +19,7 @@ theme-system-light:
 theme-terminal-macchiato:
   sd 'theme="(.*)"' 'theme="Catppuccin Macchiato"' configs/bat/config
   sd 'syntax-theme = (.*)' 'syntax-theme = Catppuccin Macchiato' configs/git/.gitconfig
-  sd 'flavour = "(.*)"' 'flavour = "macchiato"' configs/neovim/lua/svim/plugins/catppuccin.lua
+  sd 'flavour = "(.*)"' 'flavour = "macchiato"' ./configs/neovim/lua/schemar/plugins/theme.lua
   sd 'color_scheme = "(.*)"' 'color_scheme = "Catppuccin Macchiato"' configs/wezterm/wezterm.lua
 
   # TMUX:
@@ -43,7 +43,7 @@ theme-terminal-macchiato:
 theme-terminal-latte:
   sd 'theme="(.*)"' 'theme="Catppuccin Latte"' configs/bat/config
   sd 'syntax-theme = (.*)' 'syntax-theme = Catppuccin Latte' configs/git/.gitconfig
-  sd 'flavour = "(.*)"' 'flavour = "latte"' configs/neovim/lua/svim/plugins/catppuccin.lua
+  sd 'flavour = "(.*)"' 'flavour = "latte"' ./configs/neovim/lua/schemar/plugins/theme.lua
   sd 'color_scheme = "(.*)"' 'color_scheme = "Catppuccin Latte"' configs/wezterm/wezterm.lua
 
   # TMUX:
