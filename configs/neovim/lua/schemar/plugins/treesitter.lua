@@ -4,7 +4,6 @@ return {
     version = false, -- last release is way too old and doesn't work on Windows
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-    lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
     build = ":TSUpdate",
     config = function()
       local configs = require("nvim-treesitter.configs")
@@ -188,11 +187,13 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     opts = {},
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
+    event = { "BufReadPost", "BufNewFile" },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
   {

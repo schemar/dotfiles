@@ -2,6 +2,7 @@ return {
   { "github/copilot.vim" },
   {
     "saghen/blink.cmp",
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
       {
         "Kaiser-Yang/blink-cmp-git",
