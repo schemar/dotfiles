@@ -1,12 +1,3 @@
--- format:
-local on_attach = function(client, bufnr)
-  require("lsp-format").on_attach(client, bufnr)
-end
--- blink.cmp:
-local capabilities = function()
-  return require("blink.cmp").get_lsp_capabilities()
-end
-
 return {
   {
     "williamboman/mason.nvim",
@@ -56,7 +47,7 @@ return {
     opts = { sources = {} },
     config = function(_, opts)
       local null_ls = require("null-ls")
-      opts.on_attach = on_attach
+      opts.on_attach = require("lsp-format").on_attach -- formatting
 
       null_ls.setup(opts)
     end,
@@ -72,77 +63,27 @@ return {
       "lukas-reineke/lsp-format.nvim",
     },
     -- Extended by plugins/languages/
-    opts = { servers = {} },
-    config = function()
+    opts = function(_, opts)
+      opts.servers = opts.servers or {}
+    end,
+    config = function(_, opts)
       local lspconfig = require("lspconfig")
+      local on_attach = require("lsp-format").on_attach -- formatting
+      local capabilities = require("blink.cmp").get_lsp_capabilities() -- completion with blink.cmp
 
-      -- [[ Language Servers go here ]]
-      lspconfig.bashls.setup({
-        -- bashls includes shellcheck and shfmt
-        capabilities = capabilities(),
-        on_attach = on_attach,
-      })
-      lspconfig.cssls.setup({
-        capabilities = capabilities(),
-        on_attach = on_attach,
-      })
-      lspconfig.eslint.setup({
-        capabilities = capabilities(),
-        on_attach = on_attach,
-      })
-      lspconfig.jsonls.setup({
-        capabilities = capabilities(),
-        on_attach = on_attach,
-        settings = {
-          json = {
-            schemas = require("schemastore").json.schemas(),
-            validate = { enable = true },
-          },
-        },
-      })
-      lspconfig.html.setup({
-        capabilities = capabilities(),
-        -- No formatting with HTML (confuses afilio).
-        -- on_attach = on_attach,
-        filetypes = { "html", "templ", "vue" },
-      })
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities(),
-        on_attach = on_attach,
-      })
-      -- TypeScript:
-      lspconfig.vtsls.setup({
-        capabilities = capabilities(),
-        on_attach = on_attach,
-      })
-      lspconfig.yamlls.setup({
-        capabilities = capabilities(),
-        on_attach = on_attach,
-        settings = {
-          yaml = {
-            schemaStore = {
-              -- You must disable built-in schemaStore support if you want to use
-              -- this plugin and its advanced options like `ignore`.
-              enable = false,
-              -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-              url = "",
-            },
-            schemas = require("schemastore").yaml.schemas(),
-          },
-        },
-      })
-      lspconfig.zls.setup({
-        capabilities = capabilities(),
-        on_attach = on_attach,
-      })
-      lspconfig.gdscript.setup({
-        capabilities = capabilities(),
-        on_attach = on_attach,
-      })
-      lspconfig.gdshader_lsp.setup({
-        capabilities = capabilities(),
-        on_attach = on_attach,
-      })
+      for server, server_opts in pairs(opts.servers) do
+        -- Was either done as tbl_extend with "cssls" in which case the server
+        -- is the second value of ipairs, or as {cssls = { setup = {...}}}
+        if type(server_opts) == "string" then
+          server = server_opts
+          server_opts = {}
+        end
+
+        lspconfig[server].setup(vim.tbl_deep_extend("force", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+        }, server_opts))
+      end
     end,
   },
   {

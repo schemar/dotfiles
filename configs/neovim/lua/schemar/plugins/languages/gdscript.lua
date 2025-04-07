@@ -1,5 +1,14 @@
 return {
   {
+    "neovim/nvim-lspconfig",
+    -- Extends plugins/lsp.lua
+    opts = function(_, opts)
+      opts.servers = opts.servers or {}
+      table.insert(opts.servers, "gdscript")
+      table.insert(opts.servers, "gdshader_lsp")
+    end,
+  },
+  {
     "lukas-reineke/lsp-format.nvim",
     -- Extends plugins/format.lua
     opts = {

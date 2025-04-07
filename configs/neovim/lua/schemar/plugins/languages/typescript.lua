@@ -1,5 +1,13 @@
 return {
   {
+    "neovim/nvim-lspconfig",
+    -- Extends plugins/lsp.lua
+    opts = function(_, opts)
+      opts.servers = opts.servers or {}
+      table.insert(opts.servers, "vtsls")
+    end,
+  },
+  {
     "lukas-reineke/lsp-format.nvim",
     -- Extends plugins/format.lua
     opts = {
