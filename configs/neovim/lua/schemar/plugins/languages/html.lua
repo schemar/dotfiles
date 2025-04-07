@@ -6,10 +6,6 @@ return {
       opts.servers = opts.servers or {}
       opts.servers = vim.tbl_extend("force", opts.servers, {
         html = {
-          init_options = {
-            -- No formatting with HTML (confuses afilio).
-            provideFormatter = false,
-          },
           filetypes = { "html", "templ", "vue" },
         },
       })
@@ -20,8 +16,11 @@ return {
     -- Extends plugins/format.lua
     opts = {
       html = {
-        order = { "html", "null-ls" },
+        order = { "null-ls" },
         sync = true,
+        -- No formatting with HTML (confuses afilio).
+
+        exclude = { "html" }, -- Exclude html from formatting
       },
     },
   },

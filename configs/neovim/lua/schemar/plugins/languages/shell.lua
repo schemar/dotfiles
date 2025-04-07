@@ -9,6 +9,20 @@ return {
     end,
   },
   {
+    "lukas-reineke/lsp-format.nvim",
+    -- Extends plugins/format.lua
+    opts = {
+      sh = {
+        order = { "bashls" },
+        sync = true,
+      },
+      zsh = {
+        order = { "bashls" },
+        sync = true,
+      },
+    },
+  },
+  {
     "williamboman/mason-lspconfig.nvim",
     -- Extends plugins/lsp.lua
     opts = function(_, opts)

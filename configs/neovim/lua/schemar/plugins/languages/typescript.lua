@@ -13,8 +13,11 @@ return {
     opts = {
       typescript = {
         -- null-ls is prettier
-        order = { "vtsls", "eslint", "null-ls" },
+        order = { "eslint", "null-ls" },
         sync = true,
+        -- Format only with eslint and prettier.
+        -- Prevents back and forth formatting.
+        exclude = { "vtsls" },
       },
     },
   },
