@@ -17,16 +17,54 @@ function M.init()
   end
 
   wk.add({
-    { "<c-w>", group = "Window" },
     {
-      "<c-w>s",
-      "<cmd>vsplit<cr>",
-      desc = "Split window",
+      "]",
+      group = "Next ...",
+      {
+        {
+          "]t",
+          function()
+            require("todo-comments").jump_next()
+          end,
+          desc = "Next todo comment",
+        },
+        {
+          "]w",
+          function()
+            require("snacks").words.jump(1, true)
+          end,
+          desc = "Next matching word",
+        },
+      },
     },
     {
-      "<c-w>v",
-      "<cmd>split<cr>",
-      desc = "Split window verticallly",
+      "[",
+      group = "Previous ...",
+      {
+        {
+          "[t",
+          function()
+            require("todo-comments").jump_prev()
+          end,
+          desc = "Previous todo comment",
+        },
+      },
+    },
+    {
+      "<c-w>",
+      group = "Window",
+      {
+        {
+          "<c-w>s",
+          "<cmd>vsplit<cr>",
+          desc = "Split window",
+        },
+        {
+          "<c-w>v",
+          "<cmd>split<cr>",
+          desc = "Split window verticallly",
+        },
+      },
     },
     -- ⚠️ When creating the flash keymaps manually either use a lua function like
     -- `function() require("flash").jump() end` as the rhs, or a string like
@@ -56,6 +94,41 @@ function M.init()
       end,
       desc = "Flash Treesitter",
     },
+    { "<m-h>", "<cmd>TmuxNavigateLeft<cr>" },
+    { "<m-j>", "<cmd>TmuxNavigateDown<cr>" },
+    { "<m-k>", "<cmd>TmuxNavigateUp<cr>" },
+    { "<m-l>", "<cmd>TmuxNavigateRight<cr>" },
+    { "<m-\\>", "<cmd>TmuxNavigatePrevious<cr>" },
+    {
+      "<m-n>",
+      "<cmd>tabnext<cr>",
+      desc = "Next",
+    },
+    {
+      "<m-p>",
+      "<cmd>tabprevious<cr>",
+      desc = "Previous",
+    },
+    {
+      "<m-s>",
+      "<cmd>vsplit<cr>",
+      desc = "Split window",
+    },
+    {
+      "gd",
+      "<cmd>Trouble lsp_definitions focus=true<cr>",
+      desc = "Definitions",
+    },
+    {
+      "gD",
+      "<cmd>Trouble lsp_type_definitions focus=true<cr>",
+      desc = "Type definitions",
+    },
+    {
+      "gr",
+      "<cmd>Trouble lsp_references focus=true<cr>",
+      desc = "References",
+    },
     {
       "r",
       mode = { "o" },
@@ -72,49 +145,6 @@ function M.init()
       end,
       desc = "Treesitter Search",
     },
-    { "<m-h>", "<cmd>TmuxNavigateLeft<cr>" },
-    { "<m-j>", "<cmd>TmuxNavigateDown<cr>" },
-    { "<m-k>", "<cmd>TmuxNavigateUp<cr>" },
-    { "<m-l>", "<cmd>TmuxNavigateRight<cr>" },
-    { "<m-\\>", "<cmd>TmuxNavigatePrevious<cr>" },
-    {
-      "<m-p>",
-      "<cmd>tabprevious<cr>",
-      desc = "Previous",
-    },
-    {
-      "<m-s>",
-      "<cmd>vsplit<cr>",
-      desc = "Split window",
-    },
-    {
-      "]t",
-      function()
-        require("todo-comments").jump_next()
-      end,
-      desc = "Next todo comment",
-    },
-    {
-      "[t",
-      function()
-        require("todo-comments").jump_prev()
-      end,
-      desc = "Previous todo comment",
-    },
-    {
-      "]w",
-      function()
-        require("snacks").words.jump(1, true)
-      end,
-      desc = "Next matching word",
-    },
-    {
-      "zR",
-      function()
-        require("ufo").openAllFolds()
-      end,
-      desc = "Open all folds",
-    },
     {
       "zM",
       function()
@@ -129,219 +159,283 @@ function M.init()
       end,
       desc = "Open all folds",
     },
-    { "<leader>", group = "Leader" },
     {
-      "<leader><leader>",
-      "<cmd>Telescope smart_open<cr>",
-      desc = "Open",
-    },
-    {
-      "<leader>/",
-      "<cmd>Telescope live_grep<cr>",
-      desc = "Grep Project",
-    },
-    {
-      "<leader>*",
-      "<cmd>Telescope grep_string<cr>",
-      desc = "Grep project (selection)",
-    },
-    {
-      "<leader>r",
-      "<cmd>Telescope resume<cr>",
-      desc = "Resume Telescope",
-    },
-    { "<leader>a", group = "Graphite" },
-    {
-      "<leader>al",
-      "<cmd>!gt ls<cr>",
-      desc = "List stacks",
-    },
-    {
-      "<leader>ac",
+      "zR",
       function()
-        utils.split_term("gt create")
+        require("ufo").openAllFolds()
       end,
-      desc = "Create",
+      desc = "Open all folds",
     },
     {
-      "<leader>as",
-      function()
-        utils.split_term_and_edit("gt sync")
-      end,
-      desc = "Sync",
-    },
-    {
-      "<leader>ap",
-      function()
-        utils.split_term("gt submit --no-edit")
-      end,
-      desc = "Submit",
-    },
-    {
-      "<leader>aP",
-      function()
-        utils.split_term("gt submit --no-edit --publish")
-      end,
-      desc = "Submit (publish)",
-    },
-    {
-      "<leader>am",
-      function()
-        utils.split_term("gt modify")
-      end,
-      desc = "Modify",
-    },
-    {
-      "<leader>aM",
-      function()
-        utils.split_term_and_edit("gt modify && gt sync && gt submit --no-edit")
-      end,
-      desc = "Modify, Sync, Submit",
-    },
-    {
-      "<leader>ao",
-      function()
-        utils.split_term_and_edit("gt checkout")
-      end,
-      desc = "Checkout",
-    },
-    {
-      "<leader>au",
-      function()
-        gt_command_ls("up")
-      end,
-      desc = "Up",
-    },
-    {
-      "<leader>ad",
-      function()
-        gt_command_ls("down")
-      end,
-      desc = "Down",
-    },
-    { "<leader>b", group = "Buffers" },
-    {
-      "<leader>bb",
-      "<cmd>Telescope buffers<cr>",
-      desc = "List buffers",
-    },
-    {
-      "<leader>bd",
-      function()
-        Snacks.bufdelete()
-      end,
-      desc = "Delete buffer",
-    },
-    {
-      "<leader>bD",
-      function()
-        Snacks.bufdelete.other()
-      end,
-      desc = "Delete other buffers",
-    },
-    {
-      "<leader>f",
-      group = "Files",
+      "<leader>",
+      group = "Leader",
       {
         {
-          "<leader>fe",
-          "<cmd>NvimTreeToggle<cr>",
-          desc = "Explorer",
+          "<leader><leader>",
+          "<cmd>Telescope smart_open<cr>",
+          desc = "Open",
         },
         {
-          "<leader>fE",
-          "<cmd>NvimTreeFindFile<cr>",
-          desc = "Explorer (curr. dir.)",
+          "<leader>/",
+          "<cmd>Telescope live_grep<cr>",
+          desc = "Grep Project",
         },
         {
-          "<leader>ff",
-          "<cmd>Telescope find_files<cr>",
-          desc = "Files",
+          "<leader>*",
+          "<cmd>Telescope grep_string<cr>",
+          desc = "Grep project (selection)",
         },
         {
-          "<leader>fF",
-          "<cmd>Telescope oldfiles<cr>",
-          desc = "Files (opened)",
+          "<leader>a",
+          group = "Graphite",
+          {
+            {
+              "<leader>al",
+              "<cmd>!gt ls<cr>",
+              desc = "List stacks",
+            },
+            {
+              "<leader>ac",
+              function()
+                utils.split_term("gt create")
+              end,
+              desc = "Create",
+            },
+            {
+              "<leader>as",
+              function()
+                utils.split_term_and_edit("gt sync")
+              end,
+              desc = "Sync",
+            },
+            {
+              "<leader>ap",
+              function()
+                utils.split_term("gt submit --no-edit")
+              end,
+              desc = "Submit",
+            },
+            {
+              "<leader>aP",
+              function()
+                utils.split_term("gt submit --no-edit --publish")
+              end,
+              desc = "Submit (publish)",
+            },
+            {
+              "<leader>am",
+              function()
+                utils.split_term("gt modify")
+              end,
+              desc = "Modify",
+            },
+            {
+              "<leader>aM",
+              function()
+                utils.split_term_and_edit("gt modify && gt sync && gt submit --no-edit")
+              end,
+              desc = "Modify, Sync, Submit",
+            },
+            {
+              "<leader>ao",
+              function()
+                utils.split_term_and_edit("gt checkout")
+              end,
+              desc = "Checkout",
+            },
+            {
+              "<leader>au",
+              function()
+                gt_command_ls("up")
+              end,
+              desc = "Up",
+            },
+            {
+              "<leader>ad",
+              function()
+                gt_command_ls("down")
+              end,
+              desc = "Down",
+            },
+          },
+        },
+        {
+          "<leader>b",
+          group = "Buffers",
+          {
+            {
+              "<leader>bb",
+              "<cmd>Telescope buffers<cr>",
+              desc = "List buffers",
+            },
+            {
+              "<leader>bd",
+              function()
+                Snacks.bufdelete()
+              end,
+              desc = "Delete buffer",
+            },
+            {
+              "<leader>bD",
+              function()
+                Snacks.bufdelete.other()
+              end,
+              desc = "Delete other buffers",
+            },
+          },
+        },
+        {
+          "<leader>f",
+          group = "Files",
+          {
+            {
+              "<leader>fe",
+              "<cmd>NvimTreeToggle<cr>",
+              desc = "Explorer",
+            },
+            {
+              "<leader>fE",
+              "<cmd>NvimTreeFindFile<cr>",
+              desc = "Explorer (curr. dir.)",
+            },
+            {
+              "<leader>ff",
+              "<cmd>Telescope find_files<cr>",
+              desc = "Files",
+            },
+            {
+              "<leader>fF",
+              "<cmd>Telescope oldfiles<cr>",
+              desc = "Files (opened)",
+            },
+          },
+        },
+        {
+          "<leader>g",
+          group = "Git",
+          {
+            { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diffview" },
+            { "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", desc = "File history" },
+            {
+              "<leader>gg",
+              function()
+                require("neogit").open()
+              end,
+              desc = "Neogit",
+            },
+            { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Branch history" },
+          },
+        },
+        {
+          "<leader>j",
+          group = "Tabs",
+          {
+            {
+              "<leader>jc",
+              "<cmd>tabnew<cr>",
+              desc = "Create",
+            },
+            {
+              "<leader>jj",
+              "<cmd>tabnext<cr>",
+              desc = "Next",
+            },
+            {
+              "<leader>jJ",
+              "<cmd>tablast<cr>",
+              desc = "Last",
+            },
+            {
+              "<leader>jk",
+              "<cmd>tabprevious<cr>",
+              desc = "Previous",
+            },
+            {
+              "<leader>jK",
+              "<cmd>tabfirst<cr>",
+              desc = "First",
+            },
+            {
+              "<leader>jd",
+              "<cmd>tabclose<cr>",
+              desc = "Delete",
+            },
+          },
+        },
+        {
+          "<leader>l",
+          group = "Code",
+          {
+            {
+              "<leader>la",
+              vim.lsp.buf.code_action,
+              desc = "Code actions",
+            },
+            { "<leader>lc", "<cmd>Copilot<cr>", desc = "Copilot completions" },
+            {
+              "<leader>ld",
+              "<cmd>Trouble diagnostics focus=true<cr>",
+              desc = "Diagnostics",
+            },
+            {
+              "<leader>lD",
+              "<cmd>Trouble diagnostics filter.buf=0 focus=true<cr>",
+              desc = "Buffer Diagnostics",
+            },
+            {
+              "<leader>le",
+              vim.diagnostic.open_float,
+              desc = "Floating diagnostic",
+            },
+            {
+              "<leader>ll",
+              "<cmd>Trouble lsp focus=false win.position=right<cr>",
+              desc = "LSP definitions, references, ...",
+            },
+            { "<leader>lo", "<cmd>AerialToggle<cr>", desc = "Aerial (Symbols)" },
+            { "<leader>lO", "<cmd>AerialNavToggle<cr>", desc = "Aerial (Symbols)" },
+            { "<leader>lr", vim.lsp.buf.rename, desc = "Rename" },
+            {
+              "<leader>ls",
+              "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+              desc = "Workspace symbols",
+            },
+          },
+        },
+        { "<leader>o", "<cmd>Other<cr>", desc = "Open 'other' file" },
+        { "<leader>O", "<cmd>OtherClear<cr><cmd>Other<cr>", desc = "Open 'other' file (clear)" },
+        {
+          "<leader>r",
+          "<cmd>Telescope resume<cr>",
+          desc = "Resume Telescope",
+        },
+        {
+          "<leader>t",
+          desc = "Todos",
+          {
+            {
+              "<leader>tt",
+              "<cmd>Trouble todo focus=true<cr>", -- Trouble todo filter = {tag = {TODO,FIX,FIXME}}
+              desc = "Todos",
+            },
+            {
+              "<leader>tm",
+              "<cmd>Trouble todo filter.tag={TODOMS} focus=true<cr>", -- Trouble todo filter = {tag = {TODO,FIX,FIXME}}
+              desc = "Todos MS",
+            },
+            {
+              "<leader>tb",
+              "<cmd>Trouble todo filter.buf=0 focus=true<cr>", -- Trouble todo filter = {tag = {TODO,FIX,FIXME}}
+              desc = "Todos (curr. buffer)",
+            },
+          },
+        },
+        {
+          "<leader>u",
+          "<cmd>Telescope undo<cr>",
+          desc = "Undo tree",
         },
       },
-    },
-    {
-      "<leader>g",
-      group = "Git",
-      { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diffview" },
-      { "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", desc = "File history" },
-      {
-        "<leader>gg",
-        function()
-          require("neogit").open()
-        end,
-        desc = "Neogit",
-      },
-      { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Branch history" },
-    },
-    { "<leader>l", group = "Code" },
-    {
-      "<leader>la",
-      vim.lsp.buf.code_action,
-      desc = "Code actions",
-    },
-    { "<leader>lc", "<cmd>Copilot<cr>", desc = "Copilot completions" },
-    {
-      "<leader>le",
-      vim.diagnostic.open_float,
-      desc = "Floating diagnostic",
-    },
-    { "<leader>lo", "<cmd>AerialToggle<cr>", desc = "Aerial (Symbols)" },
-    { "<leader>lO", "<cmd>AerialNavToggle<cr>", desc = "Aerial (Symbols)" },
-    { "<leader>lr", vim.lsp.buf.rename, desc = "Rename" },
-    {
-      "<leader>ls",
-      "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-      desc = "Workspace symbols",
-    },
-    { "<leader>t", desc = "Todos" },
-    { "<leader>j", group = "Tabs" },
-    {
-      "<leader>jc",
-      "<cmd>tabnew<cr>",
-      desc = "Create",
-    },
-    {
-      "<a-n>",
-      "<cmd>tabnext<cr>",
-      desc = "Next",
-    },
-    {
-      "<leader>jj",
-      "<cmd>tabnext<cr>",
-      desc = "Next",
-    },
-    {
-      "<leader>jJ",
-      "<cmd>tablast<cr>",
-      desc = "Last",
-    },
-    {
-      "<leader>jk",
-      "<cmd>tabprevious<cr>",
-      desc = "Previous",
-    },
-    {
-      "<leader>jK",
-      "<cmd>tabfirst<cr>",
-      desc = "First",
-    },
-    {
-      "<leader>jd",
-      "<cmd>tabclose<cr>",
-      desc = "Delete",
-    },
-    { "<leader>o", "<cmd>Other<cr>", desc = "Open 'other' file" },
-    { "<leader>O", "<cmd>OtherClear<cr><cmd>Other<cr>", desc = "Open 'other' file (clear)" },
-    {
-      "<leader>u",
-      "<cmd>Telescope undo<cr>",
-      desc = "Undo tree",
     },
   })
 end

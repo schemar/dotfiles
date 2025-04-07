@@ -19,53 +19,6 @@ return {
       follow = true, -- follow the current item (move in Trouble list when going to another item in the buffer)
     }, -- for default options, refer to the configuration section for custom setup.
     cmd = "Trouble",
-    keys = {
-      {
-        "<leader>ld",
-        "<cmd>Trouble diagnostics focus=true<cr>",
-        desc = "Diagnostics",
-      },
-      {
-        "<leader>lD",
-        "<cmd>Trouble diagnostics filter.buf=0 focus=true<cr>",
-        desc = "Buffer Diagnostics",
-      },
-      {
-        "<leader>ll",
-        "<cmd>Trouble lsp focus=false win.position=right<cr>",
-        desc = "LSP definitions, references, ...",
-      },
-      {
-        "<leader>tt",
-        "<cmd>Trouble todo focus=true<cr>", -- Trouble todo filter = {tag = {TODO,FIX,FIXME}}
-        desc = "Todos",
-      },
-      {
-        "<leader>tm",
-        "<cmd>Trouble todo filter.tag={TODOMS} focus=true<cr>", -- Trouble todo filter = {tag = {TODO,FIX,FIXME}}
-        desc = "Todos MS",
-      },
-      {
-        "<leader>tb",
-        "<cmd>Trouble todo filter.buf=0 focus=true<cr>", -- Trouble todo filter = {tag = {TODO,FIX,FIXME}}
-        desc = "Todos (curr. buffer)",
-      },
-      {
-        "gd",
-        "<cmd>Trouble lsp_definitions focus=true<cr>",
-        desc = "Definitions",
-      },
-      {
-        "gD",
-        "<cmd>Trouble lsp_type_definitions focus=true<cr>",
-        desc = "Type definitions",
-      },
-      {
-        "gr",
-        "<cmd>Trouble lsp_references focus=true<cr>",
-        desc = "References",
-      },
-    },
   },
   {
     "nvim-telescope/telescope.nvim",
