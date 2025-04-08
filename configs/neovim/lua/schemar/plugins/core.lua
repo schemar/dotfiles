@@ -4,6 +4,7 @@ return {
     event = "VeryLazy",
     opts = {
       preset = "helix",
+      sort = { "order", "alphanum", "mod" },
       icons = {
         mappings = false,
       },
