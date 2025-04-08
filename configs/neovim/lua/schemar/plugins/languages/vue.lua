@@ -4,8 +4,11 @@ return {
     -- Extends plugins/format.lua
     opts = {
       vue = {
-        order = { "html", "null-ls" },
+        order = { "null-ls" },
         sync = true,
+        -- Format only with stylelint and prettier.
+        -- Prevents back and forth formatting.
+        exclude = { "html" },
       },
     },
   },

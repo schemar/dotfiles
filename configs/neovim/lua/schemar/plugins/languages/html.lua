@@ -18,8 +18,8 @@ return {
       html = {
         order = { "null-ls" },
         sync = true,
-        -- No formatting with HTML (confuses afilio).
-
+        -- Format only with prettier.
+        -- Prevents back and forth formatting.
         exclude = { "html" }, -- Exclude html from formatting
       },
     },
