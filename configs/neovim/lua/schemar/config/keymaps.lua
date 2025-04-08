@@ -130,6 +130,13 @@ function M.init()
       desc = "References",
     },
     {
+      "K",
+      function()
+        vim.lsp.buf.hover({ border = require("schemar.config.options").border })
+      end,
+      desc = "Hover",
+    },
+    {
       "r",
       mode = { "o" },
       function()

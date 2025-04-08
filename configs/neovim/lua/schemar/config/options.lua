@@ -44,7 +44,6 @@ opt.cursorline = true -- bool: Highlight current line
 -- opt.listchars = "space:·,tab:>~,trail:~,extends:>,precedes:<,eol:󰌑"
 opt.listchars = "tab:~~,trail:~"
 opt.list = true
-vim.o.winborder = border
 
 -- [[ Search ]]
 opt.ignorecase = true -- bool: Ignore case in search patterns
@@ -57,9 +56,12 @@ opt.shiftwidth = 2 -- num: Size of an indent
 opt.softtabstop = 2 -- num: Number of spaces tabs count for in insert mode
 opt.tabstop = 2 -- num: Number of spaces tabs count for
 
--- [[LSP Settings]]
+-- [[ LSP Settings ]]
 vim.diagnostic.config({
   virtual_lines = false,
+  float = {
+    border = border,
+  },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = error,
