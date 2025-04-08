@@ -1,3 +1,17 @@
+local function make_lsp_capabilities()
+  local capabilities = require("blink.cmp").get_lsp_capabilities() -- completion with blink.cmp
+
+  -- See nvim-ufo setup
+  -- Tell the server the capability of foldingRange,
+  -- Neovim hasn't added foldingRange to default capabilities, users must add it manually
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
+
+  return capabilities
+end
+
 return {
   {
     "williamboman/mason.nvim",
@@ -69,7 +83,7 @@ return {
     config = function(_, opts)
       local lspconfig = require("lspconfig")
       local on_attach = require("lsp-format").on_attach -- formatting
-      local capabilities = require("blink.cmp").get_lsp_capabilities() -- completion with blink.cmp
+      local capabilities = make_lsp_capabilities()
 
       for server, server_opts in pairs(opts.servers) do
         -- Was either done as tbl_extend with "cssls" in which case the server
