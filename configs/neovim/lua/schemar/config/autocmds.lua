@@ -5,6 +5,7 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
 })
 
 -- LSP renaming support for nvim-tree using Snacks
+-- Works with vtsls, but did not work with ts_ls or typescript-tools.
 local prev = { new_name = "", old_name = "" } -- Prevents duplicate events
 vim.api.nvim_create_autocmd("User", {
   pattern = "NvimTreeSetup",
