@@ -193,80 +193,6 @@ function M.init()
           desc = "Grep project (selection)",
         },
         {
-          "<leader>a",
-          group = "Graphite",
-          {
-            {
-              "<leader>al",
-              "<cmd>!gt ls<cr>",
-              desc = "List stacks",
-            },
-            {
-              "<leader>ac",
-              function()
-                utils.split_term("gt create")
-              end,
-              desc = "Create",
-            },
-            {
-              "<leader>as",
-              function()
-                utils.split_term_and_edit("gt sync")
-              end,
-              desc = "Sync",
-            },
-            {
-              "<leader>ap",
-              function()
-                utils.split_term("gt submit --no-edit")
-              end,
-              desc = "Submit",
-            },
-            {
-              "<leader>aP",
-              function()
-                utils.split_term("gt submit --no-edit --publish")
-              end,
-              desc = "Submit (publish)",
-            },
-            {
-              "<leader>am",
-              function()
-                utils.split_term("gt modify")
-              end,
-              desc = "Modify",
-            },
-            {
-              "<leader>aM",
-              function()
-                utils.split_term_and_edit("gt modify && gt sync && gt submit --no-edit")
-              end,
-              desc = "Modify, Sync, Submit",
-            },
-            {
-              "<leader>ao",
-              function()
-                utils.split_term_and_edit("gt checkout")
-              end,
-              desc = "Checkout",
-            },
-            {
-              "<leader>au",
-              function()
-                gt_command_ls("up")
-              end,
-              desc = "Up",
-            },
-            {
-              "<leader>ad",
-              function()
-                gt_command_ls("down")
-              end,
-              desc = "Down",
-            },
-          },
-        },
-        {
           "<leader>b",
           group = "Buffers",
           {
@@ -336,6 +262,80 @@ function M.init()
               desc = "Neogit",
             },
             { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Branch history" },
+            {
+              "<leader>gt",
+              group = "Graphite",
+              {
+                {
+                  "<leader>gtl",
+                  "<cmd>!gt ls<cr>",
+                  desc = "List stacks",
+                },
+                {
+                  "<leader>gtc",
+                  function()
+                    utils.split_term("gt create")
+                  end,
+                  desc = "Create",
+                },
+                {
+                  "<leader>gts",
+                  function()
+                    utils.split_term_and_edit("gt sync")
+                  end,
+                  desc = "Sync",
+                },
+                {
+                  "<leader>gtp",
+                  function()
+                    utils.split_term("gt submit --no-edit")
+                  end,
+                  desc = "Submit",
+                },
+                {
+                  "<leader>gtP",
+                  function()
+                    utils.split_term("gt submit --no-edit --publish")
+                  end,
+                  desc = "Submit (publish)",
+                },
+                {
+                  "<leader>gtm",
+                  function()
+                    utils.split_term("gt modify")
+                  end,
+                  desc = "Modify",
+                },
+                {
+                  "<leader>gtM",
+                  function()
+                    utils.split_term_and_edit("gt modify && gt sync && gt submit --no-edit")
+                  end,
+                  desc = "Modify, Sync, Submit",
+                },
+                {
+                  "<leader>gto",
+                  function()
+                    utils.split_term_and_edit("gt checkout")
+                  end,
+                  desc = "Checkout",
+                },
+                {
+                  "<leader>gtu",
+                  function()
+                    gt_command_ls("up")
+                  end,
+                  desc = "Up",
+                },
+                {
+                  "<leader>gtd",
+                  function()
+                    gt_command_ls("down")
+                  end,
+                  desc = "Down",
+                },
+              },
+            },
           },
         },
         {
