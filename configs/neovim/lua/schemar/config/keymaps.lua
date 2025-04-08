@@ -414,8 +414,21 @@ function M.init()
             },
           },
         },
-        { "<leader>o", "<cmd>Other<cr>", desc = "Open 'other' file" },
-        { "<leader>O", "<cmd>OtherClear<cr><cmd>Other<cr>", desc = "Open 'other' file (clear)" },
+        {
+          "<leader>m",
+          "<cmd>Telescope marks<cr>",
+          desc = "Marks",
+        },
+        {
+          "<leader>o",
+          "<cmd>Other<cr>",
+          desc = "Open 'other' file",
+        },
+        {
+          "<leader>O",
+          "<cmd>OtherClear<cr><cmd>Other<cr>",
+          desc = "Open 'other' file (clear)",
+        },
         {
           "<leader>r",
           "<cmd>Telescope resume<cr>",
