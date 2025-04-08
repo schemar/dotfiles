@@ -180,7 +180,7 @@ function M.init()
         {
           "<leader><leader>",
           "<cmd>Telescope smart_open<cr>",
-          desc = "Open",
+          desc = "Open Files (smart)",
         },
         {
           "<leader>/",
@@ -270,6 +270,11 @@ function M.init()
           "<leader>b",
           group = "Buffers",
           {
+            {
+              "<leader>b/",
+              "<cmd>Telescope current_buffer_fuzzy_find<cr>",
+              desc = "Fuzzy find in buffer",
+            },
             {
               "<leader>bb",
               "<cmd>Telescope buffers<cr>",
