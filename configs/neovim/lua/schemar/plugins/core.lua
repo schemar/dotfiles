@@ -232,6 +232,7 @@ return {
             ["<C-v>"] = "actions.jump_split",
             ["h"] = "actions.left",
             ["l"] = "actions.right",
+            ["q"] = "actions.close",
             ["<C-c>"] = "actions.close",
             ["<C-e>"] = "actions.close",
           },
