@@ -3,8 +3,17 @@ return {
     "neovim/nvim-lspconfig",
     -- Extends plugins/lsp.lua
     opts = function(_, opts)
+      local lspconfig = require("lspconfig")
       opts.servers = opts.servers or {}
-      table.insert(opts.servers, "vtsls")
+      opts.servers = vim.tbl_extend("force", opts.servers, {
+        vtsls = {
+          settings = {
+            vtsls = {
+              autoUseWorkspaceTsdk = true, -- Ensures workspace TypeScript SDK is used
+            },
+          },
+        },
+      })
     end,
   },
   {
