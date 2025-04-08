@@ -246,6 +246,16 @@ function M.init()
               "<cmd>Telescope oldfiles<cr>",
               desc = "Files (opened)",
             },
+            {
+              "<leader>fo",
+              "<cmd>Other<cr>",
+              desc = "Open 'other' file",
+            },
+            {
+              "<leader>fO",
+              "<cmd>OtherClear<cr><cmd>Other<cr>",
+              desc = "Open 'other' file (clear)",
+            },
           },
         },
         {
@@ -418,16 +428,6 @@ function M.init()
           "<leader>m",
           "<cmd>Telescope marks<cr>",
           desc = "Marks",
-        },
-        {
-          "<leader>o",
-          "<cmd>Other<cr>",
-          desc = "Open 'other' file",
-        },
-        {
-          "<leader>O",
-          "<cmd>OtherClear<cr><cmd>Other<cr>",
-          desc = "Open 'other' file (clear)",
         },
         {
           "<leader>r",
