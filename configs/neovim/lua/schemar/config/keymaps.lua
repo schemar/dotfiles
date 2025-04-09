@@ -410,6 +410,15 @@ function M.init()
               desc = "Floating diagnostic",
             },
             {
+              -- Defined in plugins/debug.lua
+              "<leader>lg",
+              group = "Debug",
+              {
+                "<leader>lgs",
+                group = "Debug surround",
+              },
+            },
+            {
               "<leader>ll",
               "<cmd>Trouble lsp focus=false win.position=right<cr>",
               desc = "LSP definitions, references, ...",
