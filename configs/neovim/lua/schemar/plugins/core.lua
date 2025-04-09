@@ -135,6 +135,8 @@ return {
     opts = {
       options = {
         theme = "catppuccin",
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
         disabled_filetypes = {
           statusline = {
             "NeogitStatus",
@@ -146,24 +148,34 @@ return {
         -- only when there are more than 1 tab. (see :h showtabline)
         always_show_tabline = false,
         -- Single line for entire window, disregarding window splits.
-        globalstatus = true,
+        globalstatus = false,
       },
       sections = {
         lualine_a = { "mode", "searchcount" },
         lualine_b = { "diff", "diagnostics" },
-        lualine_c = { { "filename", path = 1 } },
-        lualine_x = {
+        lualine_c = {
           {
-            "branch",
-            fmt = function(str)
-              if string.len(str) < 20 then
-                return str
-              else
-                return string.sub(str, 0, 9) .. "..." .. string.sub(str, string.len(str) - 8)
-              end
-            end,
+            "filename",
+            path = 1,
           },
-          "filetype",
+        },
+        lualine_x = {
+          -- {
+          --   "branch",
+          --   fmt = function(str)
+          --     if string.len(str) <= 15 then
+          --       return str
+          --     elseif string.len(str) <= 15 + 13 then
+          --       return string.sub(str, 13, string.len(str))
+          --     else
+          --       return string.sub(str, 13, 22) .. "…" .. string.sub(str, string.len(str) - 5)
+          --     end
+          --   end,
+          -- },
+          {
+            "filetype",
+            icon_only = true,
+          },
         },
         lualine_y = { "progress" },
         lualine_z = { "location" },
@@ -171,13 +183,24 @@ return {
       inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = { { "filename", path = 1 } },
-        lualine_x = { "location" },
+        lualine_c = {
+          {
+            "filename",
+            path = 1,
+          },
+        },
+        lualine_x = {},
         lualine_y = {},
-        lualine_z = {},
+        lualine_z = { "location" },
       },
       tabline = {
-        lualine_a = { { "tabs", mode = 2, max_length = vim.o.columns } },
+        lualine_a = {
+          {
+            "tabs",
+            mode = 2,
+            max_length = vim.o.columns,
+          },
+        },
         lualine_b = {},
         lualine_c = {},
         lualine_x = {},
