@@ -263,4 +263,9 @@ return {
       })
     end,
   },
+  {
+    -- Somewhat hacky. Observere.
+    "stevearc/stickybuf.nvim",
+    opts = {},
+  },
 }
