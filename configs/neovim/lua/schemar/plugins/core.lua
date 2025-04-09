@@ -13,12 +13,34 @@ return {
   {
     "folke/trouble.nvim",
     dependencies = { "folke/todo-comments.nvim" },
-    opts = {
-      auto_jump = true, -- auto jump to the item when there's only one
-      auto_preview = true, -- automatically open preview when going through items in Trouble
-      auto_refresh = false, -- auto refresh when open (update which references to show in Trouble when going to another item in the buffer)
-      follow = true, -- follow the current item (move in Trouble list when going to another item in the buffer)
-    }, -- for default options, refer to the configuration section for custom setup.
+    opts = function()
+      local icons = require("schemar.config.options").icons
+
+      return {
+        auto_jump = true, -- auto jump to the item when there's only one
+        auto_preview = true, -- automatically open preview when going through items in Trouble
+        auto_refresh = true, -- auto refresh when open (update which references to show in Trouble when going to another item in the buffer)
+        follow = true, -- follow the current item (move in Trouble list when going to another item in the buffer)
+        -- The LSP base mode for:
+        -- * lsp_definitions, lsp_references, lsp_implementations
+        -- * lsp_type_definitions, lsp_declarations, lsp_command
+        lsp_base = {
+          params = {
+            --  include the current location in the results
+            include_current = true,
+          },
+        },
+        icons = {
+          indent = {
+            fold_open = icons.ui.ChevronShortDown,
+            fold_closed = icons.ui.ChevronShortRight,
+          },
+          fold_closed = icons.ui.Folder,
+          fold_open = icons.ui.FolderOpen,
+          kinds = icons.kinds,
+        },
+      } -- for default options, refer to the configuration section for custom setup.
+    end,
     cmd = "Trouble",
   },
   {

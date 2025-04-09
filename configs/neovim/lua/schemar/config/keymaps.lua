@@ -116,17 +116,17 @@ function M.init()
     },
     {
       "gd",
-      "<cmd>Trouble lsp_definitions focus=true<cr>",
+      "<cmd>Trouble lsp_definitions focus=true auto_refresh=false<cr>",
       desc = "Definitions",
     },
     {
       "gD",
-      "<cmd>Trouble lsp_type_definitions focus=true<cr>",
+      "<cmd>Trouble lsp_type_definitions focus=true auto_refresh=false<cr>",
       desc = "Type definitions",
     },
     {
       "gr",
-      "<cmd>Trouble lsp_references focus=true<cr>",
+      "<cmd>Trouble lsp_references focus=true auto_refresh=false<cr>",
       desc = "References",
     },
     {
@@ -420,7 +420,7 @@ function M.init()
             },
             {
               "<leader>ll",
-              "<cmd>Trouble lsp focus=false win.position=right<cr>",
+              "<cmd>Trouble lsp focus=false win={position=right, size=0.4, relative=win}<cr>",
               desc = "LSP definitions, references, ...",
             },
             { "<leader>lo", "<cmd>AerialToggle<cr>", desc = "Aerial (Symbols)" },
