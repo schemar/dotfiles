@@ -87,6 +87,12 @@ function M.init()
       desc = "Toggle Flash Search",
     },
     {
+      "<c-t>",
+      mode = { "n", "x", "o", "i", "t" },
+      "<cmd>ToggleTerm direction=float<cr>",
+      desc = "Toggle Terminal",
+    },
+    {
       "<c-x>",
       mode = { "n", "x", "o" },
       function()
@@ -442,6 +448,17 @@ function M.init()
           "<leader>r",
           "<cmd>Telescope resume<cr>",
           desc = "Resume Telescope",
+        },
+        {
+          "<leader>s",
+          group = "Terminal",
+          {
+            {
+              "<leader>ss",
+              "<cmd>ToggleTerm direction=float<cr>",
+              desc = "Split terminal",
+            },
+          },
         },
         {
           "<leader>t",

@@ -24,6 +24,7 @@ function M.is_file_buffer(bufnr)
 end
 
 function M.split_term(command)
+  command = command or ""
   vim.cmd("split | terminal " .. command)
 end
 
