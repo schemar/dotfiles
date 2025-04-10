@@ -1,6 +1,8 @@
 local M = {}
 
--- Shallow deduplication of the keys in the given table.
+---Shallow deduplication of the keys in the given table.
+---@param input_table table The table to deduplicate.
+---@return table result A new table with unique keys.
 function M.dedup(input_table)
   local seen = {}
   local result = {}
@@ -15,6 +17,10 @@ function M.dedup(input_table)
   return result
 end
 
+---Check if the given buffer is a file buffer.
+---Is not 100% reliable, but should work for most cases.
+---@param bufnr number The number of the buffer to check.
+---@return boolean is_file_buffer True if the buffer is a file buffer, false otherwise.
 function M.is_file_buffer(bufnr)
   -- A file buffer typically has a name (file) and no type (like a special buffer)
   local buftype = vim.api.nvim_get_option_value("buftype", { buf = bufnr })
@@ -23,11 +29,18 @@ function M.is_file_buffer(bufnr)
   return buftype == "" and bufname ~= ""
 end
 
+---Opens a terminal in a vertical split and runs the given command.
+---@param command? string The command to run in the terminal.
+---@return nil
 function M.split_term(command)
   command = command or ""
   vim.cmd("split | terminal " .. command)
 end
 
+---Opens a terminal in a vertical split and runs the given command.
+---If the previous buffer was a file buffer, it will be reloaded after the terminal closes.
+---@param command? string The command to run in the terminal.
+---@return nil
 function M.split_term_and_edit(command)
   local prev_bufnr = vim.api.nvim_get_current_buf()
 
