@@ -105,4 +105,37 @@ return {
     ft = "lua", -- only load on lua files
     opts = {},
   },
+  {
+    -- Try out hover.nvim as a replacement, as the default hover started to
+    -- crop the text/view.
+    "lewis6991/hover.nvim",
+    event = "VeryLazy",
+    opts = function()
+      local border = require("schemar.config.options").border
+
+      return {
+        init = function()
+          -- Require providers
+          require("hover.providers.lsp")
+          require("hover.providers.gh")
+          require("hover.providers.gh_user")
+          -- require('hover.providers.jira')
+          -- require('hover.providers.dap')
+          require("hover.providers.fold_preview")
+          require("hover.providers.diagnostic")
+          require("hover.providers.man")
+          -- require('hover.providers.dictionary')
+          -- require("hover.providers.highlight")
+        end,
+        preview_opts = {
+          border = border,
+        },
+        -- Whether the contents of a currently open hover window should be moved
+        -- to a :h preview-window when pressing the hover keymap.
+        preview_window = false,
+        title = true,
+        mouse_providers = {},
+      }
+    end,
+  },
 }

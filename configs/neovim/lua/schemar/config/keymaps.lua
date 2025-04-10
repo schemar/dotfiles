@@ -60,20 +60,18 @@ function M.init()
       },
     },
     {
-      "<c-w>",
-      group = "Window",
-      {
-        {
-          "<c-w>s",
-          "<cmd>vsplit<cr>",
-          desc = "Split window",
-        },
-        {
-          "<c-w>v",
-          "<cmd>split<cr>",
-          desc = "Split window verticallly",
-        },
-      },
+      "<c-j>",
+      function()
+        require("hover").hover_switch("next")
+      end,
+      desc = "Hover next",
+    },
+    {
+      "<c-k>",
+      function()
+        require("hover").hover_switch("previous")
+      end,
+      desc = "Hover previous",
     },
     -- ⚠️ When creating the flash keymaps manually either use a lua function like
     -- `function() require("flash").jump() end` as the rhs, or a string like
@@ -100,6 +98,22 @@ function M.init()
       mode = { "n", "x", "o", "i", "t" },
       "<cmd>ToggleTerm direction=float<cr>",
       desc = "Toggle Terminal",
+    },
+    {
+      "<c-w>",
+      group = "Window",
+      {
+        {
+          "<c-w>s",
+          "<cmd>vsplit<cr>",
+          desc = "Split window",
+        },
+        {
+          "<c-w>v",
+          "<cmd>split<cr>",
+          desc = "Split window verticallly",
+        },
+      },
     },
     {
       "<c-x>",
@@ -147,7 +161,8 @@ function M.init()
     {
       "K",
       function()
-        vim.lsp.buf.hover({ border = require("schemar.config.options").border })
+        -- vim.lsp.buf.hover({ border = require("schemar.config.options").border })
+        require("hover").hover()
       end,
       desc = "Hover",
     },
