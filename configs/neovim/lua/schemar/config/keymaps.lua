@@ -1,5 +1,14 @@
 local M = {}
 
+-- Philosophy:
+-- - Float and pop-up windows (also sticky like nvim-tree):
+--   - `<cr>` to open and go to, but keep the window open
+--   - `o` to open and go to, and close the window
+--   - `tab` to open (preview), but keep cursor in the current window
+--   - `q` to close
+--   - `<c-e>` to close in insert mode
+--   - `<c-j/k>` to navigate
+
 function M.init()
   local wk = require("which-key")
   local utils = require("schemar.utils")
