@@ -6,7 +6,7 @@ local hint = "󰌶"
 
 local arrow_right = ""
 
-local border = "rounded"
+local border = "single"
 
 local opt = vim.opt
 

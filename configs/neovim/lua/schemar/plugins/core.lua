@@ -69,6 +69,9 @@ return {
     config = function()
       local open_with_trouble = require("trouble.sources.telescope").open
 
+      local border = require("schemar.config.options").border
+      local border_rounded = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+
       local telescope = require("telescope")
       local actions = require("telescope.actions")
 
@@ -93,6 +96,14 @@ return {
           layout_config = {
             prompt_position = "top",
           },
+          -- All three windows (picker, results, preview) are the same.
+          -- Show hard corners for single, rounded otherwise.
+          -- But also print error when not using `solid` or `rounded` as border.
+          borderchars = border == "single"
+              and { "─", "│", "─", "│", "┌", "┐", "┘", "└" }
+            or border == "rounded" and border_rounded
+            or vim.notify("Invalid border value for telescope. See config.", vim.log.levels.ERROR)
+              and border_rounded,
         },
         pickers = {
           live_grep = {
