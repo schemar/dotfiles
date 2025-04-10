@@ -56,7 +56,6 @@ return {
       },
       {
         "danielfalk/smart-open.nvim",
-        branch = "0.2.x",
         dependencies = {
           "kkharji/sqlite.lua",
           "nvim-tree/nvim-web-devicons",
@@ -77,12 +76,16 @@ return {
         defaults = {
           mappings = {
             i = {
+              ["<c-e>"] = actions.close,
               ["<c-j>"] = actions.move_selection_next,
               ["<c-k>"] = actions.move_selection_previous,
-              ["<esc>"] = actions.close, -- Close on first press of esc. No "normal" mode.
               ["<c-t>"] = open_with_trouble,
             },
-            n = { ["<c-t>"] = open_with_trouble },
+            n = {
+              ["<c-e>"] = actions.close,
+              ["<c-t>"] = open_with_trouble,
+              ["q"] = actions.close,
+            },
           },
           -- Themeing
           sorting_strategy = "ascending", -- List from the top down
