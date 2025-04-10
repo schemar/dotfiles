@@ -265,6 +265,7 @@ function M.init()
           },
         },
         {
+          -- See also M.git_attach for further git mappings.
           "<leader>g",
           group = "Git",
           {
@@ -519,6 +520,7 @@ function M.git_attach(buffer)
   map("n", "<leader>gB", function()
     gs.blame()
   end, "Blame Buffer")
+  map("n", "<leader>gx", gs.reset_hunk, "Reset Hunk")
 end
 
 function M.dashboard()
