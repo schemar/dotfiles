@@ -124,6 +124,13 @@ return {
           smart_open = {
             match_algorithm = "fzf",
             disable_devicons = false,
+            mappings = {
+              i = {
+                ["<c-w>"] = function()
+                  vim.api.nvim_input("<c-s-w>")
+                end,
+              },
+            },
           },
           undo = {},
           ["ui-select"] = {
