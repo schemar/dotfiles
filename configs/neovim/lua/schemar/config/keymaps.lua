@@ -62,14 +62,22 @@ function M.init()
     {
       "<c-j>",
       function()
-        require("hover").hover_switch("next")
+        if utils.is_hover_open() then
+          require("hover").hover_switch("next")
+        else
+          -- Do something else when hover not open?
+        end
       end,
       desc = "Hover next",
     },
     {
       "<c-k>",
       function()
-        require("hover").hover_switch("previous")
+        if utils.is_hover_open() then
+          require("hover").hover_switch("previous")
+        else
+          -- Do something else when hover not open?
+        end
       end,
       desc = "Hover previous",
     },

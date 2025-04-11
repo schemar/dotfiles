@@ -67,4 +67,18 @@ function M.split_term_and_edit(command)
   })
 end
 
+---Check if a hover.nvim window is open in the given buffer.
+---@param bufnr? number The buffer number to check. If nil, checks the current buffer.
+---@return boolean is_hover True if the hover window is open, false otherwise.
+function M.is_hover_open(bufnr)
+  bufnr = bufnr or 0
+  -- From https://github.com/lewis6991/hover.nvim/blob/1a8282fe3933c0c6f2769d7d6a9b7bab49984aee/lua/hover/actions.lua#L216
+  local cur_hover = vim.b[bufnr].hover_preview
+  if cur_hover and vim.api.nvim_win_is_valid(cur_hover) then
+    return true
+  end
+
+  return false
+end
+
 return M
