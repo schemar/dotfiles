@@ -6,7 +6,15 @@ return {
       local null_ls = require("null-ls")
 
       opts.sources = opts.sources or {}
-      table.insert(opts.sources, null_ls.builtins.formatting.prettier)
+      table.insert(
+        opts.sources,
+        null_ls.builtins.formatting.prettier.with({
+          -- Always format open files, even if they are ignored.
+          -- Setting `ignore-path` to empty string means "ignore nothing".
+          -- By default, prettier will ignore files in .gitignore and .prettierignore.
+          extra_args = { "--ignore-path", "" },
+        })
+      )
     end,
   },
   {
