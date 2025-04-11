@@ -6,6 +6,32 @@ return {
   opts = {
     flavour = "macchiato", -- latte, frappe, macchiato, mocha
     term_colors = true,
+    highlight_overrides = {
+      -- Increase contrast, which is not enough by default:
+      latte = function(colors)
+        return {
+          ["@member"] = { fg = colors.blue },
+          ["@variable"] = { fg = colors.blue },
+          ["@variable.member"] = { fg = colors.blue }, -- For fields.
+          ["@module"] = { fg = colors.blue }, -- For identifiers referring to modules an…
+          ["@property"] = { fg = colors.blue }, -- Same as TSField.
+          ["@property.css"] = { fg = colors.blue },
+          ["@type.css"] = { fg = colors.blue },
+          ["@property.typescript"] = { fg = colors.blue },
+          ["@constructor.typescript"] = { fg = colors.blue },
+          ["@constructor.tsx"] = { fg = colors.blue },
+          Visual = { bg = colors.crust },
+          LspReferenceText = { bg = colors.crust }, -- used for highlighting "text" references
+          LspReferenceRead = { bg = colors.crust }, -- used for highlighting "read" references
+          LspReferenceWrite = { bg = colors.crust }, -- used for highlighting "write" references
+          illuminatedWord = { bg = colors.crust },
+          illuminatedCurWord = { bg = colors.crust },
+          IlluminatedWordText = { bg = colors.crust },
+          IlluminatedWordRead = { bg = colors.crust },
+          IlluminatedWordWrite = { bg = colors.crust },
+        }
+      end,
+    },
     integrations = {
       beacon = true,
       blink_cmp = true,
