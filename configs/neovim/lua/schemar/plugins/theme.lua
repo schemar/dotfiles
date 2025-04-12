@@ -23,7 +23,7 @@ return {
           -- Replace some "rosewater" word fg with "maroon":
           ["@string.special.url"] = { fg = colors.maroon },
           -- Replace cursor color to align with wezterm config:
-          TermCursor = { bg = colors.maroon },
+          TermCursor = { bg = colors.mauve },
 
           -- Replace some "flamingo" word fg with "maroon":
           ["@lsp.type.interface"] = { fg = colors.maroon },
