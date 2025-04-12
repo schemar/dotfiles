@@ -42,6 +42,11 @@ return {
           item = { icons.ChevronShortRight, icons.ChevronShortDown },
           hunk = { "", "" },
         },
+        mappings = {
+          status = {
+            ["<c-t>"] = false,
+          },
+        },
       })
     end,
   },
