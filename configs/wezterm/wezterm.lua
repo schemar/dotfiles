@@ -1,5 +1,16 @@
 local wezterm = require("wezterm")
 
+local color_scheme = "Catppuccin Macchiato"
+local cursor_bg = function()
+  -- Override latte cursor to increase contrast under cursor:
+  if color_scheme == "Catppuccin Latte" then
+    return "#e64553" -- Maroon
+  end
+
+  -- Keep default cursor bg if not catppuccin latte:
+  return nil
+end
+
 return {
   -- Allows to compose umlauts, etc. with left option key.
   -- send_composed_key_when_left_alt_is_pressed = true,
@@ -31,7 +42,12 @@ return {
   }),
   font_size = 13,
 
-  color_scheme = "Catppuccin Macchiato",
+  color_scheme = color_scheme,
+
+  colors = {
+    cursor_bg = cursor_bg(),
+    cursor_border = cursor_bg(),
+  },
 
   hide_tab_bar_if_only_one_tab = true,
 
