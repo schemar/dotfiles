@@ -150,7 +150,7 @@ return {
         render_markdown = true,
         snacks = {
           enabled = true,
-          indent_scope_color = "lavender", -- catppuccin color (eg. `lavender`) Default: text
+          indent_scope_color = "subtext0", -- catppuccin color (eg. `lavender`) Default: text
         },
         telescope = { enabled = true },
         treesitter = true,
