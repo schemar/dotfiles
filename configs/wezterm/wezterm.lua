@@ -4,7 +4,10 @@ local color_scheme = "Catppuccin Macchiato"
 local cursor_bg = function()
   -- Override latte cursor to increase contrast under cursor:
   if color_scheme == "Catppuccin Latte" then
-    return "#575279" -- Own text color; aligned with catppuccin neovim cursor setting.
+    return "#575279" -- Own text color subtext0; aligned with catppuccin neovim cursor setting.
+  end
+  if color_scheme == "Catppuccin Macchiato" then
+    return "#cdc3cb" -- Own text color overlay1; aligned with catppuccin neovim cursor setting.
   end
 
   -- Keep default cursor bg if not catppuccin latte:
