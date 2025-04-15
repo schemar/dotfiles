@@ -294,6 +294,16 @@ function M.init()
               "<cmd>OtherClear<cr><cmd>Other<cr>",
               desc = "Open 'other' file (clear)",
             },
+            {
+              "<leader>fy",
+              "<cmd>let @+ = expand('%')<cr>",
+              desc = "Yank relative file path",
+            },
+            {
+              "<leader>fY",
+              "<cmd>let @+ = expand('%:p')<cr>",
+              desc = "Yank absolute file path",
+            },
           },
         },
         {
