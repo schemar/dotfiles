@@ -9,28 +9,28 @@ return {
       term_colors = true,
       color_overrides = {
         frappe = {
-          rosewater = "#763d50",
-          flamingo = "#763d50",
-          pink = "#584271",
-          mauve = "#584271",
-          red = "#a63160",
-          maroon = "#a63160",
-          peach = "#7e382d",
-          yellow = "#8F6B00",
-          green = "#436829",
-          teal = "#436829",
-          sky = "#114f55",
-          sapphire = "#114f55",
-          blue = "#3d6187",
-          lavender = "#3d6187",
-          text = "#302f3d",
-          subtext1 = "#434154",
-          subtext0 = "#575569",
-          overlay2 = "#6c5e63",
-          overlay1 = "#4d3e45",
-          overlay0 = "#392c32",
-          surface2 = "#cecacd",
-          surface1 = "#dfdad9",
+          rosewater = "#9d4a47",
+          flamingo = "#9d4a47",
+          pink = "#636095",
+          mauve = "#636095",
+          red = "#ac536c",
+          maroon = "#ac536c",
+          peach = "#c79b16",
+          yellow = "#c79b16",
+          green = "#3a8a53",
+          teal = "#3a8a53",
+          sky = "#56949f",
+          sapphire = "#56949f",
+          blue = "#286983",
+          lavender = "#286983",
+          text = "#45405e",
+          subtext1 = "#706c89",
+          subtext0 = "#8d8aa3",
+          overlay2 = "#8d8d8d",
+          overlay1 = "#7a7a7a",
+          overlay0 = "#707070",
+          surface2 = "#dfd8d8",
+          surface1 = "#e9e4e4",
           surface0 = "#f4ede8",
           base = "#faf4ed",
           mantle = "#fffaf3",
@@ -68,7 +68,32 @@ return {
       highlight_overrides = {
         frappe = function(colors)
           return {
-            LineNr = { fg = colors.surface2 }, -- column where |signs| are displayed
+            -- Lighter highlighting:
+            Visual = { bg = colors.surface0 }, -- used for highlighting visual selection
+            VisualNOS = { bg = colors.surface0 }, -- Visual mode selection when vim is "Not Owning the Selection".
+            LspReferenceText = { bg = colors.surface1 }, -- used for highlighting "text" references
+            LspReferenceRead = { bg = colors.surface1 }, -- used for highlighting "read" references
+            LspReferenceWrite = { bg = colors.surface1 }, -- used for highlighting "write" references
+            LspSignatureActiveParameter = { bg = colors.surface1 },
+            illuminatedWord = { bg = colors.surface1 },
+            illuminatedCurWord = { bg = colors.surface1 },
+            IlluminatedWordText = { bg = colors.surface1 },
+            IlluminatedWordRead = { bg = colors.surface1 },
+            IlluminatedWordWrite = { bg = colors.surface1 },
+            MatchParen = { bg = colors.surface0 }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
+
+            -- Less yellow for code words:
+            ["@constant.builtin"] = { fg = colors.mauve },
+            ["@function.builtin"] = { fg = colors.mauve },
+            ["@type.builtin"] = { fg = colors.mauve },
+            ["@type.builtin.c"] = { fg = colors.mauve },
+            ["@type.builtin.cpp"] = { fg = colors.mauve },
+            ["Boolean"] = { fg = colors.mauve },
+            ["Number"] = { fg = colors.mauve },
+
+            ["@lsp.type.interface"] = { fg = colors.flamingo },
+            ["@property.class.css"] = { fg = colors.flamingo },
+            ["Type"] = { fg = colors.flamingo },
           }
         end,
         -- Increase contrast, which is not enough by default:
