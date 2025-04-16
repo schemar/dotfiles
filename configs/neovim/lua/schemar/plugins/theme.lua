@@ -35,6 +35,22 @@ return {
           base = "#faf4ed",
           mantle = "#fffaf3",
           crust = "#f2e9e1",
+          --
+          -- Use these instead for less red tint on the background:
+          -- surface2 = "#c1bcbc",
+          -- surface1 = "#d3cece",
+          -- surface0 = "#e5dfdc",
+          -- base = "#f7f4f1",
+          -- mantle = "#fdfaf7",
+          -- crust = "#eeeae6",
+          --
+          -- Use these instead for no red tint on the background:
+          -- surface2 = "#bdbdbd",
+          -- surface1 = "#cfcfcf",
+          -- surface0 = "#e0e0e0",
+          -- base = "#f5f5f5",
+          -- mantle = "#fbfbfb",
+          -- crust = "#ebebeb",
         },
         mocha = {
           rosewater = "#ea9a97",
