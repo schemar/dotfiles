@@ -15,7 +15,7 @@ return {
           mauve = "#636095",
           red = "#ac536c",
           maroon = "#ac536c",
-          peach = "#c79b16",
+          peach = "#b2732f",
           yellow = "#c79b16",
           green = "#3a8a53",
           teal = "#3a8a53",
@@ -83,17 +83,31 @@ return {
             MatchParen = { bg = colors.surface0 }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
 
             -- Less yellow for code words:
-            ["@constant.builtin"] = { fg = colors.mauve },
-            ["@function.builtin"] = { fg = colors.mauve },
-            ["@type.builtin"] = { fg = colors.mauve },
-            ["@type.builtin.c"] = { fg = colors.mauve },
-            ["@type.builtin.cpp"] = { fg = colors.mauve },
-            ["Boolean"] = { fg = colors.mauve },
-            ["Number"] = { fg = colors.mauve },
+            StorageClass = { fg = colors.flamingo }, -- static, register, volatile, etc.
+            Structure = { fg = colors.flamingo }, --  struct, union, enum, etc.
+            Type = { fg = colors.flamingo }, -- (preferred) int, long, char, etc.
 
-            ["@lsp.type.interface"] = { fg = colors.flamingo },
-            ["@property.class.css"] = { fg = colors.flamingo },
-            ["Type"] = { fg = colors.flamingo },
+            context_class = { fg = colors.flamingo },
+            context_interface = { fg = colors.flamingo },
+
+            terminal_color_3 = { fg = colors.flamingo },
+            terminal_color_11 = { fg = colors.flamingo },
+
+            CmpItemKindClass = { fg = colors.flamingo },
+            CmpItemKindInterface = { fg = colors.flamingo },
+
+            NavicIconsClass = { fg = colors.flamingo },
+            NavicIconsInterface = { fg = colors.flamingo },
+
+            AerialLine = { fg = colors.flamingo },
+
+            LspKindClass = { fg = colors.flamingo },
+            LspKindEnum = { fg = colors.flamingo },
+
+            BlinkCmpKindClass = { fg = colors.flamingo },
+            BlinkCmpKindInterface = { fg = colors.flamingo },
+
+            ["@type.builtin"] = { fg = colors.flamingo },
           }
         end,
         -- Increase contrast, which is not enough by default:
