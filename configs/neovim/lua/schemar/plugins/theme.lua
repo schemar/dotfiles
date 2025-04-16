@@ -69,8 +69,6 @@ return {
         frappe = function(colors)
           return {
             -- Lighter highlighting:
-            Visual = { bg = colors.surface0 }, -- used for highlighting visual selection
-            VisualNOS = { bg = colors.surface0 }, -- Visual mode selection when vim is "Not Owning the Selection".
             LspReferenceText = { bg = colors.surface1 }, -- used for highlighting "text" references
             LspReferenceRead = { bg = colors.surface1 }, -- used for highlighting "read" references
             LspReferenceWrite = { bg = colors.surface1 }, -- used for highlighting "write" references
@@ -80,7 +78,7 @@ return {
             IlluminatedWordText = { bg = colors.surface1 },
             IlluminatedWordRead = { bg = colors.surface1 },
             IlluminatedWordWrite = { bg = colors.surface1 },
-            MatchParen = { bg = colors.surface0 }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
+            MatchParen = { bg = colors.surface1 }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
 
             -- Less yellow for code words:
             StorageClass = { fg = colors.flamingo }, -- static, register, volatile, etc.
