@@ -29,9 +29,9 @@ return {
           overlay2 = "#8d8d8d",
           overlay1 = "#7a7a7a",
           overlay0 = "#707070",
-          surface2 = "#dfd8d8",
-          surface1 = "#e9e4e4",
-          surface0 = "#f4ede8",
+          surface2 = "#c9bebe",
+          surface1 = "#dad2d2",
+          surface0 = "#e9e4e4",
           base = "#faf4ed",
           mantle = "#fffaf3",
           crust = "#f2e9e1",
@@ -69,16 +69,19 @@ return {
         frappe = function(colors)
           return {
             -- Lighter highlighting:
-            LspReferenceText = { bg = colors.surface1 }, -- used for highlighting "text" references
-            LspReferenceRead = { bg = colors.surface1 }, -- used for highlighting "read" references
-            LspReferenceWrite = { bg = colors.surface1 }, -- used for highlighting "write" references
-            LspSignatureActiveParameter = { bg = colors.surface1 },
-            illuminatedWord = { bg = colors.surface1 },
-            illuminatedCurWord = { bg = colors.surface1 },
-            IlluminatedWordText = { bg = colors.surface1 },
-            IlluminatedWordRead = { bg = colors.surface1 },
-            IlluminatedWordWrite = { bg = colors.surface1 },
-            MatchParen = { bg = colors.surface1 }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
+            Visual = { bg = colors.surface0 }, -- used for highlighting visual selection
+            VisualNOS = { bg = colors.surface0 }, -- Visual mode selection when vim is "Not Owning the Selection".
+
+            LspReferenceText = { bg = colors.surface0 }, -- used for highlighting "text" references
+            LspReferenceRead = { bg = colors.surface0 }, -- used for highlighting "read" references
+            LspReferenceWrite = { bg = colors.surface0 }, -- used for highlighting "write" references
+            LspSignatureActiveParameter = { bg = colors.surface0 },
+            illuminatedWord = { bg = colors.surface0 },
+            illuminatedCurWord = { bg = colors.surface0 },
+            IlluminatedWordText = { bg = colors.surface0 },
+            IlluminatedWordRead = { bg = colors.surface0 },
+            IlluminatedWordWrite = { bg = colors.surface0 },
+            MatchParen = { bg = colors.surface0 }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
 
             -- More contrast for line numbers:
             LineNr = { fg = colors.overlay2 }, -- Line numbers when the cursor is not on it.
