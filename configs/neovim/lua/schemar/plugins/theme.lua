@@ -9,8 +9,8 @@ return {
       term_colors = true,
       color_overrides = {
         frappe = {
-          rosewater = "#b6625d",
-          flamingo = "#b6625d",
+          rosewater = "#c7435f",
+          flamingo = "#c7435f",
           pink = "#7776a7",
           mauve = "#7776a7",
           red = "#b36178",
