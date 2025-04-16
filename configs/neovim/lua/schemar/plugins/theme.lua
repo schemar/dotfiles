@@ -80,6 +80,10 @@ return {
             IlluminatedWordWrite = { bg = colors.surface1 },
             MatchParen = { bg = colors.surface1 }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
 
+            -- More contrast for line numbers:
+            LineNr = { fg = colors.overlay2 }, -- Line numbers when the cursor is not on it.
+            TreesitterContextLineNumber = { fg = colors.overlay2 },
+
             -- Less yellow for code words:
             StorageClass = { fg = colors.flamingo }, -- static, register, volatile, etc.
             Structure = { fg = colors.flamingo }, --  struct, union, enum, etc.
