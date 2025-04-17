@@ -88,6 +88,15 @@ return {
             LineNr = { fg = colors.overlay2 }, -- Line numbers when the cursor is not on it.
             TreesitterContextLineNumber = { fg = colors.overlay2 },
 
+            -- More contrast menus:
+            Pmenu = { bg = colors.surface0 }, -- Popup menu: normal item.
+            PmenuSel = { bg = colors.surface1 }, -- Popup menu: selected item.
+            PmenuSbar = { bg = colors.surface1 }, -- Popup menu: scrollbar.
+            PmenuThumb = { bg = colors.overlay0 }, -- Popup menu: Thumb of the scrollbar.
+
+            -- More contrast other highlights:
+            GitSignsCurrentLineBlame = { fg = colors.surface2 },
+
             -- Less yellow for code words:
             StorageClass = { fg = colors.flamingo }, -- static, register, volatile, etc.
             Structure = { fg = colors.flamingo }, --  struct, union, enum, etc.
