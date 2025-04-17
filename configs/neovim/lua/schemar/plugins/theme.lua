@@ -29,9 +29,9 @@ return {
           overlay2 = "#707070",
           overlay1 = "#646464",
           overlay0 = "#585858",
-          surface2 = "#c5baba",
-          surface1 = "#d6cdcd",
-          surface0 = "#e9ded8",
+          surface2 = "#e0d6c8",
+          surface1 = "#e8dfd4",
+          surface0 = "#ede6de",
           base = "#faf4ed",
           mantle = "#fffaf3",
           crust = "#f2e9e1",
@@ -68,21 +68,6 @@ return {
       highlight_overrides = {
         frappe = function(colors)
           return {
-            -- Lighter highlighting:
-            Visual = { bg = colors.surface0 }, -- used for highlighting visual selection
-            VisualNOS = { bg = colors.surface0 }, -- Visual mode selection when vim is "Not Owning the Selection".
-
-            LspReferenceText = { bg = colors.surface0 }, -- used for highlighting "text" references
-            LspReferenceRead = { bg = colors.surface0 }, -- used for highlighting "read" references
-            LspReferenceWrite = { bg = colors.surface0 }, -- used for highlighting "write" references
-            LspSignatureActiveParameter = { bg = colors.surface0 },
-            illuminatedWord = { bg = colors.surface0 },
-            illuminatedCurWord = { bg = colors.surface0 },
-            IlluminatedWordText = { bg = colors.surface0 },
-            IlluminatedWordRead = { bg = colors.surface0 },
-            IlluminatedWordWrite = { bg = colors.surface0 },
-            MatchParen = { bg = colors.surface0 }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
-
             -- More contrast for line numbers:
             LineNr = { fg = colors.overlay2 }, -- Line numbers when the cursor is not on it.
             TreesitterContextLineNumber = { fg = colors.overlay2 },
