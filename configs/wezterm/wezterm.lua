@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
+local color_schemes = require("colors")
 
-local color_scheme = "Catppuccin Macchiato"
+local color_scheme = "peach"
 local cursor_bg = function()
   -- Override latte cursor to increase contrast under cursor:
   if color_scheme == "Catppuccin Latte" then
@@ -45,6 +46,7 @@ return {
   }),
   font_size = 13,
 
+  color_schemes = color_schemes,
   color_scheme = color_scheme,
 
   colors = {
