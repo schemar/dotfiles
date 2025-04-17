@@ -145,7 +145,7 @@ if [ -f '/Users/schemar/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/schemar
 if [ -f '/Users/schemar/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/schemar/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Themed syntax highlighting.
-source ~/.config/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh
+source ~/.config/zsh/peach-zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Set git branch in tmux
