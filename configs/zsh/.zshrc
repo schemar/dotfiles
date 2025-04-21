@@ -98,9 +98,9 @@ export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers,changes --color=always {}
 export FZF_COMPLETION_TRIGGER=',,'
 ## FZF Themeing
 export FZF_DEFAULT_OPTS=" \
---color=bg+:#f1ece5,bg:#faf4ed,spinner:#97597b,hl:#b74e5f \
---color=fg:#45405e,header:#b74e5f,info:#6b6aa0,pointer:#97597b \
---color=marker:#97597b,fg+:#45405e,prompt:#6b6aa0,hl+:#b74e5f"
+--color=bg+:#f1ece5,bg:#faf4ed,spinner:#A352A0,hl:#CC2C58 \
+--color=fg:#5B5B5B,header:#CC2C58,info:#6A67B4,pointer:#A352A0 \
+--color=marker:#A352A0,fg+:#5B5B5B,prompt:#6A67B4,hl+:#CC2C58"
 
 #
 # COMPLETIONS

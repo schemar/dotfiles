@@ -20,7 +20,7 @@
 [core]
   pager = delta
 [delta]
-  syntax-theme = Catppuccin Macchiato
+  syntax-theme = Catppuccin Latte
   line-numbers = true
 [diff]
   algorithm = histogram

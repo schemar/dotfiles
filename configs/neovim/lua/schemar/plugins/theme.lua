@@ -93,6 +93,9 @@ return {
 
             -- More contrast menus:
             Pmenu = { fg = colors.overlay0 }, -- Popup menu: normal item.
+
+            -- More contrast for window separator:
+            WinSeparator = { fg = colors.surface2 }, -- Separator between windows.
           }
         end,
         -- Increase contrast, which is not enough by default:
