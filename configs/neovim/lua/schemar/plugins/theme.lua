@@ -15,8 +15,8 @@ return {
           rosewater = "#A352A0",
           red = "#B5274E",
           maroon = "#B5274E",
-          yellow = "#C49400",
-          peach = "#A2611A",
+          yellow = "#8A7400",
+          peach = "#AC591C",
           green = "#288043",
           teal = "#007E7D",
           sky = "#007E7D",
@@ -96,35 +96,6 @@ return {
 
             -- More contrast other highlights:
             GitSignsCurrentLineBlame = { fg = colors.surface2 },
-
-            -- Less yellow for code words:
-            StorageClass = { fg = colors.flamingo }, -- static, register, volatile, etc.
-            Structure = { fg = colors.flamingo }, --  struct, union, enum, etc.
-            Type = { fg = colors.flamingo }, -- (preferred) int, long, char, etc.
-
-            context_class = { fg = colors.flamingo },
-            context_interface = { fg = colors.flamingo },
-
-            terminal_color_3 = { fg = colors.flamingo },
-            terminal_color_11 = { fg = colors.flamingo },
-
-            CmpItemKindClass = { fg = colors.flamingo },
-            CmpItemKindInterface = { fg = colors.flamingo },
-
-            NavicIconsClass = { fg = colors.flamingo },
-            NavicIconsInterface = { fg = colors.flamingo },
-
-            AerialLine = { fg = colors.flamingo },
-
-            LspKindClass = { fg = colors.flamingo },
-            LspKindEnum = { fg = colors.flamingo },
-
-            BlinkCmpKindClass = { fg = colors.flamingo },
-            BlinkCmpKindInterface = { fg = colors.flamingo },
-
-            ["@type.builtin"] = { fg = colors.flamingo },
-            ["@type.builtin.c"] = { fg = colors.flamingo },
-            ["@property.class.css"] = { fg = colors.flamingo },
           }
         end,
         -- Increase contrast, which is not enough by default:
