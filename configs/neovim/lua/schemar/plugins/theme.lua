@@ -13,8 +13,8 @@ return {
           pink = "#6A67B4",
           flamingo = "#A352A0",
           rosewater = "#A352A0",
-          red = "#B5274E",
-          maroon = "#B5274E",
+          red = "#CC2C58",
+          maroon = "#CC2C58",
           yellow = "#8A7400",
           peach = "#AC591C",
           green = "#288043",
@@ -24,33 +24,17 @@ return {
           blue = "#1675AB",
           lavender = "#1675AB",
           text = "#5B5B5B",
-          subtext1 = "#5B5B5B",
-          subtext0 = "#605C75",
+          subtext1 = "#908A84",
+          subtext0 = "#908A84",
           overlay2 = "#707070",
           overlay1 = "#646464",
           overlay0 = "#585858",
-          surface2 = "#e0d6c8",
+          surface2 = "#9C8282",
           surface1 = "#e8dfd4",
           surface0 = "#f1ece5",
           base = "#faf4ed",
-          mantle = "#fffaf3",
-          crust = "#f2e9e1",
-          --
-          -- For less red tint use these instead:
-          -- surface2 = "#dbd7d0",
-          -- surface1 = "#e6dfd8",
-          -- surface0 = "#efece9",
-          -- base = "#f8f4f0",
-          -- mantle = "#fdfaf7",
-          -- crust = "#efeae6",
-          --
-          -- For no red tint use these instead:
-          -- surface2 = "#d7d7d7",
-          -- surface1 = "#e0e0e0",
-          -- surface0 = "#ececec",
-          -- base = "#f5f5f5",
-          -- mantle = "#fbfbfb",
-          -- crust = "#ebebeb",
+          mantle = "#FFFAF0",
+          crust = "#FFFAF0",
         },
         mocha = {
           rosewater = "#ea9a97",
@@ -84,18 +68,31 @@ return {
       highlight_overrides = {
         frappe = function(colors)
           return {
-            -- More contrast for line numbers:
-            LineNr = { fg = colors.overlay2 }, -- Line numbers when the cursor is not on it.
-            TreesitterContextLineNumber = { fg = colors.overlay2 },
+            -- surface0 and 1 is used as a background color most of the time,
+            -- but also as a foreground color in some cases. This makes it
+            -- impossible to ensure contrast in all cases.
+            -- For this reason, we replace all surface foreground colors with
+            -- other surface colors to increase contrast.
+            -- (surface2 is a rare color which is exclusively used as a
+            -- foreground color)
+            --
+            -- surface0:
+            SnacksIndent = { fg = colors.surface1 },
+            IblIndent = { fg = colors.surface1 },
+
+            -- surface1:
+            SignColumn = { fg = colors.surface2 }, -- column where |signs| are displayed
+            SignColumnSB = { fg = colors.surface2 }, -- column where |signs| are displayed
+
+            LineNr = { fg = colors.surface2 }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' o…
+            TreesitterContextLineNumber = { fg = colors.surface2 },
+
+            DapUIUnavailable = { fg = colors.surface2 },
+
+            GitSignsCurrentLineBlame = { fg = colors.surface2 },
 
             -- More contrast menus:
-            Pmenu = { bg = colors.surface0 }, -- Popup menu: normal item.
-            PmenuSel = { bg = colors.surface1 }, -- Popup menu: selected item.
-            PmenuSbar = { bg = colors.surface1 }, -- Popup menu: scrollbar.
-            PmenuThumb = { bg = colors.overlay0 }, -- Popup menu: Thumb of the scrollbar.
-
-            -- More contrast other highlights:
-            GitSignsCurrentLineBlame = { fg = colors.surface2 },
+            Pmenu = { fg = colors.overlay0 }, -- Popup menu: normal item.
           }
         end,
         -- Increase contrast, which is not enough by default:
