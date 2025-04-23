@@ -1,12 +1,8 @@
 local wezterm = require("wezterm")
-local color_schemes = require("colors")
+local color_schemes = require("color_schemes")
 
-local color_scheme = "peach"
+local color_scheme = "blueberry_peach_light"
 local cursor_bg = function()
-  -- Override latte cursor to increase contrast under cursor:
-  if color_scheme == "Catppuccin Latte" then
-    return "#706c89" -- Own text color subtext1; aligned with catppuccin neovim cursor setting.
-  end
   if color_scheme == "Catppuccin Macchiato" then
     return "#cdc3cb" -- Own text color overlay1; aligned with catppuccin neovim cursor setting.
   end
@@ -15,7 +11,7 @@ local cursor_bg = function()
   return nil
 end
 
-return {
+local config = {
   -- Allows to compose umlauts, etc. with left option key.
   -- send_composed_key_when_left_alt_is_pressed = true,
   -- send_composed_key_when_right_alt_is_pressed = false,
@@ -59,3 +55,5 @@ return {
   window_decorations = "RESIZE",
   window_close_confirmation = "NeverPrompt",
 }
+
+return config

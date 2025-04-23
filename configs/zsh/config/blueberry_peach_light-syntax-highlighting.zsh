@@ -1,4 +1,4 @@
-# Blueberry Peach Light Theme (for zsh-syntax-highlighting)
+# Catppuccin Latte Theme (for zsh-syntax-highlighting)
 #
 # Paste this files contents inside your ~/.zshrc before you activate zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main cursor)
