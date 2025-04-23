@@ -25,8 +25,8 @@ local peach = {
   surface1 = "#e8dfd4",
   surface0 = "#f1ece5",
   base = "#faf4ed",
-  mantle = "#FFFAF0",
-  crust = "#FFFAF0",
+  mantle = "#FFFBEF",
+  crust = "#FFFBEF",
 }
 
 color_schemes.peach = {
