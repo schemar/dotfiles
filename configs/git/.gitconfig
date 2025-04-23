@@ -20,7 +20,7 @@
 [core]
   pager = delta
 [delta]
-  syntax-theme = blueberry_peach_light
+  syntax-theme = blueberry_peach_dark
   line-numbers = true
 [diff]
   algorithm = histogram

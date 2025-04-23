@@ -1,15 +1,6 @@
 local wezterm = require("wezterm")
-local color_schemes = require("color_schemes")
 
-local color_scheme = "blueberry_peach_light"
-local cursor_bg = function()
-  if color_scheme == "Catppuccin Macchiato" then
-    return "#cdc3cb" -- Own text color overlay1; aligned with catppuccin neovim cursor setting.
-  end
-
-  -- Keep default cursor bg if not catppuccin latte:
-  return nil
-end
+local color_scheme = "Blueberry Peach Dark"
 
 local config = {
   -- Allows to compose umlauts, etc. with left option key.
@@ -42,13 +33,7 @@ local config = {
   }),
   font_size = 13,
 
-  color_schemes = color_schemes,
   color_scheme = color_scheme,
-
-  colors = {
-    cursor_bg = cursor_bg(),
-    cursor_border = cursor_bg(),
-  },
 
   hide_tab_bar_if_only_one_tab = true,
 

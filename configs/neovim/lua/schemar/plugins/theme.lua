@@ -5,7 +5,7 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-      flavour = "frappe", -- latte, frappe, macchiato, mocha
+      flavour = "mocha", -- latte, frappe, macchiato, mocha
       highlight_overrides = {
         -- Increase contrast, which is not enough by default:
         latte = function(colors)
@@ -101,6 +101,8 @@ return {
       -- Extend with overrides for blueberry-peach theme
       local blueberry_peach_light = require("schemar.config.themes.blueberry_peach_light")
       opts = vim.tbl_deep_extend("force", opts, blueberry_peach_light.get_overrides("frappe"))
+      local blueberry_peach_dark = require("schemar.config.themes.blueberry_peach_dark")
+      opts = vim.tbl_deep_extend("force", opts, blueberry_peach_dark.get_overrides("mocha"))
 
       require("catppuccin").setup(opts)
       vim.cmd([[colorscheme catppuccin]])

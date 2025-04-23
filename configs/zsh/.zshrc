@@ -97,7 +97,7 @@ export FZF_COMPLETION_OPTS="--preview 'bat --style=numbers,changes --color=alway
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers,changes --color=always {}'"
 export FZF_COMPLETION_TRIGGER=',,'
 ## FZF Themeing
-source ~/.config/zsh/blueberry_peach_light-fzf-colors.zsh
+source ~/.config/zsh/blueberry_peach_dark-fzf-colors.zsh
 
 #
 # COMPLETIONS
@@ -142,7 +142,7 @@ if [ -f '/Users/schemar/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/schemar
 if [ -f '/Users/schemar/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/schemar/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Themed syntax highlighting.
-source ~/.config/zsh/blueberry_peach_light-syntax-highlighting.zsh
+source ~/.config/zsh/blueberry_peach_dark-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Set git branch in tmux

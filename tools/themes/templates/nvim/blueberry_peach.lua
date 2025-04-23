@@ -47,13 +47,15 @@ local highlight_overrides = function(colors)
 
     LineNr = { fg = colors.surface2 }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' o…
     TreesitterContextLineNumber = { fg = colors.surface2 },
+    CursorLineNr = { fg = colors.blue }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
 
     DapUIUnavailable = { fg = colors.surface2 },
 
     GitSignsCurrentLineBlame = { fg = colors.surface2 },
 
     -- More contrast menus:
-    Pmenu = { fg = colors.overlay0 }, -- Popup menu: normal item.
+    Pmenu = { bg = colors.mantle, fg = colors.overlay2 }, -- Popup menu: normal item.
+    PmenuSel = { bg = colors.surface1, style = { "bold" } }, -- Popup menu: selected item.
 
     -- More contrast for window separator:
     WinSeparator = { fg = colors.surface2 }, -- Separator between windows.

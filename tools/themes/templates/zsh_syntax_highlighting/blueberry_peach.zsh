@@ -1,4 +1,4 @@
-# Blueberry Peach Theme (for zsh-syntax-highlighting)
+# {{name}} Theme (for zsh-syntax-highlighting)
 #
 # Taken from https://github.com/catppuccin/zsh-syntax-highlighting
 # See license at the end of this file.

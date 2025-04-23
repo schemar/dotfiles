@@ -4,7 +4,7 @@ default: help
 help:
   just --list --unsorted
 
-theme-dark: theme-system-dark theme-terminal-macchiato
+theme-dark: theme-system-dark theme-terminal-blueberry-peach-dark
   # Slack: #24273A,#C6A0F6,#C6A0F6,#91D7E3
 
 theme-light: theme-system-light theme-terminal-blueberry-peach-light
@@ -26,6 +26,22 @@ theme-terminal-macchiato:
 
   sd 'source ~/.config/zsh/(.*)syntax-highlighting.zsh' 'source ~/.config/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh' configs/zsh/.zshrc
   sd 'source ~/.config/zsh/(.*)fzf-colors.zsh' 'source ~/.config/zsh/catppuccin_macchiato-fzf-colors.zsh' configs/zsh/.zshrc
+
+  #
+  # ⚠️ Remember to reload tmux and zsh sessions to apply the changes.
+  #
+
+theme-terminal-blueberry-peach-dark:
+  sd 'theme="(.*)"' 'theme="blueberry_peach_dark"' configs/bat/config
+  sd 'syntax-theme = (.*)' 'syntax-theme = blueberry_peach_dark' configs/git/.gitconfig
+  sd 'flavour = "(.*)"' 'flavour = "mocha"' ./configs/neovim/lua/schemar/plugins/theme.lua
+  sd 'local color_scheme = "(.*)"' 'local color_scheme = "Blueberry Peach Dark"' ./configs/wezterm/wezterm.lua
+
+  sd 'source ~/.config/tmux/(.*).conf' 'source ~/.config/tmux/blueberry_peach_dark.conf' configs/tmux/.tmux.conf
+
+  sd 'source ~/.config/zsh/(.*)syntax-highlighting.zsh' 'source ~/.config/zsh/blueberry_peach_dark-syntax-highlighting.zsh' configs/zsh/.zshrc
+  sd 'source ~/.config/zsh/(.*)fzf-colors.zsh' 'source ~/.config/zsh/blueberry_peach_dark-fzf-colors.zsh' configs/zsh/.zshrc
+
   #
   # ⚠️ Remember to reload tmux and zsh sessions to apply the changes.
   #
@@ -34,7 +50,7 @@ theme-terminal-blueberry-peach-light:
   sd 'theme="(.*)"' 'theme="blueberry_peach_light"' configs/bat/config
   sd 'syntax-theme = (.*)' 'syntax-theme = blueberry_peach_light' configs/git/.gitconfig
   sd 'flavour = "(.*)"' 'flavour = "frappe"' ./configs/neovim/lua/schemar/plugins/theme.lua
-  sd 'local color_scheme = "(.*)"' 'local color_scheme = "blueberry_peach_light"' ./configs/wezterm/wezterm.lua
+  sd 'local color_scheme = "(.*)"' 'local color_scheme = "Blueberry Peach Light"' ./configs/wezterm/wezterm.lua
 
   sd 'source ~/.config/tmux/(.*).conf' 'source ~/.config/tmux/blueberry_peach_light.conf' configs/tmux/.tmux.conf
 

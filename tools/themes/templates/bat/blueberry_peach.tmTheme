@@ -5,11 +5,11 @@
 <plist version="1.0">
   <dict>
     <key>name</key>
-    <string>Blueberry Peach Light</string>
+    <string>{{name}}</string>
     <key>semanticClass</key>
-    <string>theme.light.blueberry-peach</string>
+    <string>theme.{{id}}.blueberry-peach</string>
     <key>uuid</key>
-    <string>F868CB26-288E-4FDF-BC92-095E5102110A</string>
+    <string>F868CB26-288E-4FDF-BC92-095E5102110A-{{id}}</string>
     <key>author</key>
     <string>schemar</string>
     <key>colorSpaceName</key>
