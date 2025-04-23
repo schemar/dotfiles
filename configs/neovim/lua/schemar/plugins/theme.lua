@@ -6,15 +6,14 @@ return {
     lazy = false,
     opts = {
       flavour = "frappe", -- latte, frappe, macchiato, mocha
-      term_colors = true,
       color_overrides = {
         frappe = {
           mauve = "#6A67B4",
           pink = "#6A67B4",
           flamingo = "#A352A0",
           rosewater = "#A352A0",
-          red = "#CC2C58",
-          maroon = "#CC2C58",
+          red = "#C53F64",
+          maroon = "#C53F64",
           yellow = "#8A7400",
           peach = "#AC591C",
           green = "#288043",

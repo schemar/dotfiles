@@ -63,3 +63,6 @@ theme-terminal-latte:
   #
   # ⚠️ Remember to reload tmux and zsh sessions to apply the changes.
   #
+
+theme-blueberry-peach-update:
+  ./tools/theme/replace_catppuccin_with_bp.lua

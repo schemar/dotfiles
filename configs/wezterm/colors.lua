@@ -5,8 +5,8 @@ local peach = {
   pink = "#6A67B4",
   flamingo = "#A352A0",
   rosewater = "#A352A0",
-  red = "#CC2C58",
-  maroon = "#CC2C58",
+  red = "#C53F64",
+  maroon = "#C53F64",
   yellow = "#8A7400",
   peach = "#AC591C",
   green = "#288043",
@@ -37,13 +37,13 @@ color_schemes.peach = {
 
   -- Overrides the cell background color when the current cell is occupied by the
   -- cursor and the cursor style is set to Block
-  cursor_bg = peach.subtext1,
+  cursor_bg = peach.teal,
   -- Overrides the text color when the current cell is occupied by the cursor
   cursor_fg = peach.base,
   -- Specifies the border color of the cursor when the cursor style is set to Block,
   -- or the color of the vertical or horizontal bar when the cursor style is set to
   -- Bar or Underline.
-  cursor_border = peach.subtext1,
+  cursor_border = peach.teal,
 
   -- the foreground color of selected text
   selection_fg = peach.text,
