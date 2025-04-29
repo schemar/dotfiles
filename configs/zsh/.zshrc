@@ -10,46 +10,6 @@ export PATH="$HOME/.local/bin:$PATH"
 export VISUAL="nvim"
 export EDITOR="nvim"
 
-alias g='git'
-alias y='yarn'
-
-alias l='lsd -al'
-alias ll='lsd -al --tree'
-
-alias h='function hdi(){ howdoi $* -c -n 5; }; hdi'
-
-alias n='nvim'
-alias ng='rm -f /Users/schemar/.cache/godothost && nvim --listen /Users/schemar/.cache/godothost'
-
-# Required for gitui to work with git push via SSH:
-alias 'gitui'='eval $(ssh-agent) && ssh-add ~/.ssh/id_rsa && gitui'
-
-alias fkill='ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill'
-
-# Tmux usability aliases
-alias tma='tmux new-session -A -s afilio'
-alias tmd='tmux new-session -A -s dots'
-alias tme='tmux new-session -A -s eoi'
-alias tmh='tmux new-session -A -s home-as'
-
-# Enable 256 colors in tmux
-alias tmux='tmux -2'
-
-# History
-HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=10000
-unsetopt beep
-
-# Completion
-zstyle :compinstall filename "$HOME/.zshrc"
-autoload -Uz compinit
-compinit
-
-# Use Vi key bindings
-# The starship prompt indicates the mode:
-# `>` is insert mode, `<` is for other modes
-bindkey -v
 # Remove mode switching delay.
 KEYTIMEOUT=5
 # Change cursor shape for different vi modes.
