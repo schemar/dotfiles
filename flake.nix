@@ -16,8 +16,7 @@
       configuration = { pkgs, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
-        environment.systemPackages = with pkgs; [
-        ];
+        environment.systemPackages = with pkgs; [];
 
         # Necessary for using flakes on this system.
         nix.settings.experimental-features = "nix-command flakes";
@@ -31,11 +30,12 @@
         # Used for backwards compatibility, please read the changelog before changing.
         # $ darwin-rebuild changelog
         system.stateVersion = 5;
-
+      };
+      macConfiguration = {
         # The platform the configuration will be used on.
         nixpkgs.hostPlatform = "aarch64-darwin";
 
-        # Add ability to used TouchID for sudo authentication in terminal
+        # Add ability to use TouchID for sudo authentication in terminal
         security.pam.enableSudoTouchIdAuth = true;
 
         # Required by home-manager:
@@ -44,7 +44,7 @@
           useGlobalPkgs = true;
           useUserPackages = true;
 
-          users.schemar = ./home.schemar.nix;
+          users.schemar = ./users/schemar;
         };
       };
     in
@@ -54,11 +54,21 @@
       darwinConfigurations = {
         "Schencks-MacBook-Air" = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          modules = [ home-manager.darwinModules.home-manager configuration ./hosts/Schencks-MacBook-Air/default.nix ];
+          modules = [
+            home-manager.darwinModules.home-manager
+            configuration
+            macConfiguration
+            ./hosts/Schencks-MacBook-Air
+          ];
         };
         "MacBook-Pro-0083" = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          modules = [ home-manager.darwinModules.home-manager configuration ./hosts/MacBook-Pro-0083/default.nix ];
+          modules = [
+            home-manager.darwinModules.home-manager
+            configuration
+            macConfiguration
+            ./hosts/MacBook-Pro-0083
+          ];
         };
       };
     };
