@@ -40,9 +40,14 @@
     in
     {
       # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#Schencks-MacBook-Air
-      darwinConfigurations."Schencks-MacBook-Air" = nix-darwin.lib.darwinSystem {
-        modules = [ configuration ./hosts/Schencks-MacBook-Air/default.nix ];
+      # $ darwin-rebuild build --flake .
+      darwinConfigurations = {
+        "Schencks-MacBook-Air" = nix-darwin.lib.darwinSystem {
+          modules = [ configuration ./hosts/Schencks-MacBook-Air/default.nix ];
+        };
+        "MacBook-Pro-0083" = nix-darwin.lib.darwinSystem {
+          modules = [ configuration ./hosts/MacBook-Pro-0083/default.nix ];
+        };
       };
     };
 }
