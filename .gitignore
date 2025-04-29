@@ -1,8 +1,6 @@
 output.log
 .state
 *.swp
-configs/broot/launcher/
-configs/nushell/history.txt
 configs/qutebrowser/autoconfig.yml
 # Ignore temporary files that end in ~
 *~
