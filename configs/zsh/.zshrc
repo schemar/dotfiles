@@ -38,10 +38,6 @@ export LC_ALL=en_US.UTF-8
 # TOOLS
 #
 
-# staship shell prompt
-export STARSHIP_CONFIG="$HOME/.config/starship.toml"
-eval "$(starship init zsh)"
-
 eval "$(mise activate zsh)"
 
 # direnv to load environment (variables) per directory/project

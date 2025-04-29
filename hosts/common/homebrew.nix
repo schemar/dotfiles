@@ -40,7 +40,6 @@
       "sd"
       "ShellCheck"
       "shfmt"
-      "starship"
       "tealdeer"
       "tmux"
       "tree-sitter"
