@@ -45,7 +45,6 @@
       "wget"
       "yamllint"
       "yazi"
-      "zoxide"
       "zsh-syntax-highlighting"
     ];
     casks = [

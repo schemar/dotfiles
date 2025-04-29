@@ -40,9 +40,6 @@ export LC_ALL=en_US.UTF-8
 
 eval "$(mise activate zsh)"
 
-# z for directory jumping
-eval "$(zoxide init zsh)"
-
 # FZF config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude ".git/"'
