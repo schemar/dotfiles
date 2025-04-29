@@ -7,7 +7,7 @@
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-24.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -16,10 +16,8 @@
       configuration = { pkgs, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
-        environment.systemPackages = with pkgs;
-          [
-            neovim
-          ];
+        environment.systemPackages = with pkgs; [
+        ];
 
         # Necessary for using flakes on this system.
         nix.settings.experimental-features = "nix-command flakes";
@@ -36,17 +34,31 @@
 
         # The platform the configuration will be used on.
         nixpkgs.hostPlatform = "aarch64-darwin";
+
+        # Add ability to used TouchID for sudo authentication in terminal
+        security.pam.enableSudoTouchIdAuth = true;
+
+        # Required by home-manager:
+        users.users.schemar.home = /Users/schemar;
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+
+          users.schemar = ./home.schemar.nix;
+        };
       };
     in
     {
       # Build darwin flake using:
-      # $ darwin-rebuild build --flake .
+      # $ darwin-rebuild switch --flake .
       darwinConfigurations = {
         "Schencks-MacBook-Air" = nix-darwin.lib.darwinSystem {
-          modules = [ configuration ./hosts/Schencks-MacBook-Air/default.nix ];
+          system = "aarch64-darwin";
+          modules = [ home-manager.darwinModules.home-manager configuration ./hosts/Schencks-MacBook-Air/default.nix ];
         };
         "MacBook-Pro-0083" = nix-darwin.lib.darwinSystem {
-          modules = [ configuration ./hosts/MacBook-Pro-0083/default.nix ];
+          system = "aarch64-darwin";
+          modules = [ home-manager.darwinModules.home-manager configuration ./hosts/MacBook-Pro-0083/default.nix ];
         };
       };
     };
