@@ -60,4 +60,9 @@
       ${builtins.readFile ../../configs/zsh/.zshrc}
     '';
   };
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 }

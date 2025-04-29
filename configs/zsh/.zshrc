@@ -40,9 +40,6 @@ export LC_ALL=en_US.UTF-8
 
 eval "$(mise activate zsh)"
 
-# direnv to load environment (variables) per directory/project
-eval "$(direnv hook zsh)"
-
 # z for directory jumping
 eval "$(zoxide init zsh)"
 

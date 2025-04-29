@@ -12,7 +12,6 @@
       "cmake"
       "coreutils"
       "curl"
-      "direnv"
       "fd"
       "fzf"
       "gh"
