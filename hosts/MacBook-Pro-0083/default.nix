@@ -11,7 +11,6 @@
     ];
     brews = [ 
       "pulumi/tap/pulumi"
-      "temporal"
       "withgraphite/tap/graphite"
     ];
     casks = [ "polypane" ];
