@@ -7,5 +7,6 @@
   homebrew = {
     taps = [ "withgraphite/tap" ];
     brews = [ "withgraphite/tap/graphite" ];
+    casks = [ "polypane" ];
   };
 }
