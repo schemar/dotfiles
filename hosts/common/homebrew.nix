@@ -34,7 +34,6 @@
       "pandoc"
       "procs"
       "python"
-      "qmk/qmk/qmk"
       "ripgrep"
       "sd"
       "ShellCheck"
