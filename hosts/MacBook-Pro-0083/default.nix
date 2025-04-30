@@ -5,8 +5,14 @@
 
   # Additional brew settings for this host only
   homebrew = {
-    taps = [ "withgraphite/tap" ];
-    brews = [ "withgraphite/tap/graphite" ];
+    taps = [ 
+      "pulumi/tap"
+      "withgraphite/tap"
+    ];
+    brews = [ 
+      "pulumi/tap/pulumi"
+      "withgraphite/tap/graphite"
+    ];
     casks = [ "polypane" ];
   };
 }
