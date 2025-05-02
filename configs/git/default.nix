@@ -70,7 +70,7 @@
       };
       merge = {
         tool = "nvimdiff";
-         conflictstyle = "zdiff3 ";
+        conflictstyle = "zdiff3";
       };
       mergetool = {
         keepBackup = "false";
