@@ -18,7 +18,7 @@ theme-system-light:
 
 theme-terminal-macchiato:
   sd 'theme="(.*)"' 'theme="Catppuccin Macchiato"' configs/bat/config
-  sd 'syntax-theme = (.*)' 'syntax-theme = Catppuccin Macchiato' configs/git/.gitconfig
+  sd 'syntax-theme = "(.*)"' 'syntax-theme = "Catppuccin Macchiato"' configs/git/default.nix
   sd 'flavour = "(.*)"' 'flavour = "macchiato"' ./configs/neovim/lua/schemar/plugins/theme.lua
   sd 'local color_scheme = "(.*)"' 'local color_scheme = "Catppuccin Macchiato"' ./configs/wezterm/wezterm.lua
 
@@ -33,7 +33,7 @@ theme-terminal-macchiato:
 
 theme-terminal-blueberry-peach-dark:
   sd 'theme="(.*)"' 'theme="blueberry_peach_dark"' configs/bat/config
-  sd 'syntax-theme = (.*)' 'syntax-theme = blueberry_peach_dark' configs/git/.gitconfig
+  sd 'syntax-theme = "(.*)"' 'syntax-theme = "blueberry_peach_dark"' configs/git/default.nix
   sd 'flavour = "(.*)"' 'flavour = "mocha"' ./configs/neovim/lua/schemar/plugins/theme.lua
   sd 'local color_scheme = "(.*)"' 'local color_scheme = "Blueberry Peach Dark"' ./configs/wezterm/wezterm.lua
 
@@ -48,7 +48,7 @@ theme-terminal-blueberry-peach-dark:
 
 theme-terminal-blueberry-peach-light:
   sd 'theme="(.*)"' 'theme="blueberry_peach_light"' configs/bat/config
-  sd 'syntax-theme = (.*)' 'syntax-theme = blueberry_peach_light' configs/git/.gitconfig
+  sd 'syntax-theme = "(.*)"' 'syntax-theme = "blueberry_peach_light"' configs/git/default.nix
   sd 'flavour = "(.*)"' 'flavour = "frappe"' ./configs/neovim/lua/schemar/plugins/theme.lua
   sd 'local color_scheme = "(.*)"' 'local color_scheme = "Blueberry Peach Light"' ./configs/wezterm/wezterm.lua
 

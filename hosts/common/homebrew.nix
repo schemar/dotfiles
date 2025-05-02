@@ -15,7 +15,6 @@
       "fd"
       "fzf"
       "gh"
-      "git"
       "git-delta"
       "ImageMagick"
       "jq"
