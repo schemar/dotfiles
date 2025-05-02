@@ -21,6 +21,7 @@
   programs.home-manager.enable = true;
 
   imports = [
+    ../../configs/bat
     ../../configs/git
     ../../configs/starship
     ../../configs/zsh

@@ -8,7 +8,6 @@
 
     brews = [
       "bash"
-      "bat"
       "cmake"
       "coreutils"
       "curl"
