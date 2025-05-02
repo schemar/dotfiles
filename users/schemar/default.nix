@@ -5,7 +5,9 @@
   home.username = "schemar";
   home.homeDirectory = /Users/schemar;
 
-  home.packages = with pkgs; [ ];
+  home.packages = with pkgs; [
+    just
+  ];
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -21,10 +23,16 @@
   programs.home-manager.enable = true;
 
   imports = [
+    ../../configs/bash
     ../../configs/bat
     ../../configs/bottom
+    ../../configs/fd
+    ../../configs/gh
     ../../configs/git
+    ../../configs/jq
+    ../../configs/ripgrep
     ../../configs/starship
+    ../../configs/tealdeer
     ../../configs/zsh
   ];
 }
