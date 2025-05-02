@@ -32,7 +32,7 @@
     };
 
     initExtra = ''
-      ${builtins.readFile ../../configs/zsh/.zshrc}
+      ${builtins.readFile ./.zshrc}
     '';
   };
 
