@@ -22,6 +22,7 @@
 
   imports = [
     ../../configs/bat
+    ../../configs/bottom
     ../../configs/git
     ../../configs/starship
     ../../configs/zsh
