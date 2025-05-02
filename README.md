@@ -2,6 +2,11 @@
 
 This repository contains a nix configuration for my productivity stack.
 
+> [!WARNING]
+> I am still in the process of switching from a simple dotfiles setup to an overcomplicated nix setup.
+> See flake.nix as entry point.
+> Uses nix-darwin and home-manager.
+
 ## Installation
 
 Requirements:
