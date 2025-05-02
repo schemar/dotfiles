@@ -14,7 +14,6 @@
       "fd"
       "fzf"
       "gh"
-      "git-delta"
       "ImageMagick"
       "jq"
       "jsonlint"
@@ -41,14 +40,12 @@
       "tree-sitter"
       "wget"
       "yamllint"
-      "yazi"
       "zsh-syntax-highlighting"
     ];
     casks = [
       "font-monaspace"
       "gimp"
       "raycast"
-      "vlc"
       "wezterm"
       "unnaturalscrollwheels"
     ];
