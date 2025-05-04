@@ -2,31 +2,31 @@
   programs.tmux = {
     enable = true;
 
-    baseIndex = 1;
-    clock24 = true;
-    customPaneNavigationAndResize = true;
-    escapeTime = 0;
-
-    historyLimit = 10000;
-    keyMode = "vi";
-    prefix = "C-a";
-
-    mouse = true;
-
     shell = "${pkgs.zsh}/bin/zsh";
     terminal = "xterm-256color";
 
-    tmuxp.enable = true;
+    escapeTime = 0;
+    historyLimit = 10000;
+
+    prefix = "C-a";
+    keyMode = "vi";
+    mouse = true;
+
+    baseIndex = 1;
+    clock24 = true;
+    customPaneNavigationAndResize = true;
+
     # Disable due to messed up shell.
     # See, among others, https://discourse.nixos.org/t/tmux-use-bash-instead-defined-zsh-in-home-manager/54763/2
     sensibleOnTop = false;
-    # Fetch later versions, as some packaged plugins are very outdated:
-    # TODO: Add all rtpFilePaths:
+
+    # Fetch later versions, as some packaged plugins are outdated:
     plugins = with pkgs; [
       {
         plugin = tmuxPlugins.mkTmuxPlugin {
           pluginName = "catppuccin";
           name = "tmux-plugin-catppuccin";
+          rtpFilePath = "catppuccin.tmux";
           src = fetchFromGitHub {
             owner = "catppuccin";
             repo = "tmux";
@@ -35,21 +35,14 @@
           };
         };
         extraConfig = ''
-          source ~/.config/tmux/blueberry_peach_light.conf
+          source ~/.config/tmux/blueberry_peach_dark.conf
+
+          set -g status-left '#[bg=#{?client_prefix,blue,default},fg=#{?client_prefix,black,default}]#S#[default] '
+          # Make sure to do this before sourcing tmux-continuum.
+          # See their "known-issues".
+          # git branch; see file in dotfiles repo (tmux/config)
+          set -g status-right '#(~/.config/tmux/pane_branch.sh)'
         '';
-      }
-      {
-        plugin = tmuxPlugins.mkTmuxPlugin {
-          pluginName = "tmux-prefix-highlight";
-          name = "tmux-plugin-tmux-prefix-highlight";
-          rtpFilePath = "prefix_highlight.tmux";
-          src = fetchFromGitHub {
-            owner = "tmux-plugins";
-            repo = "tmux-prefix-highlight";
-            rev = "06cbb4ecd3a0a918ce355c70dc56d79debd455c7";
-            sha256 = "sha256-wkMm2Myxau24E0fbXINPuL2dc8E4ZYe5Pa6A0fWhiw4=";
-          };
-        };
       }
       {
         plugin = tmuxPlugins.mkTmuxPlugin {
@@ -68,6 +61,7 @@
         plugin = tmuxPlugins.mkTmuxPlugin {
           pluginName = "extrakto";
           name = "tmux-plugin-extrakto";
+          rtpFilePath = "extrakto.tmux";
           src = fetchFromGitHub {
             owner = "laktak";
             repo = "extrakto";
@@ -80,6 +74,7 @@
         plugin = tmuxPlugins.mkTmuxPlugin {
           pluginName = "yank";
           name = "tmux-plugin-yank";
+          rtpFilePath = "yank.tmux";
           src = fetchFromGitHub {
             owner = "tmux-plugins";
             repo = "tmux-yank";
@@ -92,6 +87,7 @@
         plugin = tmuxPlugins.mkTmuxPlugin {
           pluginName = "vim-tmux-navigator";
           name = "tmux-plugin-vim-tmux-navigator";
+          rtpFilePath = "vim-tmux-navigator.tmux";
           src = fetchFromGitHub {
             owner = "christoomey";
             repo = "vim-tmux-navigator";
@@ -100,27 +96,18 @@
           };
         };
         extraConfig = ''
-          # Smart pane switching with awareness of Vim splits.
-          # See: https://github.com/christoomey/vim-tmux-navigator
-          is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
-              | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?\.?(view|l?n?vim?x?|fzf)(diff)?(-wrapped)?$'"
-          bind-key -n 'M-h' if-shell "$is_vim" 'send-keys M-h'  'select-pane -L'
-          bind-key -n 'M-j' if-shell "$is_vim" 'send-keys M-j'  'select-pane -D'
-          bind-key -n 'M-k' if-shell "$is_vim" 'send-keys M-k'  'select-pane -U'
-          bind-key -n 'M-l' if-shell "$is_vim" 'send-keys M-l'  'select-pane -R'
-          bind-key -n 'M-\' if-shell \"$is_vim\" 'send-keys M-\\'  'select-pane -l'
-          
-          bind-key -T copy-mode-vi 'M-h' select-pane -L
-          bind-key -T copy-mode-vi 'M-j' select-pane -D
-          bind-key -T copy-mode-vi 'M-k' select-pane -U
-          bind-key -T copy-mode-vi 'M-l' select-pane -R
-          bind-key -T copy-mode-vi 'M-\' select-pane -l
+          set -g @vim_navigator_mapping_left "M-h"
+          set -g @vim_navigator_mapping_right "M-l"
+          set -g @vim_navigator_mapping_up "M-k"
+          set -g @vim_navigator_mapping_down "M-j"
+          set -g @vim_navigator_mapping_prev "M-\\"
         '';
       }
       {
         plugin = tmuxPlugins.mkTmuxPlugin {
           pluginName = "resurrect";
           name = "tmux-plugin-resurrect";
+          rtpFilePath = "resurrect.tmux";
           src = fetchFromGitHub {
             owner = "tmux-plugins";
             repo = "tmux-resurrect";
@@ -129,10 +116,14 @@
           };
         };
       }
+      # Do tmux-continuum last.
+      # 1. It requires tmux-resurrect.
+      # 2. It must be the last to set right-status (see their "known-issues").
       {
         plugin = tmuxPlugins.mkTmuxPlugin {
           pluginName = "continuum";
           name = "tmux-plugin-continuum";
+          rtpFilePath = "continuum.tmux";
           src = fetchFromGitHub {
             owner = "tmux-plugins";
             repo = "tmux-continuum";
@@ -149,9 +140,6 @@
     ];
 
     extraConfig = ''
-      # git branch; see file in dotfiles repo (tmux/config)
-      set -g status-right '#(~/.config/tmux/pane_branch.sh)'
-
       # Colors
       # https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
       set -sg terminal-overrides ",*:RGB"

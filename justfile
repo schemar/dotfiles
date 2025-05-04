@@ -22,7 +22,7 @@ theme-terminal-macchiato:
   sd 'flavour = "(.*)"' 'flavour = "macchiato"' ./configs/neovim/lua/schemar/plugins/theme.lua
   sd 'local color_scheme = "(.*)"' 'local color_scheme = "Catppuccin Macchiato"' ./configs/wezterm/wezterm.lua
 
-  sd 'source ~/.config/tmux/(.*).conf' 'source ~/.config/tmux/catppuccin-macchiato.conf' configs/tmux/.tmux.conf
+  sd 'source ~/.config/tmux/(.*).conf' 'source ~/.config/tmux/catppuccin-macchiato.conf' configs/tmux/default.nix
 
   sd 'source ~/.config/zsh/(.*)syntax-highlighting.zsh' 'source ~/.config/zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh' configs/zsh/.zshrc
   sd 'source ~/.config/zsh/(.*)fzf-colors.zsh' 'source ~/.config/zsh/catppuccin_macchiato-fzf-colors.zsh' configs/zsh/.zshrc
@@ -37,7 +37,7 @@ theme-terminal-blueberry-peach-dark:
   sd 'flavour = "(.*)"' 'flavour = "mocha"' ./configs/neovim/lua/schemar/plugins/theme.lua
   sd 'local color_scheme = "(.*)"' 'local color_scheme = "Blueberry Peach Dark"' ./configs/wezterm/wezterm.lua
 
-  sd 'source ~/.config/tmux/(.*).conf' 'source ~/.config/tmux/blueberry_peach_dark.conf' configs/tmux/.tmux.conf
+  sd 'source ~/.config/tmux/(.*).conf' 'source ~/.config/tmux/blueberry_peach_dark.conf' configs/tmux/default.nix
 
   sd 'source ~/.config/zsh/(.*)syntax-highlighting.zsh' 'source ~/.config/zsh/blueberry_peach_dark-syntax-highlighting.zsh' configs/zsh/.zshrc
   sd 'source ~/.config/zsh/(.*)fzf-colors.zsh' 'source ~/.config/zsh/blueberry_peach_dark-fzf-colors.zsh' configs/zsh/.zshrc
@@ -52,7 +52,7 @@ theme-terminal-blueberry-peach-light:
   sd 'flavour = "(.*)"' 'flavour = "frappe"' ./configs/neovim/lua/schemar/plugins/theme.lua
   sd 'local color_scheme = "(.*)"' 'local color_scheme = "Blueberry Peach Light"' ./configs/wezterm/wezterm.lua
 
-  sd 'source ~/.config/tmux/(.*).conf' 'source ~/.config/tmux/blueberry_peach_light.conf' configs/tmux/.tmux.conf
+  sd 'source ~/.config/tmux/blueberry(.*).conf' 'source ~/.config/tmux/blueberry_peach_light.conf' configs/tmux/default.nix
 
   sd 'source ~/.config/zsh/(.*)syntax-highlighting.zsh' 'source ~/.config/zsh/blueberry_peach_light-syntax-highlighting.zsh' configs/zsh/.zshrc
   sd 'source ~/.config/zsh/(.*)fzf-colors.zsh' 'source ~/.config/zsh/blueberry_peach_light-fzf-colors.zsh' configs/zsh/.zshrc

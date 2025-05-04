@@ -22,7 +22,7 @@
     delta = {
       enable = true;
       options = {
-        syntax-theme = "blueberry_peach_light";
+        syntax-theme = "blueberry_peach_dark";
         line-numbers = true;
       };
     };
