@@ -19,7 +19,6 @@
       "sd"
       "ShellCheck"
       "shfmt"
-      "tmux"
       "tree-sitter"
       "yamllint"
       "zsh-syntax-highlighting"
