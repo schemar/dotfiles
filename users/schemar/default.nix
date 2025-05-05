@@ -31,6 +31,7 @@
     ../../configs/ripgrep
     ../../configs/starship
     ../../configs/tealdeer
+    ../../configs/theme
     ../../configs/tmux
     ../../configs/zsh
   ];

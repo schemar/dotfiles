@@ -16,6 +16,8 @@
       n = "nvim";
       ng = "rm -f /Users/schemar/.cache/godothost && nvim --listen /Users/schemar/.cache/godothost";
 
+      src = "source ~/.zshrc";
+
       # Required for gitui to work with git push via SSH:
       gitui = "eval $(ssh-agent) && ssh-add ~/.ssh/id_rsa && gitui";
 
@@ -29,6 +31,9 @@
 
       # Enable 256 colors in tmux
       tmux = "tmux -2";
+
+      # Themeing for bat
+      bat = "bat --theme=blueberry_peach_$(~/.config/current_theme)";
     };
 
     initExtra = ''

@@ -20,9 +20,10 @@
     };
 
     delta = {
-      enable = true;
+      # We use our own git pager setting to have dynamic theme support:
+      # (system package is enabled)
+      enable = false;
       options = {
-        syntax-theme = "blueberry_peach_dark";
         line-numbers = true;
       };
     };
@@ -44,6 +45,16 @@
       };
       column = {
         ui = "auto";
+      };
+      core = {
+        # Enable dynamic delta syntax theme:
+        pager = "delta --features syntax-theme-`$HOME/.config/current_theme`";
+      };
+      "delta \"syntax-theme-light\"" = {
+        syntax-theme = "blueberry_peach_light";
+      };
+      "delta \"syntax-theme-dark\"" = {
+        syntax-theme = "blueberry_peach_light";
       };
       diff = {
         algorithm = "histogram";

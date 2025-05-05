@@ -1,3 +1,30 @@
+---Selects the catppuccin flavour or falls back to the given fallback.
+---@param fallback "latte"|"frappe"|"macchiato"|"mocha"
+---@return "latte"|"frappe"|"macchiato"|"mocha"
+function get_theme(fallback)
+  local xdg_config_home = vim.env.XDG_CONFIG_HOME
+    or os.getenv("XDG_CONFIG_HOME")
+    or (vim.env.HOME .. "/.config")
+  local theme_path = xdg_config_home .. "/current_theme_store"
+
+  local file, err = io.open(theme_path, "r")
+  if not file or err then
+    vim.notify("Could not read theme file " .. theme_path, vim.log.levels.WARN)
+    return fallback
+  end
+
+  local content = file:read("*a")
+  file:close()
+
+  -- Validate content
+  if content ~= "light" and content ~= "dark" then
+    vim.notify("Invalid theme value: " .. content, vim.log.levels.ERROR)
+    return fallback
+  end
+
+  return content == "light" and "frappe" or "mocha"
+end
+
 return {
   {
     "catppuccin/nvim",
@@ -5,7 +32,7 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-      flavour = "mocha", -- latte, frappe, macchiato, mocha
+      flavour = get_theme("frappe"), -- latte, frappe, macchiato, mocha
       highlight_overrides = {
         -- Increase contrast, which is not enough by default:
         latte = function(colors)

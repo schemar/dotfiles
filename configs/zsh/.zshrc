@@ -40,6 +40,8 @@ export LC_ALL=en_US.UTF-8
 
 eval "$(mise activate zsh)"
 
+export THEME_MODE=$(~/.config/current_theme)
+
 # FZF config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude ".git/"'
@@ -47,7 +49,11 @@ export FZF_COMPLETION_OPTS="--preview 'bat --style=numbers,changes --color=alway
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers,changes --color=always {}'"
 export FZF_COMPLETION_TRIGGER=',,'
 ## FZF Themeing
-source ~/.config/zsh/blueberry_peach_dark-fzf-colors.zsh
+if [[ "$THEME_MODE" == "light" ]]; then
+  source ~/.config/zsh/blueberry_peach_light-fzf-colors.zsh
+else
+  source ~/.config/zsh/blueberry_peach_dark-fzf-colors.zsh
+fi
 
 #
 # COMPLETIONS
@@ -92,7 +98,11 @@ if [ -f '/Users/schemar/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/schemar
 if [ -f '/Users/schemar/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/schemar/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Themed syntax highlighting.
-source ~/.config/zsh/blueberry_peach_dark-syntax-highlighting.zsh
+if [[ "$THEME_MODE" == "light" ]]; then
+  source ~/.config/zsh/blueberry_peach_light-syntax-highlighting.zsh
+else
+  source ~/.config/zsh/blueberry_peach_dark-syntax-highlighting.zsh
+fi
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Set git branch in tmux

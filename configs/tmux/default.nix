@@ -35,7 +35,10 @@
           };
         };
         extraConfig = ''
-          source ~/.config/tmux/blueberry_peach_dark.conf
+          source ~/.config/tmux/reset_catppuccin.conf
+          if-shell '[ "$(~/.config/current_theme)" = "dark" ]' \
+            "source-file ~/.config/tmux/blueberry_peach_dark.conf" \
+            "source-file ~/.config/tmux/blueberry_peach_light.conf"
 
           set -g status-left '#[bg=#{?client_prefix,blue,default},fg=#{?client_prefix,black,default}]#S#[default] '
           # Make sure to do this before sourcing tmux-continuum.
@@ -172,5 +175,6 @@
   xdg.configFile."tmux/pane_branch.sh".source = ./config/pane_branch.sh;
   xdg.configFile."tmux/blueberry_peach_light.conf".source = ./config/blueberry_peach_light.conf;
   xdg.configFile."tmux/blueberry_peach_dark.conf".source = ./config/blueberry_peach_dark.conf;
+  xdg.configFile."tmux/reset_catppuccin.conf".source = ./config/reset_catppuccin.conf;
 }
 

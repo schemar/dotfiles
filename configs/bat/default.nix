@@ -4,7 +4,6 @@
 
     config = {
       style = "numbers,changes";
-      theme = "blueberry_peach_light";
     };
 
     themes = {

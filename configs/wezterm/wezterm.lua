@@ -1,6 +1,16 @@
 local wezterm = require("wezterm")
 
-local color_scheme = "Blueberry Peach Dark"
+local theme_mode = "light" -- default to light mode
+local theme_file = os.getenv("HOME") .. "/.config/current_theme"
+local handle = io.popen(theme_file)
+if not handle then
+  wezterm.log_error("Could not read theme script: " .. theme_file)
+else
+  theme_mode = handle:read("*a")
+  handle:close()
+end
+
+local color_scheme = theme_mode == "light" and "Blueberry Peach Light" or "Blueberry Peach Dark"
 
 local config = {
   -- Allows to compose umlauts, etc. with left option key.

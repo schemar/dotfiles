@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Store should contain "light" or "dark":
+STORE="$HOME/.config/current_theme_store"
+
+# Check if the store exists; if not, create it
+if [ ! -f "$STORE" ]; then
+    printf "light" > "$STORE"
+fi
+
+# Read (display) the contents of the store
+cat "$STORE"
