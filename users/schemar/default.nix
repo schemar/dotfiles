@@ -25,6 +25,7 @@
     ../../configs/bat
     ../../configs/bottom
     ../../configs/fd
+    ../../configs/fzf
     ../../configs/gh
     ../../configs/git
     ../../configs/jq

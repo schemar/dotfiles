@@ -42,12 +42,6 @@ eval "$(mise activate zsh)"
 
 export THEME_MODE=$(~/.config/current_theme)
 
-# FZF config
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude ".git/"'
-export FZF_COMPLETION_OPTS="--preview 'bat --style=numbers,changes --color=always {}'"
-export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers,changes --color=always {}'"
-export FZF_COMPLETION_TRIGGER=',,'
 ## FZF Themeing
 if [[ "$THEME_MODE" == "light" ]]; then
   source ~/.config/zsh/blueberry_peach_light-fzf-colors.zsh
