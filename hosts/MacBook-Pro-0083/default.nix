@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
-    ../common/homebrew.nix
+    ../common/common.nix
+    ../common/darwin.nix
   ];
 
   # Additional brew settings for this host only
