@@ -4,6 +4,15 @@ default: help
 help:
   just --list --unsorted
 
+# Update brew's DB
+brew-update:
+  brew update
+
+# Update all installed homebrew packages (incl. casks)
+brew-upgrade: brew-update
+  brew upgrade
+  brew upgrade --casks --greedy
+
 theme-dark:
   osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
   printf "dark" > ~/.config/current_theme_store
