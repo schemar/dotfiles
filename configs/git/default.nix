@@ -39,12 +39,17 @@
       }
     ];
 
+    # Signing managed in extra config (ssh only supported by newer home-manager).
+
     extraConfig = {
       branch = {
         sort = "-committerdate";
       };
       column = {
         ui = "auto";
+      };
+      commit = {
+        gpgSign = "true";
       };
       core = {
         # Enable dynamic delta syntax theme:
@@ -69,6 +74,9 @@
       };
       github = {
         user = "schemar";
+      };
+      gpg = {
+        format = "ssh";
       };
       help = {
         autocorrect = "prompt";
@@ -105,6 +113,9 @@
       };
       tag = {
         sort = "version:refname";
+      };
+      user = {
+        signingkey = "~/.ssh/id_rsa.pub";
       };
     };
   };
