@@ -35,6 +35,7 @@
     ../../configs/tealdeer
     ../../configs/theme
     ../../configs/tmux
+    ../../configs/wezterm
     ../../configs/zsh
   ];
 }
