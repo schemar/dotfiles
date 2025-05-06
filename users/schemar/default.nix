@@ -29,6 +29,7 @@
     ../../configs/gh
     ../../configs/git
     ../../configs/jq
+    ../../configs/lsd
     ../../configs/ripgrep
     ../../configs/starship
     ../../configs/tealdeer

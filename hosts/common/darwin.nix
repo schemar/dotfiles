@@ -25,7 +25,6 @@
       # Keep coreutils here to fix tmux.
       # Maybe move to nixpkgs with nix tmux.
       "coreutils"
-      "lsd"
       "lua"
       "markdownlint-cli"
       "mise"

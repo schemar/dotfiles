@@ -85,12 +85,6 @@ _gt_yargs_completions()
 compdef _gt_yargs_completions gt
 ###-end-gt-completions-###
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/schemar/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/schemar/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/schemar/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/schemar/google-cloud-sdk/completion.zsh.inc'; fi
-
 # Themed syntax highlighting.
 if [[ "$THEME_MODE" == "light" ]]; then
   source ~/.config/zsh/blueberry_peach_light-syntax-highlighting.zsh
