@@ -30,6 +30,7 @@
     ../../configs/git
     ../../configs/jq
     ../../configs/lsd
+    ../../configs/neovim
     ../../configs/ripgrep
     ../../configs/starship
     ../../configs/tealdeer
