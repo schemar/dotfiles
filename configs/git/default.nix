@@ -30,11 +30,11 @@
 
     includes = [
       {
-        path = "~/.gitconfigprivate";
+        path = ./gitprivate;
         condition =  "gitdir:*";
       }
       {
-        path = "~/.gitconfigafilio";
+        path = ./gitafilio;
         condition =   "gitdir:afilio*/";
       }
     ];
