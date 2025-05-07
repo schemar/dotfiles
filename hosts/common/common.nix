@@ -8,10 +8,19 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    cargo
-    delta
-    just
-    nixfmt-rfc-style
     tmux
+
+    just
+    sd
+    delta
+
+    # Languages, language servers, formatters, etc.:
+    tree-sitter
+
+    nixfmt-rfc-style
+
+    lua
+
+    cargo
   ];
 }

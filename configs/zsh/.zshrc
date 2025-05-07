@@ -38,8 +38,6 @@ export LC_ALL=en_US.UTF-8
 # TOOLS
 #
 
-eval "$(mise activate zsh)"
-
 export THEME_MODE=$(~/.config/current_theme)
 
 ## FZF Themeing
@@ -91,7 +89,6 @@ if [[ "$THEME_MODE" == "light" ]]; then
 else
   source ~/.config/zsh/blueberry_peach_dark-syntax-highlighting.zsh
 fi
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Set git branch in tmux
 # See also ~/.tmux.conf which reads the branch variable for status-right

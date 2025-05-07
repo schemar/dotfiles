@@ -5,6 +5,10 @@
 
     defaultKeymap = "viins";
 
+    syntaxHighlighting = {
+      enable = true;
+    };
+
     shellAliases = {
       g = "git";
       y = "yarn";

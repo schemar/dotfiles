@@ -22,19 +22,10 @@
     };
 
     brews = [
-      # Keep coreutils here to fix tmux.
-      # Maybe move to nixpkgs with nix tmux.
+      # Keep coreutils here to have greadlink which I use in ZSH to get the
+      # current git repo. (see zsh config)
       "coreutils"
-      "lua"
-      "markdownlint-cli"
-      "mise"
       "neovim"
-      "sd"
-      "ShellCheck"
-      "shfmt"
-      "tree-sitter"
-      "yamllint"
-      "zsh-syntax-highlighting"
     ];
     casks = [
       "font-monaspace"

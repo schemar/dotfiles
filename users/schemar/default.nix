@@ -29,6 +29,7 @@
     ../../configs/gh
     ../../configs/git
     ../../configs/jq
+    ../../configs/mise
     ../../configs/neovim
     ../../configs/ripgrep
     ../../configs/starship
