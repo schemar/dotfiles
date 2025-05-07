@@ -1,4 +1,5 @@
-{ pkgs, ...} :{
+{ pkgs, ... }:
+{
   # Enable alternative shell support.
   programs.zsh.enable = true;
   environment.shells = with pkgs; [ zsh ];
@@ -10,6 +11,7 @@
     cargo
     delta
     just
+    nixfmt-rfc-style
     tmux
   ];
 }
