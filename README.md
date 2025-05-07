@@ -42,6 +42,13 @@ Update config:
 darwin-rebuild switch --flake .
 ```
 
+Generate an SSH keypair and upload the public key to GitHub (auth and signing):
+
+```sh
+# Use the default keyname (~/.ssh/id_ed25519) as it is used by the git config:
+ssh-keygen -t ed25519 -C "martinschenck@fastmail.com"
+```
+
 ## Included Configurations
 
 See `./configs` for the full list of configurations.

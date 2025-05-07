@@ -4,6 +4,10 @@ default: help
 help:
   just --list --unsorted
 
+# Configure the system with this flake
+switch:
+  darwin-rebuild switch --flake .
+
 # Update brew's DB
 brew-update:
   brew update

@@ -115,7 +115,7 @@
         sort = "version:refname";
       };
       user = {
-        signingkey = "~/.ssh/id_rsa.pub";
+        signingkey = "~/.ssh/id_ed25519";
       };
     };
   };

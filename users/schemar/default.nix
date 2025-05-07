@@ -33,6 +33,7 @@
     ../../configs/neovim
     ../../configs/ripgrep
     ../../configs/starship
+    ../../configs/ssh
     ../../configs/tealdeer
     ../../configs/theme
     ../../configs/tmux
