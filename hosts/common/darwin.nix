@@ -4,7 +4,7 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   # Add ability to use TouchID for sudo authentication in terminal
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # Required by home-manager:
   users.users.schemar.home = /Users/schemar;

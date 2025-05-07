@@ -107,19 +107,7 @@
           set -g @vim_navigator_mapping_prev "M-\\"
         '';
       }
-      {
-        plugin = tmuxPlugins.mkTmuxPlugin {
-          pluginName = "resurrect";
-          name = "tmux-plugin-resurrect";
-          rtpFilePath = "resurrect.tmux";
-          src = fetchFromGitHub {
-            owner = "tmux-plugins";
-            repo = "tmux-resurrect";
-            rev = "cff343cf9e81983d3da0c8562b01616f12e8d548";
-            sha256 = "sha256-FcSjYyWjXM1B+WmiK2bqUNJYtH7sJBUsY2IjSur5TjY=";
-          };
-        };
-      }
+      tmuxPlugins.resurrect
       # Do tmux-continuum last.
       # 1. It requires tmux-resurrect.
       # 2. It must be the last to set right-status (see their "known-issues").

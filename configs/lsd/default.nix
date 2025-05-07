@@ -18,5 +18,8 @@
         older = "dark_green";
       };
     };
+
+    # I manage my own aliases:
+    enableZshIntegration = false;
   };
 }
