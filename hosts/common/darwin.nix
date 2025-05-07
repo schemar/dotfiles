@@ -30,11 +30,13 @@
       "sqlite"
     ];
     casks = [
-      "font-monaspace"
       "gimp"
       "raycast"
       "wezterm"
       "unnaturalscrollwheels"
+
+      "font-monaspace"
+      "font-symbols-only-nerd-font"
     ];
   };
 }
