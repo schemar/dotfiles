@@ -17,6 +17,9 @@ brew-upgrade: brew-update
   brew upgrade
   brew upgrade --casks --greedy
 
+nix-clean:
+  nix-collect-garbage -d
+
 theme-dark:
   osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
   printf "dark" > ~/.config/current_theme_store
