@@ -41,9 +41,10 @@
       bat = "bat --theme=blueberry_peach_$(~/.config/current_theme)";
     };
 
-    initContent = ''
-      ${builtins.readFile ./.zshrc}
-    '';
+    initContent = # zsh
+      ''
+        ${builtins.readFile ./.zshrc}
+      '';
   };
 
   programs.direnv = {

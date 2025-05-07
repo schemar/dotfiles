@@ -35,18 +35,19 @@
             sha256 = "sha256-poG3QCow2j6h/G7BLEA8v3ZJXuk28iPmH1J4t7vT55k=";
           };
         };
-        extraConfig = ''
-          source ~/.config/tmux/reset_catppuccin.conf
-          if-shell '[ "$(~/.config/current_theme)" = "dark" ]' \
-            "source-file ~/.config/tmux/blueberry_peach_dark.conf" \
-            "source-file ~/.config/tmux/blueberry_peach_light.conf"
+        extraConfig = # tmux
+          ''
+            source ~/.config/tmux/reset_catppuccin.conf
+            if-shell '[ "$(~/.config/current_theme)" = "dark" ]' \
+              "source-file ~/.config/tmux/blueberry_peach_dark.conf" \
+              "source-file ~/.config/tmux/blueberry_peach_light.conf"
 
-          set -g status-left '#[bg=#{?client_prefix,blue,default},fg=#{?client_prefix,black,default}]#S#[default] '
-          # Make sure to do this before sourcing tmux-continuum.
-          # See their "known-issues".
-          # git branch; see file in dotfiles repo (tmux/config)
-          set -g status-right '#(~/.config/tmux/pane_branch.sh)'
-        '';
+            set -g status-left '#[bg=#{?client_prefix,blue,default},fg=#{?client_prefix,black,default}]#S#[default] '
+            # Make sure to do this before sourcing tmux-continuum.
+            # See their "known-issues".
+            # git branch; see file in dotfiles repo (tmux/config)
+            set -g status-right '#(~/.config/tmux/pane_branch.sh)'
+          '';
       }
       {
         plugin = tmuxPlugins.mkTmuxPlugin {
@@ -99,13 +100,14 @@
             sha256 = "sha256-h3c5ki8N4kiNzbgjxHwLh625un6GqbLZv/4dPVW3vCI=";
           };
         };
-        extraConfig = ''
-          set -g @vim_navigator_mapping_left "M-h"
-          set -g @vim_navigator_mapping_right "M-l"
-          set -g @vim_navigator_mapping_up "M-k"
-          set -g @vim_navigator_mapping_down "M-j"
-          set -g @vim_navigator_mapping_prev "M-\\"
-        '';
+        extraConfig = # tmux
+          ''
+            set -g @vim_navigator_mapping_left "M-h"
+            set -g @vim_navigator_mapping_right "M-l"
+            set -g @vim_navigator_mapping_up "M-k"
+            set -g @vim_navigator_mapping_down "M-j"
+            set -g @vim_navigator_mapping_prev "M-\\"
+          '';
       }
       tmuxPlugins.resurrect
       # Do tmux-continuum last.
@@ -123,42 +125,44 @@
             sha256 = "sha256-W71QyLwC/MXz3bcLR2aJeWcoXFI/A3itjpcWKAdVFJY=";
           };
         };
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-          set -g @continuum-boot 'on'
-          set -g @continuum-save-interval '10' # minutes
-        '';
+        extraConfig = # tmux
+          ''
+            set -g @continuum-restore 'on'
+            set -g @continuum-boot 'on'
+            set -g @continuum-save-interval '10' # minutes
+          '';
       }
     ];
 
-    extraConfig = ''
-      # Colors
-      # https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
-      set -sg terminal-overrides ",*:RGB"
+    extraConfig = # tmux
+      ''
+        # Colors
+        # https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
+        set -sg terminal-overrides ",*:RGB"
 
-      # use <prefix> v/s for splitting
-      bind v split-window -v
-      bind s split-window -h
+        # use <prefix> v/s for splitting
+        bind v split-window -v
+        bind s split-window -h
 
-      # use <prefix> z to (un)zoom current pane
-      bind z resize-pane -Z
-      # use C-b to go to last pane and zoom
-      # binding with -n means "no prefix"
-      bind -n C-b select-pane -l \; resize-pane -Z
+        # use <prefix> z to (un)zoom current pane
+        bind z resize-pane -Z
+        # use C-b to go to last pane and zoom
+        # binding with -n means "no prefix"
+        bind -n C-b select-pane -l \; resize-pane -Z
 
-      # Move between windows
-      bind -n M-J next-window
-      bind -n M-K previous-window
-      bind -n M-L last-window
+        # Move between windows
+        bind -n M-J next-window
+        bind -n M-K previous-window
+        bind -n M-L last-window
 
-      # resize panes more easiyly
-      bind < resize-pane -L 10
-      bind > resize-pane -R 10
-      bind - resize-pane -D 4
-      bind + resize-pane -U 4
+        # resize panes more easiyly
+        bind < resize-pane -L 10
+        bind > resize-pane -R 10
+        bind - resize-pane -D 4
+        bind + resize-pane -U 4
 
-      set -g status-interval 1 # Refresh status line every second
-    '';
+        set -g status-interval 1 # Refresh status line every second
+      '';
   };
 
   xdg.configFile."tmux/pane_branch.sh".source = ./config/pane_branch.sh;
