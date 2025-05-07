@@ -26,6 +26,8 @@
       # current git repo. (see zsh config)
       "coreutils"
       "neovim"
+      # Used by sqlite.lua in nvim (with brew path prefix):
+      "sqlite"
     ];
     casks = [
       "font-monaspace"
