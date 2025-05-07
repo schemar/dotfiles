@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [
     ../common/common.nix
     ../common/darwin.nix
@@ -6,11 +7,11 @@
 
   # Additional brew settings for this host only
   homebrew = {
-    taps = [ 
+    taps = [
       "pulumi/tap"
       "withgraphite/tap"
     ];
-    brews = [ 
+    brews = [
       "pulumi/tap/pulumi"
       "withgraphite/tap/graphite"
     ];

@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   programs.git = {
     enable = true;
 
@@ -31,11 +32,11 @@
     includes = [
       {
         path = ./gitprivate;
-        condition =  "gitdir:*";
+        condition = "gitdir:*";
       }
       {
         path = ./gitafilio;
-        condition =   "gitdir:afilio*/";
+        condition = "gitdir:afilio*/";
       }
     ];
 

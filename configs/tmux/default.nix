@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.tmux = {
     enable = true;
 
@@ -177,4 +178,3 @@
   xdg.configFile."tmux/blueberry_peach_dark.conf".source = ./config/blueberry_peach_dark.conf;
   xdg.configFile."tmux/reset_catppuccin.conf".source = ./config/reset_catppuccin.conf;
 }
-
