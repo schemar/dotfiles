@@ -2,3 +2,7 @@ Host github.com
   AddKeysToAgent yes
   IdentityFile ~/.ssh/id_ed25519
 
+Host homeassistant.local
+    User root
+    IdentityFile ~/.ssh/id_home_assistant
+    IdentitiesOnly yes
