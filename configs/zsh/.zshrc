@@ -40,13 +40,6 @@ export LC_ALL=en_US.UTF-8
 
 export THEME_MODE=$(~/.config/current_theme)
 
-## FZF Themeing
-if [[ "$THEME_MODE" == "light" ]]; then
-  source ~/.config/zsh/blueberry_peach_light-fzf-colors.zsh
-else
-  source ~/.config/zsh/blueberry_peach_dark-fzf-colors.zsh
-fi
-
 #
 # COMPLETIONS
 #
@@ -82,13 +75,6 @@ _gt_yargs_completions()
 }
 compdef _gt_yargs_completions gt
 ###-end-gt-completions-###
-
-# Themed syntax highlighting.
-if [[ "$THEME_MODE" == "light" ]]; then
-  source ~/.config/zsh/blueberry_peach_light-syntax-highlighting.zsh
-else
-  source ~/.config/zsh/blueberry_peach_dark-syntax-highlighting.zsh
-fi
 
 # Set git branch in tmux
 # See also ~/.tmux.conf which reads the branch variable for status-right

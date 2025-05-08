@@ -60,7 +60,7 @@
         syntax-theme = "blueberry_peach_light";
       };
       "delta \"syntax-theme-dark\"" = {
-        syntax-theme = "blueberry_peach_light";
+        syntax-theme = "blueberry_peach_dark";
       };
       diff = {
         algorithm = "histogram";

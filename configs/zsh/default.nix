@@ -41,9 +41,23 @@
       bat = "bat --theme=blueberry_peach_$(~/.config/current_theme)";
     };
 
-    initContent = # zsh
+    initContent = # sh
       ''
         ${builtins.readFile ./.zshrc}
+
+        ## FZF Themeing
+        if [[ "$THEME_MODE" == "light" ]]; then
+          source ${./config/blueberry_peach_light-fzf-colors.zsh}
+        else
+          source ${./config/blueberry_peach_dark-fzf-colors.zsh}
+        fi
+
+        # Themed syntax highlighting.
+        if [[ "$THEME_MODE" == "light" ]]; then
+          source ${./config/blueberry_peach_light-syntax-highlighting.zsh}
+        else
+          source ${./config/blueberry_peach_dark-syntax-highlighting.zsh}
+        fi
       '';
   };
 
