@@ -4,10 +4,6 @@ default: help
 help:
   just --list --unsorted
 
-# Configure the system with this flake
-switch:
-  darwin-rebuild switch --flake .
-
 # Update brew's DB
 brew-update:
   brew update
@@ -16,6 +12,10 @@ brew-update:
 brew-upgrade: brew-update
   brew upgrade
   brew upgrade --casks --greedy
+
+# Configure the system with this flake
+nix-switch:
+  darwin-rebuild switch --flake .
 
 nix-clean:
   nix-collect-garbage -d

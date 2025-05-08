@@ -27,7 +27,7 @@ Install initially with:
 
 ```sh
 # Errors will guide you on what to fix:
-nix --extra-experimental-features "nix-command flakes" run nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch --flake .
+nix --extra-experimental-features "nix-command flakes" run nix-darwin/master#darwin-rebuild -- switch --flake .
 ```
 
 Change shell (not sure why nix doesn't do this):
