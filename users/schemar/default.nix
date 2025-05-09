@@ -1,11 +1,28 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "schemar";
   home.homeDirectory = /Users/schemar;
 
-  home.packages = with pkgs; [ ];
+  # List packages installed in user profile. To search by name, run:
+  # $ nix-env -qaP | grep wget
+  home.packages = with pkgs; [
+    tmux
+
+    just
+    sd
+    delta
+
+    # Languages, language servers, formatters, etc.:
+    tree-sitter
+
+    nixfmt-rfc-style
+
+    lua
+
+    cargo
+  ];
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
