@@ -38,7 +38,6 @@
       # $ darwin-rebuild switch --flake .
       darwinConfigurations = {
         "Schencks-MacBook-Air" = nix-darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
           modules = [
             configuration
             ./hosts/Schencks-MacBook-Air
@@ -46,7 +45,6 @@
           ];
         };
         "MacBook-Pro-0083" = nix-darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
           modules = [
             configuration
             ./hosts/MacBook-Pro-0083
