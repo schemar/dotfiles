@@ -49,6 +49,10 @@ Generate an SSH keypair and upload the public key to GitHub (auth and signing):
 ssh-keygen -t ed25519 -C "martinschenck@fastmail.com"
 ```
 
+Remaining steps:
+
+- Set up Night Shift (System Preferences > Displays > Night Shift)
+
 ## Included Configurations
 
 See `./configs` for the full list of configurations.
