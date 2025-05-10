@@ -33,6 +33,3 @@ theme-light:
   /etc/profiles/per-user/$USER/bin/tmux source-file ~/.config/tmux/tmux.conf
   # Slack: #FAF4ED,#6A67B4,#6A67B4,#007E7D
   # ⚠️ Remember to reload zsh sessions to apply the changes.
-
-theme-blueberry-peach-update:
-  ./tools/themes/update_blueberry_peach.lua
