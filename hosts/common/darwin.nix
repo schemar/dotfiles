@@ -106,6 +106,8 @@
   system.defaults.screensaver.askForPassword = true;
   system.defaults.screensaver.askForPasswordDelay = 0;
 
+  system.defaults.spaces.spans-displays = true;
+
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
 }
