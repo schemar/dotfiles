@@ -6,7 +6,7 @@
 
     globalConfig = {
       tools = {
-        node = "lts";
+        node = "22.11";
       };
     };
   };
