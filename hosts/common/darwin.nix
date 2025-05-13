@@ -44,8 +44,16 @@
   security.pam.services.sudo_local.touchIdAuth = true;
   # This fixes Touch ID for sudo not working inside tmux and screen:
   security.pam.services.sudo_local.reattach = true;
-  # Disable mouse acceleration:
-  system.defaults.".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
+
+  system.defaults.CustomUserPreferences = {
+    NSGlobalDomain = {
+      # Disable mouse acceleration:
+      "com.apple.mouse.linear" = true;
+    };
+  };
+
+  # Mouse speed:
+  system.defaults.".GlobalPreferences"."com.apple.mouse.scaling" = 0.6875;
   # Mode 3 enables full keyboard control:
   system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;
   # Jump to the spot that’s clicked on the scroll bar:
