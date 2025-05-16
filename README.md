@@ -14,6 +14,9 @@ This repository contains a nix configuration for my productivity stack.
 
 Requirements:
 
+> [!NOTE]
+> Consider installing [lix](https://lix.systems/) instead of nix:
+
 - [Nix](https://nixos.org/download.html)
   ```sh
   sh <(curl -L https://nixos.org/nix/install)
