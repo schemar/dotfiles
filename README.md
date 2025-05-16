@@ -62,6 +62,7 @@ See `./configs` for the full list of configurations.
 
 ### Remote
 
+- [🫐 BlueberryPeach 🍑 Theme](https://github.com/schemar/blueberry-peach)
 - [Q1 Max QMK Firmware](https://github.com/schemar/qmk_firmware/blob/wireless_playground/keyboards/keychron/q1_max/ansi_encoder/keymaps/schemar/keymap.c)
 
 ## Themeing
