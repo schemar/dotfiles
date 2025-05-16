@@ -56,5 +56,7 @@
     ../../configs/tmux
     ../../configs/wezterm
     ../../configs/zsh
+    # TODO: Make conditional for macOS only:
+    ../../configs/aerospace
   ];
 }
