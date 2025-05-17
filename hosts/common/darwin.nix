@@ -24,9 +24,6 @@
       # Keep coreutils here to have greadlink which I use in ZSH to get the
       # current git repo. (see zsh config)
       "coreutils"
-      "neovim"
-      # Used by sqlite.lua in nvim (with brew path prefix):
-      "sqlite"
     ];
     casks = [
       "gimp"

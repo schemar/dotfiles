@@ -61,6 +61,9 @@ return {
           "nvim-tree/nvim-web-devicons",
           "nvim-telescope/telescope-fzf-native.nvim",
         },
+        init = function()
+          vim.g.sqlite_clib_path = "/etc/profiles/per-user/schemar/bin/sqlite3"
+        end,
       },
       "debugloop/telescope-undo.nvim",
       "pfdzm/graphite-picker",

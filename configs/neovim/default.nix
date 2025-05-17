@@ -1,5 +1,9 @@
 { config, ... }:
 {
+  programs.neovim = {
+    enable = true;
+  };
+
   xdg.configFile."nvim" = {
     # Using "out of store symlink" to enable updates without switching nix-darwin.
     # Requires an absolute path to the target.

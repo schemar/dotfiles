@@ -16,6 +16,7 @@
 
     # Languages, language servers, formatters, etc.:
     tree-sitter
+    sqlite
 
     nixfmt-rfc-style
 
