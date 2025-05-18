@@ -10,6 +10,11 @@
   # Use user-level ZSH provided by home-manager config:
   environment.shells = [ "/run/current-system/sw/bin/zsh" ];
 
+  fonts.packages = with pkgs; [
+    monaspace
+    nerd-fonts.symbols-only
+  ];
+
   # Include unfree packages from nixpkgs:
   nixpkgs.config.allowUnfree = true;
 }

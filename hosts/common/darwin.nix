@@ -16,11 +16,6 @@
       "gimp"
       "raycast"
       "wezterm"
-
-      # Could probably be done with nix-darwin as well:
-      # https://nix-darwin.github.io/nix-darwin/manual/index.html#opt-fonts.packages
-      "font-monaspace"
-      "font-symbols-only-nerd-font"
     ];
   };
 
