@@ -6,6 +6,15 @@
       # Must be started manually once before this takes effect:
       start-at-login = true;
 
+      gaps = {
+        inner.horizontal = 7;
+        inner.vertical = 7;
+        outer.left = 7;
+        outer.bottom = 7;
+        outer.top = 7;
+        outer.right = 7;
+      };
+
       mode.main.binding = {
         ctrl-alt-cmd-shift-h = "focus left";
         ctrl-alt-cmd-shift-j = "focus down";
