@@ -40,15 +40,15 @@
         "Schencks-MacBook-Air" = nix-darwin.lib.darwinSystem {
           modules = [
             configuration
-            ./hosts/Schencks-MacBook-Air
             home-manager.darwinModules.home-manager
+            ./hosts/Schencks-MacBook-Air
           ];
         };
         "MacBook-Pro-0083" = nix-darwin.lib.darwinSystem {
           modules = [
             configuration
-            ./hosts/MacBook-Pro-0083
             home-manager.darwinModules.home-manager
+            ./hosts/MacBook-Pro-0083
           ];
         };
       };

@@ -62,7 +62,7 @@ return {
           "nvim-telescope/telescope-fzf-native.nvim",
         },
         init = function()
-          vim.g.sqlite_clib_path = "/etc/profiles/per-user/schemar/bin/sqlite3"
+          vim.g.sqlite_clib_path = "/etc/profiles/per-user/" .. os.getenv("USER") .. "/bin/sqlite3"
         end,
       },
       "debugloop/telescope-undo.nvim",

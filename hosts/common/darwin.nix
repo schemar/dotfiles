@@ -2,17 +2,9 @@
 {
   # The platform the configuration will be used on:
   nixpkgs.hostPlatform = "aarch64-darwin";
-  # Include unfree packages from nixpkgs:
-  nixpkgs.config.allowUnfree = true;
 
   # Required by home-manager:
   users.users.schemar.home = /Users/schemar;
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-
-    users.schemar = ../../users/schemar;
-  };
 
   homebrew = {
     enable = true;

@@ -19,7 +19,7 @@
       h = "function hdi(){ howdoi $* -c -n 5; }; hdi";
 
       n = "nvim";
-      ng = "rm -f /Users/schemar/.cache/godothost && nvim --listen /Users/schemar/.cache/godothost";
+      ng = "rm -f ~/.cache/godothost && nvim --listen ~/.cache/godothost";
 
       src = "source ~/.zshrc";
 

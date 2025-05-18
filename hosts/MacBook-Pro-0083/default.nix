@@ -3,6 +3,7 @@
   imports = [
     ../common/common.nix
     ../common/darwin.nix
+    ../../users/schemar
   ];
 
   # Additional brew settings for this host only

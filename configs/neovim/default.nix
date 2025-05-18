@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, isDarwin, ... }:
 {
   programs.neovim = {
     enable = true;
@@ -8,7 +8,12 @@
     # Using "out of store symlink" to enable updates without switching nix-darwin.
     # Requires an absolute path to the target.
     # Hardcoded here, but not ideal.
-    source = config.lib.file.mkOutOfStoreSymlink "/Users/schemar/Projects/dotfiles/configs/neovim";
+    source = config.lib.file.mkOutOfStoreSymlink (
+      if isDarwin then
+        "/Users/schemar/Projects/dotfiles/configs/neovim"
+      else
+        "/home/schemar/Projects/dotfiles/configs/neovim"
+    );
     recursive = true;
   };
 }

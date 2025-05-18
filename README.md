@@ -36,10 +36,10 @@ nix --extra-experimental-features "nix-command flakes" run nix-darwin/master#dar
 Change shell (not sure why nix doesn't do this):
 
 ```sh
-chsh -s /etc/profiles/per-user/schemar/bin/zsh
+chsh -s /run/current-system/sw/bin/zsh
 ```
 
-Update config:
+Apply config:
 
 ```sh
 darwin-rebuild switch --flake .
