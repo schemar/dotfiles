@@ -12,11 +12,6 @@
       cleanup = "zap";
     };
 
-    brews = [
-      # Keep coreutils here to have greadlink which I use in ZSH to get the
-      # current git repo. (see zsh config)
-      "coreutils"
-    ];
     casks = [
       "gimp"
       "raycast"
