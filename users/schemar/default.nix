@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   users.users.schemar.shell = "/run/current-system/sw/bin/zsh";
+  system.primaryUser = "schemar";
 
   home-manager = {
     useGlobalPkgs = true;
