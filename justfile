@@ -12,7 +12,7 @@ brew-upgrade:
 
 # Configure the system with this flake
 nix-switch:
-  darwin-rebuild switch --flake .
+  sudo darwin-rebuild switch --flake .
 
 nix-clean:
   nix-collect-garbage -d
