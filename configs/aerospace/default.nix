@@ -99,6 +99,7 @@
         ];
       };
 
+      # Cannot auto-move Todoist as we cannot differentiate between the main app window and the quick entry pop-up.
       on-window-detected = [
         {
           check-further-callbacks = true;
@@ -134,15 +135,6 @@
           };
           run = [
             "move-node-to-workspace 2"
-          ];
-        }
-        {
-          check-further-callbacks = false;
-          "if" = {
-            app-id = "com.todoist.mac.Todoist";
-          };
-          run = [
-            "move-node-to-workspace 3"
           ];
         }
         {
