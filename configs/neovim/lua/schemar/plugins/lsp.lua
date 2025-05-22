@@ -51,6 +51,7 @@ return {
     -- Extended by plugins/languages/
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
+      opts.automatic_enable = false
     end,
   },
   {
