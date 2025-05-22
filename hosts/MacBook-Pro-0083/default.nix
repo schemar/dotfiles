@@ -16,6 +16,9 @@
       "pulumi/tap/pulumi"
       "withgraphite/tap/graphite"
     ];
-    casks = [ "polypane" ];
+    casks = [
+      "polypane"
+      "hoppscotch"
+    ];
   };
 }
