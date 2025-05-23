@@ -1,19 +1,19 @@
-{ config, isDarwin, ... }:
+{ inputs, ... }:
 {
-  programs.neovim = {
-    enable = true;
-  };
+  imports = [
+    inputs.nixvim.homeManagerModules.nixvim
+  ];
 
-  xdg.configFile."nvim" = {
-    # Using "out of store symlink" to enable updates without switching nix-darwin.
-    # Requires an absolute path to the target.
-    # Hardcoded here, but not ideal.
-    source = config.lib.file.mkOutOfStoreSymlink (
-      if isDarwin then
-        "/Users/schemar/Projects/dotfiles/configs/neovim"
-      else
-        "/home/schemar/Projects/dotfiles/configs/neovim"
-    );
-    recursive = true;
+  programs.nixvim = {
+    enable = true;
+    defaultEditor = true;
+    vimdiffAlias = true;
+
+    colorschemes = {
+      catppuccin = {
+        enable = true;
+        autoLoad = true;
+      };
+    };
   };
 }

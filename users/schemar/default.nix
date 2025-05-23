@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ inputs, pkgs, ... }:
 {
   users.users.schemar.shell = "/run/current-system/sw/bin/zsh";
   system.primaryUser = "schemar";
