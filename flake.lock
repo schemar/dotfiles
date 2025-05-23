@@ -1,5 +1,20 @@
 {
   "nodes": {
+    "blueberry-peach": {
+      "locked": {
+        "lastModified": 1748008926,
+        "narHash": "sha256-B1Xt2HP27slbEqiRgh/Kt0IfZmSM6sIvocXTQl8m+DM=",
+        "owner": "schemar",
+        "repo": "blueberry-peach",
+        "rev": "0d89660ee8aa41f401f144cbad4e1b5fbfbc5fbd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "schemar",
+        "repo": "blueberry-peach",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -58,6 +73,7 @@
     },
     "root": {
       "inputs": {
+        "blueberry-peach": "blueberry-peach",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs"

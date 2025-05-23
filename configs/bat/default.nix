@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 {
   programs.bat = {
     enable = true;
@@ -9,12 +9,10 @@
 
     themes = {
       blueberry_peach_light = {
-        src = ./themes;
-        file = "blueberry_peach_light.tmTheme";
+        src = "${inputs.blueberry-peach}/ports/bat/blueberry_peach_light.tmTheme";
       };
       blueberry_peach_dark = {
-        src = ./themes;
-        file = "blueberry_peach_dark.tmTheme";
+        src = "${inputs.blueberry-peach}/ports/bat/blueberry_peach_dark.tmTheme";
       };
     };
   };

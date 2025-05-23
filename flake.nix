@@ -9,6 +9,8 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    blueberry-peach.url = "github:schemar/blueberry-peach";
   };
 
   outputs =
@@ -17,6 +19,7 @@
       nix-darwin,
       nixpkgs,
       home-manager,
+      blueberry-peach,
     }:
     let
       configuration =
@@ -38,6 +41,7 @@
       # $ darwin-rebuild switch --flake .
       darwinConfigurations = {
         "Schencks-MacBook-Air" = nix-darwin.lib.darwinSystem {
+          specialArgs = { inherit inputs; };
           modules = [
             configuration
             home-manager.darwinModules.home-manager
@@ -45,6 +49,7 @@
           ];
         };
         "MacBook-Pro-0083" = nix-darwin.lib.darwinSystem {
+          specialArgs = { inherit inputs; };
           modules = [
             configuration
             home-manager.darwinModules.home-manager

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   programs.tmux = {
     enable = true;
@@ -39,8 +39,8 @@
           ''
             source ${./config/reset_catppuccin.conf}
             if-shell '[ "$(~/.config/current_theme)" = "dark" ]' \
-              "source-file ${./config/blueberry_peach_dark.conf}" \
-              "source-file ${./config/blueberry_peach_light.conf}"
+              "source-file ${inputs.blueberry-peach}/ports/tmux/blueberry_peach_dark.conf" \
+              "source-file ${inputs.blueberry-peach}/ports/tmux/blueberry_peach_light.conf"
 
             set -g status-left '#[bg=#{?client_prefix,blue,default},fg=#{?client_prefix,black,default}]#S#[default] '
             # Make sure to do this before sourcing tmux-continuum.

@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -47,16 +47,16 @@
 
         ## FZF Themeing
         if [[ "$THEME_MODE" == "light" ]]; then
-          source ${./config/blueberry_peach_light-fzf-colors.zsh}
+          source "${inputs.blueberry-peach}/ports/fzf/blueberry_peach_light-fzf-colors.sh"
         else
-          source ${./config/blueberry_peach_dark-fzf-colors.zsh}
+          source "${inputs.blueberry-peach}/ports/fzf/blueberry_peach_dark-fzf-colors.sh"
         fi
 
         # Themed syntax highlighting.
         if [[ "$THEME_MODE" == "light" ]]; then
-          source ${./config/blueberry_peach_light-syntax-highlighting.zsh}
+          source "${inputs.blueberry-peach}/ports/zsh_syntax_highlighting/blueberry_peach_light-syntax-highlighting.sh"
         else
-          source ${./config/blueberry_peach_dark-syntax-highlighting.zsh}
+          source "${inputs.blueberry-peach}/ports/zsh_syntax_highlighting/blueberry_peach_dark-syntax-highlighting.sh"
         fi
       '';
   };

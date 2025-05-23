@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   users.users.schemar.shell = "/run/current-system/sw/bin/zsh";
   system.primaryUser = "schemar";
@@ -11,6 +11,7 @@
 
     extraSpecialArgs = {
       isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+      inherit inputs;
     };
   };
 }
