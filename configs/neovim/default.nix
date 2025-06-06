@@ -18,8 +18,6 @@
       defaultEditor = true;
       vimdiffAlias = true;
 
-      nixpkgs.pkgs = pkgs;
-
       globals = {
         mapleader = " ";
         maplocalleader = "\\";
@@ -1514,6 +1512,8 @@
             formatting = {
               nixfmt = {
                 enable = true;
+
+                package = pkgs.nixfmt-rfc-style;
               };
               prettier = {
                 enable = true;
