@@ -473,7 +473,7 @@
             vim.cmd("!gt ls")
 
             -- Edit a file buffer (0 is current buffer):
-            if utils.is_file_buffer(0) then
+            if is_file_buffer(0) then
               vim.cmd("edit")
             end
           end
@@ -673,7 +673,7 @@
                 {
                   "<c-j>",
                   function()
-                    if utils.is_hover_open() then
+                    if is_hover_open() then
                       require("hover").hover_switch("next")
                     else
                       -- Do something else when hover not open?
@@ -684,7 +684,7 @@
                 {
                   "<c-k>",
                   function()
-                    if utils.is_hover_open() then
+                    if is_hover_open() then
                       require("hover").hover_switch("previous")
                     else
                       -- Do something else when hover not open?
@@ -944,49 +944,49 @@
                             {
                               "<leader>gtc",
                               function()
-                                utils.split_term("gt create")
+                                split_term("gt create")
                               end,
                               desc = "Create",
                             },
                             {
                               "<leader>gts",
                               function()
-                                utils.split_term_and_edit("gt sync")
+                                split_term_and_edit("gt sync")
                               end,
                               desc = "Sync",
                             },
                             {
                               "<leader>gtp",
                               function()
-                                utils.split_term("gt submit --no-edit")
+                                split_term("gt submit --no-edit")
                               end,
                               desc = "Submit",
                             },
                             {
                               "<leader>gtP",
                               function()
-                                utils.split_term("gt submit --no-edit --publish")
+                                split_term("gt submit --no-edit --publish")
                               end,
                               desc = "Submit (publish)",
                             },
                             {
                               "<leader>gtm",
                               function()
-                                utils.split_term("gt modify")
+                                split_term("gt modify")
                               end,
                               desc = "Modify",
                             },
                             {
                               "<leader>gtM",
                               function()
-                                utils.split_term_and_edit("gt modify && gt sync && gt submit --no-edit")
+                                split_term_and_edit("gt modify && gt sync && gt submit --no-edit")
                               end,
                               desc = "Modify, Sync, Submit",
                             },
                             {
                               "<leader>gto",
                               function()
-                                utils.split_term_and_edit("gt checkout")
+                                split_term_and_edit("gt checkout")
                               end,
                               desc = "Checkout",
                             },

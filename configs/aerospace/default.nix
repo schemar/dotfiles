@@ -106,90 +106,70 @@
           "if" = {
             app-id = "com.apple.systempreferences";
           };
-          run = [
-            "layout floating"
-          ];
+          run = [ "layout floating" ];
         }
         {
           check-further-callbacks = false;
           "if" = {
             app-id = "com.github.wez.wezterm";
           };
-          run = [
-            "move-node-to-workspace 1"
-          ];
+          run = [ "move-node-to-workspace 1" ];
         }
         {
           check-further-callbacks = false;
           "if" = {
             app-id = "com.google.Chrome";
           };
-          run = [
-            "move-node-to-workspace 2"
-          ];
+          run = [ "move-node-to-workspace 2" ];
         }
         {
           check-further-callbacks = false;
           "if" = {
             app-id = "com.apple.Safari";
           };
-          run = [
-            "move-node-to-workspace 2"
-          ];
+          run = [ "move-node-to-workspace 2" ];
         }
         {
           check-further-callbacks = false;
           "if" = {
             app-id = "com.apple.Notes";
           };
-          run = [
-            "move-node-to-workspace 4"
-          ];
+          run = [ "move-node-to-workspace 4" ];
         }
         {
           check-further-callbacks = false;
           "if" = {
             app-id = "notion.id";
           };
-          run = [
-            "move-node-to-workspace 4"
-          ];
+          run = [ "move-node-to-workspace 4" ];
         }
         {
           check-further-callbacks = false;
           "if" = {
             app-id = "com.tinyspeck.slackmacgap";
           };
-          run = [
-            "move-node-to-workspace 5"
-          ];
+          run = [ "move-node-to-workspace 5" ];
         }
         {
           check-further-callbacks = false;
           "if" = {
             app-id = "com.apple.mail";
           };
-          run = [
-            "move-node-to-workspace 5"
-          ];
+          run = [ "move-node-to-workspace 5" ];
         }
         {
           check-further-callbacks = false;
           "if" = {
             app-id = "com.apple.Music";
           };
-          run = [
-            "move-node-to-workspace 6"
-          ];
+          run = [ "move-node-to-workspace 6" ];
         }
         {
           check-further-callbacks = false;
           "if" = {
             app-id = "md.obsidian";
           };
-          run = [
-            "move-node-to-workspace 7"
-          ];
+          run = [ "move-node-to-workspace 7" ];
         }
       ];
     };

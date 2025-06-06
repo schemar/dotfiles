@@ -41,28 +41,24 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  imports =
-    [
-      ../../configs/bash
-      ../../configs/bat
-      ../../configs/bottom
-      ../../configs/fd
-      ../../configs/fzf
-      ../../configs/gh
-      ../../configs/git
-      ../../configs/jq
-      ../../configs/mise
-      ../../configs/neovim
-      ../../configs/ripgrep
-      ../../configs/starship
-      ../../configs/ssh
-      ../../configs/tealdeer
-      ../../configs/theme
-      ../../configs/tmux
-      ../../configs/wezterm
-      ../../configs/zsh
-    ]
-    ++ lib.optionals isDarwin [
-      ../../configs/aerospace
-    ];
+  imports = [
+    ../../configs/bash
+    ../../configs/bat
+    ../../configs/bottom
+    ../../configs/fd
+    ../../configs/fzf
+    ../../configs/gh
+    ../../configs/git
+    ../../configs/jq
+    ../../configs/mise
+    ../../configs/neovim
+    ../../configs/ripgrep
+    ../../configs/starship
+    ../../configs/ssh
+    ../../configs/tealdeer
+    ../../configs/theme
+    ../../configs/tmux
+    ../../configs/wezterm
+    ../../configs/zsh
+  ] ++ lib.optionals isDarwin [ ../../configs/aerospace ];
 }
