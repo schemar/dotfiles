@@ -1588,6 +1588,14 @@
               # Format only with stylelint and prettier.
               exclude = [ "html" ];
             };
+            sh = {
+              order = [ "bashls" ];
+              sync = true;
+            };
+            zsh = {
+              order = [ "bashls" ];
+              sync = true;
+            };
           };
         };
         todo-comments = {
@@ -1869,6 +1877,7 @@
 
       lsp = {
         servers = {
+          bashls.enable = true;
           cssls.enable = true;
           eslint.enable = true;
           lua_ls.enable = true;
