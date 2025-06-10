@@ -18,6 +18,8 @@
       defaultEditor = true;
       vimdiffAlias = true;
 
+      nixpkgs.config.allowUnfree = true;
+
       globals = {
         mapleader = " ";
         maplocalleader = "\\";
@@ -168,6 +170,9 @@
                     fidget = true,
                     flash = true,
                     gitsigns = true,
+                    indent_blankline = {
+                      enabled = true,
+                    },
                     lsp_trouble = true,
                     markdown = true,
                     mason = true,
@@ -598,6 +603,15 @@
 
       plugins = {
         web-devicons.enable = true;
+        indent-blankline = {
+          enable = true;
+
+          settings = {
+            indent = {
+              char = "┃";
+            };
+          };
+        };
         tmux-navigator = {
           enable = true;
 
@@ -1496,6 +1510,7 @@
             incremental = true;
           };
         };
+        copilot-vim.enable = true;
         lspconfig.enable = true;
         none-ls = {
           enable = true;
