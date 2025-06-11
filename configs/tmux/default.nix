@@ -6,6 +6,8 @@
     shell = "${pkgs.zsh}/bin/zsh";
     terminal = "xterm-256color";
 
+    focusEvents = true;
+
     escapeTime = 0;
     historyLimit = 10000;
 
