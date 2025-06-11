@@ -52,12 +52,12 @@
             ./hosts/Schencks-MacBook-Air
           ];
         };
-        "MacBook-Pro-0083" = nix-darwin.lib.darwinSystem {
+        "Afilio-0083" = nix-darwin.lib.darwinSystem {
           specialArgs = { inherit inputs; };
           modules = [
             configuration
             home-manager.darwinModules.home-manager
-            ./hosts/MacBook-Pro-0083
+            ./hosts/Afilio-0083
           ];
         };
       };
