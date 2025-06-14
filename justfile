@@ -22,7 +22,7 @@ nix-flake-update:
 
 nix-upgrade: nix-flake-update nix-switch
 
-upgrade: nix-upgrade brew-upgrade
+upgrade: brew-upgrade nix-upgrade
 
 theme-dark:
   osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
