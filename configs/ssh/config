@@ -1,8 +1,12 @@
+# Configured by Afilio Management
+Ciphers aes192-ctr,aes256-ctr,aes128-ctr
+MACs hmac-sha1,hmac-sha2-256,hmac-sha2-512
+
 Host github.com
   AddKeysToAgent yes
   IdentityFile ~/.ssh/id_ed25519
 
 Host homeassistant.local
-    User root
-    IdentityFile ~/.ssh/id_home_assistant
-    IdentitiesOnly yes
+  User root
+  IdentityFile ~/.ssh/id_home_assistant
+  IdentitiesOnly yes
