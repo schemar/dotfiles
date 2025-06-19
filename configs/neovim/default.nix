@@ -1554,6 +1554,14 @@
         lsp-format = {
           enable = true;
 
+          lspServersToEnable = [
+            "bashls"
+            "cssls"
+            "eslint"
+            "jsonls"
+            "null-ls"
+          ];
+
           settings = {
             html = {
               order = [ "null-ls" ];
