@@ -170,6 +170,10 @@
                     fidget = true,
                     flash = true,
                     gitsigns = true,
+                    illuminate = {
+                      enabled = true,
+                      lsp = true,
+                    },
                     indent_blankline = {
                       enabled = true,
                     },
@@ -610,7 +614,17 @@
             indent = {
               char = "┃";
             };
+            scope = {
+              show_start = false;
+              show_end = false;
+            };
           };
+        };
+        illuminate = {
+          enable = true;
+        };
+        marks = {
+          enable = true;
         };
         tmux-navigator = {
           enable = true;
@@ -621,6 +635,10 @@
         };
         which-key = {
           enable = true;
+
+          settings = {
+            delay = 300;
+          };
 
           luaConfig.post = # lua
             ''
@@ -1551,6 +1569,7 @@
             };
           };
         };
+        schemastore.enable = true;
         lsp-format = {
           enable = true;
 
@@ -1559,6 +1578,7 @@
             "cssls"
             "eslint"
             "jsonls"
+            "yamlls"
             "null-ls"
           ];
 
@@ -1590,6 +1610,13 @@
             json = {
               order = [
                 "jsonls"
+                "null-ls"
+              ];
+              sync = true;
+            };
+            yamlls = {
+              order = [
+                "yamlls"
                 "null-ls"
               ];
               sync = true;
@@ -1911,6 +1938,7 @@
           };
 
           jsonls.enable = true;
+          yamlls.enable = true;
         };
       };
     };
