@@ -1566,6 +1566,9 @@
                   extra_filetypes = [ "vue" ];
                 };
               };
+              stylua = {
+                enable = true;
+              };
             };
           };
         };
@@ -1619,6 +1622,10 @@
                 "yamlls"
                 "null-ls"
               ];
+              sync = true;
+            };
+            lua = {
+              order = [ "null-ls" ];
               sync = true;
             };
             nix = {
