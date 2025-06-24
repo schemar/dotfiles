@@ -2,11 +2,11 @@
   "nodes": {
     "blueberry-peach": {
       "locked": {
-        "lastModified": 1750705904,
-        "narHash": "sha256-r+joQ0BBsk4pZWHEbvz4gwdw2RML6byILP0dJ30rUkg=",
+        "lastModified": 1750753298,
+        "narHash": "sha256-lNL/TtE+YUHQpgQB7zNHnUYQC6kIH/Xle3wfpsxNPSg=",
         "owner": "schemar",
         "repo": "blueberry-peach",
-        "rev": "80ac1447e271b23f78a7090fae7be1e8917b6802",
+        "rev": "910a36cc432f6f1501fcfab8361eac51714aa756",
         "type": "github"
       },
       "original": {
@@ -126,11 +126,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1750400657,
-        "narHash": "sha256-3vkjFnxCOP6vm5Pm13wC/Zy6/VYgei/I/2DWgW4RFeA=",
+        "lastModified": 1750622754,
+        "narHash": "sha256-kMhs+YzV4vPGfuTpD3mwzibWUE6jotw5Al2wczI0Pv8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b2485d56967598da068b5a6946dadda8bfcbcd37",
+        "rev": "c7ab75210cb8cb16ddd8f290755d9558edde7ee1",
         "type": "github"
       },
       "original": {
