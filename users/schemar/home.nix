@@ -50,6 +50,7 @@
     ../../configs/gh
     ../../configs/git
     ../../configs/jq
+    ../../configs/jujutsu
     ../../configs/mise
     ../../configs/neovim
     ../../configs/ripgrep
