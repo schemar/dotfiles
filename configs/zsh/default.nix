@@ -45,19 +45,28 @@
       ''
         ${builtins.readFile ./.zshrc}
 
-        ## FZF Themeing
-        if [[ "$THEME_MODE" == "light" ]]; then
-          source "${inputs.blueberry-peach}/ports/fzf/blueberry_peach_light-fzf-colors.sh"
-        else
-          source "${inputs.blueberry-peach}/ports/fzf/blueberry_peach_dark-fzf-colors.sh"
-        fi
 
-        # Themed syntax highlighting.
-        if [[ "$THEME_MODE" == "light" ]]; then
-          source "${inputs.blueberry-peach}/ports/zsh_syntax_highlighting/blueberry_peach_light-syntax-highlighting.sh"
-        else
-          source "${inputs.blueberry-peach}/ports/zsh_syntax_highlighting/blueberry_peach_dark-syntax-highlighting.sh"
-        fi
+        function update_theme() {
+          export THEME_MODE=$(~/.config/current_theme)
+          ## FZF Themeing
+          if [[ "$THEME_MODE" == "light" ]]; then
+            source "${inputs.blueberry-peach}/ports/fzf/blueberry_peach_light-fzf-colors.sh"
+          else
+            source "${inputs.blueberry-peach}/ports/fzf/blueberry_peach_dark-fzf-colors.sh"
+          fi
+
+          # Themed syntax highlighting.
+          if [[ "$THEME_MODE" == "light" ]]; then
+            source "${inputs.blueberry-peach}/ports/zsh_syntax_highlighting/blueberry_peach_light-syntax-highlighting.sh"
+          else
+            source "${inputs.blueberry-peach}/ports/zsh_syntax_highlighting/blueberry_peach_dark-syntax-highlighting.sh"
+          fi
+        }
+
+        update_theme
+        # Auto update on signal, but only if running interactively.
+        # Trigger with `pkill -USR1 zsh` or `pkill -USR1 -u "$(whoami)" zsh`
+        trap '[[ $- == *i* ]] && update_theme' USR1
       '';
   };
 
