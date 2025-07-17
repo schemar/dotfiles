@@ -21,6 +21,8 @@
     tree-sitter
     sqlite
 
+    gdtoolkit_4
+
     nixfmt-rfc-style
 
     lua
