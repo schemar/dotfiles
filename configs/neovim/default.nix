@@ -1541,8 +1541,14 @@
                   extra_filetypes = [ "vue" ];
                 };
               };
+              gdlint = {
+                enable = true;
+              };
             };
             formatting = {
+              gdformat = {
+                enable = true;
+              };
               nixfmt = {
                 enable = true;
 
@@ -1929,6 +1935,7 @@
           bashls.enable = true;
           cssls.enable = true;
           eslint.enable = true;
+          gdscript.enable = true;
           lua_ls.enable = true;
           nixd.enable = true;
           vtsls.enable = true;
