@@ -13,6 +13,8 @@
       "withgraphite/tap"
     ];
     brews = [
+      "earthly"
+      "podman"
       "pulumi/tap/pulumi"
       "withgraphite/tap/graphite"
     ];
