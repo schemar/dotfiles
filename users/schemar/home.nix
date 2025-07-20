@@ -62,6 +62,7 @@
     ../../configs/theme
     ../../configs/tmux
     ../../configs/wezterm
+    ../../configs/yazi
     ../../configs/zsh
   ] ++ lib.optionals isDarwin [ ../../configs/aerospace ];
 }
