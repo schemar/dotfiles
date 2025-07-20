@@ -906,14 +906,24 @@
                       group = "Files",
                       {
                         {
-                          "<leader>fe",
+                          "<leader>Fe",
                           "<cmd>NvimTreeToggle<cr>",
                           desc = "Explorer",
                         },
                         {
-                          "<leader>fE",
+                          "<leader>FE",
                           "<cmd>NvimTreeFindFile<cr>",
                           desc = "Explorer (curr. dir.)",
+                        },
+                        {
+                          "<leader>fe",
+                          "<cmd>Yazi<cr>",
+                          desc = "Explorer (ccurr. file)",
+                        },
+                        {
+                          "<leader>fE",
+                          "<cmd>Yazi cwd<cr>",
+                          desc = "Explorer (root)",
                         },
                         {
                           "<leader>ff",
@@ -1174,6 +1184,9 @@
                 },
               })
             '';
+        };
+        yazi = {
+          enable = true;
         };
         nvim-tree = {
           enable = true;
