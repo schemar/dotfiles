@@ -28,6 +28,22 @@ Requirements:
 
 Install initially with:
 
+Generate an SSH keypair and upload the public key to GitHub (auth and signing):
+
+```sh
+# Use the default keyname (~/.ssh/id_ed25519) as it is used by the git config:
+ssh-keygen -t ed25519 -C "martinschenck@fastmail.com"
+```
+
+Clone this repo (on a machine without git)
+
+```sh
+nix-shell -p git
+git clone ...
+```
+
+Initial installation
+
 ```sh
 # Errors will guide you on what to fix:
 nix --extra-experimental-features "nix-command flakes" run nix-darwin/master#darwin-rebuild -- switch --flake .
@@ -43,13 +59,6 @@ Apply config:
 
 ```sh
 darwin-rebuild switch --flake .
-```
-
-Generate an SSH keypair and upload the public key to GitHub (auth and signing):
-
-```sh
-# Use the default keyname (~/.ssh/id_ed25519) as it is used by the git config:
-ssh-keygen -t ed25519 -C "martinschenck@fastmail.com"
 ```
 
 Remaining steps:
