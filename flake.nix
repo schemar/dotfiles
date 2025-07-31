@@ -37,7 +37,6 @@
 
           # Used for backwards compatibility, please read the changelog before changing.
           # $ darwin-rebuild changelog
-          system.stateVersion = 5;
         };
     in
     {
@@ -47,6 +46,7 @@
         "Schencks-MacBook-Air" = nix-darwin.lib.darwinSystem {
           specialArgs = { inherit inputs; };
           modules = [
+            { system.stateVersion = 5; }
             configuration
             home-manager.darwinModules.home-manager
             ./hosts/Schencks-MacBook-Air
@@ -55,9 +55,20 @@
         "Afilio-0083" = nix-darwin.lib.darwinSystem {
           specialArgs = { inherit inputs; };
           modules = [
+            { system.stateVersion = 5; }
             configuration
             home-manager.darwinModules.home-manager
             ./hosts/Afilio-0083
+          ];
+        };
+      };
+      nixosConfigurations = {
+        "klabautermann" = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            configuration
+            home-manager.nixosModules.home-manager
+            ./hosts/klabautermann
           ];
         };
       };
