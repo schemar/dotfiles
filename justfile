@@ -1,3 +1,5 @@
+rebuild := if os() == 'linux' { 'nixos-rebuild' } else { 'darwin-rebuild' } 
+
 default: help
 
 # List available recipes
@@ -12,7 +14,7 @@ brew-upgrade:
 
 # Configure the system with this flake
 nix-switch:
-  sudo darwin-rebuild switch --flake .
+  sudo {{rebuild}} switch --flake .
 
 nix-clean:
   nix-collect-garbage -d
