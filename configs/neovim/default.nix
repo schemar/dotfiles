@@ -1562,6 +1562,9 @@
               gdformat = {
                 enable = true;
               };
+              just = {
+                enable = true;
+              };
               nixfmt = {
                 enable = true;
 
@@ -1949,6 +1952,7 @@
           cssls.enable = true;
           eslint.enable = true;
           gdscript.enable = true;
+          just.enable = true;
           lua_ls.enable = true;
           nixd.enable = true;
           vtsls.enable = true;
