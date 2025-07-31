@@ -122,4 +122,5 @@ tmux_set_git() {
   fi
 }
 
+autoload -Uz add-zsh-hook
 add-zsh-hook precmd tmux_set_git
