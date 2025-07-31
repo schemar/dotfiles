@@ -8,7 +8,7 @@
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "schemar";
-  home.homeDirectory = if isDarwin then /Users/schemar else /home/schemar;
+  home.homeDirectory = if isDarwin then /Users/schemar else "/home/schemar";
 
   # List packages installed in user profile. To search by name, run:
   # $ nix-env -qaP | grep wget
