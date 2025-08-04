@@ -15,6 +15,10 @@
     };
     dhcpcd.enable = false;
     usePredictableInterfaceNames = lib.mkForce false;
+    firewall.allowedTCPPorts = [
+      80
+      443
+    ];
     interfaces = {
       eth0 = {
         ipv4.addresses = [

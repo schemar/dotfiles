@@ -46,6 +46,26 @@
     ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK/4l6M0rsHmCuYHkUxuk42+gKN/tySO9CRLp0NOUjuH''
   ];
 
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "martinschenck@fastmail.com";
+  };
+
+  services.nginx = {
+    enable = true;
+    virtualHosts."klabautermann.schemar.net" = {
+      enableACME = true;
+      forceSSL = true;
+
+      locations."/" = {
+        return = "200 '<html><body><h1>Klabautermann</h1><p>https://klabautermann.schemar.net/</p></body></html>'";
+        extraConfig = ''
+          default_type text/html;
+        '';
+      };
+    };
+  };
+
   imports = [
     ./configuration.nix
     ../common.nix
