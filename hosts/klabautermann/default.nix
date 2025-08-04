@@ -58,7 +58,17 @@
       forceSSL = true;
 
       locations."/" = {
-        return = "200 '<html><body><h1>Klabautermann</h1><p>https://klabautermann.schemar.net/</p></body></html>'";
+        return = # html
+          ''
+            200 '<html style="background-color: black;">
+              <body>
+                <div style="color: grey; max-width: 800px; margin: 0 auto;">
+                  <h1>Klabautermann</h1>
+                  <p>https://klabautermann.schemar.net/</p>
+                </div>
+              </body>
+            </html>'
+          '';
         extraConfig = ''
           default_type text/html;
         '';
