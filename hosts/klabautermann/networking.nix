@@ -6,7 +6,7 @@
     nameservers = [
       "2a01:4ff:ff00::add:2"
       "2a01:4ff:ff00::add:1"
-      "185.12.64.1"
+      "185.12.64.2"
     ];
     defaultGateway = "172.31.1.1";
     defaultGateway6 = {
@@ -33,7 +33,7 @@
             prefixLength = 64;
           }
           {
-            address = "fe80::9000:6ff:fe4c:fa2d";
+            address = "fe80::9000:6ff:fe51:274d";
             prefixLength = 64;
           }
         ];
@@ -54,7 +54,7 @@
     };
   };
   services.udev.extraRules = ''
-    ATTR{address}=="92:00:06:4c:fa:2d", NAME="eth0"
+    ATTR{address}=="92:00:06:51:27:4d", NAME="eth0"
 
   '';
 }
