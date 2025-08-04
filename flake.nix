@@ -26,15 +26,10 @@
       blueberry-peach,
     }:
     let
-      configuration =
-        { pkgs, ... }:
-        {
-          # Necessary for using flakes on this system.
-          nix.settings.experimental-features = "nix-command flakes";
-
-          # Set Git commit hash for darwin-version.
-          system.configurationRevision = self.rev or self.dirtyRev or null;
-        };
+      darwin = {
+        # Set Git commit hash for darwin-version.
+        system.configurationRevision = self.rev or self.dirtyRev or null;
+      };
     in
     {
       # Build darwin flake using:
@@ -43,12 +38,7 @@
         "Schencks-MacBook-Air" = nix-darwin.lib.darwinSystem {
           specialArgs = { inherit inputs; };
           modules = [
-            {
-              # Used for backwards compatibility, please read the changelog before changing.
-              # $ darwin-rebuild changelog
-              system.stateVersion = 5;
-            }
-            configuration
+            darwin
             home-manager.darwinModules.home-manager
             ./hosts/Schencks-MacBook-Air
           ];
@@ -56,12 +46,7 @@
         "Afilio-0083" = nix-darwin.lib.darwinSystem {
           specialArgs = { inherit inputs; };
           modules = [
-            {
-              # Used for backwards compatibility, please read the changelog before changing.
-              # $ darwin-rebuild changelog
-              system.stateVersion = 5;
-            }
-            configuration
+            darwin
             home-manager.darwinModules.home-manager
             ./hosts/Afilio-0083
           ];
@@ -71,7 +56,6 @@
         "klabautermann" = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
-            configuration
             home-manager.nixosModules.home-manager
             ./hosts/klabautermann
           ];
