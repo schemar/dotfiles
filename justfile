@@ -30,7 +30,8 @@ theme-dark:
     #!/usr/bin/env bash
     if [ "{{ os() }}" = "macos" ]; then
       osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
-      # Slack: #24273A,#C6A0F6,#C6A0F6,#91D7E3
+      printf "#191724,#A19DD4,#A19DD4,#5EB1AF" | pbcopy
+      echo "Copied slack colors to clipboard"
     fi
 
     printf "dark" > ~/.config/current_theme_store
@@ -42,7 +43,8 @@ theme-light:
     #!/usr/bin/env bash
     if [ "{{ os() }}" = "macos" ]; then
       osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to false'
-      # Slack: #FAF4ED,#6A67B4,#6A67B4,#007E7D
+      printf "#FAF4ED,#6A67B4,#6A67B4,#007E7D" | pbcopy
+      echo "Copied slack colors to clipboard"
     fi
 
     printf "light" > ~/.config/current_theme_store
