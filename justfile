@@ -27,17 +27,25 @@ nix-upgrade: nix-flake-update nix-switch
 upgrade: brew-upgrade nix-upgrade
 
 theme-dark:
-    osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
+    #!/usr/bin/env bash
+    if [ "{{ os() }}" = "macos" ]; then
+      osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
+      # Slack: #24273A,#C6A0F6,#C6A0F6,#91D7E3
+    fi
+
     printf "dark" > ~/.config/current_theme_store
     /etc/profiles/per-user/$USER/bin/tmux source-file ~/.config/tmux/tmux.conf
     # See trap in ZSH config:
     pkill -USR1 zsh
-    # Slack: #24273A,#C6A0F6,#C6A0F6,#91D7E3
 
 theme-light:
-    osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to false'
+    #!/usr/bin/env bash
+    if [ "{{ os() }}" = "macos" ]; then
+      osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to false'
+      # Slack: #FAF4ED,#6A67B4,#6A67B4,#007E7D
+    fi
+
     printf "light" > ~/.config/current_theme_store
     /etc/profiles/per-user/$USER/bin/tmux source-file ~/.config/tmux/tmux.conf
     # See trap in ZSH config:
     pkill -USR1 zsh
-    # Slack: #FAF4ED,#6A67B4,#6A67B4,#007E7D
