@@ -134,6 +134,13 @@
         {
           check-further-callbacks = false;
           "if" = {
+            app-id = "com.vivaldi.Vivaldi";
+          };
+          run = [ "move-node-to-workspace 2" ];
+        }
+        {
+          check-further-callbacks = false;
+          "if" = {
             app-id = "com.apple.Notes";
           };
           run = [ "move-node-to-workspace 4" ];
