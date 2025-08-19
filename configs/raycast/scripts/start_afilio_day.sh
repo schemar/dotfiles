@@ -32,3 +32,8 @@ open https://console.cloud.google.com/
 /etc/profiles/per-user/$USER/bin/tmux send-keys -t dots:1.1 'just brew-upgrade' C-m
 
 echo "All started. Logging into gcloud."
+
+# Move Todoist to the correct space (wait for Todoist to open):
+sleep 5
+todist_id="$(/etc/profiles/per-user/$USER/bin/aerospace list-windows --all --format "%{window-id}|%{app-name}" | /etc/profiles/per-user/$USER/bin/rg "Todoist" | cut -d"|" -f1)"
+/etc/profiles/per-user/$USER/bin/aerospace move-node-to-workspace --window-id "$todist_id" 3
