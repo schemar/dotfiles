@@ -14,6 +14,7 @@
       "withgraphite/tap"
     ];
     brews = [
+      "codex"
       "earthly"
       "podman"
       "pulumi/tap/pulumi"
