@@ -14,8 +14,14 @@
 # @raycast.icon ☀️
 # @raycast.packageName Afilio
 
-# Use the setup layout which starts all apps.
-open -g "raycast://customWindowManagementCommand?&name=Start Afilio Day"
+# Open all applications:
+open /Applications/WezTerm.app
+open /Applications/Vivaldi.app
+open /Applications/Todoist.app
+open /Applications/Notion.app
+open /Applications/Slack.app
+open /System/Applications/Music.app
+open /Applications/Obsidian.app
 
 # Log into all the things "security key":
 open https://console.cloud.google.com/
