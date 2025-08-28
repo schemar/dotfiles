@@ -1062,7 +1062,6 @@
           };
         };
         copilot-vim.enable = true;
-        lspconfig.enable = true;
         none-ls = {
           enable = true;
 

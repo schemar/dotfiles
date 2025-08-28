@@ -27,5 +27,9 @@
         yamlls.enable = true;
       };
     };
+    plugins = {
+      lsp.enable = true;
+      # lspconfig.enable = true;
+    };
   };
 }
