@@ -1054,6 +1054,9 @@
               }
             '';
         };
+        codecompanion = {
+          enable = true;
+        };
         nvim-surround.enable = true;
         nvim-autopairs.enable = true;
         flash = {
