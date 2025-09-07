@@ -5,6 +5,12 @@
       servers = {
         bashls.enable = true;
         cssls.enable = true;
+        elixirls = {
+          enable = true;
+          settings = {
+            cmd = [ "elixir-ls" ];
+          };
+        };
         eslint.enable = true;
         gdscript.enable = true;
         just.enable = true;

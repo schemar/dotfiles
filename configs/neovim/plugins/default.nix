@@ -1072,6 +1072,9 @@
 
           sources = {
             diagnostics = {
+              credo = {
+                enable = true;
+              };
               stylelint = {
                 enable = true;
                 settings = {
@@ -1125,6 +1128,7 @@
           lspServersToEnable = [
             "bashls"
             "cssls"
+            "elixirls"
             "eslint"
             "jsonls"
             "yamlls"
@@ -1132,6 +1136,10 @@
           ];
 
           settings = {
+            elixir = {
+              order = [ "elixirls" ];
+              sync = true;
+            };
             html = {
               order = [ "null-ls" ];
               sync = true;
