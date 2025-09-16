@@ -16,6 +16,15 @@
       cleanup = "zap";
     };
 
+    taps = [
+      "qmk/qmk"
+      "osx-cross/avr" # required by qmk/qmk/qmk
+    ];
+
+    brews = [
+      "qmk/qmk/qmk"
+    ];
+
     casks = [
       "gimp"
       "raycast"
