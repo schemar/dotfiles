@@ -695,11 +695,6 @@
                         },
                       },
                     },
-                    {
-                      "<leader>u",
-                      "<cmd>Telescope undo<cr>",
-                      desc = "Undo tree",
-                    },
                   },
                 },
               })
@@ -839,6 +834,7 @@
                   mappings = {
                     i = {
                       ["<c-e>"] = actions.close,
+                      ["<c-y>"] = actions.select_default,
                       ["<c-j>"] = actions.move_selection_next,
                       ["<c-k>"] = actions.move_selection_previous,
                       ["<c-t>"] = open_with_trouble,
