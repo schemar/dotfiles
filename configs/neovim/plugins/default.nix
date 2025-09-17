@@ -842,6 +842,7 @@
                     n = {
                       ["<c-e>"] = actions.close,
                       ["<c-t>"] = open_with_trouble,
+                      ["o"] = actions.select_default,
                       ["q"] = actions.close,
                     },
                   },
