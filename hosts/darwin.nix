@@ -18,6 +18,7 @@
 
     taps = [
       "qmk/qmk"
+      "osx-cross/arm" # required by qmk/qmk/qmk
       "osx-cross/avr" # required by qmk/qmk/qmk
     ];
 
