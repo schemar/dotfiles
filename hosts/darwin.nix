@@ -111,4 +111,6 @@
 
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
+
+  system.defaults.universalaccess.mouseDriverCursorSize = 4.0;
 }
