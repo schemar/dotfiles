@@ -14,6 +14,7 @@
         eslint.enable = true;
         gdscript.enable = true;
         just.enable = true;
+        lemminx.enable = true;
         lua_ls.enable = true;
         nixd.enable = true;
         vtsls.enable = true;

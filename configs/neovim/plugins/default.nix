@@ -1128,6 +1128,7 @@
             "elixirls"
             "eslint"
             "jsonls"
+            "lemminx"
             "yamlls"
             "null-ls"
           ];
@@ -1168,7 +1169,13 @@
               ];
               sync = true;
             };
-            yamlls = {
+            xml = {
+              order = [
+                "lemminx"
+              ];
+              sync = true;
+            };
+            yaml = {
               order = [
                 "yamlls"
                 "null-ls"
