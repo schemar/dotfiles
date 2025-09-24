@@ -45,10 +45,13 @@
               "source-file ${inputs.blueberry-peach}/ports/tmux/blueberry_peach_light.conf"
 
             set -g status-left '#[bg=#{?client_prefix,blue,default},fg=#{?client_prefix,black,default}]#S#[default] '
+
             # Make sure to do this before sourcing tmux-continuum.
             # See their "known-issues".
             # git branch; see file in dotfiles repo (tmux/config)
             set -g status-right '#(${./config/pane_branch.sh})'
+            # The branch name is often longer than the default length of 40.
+            set -g status-right-length 70
           '';
       }
       {
