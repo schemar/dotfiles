@@ -23,9 +23,6 @@
 
       src = "source ~/.zshrc";
 
-      # Required for gitui to work with git push via SSH:
-      gitui = "eval $(ssh-agent) && ssh-add ~/.ssh/id_rsa && gitui";
-
       fkill = "ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill";
 
       # Tmux usability aliases
