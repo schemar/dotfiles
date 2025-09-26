@@ -11,6 +11,9 @@
 
     shellAliases = {
       g = "git";
+      gtsync = "gt co main && gt sync && git switch -";
+      gtsubmit = "gt top && gt sync && gt submit && git switch -";
+
       y = "yarn";
 
       l = "lsd -al";
