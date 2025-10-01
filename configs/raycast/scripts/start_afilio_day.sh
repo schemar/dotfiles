@@ -20,7 +20,6 @@ open /Applications/Vivaldi.app
 open /Applications/Todoist.app
 open /Applications/Notion.app
 open /Applications/Slack.app
-open /System/Applications/Music.app
 open /Applications/Obsidian.app
 
 # Log into all the things "security key":
