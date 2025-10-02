@@ -52,7 +52,6 @@
     ../../configs/gh
     ../../configs/git
     ../../configs/jq
-    ../../configs/jujutsu
     ../../configs/mise
     ../../configs/neovim
     ../../configs/ripgrep
@@ -64,5 +63,6 @@
     ../../configs/wezterm
     ../../configs/yazi
     ../../configs/zsh
-  ] ++ lib.optionals isDarwin [ ../../configs/aerospace ];
+  ]
+  ++ lib.optionals isDarwin [ ../../configs/aerospace ];
 }
