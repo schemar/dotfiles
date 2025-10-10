@@ -1,10 +1,27 @@
-{ ... }:
+{ pkgs, ... }:
+let
+  gdk = pkgs.google-cloud-sdk.withExtraComponents (
+    with pkgs.google-cloud-sdk.components;
+    [
+      kubectl
+    ]
+  );
+in
 {
   imports = [
     ../common.nix
     ../darwin.nix
     ../../users/schemar/common.nix
     ../../users/schemar/darwin.nix
+  ];
+
+  environment.systemPackages = [
+    gdk
+    pkgs.temporal-cli
+
+    # For the firebase emulator:
+    pkgs.jdk
+    pkgs.cacert
   ];
 
   # Additional brew settings for this host only

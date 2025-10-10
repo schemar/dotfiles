@@ -7,11 +7,5 @@
     settings = {
       auto_install = true;
     };
-
-    globalConfig = {
-      tools = {
-        node = "24.6";
-      };
-    };
   };
 }
