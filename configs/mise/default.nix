@@ -10,7 +10,7 @@
 
     globalConfig = {
       tools = {
-        node = "22.18";
+        node = "24.6";
       };
     };
   };
