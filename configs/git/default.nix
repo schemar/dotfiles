@@ -3,46 +3,23 @@
   programs.git = {
     enable = true;
 
-    aliases = {
-      a = "add -A";
-      b = "branch";
-      bd = "branch -d";
-      c = "commit";
-      d = "diff";
-      ds = "diff --staged";
-      e = "restore";
-      h = "push";
-      l = "log --pretty=short --max-count=10";
-      n = "clean -fd src";
-      o = "switch";
-      p = "pull -p";
-      r = "rebase";
-      s = "status";
-    };
-
-    delta = {
-      # We use our own git pager setting to have dynamic theme support:
-      # (system package is enabled)
-      enable = false;
-      options = {
-        line-numbers = true;
+    settings = {
+      alias = {
+        a = "add -A";
+        b = "branch";
+        bd = "branch -d";
+        c = "commit";
+        d = "diff";
+        ds = "diff --staged";
+        e = "restore";
+        h = "push";
+        l = "log --pretty=short --max-count=10";
+        n = "clean -fd src";
+        o = "switch";
+        p = "pull -p";
+        r = "rebase";
+        s = "status";
       };
-    };
-
-    includes = [
-      {
-        path = ./gitprivate;
-        condition = "gitdir:*";
-      }
-      {
-        path = ./gitafilio;
-        condition = "gitdir:afilio*/";
-      }
-    ];
-
-    # Signing managed in extra config (ssh only supported by newer home-manager).
-
-    extraConfig = {
       branch = {
         sort = "-committerdate";
       };
@@ -118,6 +95,26 @@
       user = {
         signingkey = "~/.ssh/id_ed25519";
       };
+    };
+
+    includes = [
+      {
+        path = ./gitprivate;
+        condition = "gitdir:*";
+      }
+      {
+        path = ./gitafilio;
+        condition = "gitdir:afilio*/";
+      }
+    ];
+  };
+
+  programs.delta = {
+    # We use our own git pager setting to have dynamic theme support:
+    # (system package is enabled)
+    enable = false;
+    options = {
+      line-numbers = true;
     };
   };
 }

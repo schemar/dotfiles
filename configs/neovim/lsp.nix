@@ -7,7 +7,7 @@
         cssls.enable = true;
         elixirls = {
           enable = true;
-          settings = {
+          config = {
             cmd = [ "elixir-ls" ];
           };
         };
@@ -21,7 +21,7 @@
 
         html = {
           enable = true;
-          settings = {
+          config = {
             filetypes = [
               "html"
               "templ"

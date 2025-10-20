@@ -1233,7 +1233,7 @@
         ts-context-commentstring = {
           enable = true;
 
-          extraOptions = {
+          settings = {
             enable_autocmd = false;
           };
         };
@@ -1440,36 +1440,38 @@
         diffview = {
           enable = true;
 
-          defaultArgs = {
-            diffviewOpen = [ "--imply-local" ];
-          };
+          settings = {
+            default_args = {
+              diffview_open = [ "--imply-local" ];
+            };
 
-          keymaps = {
-            disableDefaults = false;
-            view = [
-              {
-                action = "<cmd>DiffviewClose<cr>";
-                description = "Close Diffview";
-                key = "q";
-                mode = "n";
-              }
-            ];
-            filePanel = [
-              {
-                action = "<cmd>DiffviewClose<cr>";
-                description = "Close Diffview";
-                key = "q";
-                mode = "n";
-              }
-            ];
-            fileHistoryPanel = [
-              {
-                action = "<cmd>DiffviewClose<cr>";
-                description = "Close Diffview";
-                key = "q";
-                mode = "n";
-              }
-            ];
+            keymaps = {
+              disable_defaults = false;
+              view = [
+                {
+                  action = "<cmd>DiffviewClose<cr>";
+                  description = "Close Diffview";
+                  key = "q";
+                  mode = "n";
+                }
+              ];
+              file_panel = [
+                {
+                  action = "<cmd>DiffviewClose<cr>";
+                  description = "Close Diffview";
+                  key = "q";
+                  mode = "n";
+                }
+              ];
+              file_history_panel = [
+                {
+                  action = "<cmd>DiffviewClose<cr>";
+                  description = "Close Diffview";
+                  key = "q";
+                  mode = "n";
+                }
+              ];
+            };
           };
         };
         toggleterm = {
