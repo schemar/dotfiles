@@ -27,6 +27,7 @@
     ];
 
     casks = [
+      "anki"
       "gimp"
       "raycast"
       "wezterm"
