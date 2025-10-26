@@ -69,6 +69,14 @@
 
   system.defaults.controlcenter.BatteryShowPercentage = true;
 
+  # Which icons to display in the  menu bar:
+  # (assuming `null` means "auto")
+  system.defaults.controlcenter.Bluetooth = true;
+  system.defaults.controlcenter.Display = true;
+  system.defaults.controlcenter.FocusModes = true;
+  system.defaults.controlcenter.NowPlaying = null;
+  system.defaults.controlcenter.Sound = true;
+
   system.defaults.dock.autohide = true;
   system.defaults.dock.autohide-delay = 0.0;
   system.defaults.dock.autohide-time-modifier = 0.1;
