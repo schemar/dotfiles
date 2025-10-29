@@ -1089,6 +1089,9 @@
               just = {
                 enable = true;
               };
+              mix = {
+                enable = true;
+              };
               nixfmt = {
                 enable = true;
 
@@ -1135,7 +1138,10 @@
 
           settings = {
             elixir = {
-              order = [ "elixirls" ];
+              order = [
+                "elixir-ls"
+                "null-ls"
+              ];
               sync = true;
             };
             html = {
