@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
@@ -8,6 +8,8 @@
   environment.systemPackages = with pkgs; [
     coreutils-prefixed
     zsh
+
+    inputs.expert.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   # Use user-level ZSH provided by home-manager config:
