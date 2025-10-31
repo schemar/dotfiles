@@ -14,7 +14,6 @@
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     blueberry-peach.url = "github:schemar/blueberry-peach";
-    expert.url = "github:elixir-lang/expert";
   };
 
   outputs =
@@ -25,7 +24,6 @@
       home-manager,
       nixvim,
       blueberry-peach,
-      expert,
     }:
     let
       darwin = {
