@@ -3,6 +3,8 @@ theme = dark:blueberry_peach_dark,light:blueberry_peach_light
 font-family = Monaspace Neon
 font-family = Symbols Nerd Font Mono
 
+font-size = 13
+
 font-feature = "calt=1"
 font-feature = "dlig=1"
 font-feature = "cv01=2"
@@ -24,3 +26,5 @@ window-decoration = none
 
 window-padding-x = 0
 window-padding-y = 0
+
+macos-option-as-alt = true
