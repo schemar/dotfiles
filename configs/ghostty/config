@@ -21,10 +21,11 @@ font-feature = "ss10=1"
 
 confirm-close-surface = false
 
-window-padding-balance = true
 window-decoration = none
 
-window-padding-x = 0
-window-padding-y = 0
+window-padding-balance = true
+window-padding-x = 3
+window-padding-y = 1
+window-padding-color = extend
 
 macos-option-as-alt = true
