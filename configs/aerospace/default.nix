@@ -11,7 +11,7 @@
         inner.vertical = 7;
         outer.left = 7;
         outer.bottom = 7;
-        outer.top = 7;
+        outer.top = 0;
         outer.right = 7;
       };
 
