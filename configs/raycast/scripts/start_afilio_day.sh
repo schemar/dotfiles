@@ -15,7 +15,7 @@
 # @raycast.packageName Afilio
 
 # Open all applications:
-open /Applications/WezTerm.app
+open /Applications/Ghostty.app
 open /Applications/Vivaldi.app
 open /Applications/Todoist.app
 open /Applications/Notion.app

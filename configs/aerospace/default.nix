@@ -102,6 +102,7 @@
       };
 
       # Cannot auto-move Todoist as we cannot differentiate between the main app window and the quick entry pop-up.
+      # Find the app IDs with `aerospace list-apps`
       on-window-detected = [
         {
           check-further-callbacks = true;
@@ -109,6 +110,13 @@
             app-id = "com.apple.systempreferences";
           };
           run = [ "layout floating" ];
+        }
+        {
+          check-further-callbacks = false;
+          "if" = {
+            app-id = "com.mitchellh.ghostty";
+          };
+          run = [ "move-node-to-workspace 1" ];
         }
         {
           check-further-callbacks = false;

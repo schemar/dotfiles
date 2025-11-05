@@ -50,6 +50,7 @@
     ../../configs/fd
     ../../configs/fzf
     ../../configs/gh
+    ../../configs/ghostty
     ../../configs/git
     ../../configs/jq
     ../../configs/mise

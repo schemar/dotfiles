@@ -28,6 +28,7 @@
 
     casks = [
       "anki"
+      "ghostty"
       "gimp"
       "raycast"
       "wezterm"
