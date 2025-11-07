@@ -19,6 +19,7 @@ font-feature = "ss08=1"
 font-feature = "ss09=1"
 font-feature = "ss10=1"
 
+quit-after-last-window-closed
 confirm-close-surface = false
 
 window-decoration = none
