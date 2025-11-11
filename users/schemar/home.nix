@@ -53,6 +53,7 @@
     ../../configs/ghostty
     ../../configs/git
     ../../configs/jq
+    ../../configs/lazygit
     ../../configs/mise
     ../../configs/neovim
     ../../configs/ripgrep
