@@ -87,6 +87,7 @@ The following programs use the theme store or its accompanying script to change 
 - `bat`: There is a zsh-alias configured in `./configs/zsh/` which selects the theme.
 - `delta`: There are both themes configured in `./configs/git/`. `git`'s pager is set tot a script which selects the theme.
 - `fzf`: The zsh-configuration sources the fzf-theme based on the store value.
+- `lazygit`: There is a zsh-alias configured in `./configs/zsh/` which selects the theme.
 - `nvim`: `plugins/theme.lua` loads the theme from the store.
 - `tmux`: `./configs/tmux/` sources the theme based on an `if-shell` in its config.
 - `wezterm`: `./configs/wezterm/` loads the theme from the store.

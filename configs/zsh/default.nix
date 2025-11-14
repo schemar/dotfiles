@@ -39,6 +39,10 @@
 
       # Themeing for bat
       bat = "bat --theme=blueberry_peach_$(~/.config/current_theme)";
+
+      # Themeing for lazygit
+      # Use \lazygit to prevent recursive aliasing
+      lazygit = "lazygit --use-config-file=\"$(\\lazygit --print-config-dir)/config.yml,$HOME/.config/lazygit/blueberry_peach_$(~/.config/current_theme).yml\"";
     };
 
     initContent = # sh
