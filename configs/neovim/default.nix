@@ -4,7 +4,7 @@
     inputs.nixvim.homeModules.nixvim
     ./lua.nix
     ./theme.nix
-    ./lsp.nix
+    ./languages
     ./plugins
   ];
 
