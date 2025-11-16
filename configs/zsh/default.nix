@@ -43,6 +43,7 @@
       # Themeing for lazygit
       # Use \lazygit to prevent recursive aliasing
       lazygit = "lazygit --use-config-file=\"$(\\lazygit --print-config-dir)/config.yml,$HOME/.config/lazygit/blueberry_peach_$(~/.config/current_theme).yml\"";
+      lg = "lazygit";
     };
 
     initContent = # sh
