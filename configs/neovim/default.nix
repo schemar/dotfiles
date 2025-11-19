@@ -44,6 +44,7 @@
         updatetime = 1000; # num: Timeout for "cursor hold" event
         clipboard = "unnamedplus"; # str: Clipboard integration with macOS
         splitkeep = "cursor"; # The default "screen" moves the cursor wrongly, which leads to problems, e.g. with Trouble
+        wrap = false; # bool: Disable line wrapping
 
         # [[ Context ]]
         colorcolumn = "80"; # str: Show col for max line length
