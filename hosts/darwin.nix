@@ -81,11 +81,11 @@
 
   system.defaults.dock.autohide = true;
   system.defaults.dock.autohide-delay = 0.0;
-  system.defaults.dock.autohide-time-modifier = 0.1;
+  system.defaults.dock.autohide-time-modifier = 0.2;
   system.defaults.dock.tilesize = 40;
-  system.defaults.dock.largesize = 56;
-  system.defaults.dock.magnification = true;
-  system.defaults.dock.orientation = "bottom";
+  system.defaults.dock.largesize = 40;
+  system.defaults.dock.magnification = false;
+  system.defaults.dock.orientation = "right";
   system.defaults.dock.show-recents = false;
   system.defaults.dock.showhidden = true;
   system.defaults.dock.mru-spaces = false;
