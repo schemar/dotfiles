@@ -1064,7 +1064,6 @@
           };
         };
         copilot-vim.enable = true;
-        schemastore.enable = true;
         todo-comments = {
           enable = true;
           settings = {
