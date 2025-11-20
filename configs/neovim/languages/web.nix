@@ -1,19 +1,15 @@
 { ... }:
 {
+  lspServerHtmlFiletypes = [
+    "html"
+    "templ"
+  ];
+
   programs.nixvim = {
     lsp = {
       servers = {
         cssls.enable = true;
         eslint.enable = true;
-        html = {
-          enable = true;
-          config = {
-            filetypes = [
-              "html"
-              "templ"
-            ];
-          };
-        };
       };
     };
     plugins = {

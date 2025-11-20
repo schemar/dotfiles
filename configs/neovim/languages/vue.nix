@@ -1,5 +1,9 @@
 { ... }:
 {
+  lspServerHtmlFiletypes = [
+    "vue"
+  ];
+
   programs.nixvim = {
     plugins = {
       none-ls = {
