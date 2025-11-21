@@ -491,6 +491,11 @@
                           end,
                           desc = "Neogit",
                         },
+                        {
+                          "<leader>gG",
+                          open_lazygit_tab, -- defined in ./lua.nix
+                          desc = "Lazygit",
+                        }, 
                         { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Branch history" },
                         {
                           "<leader>gt",

@@ -2,7 +2,11 @@
 {
   programs.lazygit = {
     enable = true;
+    enableZshIntegration = false;
     settings = {
+      os = {
+        editPreset = "nvim-remote";
+      };
       gui = {
         scrollHeight = 5;
         scrollOffMargin = 5;
