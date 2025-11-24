@@ -11,7 +11,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    # Removed due to error with lualine:
+    # nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     blueberry-peach.url = "github:schemar/blueberry-peach";
   };
