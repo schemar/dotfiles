@@ -493,7 +493,33 @@
                         },
                         {
                           "<leader>gG",
-                          open_lazygit_tab, -- defined in ./lua.nix
+                          -- Lazygit integration without extra plugins
+                          -- ========================================
+
+                          -- open lazygit in a new tab (terminal)
+                          -- and auto-close that tab when lazygit exits
+                          function()
+                            -- Open a fresh tab and remember its buffer
+                            vim.cmd('tabnew')
+                            local buf = vim.api.nvim_get_current_buf()
+
+                            -- Start lazygit inside a terminal
+                            vim.fn.termopen('lazygit --use-config-file="$(\\lazygit --print-config-dir)/config.yml,$HOME/.config/lazygit/blueberry_peach_$(~/.config/current_theme).yml"', {
+                              on_exit = function()
+                                -- Defer buffer deletion to avoid messing with termopen's event loop
+                                vim.schedule(function()
+                                  if vim.api.nvim_buf_is_valid(buf) then
+                                    -- Delete the terminal buffer; if it's the only window in the tab,
+                                    -- the tab will close as well.
+                                    pcall(vim.api.nvim_buf_delete, buf, { force = true })
+                                  end
+                                end)
+                              end,
+                            })
+
+                            -- Jump straight into terminal insert mode
+                            vim.cmd('startinsert')
+                          end,
                           desc = "Lazygit",
                         }, 
                         { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Branch history" },
