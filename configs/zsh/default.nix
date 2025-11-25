@@ -15,11 +15,11 @@
       gtsubmit = "gt top && gt sync && gt submit && git switch -";
 
       y = "yarn";
+      # Use `\npm` or `env npm` to prevent using the alias when installing sfw.
+      npm = "sfw npm";
 
       l = "lsd -al";
       ll = "lsd -al --tree";
-
-      h = "function hdi(){ howdoi $* -c -n 5; }; hdi";
 
       n = "nvim";
       ng = "rm -f ~/.cache/godothost && nvim --listen ~/.cache/godothost";
