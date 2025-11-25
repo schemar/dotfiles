@@ -9,19 +9,11 @@
     };
     plugins = {
       none-ls = {
+        enable = true;
         sources = {
           formatting = {
             prettier = {
               enable = true;
-              settings = {
-                # Always format open files, even if they are ignored.
-                # Setting `ignore-path` to empty string means "ignore nothing".
-                # By default, prettier will ignore files in .gitignore and .prettierignore.
-                extra_args = [
-                  "--ignore-path"
-                  ""
-                ];
-              };
             };
           };
         };

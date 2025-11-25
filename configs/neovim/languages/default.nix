@@ -20,8 +20,24 @@
     plugins = {
       lsp-format.enable = true;
       lspconfig.enable = true;
-      none-ls.enable = true;
       schemastore.enable = true;
+      none-ls = {
+        sources = {
+          formatting = {
+            prettier = {
+              settings = {
+                # Always format open files, even if they are ignored.
+                # Setting `ignore-path` to empty string means "ignore nothing".
+                # By default, prettier will ignore files in .gitignore and .prettierignore.
+                extra_args = [
+                  "--ignore-path"
+                  ""
+                ];
+              };
+            };
+          };
+        };
+      };
     };
   };
 

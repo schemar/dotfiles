@@ -10,10 +10,12 @@
       servers = {
         cssls.enable = true;
         eslint.enable = true;
+        html.enable = true;
       };
     };
     plugins = {
       none-ls = {
+        enable = true;
         sources = {
           diagnostics = {
             stylelint = {
@@ -23,15 +25,6 @@
           formatting = {
             prettier = {
               enable = true;
-              settings = {
-                # Always format open files, even if they are ignored.
-                # Setting `ignore-path` to empty string means "ignore nothing".
-                # By default, prettier will ignore files in .gitignore and .prettierignore.
-                extra_args = [
-                  "--ignore-path"
-                  ""
-                ];
-              };
             };
             stylelint = {
               enable = true;

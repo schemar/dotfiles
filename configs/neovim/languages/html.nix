@@ -19,7 +19,6 @@
   };
 
   config.programs.nixvim.lsp.servers.html = {
-    enable = true;
     config.filetypes = config.lspServerHtmlFiletypes;
   };
 }
