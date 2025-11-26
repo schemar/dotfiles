@@ -15,6 +15,9 @@ in
     ../../users/schemar/darwin.nix
   ];
 
+  # Use `\npm` or `env npm` to prevent using the alias when installing sfw.
+  home-manager.extraSpecialArgs.npmAlias = "sfw npm";
+
   environment.systemPackages = [
     gdk
     pkgs.temporal-cli

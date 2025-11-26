@@ -1,4 +1,9 @@
-{ inputs, ... }:
+{
+  inputs,
+  lib,
+  npmAlias,
+  ...
+}:
 {
   programs.zsh = {
     enable = true;
@@ -15,8 +20,7 @@
       gtsubmit = "gt top && gt sync && gt submit && git switch -";
 
       y = "yarn";
-      # Use `\npm` or `env npm` to prevent using the alias when installing sfw.
-      npm = "sfw npm";
+      npm = lib.mkIf (npmAlias != null) npmAlias;
 
       l = "lsd -al";
       ll = "lsd -al --tree";

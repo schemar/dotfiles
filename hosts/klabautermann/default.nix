@@ -82,4 +82,6 @@
     ../../users/schemar/common.nix
     ../../users/schemar/nixos.nix
   ];
+
+  home-manager.extraSpecialArgs.npmAlias = null;
 }
