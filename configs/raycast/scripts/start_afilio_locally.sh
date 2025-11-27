@@ -19,8 +19,9 @@ sleep 10
 # Sleeping and waiting for npm run start before starting emulators ...
 sleep 30
 
-/etc/profiles/per-user/$USER/bin/tmux send-keys -t afilio:2.2 'npm run emulator:firebase' C-m
-/etc/profiles/per-user/$USER/bin/tmux send-keys -t afilio:2.4 'npm run emulator:functions' C-m
+# Using `\npm` to avoid using `sfw` which won't start the emulator (backslash won't use an alias).
+/etc/profiles/per-user/$USER/bin/tmux send-keys -t afilio:2.2 '\npm run emulator:firebase' C-m
+/etc/profiles/per-user/$USER/bin/tmux send-keys -t afilio:2.4 '\npm run emulator:functions' C-m
 # Sleeping and waiting for firebase and functions before starting temporal server ...
 sleep 20
 
