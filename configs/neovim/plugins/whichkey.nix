@@ -332,14 +332,14 @@
                   { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diffview" },
                   { "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", desc = "File history" },
                   {
-                    "<leader>gg",
+                    "<leader>gG",
                     function()
                       require("neogit").open()
                     end,
                     desc = "Neogit",
                   },
                   {
-                    "<leader>gG",
+                    "<leader>gg",
                     -- Lazygit integration without extra plugins
                     -- ========================================
 
