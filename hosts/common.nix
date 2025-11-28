@@ -7,6 +7,7 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     coreutils-prefixed
+    nix
     zsh
   ];
 
