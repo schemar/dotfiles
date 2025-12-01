@@ -75,12 +75,15 @@
   system.defaults.NSGlobalDomain.NSStatusItemSpacing = 10;
   system.defaults.NSGlobalDomain.NSStatusItemSelectionPadding = 8;
 
+  # Don't show these icons in the menu bar so that other icons do not disappear
+  # behind the notch:
   # (assuming `null` means "auto")
-  system.defaults.controlcenter.Bluetooth = true;
-  system.defaults.controlcenter.Display = true;
-  system.defaults.controlcenter.FocusModes = true;
-  system.defaults.controlcenter.NowPlaying = null;
-  system.defaults.controlcenter.Sound = true;
+  system.defaults.controlcenter.AirDrop = false;
+  system.defaults.controlcenter.Bluetooth = false;
+  system.defaults.controlcenter.Display = false;
+  system.defaults.controlcenter.FocusModes = false;
+  system.defaults.controlcenter.NowPlaying = false;
+  system.defaults.controlcenter.Sound = false;
 
   system.defaults.dock.autohide = true;
   system.defaults.dock.autohide-delay = 0.0;
