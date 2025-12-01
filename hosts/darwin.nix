@@ -71,7 +71,10 @@
 
   system.defaults.controlcenter.BatteryShowPercentage = true;
 
-  # Which icons to display in the  menu bar:
+  # Move icons in menu bar closer together:
+  system.defaults.NSGlobalDomain.NSStatusItemSpacing = 10;
+  system.defaults.NSGlobalDomain.NSStatusItemSelectionPadding = 8;
+
   # (assuming `null` means "auto")
   system.defaults.controlcenter.Bluetooth = true;
   system.defaults.controlcenter.Display = true;
