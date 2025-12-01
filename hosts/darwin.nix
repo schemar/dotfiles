@@ -49,8 +49,8 @@
 
   # Mouse speed:
   system.defaults.".GlobalPreferences"."com.apple.mouse.scaling" = 0.6875;
-  # Mode 3 enables full keyboard control:
-  system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;
+  # Mode 2 enables control on Sonoma or later:
+  system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 2;
   # Jump to the spot that’s clicked on the scroll bar:
   system.defaults.NSGlobalDomain.AppleScrollerPagingBehavior = true;
   # Finder:
