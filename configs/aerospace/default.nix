@@ -2,10 +2,10 @@
 {
   programs.aerospace = {
     enable = true;
-    userSettings = {
-      # Must be started manually once before this takes effect:
-      start-at-login = true;
+    # Automatically start at startup
+    launchd.enable = true;
 
+    settings = {
       gaps = {
         inner.horizontal = 7;
         inner.vertical = 7;
