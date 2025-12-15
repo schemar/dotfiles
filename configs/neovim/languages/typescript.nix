@@ -4,7 +4,19 @@
     lsp = {
       servers = {
         eslint.enable = true;
-        vtsls.enable = true;
+        vtsls = {
+          enable = true;
+
+          config = {
+            settings = {
+              # limit completions returned by vtsls to not break nvim performance.
+              vtsls.experimental.completion.entriesLimit = 2000;
+
+              vtsls.experimental.completion.enableServerSideFuzzyMatching = true;
+              typescript.tsserver.maxTsServerMemory = 8192;
+            };
+          };
+        };
       };
     };
     plugins = {
