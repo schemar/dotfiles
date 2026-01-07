@@ -23,7 +23,7 @@
 
     gdtoolkit_4
 
-    nixfmt-rfc-style
+    nixfmt
 
     lua
 
