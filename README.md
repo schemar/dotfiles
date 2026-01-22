@@ -11,7 +11,11 @@ Requirements:
 
 - [Nix](https://nixos.org/download.html)
   ```sh
+  # macOS:
   sh <(curl -L https://nixos.org/nix/install)
+
+  # Linux with SELinux disabled (multi-user):
+  sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
   ```
 - [Homebrew](https://brew.sh/) (macOS only)
   ```sh
@@ -37,8 +41,13 @@ git clone ...
 Initial installation
 
 ```sh
-# Errors will guide you on what to fix:
+# Errors will guide you on what to fix
+# macOS:
 nix --extra-experimental-features "nix-command flakes" run nix-darwin/master#darwin-rebuild -- switch --flake .
+
+# Linux with home-manager only:
+# (if necessary, add 'experimental-features = nix-command flakes' to /etc/nix/nix.conf
+nix --extra-experimental-features "nix-command flakes" run home-manager/master -- switch --flake .#$(whoami)@$(hostname)
 ```
 
 Change shell (not sure why nix doesn't do this):
@@ -50,7 +59,11 @@ chsh -s /run/current-system/sw/bin/zsh
 Apply config:
 
 ```sh
+# macOS:
 darwin-rebuild switch --flake .
+
+# Linux with home-manager only:
+home-manager switch --flake .#$(whoami)@$(hostname)
 ```
 
 Remaining steps:
