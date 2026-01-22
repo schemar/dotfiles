@@ -65,7 +65,11 @@
       homeConfigurations = {
         "schemar@schenck-debian" = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { system = "x86_64-linux"; };
-          extraSpecialArgs = { inherit inputs; isDarwin = false; npmAlias = null; };
+          extraSpecialArgs = {
+            inherit inputs;
+            isDarwin = false;
+            npmAlias = null;
+          };
           modules = [
             {
               imports = [

@@ -1,5 +1,4 @@
-{ pkgs, inputs, ... }:
-
+{ ... }:
 {
   home.username = "schemar";
   home.homeDirectory = "/home/schemar";
@@ -12,4 +11,3 @@
     ./home.nix
   ];
 }
-
