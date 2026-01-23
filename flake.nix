@@ -11,8 +11,10 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixvim.url = "github:nix-community/nixvim";
-    # Removed due to error with lualine:
-    # nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    # Remove the following lane in case of nixvim errors.
+    # Their own nixpkgs are usually tested.
+    # A working nixvim with a mismatch in programgs/libs is ok in that case.
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     blueberry-peach.url = "github:schemar/blueberry-peach";
   };

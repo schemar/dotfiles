@@ -78,8 +78,8 @@ See `./configs` for the full list of configurations.
 
 - **`system/`** - System-level configurations for NixOS and nix-darwin
   - `common.nix` - Shared settings across all systems
-  - `darwin/` - macOS-specific system settings
-  - `nixos/` - NixOS-specific system settings
+  - `darwin.nix` - macOS-specific system settings
+  - `nixos.nix` - NixOS-specific system settings
 - **`home/`** - User-level configurations (home-manager)
   - `schemar/` - My user configuration
     - `default.nix` - Common home-manager config

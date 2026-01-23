@@ -7,8 +7,6 @@
   imports = [
     # NixOS-specific configs:
     ./configuration.nix
-    ./hardware-configuration.nix
-    ./networking.nix
 
     # System-level configurations:
     ../../system/common.nix
