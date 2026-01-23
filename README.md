@@ -74,6 +74,20 @@ Remaining steps:
 
 See `./configs` for the full list of configurations.
 
+### Directory Structure
+
+- **`system/`** - System-level configurations for NixOS and nix-darwin
+  - `common.nix` - Shared settings across all systems
+  - `darwin/` - macOS-specific system settings
+  - `nixos/` - NixOS-specific system settings
+- **`home/`** - User-level configurations (home-manager)
+  - `schemar/` - My user configuration
+    - `default.nix` - Common home-manager config
+    - `standalone.nix` - Standalone home-manager entry point
+- **`hosts/`** - Host-specific configurations
+  - Each subdirectory represents a specific machine
+- **`configs/`** - Application configurations (reusable home-manager modules)
+
 ### Remote
 
 - [🫐 BlueberryPeach 🍑 Theme](https://github.com/schemar/blueberry-peach)

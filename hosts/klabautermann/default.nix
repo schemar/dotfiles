@@ -1,7 +1,34 @@
-{ ... }:
+{ inputs, ... }:
 {
+  # Host configuration for klabautermann (NixOS)
+
   nixpkgs.hostPlatform = "x86_64-linux";
 
+  imports = [
+    # NixOS-specific configs:
+    ./configuration.nix
+    ./hardware-configuration.nix
+    ./networking.nix
+
+    # System-level configurations:
+    ../../system/common.nix
+    ../../system/nixos.nix
+
+    # Home-manager as a NixOS module:
+    inputs.home-manager.nixosModules.home-manager
+  ];
+
+  # Configure home-manager to use the schemar user config:
+  home-manager.users.schemar = {
+    imports = [
+      ../../home/schemar
+    ];
+  };
+
+  # Host-specific overrides:
+  home-manager.extraSpecialArgs.npmAlias = null;
+
+  # SSH configuration:
   services.openssh = {
     enable = true;
     allowSFTP = false;
@@ -39,18 +66,20 @@
     };
   };
   users.users.root.openssh.authorizedKeys.keys = [
-    ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIChFNUALd5qGQ96dfCbPAwLq/qV1v7xOCXJlyFCwMSkV''
-    ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKgAC0Py5KkT0hrmIKcXHLGKe1/57+/0A1RjNB1BPS6i''
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIChFNUALd5qGQ96dfCbPAwLq/qV1v7xOCXJlyFCwMSkV"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKgAC0Py5KkT0hrmIKcXHLGKe1/57+/0A1RjNB1BPS6i"
   ];
   users.users.schemar.openssh.authorizedKeys.keys = [
-    ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK/4l6M0rsHmCuYHkUxuk42+gKN/tySO9CRLp0NOUjuH''
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK/4l6M0rsHmCuYHkUxuk42+gKN/tySO9CRLp0NOUjuH"
   ];
 
+  # ACME/Let's Encrypt configuration:
   security.acme = {
     acceptTerms = true;
     defaults.email = "martinschenck@fastmail.com";
   };
 
+  # Nginx web server:
   services.nginx = {
     enable = true;
     virtualHosts."klabautermann.schemar.net" = {
@@ -75,13 +104,4 @@
       };
     };
   };
-
-  imports = [
-    ./configuration.nix
-    ../common.nix
-    ../../users/schemar/common.nix
-    ../../users/schemar/nixos.nix
-  ];
-
-  home-manager.extraSpecialArgs.npmAlias = null;
 }

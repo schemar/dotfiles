@@ -7,6 +7,9 @@
   # $ darwin-rebuild changelog
   system.stateVersion = 5;
 
+  # Set the primary user for nix-darwin:
+  system.primaryUser = "schemar";
+
   # Required by home-manager:
   users.users.schemar.home = /Users/schemar;
 
@@ -51,7 +54,7 @@
   system.defaults.".GlobalPreferences"."com.apple.mouse.scaling" = 0.6875;
   # Mode 2 enables control on Sonoma or later:
   system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 2;
-  # Jump to the spot that’s clicked on the scroll bar:
+  # Jump to the spot that's clicked on the scroll bar:
   system.defaults.NSGlobalDomain.AppleScrollerPagingBehavior = true;
   # Finder:
   system.defaults.NSGlobalDomain.AppleShowAllExtensions = true;

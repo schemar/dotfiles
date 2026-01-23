@@ -40,7 +40,6 @@
           specialArgs = { inherit inputs; };
           modules = [
             darwin
-            home-manager.darwinModules.home-manager
             ./hosts/Schencks-MacBook-Air
           ];
         };
@@ -48,7 +47,6 @@
           specialArgs = { inherit inputs; };
           modules = [
             darwin
-            home-manager.darwinModules.home-manager
             ./hosts/Afilio-0083
           ];
         };
@@ -57,7 +55,6 @@
         "klabautermann" = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
-            home-manager.nixosModules.home-manager
             ./hosts/klabautermann
           ];
         };
@@ -71,11 +68,7 @@
             npmAlias = null;
           };
           modules = [
-            {
-              imports = [
-                ./users/schemar/hm.nix
-              ];
-            }
+            ./home/schemar/standalone.nix
           ];
         };
       };
