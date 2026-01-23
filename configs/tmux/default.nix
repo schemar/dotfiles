@@ -39,6 +39,9 @@
         };
         extraConfig = # tmux
           ''
+            # Ensure tmux jobs/plugins can find basic tools and bash
+            set-environment -g PATH "$HOME/.nix-profile/bin:/usr/local/bin:/usr/bin:/bin"
+
             source ${./config/reset_catppuccin.conf}
             if-shell '[ "$(~/.config/current_theme)" = "dark" ]' \
               "source-file ${inputs.blueberry-peach}/ports/tmux/blueberry_peach_dark.conf" \
