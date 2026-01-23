@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, username, ... }:
 {
   # Host configuration for Schencks-MacBook-Air (nix-darwin)
 
@@ -11,10 +11,10 @@
     inputs.home-manager.darwinModules.home-manager
   ];
 
-  # Configure home-manager to use the schemar user config:
-  home-manager.users.schemar = {
+  # Configure home-manager to use the user config:
+  home-manager.users.${username} = {
     imports = [
-      ../../home/schemar
+      ../../home
     ];
   };
 

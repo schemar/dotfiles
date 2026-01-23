@@ -1,4 +1,9 @@
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  username,
+  ...
+}:
 {
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
@@ -15,7 +20,7 @@
   environment.shells = [ "/run/current-system/sw/bin/zsh" ];
 
   # Configure user shell (both NixOS and nix-darwin):
-  users.users.schemar.shell = "/run/current-system/sw/bin/zsh";
+  users.users.${username}.shell = "/run/current-system/sw/bin/zsh";
 
   fonts.packages = with pkgs; [
     monaspace

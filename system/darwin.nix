@@ -1,4 +1,4 @@
-{ ... }:
+{ username, pkgs, ... }:
 {
   # The platform the configuration will be used on:
   nixpkgs.hostPlatform = "aarch64-darwin";
@@ -8,10 +8,11 @@
   system.stateVersion = 5;
 
   # Set the primary user for nix-darwin:
-  system.primaryUser = "schemar";
+  system.primaryUser = username;
 
   # Required by home-manager:
-  users.users.schemar.home = /Users/schemar;
+  users.users.${username}.home =
+    if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else "/home/${username}";
 
   homebrew = {
     enable = true;

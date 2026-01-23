@@ -1,10 +1,10 @@
-{ ... }:
+{ username, ... }:
 {
-  # Standalone home-manager configuration for user "schemar"
+  # Standalone home-manager configuration for user
   # Use this for systems where home-manager is run standalone (not as a NixOS/nix-darwin module)
 
-  home.username = "schemar";
-  home.homeDirectory = "/home/schemar";
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

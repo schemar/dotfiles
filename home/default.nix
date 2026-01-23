@@ -5,7 +5,7 @@
   ...
 }:
 {
-  # This is the common home-manager configuration for user "schemar"
+  # This is the common home-manager configuration
   # It is used by both:
   # 1. NixOS/nix-darwin as a home-manager module
   # 2. Standalone home-manager (via standalone.nix)
@@ -41,27 +41,27 @@
   ];
 
   imports = [
-    ../../configs/bash
-    ../../configs/bat
-    ../../configs/bottom
-    ../../configs/fd
-    ../../configs/fzf
-    ../../configs/gh
-    ../../configs/ghostty
-    ../../configs/git
-    ../../configs/jq
-    ../../configs/lazygit
-    ../../configs/mise
-    ../../configs/neovim
-    ../../configs/ripgrep
-    ../../configs/starship
-    ../../configs/ssh
-    ../../configs/tealdeer
-    ../../configs/theme
-    ../../configs/tmux
-    ../../configs/wezterm
-    ../../configs/yazi
-    ../../configs/zsh
+    ../configs/bash
+    ../configs/bat
+    ../configs/bottom
+    ../configs/fd
+    ../configs/fzf
+    ../configs/gh
+    ../configs/ghostty
+    ../configs/git
+    ../configs/jq
+    ../configs/lazygit
+    ../configs/mise
+    ../configs/neovim
+    ../configs/ripgrep
+    ../configs/starship
+    ../configs/ssh
+    ../configs/tealdeer
+    ../configs/theme
+    ../configs/tmux
+    ../configs/wezterm
+    ../configs/yazi
+    ../configs/zsh
   ]
-  ++ lib.optionals isDarwin [ ../../configs/aerospace ];
+  ++ lib.optionals isDarwin [ ../configs/aerospace ];
 }

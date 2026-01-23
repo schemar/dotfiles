@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  username,
+  ...
+}:
 let
   gdk = pkgs.google-cloud-sdk.withExtraComponents (
     with pkgs.google-cloud-sdk.components;
@@ -19,10 +24,10 @@ in
     inputs.home-manager.darwinModules.home-manager
   ];
 
-  # Configure home-manager to use the schemar user config:
-  home-manager.users.schemar = {
+  # Configure home-manager to use the user config:
+  home-manager.users.${username} = {
     imports = [
-      ../../home/schemar
+      ../../home
     ];
   };
 

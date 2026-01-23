@@ -1,18 +1,18 @@
-{ ... }:
+{ username, ... }:
 {
   # NixOS-specific system configuration
 
-  # Create the schemar user:
-  users.users.schemar = {
+  # Create the user:
+  users.users.${username} = {
     isNormalUser = true;
     # "wheel" for sudo:
     extraGroups = [ "wheel" ];
   };
 
-  # Passwordless sudo for schemar:
+  # Passwordless sudo for user:
   security.sudo.extraRules = [
     {
-      users = [ "schemar" ];
+      users = [ username ];
       commands = [
         {
           command = "ALL";

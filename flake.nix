@@ -29,6 +29,7 @@
       blueberry-peach,
     }:
     let
+      username = "schemar";
       darwin = {
         # Set Git commit hash for darwin-version.
         system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -39,14 +40,14 @@
       # $ darwin-rebuild switch --flake .
       darwinConfigurations = {
         "Schencks-MacBook-Air" = nix-darwin.lib.darwinSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs username; };
           modules = [
             darwin
             ./hosts/Schencks-MacBook-Air
           ];
         };
         "Afilio-0083" = nix-darwin.lib.darwinSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs username; };
           modules = [
             darwin
             ./hosts/Afilio-0083
@@ -55,22 +56,25 @@
       };
       nixosConfigurations = {
         "klabautermann" = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs username; };
           modules = [
             ./hosts/klabautermann
           ];
         };
       };
       homeConfigurations = {
-        "schemar@schenck-debian" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs { system = "x86_64-linux"; };
+        "${username}@schenck-debian" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
           extraSpecialArgs = {
-            inherit inputs;
+            inherit inputs username;
             isDarwin = false;
             npmAlias = null;
           };
           modules = [
-            ./home/schemar/standalone.nix
+            ./home/standalone.nix
           ];
         };
       };

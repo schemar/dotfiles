@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, username, ... }:
 {
   # Host configuration for klabautermann (NixOS)
 
@@ -16,10 +16,10 @@
     inputs.home-manager.nixosModules.home-manager
   ];
 
-  # Configure home-manager to use the schemar user config:
-  home-manager.users.schemar = {
+  # Configure home-manager to use the user config:
+  home-manager.users.${username} = {
     imports = [
-      ../../home/schemar
+      ../../home
     ];
   };
 
@@ -67,7 +67,7 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIChFNUALd5qGQ96dfCbPAwLq/qV1v7xOCXJlyFCwMSkV"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKgAC0Py5KkT0hrmIKcXHLGKe1/57+/0A1RjNB1BPS6i"
   ];
-  users.users.schemar.openssh.authorizedKeys.keys = [
+  users.users.${username}.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK/4l6M0rsHmCuYHkUxuk42+gKN/tySO9CRLp0NOUjuH"
   ];
 
