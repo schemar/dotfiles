@@ -19,8 +19,12 @@
   # Use user-level ZSH provided by home-manager config:
   environment.shells = [ "/run/current-system/sw/bin/zsh" ];
 
-  # Configure user shell (both NixOS and nix-darwin):
-  users.users.${username}.shell = "/run/current-system/sw/bin/zsh";
+  users.users.${username} = {
+    # Configure user shell (both NixOS and nix-darwin):
+    shell = "/run/current-system/sw/bin/zsh";
+    # Required by home-manager:
+    home = if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else "/home/${username}";
+  };
 
   fonts.packages = with pkgs; [
     monaspace

@@ -40,14 +40,18 @@
       # $ darwin-rebuild switch --flake .
       darwinConfigurations = {
         "Schencks-MacBook-Air" = nix-darwin.lib.darwinSystem {
-          specialArgs = { inherit inputs username; };
+          specialArgs = {
+            inherit inputs username;
+          };
           modules = [
             darwin
             ./hosts/Schencks-MacBook-Air
           ];
         };
         "Afilio-0083" = nix-darwin.lib.darwinSystem {
-          specialArgs = { inherit inputs username; };
+          specialArgs = {
+            inherit inputs username;
+          };
           modules = [
             darwin
             ./hosts/Afilio-0083
@@ -56,7 +60,9 @@
       };
       nixosConfigurations = {
         "klabautermann" = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs username; };
+          specialArgs = {
+            inherit inputs username;
+          };
           modules = [
             ./hosts/klabautermann
           ];
