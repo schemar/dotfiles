@@ -118,6 +118,15 @@
     };
   };
 
+  services.mako = {
+    enable = true;
+
+    settings = {
+      default-timeout = 10000; # 10 seconds
+      font = "Monaspace Neon 13";
+    };
+  };
+
   programs = {
     swaylock = {
       enable = true;
@@ -136,6 +145,7 @@
     # Configured when started by sway (see sway config).
     swayidle
 
+    libnotify
     wl-clipboard
 
     ghostty
