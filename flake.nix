@@ -80,7 +80,7 @@
             npmAlias = null;
           };
           modules = [
-            ./home/standalone.nix
+            ./hosts/schenck-debian
           ];
         };
       };

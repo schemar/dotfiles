@@ -16,6 +16,9 @@ brew-upgrade:
 nix-switch:
     sudo {{ rebuild }} switch --flake .
 
+hm-switch:
+    home-manager switch --flake .#$(whoami)@$(hostname)
+
 nix-clean:
     nix-collect-garbage -d
 
