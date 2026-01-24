@@ -139,7 +139,7 @@
         extraConfig = # tmux
           ''
             set -g @continuum-restore 'on'
-            set -g @continuum-boot 'on'
+            set -g @continuum-boot 'off'
             set -g @continuum-save-interval '10' # minutes
           '';
       }
