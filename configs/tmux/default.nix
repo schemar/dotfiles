@@ -40,7 +40,7 @@
         extraConfig = # tmux
           ''
             # Ensure tmux jobs/plugins can find basic tools and bash
-            set-environment -g PATH "$HOME/.nix-profile/bin:/usr/local/bin:/usr/bin:/bin"
+            set-environment -g PATH "$HOME/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:/usr/local/bin:/usr/bin:/bin"
 
             source ${./config/reset_catppuccin.conf}
             if-shell '[ "$(~/.config/current_theme)" = "dark" ]' \
