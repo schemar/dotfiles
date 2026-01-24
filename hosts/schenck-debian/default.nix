@@ -53,12 +53,6 @@
       source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
     fi
 
-    # Ensure dbus/systemd user services see the same env
-    if command -v dbus-update-activation-environment >/dev/null 2>&1; then
-      systemctl --user import-environment XDG_CONFIG_HOME XDG_CACHE_HOME XDG_DATA_HOME XDG_STATE_HOME PATH
-      dbus-update-activation-environment --systemd --all
-    fi
-
     exec sway
   '';
   home.file.".local/bin/sway-session".executable = true;
@@ -92,6 +86,15 @@
       terminal = "${pkgs.ghostty}/bin/ghostty";
 
       startup = [
+        # Make systemd user + DBus activation see the Wayland session vars (next two commands)
+        {
+          always = true;
+          command = "systemctl --user import-environment WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_RUNTIME_DIR";
+        }
+        {
+          always = true;
+          command = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_RUNTIME_DIR";
+        }
         {
           command = ''
             swayidle -w \
