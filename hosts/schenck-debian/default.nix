@@ -151,6 +151,8 @@
     libnotify
     wl-clipboard
 
+    networkmanager
+
     ghostty
   ];
 
