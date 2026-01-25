@@ -161,6 +161,10 @@
               before-sleep 'swaylock -fF'
           '';
         }
+
+        {
+          command = "nm-applet";
+        }
       ];
 
       input = {
@@ -262,6 +266,7 @@
     wl-clipboard
 
     networkmanager
+    networkmanagerapplet
 
     ghostty
   ];
