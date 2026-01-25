@@ -134,15 +134,7 @@
       };
       bars = [
         {
-          position = "top";
-          statusCommand = "${pkgs.i3status}/bin/i3status";
-          fonts = {
-            names = [
-              "Monaspace Neon"
-              "Symbols Nerd Font Mono"
-            ];
-            size = 13.0;
-          };
+          command = "${pkgs.waybar}/bin/waybar";
         }
       ];
 
@@ -213,6 +205,40 @@
       settings = {
         color = "191724";
       };
+    };
+
+    waybar = {
+      enable = true;
+
+      settings = {
+        main = {
+          position = "top";
+          height = 36;
+          modules-left = [
+            "sway/workspaces"
+            "sway/mode"
+          ];
+          modules-center = [
+            "clock"
+          ];
+          modules-right = [
+            "pulseaudio"
+            "bluetooth"
+            "tray"
+          ];
+
+          clock = {
+            format = "{0:%Y-%m-%d} {0:%H:%M}";
+          };
+        };
+      };
+      style = # css
+        ''
+          * {
+            font-family: Monaspace Neon, Symbols Nerd Font Mono;
+            font-size: 18px;
+          }
+        '';
     };
 
     fuzzel = {
