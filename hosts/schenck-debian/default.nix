@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }:
@@ -182,6 +183,10 @@
           scale = "1.5";
         };
       };
+
+      keybindings = lib.mkOptionDefault {
+        "Mod4+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
+      };
     };
 
     extraConfig = ''
@@ -207,6 +212,17 @@
 
       settings = {
         color = "191724";
+      };
+    };
+
+    fuzzel = {
+      enable = true;
+
+      settings = {
+        main = {
+          font = "Monaspace Neon:size=13,Symbols Nerd Font Mono:size=13";
+          terminal = "${pkgs.ghostty}/bin/ghostty";
+        };
       };
     };
   };
