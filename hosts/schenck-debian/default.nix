@@ -277,8 +277,7 @@
 
       [Desktop Action new-window]
       Name=New Window
-      Exec=/nix/store/4fkwvnja07zmivbi0l68351rzd3166hp-ghostty-1.2.3/bin/ghostty --gtk-single-instance=true
-
+      Exec=${pkgs.ghostty}/bin/ghostty --gtk-single-instance=true
     '';
   };
 
