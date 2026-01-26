@@ -7,6 +7,7 @@
 {
   # * Add shell to /etc/shells
   #   !! Needs updating after zsh upgrades (store path changes) if pkexec breaks.
+  #   `nix eval --raw nixpkgs#zsh.outPath` helps.
   # * Install Debian's swaylock: sudo apt install swaylock
   # * After home-manager switch:
   #   * Enable the polkit service: systemctl --user enable --now polkit-kde-agent.service
@@ -100,30 +101,18 @@
   #
   # [Desktop Entry]
   # Name=Sway
-  # Exec=/home/<USERNAMW>/.local/bin/sway-session
+  # Exec=/home/<USERNAME>/.nix-profile/bin/sway
   # Type=Application
   # DesktopNames=sway
   #
   # For swaylock to work, use Debian's binary to ensure a working PAM stack:
   # sudo apt install swaylock
 
-  # Wrapper script to start sway to ensure config from home-manager is set:
-  home.file.".local/bin/sway-session".text = ''
-    #!/usr/bin/env bash
-    set -e
-
-    # Load Home Manager env (sets XDG_* and fixes PATH consistently)
-    if [ -r "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
-      source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-    fi
-
-    exec sway
-  '';
-  home.file.".local/bin/sway-session".executable = true;
-
   wayland.windowManager.sway = {
     enable = true;
+    systemd.enable = true;
     wrapperFeatures.gtk = true; # Include fixes for GTK apps under Sway
+
     config = {
       fonts = {
         names = [
@@ -142,16 +131,6 @@
       terminal = "${pkgs.ghostty}/bin/ghostty";
 
       startup = [
-        # Make systemd user + DBus activation see the Wayland session vars (next two commands)
-        {
-          always = true;
-          command = "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_RUNTIME_DIR DBUS_SESSION_BUS_ADDRESS";
-        }
-        {
-          always = true;
-          command = "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_RUNTIME_DIR DBUS_SESSION_BUS_ADDRESS";
-        }
-
         {
           command = ''
             swayidle -w \
