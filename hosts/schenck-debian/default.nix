@@ -161,6 +161,7 @@
 
       keybindings = lib.mkOptionDefault {
         "Mod4+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
+        "Mod4+Shift+d" = "exec ${pkgs.bemoji}/bin/bemoji --type";
       };
     };
 
@@ -246,6 +247,9 @@
 
     networkmanager
     networkmanagerapplet
+
+    bemoji
+    wtype # Type on wayland like xdotool; used by bemoji
 
     ghostty
   ];
