@@ -108,12 +108,43 @@
   # For swaylock to work, use Debian's binary to ensure a working PAM stack:
   # sudo apt install swaylock
 
+  home.file.".local/bin/powermenu.sh".text = # bash
+    ''
+      #!/usr/bin/env bash
+
+      choice=$(printf "󰗼 Lock\n󰍃 Logout\n󰜉 Reboot\n󰐥 Shutdown\n󰒲 Hibernate" \
+        | fuzzel -d --prompt="Power > ")
+
+      case "$choice" in
+        "󰗼 Lock")
+          swaylock
+          ;;
+        "󰍃 Logout")
+          swaymsg exit
+          ;;
+        "󰜉 Reboot")
+          systemctl reboot
+          ;;
+        "󰐥 Shutdown")
+          systemctl poweroff
+          ;;
+        "󰒲 Hibernate")
+          systemctl hibernate
+          ;;
+      esac
+    '';
+  home.file.".local/bin/powermenu.sh".executable = true;
+
   wayland.windowManager.sway = {
     enable = true;
     systemd.enable = true;
     wrapperFeatures.gtk = true; # Include fixes for GTK apps under Sway
 
     config = {
+      focus = {
+        followMouse = false;
+      };
+
       fonts = {
         names = [
           "Monaspace Neon"
@@ -160,6 +191,8 @@
       };
 
       keybindings = lib.mkOptionDefault {
+        "Mod4+Shift+e" = "exec ~/.local/bin/powermenu.sh";
+
         "Mod4+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
         "Mod4+Shift+d" = "exec ${pkgs.bemoji}/bin/bemoji --type";
       };
@@ -209,10 +242,18 @@
             "pulseaudio"
             "bluetooth"
             "tray"
+            "custom/power"
           ];
 
           clock = {
             format = "{0:%Y-%m-%d} {0:%H:%M}";
+          };
+
+          "custom/power" = {
+            format = "";
+            tooltip = "Power menu";
+            on-click = "~/.local/bin/powermenu.sh";
+            on-click-right = "swaylock";
           };
         };
       };
