@@ -11,8 +11,10 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixvim.url = "github:nix-community/nixvim";
-    # Removed due to error with lualine:
-    # nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    # Remove the following lane in case of nixvim errors.
+    # Their own nixpkgs are usually tested.
+    # A working nixvim with a mismatch in programgs/libs is ok in that case.
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     blueberry-peach.url = "github:schemar/blueberry-peach";
   };
@@ -27,6 +29,7 @@
       blueberry-peach,
     }:
     let
+      username = "schemar";
       darwin = {
         # Set Git commit hash for darwin-version.
         system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -37,28 +40,47 @@
       # $ darwin-rebuild switch --flake .
       darwinConfigurations = {
         "Schencks-MacBook-Air" = nix-darwin.lib.darwinSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs username;
+          };
           modules = [
             darwin
-            home-manager.darwinModules.home-manager
             ./hosts/Schencks-MacBook-Air
           ];
         };
         "Afilio-0083" = nix-darwin.lib.darwinSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs username;
+          };
           modules = [
             darwin
-            home-manager.darwinModules.home-manager
             ./hosts/Afilio-0083
           ];
         };
       };
       nixosConfigurations = {
         "klabautermann" = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs username;
+          };
           modules = [
-            home-manager.nixosModules.home-manager
             ./hosts/klabautermann
+          ];
+        };
+      };
+      homeConfigurations = {
+        "${username}@schenck-debian" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+          extraSpecialArgs = {
+            inherit inputs username;
+            isDarwin = false;
+            npmAlias = null;
+          };
+          modules = [
+            ./hosts/schenck-debian
           ];
         };
       };

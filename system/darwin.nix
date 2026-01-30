@@ -1,4 +1,4 @@
-{ ... }:
+{ username, pkgs, ... }:
 {
   # The platform the configuration will be used on:
   nixpkgs.hostPlatform = "aarch64-darwin";
@@ -7,8 +7,8 @@
   # $ darwin-rebuild changelog
   system.stateVersion = 5;
 
-  # Required by home-manager:
-  users.users.schemar.home = /Users/schemar;
+  # Set the primary user for nix-darwin:
+  system.primaryUser = username;
 
   homebrew = {
     enable = true;
@@ -51,7 +51,7 @@
   system.defaults.".GlobalPreferences"."com.apple.mouse.scaling" = 0.6875;
   # Mode 2 enables control on Sonoma or later:
   system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 2;
-  # Jump to the spot that’s clicked on the scroll bar:
+  # Jump to the spot that's clicked on the scroll bar:
   system.defaults.NSGlobalDomain.AppleScrollerPagingBehavior = true;
   # Finder:
   system.defaults.NSGlobalDomain.AppleShowAllExtensions = true;

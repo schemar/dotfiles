@@ -39,6 +39,12 @@
         };
         extraConfig = # tmux
           ''
+            # Ensure tmux jobs/plugins can find basic tools and bash.
+            # This is necessary due to how nix home-manager's sway runs on a Debian host.
+            # While this doesn't belong to this plugin, it must be set in the first of all plugins,
+            # as `extraConfig` is only sourced after the plugins.
+            set-environment -g PATH "$HOME/.nix-profile/bin:/etc/profiles/per-user/$USER/bin:/usr/local/bin:/usr/bin:/bin"
+
             source ${./config/reset_catppuccin.conf}
             if-shell '[ "$(~/.config/current_theme)" = "dark" ]' \
               "source-file ${inputs.blueberry-peach}/ports/tmux/blueberry_peach_dark.conf" \
@@ -133,7 +139,7 @@
         extraConfig = # tmux
           ''
             set -g @continuum-restore 'on'
-            set -g @continuum-boot 'on'
+            set -g @continuum-boot 'off'
             set -g @continuum-save-interval '10' # minutes
           '';
       }

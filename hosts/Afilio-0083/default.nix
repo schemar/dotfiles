@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  username,
+  ...
+}:
 let
   gdk = pkgs.google-cloud-sdk.withExtraComponents (
     with pkgs.google-cloud-sdk.components;
@@ -8,14 +13,26 @@ let
   );
 in
 {
+  # Host configuration for Afilio-0083 (nix-darwin)
+
   imports = [
-    ../common.nix
-    ../darwin.nix
-    ../../users/schemar/common.nix
-    ../../users/schemar/darwin.nix
+    # System-level configurations:
+    ../../system/common.nix
+    ../../system/darwin.nix
+
+    # Home-manager as a nix-darwin module:
+    inputs.home-manager.darwinModules.home-manager
   ];
 
-  # Use `\npm` or `env npm` to prevent using the alias when installing sfw.
+  # Configure home-manager to use the user config:
+  home-manager.users.${username} = {
+    imports = [
+      ../../home
+    ];
+  };
+
+  # Host-specific overrides:
+  # Use `\\npm` or `env npm` to prevent using the alias when installing sfw.
   home-manager.extraSpecialArgs.npmAlias = "sfw npm";
 
   environment.systemPackages = [

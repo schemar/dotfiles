@@ -1,17 +1,20 @@
-{ ... }:
+{ username, ... }:
 {
-  users.users.schemar = {
+  # NixOS-specific system configuration
+
+  # Create the user:
+  users.users.${username} = {
     isNormalUser = true;
     # "wheel" for sudo:
     extraGroups = [ "wheel" ];
   };
 
+  # Passwordless sudo for user:
   security.sudo.extraRules = [
     {
-      users = [ "schemar" ];
+      users = [ username ];
       commands = [
         {
-          # passwordless sudo:
           command = "ALL";
           options = [ "NOPASSWD" ];
         }
