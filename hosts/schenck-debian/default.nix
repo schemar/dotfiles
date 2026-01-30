@@ -297,6 +297,7 @@
     wtype # Type on wayland like xdotool; used by bemoji
 
     ghostty
+    vivaldi
   ];
 
   home.file.".config/systemd/user/xdg-desktop-portal-wlr.service".text = # ini
