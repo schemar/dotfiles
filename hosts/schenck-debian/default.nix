@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   ...
 }:
@@ -108,171 +107,13 @@
   # For swaylock to work, use Debian's binary to ensure a working PAM stack:
   # sudo apt install swaylock
 
-  home.file.".local/bin/powermenu.sh".text = # bash
-    ''
-      #!/usr/bin/env bash
-
-      choice=$(printf "󰗼 Lock\n󰍃 Logout\n󰜉 Reboot\n󰐥 Shutdown\n󰒲 Hibernate" \
-        | fuzzel -d --prompt="Power > ")
-
-      case "$choice" in
-        "󰗼 Lock")
-          swaylock
-          ;;
-        "󰍃 Logout")
-          swaymsg exit
-          ;;
-        "󰜉 Reboot")
-          systemctl reboot
-          ;;
-        "󰐥 Shutdown")
-          systemctl poweroff
-          ;;
-        "󰒲 Hibernate")
-          systemctl hibernate
-          ;;
-      esac
-    '';
-  home.file.".local/bin/powermenu.sh".executable = true;
-
   wayland.windowManager.sway = {
-    enable = true;
     systemd.enable = true;
-    wrapperFeatures.gtk = true; # Include fixes for GTK apps under Sway
 
     config = {
-      focus = {
-        followMouse = false;
-      };
-
-      fonts = {
-        names = [
-          "Monaspace Neon"
-          "Symbols Nerd Font Mono"
-        ];
-        size = 13.0;
-      };
-      bars = [
-        {
-          command = "${pkgs.waybar}/bin/waybar";
-        }
-      ];
-
-      modifier = "Mod4"; # Use the Super/Windows key as the Mod key
-      terminal = "${pkgs.ghostty}/bin/ghostty";
-
-      startup = [
-        {
-          command = ''
-            swayidle -w \
-              timeout 300 'swaylock -fF' \
-              timeout 600 'swaymsg "output * dpms off"' \
-              resume 'swaymsg "output * dpms on"' \
-              before-sleep 'swaylock -fF'
-          '';
-        }
-
-        {
-          command = "nm-applet";
-        }
-      ];
-
-      input = {
-        "type:keyboard" = {
-          # Map capslock to escape:
-          "xkb_options" = "caps:escape";
-        };
-      };
-
       output = {
         "HDMI-A-1" = {
           scale = "1.5";
-        };
-      };
-
-      keybindings = lib.mkOptionDefault {
-        "Mod4+Shift+e" = "exec ~/.local/bin/powermenu.sh";
-
-        "Mod4+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
-        "Mod4+Shift+d" = "exec ${pkgs.bemoji}/bin/bemoji --type";
-      };
-    };
-
-    extraConfig = ''
-      xwayland enable
-    '';
-  };
-
-  services.mako = {
-    enable = true;
-
-    settings = {
-      default-timeout = 10000; # 10 seconds
-      font = "Monaspace Neon 13";
-    };
-  };
-
-  programs = {
-    swaylock = {
-      enable = true;
-      # Disabled due to broken PAM stack with Debian. Instead:
-      # sudo apt install swaylock
-      package = null;
-
-      settings = {
-        color = "191724";
-      };
-    };
-
-    waybar = {
-      enable = true;
-
-      settings = {
-        main = {
-          position = "top";
-          height = 36;
-          modules-left = [
-            "sway/workspaces"
-            "sway/mode"
-          ];
-          modules-center = [
-            "clock"
-          ];
-          modules-right = [
-            "pulseaudio"
-            "bluetooth"
-            "tray"
-            "custom/power"
-          ];
-
-          clock = {
-            format = "{0:%Y-%m-%d} {0:%H:%M}";
-          };
-
-          "custom/power" = {
-            format = "";
-            tooltip = "Power menu";
-            on-click = "~/.local/bin/powermenu.sh";
-            on-click-right = "swaylock";
-          };
-        };
-      };
-      style = # css
-        ''
-          * {
-            font-family: Monaspace Neon, Symbols Nerd Font Mono;
-            font-size: 18px;
-          }
-        '';
-    };
-
-    fuzzel = {
-      enable = true;
-
-      settings = {
-        main = {
-          font = "Monaspace Neon:size=13,Symbols Nerd Font Mono:size=13";
-          terminal = "${pkgs.ghostty}/bin/ghostty";
         };
       };
     };
@@ -280,42 +121,9 @@
 
   # Install host specific packages:
   home.packages = with pkgs; [
-    # Configured when started by sway (see sway config).
-    swayidle
-
-    libnotify
-    wl-clipboard
-
-    xdg-desktop-portal-wlr
-    slurp
-    grim
-
-    networkmanager
-    networkmanagerapplet
-
-    bemoji
-    wtype # Type on wayland like xdotool; used by bemoji
-
     ghostty
     vivaldi
   ];
-
-  home.file.".config/systemd/user/xdg-desktop-portal-wlr.service".text = # ini
-    ''
-      [Unit]
-      Description=xdg-desktop-portal-wlr
-      PartOf=graphical-session.target
-      After=graphical-session.target
-
-      [Service]
-      Type=dbus
-      BusName=org.freedesktop.impl.portal.desktop.wlr
-      ExecStart=${pkgs.xdg-desktop-portal-wlr}/libexec/xdg-desktop-portal-wlr
-      Restart=on-failure
-
-      [Install]
-      WantedBy=graphical-session.target
-    '';
 
   # Overwrite default desktop file to not have "DBusActivatable=true"
   home.file.".local/share/applications/com.mitchellh.ghostty.desktop" = {
@@ -351,6 +159,8 @@
 
   # Uses home-manager standalone module on debian linux:
   imports = [
+    ./screencast.nix
+    ../../home/linux-desktop.nix
     ../../home/standalone.nix
   ];
 }
