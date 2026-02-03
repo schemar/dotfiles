@@ -14,6 +14,7 @@
 
       "font-family" = [
         "Monaspace Neon"
+        "OpenMoji Color"
         "Symbols Nerd Font Mono"
       ];
 

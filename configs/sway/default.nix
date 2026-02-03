@@ -13,6 +13,7 @@
       fonts = {
         names = [
           "Monaspace Neon"
+          "OpenMoji Color"
           "Symbols Nerd Font Mono"
         ];
         size = 13.0;

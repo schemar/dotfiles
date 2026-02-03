@@ -20,6 +20,7 @@
   home.packages = with pkgs; [
     monaspace
     nerd-fonts.symbols-only
+    openmoji-color
   ];
 
   imports = [
