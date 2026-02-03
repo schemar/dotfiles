@@ -1,0 +1,90 @@
+@define-color background #191724;
+@define-color surface0 #0B0A0F;
+@define-color surface2 #37363E;
+@define-color text #A2A2A9;
+@define-color red #DF8BA0;
+@define-color green #75B087;
+@define-color yellow #C7B96F;
+@define-color blue #7AA8CE;
+@define-color violet #A19DD4;
+@define-color teal #5EB1AF;
+@define-color orange #C79A76;
+@define-color pink #C394c2;
+
+* {
+  font-family:
+    Monaspace Neon,
+    OpenMoji Color,
+    Symbols Nerd Font Mono;
+  font-size: 13pt;
+
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid transparent;
+}
+
+window#waybar {
+  background-color: @background;
+  color: @text;
+}
+
+#workspaces button {
+  padding: 0 10px;
+  margin: 0 2px;
+  background-color: transparent;
+}
+
+#workspaces button:hover {
+  background: @surface2;
+}
+
+#workspaces button.focused {
+  background-color: @violet;
+  color: @background;
+}
+
+#workspaces button.urgent {
+  background-color: @red;
+  color: @background;
+}
+
+#mode {
+  padding: 0 10px;
+  margin: 0 2px;
+  background-color: @blue;
+  color: @background;
+}
+
+#clock {
+  border-bottom: 1px solid @blue;
+}
+
+#pulseaudio {
+  padding: 0 10px;
+  margin: 0 2px;
+  border-bottom: 1px solid @yellow;
+}
+
+#pulseaudio.muted {
+  padding: 0 10px;
+  margin: 0 2px;
+  border-bottom: 1px solid @red;
+}
+
+#bluetooth {
+  padding: 0 10px;
+  margin: 0 2px;
+  border-bottom: 1px solid @green;
+}
+
+#tray {
+  padding: 0 10px;
+  margin: 0 2px;
+  border-bottom: 1px solid @blue;
+}
+
+#custom-power {
+  padding: 0 10px;
+  margin: 0 2px;
+  border-bottom: 1px solid @violet;
+}

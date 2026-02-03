@@ -13,6 +13,8 @@
     networkmanager
     networkmanagerapplet
 
+    pavucontrol
+
     bemoji
     wtype # Type on wayland like xdotool; used by bemoji
   ];
