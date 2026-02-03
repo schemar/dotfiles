@@ -38,10 +38,65 @@
         }
       ];
 
+      gaps = {
+        outer = 6;
+        inner = 6;
+      };
+
+      window = {
+        titlebar = false;
+        border = 1;
+      };
+
+      defaultWorkspace = "workspace number 1";
+
+      colors = {
+        background = "#191724";
+        focused = {
+          border = "#A19DD4";
+          background = "#191724";
+          text = "#A2A2A9";
+          indicator = "#C394C2";
+          childBorder = "#A19DD4";
+        };
+        focusedInactive = {
+          border = "#84848C";
+          background = "#0B0A0F";
+          text = "#878794";
+          indicator = "#37363E";
+          childBorder = "#37363E";
+        };
+        unfocused = {
+          border = "#0B0A0F";
+          background = "#0B0A0F";
+          text = "#878794";
+          indicator = "#37363E";
+          childBorder = "#37363E";
+        };
+        placeholder = {
+          background = "#191724";
+          text = "#A2A2A9";
+
+          # unused
+          border = "#000000";
+          indicator = "#000000";
+          childBorder = "#000000";
+        };
+      };
+
+      seat = {
+        "*" = {
+          hide_cursor = "when-typing enable";
+        };
+      };
+
       input = {
         "type:keyboard" = {
           # Map capslock to escape:
           "xkb_options" = "caps:escape";
+
+          "repeat_delay" = "200";
+          "repeat_rate" = "50";
         };
       };
 
@@ -50,7 +105,27 @@
 
         "Mod4+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
         "Mod4+Shift+d" = "exec ${pkgs.bemoji}/bin/bemoji --type";
+
+        # Commands provided by avizo.service
+        "XF86AudioRaiseVolume" = "exec volumectl -u up";
+        "XF86AudioLowerVolume" = "exec volumectl -u down";
+        "XF86AudioMute" = "exec volumectl toggle-mute";
+        "XF86AudioMicMute" = "exec volumectl -m toggle-mute";
+        "XF86MonBrightnessUp" = "exec lightctl up";
+        "XF86MonBrightnessDown" = "exec lightctl down";
+
+        "XF86AudioPlay" = "exec playerctl play-pause";
+        "XF86AudioPause" = "exec playerctl play-pause";
+        "XF86AudioNext" = "exec playerctl next";
+        "XF86AudioPrev" = "exec playerctl previous";
+        "XF86AudioStop" = "exec playerctl stop";
+        "XF86Search" = "exec fuzzel";
       };
     };
+
+    extraConfig = # sway
+      ''
+        for_window [shell="xwayland"] title_format "[XWayland] %title"
+      '';
   };
 }

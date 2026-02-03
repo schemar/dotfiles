@@ -114,6 +114,7 @@
       output = {
         "HDMI-A-1" = {
           scale = "1.5";
+          bg = "#0B0A0F solid_color";
         };
       };
     };

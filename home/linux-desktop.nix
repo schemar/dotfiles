@@ -4,8 +4,11 @@
     # Configured when started by sway (see sway config).
     swayidle
 
+    swaybg
+
     libnotify
     wl-clipboard
+    playerctl
 
     networkmanager
     networkmanagerapplet
@@ -48,6 +51,7 @@
   ];
 
   imports = [
+    ../configs/avizo
     ../configs/fuzzel
     ../configs/mako
     ../configs/sway
