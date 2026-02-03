@@ -113,7 +113,7 @@
     config = {
       output = {
         "HDMI-A-1" = {
-          scale = "1.75";
+          scale = "1.5";
         };
       };
     };
