@@ -32,6 +32,7 @@ window#waybar {
   margin: 0 2px;
   color: @text;
   background-color: transparent;
+  border-bottom: 1px solid @violet;
 }
 
 #workspaces button:hover {
