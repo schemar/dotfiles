@@ -20,7 +20,6 @@
 
   border: none;
   border-radius: 0;
-  border-bottom: 1px solid transparent;
 }
 
 window#waybar {
@@ -31,6 +30,7 @@ window#waybar {
 #workspaces button {
   padding: 0 10px;
   margin: 0 2px;
+  color: @text;
   background-color: transparent;
 }
 
