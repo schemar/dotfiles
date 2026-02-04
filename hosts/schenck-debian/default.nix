@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }:
@@ -113,12 +114,15 @@
     config = {
       output = {
         "HDMI-A-1" = {
-          scale = "1.5";
+          scale = "2";
           bg = "#0B0A0F solid_color";
         };
       };
     };
   };
+
+  # For some reason, the scaling in wayland makes the fonts way bigger. Adjusting:
+  programs.ghostty.settings."font-size" = lib.mkForce 11.0;
 
   # Install host specific packages:
   home.packages = with pkgs; [

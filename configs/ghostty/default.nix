@@ -18,7 +18,7 @@
         "Symbols Nerd Font Mono"
       ];
 
-      "font-size" = 13;
+      "font-size" = 13.0;
 
       "font-feature" = [
         "calt=1"
