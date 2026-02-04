@@ -16,7 +16,6 @@
         ];
         modules-right = [
           "pulseaudio"
-          "bluetooth"
           "tray"
           "custom/power"
         ];

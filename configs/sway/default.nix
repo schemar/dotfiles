@@ -102,6 +102,7 @@
 
       keybindings = lib.mkOptionDefault {
         "Mod4+Shift+e" = "exec ~/.local/bin/powermenu.sh";
+        "Mod4+Shift+s" = "exec ~/.local/bin/settingsmenu.sh";
 
         "Mod4+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
         "Mod4+Shift+d" = "exec ${pkgs.bemoji}/bin/bemoji --type";
