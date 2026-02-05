@@ -28,12 +28,13 @@ in
   home-manager.users.${username} = {
     imports = [
       ../../home
+      {
+        programs.bash.shellAliases.npm = "sfw npm";
+        programs.zsh.shellAliases.npm = "sfw npm";
+        programs.nixvim.plugins.none-ls.sources.formatting.prettier.settings.command = "oxfmt";
+      }
     ];
   };
-
-  # Host-specific overrides:
-  # Use `\\npm` or `env npm` to prevent using the alias when installing sfw.
-  home-manager.extraSpecialArgs.npmAlias = "sfw npm";
 
   environment.systemPackages = [
     gdk

@@ -2,7 +2,6 @@
   inputs,
   lib,
   isDarwin,
-  npmAlias,
   ...
 }:
 {
@@ -21,7 +20,6 @@
       gtsubmit = "gt top && gt sync && gt submit && git switch -";
 
       y = "yarn";
-      npm = lib.mkIf (npmAlias != null) npmAlias;
 
       l = "lsd -al";
       ll = "lsd -al --tree";

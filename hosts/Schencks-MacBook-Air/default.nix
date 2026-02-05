@@ -17,7 +17,4 @@
       ../../home
     ];
   };
-
-  # Host-specific overrides:
-  home-manager.extraSpecialArgs.npmAlias = null;
 }

@@ -33,7 +33,6 @@
                   "--ignore-path"
                   ""
                 ];
-                command = "oxfmt";
               };
             };
           };

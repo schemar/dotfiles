@@ -77,7 +77,6 @@
           extraSpecialArgs = {
             inherit inputs username;
             isDarwin = false;
-            npmAlias = null;
           };
           modules = [
             ./hosts/schenck-debian

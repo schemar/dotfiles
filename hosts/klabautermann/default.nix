@@ -23,9 +23,6 @@
     ];
   };
 
-  # Host-specific overrides:
-  home-manager.extraSpecialArgs.npmAlias = null;
-
   # SSH configuration:
   services.openssh = {
     enable = true;
