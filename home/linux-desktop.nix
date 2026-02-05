@@ -10,6 +10,9 @@
 
     swaybg
 
+    kdePackages.breeze-gtk
+    kdePackages.breeze-icons
+
     libnotify
     wl-clipboard
     playerctl
@@ -59,7 +62,7 @@
       ''
         #!/usr/bin/env bash
 
-        choice=$(printf " Audio\n󰛳 Network\n󰂯 Bluetooth" \
+        choice=$(printf " Audio\n󰛳 Network\n󰂯 Bluetooth\n Light Mode\n Dark Mode" \
           | fuzzel -d --prompt="Power > ")
 
         case "$choice" in
@@ -72,7 +75,58 @@
           "󰂯 Bluetooth")
             blueman-manager
             ;;
+          " Light Mode")
+            "$HOME/.local/bin/lightmode.sh"
+            ;;
+          " Dark Mode")
+            "$HOME/.local/bin/darkmode.sh"
+            ;;
         esac
+      '';
+  };
+
+  home.file.".local/bin/lightmode.sh" = {
+    executable = true;
+    text = # bash
+      ''
+        #!/usr/bin/env bash
+
+        printf "light" > ~/.config/current_theme_store
+
+        lookandfeeltool -a org.kde.breeze.desktop
+        gsettings set org.gnome.desktop.interface gtk-theme Breeze
+        gsettings set org.gnome.desktop.interface icon-theme breeze
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
+
+        tmux source-file ~/.config/tmux/tmux.conf
+        pkill -USR1 zsh
+      '';
+  };
+  home.file.".local/bin/darkmode.sh" = {
+    executable = true;
+    text = # bash
+      ''
+        #!/usr/bin/env bash
+
+        printf "light" > ~/.config/current_theme_store
+
+        lookandfeeltool -a org.kde.breeze.desktop
+        gsettings set org.gnome.desktop.interface gtk-theme Breeze
+        gsettings set org.gnome.desktop.interface icon-theme breeze
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
+
+        tmux source-file ~/.config/tmux/tmux.conf
+        pkill -USR1 zsh
+
+        printf "dark" > ~/.config/current_theme_store
+
+        lookandfeeltool -a org.kde.breezedark.desktop
+        gsettings set org.gnome.desktop.interface gtk-theme Breeze-Dark
+        gsettings set org.gnome.desktop.interface icon-theme breeze-dark
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
+        tmux source-file ~/.config/tmux/tmux.conf
+        pkill -USR1 zsh
       '';
   };
 
