@@ -155,6 +155,9 @@
         bind v split-window -v
         bind s split-window -h
 
+        # session selection menu
+        bind S run-shell ${./config/switch-session.sh}
+
         # use <prefix> z to (un)zoom current pane
         bind z resize-pane -Z
         # use C-b to go to last pane and zoom
