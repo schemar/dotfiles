@@ -10,6 +10,7 @@
 
     swaybg
 
+    kdePackages.breeze
     kdePackages.breeze-gtk
     kdePackages.breeze-icons
 
@@ -63,7 +64,7 @@
         #!/usr/bin/env bash
 
         choice=$(printf " Audio\n󰛳 Network\n󰂯 Bluetooth\n Light Mode\n Dark Mode" \
-          | fuzzel -d --prompt="Power > ")
+          | fuzzel -d --prompt="Settings > ")
 
         case "$choice" in
           " Audio")
@@ -94,8 +95,8 @@
         printf "light" > ~/.config/current_theme_store
 
         lookandfeeltool -a org.kde.breeze.desktop
-        gsettings set org.gnome.desktop.interface gtk-theme Breeze
-        gsettings set org.gnome.desktop.interface icon-theme breeze
+        gsettings set org.gnome.desktop.interface gtk-theme 'Breeze'
+        gsettings set org.gnome.desktop.interface icon-theme 'breeze'
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
 
         tmux source-file ~/.config/tmux/tmux.conf
@@ -108,21 +109,11 @@
       ''
         #!/usr/bin/env bash
 
-        printf "light" > ~/.config/current_theme_store
-
-        lookandfeeltool -a org.kde.breeze.desktop
-        gsettings set org.gnome.desktop.interface gtk-theme Breeze
-        gsettings set org.gnome.desktop.interface icon-theme breeze
-        gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
-
-        tmux source-file ~/.config/tmux/tmux.conf
-        pkill -USR1 zsh
-
         printf "dark" > ~/.config/current_theme_store
 
         lookandfeeltool -a org.kde.breezedark.desktop
-        gsettings set org.gnome.desktop.interface gtk-theme Breeze-Dark
-        gsettings set org.gnome.desktop.interface icon-theme breeze-dark
+        gsettings set org.gnome.desktop.interface gtk-theme 'Breeze-Dark'
+        gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark'
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
         tmux source-file ~/.config/tmux/tmux.conf
@@ -139,6 +130,7 @@
   imports = [
     ../configs/avizo
     ../configs/fuzzel
+    ../configs/gtk
     ../configs/mako
     ../configs/sway
     ../configs/swaylock
