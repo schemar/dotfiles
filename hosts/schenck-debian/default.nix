@@ -115,7 +115,7 @@
       output = {
         "HDMI-A-1" = {
           scale = "2";
-          bg = "#0B0A0F solid_color";
+          bg = "${../../assets/images/neil-rosenstech-1o4Z1EwCkaY-unsplash.jpg} fill";
         };
       };
     };
