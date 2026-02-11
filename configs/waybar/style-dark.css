@@ -114,8 +114,6 @@ tooltip {
   margin-right: 0;
 }
 
-#battery {}
-
 #battery.charging,
 #battery.plugged {
   background-color: @green;
@@ -168,31 +166,17 @@ label:focus {
   background: @surface1;
 }
 
-#cpu {}
-
-#memory {}
-
-#disk {}
-
-#backlight {}
-
-#network {}
-
 #network.disconnected {
   background-color: @red;
   color: @background;
   border-top: 1px solid @red;
 }
 
-#pulseaudio {}
-
 #pulseaudio.muted {
   background-color: @orange;
   color: @background;
   border-top: 1px solid @orange;
 }
-
-#wireplumber {}
 
 #wireplumber.muted {
   background-color: @orange;
@@ -203,16 +187,6 @@ label:focus {
 #custom-media {
   min-width: 100px;
 }
-
-#custom-media.custom-spotify {}
-
-#custom-media.custom-vlc {}
-
-#temperature {}
-
-#temperature.critical {}
-
-#tray {}
 
 #tray>.passive {
   -gtk-icon-effect: dim;
@@ -225,23 +199,17 @@ label:focus {
   border-top: 1px solid @red;
 }
 
-#idle_inhibitor {}
-
 #idle_inhibitor.activated {
   background-color: @orange;
   color: @background;
   border-top: 1px solid @orange;
 }
 
-#mpd {}
-
 #mpd.disconnected {
   background-color: @red;
   color: @background;
   border-top: 1px solid @red;
 }
-
-#mpd.stopped {}
 
 #mpd.paused {
   background-color: @green;
@@ -261,13 +229,9 @@ label:focus {
   padding: 0 5px;
 }
 
-#keyboard-state>label.locked {}
-
 #scratchpad {
   border-top: 1px solid @green;
 }
-
-#scratchpad.empty {}
 
 #privacy {
   padding: 0;
