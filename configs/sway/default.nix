@@ -101,6 +101,8 @@
       };
 
       keybindings = lib.mkOptionDefault {
+        "Mod4+Shift+a" = "focus child";
+
         "Mod4+Shift+e" = "exec ~/.local/bin/powermenu.sh";
         "Mod4+Shift+s" = "exec ~/.local/bin/settingsmenu.sh";
 
