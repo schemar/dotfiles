@@ -3,25 +3,15 @@
   programs.nixvim = {
     lsp = {
       servers = {
-        elixirls = {
-          enable = true;
-          config = {
-            cmd = [ "elixir-ls" ];
-          };
-        };
+        marksman.enable = true;
       };
     };
     plugins = {
       none-ls = {
         enable = true;
         sources = {
-          diagnostics = {
-            credo = {
-              enable = true;
-            };
-          };
           formatting = {
-            mix = {
+            prettier = {
               enable = true;
             };
           };
@@ -30,13 +20,11 @@
       lsp-format = {
         lspServersToEnable = [
           "null-ls"
-          "elixirls"
         ];
 
         settings = {
-          elixir = {
+          markdown = {
             order = [
-              "elixir-ls"
               "null-ls"
             ];
             sync = true;

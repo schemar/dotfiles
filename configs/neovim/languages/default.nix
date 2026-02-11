@@ -7,6 +7,7 @@
     ./json.nix
     ./just.nix
     ./lua.nix
+    ./markdown.nix
     ./nix.nix
     ./shell.nix
     ./typescript.nix
