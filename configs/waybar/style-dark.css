@@ -1,15 +1,21 @@
-@define-color background #191724;
-@define-color surface0 #0B0A0F;
-@define-color surface2 #37363E;
-@define-color text #A2A2A9;
 @define-color red #DF8BA0;
-@define-color green #75B087;
 @define-color yellow #C7B96F;
+@define-color orange #C79A76;
+@define-color green #75B087;
+@define-color teal #5EB1AF;
 @define-color blue #7AA8CE;
 @define-color violet #A19DD4;
-@define-color teal #5EB1AF;
-@define-color orange #C79A76;
-@define-color pink #C394c2;
+@define-color pink #C394C2;
+@define-color text #A2A2A9;
+@define-color subtext #878794;
+@define-color overlay2 #7D7D7D;
+@define-color overlay1 #808084;
+@define-color overlay0 #84848C;
+@define-color dimmed #7C7992;
+@define-color surface2 #37363E;
+@define-color surface1 #37363E;
+@define-color background #191724;
+@define-color surface0 #0B0A0F;
 
 * {
   font-family:
@@ -17,29 +23,39 @@
     OpenMoji Color,
     Symbols Nerd Font Mono;
   font-size: 11pt;
-
-  border: none;
-  border-radius: 0;
+  font-weight: 600;
 }
 
 window#waybar {
   background-color: @background;
   color: @text;
+  border: none;
+  border-radius: 0;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+button {
+  /* Avoid rounded borders under each button name */
+  border: none;
+  border-radius: 0;
 }
 
 #workspaces button {
   padding: 0 10px;
-  margin: 0 2px;
+  margin: 0 5px;
   color: @text;
-  background-color: transparent;
-  border-bottom: 2px solid @violet;
+  border-top: 1px solid @violet;
 }
 
 #workspaces button:hover {
-  background: @surface2;
+  background: @surface1;
 }
 
-#workspaces button.focused {
+#workspaces button.focused,
+#workspaces button.active {
   background-color: @violet;
   color: @background;
 }
@@ -47,41 +63,234 @@ window#waybar {
 #workspaces button.urgent {
   background-color: @red;
   color: @background;
+  border-top: 1px solid @red;
 }
 
 #mode {
-  padding: 0 10px;
-  margin: 0 2px;
   background-color: @blue;
   color: @background;
+  border-top: 1px solid @blue;
 }
 
-#clock {
+#backlight,
+#battery,
+#bluetooth,
+#clock,
+#cpu,
+#custom-media,
+#custom-power,
+#disk,
+#idle_inhibitor,
+#memory,
+#mode,
+#mpd,
+#network,
+#power-profiles-daemon,
+#pulseaudio,
+#scratchpad,
+#temperature,
+#tray,
+#wireplumber {
   padding: 0 10px;
-  margin: 0 2px;
-  border-bottom: 2px solid @blue;
+  margin: 0 5px;
+  border-top: 1px solid @violet;
 }
 
-#pulseaudio {
-  padding: 0 10px;
-  margin: 0 2px;
-  border-bottom: 2px solid @green;
+tooltip {
+  background-color: @surface0;
+  color: @text;
+  border: 1px solid @violet;
+  border-radius: 8px;
+  padding: 8px;
 }
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left>widget:first-child>#workspaces {
+  margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right>widget:last-child>#workspaces {
+  margin-right: 0;
+}
+
+#battery {}
+
+#battery.charging,
+#battery.plugged {
+  background-color: @green;
+  color: @background;
+  border-top: 1px solid @green;
+}
+
+@keyframes blink {
+  to {
+    color: @background;
+    background-color: @text;
+    border-top: 1px solid @text;
+  }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+  background-color: @red;
+  color: @background;
+  border-top: 1px solid @red;
+}
+
+#power-profiles-daemon {
+  padding-right: 15px;
+}
+
+#power-profiles-daemon.performance {
+  background-color: @red;
+  color: @background;
+  border-top: 1px solid @red;
+}
+
+#power-profiles-daemon.balanced {
+  background-color: @blue;
+  color: @background;
+  border-top: 1px solid @blue;
+}
+
+#power-profiles-daemon.power-saver {
+  background-color: @green;
+  color: @background;
+  border-top: 1px solid @green;
+}
+
+label:focus {
+  background-color: @background;
+}
+
+#custom-power:hover {
+  background: @surface1;
+}
+
+#cpu {}
+
+#memory {}
+
+#disk {}
+
+#backlight {}
+
+#network {}
+
+#network.disconnected {
+  background-color: @red;
+  color: @background;
+  border-top: 1px solid @red;
+}
+
+#pulseaudio {}
 
 #pulseaudio.muted {
-  padding: 0 10px;
-  margin: 0 2px;
-  border-bottom: 2px solid @red;
+  background-color: @red;
+  color: @background;
+  border-top: 1px solid @red;
 }
 
-#tray {
-  padding: 0 10px;
-  margin: 0 2px;
-  border-bottom: 2px solid @blue;
+#wireplumber {}
+
+#wireplumber.muted {
+  background-color: @red;
+  color: @background;
+  border-top: 1px solid @red;
 }
 
-#custom-power {
-  padding: 0 10px;
-  margin: 0 2px;
-  border-bottom: 2px solid @violet;
+#custom-media {
+  min-width: 100px;
+}
+
+#custom-media.custom-spotify {}
+
+#custom-media.custom-vlc {}
+
+#temperature {}
+
+#temperature.critical {}
+
+#tray {}
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: @red;
+  color: @background;
+  border-top: 1px solid @red;
+}
+
+#idle_inhibitor {}
+
+#idle_inhibitor.activated {
+  background-color: @text;
+  color: @background;
+  border-top: 1px solid @text;
+}
+
+#mpd {}
+
+#mpd.disconnected {
+  background-color: @red;
+  color: @background;
+  border-top: 1px solid @red;
+}
+
+#mpd.stopped {}
+
+#mpd.paused {
+  background-color: @green;
+  color: @background;
+  border-top: 1px solid @green;
+}
+
+#language {
+  min-width: 16px;
+}
+
+#keyboard-state {
+  min-width: 16px;
+}
+
+#keyboard-state>label {
+  padding: 0 5px;
+}
+
+#keyboard-state>label.locked {}
+
+#scratchpad {
+  border-top: 1px solid @green;
+}
+
+#scratchpad.empty {}
+
+#privacy {
+  padding: 0;
+}
+
+#privacy-item {
+  padding: 0 5px;
+}
+
+#privacy-item.screenshare {
+  background-color: @orange;
+  color: @background;
+  border-top: 1px solid @orange;
+}
+
+#privacy-item.audio-in {
+  background-color: @green;
+  color: @background;
+  border-top: 1px solid @green;
+}
+
+#privacy-item.audio-out {
+  background-color: @blue;
+  color: @background;
+  border-top: 1px solid @blue;
 }

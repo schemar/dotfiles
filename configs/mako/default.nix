@@ -9,7 +9,7 @@
       text-color = "#A2A2A9";
       width = "600";
       height = "80";
-      border-size = "2";
+      border-size = "1";
       border-color = "#A19DD4FF";
       border-radius = "8";
       progress-color = "over #A19DD4FF";

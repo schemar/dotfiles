@@ -25,7 +25,7 @@
       colors.counter = "A19DD4FF";
       colors.border = "A19DD4FF";
 
-      border.width = "2";
+      border.width = "1";
       border.radius = "8";
     };
   };
