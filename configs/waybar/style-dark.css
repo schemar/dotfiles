@@ -187,17 +187,17 @@ label:focus {
 #pulseaudio {}
 
 #pulseaudio.muted {
-  background-color: @red;
+  background-color: @orange;
   color: @background;
-  border-top: 1px solid @red;
+  border-top: 1px solid @orange;
 }
 
 #wireplumber {}
 
 #wireplumber.muted {
-  background-color: @red;
+  background-color: @orange;
   color: @background;
-  border-top: 1px solid @red;
+  border-top: 1px solid @orange;
 }
 
 #custom-media {
@@ -228,9 +228,9 @@ label:focus {
 #idle_inhibitor {}
 
 #idle_inhibitor.activated {
-  background-color: @text;
+  background-color: @orange;
   color: @background;
-  border-top: 1px solid @text;
+  border-top: 1px solid @orange;
 }
 
 #mpd {}

@@ -16,6 +16,7 @@
           "mpd"
         ];
         modules-right = [
+          "cpu"
           "memory"
           "network"
           "pulseaudio"
@@ -28,7 +29,7 @@
         ];
 
         clock = {
-          format = "{0:%Y-%m-%d} {0:%H:%M}";
+          format = " {0:%Y-%m-%d} {0:%H:%M}";
           locale = "de_DE";
           tooltip-format = "<tt><small>{calendar}</small></tt>";
           calendar = {
@@ -44,6 +45,37 @@
               today = "<span color='#5EB1AF'><b><u>{}</u></b></span>";
             };
           };
+        };
+
+        cpu = {
+          format = " {usage}%";
+        };
+
+        memory = {
+          format = " {percentage}%";
+        };
+
+        network = {
+          format = "{ifname}";
+          format-ethernet = "󰈀 {ipaddr}";
+          format-wifi = "󰖩 {essid}";
+          format-disconnected = "󰖪";
+          tooltip-format = "{ifname} via {gwaddr}";
+          tooltip-format-wifi = "{signalStrength}%";
+          tooltip-format-ethernet = "{ifname}";
+          tooltip-format-disconnected = "Disconnected";
+          max-length = 50;
+          on-click = "nm-connection-editor";
+        };
+
+        bluetooth = {
+          format = "󰂯 {status}";
+          format-disabled = "󰂲";
+          format-connected = " {num_connections} connected";
+          tooltip-format = "{controller_alias}\t{controller_address}";
+          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
+          tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+          on-click = "blueman-manager";
         };
 
         pulseaudio = {
@@ -68,6 +100,14 @@
           "on-click-right" = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
           "on-scroll-up" = "pactl set-sink-volume @DEFAULT_SINK@ +2%";
           "on-scroll-down" = "pactl set-sink-volume @DEFAULT_SINK@ -2%";
+        };
+
+        idle_inhibitor = {
+          format = "{icon}";
+          format-icons = {
+            activated = "";
+            deactivated = "";
+          };
         };
 
         "custom/power" = {
