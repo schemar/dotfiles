@@ -21,6 +21,8 @@
     monaspace
     nerd-fonts.symbols-only
     openmoji-color
+    open-sans
+    source-serif
   ];
 
   imports = [
