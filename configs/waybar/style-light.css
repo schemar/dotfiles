@@ -1,0 +1,240 @@
+@define-color red #C34165;
+@define-color yellow #8A7400;
+@define-color orange #AC591C;
+@define-color green #288043;
+@define-color teal #007E7D;
+@define-color blue #1675AB;
+@define-color violet #6A67B4;
+@define-color pink #A352A0;
+@define-color text #5B5B5B;
+@define-color subtext #908A84;
+@define-color overlay2 #707070;
+@define-color overlay1 #646464;
+@define-color overlay0 #585858;
+@define-color dimmed #9C8282;
+@define-color surface2 #E8DFD4;
+@define-color surface1 #F1ECE5;
+@define-color background #FAF4ED;
+@define-color surface0 #FFFAF0;
+
+* {
+  font-family:
+    Monaspace Neon,
+    OpenMoji Color,
+    Symbols Nerd Font Mono;
+  font-size: 11pt;
+  font-weight: 600;
+}
+
+window#waybar {
+  background-color: @surface0;
+  color: @text;
+  border: none;
+  border-bottom: 1px solid @violet;
+  border-radius: 0;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+button {
+  /* Avoid rounded borders under each button name */
+  border: none;
+  border-radius: 0;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+  background-color: @violet;
+  color: @surface0;
+}
+
+#workspaces button.urgent {
+  background-color: @red;
+  color: @surface0;
+}
+
+#mode {
+  background-color: @blue;
+  color: @surface0;
+}
+
+#backlight,
+#battery,
+#bluetooth,
+#clock,
+#cpu,
+#custom-media,
+#custom-power,
+#disk,
+#idle_inhibitor,
+#memory,
+#mode,
+#mpd,
+#network,
+#power-profiles-daemon,
+#pulseaudio,
+#scratchpad,
+#sway-window,
+#temperature,
+#tray,
+#wireplumber,
+#workspaces button {
+  padding: 0 10px;
+  margin: 0 2px;
+  color: @text;
+}
+
+/* Clickable: */
+#bluetooth:hover,
+#custom-power:hover,
+#idle_inhibitor:hover,
+#network:hover,
+#pulseaudio:hover,
+#workspaces button:hover {}
+
+tooltip {
+  background-color: @surface0;
+  color: @text;
+  border: 1px solid @violet;
+  border-radius: 0;
+  padding: 8px;
+  box-shadow: none;
+}
+
+tooltip * {
+  color: @text;
+  box-shadow: none;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left>widget:first-child>#workspaces {
+  margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right>widget:last-child>#workspaces {
+  margin-right: 0;
+}
+
+#battery.charging,
+#battery.plugged {
+  background-color: @green;
+  color: @surface0;
+}
+
+@keyframes blink {
+  to {
+    color: @surface0;
+    background-color: @text;
+  }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+  background-color: @red;
+  color: @surface0;
+}
+
+#power-profiles-daemon {
+  padding-right: 15px;
+}
+
+#power-profiles-daemon.performance {
+  background-color: @red;
+  color: @surface0;
+}
+
+#power-profiles-daemon.balanced {
+  background-color: @blue;
+  color: @surface0;
+}
+
+#power-profiles-daemon.power-saver {
+  background-color: @green;
+  color: @surface0;
+}
+
+label:focus {
+  background-color: @surface0;
+}
+
+#network.disconnected {
+  background-color: @red;
+  color: @surface0;
+}
+
+#pulseaudio.muted {
+  background-color: @orange;
+  color: @surface0;
+}
+
+#wireplumber.muted {
+  background-color: @orange;
+  color: @surface0;
+}
+
+#custom-media {
+  min-width: 100px;
+}
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: @red;
+  color: @surface0;
+}
+
+#idle_inhibitor.activated {
+  background-color: @orange;
+  color: @surface0;
+}
+
+#mpd.disconnected {
+  background-color: @red;
+  color: @surface0;
+}
+
+#mpd.paused {
+  background-color: @green;
+  color: @surface0;
+}
+
+#language {
+  min-width: 16px;
+}
+
+#keyboard-state {
+  min-width: 16px;
+}
+
+#keyboard-state>label {
+  padding: 0 5px;
+}
+
+#privacy {
+  padding: 0;
+}
+
+#privacy-item {
+  padding: 0 5px;
+}
+
+#privacy-item.screenshare {
+  background-color: @orange;
+  color: @surface0;
+}
+
+#privacy-item.audio-in {
+  background-color: @green;
+  color: @surface0;
+}
+
+#privacy-item.audio-out {
+  background-color: @blue;
+  color: @surface0;
+}
