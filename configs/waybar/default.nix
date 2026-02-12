@@ -138,10 +138,7 @@
     };
   };
 
-  xdg.configFile."waybar/style-light.css" = {
-    source = ./style-light.css;
-  };
-  xdg.configFile."waybar/style-dark.css" = {
-    source = ./style-dark.css;
+  xdg.configFile."waybar/style.css" = {
+    source = ./style.css;
   };
 }

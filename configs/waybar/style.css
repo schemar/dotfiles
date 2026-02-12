@@ -7,6 +7,7 @@
 @define-color violet #A19DD4;
 @define-color pink #C394C2;
 @define-color text #A2A2A9;
+@define-color textbright #F1ECE5;
 @define-color subtext #878794;
 @define-color overlay2 #7D7D7D;
 @define-color overlay1 #808084;
@@ -27,8 +28,8 @@
 }
 
 window#waybar {
-  background-color: @background;
-  color: @text;
+  background-color: transparent;
+  color: @textbright;
   border: none;
   border-radius: 0;
 }
@@ -43,29 +44,19 @@ button {
   border-radius: 0;
 }
 
-#workspaces button {
-  padding: 0 10px;
-  margin: 0 5px;
-  color: @text;
-  border-top: 1px solid @violet;
-}
-
 #workspaces button.focused,
 #workspaces button.active {
-  background-color: @violet;
-  color: @background;
+  border-top: 2px solid @violet;
 }
 
 #workspaces button.urgent {
   background-color: @red;
   color: @background;
-  border-top: 1px solid @red;
 }
 
 #mode {
   background-color: @blue;
   color: @background;
-  border-top: 1px solid @blue;
 }
 
 #backlight,
@@ -86,10 +77,10 @@ button {
 #scratchpad,
 #temperature,
 #tray,
-#wireplumber {
+#wireplumber,
+#workspaces button {
   padding: 0 10px;
-  margin: 0 5px;
-  border-top: 1px solid @violet;
+  margin: 0 2px;
 }
 
 /* Clickable: */
@@ -98,10 +89,7 @@ button {
 #idle_inhibitor:hover,
 #network:hover,
 #pulseaudio:hover,
-#workspaces button:hover {
-  background: @surface1;
-  color: @text;
-}
+#workspaces button:hover {}
 
 tooltip {
   background-color: @surface0;
@@ -131,14 +119,12 @@ tooltip * {
 #battery.plugged {
   background-color: @green;
   color: @background;
-  border-top: 1px solid @green;
 }
 
 @keyframes blink {
   to {
     color: @background;
     background-color: @text;
-    border-top: 1px solid @text;
   }
 }
 
@@ -146,7 +132,6 @@ tooltip * {
 #battery.critical:not(.charging) {
   background-color: @red;
   color: @background;
-  border-top: 1px solid @red;
 }
 
 #power-profiles-daemon {
@@ -156,19 +141,16 @@ tooltip * {
 #power-profiles-daemon.performance {
   background-color: @red;
   color: @background;
-  border-top: 1px solid @red;
 }
 
 #power-profiles-daemon.balanced {
   background-color: @blue;
   color: @background;
-  border-top: 1px solid @blue;
 }
 
 #power-profiles-daemon.power-saver {
   background-color: @green;
   color: @background;
-  border-top: 1px solid @green;
 }
 
 label:focus {
@@ -178,19 +160,16 @@ label:focus {
 #network.disconnected {
   background-color: @red;
   color: @background;
-  border-top: 1px solid @red;
 }
 
 #pulseaudio.muted {
   background-color: @orange;
   color: @background;
-  border-top: 1px solid @orange;
 }
 
 #wireplumber.muted {
   background-color: @orange;
   color: @background;
-  border-top: 1px solid @orange;
 }
 
 #custom-media {
@@ -205,25 +184,21 @@ label:focus {
   -gtk-icon-effect: highlight;
   background-color: @red;
   color: @background;
-  border-top: 1px solid @red;
 }
 
 #idle_inhibitor.activated {
   background-color: @orange;
   color: @background;
-  border-top: 1px solid @orange;
 }
 
 #mpd.disconnected {
   background-color: @red;
   color: @background;
-  border-top: 1px solid @red;
 }
 
 #mpd.paused {
   background-color: @green;
   color: @background;
-  border-top: 1px solid @green;
 }
 
 #language {
@@ -238,10 +213,6 @@ label:focus {
   padding: 0 5px;
 }
 
-#scratchpad {
-  border-top: 1px solid @green;
-}
-
 #privacy {
   padding: 0;
 }
@@ -253,17 +224,14 @@ label:focus {
 #privacy-item.screenshare {
   background-color: @orange;
   color: @background;
-  border-top: 1px solid @orange;
 }
 
 #privacy-item.audio-in {
   background-color: @green;
   color: @background;
-  border-top: 1px solid @green;
 }
 
 #privacy-item.audio-out {
   background-color: @blue;
   color: @background;
-  border-top: 1px solid @blue;
 }
