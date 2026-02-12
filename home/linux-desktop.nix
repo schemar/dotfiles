@@ -28,6 +28,7 @@
     wtype # Type on wayland like xdotool; used by bemoji
 
     eog # eye of gnome image viewer
+    todoist-electron
   ];
 
   home.file.".local/bin/powermenu.sh" = {
