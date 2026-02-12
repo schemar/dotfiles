@@ -4,6 +4,10 @@
     enable = true;
   };
 
+  home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
+
   home.packages = with pkgs; [
     # Configured when started by sway (see sway config).
     swayidle
