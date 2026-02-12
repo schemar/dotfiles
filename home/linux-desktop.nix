@@ -35,7 +35,6 @@
     eog # eye of gnome image viewer
     gimp
     obsidian
-    qutebrowser
     todoist-electron
   ];
 
@@ -143,6 +142,7 @@
     ../configs/fuzzel
     ../configs/gtk
     ../configs/mako
+    ../configs/qutebrowser
     ../configs/sway
     ../configs/swaylock
     ../configs/waybar
