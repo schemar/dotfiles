@@ -5,7 +5,7 @@
   };
 
   home.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
+    NIXOS_OZONE_WL = "1"; # Enable wayland for Chrome (Electron) apps (e.g. Todoist).
   };
 
   home.packages = with pkgs; [
