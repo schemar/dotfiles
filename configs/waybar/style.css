@@ -7,7 +7,6 @@
 @define-color violet #A19DD4;
 @define-color pink #C394C2;
 @define-color text #A2A2A9;
-@define-color textbright #F1ECE5;
 @define-color subtext #878794;
 @define-color overlay2 #7D7D7D;
 @define-color overlay1 #808084;
@@ -28,9 +27,10 @@
 }
 
 window#waybar {
-  background-color: transparent;
-  color: @textbright;
+  background-color: @surface0;
+  color: @text;
   border: none;
+  border-bottom: 1px solid @violet;
   border-radius: 0;
 }
 
@@ -46,17 +46,18 @@ button {
 
 #workspaces button.focused,
 #workspaces button.active {
-  border-top: 2px solid @violet;
+  background-color: @violet;
+  color: @surface0;
 }
 
 #workspaces button.urgent {
   background-color: @red;
-  color: @background;
+  color: @surface0;
 }
 
 #mode {
   background-color: @blue;
-  color: @background;
+  color: @surface0;
 }
 
 #backlight,
@@ -75,12 +76,14 @@ button {
 #power-profiles-daemon,
 #pulseaudio,
 #scratchpad,
+#sway-window,
 #temperature,
 #tray,
 #wireplumber,
 #workspaces button {
   padding: 0 10px;
   margin: 0 2px;
+  color: @text;
 }
 
 /* Clickable: */
@@ -118,12 +121,12 @@ tooltip * {
 #battery.charging,
 #battery.plugged {
   background-color: @green;
-  color: @background;
+  color: @surface0;
 }
 
 @keyframes blink {
   to {
-    color: @background;
+    color: @surface0;
     background-color: @text;
   }
 }
@@ -131,7 +134,7 @@ tooltip * {
 /* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
   background-color: @red;
-  color: @background;
+  color: @surface0;
 }
 
 #power-profiles-daemon {
@@ -140,36 +143,36 @@ tooltip * {
 
 #power-profiles-daemon.performance {
   background-color: @red;
-  color: @background;
+  color: @surface0;
 }
 
 #power-profiles-daemon.balanced {
   background-color: @blue;
-  color: @background;
+  color: @surface0;
 }
 
 #power-profiles-daemon.power-saver {
   background-color: @green;
-  color: @background;
+  color: @surface0;
 }
 
 label:focus {
-  background-color: @background;
+  background-color: @surface0;
 }
 
 #network.disconnected {
   background-color: @red;
-  color: @background;
+  color: @surface0;
 }
 
 #pulseaudio.muted {
   background-color: @orange;
-  color: @background;
+  color: @surface0;
 }
 
 #wireplumber.muted {
   background-color: @orange;
-  color: @background;
+  color: @surface0;
 }
 
 #custom-media {
@@ -183,22 +186,22 @@ label:focus {
 #tray>.needs-attention {
   -gtk-icon-effect: highlight;
   background-color: @red;
-  color: @background;
+  color: @surface0;
 }
 
 #idle_inhibitor.activated {
   background-color: @orange;
-  color: @background;
+  color: @surface0;
 }
 
 #mpd.disconnected {
   background-color: @red;
-  color: @background;
+  color: @surface0;
 }
 
 #mpd.paused {
   background-color: @green;
-  color: @background;
+  color: @surface0;
 }
 
 #language {
@@ -223,15 +226,15 @@ label:focus {
 
 #privacy-item.screenshare {
   background-color: @orange;
-  color: @background;
+  color: @surface0;
 }
 
 #privacy-item.audio-in {
   background-color: @green;
-  color: @background;
+  color: @surface0;
 }
 
 #privacy-item.audio-out {
   background-color: @blue;
-  color: @background;
+  color: @surface0;
 }

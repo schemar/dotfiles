@@ -14,6 +14,7 @@
         ];
         modules-center = [
           "mpd"
+          "sway/window"
         ];
         modules-right = [
           "cpu"
