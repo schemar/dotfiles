@@ -26,7 +26,7 @@
       colors.border = "A19DD4FF";
 
       border.width = "1";
-      border.radius = "8";
+      border.radius = "0";
     };
   };
 }

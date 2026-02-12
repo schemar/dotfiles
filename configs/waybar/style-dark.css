@@ -50,10 +50,6 @@ button {
   border-top: 1px solid @violet;
 }
 
-#workspaces button:hover {
-  background: @surface1;
-}
-
 #workspaces button.focused,
 #workspaces button.active {
   background-color: @violet;
@@ -96,16 +92,29 @@ button {
   border-top: 1px solid @violet;
 }
 
+/* Clickable: */
+#bluetooth:hover,
+#clock:hover,
+#custom-power:hover,
+#idle_inhibitor:hover,
+#network:hover,
+#pulseaudio:hover,
+#workspaces button:hover {
+  background: @surface1;
+}
+
 tooltip {
   background-color: @surface0;
   color: @text;
   border: 1px solid @violet;
-  border-radius: 8px;
+  border-radius: 0;
   padding: 8px;
+  box-shadow: none;
 }
 
-tooltip label {
+tooltip * {
   color: @text;
+  box-shadow: none;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -164,10 +173,6 @@ tooltip label {
 
 label:focus {
   background-color: @background;
-}
-
-#custom-power:hover {
-  background: @surface1;
 }
 
 #network.disconnected {

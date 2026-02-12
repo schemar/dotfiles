@@ -9,9 +9,10 @@
       text-color = "#A2A2A9";
       width = "600";
       height = "80";
+      margin = "6";
       border-size = "1";
       border-color = "#A19DD4FF";
-      border-radius = "8";
+      border-radius = "0";
       progress-color = "over #A19DD4FF";
       padding = "8";
     };

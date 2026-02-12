@@ -42,7 +42,7 @@
               days = "<span color='#A2A2A9'><b>{}</b></span>";
               weeks = "<span color='#878794'><b>W{}</b></span>";
               weekdays = "<span color='#878794'><b>{}</b></span>";
-              today = "<span color='#5EB1AF'><b><u>{}</u></b></span>";
+              today = "<span color='#7AA8CE'><b><u>{}</u></b></span>";
             };
           };
         };
@@ -57,12 +57,12 @@
 
         network = {
           format = "{ifname}";
-          format-ethernet = "󰈀 {ipaddr}";
-          format-wifi = "󰖩 {essid}";
+          format-ethernet = "󰈀";
+          format-wifi = "󰖩";
           format-disconnected = "󰖪";
           tooltip-format = "{ifname} via {gwaddr}";
-          tooltip-format-wifi = "{signalStrength}%";
-          tooltip-format-ethernet = "{ifname}";
+          tooltip-format-wifi = "{essid} ({signalStrength}%)";
+          tooltip-format-ethernet = "{ipaddr} ({ifname})";
           tooltip-format-disconnected = "Disconnected";
           max-length = 50;
           on-click = "nm-connection-editor";
@@ -108,6 +108,11 @@
             activated = "";
             deactivated = "";
           };
+        };
+
+        "sway/scratchpad" = {
+          format = "{icon} {count}";
+          format-icons = "󱞞";
         };
 
         "custom/power" = {
