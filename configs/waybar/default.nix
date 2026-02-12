@@ -29,7 +29,7 @@
         ];
 
         clock = {
-          format = " {0:%Y-%m-%d} {0:%H:%M}";
+          format = "{0:%Y-%m-%d} {0:%H:%M}";
           locale = "de_DE";
           tooltip-format = "<tt><small>{calendar}</small></tt>";
           calendar = {
@@ -48,11 +48,11 @@
         };
 
         cpu = {
-          format = " {usage}%";
+          format = "{usage}% ";
         };
 
         memory = {
-          format = " {percentage}%";
+          format = "{percentage}% ";
         };
 
         network = {
@@ -69,9 +69,9 @@
         };
 
         bluetooth = {
-          format = "󰂯 {status}";
+          format = "{status} 󰂯";
           format-disabled = "󰂲";
-          format-connected = " {num_connections} connected";
+          format-connected = "{num_connections} connected ";
           tooltip-format = "{controller_alias}\t{controller_address}";
           tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
           tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
@@ -79,9 +79,9 @@
         };
 
         pulseaudio = {
-          format = "{icon} {volume}%";
-          "format-bluetooth" = "󰂰 {volume}%";
-          "format-bluetooth-muted" = "󰂲 {icon}";
+          format = "{volume}% {icon}";
+          "format-bluetooth" = "{volume}% 󰂰";
+          "format-bluetooth-muted" = "{icon} 󰂲";
           "format-muted" = "󰝟";
           "format-icons" = {
             "headphone" = "󰋋";
@@ -111,7 +111,7 @@
         };
 
         "sway/scratchpad" = {
-          format = "{icon} {count}";
+          format = "{count} {icon}";
           format-icons = "󱞞";
         };
 
@@ -130,7 +130,7 @@
 
         "custom/power" = {
           format = "";
-          tooltip = "Power menu";
+          tooltip-format = "Power menu";
           on-click = "~/.local/bin/powermenu.sh";
           on-click-right = "swaylock";
         };
