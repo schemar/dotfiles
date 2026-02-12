@@ -94,13 +94,13 @@ button {
 
 /* Clickable: */
 #bluetooth:hover,
-#clock:hover,
 #custom-power:hover,
 #idle_inhibitor:hover,
 #network:hover,
 #pulseaudio:hover,
 #workspaces button:hover {
   background: @surface1;
+  color: @text;
 }
 
 tooltip {
