@@ -27,6 +27,8 @@ nix-flake-update:
 
 nix-upgrade: nix-flake-update nix-switch
 
+hm-upgrade: nix-flake-update hm-switch
+
 upgrade: brew-upgrade nix-upgrade
 
 theme-dark:
