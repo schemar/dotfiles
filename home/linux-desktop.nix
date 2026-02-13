@@ -143,7 +143,7 @@
     ../configs/gtk
     ../configs/mako
     ../configs/qutebrowser
-    ../configs/sway
+    ../configs/sway-i3/sway.nix
     ../configs/swaylock
     ../configs/waybar
   ];
