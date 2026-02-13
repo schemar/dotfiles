@@ -4,15 +4,16 @@
     enable = true;
   };
 
-  home.sessionVariables = {
-    NIXOS_OZONE_WL = "1"; # Enable wayland for Chrome (Electron) apps (e.g. Todoist).
-  };
-
   home.packages = with pkgs; [
-    # Configured when started by sway (see sway config).
+    # Sway
+    # Configured when started by sway (see sway config):
     swayidle
-
     swaybg
+
+    # i3
+    i3status
+    feh
+    rofi
 
     kdePackages.breeze
     kdePackages.breeze-gtk
@@ -44,8 +45,22 @@
       ''
         #!/usr/bin/env bash
 
-        choice=$(printf "󰗼 Lock\n󰍃 Logout\n󰜉 Reboot\n󰐥 Shutdown\n󰒲 Hibernate" \
-          | fuzzel -d --prompt="Power > ")
+        launcher="$1"
+
+        # Check if argument is fuzzel or rofi
+        if [[ "$launcher" != "fuzzel" && "$launcher" != "rofi" ]]; then
+            echo "Usage: $0 {fuzzel|rofi}"
+            exit 1
+        fi
+
+        # Build launcher command
+        if [[ "$launcher" == "fuzzel" ]]; then
+            menu_cmd=(fuzzel -d --prompt="Power > ")
+        else
+            menu_cmd=(rofi -dmenu -p "Power > ")
+        fi
+
+        choice=$(printf "󰗼 Lock\n󰍃 Logout\n󰜉 Reboot\n󰐥 Shutdown\n󰒲 Hibernate" | "${"$"}{menu_cmd[@]}")
 
         case "$choice" in
           "󰗼 Lock")
@@ -73,8 +88,23 @@
       ''
         #!/usr/bin/env bash
 
+        launcher="$1"
+
+        # Check if argument is fuzzel or rofi
+        if [[ "$launcher" != "fuzzel" && "$launcher" != "rofi" ]]; then
+            echo "Usage: $0 {fuzzel|rofi}"
+            exit 1
+        fi
+
+        # Build launcher command
+        if [[ "$launcher" == "fuzzel" ]]; then
+            menu_cmd=(fuzzel -d --prompt="Power > ")
+        else
+            menu_cmd=(rofi -dmenu -p "Power > ")
+        fi
+
         choice=$(printf " Audio\n󰛳 Network\n󰂯 Bluetooth\n Light Mode\n Dark Mode" \
-          | fuzzel -d --prompt="Settings > ")
+          | "${"$"}{menu_cmd[@]}")
 
         case "$choice" in
           " Audio")
@@ -142,7 +172,9 @@
     ../configs/fuzzel
     ../configs/gtk
     ../configs/mako
+    ../configs/polybar
     ../configs/qutebrowser
+    ../configs/sway-i3/i3.nix
     ../configs/sway-i3/sway.nix
     ../configs/swaylock
     ../configs/waybar

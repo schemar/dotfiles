@@ -11,7 +11,8 @@
       [Unit]
       Description=xdg-desktop-portal-wlr
       PartOf=graphical-session.target
-      After=graphical-session.target
+      Wants=sway.service
+      After=sway.service
 
       [Service]
       Type=dbus
@@ -20,6 +21,6 @@
       Restart=on-failure
 
       [Install]
-      WantedBy=graphical-session.target
+      WantedBy=sway.service
     '';
 }

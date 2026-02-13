@@ -39,12 +39,7 @@
     '';
   };
 
-  # Make sure these are set in $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
-  # That way they will be sourced properly by the sway wrapper script (see below).
   home.sessionVariables = {
-    XDG_CURRENT_DESKTOP = "sway";
-    XDG_SESSION_DESKTOP = "sway";
-
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_DATA_HOME = "$HOME/.local/share";
@@ -68,10 +63,10 @@
         After = [
           "graphical-session.target"
           "dbus.service"
+          "sway.service"
         ];
+        Wants = [ "sway.service" ];
         PartOf = [ "graphical-session.target" ];
-        # Only start in sway, not e.g. plasma:
-        ConditionEnvironment = "XDG_CURRENT_DESKTOP=sway";
       };
 
       Service = {
@@ -92,25 +87,34 @@
     };
   };
 
-  # Sway desktop stuff.
-  #
   # For sway to be available on the Plasma/SDDM debian host, add the following
   # file (!! REPLACE USERNAME):
+  # (Note that this sets the wayland specific env vars; for Xorg that's done in xsession/xprofile.)
   #
   # /usr/share/wayland-sessions/sway.desktop
   #
   # [Desktop Entry]
   # Name=Sway
-  # Exec=/home/<USERNAME>/.nix-profile/bin/sway
+  # Exec=/usr/bin/env XDG_SESSION_TYPE=wayland XDG_CURRENT_DESKTOP=sway XDG_SESSION_DESKTOP=sway NIXOS_OZONE_WL=1 /home/<USERNAME>/.nix-profile/bin/sway
   # Type=Application
   # DesktopNames=sway
   #
   # For swaylock to work, use Debian's binary to ensure a working PAM stack:
   # sudo apt install swaylock
+  #
+  # For i3 to be available on the Plasma/SDDM debian host, add the following
+  # file (!! REPLACE USERNAME):
+  #
+  # /usr/share/xsessions/i3.desktop
+  #
+  # [Desktop Entry]
+  # Name=i3
+  # Comment=i3 window manager
+  # Exec=dbus-run-session -- /home/<your-username>/.nix-profile/bin/i3
+  # Type=Application
+  # DesktopNames=i3
 
   wayland.windowManager.sway = {
-    systemd.enable = true;
-
     config = {
       output = {
         "HDMI-A-1" = {
@@ -119,6 +123,31 @@
         };
       };
     };
+  };
+
+  xsession = {
+    enable = true;
+
+    profileExtra = ''
+      # Scaling
+      QT_AUTO_SCREEN_SCALE_FACTOR=1
+      QT_ENABLE_HIGHDPI_SCALING=1
+      GDK_SCALE=2
+
+      # Make sure wayland isn't leaking:
+      unset WAYLAND_DISPLAY
+      unset NIXOS_OZONE_WL
+      unset XDG_CURRENT_DESKTOP
+      unset XDG_SESSION_TYPE
+      export XDG_CURRENT_DESKTOP=i3
+      export XDG_SESSION_TYPE=x11
+    '';
+  };
+
+  xresources = {
+    extraConfig = ''
+      Xft.dpi: 192
+    '';
   };
 
   # For some reason, the scaling in wayland makes the fonts way bigger. Adjusting:
