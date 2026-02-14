@@ -141,7 +141,7 @@
         "custom/power" = {
           format = "";
           tooltip-format = "Power menu";
-          on-click = "~/.local/bin/powermenu.sh";
+          on-click = "~/.local/bin/powermenu.sh fuzzel";
           on-click-right = "swaylock";
         };
       };
