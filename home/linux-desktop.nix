@@ -13,7 +13,8 @@
     # i3
     i3status
     feh
-    rofi
+    xautolock
+    i3lock
 
     kdePackages.breeze
     kdePackages.breeze-gtk
@@ -134,7 +135,6 @@
 
         printf "light" > ~/.config/current_theme_store
 
-        lookandfeeltool -a org.kde.breeze.desktop
         gsettings set org.gnome.desktop.interface gtk-theme 'Breeze'
         gsettings set org.gnome.desktop.interface icon-theme 'breeze'
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
@@ -151,7 +151,6 @@
 
         printf "dark" > ~/.config/current_theme_store
 
-        lookandfeeltool -a org.kde.breezedark.desktop
         gsettings set org.gnome.desktop.interface gtk-theme 'Breeze-Dark'
         gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark'
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
@@ -169,11 +168,13 @@
 
   imports = [
     ../configs/avizo
+    ../configs/dunst
     ../configs/fuzzel
     ../configs/gtk
     ../configs/mako
     ../configs/polybar
     ../configs/qutebrowser
+    ../configs/rofi
     ../configs/sway-i3/i3.nix
     ../configs/sway-i3/sway.nix
     ../configs/swaylock

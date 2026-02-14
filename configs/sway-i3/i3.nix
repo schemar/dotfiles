@@ -12,7 +12,16 @@
         };
       in
       lib.recursiveUpdate commonConfig {
+        # The Polybar service manages itself:
+        bars = [ ];
+
         startup = [
+          {
+            command = ''
+              ${pkgs.xautolock}/bin/xautolock -time 5 -locker "${pkgs.i3lock}/bin/i3lock"
+            '';
+          }
+
           {
             command = "--no-startup-id ${pkgs.feh}/bin/feh --no-fehbg --bg-fill ${../../assets/images/daniel-leone-v7daTKlZzaw-unsplash.jpg}";
           }
@@ -24,7 +33,22 @@
             # Map CapsLock to Escape:
             command = "--no-startup-id setxkbmap -option caps:escape";
           }
+
+          {
+            command = "nm-applet";
+          }
+          {
+            command = "blueman-applet";
+          }
         ];
+
       };
+
+    extraConfig = # i3
+      ''
+        # Ensure borders for _all_ windows. Without this, ghostty and vivaldi
+        # wouldn't have borders, for example.
+        for_window [class="^.*"] border pixel 1
+      '';
   };
 }
