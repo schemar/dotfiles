@@ -5,6 +5,9 @@
     enable = true;
     wrapperFeatures.gtk = true; # Include fixes for GTK apps under Sway
 
+    # This also starts a systemd sway-session.target:
+    systemd.enable = true;
+
     config = {
       focus = {
         followMouse = false;
@@ -137,6 +140,11 @@
     extraConfig = # sway
       ''
         for_window [shell="xwayland"] title_format "[XWayland] %title"
+
+        # Make sure ghostty and tmux-server die when sway exits so that new sessions
+        # start with new servers that attach to the correct dbus, etc.
+        exec "swaymsg -mt subscribe '[]' || true && ${pkgs.tmux}/bin/tmux kill-server"
+        exec "swaymsg -mt subscribe '[]' || true && pkill ghostty"
       '';
   };
 }

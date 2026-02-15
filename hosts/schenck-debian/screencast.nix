@@ -6,20 +6,22 @@
     grim
   ];
 
-  home.file.".config/systemd/user/xdg-desktop-portal-wlr.service".text = # ini
-    ''
-      [Unit]
-      Description=xdg-desktop-portal-wlr
-      PartOf=graphical-session.target
-      After=graphical-session.target
+  systemd.user.services.xdg-desktop-portal-wlr = {
+    Unit = {
+      Description = "xdg-desktop-portal-wlr";
+      PartOf = [ "sway-session.target" ];
+      After = [ "sway-session.target" ];
+    };
 
-      [Service]
-      Type=dbus
-      BusName=org.freedesktop.impl.portal.desktop.wlr
-      ExecStart=${pkgs.xdg-desktop-portal-wlr}/libexec/xdg-desktop-portal-wlr
-      Restart=on-failure
+    Service = {
+      Type = "dbus";
+      BusName = "org.freedesktop.impl.portal.desktop.wlr";
+      ExecStart = "${pkgs.xdg-desktop-portal-wlr}/libexec/xdg-desktop-portal-wlr";
+      Restart = "on-failure";
+    };
 
-      [Install]
-      WantedBy=graphical-session.target
-    '';
+    Install = {
+      WantedBy = [ "sway-session.target" ];
+    };
+  };
 }

@@ -99,8 +99,6 @@
   # sudo apt install swaylock
 
   wayland.windowManager.sway = {
-    systemd.enable = true;
-
     config = {
       output = {
         "HDMI-A-1" = {
