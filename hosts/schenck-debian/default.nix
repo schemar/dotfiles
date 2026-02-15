@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 {
@@ -39,9 +38,6 @@
   # Make sure these are set in $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
   # That way they will be sourced properly by the sway wrapper script (see below).
   home.sessionVariables = {
-    XDG_CURRENT_DESKTOP = "sway";
-    XDG_SESSION_DESKTOP = "sway";
-
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_DATA_HOME = "$HOME/.local/share";
@@ -91,7 +87,7 @@
   #
   # [Desktop Entry]
   # Name=Sway
-  # Exec=/home/<USERNAME>/.nix-profile/bin/sway
+  # Exec=/home/<USERNAME>/.local/bin/start-sway.sh
   # Type=Application
   # DesktopNames=sway
   #
