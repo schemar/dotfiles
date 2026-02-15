@@ -1,12 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   # Only in sway:
   systemd.user.services.mako = {
     Unit = {
       Description = "Lightweight Wayland notification daemon";
       Documentation = "man:mako(1)";
-      PartOf = [ "sway-session.target" ];
-      After = [ "sway-session.target" ];
+      PartOf = lib.mkForce [ "sway-session.target" ];
+      After = lib.mkForce [ "sway-session.target" ];
     };
     Service = {
       Type = "dbus";
@@ -16,7 +16,7 @@
       ExecReload = "${pkgs.mako}/bin/makoctl reload";
     };
     Install = {
-      WantedBy = [ "sway-session.target" ];
+      WantedBy = lib.mkForce [ "sway-session.target" ];
     };
   };
 
