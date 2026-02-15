@@ -8,6 +8,9 @@
     NIXOS_OZONE_WL = "1"; # Enable wayland for Chrome (Electron) apps (e.g. Todoist).
   };
 
+  # Fonts
+  fonts.fontconfig.enable = true;
+
   home.packages = with pkgs; [
     # Configured when started by sway (see sway config).
     swayidle
@@ -31,11 +34,19 @@
     bemoji
     wtype # Type on wayland like xdotool; used by bemoji
 
+    # Fonts:
+    monaspace
+    nerd-fonts.symbols-only
+    openmoji-color
+    open-sans
+    source-serif
+
     discord-ptb # ptb (beta) as middle ground between stable and canary
     eog # eye of gnome image viewer
     gimp
     obsidian
     todoist-electron
+    vivaldi
   ];
 
   home.file.".local/bin/powermenu.sh" = {
@@ -130,12 +141,6 @@
         pkill -USR1 zsh
       '';
   };
-
-  wayland.windowManager.sway.config.bars = [
-    {
-      command = "${pkgs.waybar}/bin/waybar";
-    }
-  ];
 
   imports = [
     ../configs/avizo

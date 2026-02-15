@@ -38,6 +38,12 @@
         }
       ];
 
+      bars = [
+        {
+          command = "${pkgs.waybar}/bin/waybar";
+        }
+      ];
+
       gaps = {
         outer = 6;
         inner = 6;
