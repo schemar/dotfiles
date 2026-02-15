@@ -15,16 +15,6 @@
     home-manager.enable = true;
   };
 
-  # Fonts
-  fonts.fontconfig.enable = true;
-  home.packages = with pkgs; [
-    monaspace
-    nerd-fonts.symbols-only
-    openmoji-color
-    open-sans
-    source-serif
-  ];
-
   imports = [
     ./default.nix
   ];
