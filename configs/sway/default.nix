@@ -32,6 +32,19 @@
       let
         commonConfig = import ./common-config.nix {
           inherit lib pkgs;
+          commands = {
+            powerCommand = "exec ~/.local/bin/powermenu.sh";
+            settingsCommand = "exec ~/.local/bin/settingsmenu.sh";
+            notificationDismissCommand = "exec ${pkgs.mako}/bin/makoctl dismiss";
+            applicationCommand = "exec ${pkgs.fuzzel}/bin/fuzzel";
+            emojiCommand = "exec ${pkgs.bemoji}/bin/bemoji --type";
+            audioUpCommand = "exec volumectl -u up";
+            audioDownCommand = "exec volumectl -u down";
+            audioMuteCommand = "exec volumectl toggle-mute";
+            audioMicMuteCommand = "exec volumectl -m toggle-mute";
+            brightnessUpCommand = "exec lightctl up";
+            brightnessDownCommand = "exec lightctl down";
+          };
         };
       in
       lib.recursiveUpdate commonConfig {
