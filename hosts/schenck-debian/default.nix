@@ -105,6 +105,18 @@
     };
   };
 
+  # For i3 to be available on the Plasma/SDDM debian host, add the following
+  # file (!! REPLACE USERNAME):
+  #
+  # /usr/share/xsessions/i3.desktop
+  #
+  # [Desktop Entry]
+  # Name=i3
+  # Comment=i3 window manager
+  # Exec=/home/<USERNAME>/.local/bin/start-i3.sh
+  # Type=Application
+  # DesktopNames=i3
+
   # For some reason, the scaling in wayland makes the fonts way bigger. Adjusting:
   programs.ghostty.settings."font-size" = lib.mkForce 11.0;
 

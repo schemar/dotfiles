@@ -73,19 +73,21 @@ in
   keybindings = lib.mkOptionDefault {
     "Mod4+Shift+a" = "focus child";
 
-    "Mod4+n" = commands.notificationDismissCommand;
+    "Mod4+n" = lib.mkIf (
+      commands.notificationDismissCommand != null
+    ) commands.notificationDismissCommand;
 
-    "Mod4+Shift+e" = commands.powerCommand;
-    "Mod4+Shift+s" = commands.settingsCommand;
+    "Mod4+Shift+e" = lib.mkIf (commands.powerCommand != null) commands.powerCommand;
+    "Mod4+Shift+s" = lib.mkIf (commands.settingsCommand != null) commands.settingsCommand;
 
-    "Mod4+d" = commands.applicationCommand;
-    "Mod4+Shift+d" = commands.emojiCommand;
+    "Mod4+d" = lib.mkIf (commands.applicationCommand != null) commands.applicationCommand;
+    "Mod4+Shift+d" = lib.mkIf (commands.emojiCommand != null) commands.emojiCommand;
 
     # Commands provided by avizo.service
     "XF86AudioRaiseVolume" = commands.audioUpCommand;
     "XF86AudioLowerVolume" = commands.audioDownCommand;
     "XF86AudioMute" = commands.audioMuteCommand;
-    "XF86AudioMicMute" = commands.audioMicMuteCommand;
+    "XF86AudioMicMute" = lib.mkIf (commands.audioMicMuteCommand != null) commands.audioMicMuteCommand;
     "XF86MonBrightnessUp" = commands.brightnessUpCommand;
     "XF86MonBrightnessDown" = commands.brightnessDownCommand;
 

@@ -13,6 +13,10 @@
 
     swaybg
 
+    xset
+    setxkbmap
+    xbacklight
+
     kdePackages.breeze
     kdePackages.breeze-gtk
     kdePackages.breeze-icons
@@ -24,6 +28,7 @@
     networkmanager
     networkmanagerapplet
 
+    pulseaudio
     pavucontrol
     blueman
 
@@ -172,7 +177,8 @@
     ../configs/gtk
     ../configs/mako
     ../configs/qutebrowser
-    ../configs/sway/sway.nix
+    ../configs/i3-sway/sway.nix
+    ../configs/i3-sway/i3.nix
     ../configs/swaylock
     ../configs/waybar
   ];
