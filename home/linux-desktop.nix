@@ -111,7 +111,6 @@
 
         printf "light" > ~/.config/current_theme_store
 
-        lookandfeeltool -a org.kde.breeze.desktop
         gsettings set org.gnome.desktop.interface gtk-theme 'Breeze'
         gsettings set org.gnome.desktop.interface icon-theme 'breeze'
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
@@ -128,7 +127,6 @@
 
         printf "dark" > ~/.config/current_theme_store
 
-        lookandfeeltool -a org.kde.breezedark.desktop
         gsettings set org.gnome.desktop.interface gtk-theme 'Breeze-Dark'
         gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark'
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
