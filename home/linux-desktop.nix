@@ -51,8 +51,23 @@
       ''
         #!/usr/bin/env bash
 
+        launcher="$1"
+
+        # Check if argument is fuzzel or rofi
+        if [[ "$launcher" != "fuzzel" && "$launcher" != "rofi" ]]; then
+            echo "Usage: $0 {fuzzel|rofi}"
+            exit 1
+        fi
+
+        # Build launcher command
+        if [[ "$launcher" == "fuzzel" ]]; then
+            menu_cmd=(fuzzel -d --prompt="Power > ")
+        else
+            menu_cmd=(rofi -dmenu -p "Power > ")
+        fi
+
         choice=$(printf "󰗼 Lock\n󰍃 Logout\n󰜉 Reboot\n󰐥 Shutdown\n󰒲 Hibernate" \
-          | fuzzel -d --prompt="Power > ")
+          | "''${menu_cmd[@]}")
 
         case "$choice" in
           "󰗼 Lock")
@@ -80,8 +95,23 @@
       ''
         #!/usr/bin/env bash
 
+        launcher="$1"
+
+        # Check if argument is fuzzel or rofi
+        if [[ "$launcher" != "fuzzel" && "$launcher" != "rofi" ]]; then
+            echo "Usage: $0 {fuzzel|rofi}"
+            exit 1
+        fi
+
+        # Build launcher command
+        if [[ "$launcher" == "fuzzel" ]]; then
+            menu_cmd=(fuzzel -d --prompt="Settings > ")
+        else
+            menu_cmd=(rofi -dmenu -p "Settings > ")
+        fi
+
         choice=$(printf " Audio\n󰛳 Network\n󰂯 Bluetooth\n Light Mode\n Dark Mode" \
-          | fuzzel -d --prompt="Settings > ")
+          | "''${menu_cmd[@]}")
 
         case "$choice" in
           " Audio")
