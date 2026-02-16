@@ -24,10 +24,11 @@
 
   wayland.windowManager.sway = {
     enable = true;
-    wrapperFeatures.gtk = true; # Include fixes for GTK apps under Sway
-
     # This also starts a systemd sway-session.target:
     systemd.enable = true;
+
+    wrapperFeatures.gtk = true; # Include fixes for GTK apps under Sway
+
     config =
       let
         commonConfig = import ./common-config.nix {
