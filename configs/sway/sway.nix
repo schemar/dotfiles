@@ -39,12 +39,12 @@
             notificationDismissCommand = "exec ${pkgs.mako}/bin/makoctl dismiss";
             applicationCommand = "exec ${pkgs.fuzzel}/bin/fuzzel";
             emojiCommand = "exec ${pkgs.bemoji}/bin/bemoji --type";
-            audioUpCommand = "exec volumectl -u up";
-            audioDownCommand = "exec volumectl -u down";
-            audioMuteCommand = "exec volumectl toggle-mute";
-            audioMicMuteCommand = "exec volumectl -m toggle-mute";
-            brightnessUpCommand = "exec lightctl up";
-            brightnessDownCommand = "exec lightctl down";
+            audioUpCommand = "exec ${pkgs.avizo}/bin/volumectl -u up";
+            audioDownCommand = "exec ${pkgs.avizo}/bin/volumectl -u down";
+            audioMuteCommand = "exec ${pkgs.avizo}/bin/volumectl toggle-mute";
+            audioMicMuteCommand = "exec ${pkgs.avizo}/bin/volumectl -m toggle-mute";
+            brightnessUpCommand = "exec ${pkgs.avizo}/bin/lightctl up";
+            brightnessDownCommand = "exec ${pkgs.avizo}/bin/lightctl down";
           };
         };
       in
