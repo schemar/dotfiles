@@ -39,7 +39,7 @@
       "quit-after-last-window-closed" = true;
       "confirm-close-surface" = false;
 
-      "window-decoration" = if isDarwin then "none" else "auto";
+      "window-decoration" = "none";
 
       "window-padding-balance" = true;
       "window-padding-x" = 3;
