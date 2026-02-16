@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 {
@@ -10,8 +9,7 @@
   #   `nix eval --raw nixpkgs#zsh.outPath` helps.
   # * Install Debian's swaylock: sudo apt install swaylock
   # * After home-manager switch:
-  #   * Enable the polkit service: systemctl --user enable --now polkit-kde-agent.service
-  #   * Create the desktop file for sway (see below for details): /usr/share/wayland-sessions/sway.desktop
+  #   * Create the desktop file for sway and i3 (see below for details)
 
   # Make sure the direct path to the shell in the nix store is listed in /etc/shells
   # Example:
@@ -27,8 +25,6 @@
   #   9 /home/schemar/.nix-profile/bin/zsh
   #  10 /nix/store/309lg0w4dj1nbcr04pwzzkhvisfnmqqn-zsh-5.9/bin/zsh
 
-  # The following statements are required to integrate home-manager better with
-  # the KDE plasma session of the host:
   targets.genericLinux.enable = true;
 
   home.file.".config/plasma-workspace/env/10-home-manager-xdg-data-dirs.sh" = {
@@ -42,9 +38,6 @@
   # Make sure these are set in $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
   # That way they will be sourced properly by the sway wrapper script (see below).
   home.sessionVariables = {
-    XDG_CURRENT_DESKTOP = "sway";
-    XDG_SESSION_DESKTOP = "sway";
-
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_DATA_HOME = "$HOME/.local/share";
@@ -60,8 +53,6 @@
   systemd.user = {
     services.polkit-kde-agent = {
       # A polkit agent for graphical privilege escalation.
-      # !! You must enable the service:
-      # systemctl --user enable --now polkit-kde-agent.service
       Unit = {
         Description = "KDE Polkit Authentication Agent";
         # These targets exist on most systemd desktops. If one is missing, systemd will ignore ordering.
@@ -79,11 +70,6 @@
         ExecStart = "/usr/lib/x86_64-linux-gnu/libexec/polkit-kde-authentication-agent-1";
         Restart = "on-failure";
         RestartSec = 1;
-
-        # Force it to use X11 via XWayland (reliable under Sway)
-        Environment = [
-          "QT_QPA_PLATFORM=xcb"
-        ];
       };
 
       Install = {
@@ -101,7 +87,7 @@
   #
   # [Desktop Entry]
   # Name=Sway
-  # Exec=/home/<USERNAME>/.nix-profile/bin/sway
+  # Exec=/home/<USERNAME>/.local/bin/start-sway.sh
   # Type=Application
   # DesktopNames=sway
   #
@@ -109,8 +95,6 @@
   # sudo apt install swaylock
 
   wayland.windowManager.sway = {
-    systemd.enable = true;
-
     config = {
       output = {
         "HDMI-A-1" = {
@@ -123,11 +107,6 @@
 
   # For some reason, the scaling in wayland makes the fonts way bigger. Adjusting:
   programs.ghostty.settings."font-size" = lib.mkForce 11.0;
-
-  # Install host specific packages:
-  home.packages = with pkgs; [
-    vivaldi
-  ];
 
   # Uses home-manager standalone module on debian linux:
   imports = [
