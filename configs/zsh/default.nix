@@ -49,7 +49,7 @@
       lg = "lazygit";
     };
 
-    # Have to escape zsh ${...} with ${"$"}{...}
+    # Have to escape zsh ${...} with ''${...}
     initContent = # sh
       ''
         # Temp fix for compinit:
@@ -68,13 +68,13 @@
         KEYTIMEOUT=5
         # Change cursor shape for different vi modes.
         function zle-keymap-select {
-          if [[ ${"$"}{KEYMAP} == vicmd ]] ||
+          if [[ ''${KEYMAP} == vicmd ]] ||
              [[ $1 = 'block' ]]; then
             echo -ne '\e[2 q'
 
-          elif [[ ${"$"}{KEYMAP} == main ]] ||
-               [[ ${"$"}{KEYMAP} == viins ]] ||
-               [[ ${"$"}{KEYMAP} = ''' ]] ||
+          elif [[ ''${KEYMAP} == main ]] ||
+               [[ ''${KEYMAP} == viins ]] ||
+               [[ ''${KEYMAP} = ''' ]] ||
                [[ $1 = 'beam' ]]; then
             echo -ne '\e[6 q'
           fi
@@ -104,7 +104,7 @@
           compadd -- $(COMP_CWORD=$((CURRENT-1)) \
                        COMP_LINE=$BUFFER \
                        COMP_POINT=0 \
-                       npm completion -- "${"$"}{words[@]}" \
+                       npm completion -- "''${words[@]}" \
                        2>/dev/null)
           IFS=$si
         }
@@ -123,7 +123,7 @@
           local reply
           local si=$IFS
           IFS=$'
-        ' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" gt --get-yargs-completions "${"$"}{words[@]}"))
+        ' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" gt --get-yargs-completions "''${words[@]}"))
           IFS=$si
           _describe 'values' reply
         }
@@ -156,23 +156,23 @@
 
           local pane_id=$(tmux_pane_id)
           local cwd=`${if isDarwin then "greadlink" else "readlink"} -e "$(pwd)"`/
-          local last_repo_len=${"$"}{#TMUX_GIT_LAST_REPO}
+          local last_repo_len=''${#TMUX_GIT_LAST_REPO}
 
           local repo_dir="$(find_git_repo)"
 
           # Could optimize here by not updating when staying in same repo:
-          if [[ -z ${"$"}{repo_dir} ]]; then
+          if [[ -z ''${repo_dir} ]]; then
             # No git repo found
             tmux set-env -g TMUX_GIT_BRANCH_$pane_id  ' (not git)'
           else
             local branch='(unknown)'
-            local head=$(< "${"$"}{repo_dir}.git/HEAD")
+            local head=$(< "''${repo_dir}.git/HEAD")
             if [[ $head == ref:\ refs/heads/* ]]; then
-                branch=${"$"}{head#*/*/}
+                branch=''${head#*/*/}
             elif [[ $head != ''' ]]; then
                 branch='(detached)'
             fi
-            tmux set-env -g TMUX_GIT_BRANCH_$pane_id  " ${"$"}{branch}"
+            tmux set-env -g TMUX_GIT_BRANCH_$pane_id  " ''${branch}"
           fi
         }
 
