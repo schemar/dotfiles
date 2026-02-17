@@ -45,6 +45,7 @@
             audioMicMuteCommand = "exec ${pkgs.avizo}/bin/volumectl -m toggle-mute";
             brightnessUpCommand = "exec ${pkgs.avizo}/bin/lightctl up";
             brightnessDownCommand = "exec ${pkgs.avizo}/bin/lightctl down";
+            searchCommand = "exec ${pkgs.fuzzel}/bin/fuzzel";
           };
         };
       in

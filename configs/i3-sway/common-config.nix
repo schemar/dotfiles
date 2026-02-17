@@ -97,6 +97,8 @@ in
     "XF86AudioPrev" = "exec playerctl previous";
     "XF86AudioStop" = "exec playerctl stop";
 
+    "XF86Search" = lib.mkIf (commands.searchCommand != null) commands.searchCommand;
+
     # More or less default:
     "Mod4+1" = "workspace number 1";
     "Mod4+0" = "workspace number 10";
@@ -149,7 +151,6 @@ in
     "Mod4+space" = "focus mode_toggle";
     "Mod4+v" = "splitv";
     "Mod4+w" = "layout tabbed";
-    "XF86Search" = "exec fuzzel";
   };
 
 }

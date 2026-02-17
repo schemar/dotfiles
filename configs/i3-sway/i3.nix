@@ -44,6 +44,7 @@
             audioMicMuteCommand = null;
             brightnessUpCommand = "exec --no-startup-id ${pkgs.xbacklight}/bin/xbacklight -inc 20";
             brightnessDownCommand = "exec --no-startup-id ${pkgs.xbacklight}/bin/xbacklight -dec 20";
+            searchCommand = null;
           };
         };
       in
