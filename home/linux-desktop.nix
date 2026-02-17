@@ -171,14 +171,31 @@
       '';
   };
 
+  # Scaling in xsession and xresources:
+  xsession = {
+    enable = true;
+
+    profileExtra = ''
+      # Scaling
+      export QT_AUTO_SCREEN_SCALE_FACTOR=1
+      export QT_ENABLE_HIGHDPI_SCALING=1
+      export GDK_SCALE=2
+    '';
+  };
+  xresources = {
+    extraConfig = ''
+      Xft.dpi: 192
+    '';
+  };
+
   imports = [
     ../configs/avizo
     ../configs/fuzzel
     ../configs/gtk
     ../configs/mako
     ../configs/qutebrowser
-    ../configs/i3-sway/sway.nix
     ../configs/i3-sway/i3.nix
+    ../configs/i3-sway/sway.nix
     ../configs/swaylock
     ../configs/waybar
   ];
