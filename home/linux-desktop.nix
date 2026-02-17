@@ -13,6 +13,10 @@
 
     swaybg
 
+    xset
+    setxkbmap
+    xbacklight
+
     kdePackages.breeze
     kdePackages.breeze-gtk
     kdePackages.breeze-icons
@@ -24,6 +28,7 @@
     networkmanager
     networkmanagerapplet
 
+    pulseaudio
     pavucontrol
     blueman
 
@@ -51,8 +56,23 @@
       ''
         #!/usr/bin/env bash
 
+        launcher="$1"
+
+        # Check if argument is fuzzel or rofi
+        if [[ "$launcher" != "fuzzel" && "$launcher" != "rofi" ]]; then
+            echo "Usage: $0 {fuzzel|rofi}"
+            exit 1
+        fi
+
+        # Build launcher command
+        if [[ "$launcher" == "fuzzel" ]]; then
+            menu_cmd=(fuzzel -d --prompt="Power > ")
+        else
+            menu_cmd=(rofi -dmenu -p "Power > ")
+        fi
+
         choice=$(printf "󰗼 Lock\n󰍃 Logout\n󰜉 Reboot\n󰐥 Shutdown\n󰒲 Hibernate" \
-          | fuzzel -d --prompt="Power > ")
+          | "''${menu_cmd[@]}")
 
         case "$choice" in
           "󰗼 Lock")
@@ -80,8 +100,23 @@
       ''
         #!/usr/bin/env bash
 
+        launcher="$1"
+
+        # Check if argument is fuzzel or rofi
+        if [[ "$launcher" != "fuzzel" && "$launcher" != "rofi" ]]; then
+            echo "Usage: $0 {fuzzel|rofi}"
+            exit 1
+        fi
+
+        # Build launcher command
+        if [[ "$launcher" == "fuzzel" ]]; then
+            menu_cmd=(fuzzel -d --prompt="Settings > ")
+        else
+            menu_cmd=(rofi -dmenu -p "Settings > ")
+        fi
+
         choice=$(printf " Audio\n󰛳 Network\n󰂯 Bluetooth\n Light Mode\n Dark Mode" \
-          | fuzzel -d --prompt="Settings > ")
+          | "''${menu_cmd[@]}")
 
         case "$choice" in
           " Audio")
@@ -111,7 +146,6 @@
 
         printf "light" > ~/.config/current_theme_store
 
-        lookandfeeltool -a org.kde.breeze.desktop
         gsettings set org.gnome.desktop.interface gtk-theme 'Breeze'
         gsettings set org.gnome.desktop.interface icon-theme 'breeze'
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
@@ -128,7 +162,6 @@
 
         printf "dark" > ~/.config/current_theme_store
 
-        lookandfeeltool -a org.kde.breezedark.desktop
         gsettings set org.gnome.desktop.interface gtk-theme 'Breeze-Dark'
         gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark'
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
@@ -144,7 +177,8 @@
     ../configs/gtk
     ../configs/mako
     ../configs/qutebrowser
-    ../configs/sway/sway.nix
+    ../configs/i3-sway/sway.nix
+    ../configs/i3-sway/i3.nix
     ../configs/swaylock
     ../configs/waybar
   ];

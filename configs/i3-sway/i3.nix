@@ -1,0 +1,81 @@
+{ lib, pkgs, ... }:
+{
+  home.file.".local/bin/start-i3.sh" = {
+    executable = true;
+    text = # bash
+      ''
+        #!/usr/bin/env bash
+
+        unset MOZ_ENABLE_WAYLAND
+        unset QT_QPA_PLATFORM
+        unset SDL_VIDEODRIVER
+        unset _JAVA_AWT_WM_NONREPARENTING
+        unset NIXOS_OZONE_WL
+
+        unset WAYLAND_DISPLAY
+        unset XDG_SESSION_TYPE
+        unset XDG_SESSION_DESKTOP
+        unset XDG_CURRENT_DESKTOP
+
+        export XDG_SESSION_TYPE=x11
+        export XDG_SESSION_DESKTOP=i3
+        export XDG_CURRENT_DESKTOP=i3
+
+        exec ${pkgs.i3}/bin/i3 "$@"
+      '';
+  };
+
+  xsession.windowManager.i3 = {
+    enable = true;
+
+    config =
+      let
+        commonConfig = import ./common-config.nix {
+          inherit lib pkgs;
+          commands = {
+            powerCommand = null;
+            settingsCommand = null;
+            notificationDismissCommand = null;
+            applicationCommand = null;
+            emojiCommand = null;
+            audioUpCommand = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume 0 +5%";
+            audioDownCommand = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume 0 -5%";
+            audioMuteCommand = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute 0 toggle";
+            audioMicMuteCommand = null;
+            brightnessUpCommand = "exec --no-startup-id ${pkgs.xbacklight}/bin/xbacklight -inc 20";
+            brightnessDownCommand = "exec --no-startup-id ${pkgs.xbacklight}/bin/xbacklight -dec 20";
+          };
+        };
+      in
+      lib.recursiveUpdate commonConfig {
+        startup = [
+          {
+            # Keyboard repeat rate:
+            command = "--no-startup-id ${pkgs.xset}/bin/xset r rate 200 50";
+          }
+          {
+            # Map CapsLock to Escape:
+            command = "--no-startup-id ${pkgs.setxkbmap}/bin/setxkbmap -option caps:escape";
+          }
+
+          {
+            command = "nm-applet";
+          }
+          {
+            command = "blueman-applet";
+          }
+        ];
+
+      };
+
+    extraConfig = # i3
+      ''
+        exec --no-startup-id "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP XDG_SESSION_TYPE NIXOS_OZONE_WL XCURSOR_THEME XCURSOR_SIZE; systemctl --user reset-failed"
+
+        # Make sure ghostty and tmux-server die when i3 exits so that new sessions
+        # start with new servers that attach to the correct dbus, etc.
+        exec --no-startup-id "i3-msg -mt subscribe '[]' || true && ${pkgs.tmux}/bin/tmux kill-server"
+        exec --no-startup-id "i3-msg -mt subscribe '[]' || true && pkill ghostty"
+      '';
+  };
+}

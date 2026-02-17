@@ -34,8 +34,8 @@
         commonConfig = import ./common-config.nix {
           inherit lib pkgs;
           commands = {
-            powerCommand = "exec ~/.local/bin/powermenu.sh";
-            settingsCommand = "exec ~/.local/bin/settingsmenu.sh";
+            powerCommand = "exec ~/.local/bin/powermenu.sh fuzzel";
+            settingsCommand = "exec ~/.local/bin/settingsmenu.sh fuzzel";
             notificationDismissCommand = "exec ${pkgs.mako}/bin/makoctl dismiss";
             applicationCommand = "exec ${pkgs.fuzzel}/bin/fuzzel";
             emojiCommand = "exec ${pkgs.bemoji}/bin/bemoji --type";
