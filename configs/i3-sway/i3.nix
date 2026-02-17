@@ -51,11 +51,19 @@
         startup = [
           {
             # Keyboard repeat rate:
-            command = "--no-startup-id ${pkgs.xset}/bin/xset r rate 200 50";
+            command = "${pkgs.xset}/bin/xset r rate 200 50";
+            notification = false;
           }
           {
             # Map CapsLock to Escape:
-            command = "--no-startup-id ${pkgs.setxkbmap}/bin/setxkbmap -option caps:escape";
+            command = "${pkgs.setxkbmap}/bin/setxkbmap -option caps:escape";
+            notification = false;
+          }
+
+          {
+            command = "systemctl --user restart polybar.service";
+            always = true;
+            notification = false;
           }
 
           {
@@ -66,6 +74,8 @@
           }
         ];
 
+        # Polybar is started by start command above using systemctl.
+        bars = [ ];
       };
 
     extraConfig = # i3

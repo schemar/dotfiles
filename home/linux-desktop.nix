@@ -192,10 +192,11 @@
     ../configs/avizo
     ../configs/fuzzel
     ../configs/gtk
-    ../configs/mako
-    ../configs/qutebrowser
     ../configs/i3-sway/i3.nix
     ../configs/i3-sway/sway.nix
+    ../configs/mako
+    ../configs/polybar
+    ../configs/qutebrowser
     ../configs/swaylock
     ../configs/waybar
   ];
