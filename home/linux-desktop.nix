@@ -190,6 +190,7 @@
 
   imports = [
     ../configs/avizo
+    ../configs/dunst
     ../configs/fuzzel
     ../configs/gtk
     ../configs/i3-sway/i3.nix

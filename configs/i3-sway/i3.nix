@@ -36,6 +36,7 @@
           commands = {
             powerCommand = null;
             settingsCommand = null;
+            # dunst manages its shortcut itself:
             notificationDismissCommand = null;
             applicationCommand = null;
             emojiCommand = null;
