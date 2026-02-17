@@ -21,7 +21,8 @@
         export XDG_SESSION_DESKTOP=i3
         export XDG_CURRENT_DESKTOP=i3
 
-        exec ${pkgs.i3}/bin/i3 "$@"
+        # Make sure dbus kills itself when i3 exits:
+        exec dbus-run-session -- ${pkgs.i3}/bin/i3 "$@"
       '';
   };
 
