@@ -4,18 +4,13 @@ This repository contains a nix configuration for my productivity stack.
 
 ## Installation
 
-Requirements:
+### macOS
 
-> [!NOTE]
-> Consider installing [lix](https://lix.systems/) instead of nix:
+Requirements:
 
 - [Nix](https://nixos.org/download.html)
   ```sh
-  # macOS:
   sh <(curl -L https://nixos.org/nix/install)
-
-  # Linux with SELinux disabled (multi-user):
-  sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
   ```
 - [Homebrew](https://brew.sh/) (macOS only)
   ```sh
@@ -42,10 +37,53 @@ Initial installation
 
 ```sh
 # Errors will guide you on what to fix
-# macOS:
 nix --extra-experimental-features "nix-command flakes" run nix-darwin/master#darwin-rebuild -- switch --flake .
+```
 
-# Linux with home-manager only:
+Change shell (not sure why nix doesn't do this):
+
+```sh
+chsh -s /run/current-system/sw/bin/zsh
+```
+
+Apply config:
+
+```sh
+# macOS:
+darwin-rebuild switch --flake .
+```
+
+Remaining steps:
+
+- Set up Night Shift (System Preferences > Displays > Night Shift)
+
+### Generic Linux
+
+```sh
+  # Linux with SELinux disabled (multi-user):
+  sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
+```
+
+Install initially with:
+
+Generate an SSH keypair and upload the public key to GitHub (auth and signing):
+
+```sh
+# Use the default keyname (~/.ssh/id_ed25519) as it is used by the git config:
+ssh-keygen -t ed25519 -C "martinschenck@fastmail.com"
+```
+
+Clone this repo (on a machine without git)
+
+```sh
+nix-shell -p git
+git clone ...
+```
+
+Initial installation
+
+```sh
+# Linux with home-manager standalon:
 # (if necessary, add 'experimental-features = nix-command flakes' to /etc/nix/nix.conf
 nix --extra-experimental-features "nix-command flakes" run home-manager/master -- switch --flake .#$(whoami)@$(hostname)
 ```
@@ -65,10 +103,6 @@ darwin-rebuild switch --flake .
 # Linux with home-manager only:
 home-manager switch --flake .#$(whoami)@$(hostname)
 ```
-
-Remaining steps:
-
-- Set up Night Shift (System Preferences > Displays > Night Shift)
 
 ## Included Configurations
 
