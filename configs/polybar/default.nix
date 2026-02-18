@@ -15,33 +15,37 @@
     settings = {
       "bar/top" = {
         width = "100%";
-        # Twice due to scaling?:
-        height = "56px";
+        height = "28pt";
         bottom = false;
 
         dpi-x = 192;
         dpi-y = 192;
 
         font = [
-          "Monaspace Neon:size=11"
-          "OpenMoji Color:size=11"
-          "Symbols Nerd Font Mono:size=11"
+          "Monaspace Neon:size=11;4"
+          "OpenMoji Color:size=11;4"
+          "Symbols Nerd Font Mono:size=11;4"
         ];
 
         background = "#0B0A0F";
         foreground = "#A2A2A9";
 
-        border-bottom-size = "1px";
+        border-bottom-size = "1pt";
         border-color = "#A19DD4";
 
         # No separate padding, so both in one:
-        module-margin = "12px";
+        module-margin = "2pt";
 
         modules = {
           left = "i3";
           center = "window";
           right = "cpu memory ethernet wifi audio bluetooth privacy idle tray clock power";
         };
+
+      };
+
+      settings = {
+        format-padding = "10pt";
       };
 
       "module/i3" = {
@@ -59,17 +63,17 @@
 
         label-mode-background = "#7AA8CE";
         label-mode-foreground = "#0B0A0F";
-        label-mode-padding = "10px";
+        label-mode-padding = "10pt";
 
         label-focused = "%icon%";
         label-unfocused = "%icon%";
         label-visible = "%icon%";
         label-urgent = "%icon%";
 
-        label-focused-padding = "12px";
-        label-unfocused-padding = "12px";
-        label-visible-padding = "12px";
-        label-urgent-padding = "12px";
+        label-focused-padding = "10pt";
+        label-unfocused-padding = "10pt";
+        label-visible-padding = "10pt";
+        label-urgent-padding = "10pt";
 
         label-focused-foreground = "#0B0A0F";
         label-focused-background = "#A19DD4";
