@@ -34,11 +34,11 @@
         commonConfig = import ./common-config.nix {
           inherit lib pkgs;
           commands = {
-            powerCommand = null;
-            settingsCommand = null;
+            powerCommand = "exec ~/.local/bin/powermenu.sh rofi";
+            settingsCommand = "exec ~/.local/bin/settingsmenu.sh rofi";
             # dunst manages its shortcut itself:
             notificationDismissCommand = null;
-            applicationCommand = null;
+            applicationCommand = "exec ${pkgs.rofi}/bin/rofi -show drun";
             emojiCommand = null;
             audioUpCommand = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume 0 +5%";
             audioDownCommand = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume 0 -5%";
@@ -46,7 +46,7 @@
             audioMicMuteCommand = null;
             brightnessUpCommand = "exec --no-startup-id ${pkgs.xbacklight}/bin/xbacklight -inc 20";
             brightnessDownCommand = "exec --no-startup-id ${pkgs.xbacklight}/bin/xbacklight -dec 20";
-            searchCommand = null;
+            searchCommand = "exec ${pkgs.rofi}/bin/rofi -show drun";
           };
         };
       in
