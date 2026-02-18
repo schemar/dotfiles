@@ -88,7 +88,6 @@
         # Make sure ghostty and tmux-server die when i3 exits so that new sessions
         # start with new servers that attach to the correct dbus, etc.
         exec --no-startup-id "i3-msg -mt subscribe '[]' || true && ${pkgs.tmux}/bin/tmux kill-server"
-        exec --no-startup-id "i3-msg -mt subscribe '[]' || true && pkill ghostty"
       '';
   };
 }
