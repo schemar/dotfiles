@@ -95,8 +95,9 @@
 
         # Make sure tmux-server, etc. exit when sway exits so that new sessions
         # start with new servers that attach to the correct dbus, etc.
-        exec --no-startup-id "swaymsg -mt subscribe '[]' || true && ${pkgs.tmux}/bin/tmux kill-server"
-        exec --no-startup-id "i3-msg -mt subscribe '[]' || true && systemctl --user stop mako.service"
+        exec --no-startup-id swaymsg -mt subscribe '[]' || true && ${pkgs.tmux}/bin/tmux kill-server
+        exec --no-startup-id swaymsg -mt subscribe '[]' || true && pkill ghostty
+        exec --no-startup-id swaymsg -mt subscribe '[]' || true && systemctl --user stop mako.service
       '';
   };
 }

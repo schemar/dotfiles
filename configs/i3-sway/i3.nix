@@ -105,12 +105,13 @@
         for_window [class="^.*"] border pixel 1
 
         # Update environment same as in sway module of home-manager:
-        exec --no-startup-id "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_DESKTOP XCURSOR_THEME XCURSOR_SIZE; systemctl --user reset-failed"
+        exec --no-startup-id ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_DESKTOP XCURSOR_THEME XCURSOR_SIZE; systemctl --user reset-failed
 
         # Make sure tmux-server, etc. exit when i3 exits so that new sessions
         # start with new servers that attach to the correct dbus, etc.
-        exec --no-startup-id "i3-msg -mt subscribe '[]' || true && ${pkgs.tmux}/bin/tmux kill-server"
-        exec --no-startup-id "i3-msg -mt subscribe '[]' || true && systemctl --user stop polybar.service; systemctl --user stop dunst.service"
+        exec --no-startup-id ${pkgs.i3}/bin/i3-msg -mt subscribe '[]' || true && ${pkgs.tmux}/bin/tmux kill-server
+        exec --no-startup-id ${pkgs.i3}/bin/i3-msg -mt subscribe '[]' || true && pkill ghostty
+        exec --no-startup-id ${pkgs.i3}/bin/i3-msg -mt subscribe '[]' || true && systemctl --user stop polybar.service; systemctl --user stop dunst.service
       '';
   };
 }
