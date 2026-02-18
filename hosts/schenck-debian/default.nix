@@ -62,7 +62,7 @@
         ];
         PartOf = [ "graphical-session.target" ];
         # Only start in sway, not e.g. plasma:
-        ConditionEnvironment = "XDG_CURRENT_DESKTOP=sway";
+        ExecCondition = "/bin/bash -c '[ $XDG_CURRENT_DESKTOP = sway ] || [ $XDG_CURRENT_DESKTOP = i3 ]'";
       };
 
       Service = {
