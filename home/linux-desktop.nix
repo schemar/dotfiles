@@ -16,6 +16,7 @@
     xset
     setxkbmap
     xbacklight
+    feh
 
     kdePackages.breeze
     kdePackages.breeze-gtk

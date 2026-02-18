@@ -53,6 +53,12 @@
       lib.recursiveUpdate commonConfig {
         startup = [
           {
+            command = "${pkgs.feh}/bin/feh --no-fehbg --bg-fill ${../../assets/images/daniel-leone-v7daTKlZzaw-unsplash.jpg}";
+            always = true;
+            notification = false;
+          }
+
+          {
             # Keyboard repeat rate:
             command = "${pkgs.xset}/bin/xset r rate 200 50";
             notification = false;
