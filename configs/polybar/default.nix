@@ -1,5 +1,8 @@
 { pkgs, ... }:
 {
+  systemd.user.services.polybar.Service.ExecCondition =
+    "/bin/bash -c '[ \"$XDG_CURRENT_DESKTOP\" = \"i3\" ]'";
+
   services.polybar = {
     enable = true;
 
@@ -165,10 +168,6 @@
 
     script = # bash
       ''
-        if [ "$XDG_SESSION_DESKTOP" != "i3" ]; then
-          exit 0
-        fi
-
         exec polybar top &
       '';
   };

@@ -1,5 +1,8 @@
 { ... }:
 {
+  systemd.user.services.dunst.Service.ExecCondition =
+    "/bin/bash -c '[ \"$XDG_CURRENT_DESKTOP\" = \"i3\" ]'";
+
   services.dunst = {
     enable = true;
 
