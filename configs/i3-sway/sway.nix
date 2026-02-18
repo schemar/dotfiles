@@ -90,7 +90,7 @@
         ];
       };
 
-    extraConfig = # sway
+    extraConfig = # swayconfig
       ''
         for_window [shell="xwayland"] title_format "[XWayland] %title"
 

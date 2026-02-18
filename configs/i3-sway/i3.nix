@@ -81,8 +81,13 @@
         bars = [ ];
       };
 
-    extraConfig = # i3
+    extraConfig = # i3config
       ''
+        # Ensure borders for _all_ windows. Without this, ghostty and vivaldi
+        # wouldn't have borders, for example.
+        for_window [class="^.*"] border pixel 1
+
+        # Update environment same as in sway module of home-manager:
         exec --no-startup-id "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP XDG_SESSION_TYPE NIXOS_OZONE_WL XCURSOR_THEME XCURSOR_SIZE; systemctl --user reset-failed"
 
         # Make sure ghostty and tmux-server die when i3 exits so that new sessions
