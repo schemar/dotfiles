@@ -165,6 +165,10 @@
 
     script = # bash
       ''
+        if [ "$XDG_SESSION_DESKTOP" != "i3" ]; then
+          exit 0
+        fi
+
         exec polybar top &
       '';
   };
