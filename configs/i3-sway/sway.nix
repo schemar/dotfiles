@@ -18,7 +18,8 @@
         export _JAVA_AWT_WM_NONREPARENTING=1
         export NIXOS_OZONE_WL=1
 
-        exec ${pkgs.sway}/bin/sway "$@"
+        # Make sure dbus kills itself when sway exits:
+        exec dbus-run-session -- ${pkgs.sway}/bin/sway "$@"
       '';
   };
 
