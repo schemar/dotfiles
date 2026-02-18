@@ -172,17 +172,7 @@
       '';
   };
 
-  # Scaling in xsession and xresources:
-  xsession = {
-    enable = true;
-
-    profileExtra = ''
-      # Scaling
-      export QT_ENABLE_HIGHDPI_SCALING=1
-      export QT_SCALE_FACTOR=2
-      export GDK_SCALE=2
-    '';
-  };
+  # Scaling in xresources:
   xresources = {
     extraConfig = ''
       *dpi: 192

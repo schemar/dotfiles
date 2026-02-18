@@ -21,8 +21,7 @@
         export XDG_SESSION_DESKTOP=i3
         export XDG_CURRENT_DESKTOP=i3
 
-        # Make sure dbus kills itself when i3 exits:
-        exec dbus-run-session -- ${pkgs.i3}/bin/i3 "$@"
+        exec ${pkgs.i3}/bin/i3 "$@"
       '';
   };
 
@@ -94,7 +93,7 @@
         for_window [class="^.*"] border pixel 1
 
         # Update environment same as in sway module of home-manager:
-        exec --no-startup-id "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP XDG_SESSION_TYPE NIXOS_OZONE_WL XCURSOR_THEME XCURSOR_SIZE; systemctl --user reset-failed"
+        exec --no-startup-id "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_DESKTOP XCURSOR_THEME XCURSOR_SIZE; systemctl --user reset-failed"
 
         # Make sure tmux-server, etc. exit when i3 exits so that new sessions
         # start with new servers that attach to the correct dbus, etc.
