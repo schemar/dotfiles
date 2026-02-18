@@ -7,7 +7,7 @@
   # * Add shell to /etc/shells
   #   !! Needs updating after zsh upgrades (store path changes) if pkexec breaks.
   #   `nix eval --raw nixpkgs#zsh.outPath` helps.
-  # * Install Debian's swaylock: sudo apt install swaylock
+  # * Install Debian's swaylock and i3lock: sudo apt install swaylock i3lock
   # * After home-manager switch:
   #   * Create the desktop file for sway and i3 (see below for details)
 
@@ -116,6 +116,9 @@
   # Exec=/home/<USERNAME>/.local/bin/start-i3.sh
   # Type=Application
   # DesktopNames=i3
+  #
+  # For i3lock to work, use Debian's binary to ensure a working PAM stack:
+  # sudo apt install i3lock
 
   # For some reason, the scaling in wayland makes the fonts way bigger. Adjusting:
   programs.ghostty.settings."font-size" = lib.mkForce 11.0;

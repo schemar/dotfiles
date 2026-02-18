@@ -52,6 +52,16 @@
       lib.recursiveUpdate commonConfig {
         startup = [
           {
+            command = "${pkgs.xautolock}/bin/xautolock -time 5 -locker \"i3lock -n -c 191724\"";
+            notification = false;
+          }
+          {
+            # Turn off screen, pc:
+            command = "xset dpms 600 900 1200";
+            notification = false;
+          }
+
+          {
             command = "${pkgs.feh}/bin/feh --no-fehbg --bg-fill ${../../assets/images/daniel-leone-v7daTKlZzaw-unsplash.jpg}";
             always = true;
             notification = false;

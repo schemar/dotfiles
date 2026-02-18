@@ -13,6 +13,8 @@
 
     swaybg
 
+    xautolock
+
     xset
     setxkbmap
     xbacklight
@@ -68,8 +70,10 @@
         # Build launcher command
         if [[ "$launcher" == "fuzzel" ]]; then
             menu_cmd=(fuzzel -d --prompt="Power > ")
+            lock_cmd="swaylock"
         else
             menu_cmd=(rofi -dmenu -p "Power > ")
+            lock_cmd="i3lock -n -c 191724"
         fi
 
         choice=$(printf "󰗼 Lock\n󰍃 Logout\n󰜉 Reboot\n󰐥 Shutdown\n󰒲 Hibernate" \
@@ -77,7 +81,7 @@
 
         case "$choice" in
           "󰗼 Lock")
-            swaylock
+            $lock_cmd
             ;;
           "󰍃 Logout")
             swaymsg exit
