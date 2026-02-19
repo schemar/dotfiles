@@ -7,12 +7,12 @@
 
     settings = {
       gaps = {
-        inner.horizontal = 7;
-        inner.vertical = 7;
-        outer.left = 7;
-        outer.bottom = 7;
+        inner.horizontal = 6;
+        inner.vertical = 6;
+        outer.left = 6;
+        outer.bottom = 6;
         outer.top = 0;
-        outer.right = 7;
+        outer.right = 6;
       };
 
       mode.main.binding = {
