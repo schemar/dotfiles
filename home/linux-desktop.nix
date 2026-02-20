@@ -151,6 +151,8 @@
 
         printf "light" > ~/.config/current_theme_store
 
+        lookandfeeltool --platform offscreen --apply "org.kde.breeze.desktop"
+
         gsettings set org.gnome.desktop.interface gtk-theme 'Breeze'
         gsettings set org.gnome.desktop.interface icon-theme 'breeze'
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
@@ -166,6 +168,8 @@
         #!/usr/bin/env bash
 
         printf "dark" > ~/.config/current_theme_store
+
+        lookandfeeltool --platform offscreen --apply "org.kde.breezedark.desktop"
 
         gsettings set org.gnome.desktop.interface gtk-theme 'Breeze-Dark'
         gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark'
@@ -189,7 +193,6 @@
     ../configs/avizo
     ../configs/dunst
     ../configs/fuzzel
-    ../configs/gtk
     ../configs/i3-sway/i3.nix
     ../configs/i3-sway/sway.nix
     ../configs/mako
