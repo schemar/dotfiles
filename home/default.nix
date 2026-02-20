@@ -33,12 +33,10 @@
     sqlite
 
     gdtoolkit_4
-
     nixfmt
-
     lua
-
     cargo
+    exercism
   ];
 
   imports = [
