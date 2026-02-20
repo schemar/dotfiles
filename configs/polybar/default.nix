@@ -22,7 +22,7 @@
         dpi-y = 192;
 
         font = [
-          "Open Sans:size=11;4"
+          "Open Sans:weight=bold:size=11;4"
           "OpenMoji Color:size=11;4"
           "Symbols Nerd Font Mono:size=11;4"
         ];
