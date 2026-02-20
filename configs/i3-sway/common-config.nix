@@ -13,7 +13,7 @@ in
 
   fonts = {
     names = [
-      "Monaspace Neon"
+      "Open Sans"
       "OpenMoji Color"
       "Symbols Nerd Font Mono"
     ];

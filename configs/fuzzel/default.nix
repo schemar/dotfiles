@@ -9,7 +9,7 @@
         "horizontal-pad" = "12";
         "vertical-pad" = "8";
         "inner-pad" = "12";
-        font = "Monaspace Neon:size=11,OpenMoji Color:size=11,Symbols Nerd Font Mono:size=11";
+        font = "Open Sans:size=11,OpenMoji Color:size=11,Symbols Nerd Font Mono:size=11";
         terminal = "${pkgs.ghostty}/bin/ghostty";
       };
 

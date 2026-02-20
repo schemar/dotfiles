@@ -17,7 +17,7 @@
         transparency = 0;
         frame_color = "#A19DD4";
         frame_width = 1;
-        font = "Monaspace Neon 11";
+        font = "Open Sans 11";
         scale = 2;
         close = "mod4+n";
       };
