@@ -149,16 +149,20 @@
       ''
         #!/usr/bin/env bash
 
-        printf "light" > ~/.config/current_theme_store
-
         lookandfeeltool --platform offscreen --apply "org.kde.breeze.desktop"
 
         gsettings set org.gnome.desktop.interface gtk-theme 'Breeze'
         gsettings set org.gnome.desktop.interface icon-theme 'breeze'
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
 
+        printf "light" > ~/.config/current_theme_store
         tmux source-file ~/.config/tmux/tmux.conf
         pkill -USR1 zsh
+
+        if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
+          pkill swaybg
+          swaybg --mode fill --image ${../assets/images/neil-rosenstech-1o4Z1EwCkaY-unsplash.jpg} &
+        fi
       '';
   };
   home.file.".local/bin/darkmode.sh" = {
@@ -167,16 +171,21 @@
       ''
         #!/usr/bin/env bash
 
-        printf "dark" > ~/.config/current_theme_store
-
         lookandfeeltool --platform offscreen --apply "org.kde.breezedark.desktop"
 
         gsettings set org.gnome.desktop.interface gtk-theme 'Breeze-Dark'
         gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark'
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
+
+        printf "dark" > ~/.config/current_theme_store
         tmux source-file ~/.config/tmux/tmux.conf
         pkill -USR1 zsh
+
+        if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
+          pkill swaybg
+          swaybg --mode fill --image ${../assets/images/daniel-leone-v7daTKlZzaw-unsplash.jpg} &
+        fi
       '';
   };
 
