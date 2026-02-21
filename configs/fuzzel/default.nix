@@ -6,10 +6,11 @@
     settings = {
       main = {
         width = "80";
-        "horizontal-pad" = "12";
-        "vertical-pad" = "8";
-        "inner-pad" = "12";
-        font = "Open Sans:weight=Bold:size=11,OpenMoji Color:size=11,Symbols Nerd Font Mono:size=11";
+        horizontal-pad = "12";
+        vertical-pad = "8";
+        inner-pad = "12";
+        font = "Lato:size=16,OpenMoji Color:size=16,Symbols Nerd Font Mono:size=16";
+        use-bold = true;
         terminal = "${pkgs.ghostty}/bin/ghostty";
       };
 

@@ -3,7 +3,7 @@
   programs.rofi = {
     enable = true;
 
-    font = "Open Sans Bold 11";
+    font = "Lato 16";
     terminal = "${pkgs.ghostty}/bin/ghostty";
 
     extraConfig = {

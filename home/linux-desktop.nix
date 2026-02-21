@@ -39,6 +39,7 @@
     wtype # Type on wayland like xdotool; used by bemoji
 
     # Fonts:
+    lato
     monaspace
     nerd-fonts.symbols-only
     openmoji-color

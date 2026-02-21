@@ -13,11 +13,11 @@ in
 
   fonts = {
     names = [
-      "Open Sans"
+      "Lato"
       "OpenMoji Color"
       "Symbols Nerd Font Mono"
     ];
-    size = 13.0;
+    size = 11.0;
   };
 
   # For any defaults left from the sway/i3 modules in home manager:

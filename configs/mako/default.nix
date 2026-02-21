@@ -24,7 +24,7 @@
     enable = true;
 
     settings = {
-      font = "Open Sans 11";
+      font = "Lato 11";
       background-color = "#0B0A0F";
       text-color = "#A2A2A9";
       width = "600";
