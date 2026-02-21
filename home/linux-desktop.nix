@@ -51,7 +51,6 @@
     gimp
     obsidian
     todoist-electron
-    vivaldi
   ];
 
   home.file.".local/bin/powermenu.sh" = {
@@ -192,6 +191,7 @@
 
   imports = [
     ../configs/avizo
+    ../configs/chromium
     ../configs/dunst
     ../configs/fuzzel
     ../configs/i3-sway/i3.nix
