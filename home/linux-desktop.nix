@@ -77,17 +77,17 @@
             lock_cmd="i3lock -n -c 191724"
         fi
 
-        choice=$(printf "󰗼 Lock\n󰍃 Logout\n󰜉 Reboot\n󰐥 Shutdown\n󰒲 Hibernate" \
+        choice=$(printf " Lock\n󰗽 Logout\n Reboot\n󰐥 Shutdown\n󰒲 Hibernate" \
           | "''${menu_cmd[@]}")
 
         case "$choice" in
-          "󰗼 Lock")
+          " Lock")
             $lock_cmd
             ;;
-          "󰍃 Logout")
+          "󰗽 Logout")
             swaymsg exit
             ;;
-          "󰜉 Reboot")
+          " Reboot")
             systemctl reboot
             ;;
           "󰐥 Shutdown")
