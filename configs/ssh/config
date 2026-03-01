@@ -10,3 +10,9 @@ Host homeassistant.local
   User root
   IdentityFile ~/.ssh/id_home_assistant
   IdentitiesOnly yes
+
+Host klabautermann
+  HostName 91.99.8.208
+  User schemar
+  IdentityFile ~/.ssh/id_klabautermann
+  IdentitiesOnly yes

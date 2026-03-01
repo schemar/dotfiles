@@ -17,6 +17,9 @@
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
     blueberry-peach.url = "github:schemar/blueberry-peach";
+
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -27,6 +30,7 @@
       home-manager,
       nixvim,
       blueberry-peach,
+      disko,
     }:
     let
       username = "schemar";
@@ -64,6 +68,7 @@
             inherit inputs username;
           };
           modules = [
+            disko.nixosModules.disko
             ./hosts/klabautermann
           ];
         };
