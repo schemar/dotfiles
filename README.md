@@ -40,7 +40,7 @@ Initial installation
 ```sh
 # Errors will guide you on what to fix
 # macOS:
-nix --extra-experimental-features "nix-command flakes" run nix-darwin/master#darwin-rebuild -- switch --flake .
+sudo -H nix --extra-experimental-features "nix-command flakes" run nix-darwin/master#darwin-rebuild -- switch --flake .
 
 # Linux with home-manager only:
 # (if necessary, add 'experimental-features = nix-command flakes' to /etc/nix/nix.conf
