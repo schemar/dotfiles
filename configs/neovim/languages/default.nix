@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./beancount.nix
     ./elixir.nix
     ./gdscript.nix
     ./html.nix

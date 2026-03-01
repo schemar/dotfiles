@@ -32,11 +32,14 @@
     tree-sitter
     sqlite
 
-    gdtoolkit_4
-    nixfmt
-    lua
+    beancount
+    fava
+
     cargo
     exercism
+    gdtoolkit_4
+    lua
+    nixfmt
   ];
 
   imports = [
