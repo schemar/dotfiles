@@ -32,9 +32,6 @@
     tree-sitter
     sqlite
 
-    beancount
-    fava
-
     cargo
     exercism
     gdtoolkit_4
