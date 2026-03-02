@@ -6,7 +6,8 @@
 @define-color blue #1675AB;
 @define-color violet #6A67B4;
 @define-color pink #A352A0;
-@define-color text #5B5B5B;
+/* @define-color text #5B5B5B; */
+@define-color text #FAF4ED;
 @define-color subtext #908A84;
 @define-color overlay2 #707070;
 @define-color overlay1 #646464;
@@ -27,11 +28,9 @@
 }
 
 window#waybar {
-  background-color: @surface0;
+  background-color: transparent;
   color: @text;
   border: none;
-  border-bottom: 1px solid @violet;
-  border-radius: 0;
 }
 
 window#waybar.hidden {
