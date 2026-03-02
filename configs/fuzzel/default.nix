@@ -10,7 +10,7 @@
         vertical-pad = "8";
         inner-pad = "12";
         font = "Lato:size=16,OpenMoji Color:size=16,Symbols Nerd Font Mono:size=16";
-        use-bold = true;
+        use-bold = false;
         terminal = "${pkgs.ghostty}/bin/ghostty";
       };
 
