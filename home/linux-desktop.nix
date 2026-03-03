@@ -184,7 +184,7 @@
 
         if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
           pkill swaybg
-          swaybg --mode fill --image ${../assets/images/daniel-leone-v7daTKlZzaw-unsplash.jpg} &
+          swaybg --mode fill --image ${../assets/images/marc-linnemann-wDx3q0yb7fk-unsplash_darker.jpg} &
         fi
       '';
   };

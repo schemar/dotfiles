@@ -36,7 +36,7 @@ theme-dark:
     #!/usr/bin/env bash
     if [ "{{ os() }}" = "macos" ]; then
       osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to true'
-      osascript -e 'tell app "System Events" to tell every desktop to set picture to "{{ join(justfile_directory(), "assets", "images", "daniel-leone-v7daTKlZzaw-unsplash.jpg") }}"'
+      osascript -e 'tell app "System Events" to tell every desktop to set picture to "{{ join(justfile_directory(), "assets", "images", "marc-linnemann-wDx3q0yb7fk-unsplash_darker.jpg") }}"'
       printf "#191724,#A19DD4,#A19DD4,#5EB1AF" | pbcopy
       echo "Copied slack colors to clipboard"
     fi
