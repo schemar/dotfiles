@@ -1,13 +1,11 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.nixvim = {
     lsp = {
       servers = {
-        elixirls = {
+        expert = {
           enable = true;
-          config = {
-            cmd = [ "elixir-ls" ];
-          };
+          package = pkgs.beamMinimal28Packages.expert;
         };
       };
     };
@@ -30,13 +28,13 @@
       lsp-format = {
         lspServersToEnable = [
           "null-ls"
-          "elixirls"
+          "expert"
         ];
 
         settings = {
           elixir = {
             order = [
-              "elixir-ls"
+              "expert"
               "null-ls"
             ];
             sync = true;
