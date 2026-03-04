@@ -1,11 +1,30 @@
-{ ... }:
+{ isDarwin, lib, ... }:
 {
   programs.qutebrowser = {
     enable = true;
 
+    # Darwin uses homebrew to install qutebrowser:
+    package = lib.mkIf isDarwin null;
+
     settings = {
-      colors = {
-        webpage.darkmode.enabled = true;
+      auto_save = {
+        session = true;
+      };
+      fonts = {
+        default_family = "Monaspace Neon";
+        default_size = "13pt";
+      };
+      window = {
+        hide_decoration = true;
+      };
+    };
+
+    keyBindings = {
+      normal = lib.mkIf isDarwin {
+        " p" = "spawn --userscript ${./userscripts/qute-1pass-mac}";
+        " P" = "spawn --userscript ${./userscripts/qute-1pass-mac} --clipboard-password";
+        " u" = "spawn --userscript ${./userscripts/qute-1pass-mac} --totp";
+        " U" = "spawn --userscript ${./userscripts/qute-1pass-mac} --clipboard-username";
       };
     };
 
@@ -256,10 +275,6 @@
 
         c.colors.contextmenu.selected.bg = palette["overlay0"]
         c.colors.contextmenu.selected.fg = palette["rosewater"]
-        # }}}
-
-        # background color for webpages {{{
-        c.colors.webpage.bg = palette["base"]
         # }}}
       '';
   };

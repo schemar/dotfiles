@@ -1,4 +1,4 @@
-{ username, pkgs, ... }:
+{ username, ... }:
 {
   # The platform the configuration will be used on:
   nixpkgs.hostPlatform = "aarch64-darwin";
@@ -23,13 +23,16 @@
     ];
 
     brews = [
+      "choose-gui"
       "qmk/qmk/qmk"
     ];
 
     casks = [
+      "1password-cli"
       "anki"
       "ghostty"
       "gimp"
+      "qutebrowser"
       "raycast"
       "wezterm"
     ];

@@ -207,7 +207,6 @@
     ../configs/i3-sway/sway.nix
     ../configs/mako
     ../configs/polybar
-    ../configs/qutebrowser
     ../configs/rofi
     ../configs/swaylock
     ../configs/waybar

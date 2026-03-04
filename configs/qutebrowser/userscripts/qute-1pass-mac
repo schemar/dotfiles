@@ -1,0 +1,282 @@
+#!/usr/bin/env python3
+"""
+qute-1pass: 1Password userscript for qutebrowser (macOS, op CLI v2)
+
+Flags:
+    --clipboard-password Copy password to clipboard instead of injecting into page
+    --clipboard-username Copy username to clipboard instead of injecting into page
+    --totp               Copy TOTP code to clipboard (in addition to form fill)
+"""
+
+import argparse
+import json
+import os
+import subprocess
+import sys
+import urllib.parse
+
+from typing import Optional
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def fifo_write(path: str, message: str) -> None:
+    with open(path, "a") as f:
+        f.write(message + "\n")
+
+
+def info(fifo: str, msg: str) -> None:
+    fifo_write(fifo, f"message-info {json.dumps(msg)}")
+
+
+def error(fifo: str, msg: str) -> None:
+    fifo_write(fifo, f"message-error {json.dumps(msg)}")
+
+
+def run_op(*args: str) -> subprocess.CompletedProcess:
+    """Run an op CLI command and return the CompletedProcess."""
+    return subprocess.run(
+        ["/opt/homebrew/bin/op", *args],
+        capture_output=True,
+        text=True,
+    )
+
+
+def pbcopy(text: str) -> None:
+    subprocess.run(["pbcopy"], input=text, text=True, check=True)
+
+
+def dmenu_pick(choices: list[str], dmenu_bin: str) -> Optional[str]:
+    """
+    Present choices to the user via a dmenu-compatible binary.
+    Returns the selected string, or None if cancelled.
+    """
+    result = subprocess.run(
+        [dmenu_bin],
+        input="\n".join(choices),
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0 or not result.stdout.strip():
+        return None
+    return result.stdout.strip()
+
+
+# ---------------------------------------------------------------------------
+# JavaScript form injection
+# ---------------------------------------------------------------------------
+
+INJECT_JS = """
+(function() {{
+    var username = {username_json};
+    var password = {password_json};
+    var targetUrl = {url_json};
+
+    if (window.location.href !== targetUrl) {{
+        alert("Secrets will not be inserted.\\nURL mismatch.");
+        return;
+    }}
+
+    function isVisible(elem) {{
+        var style = elem.ownerDocument.defaultView.getComputedStyle(elem, null);
+        if (style.getPropertyValue("visibility") !== "visible" ||
+            style.getPropertyValue("display") === "none" ||
+            style.getPropertyValue("opacity") === "0") {{
+            return false;
+        }}
+        return elem.offsetWidth > 0 && elem.offsetHeight > 0;
+    }}
+
+    function hasPasswordField(form) {{
+        var inputs = form.getElementsByTagName("input");
+        for (var i = 0; i < inputs.length; i++) {{
+            if (inputs[i].type === "password") return true;
+        }}
+        return false;
+    }}
+
+    function dispatch(input) {{
+        input.dispatchEvent(new Event("input",  {{ bubbles: true }}));
+        input.dispatchEvent(new Event("change", {{ bubbles: true }}));
+    }}
+
+    function fillForm(form) {{
+        var inputs = form.getElementsByTagName("input");
+        for (var i = 0; i < inputs.length; i++) {{
+            var input = inputs[i];
+            if (input.type === "password") {{
+                input.focus();
+                input.value = password;
+                dispatch(input);
+                input.blur();
+            }} else if (isVisible(input) &&
+                        (input.type === "text" || input.type === "email")) {{
+                input.focus();
+                input.value = username;
+                dispatch(input);
+                input.blur();
+            }}
+        }}
+    }}
+
+    var forms = document.getElementsByTagName("form");
+    for (var i = 0; i < forms.length; i++) {{
+        if (hasPasswordField(forms[i])) {{
+            fillForm(forms[i]);
+        }}
+    }}
+}})();
+"""
+
+
+def inject_credentials(fifo: str, url: str, username: str, password: str) -> None:
+    js = INJECT_JS.format(
+        username_json=json.dumps(username),
+        password_json=json.dumps(password),
+        url_json=json.dumps(url),
+    )
+    # Collapse to a single line for the qutebrowser jseval command
+    js_oneline = " ".join(js.split())
+    fifo_write(fifo, f"jseval -q {js_oneline}")
+
+
+# ---------------------------------------------------------------------------
+# 1Password helpers
+# ---------------------------------------------------------------------------
+
+def get_hostname(url: str) -> str:
+    parsed = urllib.parse.urlparse(url)
+    host = parsed.hostname or ""
+    return host.removeprefix("www.")
+
+
+def list_items() -> list[dict]:
+    result = run_op("item", "list", "--format=json")
+    if result.returncode != 0:
+        return []
+    return json.loads(result.stdout)
+
+
+def get_item(item_id: str) -> Optional[dict]:
+    result = run_op("item", "get", item_id, "--format=json")
+    if result.returncode != 0:
+        return None
+    return json.loads(result.stdout)
+
+
+def get_totp(item_id: str) -> Optional[str]:
+    result = run_op("item", "get", item_id, "--otp")
+    if result.returncode != 0 or not result.stdout.strip():
+        return None
+    return result.stdout.strip()
+
+
+def find_matching_items(items: list[dict], hostname: str) -> list[dict]:
+    matches = []
+    for item in items:
+        for url_entry in item.get("urls") or []:
+            href = url_entry.get("href", "")
+            if hostname and hostname in href:
+                matches.append(item)
+                break
+    return matches
+
+
+def extract_credentials(item: dict) -> tuple[str, str]:
+    username = ""
+    password = ""
+    for field in item.get("fields") or []:
+        purpose = field.get("purpose", "")
+        if purpose == "USERNAME":
+            username = field.get("value", "")
+        elif purpose == "PASSWORD":
+            password = field.get("value", "")
+    return username, password
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="qute-1pass: 1Password for qutebrowser")
+    parser.add_argument("--clipboard-password", action="store_true",
+                        help="Copy password to clipboard instead of injecting into page")
+    parser.add_argument("--clipboard-username", action="store_true",
+                        help="Copy username to clipboard instead of injecting into page")
+    parser.add_argument("--totp", action="store_true",
+                        help="Also copy TOTP code to clipboard")
+    args = parser.parse_args()
+
+    fifo = os.environ.get("QUTE_FIFO")
+    url  = os.environ.get("QUTE_URL", "")
+    dmenu_bin = "/opt/homebrew/bin/choose"
+
+    if not fifo:
+        print("QUTE_FIFO not set — must be run as a qutebrowser userscript", file=sys.stderr)
+        sys.exit(1)
+
+    hostname = get_hostname(url)
+    info(fifo, f"Looking for credentials for {hostname}…")
+
+    # ---- Fetch and filter items ----
+    all_items = list_items()
+    if not all_items:
+        error(fifo, "No 1Password items found (is op signed in?)")
+        sys.exit(1)
+
+    matches = find_matching_items(all_items, hostname)
+
+    if not matches:
+        info(fifo, f"No match for {hostname} — showing all items")
+        matches = all_items
+
+    # ---- Let user pick if multiple matches ----
+    if len(matches) == 1:
+        chosen = matches[0]
+    else:
+        titles = [item["title"] for item in matches]
+        chosen_title = dmenu_pick(titles, dmenu_bin)
+        if not chosen_title:
+            error(fifo, "No item selected")
+            sys.exit(0)
+        chosen = next((i for i in matches if i["title"] == chosen_title), None)
+        if not chosen:
+            error(fifo, f"Could not resolve item: {chosen_title}")
+            sys.exit(1)
+
+    # ---- Fetch full item ----
+    item = get_item(chosen["id"])
+    if not item:
+        error(fifo, f"Failed to fetch item: {chosen['title']}")
+        sys.exit(1)
+
+    username, password = extract_credentials(item)
+    title = item.get("title", chosen["id"])
+
+    if not password:
+        error(fifo, f"No password found for {title}")
+        sys.exit(1)
+
+    # ---- Fill or copy ----
+    if args.clipboard_password:
+        pbcopy(password)
+        info(fifo, f"Password for {title} copied to clipboard")
+    elif args.clipboard_username:
+        pbcopy(username)
+        info(fifo, f"Username for {title} copied to clipboard")
+    else:
+        inject_credentials(fifo, url, username, password)
+
+        totp = get_totp(chosen["id"]) if args.totp else None
+        if totp:
+            pbcopy(totp)
+            info(fifo, f"Filled {title} — TOTP copied to clipboard")
+        else:
+            info(fifo, f"Filled credentials for {title}")
+
+
+if __name__ == "__main__":
+    main()
