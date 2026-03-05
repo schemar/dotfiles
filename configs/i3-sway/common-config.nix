@@ -25,7 +25,10 @@ in
   terminal = terminal;
 
   gaps = {
-    outer = 6;
+    top = 0;
+    right = 6;
+    bottom = 6;
+    left = 6;
     inner = 6;
   };
 
