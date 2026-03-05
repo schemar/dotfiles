@@ -45,18 +45,15 @@ button {
 
 #workspaces button.focused,
 #workspaces button.active {
-  background-color: @violet;
-  color: @surface0;
+  border-top: 2px solid @violet;
 }
 
 #workspaces button.urgent {
-  background-color: @red;
-  color: @surface0;
+  border-top: 2px solid @red;
 }
 
 #mode {
-  background-color: @blue;
-  color: @surface0;
+  border-top: 2px solid @blue;
 }
 
 #backlight,
@@ -83,6 +80,8 @@ button {
   padding: 0 10px;
   margin: 0 2px;
   color: @text;
+  /* So modules don't shift when showing a top border: */
+  border-top: 2px solid transparent;
 }
 
 /* Clickable: */
@@ -119,8 +118,7 @@ tooltip * {
 
 #battery.charging,
 #battery.plugged {
-  background-color: @green;
-  color: @surface0;
+  border-top: 2px solid @green;
 }
 
 @keyframes blink {
@@ -132,8 +130,7 @@ tooltip * {
 
 /* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
-  background-color: @red;
-  color: @surface0;
+  border-top: 2px solid @red;
 }
 
 #power-profiles-daemon {
@@ -141,18 +138,15 @@ tooltip * {
 }
 
 #power-profiles-daemon.performance {
-  background-color: @red;
-  color: @surface0;
+  border-top: 2px solid @red;
 }
 
 #power-profiles-daemon.balanced {
-  background-color: @blue;
-  color: @surface0;
+  border-top: 2px solid @blue;
 }
 
 #power-profiles-daemon.power-saver {
-  background-color: @green;
-  color: @surface0;
+  border-top: 2px solid @green;
 }
 
 label:focus {
@@ -160,18 +154,15 @@ label:focus {
 }
 
 #network.disconnected {
-  background-color: @red;
-  color: @surface0;
+  border-top: 2px solid @red;
 }
 
 #pulseaudio.muted {
-  background-color: @orange;
-  color: @surface0;
+  border-top: 2px solid @orange;
 }
 
 #wireplumber.muted {
-  background-color: @orange;
-  color: @surface0;
+  border-top: 2px solid @orange;
 }
 
 #custom-media {
@@ -184,23 +175,19 @@ label:focus {
 
 #tray>.needs-attention {
   -gtk-icon-effect: highlight;
-  background-color: @red;
-  color: @surface0;
+  border-top: 2px solid @red;
 }
 
 #idle_inhibitor.activated {
-  background-color: @orange;
-  color: @surface0;
+  border-top: 2px solid @orange;
 }
 
 #mpd.disconnected {
-  background-color: @red;
-  color: @surface0;
+  border-top: 2px solid @red;
 }
 
 #mpd.paused {
-  background-color: @green;
-  color: @surface0;
+  border-top: 2px solid @green;
 }
 
 #language {
@@ -224,16 +211,13 @@ label:focus {
 }
 
 #privacy-item.screenshare {
-  background-color: @orange;
-  color: @surface0;
+  border-top: 2px solid @orange;
 }
 
 #privacy-item.audio-in {
-  background-color: @green;
-  color: @surface0;
+  border-top: 2px solid @green;
 }
 
 #privacy-item.audio-out {
-  background-color: @blue;
-  color: @surface0;
+  border-top: 2px solid @blue;
 }
