@@ -29,7 +29,10 @@ in
     imports = [
       ../../home
       {
-        programs.bash.shellAliases.npm = "sfw npm";
+        programs.bash.bashrcExtra = # bash
+          ''
+            alias npm='sfw npm'
+          '';
         programs.zsh.shellAliases.npm = "sfw npm";
         programs.nixvim.plugins.none-ls.sources.formatting.prettier.settings.command = "oxfmt";
       }
