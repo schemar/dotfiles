@@ -35,6 +35,7 @@ in
           '';
         programs.zsh.shellAliases.npm = "sfw npm";
         programs.nixvim.plugins.none-ls.sources.formatting.prettier.settings.command = "oxfmt";
+        programs.mise.globalConfig.tools.node = "24.14.0";
       }
     ];
   };
