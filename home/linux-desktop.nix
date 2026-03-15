@@ -50,7 +50,6 @@
     eog # eye of gnome image viewer
     gimp
     obsidian
-    todoist-electron
   ];
 
   home.file.".local/bin/powermenu.sh" = {
