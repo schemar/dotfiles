@@ -74,7 +74,7 @@
           }
           {
             # Map CapsLock to Escape:
-            command = "${pkgs.setxkbmap}/bin/setxkbmap -option caps:escape";
+            command = "${pkgs.setxkbmap}/bin/setxkbmap -option caps:escape -option compose:ralt";
             notification = false;
           }
 

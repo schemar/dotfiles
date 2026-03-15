@@ -74,8 +74,9 @@
 
         input = {
           "type:keyboard" = {
-            # Map capslock to escape:
-            "xkb_options" = "caps:escape";
+            # Map capslock to escape;
+            # Allows Umlauts and  with right alt as compose key;
+            "xkb_options" = "caps:escape,compose:ralt";
 
             "repeat_delay" = "200";
             "repeat_rate" = "50";
