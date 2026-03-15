@@ -1,26 +1,26 @@
 {
   inputs,
+  lib,
   isDarwin,
-  pkgs,
   ...
 }:
 {
   programs.ghostty = {
     enable = true;
     # Darwin manages ghostty installation with homebrew:
-    package = if isDarwin then null else pkgs.ghostty;
+    package = lib.mkIf isDarwin null;
     settings = {
       theme = "dark:blueberry_peach_dark,light:blueberry_peach_light";
 
-      "font-family" = [
+      font-family = [
         "Monaspace Neon"
         "OpenMoji Color"
         "Symbols Nerd Font Mono"
       ];
 
-      "font-size" = 13.0;
+      font-size = 13.0;
 
-      "font-feature" = [
+      font-feature = [
         "calt=1"
         "dlig=1"
         "cv01=2"
@@ -36,17 +36,17 @@
         "ss10=1"
       ];
 
-      "quit-after-last-window-closed" = true;
-      "confirm-close-surface" = false;
+      quit-after-last-window-closed = true;
+      confirm-close-surface = false;
 
-      "window-decoration" = "none";
+      window-decoration = "none";
 
-      "window-padding-balance" = true;
-      "window-padding-x" = 3;
-      "window-padding-y" = 1;
-      "window-padding-color" = "extend";
+      window-padding-balance = true;
+      window-padding-x = 3;
+      window-padding-y = 1;
+      window-padding-color = "extend";
 
-      "macos-option-as-alt" = true;
+      macos-option-as-alt = true;
     };
   };
 
