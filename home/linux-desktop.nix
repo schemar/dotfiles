@@ -50,6 +50,7 @@
     eog # eye of gnome image viewer
     gimp
     obsidian
+    thunderbird
   ];
 
   home.file.".local/bin/powermenu.sh" = {
