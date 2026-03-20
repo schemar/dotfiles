@@ -52,15 +52,6 @@
             ./hosts/Schencks-MacBook-Air
           ];
         };
-        "Afilio-0083" = nix-darwin.lib.darwinSystem {
-          specialArgs = {
-            inherit inputs username;
-          };
-          modules = [
-            darwin
-            ./hosts/Afilio-0083
-          ];
-        };
       };
       nixosConfigurations = {
         "klabautermann" = nixpkgs.lib.nixosSystem {

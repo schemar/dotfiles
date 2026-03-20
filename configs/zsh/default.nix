@@ -1,6 +1,5 @@
 {
   inputs,
-  lib,
   isDarwin,
   ...
 }:
@@ -32,7 +31,6 @@
       fkill = "ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill";
 
       # Tmux usability aliases
-      tma = "tmux new-session -A -s afilio";
       tmd = "tmux new-session -A -s dots";
       tme = "tmux new-session -A -s eoi";
       tmh = "tmux new-session -A -s home-as";

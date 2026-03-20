@@ -102,10 +102,6 @@
         path = ./gitprivate;
         condition = "gitdir:*";
       }
-      {
-        path = ./gitafilio;
-        condition = "gitdir:afilio*/";
-      }
     ];
   };
 
