@@ -1,11 +1,6 @@
 { ... }:
 {
   programs.nixvim = {
-    lsp = {
-      servers = {
-        marksman.enable = true;
-      };
-    };
     plugins = {
       none-ls = {
         enable = true;
