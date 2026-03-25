@@ -97,6 +97,8 @@
       };
     };
 
+    signing.format = "ssh";
+
     includes = [
       {
         path = ./gitprivate;
