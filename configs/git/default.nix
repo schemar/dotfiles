@@ -104,6 +104,10 @@
         path = ./gitprivate;
         condition = "gitdir:*";
       }
+      {
+        path = ./gitentelios;
+        condition = "gitdir:entelios*/";
+      }
     ];
   };
 
