@@ -1,32 +1,22 @@
 { lib, pkgs, ... }:
 {
-  home.file.".local/bin/start-sway.sh" = {
-    executable = true;
-    text = # bash
-      ''
-        #!/usr/bin/env bash
-
-        # Session
-        export XDG_SESSION_TYPE=wayland
-        export XDG_SESSION_DESKTOP=sway
-        export XDG_CURRENT_DESKTOP=sway
-
-        # Wayland stuff
-        export MOZ_ENABLE_WAYLAND=1
-        export QT_QPA_PLATFORM=wayland
-        export SDL_VIDEODRIVER=wayland
-        export _JAVA_AWT_WM_NONREPARENTING=1
-        export NIXOS_OZONE_WL=1
-
-        exec ${pkgs.sway}/bin/sway "$@"
-      '';
+  home.sessionVariables = {
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_CACHE_HOME = "$HOME/.cache";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_STATE_HOME = "$HOME/.local/state";
+  };
+  systemd.user.sessionVariables = {
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_CACHE_HOME = "$HOME/.cache";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_STATE_HOME = "$HOME/.local/state";
   };
 
   wayland.windowManager.sway = {
     enable = true;
-    # This also starts a systemd sway-session.target:
-    systemd.enable = true;
 
+    systemd.enable = false;
     wrapperFeatures.gtk = true; # Include fixes for GTK apps under Sway
 
     config =
@@ -52,6 +42,11 @@
       lib.recursiveUpdate commonConfig {
         startup = [
           {
+            command = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_DATA_DIRS";
+          }
+          { command = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"; }
+
+          {
             command = ''
               swayidle -w \
                 timeout 300 'swaylock -fF' \
@@ -63,6 +58,12 @@
 
           {
             command = "nm-applet";
+          }
+          { command = "systemctl --user start mako"; }
+          { command = "avizo-service"; }
+
+          {
+            command = "~/.local/bin/darkmode.sh";
           }
         ];
 
@@ -100,5 +101,15 @@
         exec --no-startup-id swaymsg -mt subscribe '[]' || true && pkill ghostty
         exec --no-startup-id swaymsg -mt subscribe '[]' || true && systemctl --user stop mako.service
       '';
+
+    extraSessionCommands = ''
+      export XDG_SESSION_DESKTOP=sway
+      export XDG_CURRENT_DESKTOP=sway
+      export XDG_SESSION_TYPE=wayland
+      export MOZ_ENABLE_WAYLAND=1
+      export QT_QPA_PLATFORM=wayland
+      export SDL_VIDEODRIVER=wayland
+      export _JAVA_AWT_WM_NONREPARENTING=1
+    '';
   };
 }

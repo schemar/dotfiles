@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   services.blueman-applet = {
     enable = true;
@@ -13,6 +13,8 @@
 
     swaybg
 
+    glib
+
     xautolock
 
     xset
@@ -20,6 +22,7 @@
     xbacklight
     feh
 
+    kdePackages.polkit-kde-agent-1
     kdePackages.breeze
     kdePackages.breeze-gtk
     kdePackages.breeze-icons
@@ -52,6 +55,19 @@
     obsidian
     thunderbird
   ];
+
+  # Ensure pointer is the right size:
+  home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+    size = 32;
+    x11 = {
+      enable = true;
+      defaultCursor = "Adwaita";
+    };
+    gtk.enable = true;
+    sway.enable = true;
+  };
 
   home.file.".local/bin/powermenu.sh" = {
     executable = true;
@@ -143,13 +159,17 @@
       '';
   };
 
+  gtk = {
+    enable = true;
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = true; # or false for light
+    gtk4.theme = config.gtk.theme;
+  };
+
   home.file.".local/bin/lightmode.sh" = {
     executable = true;
     text = # bash
       ''
         #!/usr/bin/env bash
-
-        lookandfeeltool --platform offscreen --apply "org.kde.breeze.desktop"
 
         gsettings set org.gnome.desktop.interface gtk-theme 'Breeze'
         gsettings set org.gnome.desktop.interface icon-theme 'breeze'
@@ -170,8 +190,6 @@
     text = # bash
       ''
         #!/usr/bin/env bash
-
-        lookandfeeltool --platform offscreen --apply "org.kde.breezedark.desktop"
 
         gsettings set org.gnome.desktop.interface gtk-theme 'Breeze-Dark'
         gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark'
@@ -194,7 +212,7 @@
     extraConfig = ''
       *dpi: 192
       Xft.dpi: 192
-      Xcursor.size: 48
+      Xcursor.size: 32
     '';
   };
 

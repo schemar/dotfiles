@@ -31,7 +31,7 @@
 
         clock = {
           format = "{0:%Y-%m-%d} {0:%H:%M}";
-          locale = "de_DE";
+          locale = "de_DE.utf8";
           tooltip-format = "<tt><small>{calendar}</small></tt>";
           calendar = {
             mode = "year";

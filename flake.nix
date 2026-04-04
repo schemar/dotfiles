@@ -63,21 +63,17 @@
             ./hosts/klabautermann
           ];
         };
-      };
-      homeConfigurations = {
-        "${username}@schenck-debian" = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-          };
-          extraSpecialArgs = {
+        "aegir" = nixpkgs.lib.nixosSystem {
+          specialArgs = {
             inherit inputs username;
             isDarwin = false;
           };
           modules = [
-            ./hosts/schenck-debian
+            ./hosts/aegir
           ];
         };
+      };
+      homeConfigurations = {
         "${username}@nb0400" = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             system = "x86_64-linux";
