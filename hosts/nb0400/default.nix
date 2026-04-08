@@ -15,7 +15,9 @@
     {
       fonts.fontconfig.enable = true;
       home.packages = with pkgs; [
+        gh
         prek
+
         monaspace
         nerd-fonts.symbols-only
       ];
