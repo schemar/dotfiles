@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./beancount.nix
@@ -27,6 +27,7 @@
         sources = {
           formatting = {
             prettier = {
+              package = pkgs.prettier;
               settings = {
                 # Always format open files, even if they are ignored.
                 # Setting `ignore-path` to empty string means "ignore nothing".
