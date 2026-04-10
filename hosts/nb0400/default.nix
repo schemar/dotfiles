@@ -18,6 +18,8 @@
         gh
         prek
 
+        podman-compose
+
         monaspace
         nerd-fonts.symbols-only
       ];
