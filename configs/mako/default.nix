@@ -29,7 +29,8 @@
       text-color = "#A2A2A9";
       width = "600";
       height = "80";
-      margin = "6";
+      outer-margin = "12,6,0,0";
+      margin = "0,0,6,0";
       border-size = "1";
       border-color = "#A19DD4FF";
       border-radius = "0";
