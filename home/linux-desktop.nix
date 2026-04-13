@@ -56,6 +56,7 @@
     gimp
     obsidian
     thunderbird
+    todoist-electron
   ];
 
   # Ensure pointer is the right size:
