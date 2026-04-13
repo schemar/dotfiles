@@ -49,7 +49,7 @@
     open-sans
     source-serif
 
-    thunar
+    nautilus
 
     discord-ptb # ptb (beta) as middle ground between stable and canary
     eog # eye of gnome image viewer
@@ -164,8 +164,10 @@
 
   gtk = {
     enable = true;
-    gtk3.extraConfig.gtk-application-prefer-dark-theme = true; # or false for light
-    gtk4.theme = config.gtk.theme;
+    gtk4.theme = null;
+  };
+  qt = {
+    enable = true;
   };
 
   home.file.".local/bin/lightmode.sh" = {
@@ -197,7 +199,6 @@
         gsettings set org.gnome.desktop.interface gtk-theme 'Breeze-Dark'
         gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark'
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-
 
         printf "dark" > ~/.config/current_theme_store
         tmux source-file ~/.config/tmux/tmux.conf
