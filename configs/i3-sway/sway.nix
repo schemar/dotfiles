@@ -5,12 +5,16 @@
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_STATE_HOME = "$HOME/.local/state";
+
+    NIXOS_OZONE_WL = "1";
   };
   systemd.user.sessionVariables = {
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_STATE_HOME = "$HOME/.local/state";
+
+    NIXOS_OZONE_WL = "1";
   };
 
   wayland.windowManager.sway = {
