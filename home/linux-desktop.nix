@@ -50,6 +50,7 @@
     source-serif
 
     nautilus
+    imv
 
     discord-ptb # ptb (beta) as middle ground between stable and canary
     eog # eye of gnome image viewer
@@ -58,6 +59,21 @@
     thunderbird
     todoist-electron
   ];
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "image/bmp" = [ "imv.desktop" ];
+      "image/gif" = [ "imv.desktop" ];
+      "image/jpeg" = [ "imv.desktop" ];
+      "image/png" = [ "imv.desktop" ];
+      "text/html" = [ "vivaldi-stable.desktop" ];
+      "x-scheme-handler/about" = [ "vivaldi-stable.desktop" ];
+      "x-scheme-handler/http" = [ "vivaldi-stable.desktop" ];
+      "x-scheme-handler/https" = [ "vivaldi-stable.desktop" ];
+      "x-scheme-handler/unknown" = [ "vivaldi-stable.desktop" ];
+    };
+  };
 
   # Ensure pointer is the right size:
   home.pointerCursor = {
