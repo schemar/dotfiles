@@ -3,6 +3,7 @@
   imports = [
     ./beancount.nix
     ./elixir.nix
+    ./erlang.nix
     ./gdscript.nix
     ./html.nix
     ./json.nix
@@ -13,9 +14,9 @@
     ./shell.nix
     ./typescript.nix
     ./vue.nix
+    ./web.nix
     ./xml.nix
     ./yaml.nix
-    ./web.nix
   ];
 
   programs.nixvim = {
