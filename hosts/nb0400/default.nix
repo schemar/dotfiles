@@ -24,6 +24,7 @@
         nerd-fonts.symbols-only
 
         universal-ctags
+        watchexec
       ];
       programs.ghostty.settings.window-decoration = "auto";
       programs.ghostty.settings.window-theme = "dark";
