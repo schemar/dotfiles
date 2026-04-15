@@ -491,7 +491,6 @@
                     vim.lsp.buf.code_action,
                     desc = "Code actions",
                   },
-                  { "<leader>lc", "<cmd>Copilot<cr>", desc = "Copilot completions" },
                   {
                     "<leader>ld",
                     "<cmd>Trouble diagnostics focus=true<cr>",

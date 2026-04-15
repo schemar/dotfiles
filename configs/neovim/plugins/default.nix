@@ -110,7 +110,6 @@
             incremental = true;
           };
         };
-        copilot-vim.enable = true;
         todo-comments = {
           enable = true;
           settings = {
