@@ -40,7 +40,17 @@
     ];
   };
 
-  swapDevices = [ ];
+  swapDevices = [
+    {
+      device = "/dev/nvme0n1p6";
+      # Solid state drives have fast random access times, which make them great
+      # for swap if you ignore the limited lifespan. Enabling TRIM (discard) on
+      # the swap files can help avoid unnecessary copy actions on the SSD,
+      # reducing wear and potentially helping increase performance.
+      # https://wiki.nixos.org/wiki/Swap#discard
+      options = [ "discard" ];
+    }
+  ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
