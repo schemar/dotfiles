@@ -39,6 +39,8 @@
       quit-after-last-window-closed = true;
       confirm-close-surface = false;
 
+      bell-features = "no-title";
+
       window-decoration = "none";
 
       window-padding-balance = true;
