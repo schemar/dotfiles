@@ -39,6 +39,8 @@
             notificationDismissCommand = null;
             applicationCommand = "exec ${pkgs.rofi}/bin/rofi -show drun";
             emojiCommand = null;
+            screenshotCommand = null;
+            fullScreenshotCommand = null;
             audioUpCommand = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume 0 +5%";
             audioDownCommand = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume 0 -5%";
             audioMuteCommand = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute 0 toggle";

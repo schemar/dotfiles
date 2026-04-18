@@ -33,6 +33,11 @@
             notificationDismissCommand = "exec ${pkgs.mako}/bin/makoctl dismiss";
             applicationCommand = "exec ${pkgs.fuzzel}/bin/fuzzel";
             emojiCommand = "exec ${pkgs.bemoji}/bin/bemoji --type";
+            # `grim -g "$(slurp)"` to capture the given coordinates
+            # `grim -` (- as file) to send the result to stdout instead of a file
+            # `swappy -f -` to read the file from stdin (-)
+            screenshotCommand = "exec grim -g \"$(slurp)\" - | swappy -f -";
+            fullScreenshotCommand = "exec grim - | swappy -f -";
             audioUpCommand = "exec ${pkgs.avizo}/bin/volumectl -u up";
             audioDownCommand = "exec ${pkgs.avizo}/bin/volumectl -u down";
             audioMuteCommand = "exec ${pkgs.avizo}/bin/volumectl toggle-mute";

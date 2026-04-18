@@ -86,6 +86,9 @@ in
     "Mod4+d" = lib.mkIf (commands.applicationCommand != null) commands.applicationCommand;
     "Mod4+Shift+d" = lib.mkIf (commands.emojiCommand != null) commands.emojiCommand;
 
+    "Mod4+p" = lib.mkIf (commands.screenshotCommand != null) commands.screenshotCommand;
+    "Mod4+Shift+p" = lib.mkIf (commands.fullScreenshotCommand != null) commands.fullScreenshotCommand;
+
     # Commands provided by avizo.service
     "XF86AudioRaiseVolume" = commands.audioUpCommand;
     "XF86AudioLowerVolume" = commands.audioDownCommand;

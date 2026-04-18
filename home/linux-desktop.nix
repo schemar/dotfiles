@@ -38,6 +38,10 @@
     pavucontrol
     blueman
 
+    grim
+    slurp
+    swappy
+
     bemoji
     wtype # Type on wayland like xdotool; used by bemoji
 
