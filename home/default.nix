@@ -52,7 +52,6 @@
     ../configs/lazygit
     ../configs/mise
     ../configs/neovim
-    ../configs/qutebrowser
     ../configs/ripgrep
     ../configs/starship
     ../configs/ssh
