@@ -40,40 +40,8 @@
     ];
   };
 
-  swapDevices = [
-    {
-      device = "/dev/nvme0n1p6";
-      # Solid state drives have fast random access times, which make them great
-      # for swap if you ignore the limited lifespan. Enabling TRIM (discard) on
-      # the swap files can help avoid unnecessary copy actions on the SSD,
-      # reducing wear and potentially helping increase performance.
-      # https://wiki.nixos.org/wiki/Swap#discard
-      options = [ "discard" ];
-    }
-  ];
+  swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings = {
-      General = {
-        # Shows battery charge of connected devices on supported
-        # Bluetooth adapters. Defaults to 'false'.
-        Experimental = true;
-        # When enabled other devices can connect faster to us, however
-        # the tradeoff is increased power consumption. Defaults to
-        # 'false'.
-        FastConnectable = true;
-      };
-      Policy = {
-        # Enable all controllers when they are found. This includes
-        # adapters present on start as well as adapters that are plugged
-        # in later on. Defaults to 'true'.
-        AutoEnable = true;
-      };
-    };
-  };
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   services.blueman-applet = {
     enable = true;
@@ -239,6 +239,9 @@
       Xcursor.size: 32
     '';
   };
+
+  # For some reason, the scaling in wayland makes the fonts way bigger. Adjusting:
+  programs.ghostty.settings."font-size" = lib.mkForce 11.0;
 
   imports = [
     ../configs/avizo

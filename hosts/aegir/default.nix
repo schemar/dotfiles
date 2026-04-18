@@ -1,5 +1,4 @@
 {
-  lib,
   inputs,
   username,
   ...
@@ -19,9 +18,6 @@
       ../../home/default.nix
       ../../home/linux-desktop.nix
       {
-        # For some reason, the scaling in wayland makes the fonts way bigger. Adjusting:
-        programs.ghostty.settings."font-size" = lib.mkForce 11.0;
-
         # Configure output of this host:
         wayland.windowManager.sway = {
           config = {
