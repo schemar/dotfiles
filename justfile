@@ -20,7 +20,7 @@ hm-switch:
     home-manager switch --flake .#$(whoami)@$(hostname)
 
 nix-clean:
-    nix-env --delete-generations +2
+    nix-env --delete-generations +5
     nix-collect-garbage
 
 nix-flake-update:
