@@ -12,6 +12,7 @@
   # Uses home-manager standalone module on debian linux:
   imports = [
     ../../home/standalone.nix
+    ../../home
     {
       fonts.fontconfig.enable = true;
       home.packages = with pkgs; [
