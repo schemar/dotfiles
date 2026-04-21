@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./aerial.nix
@@ -11,6 +11,18 @@
 
   programs.nixvim =
     let
+      treesitter-queries-erlang = pkgs.tree-sitter.buildGrammar {
+        language = "erlang";
+        version = "0.15";
+        src = pkgs.fetchFromGitHub {
+          owner = "WhatsApp";
+          repo = "tree-sitter-erlang";
+          rev = "a260cb65eaa6e055289a34434f98c3aae6137ed5";
+          sha256 = "sha256-EatEvMEI83yax2LCCrtJMFWDOuTzp4/rUPdARiRze6E=";
+        };
+        meta.homepage = "https://github.com/WhatsApp/tree-sitter-erlang";
+      };
+
       border = "single";
     in
     {
@@ -19,6 +31,8 @@
         pkgs.vimPlugins.smart-open-nvim
         pkgs.vimPlugins.hover-nvim
         pkgs.vimPlugins.auto-hlsearch-nvim
+
+        treesitter-queries-erlang
       ];
 
       extraConfigLua = # lua
@@ -137,13 +151,17 @@
         treesitter = {
           enable = true;
 
-          settings = {
-            indent.enable = true;
-            highlight = {
-              enable = true;
-              additional_vim_regex_highlighting = false;
-            };
+          highlight = {
+            additional_vim_regex_highlighting = false;
+            enable = true;
           };
+          indent.enable = true;
+          folding.enable = true;
+
+          grammarPackages = config.programs.nixvim.plugins.treesitter.package.allGrammars ++ [
+            treesitter-queries-erlang
+          ];
+          languageRegister.erlang = "erlang";
         };
         treesitter-context.enable = true;
         ts-autotag.enable = true;
