@@ -1,6 +1,13 @@
 { ... }:
 {
   programs.nixvim = {
+    lsp = {
+      servers = {
+        elp = {
+          enable = true;
+        };
+      };
+    };
     plugins = {
       none-ls = {
         enable = true;

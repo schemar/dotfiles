@@ -32,7 +32,10 @@
     tree-sitter
     sqlite
 
+    beam28Packages.erlang
+    beam28Packages.elixir
     cargo
+    erlang-language-platform
     exercism
     gdtoolkit_4
     lua
