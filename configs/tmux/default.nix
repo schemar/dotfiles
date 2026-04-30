@@ -11,7 +11,7 @@
     escapeTime = 0;
     historyLimit = 10000;
 
-    prefix = "C-a";
+    prefix = "C-b";
     keyMode = "vi";
     mouse = true;
 
@@ -154,9 +154,8 @@
 
         # use <prefix> z to (un)zoom current pane
         bind z resize-pane -Z
-        # use C-b to go to last pane and zoom
-        # binding with -n means "no prefix"
-        bind -n C-b select-pane -l \; resize-pane -Z
+        # use C-b C-a to go to last pane and zoom
+        bind C-a select-pane -l \; resize-pane -Z
 
         # Move between windows
         bind -n M-J next-window
