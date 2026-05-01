@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   imports = [
-    ./beancount.nix
     ./elixir.nix
     ./erlang.nix
     ./gdscript.nix

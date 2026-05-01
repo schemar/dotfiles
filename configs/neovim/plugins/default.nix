@@ -151,12 +151,14 @@
         treesitter = {
           enable = true;
 
-          highlight = {
-            additional_vim_regex_highlighting = false;
-            enable = true;
+          settings = {
+            highlight = {
+              additional_vim_regex_highlighting = false;
+              enable = true;
+            };
+            indent.enable = true;
           };
-          indent.enable = true;
-          folding.enable = true;
+          folding = true;
 
           grammarPackages = config.programs.nixvim.plugins.treesitter.package.allGrammars ++ [
             treesitter-queries-erlang

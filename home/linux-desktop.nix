@@ -18,7 +18,7 @@
     xautolock
 
     xset
-    setxkbmap
+    xorg.setxkbmap
     xbacklight
     feh
 
