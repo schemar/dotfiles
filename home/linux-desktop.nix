@@ -247,6 +247,7 @@
     ../configs/avizo
     ../configs/chromium
     ../configs/dunst
+    ../configs/firefox
     ../configs/fuzzel
     ../configs/i3-sway/i3.nix
     ../configs/i3-sway/sway.nix
