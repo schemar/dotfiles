@@ -205,7 +205,7 @@
             ''
               {
                 options = {
-                  theme = "catppuccin-nvim",
+                  theme = "catppuccin",
                   component_separators = { left = "", right = "" },
                   section_separators = { left = "", right = "" },
                   disabled_filetypes = {
