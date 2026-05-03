@@ -40,7 +40,6 @@
     gdtoolkit_4
     lua
     nixfmt
-    uv
   ];
 
   imports = [
