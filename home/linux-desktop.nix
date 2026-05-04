@@ -29,6 +29,7 @@
 
     libnotify
     wl-clipboard
+    xdg-utils
     playerctl
 
     networkmanager
