@@ -113,6 +113,17 @@
             close_fold_kinds_for_ft = {
               default = [ "imports" ];
             };
+
+            provider_selector.__raw = # lua
+              ''
+                function(bufnr, filetype, buftype)
+                  if filetype == 'erlang' then
+                    return {'treesitter', 'indent'}
+                  else
+                    return {'lsp', 'indent'}
+                  end
+                end
+              '';
           };
         };
         nvim-surround.enable = true;
