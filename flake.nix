@@ -17,6 +17,9 @@
 
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+
+    lanzaboote.url = "github:nix-community/lanzaboote/v1.0.0";
+    lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -28,6 +31,7 @@
       nixvim,
       blueberry-peach,
       disko,
+      lanzaboote,
     }:
     let
       username = "schemar";

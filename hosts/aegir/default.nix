@@ -9,6 +9,9 @@
     ./configuration.nix
     ../../system/common.nix
 
+    # Secure Boot
+    ./secure-boot.nix
+
     # Home-manager as a NixOS module:
     inputs.home-manager.nixosModules.home-manager
   ];
