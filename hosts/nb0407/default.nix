@@ -87,33 +87,24 @@
       ../../home/default.nix
       ../../home/linux-desktop.nix
       {
-        # Configure output of this host:
-        wayland.windowManager.sway = {
-          config = {
-            output = {
-              "eDP-1" = {
-                scale = "2";
-                bg = "${../../assets/images/marc-linnemann-wDx3q0yb7fk-unsplash_darker.jpg} fill";
-              };
-            };
-          };
-        };
         services.kanshi = {
           enable = true;
 
           # Get criteria with swaymsg -t get_outputs
-          profiles = {
-            undocked = {
-              outputs = [
+          settings = [
+            {
+              profile.name = "undocked";
+              profile.outputs = [
                 {
                   criteria = "eDP-1";
                   scale = 2.0;
                   status = "enable";
                 }
               ];
-            };
-            docked_office = {
-              outputs = [
+            }
+            {
+              profile.name = "entelios_office";
+              profile.outputs = [
                 {
                   criteria = "eDP-1";
                   status = "disable";
@@ -124,8 +115,8 @@
                   status = "enable";
                 }
               ];
-            };
-          };
+            }
+          ];
         };
         services.podman.enable = true;
 
