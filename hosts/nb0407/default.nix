@@ -127,6 +127,22 @@
             };
           };
         };
+        services.podman.enable = true;
+
+        home.packages = with pkgs; [
+          gh
+          prek
+
+          podman-compose
+
+          universal-ctags
+          watchexec
+
+          # RTS repo:
+          python310
+          gcc
+          gnumake
+        ];
       }
     ];
   };
