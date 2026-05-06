@@ -73,6 +73,13 @@
             ./hosts/aegir
           ];
         };
+        "nb0407" = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs username;
+            isDarwin = false;
+          };
+          modules = [ ./hosts/nb0407 ];
+        };
       };
       homeConfigurations = {
         "${username}@nb0400" = home-manager.lib.homeManagerConfiguration {
