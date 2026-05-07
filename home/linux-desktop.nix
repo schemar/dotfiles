@@ -57,7 +57,6 @@
     nautilus
     imv
 
-    discord-ptb # ptb (beta) as middle ground between stable and canary
     eog # eye of gnome image viewer
     gimp
     obsidian
