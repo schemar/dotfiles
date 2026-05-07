@@ -82,6 +82,11 @@
 
   services.gnome.gnome-keyring.enable = true;
 
+  virtualisation.podman.enable = true;
+  # Have a "docker" command that runs podman.
+  # Useful for projects that have a justfile with docker commands.
+  virtualisation.podman.dockerCompat = true;
+
   home-manager.users.${username} = {
     imports = [
       ../../home/default.nix
