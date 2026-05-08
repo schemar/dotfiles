@@ -20,7 +20,7 @@
   wayland.windowManager.sway = {
     enable = true;
 
-    systemd.enable = false;
+    systemd.enable = true;
     wrapperFeatures.gtk = true; # Include fixes for GTK apps under Sway
 
     config =
