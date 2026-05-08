@@ -62,7 +62,6 @@
 
   environment.systemPackages = with pkgs; [
     tuigreet
-    strongswan
 
     keepassxc
 
