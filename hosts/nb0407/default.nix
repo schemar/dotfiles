@@ -108,6 +108,20 @@
               ];
             }
             {
+              profile.name = "home_office";
+              profile.outputs = [
+                {
+                  criteria = "eDP-1";
+                  status = "disable";
+                }
+                {
+                  criteria = "Dell Inc. DELL S2722QC 5Q7VLD3";
+                  scale = 2.0;
+                  status = "enable";
+                }
+              ];
+            }
+            {
               profile.name = "entelios_office";
               profile.outputs = [
                 {
