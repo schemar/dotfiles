@@ -7,6 +7,7 @@ This repository contains a nix configuration for my productivity stack.
 Requirements:
 
 - [Nix](https://nixos.org/download.html)
+
   ```sh
   # macOS:
   sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
@@ -14,6 +15,7 @@ Requirements:
   # Linux:
   sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
   ```
+
 - [Homebrew](https://brew.sh/) (macOS only)
   ```sh
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
@@ -66,6 +68,24 @@ home-manager switch --flake .#$(whoami)@$(hostname)
 Remaining steps:
 
 - Set up Night Shift (System Preferences > Displays > Night Shift)
+
+## Troubleshooting
+
+### macOS: `greadlink` not found or no nix-darwin installed
+
+It's usually enough to re-install nix-darwin:
+
+```shell
+# Same command as installation. Check release.
+sudo -H nix --extra-experimental-features "nix-command flakes" run nix-darwin/nix-darwin-25.11#darwin-rebuild -- switch --flake .
+```
+
+If it complains that it cannot connect to the nix daemon, start it first:
+
+```shell
+sudo launchctl bootstrap system /Library/LaunchDaemons/org.nixos.nix-daemon.plist 2>/dev/null || true
+sudo launchctl kickstart -k system/org.nixos.nix-daemon
+```
 
 ## Included Configurations
 
