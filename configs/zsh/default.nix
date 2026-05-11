@@ -16,10 +16,6 @@
 
     shellAliases = {
       g = "git";
-      gtsync = "gt co main && gt sync && git switch -";
-      gtsubmit = "gt top && gt sync && gt submit && git switch -";
-
-      y = "yarn";
 
       l = "lsd -al";
       ll = "lsd -al --tree";
@@ -105,26 +101,6 @@
           IFS=$si
         }
         compdef _npm_completion npm
-
-        #compdef gt
-        ###-begin-gt-completions-###
-        #
-        # yargs command completion script
-        #
-        # Installation: gt completion >> ~/.zshrc
-        #    or gt completion >> ~/.zprofile on OSX.
-        #
-        _gt_yargs_completions()
-        {
-          local reply
-          local si=$IFS
-          IFS=$'
-        ' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" gt --get-yargs-completions "''${words[@]}"))
-          IFS=$si
-          _describe 'values' reply
-        }
-        compdef _gt_yargs_completions gt
-        ###-end-gt-completions-###
 
         # Set git branch in tmux
         # See also ~/.tmux.conf which reads the branch variable for status-right
