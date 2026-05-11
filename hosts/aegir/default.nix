@@ -8,20 +8,12 @@
     # NixOS-specific configs:
     ./configuration.nix
     ../../system/common.nix
-
-    # Secure Boot
-    ./secure-boot.nix
+    ../../system/nixos-desktop.nix
+    ../../system/secure-boot.nix
 
     # Home-manager as a NixOS module:
     inputs.home-manager.nixosModules.home-manager
   ];
-
-  services = {
-    # Disks, mounting, etc.:
-    gvfs.enable = true;
-    udisks2.enable = true;
-    devmon.enable = true;
-  };
 
   home-manager.users.${username} = {
     imports = [
