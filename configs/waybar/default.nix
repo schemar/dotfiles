@@ -110,12 +110,12 @@
 
         pulseaudio = {
           format = "{volume}% {icon}";
-          "format-bluetooth" = "{volume}% 󰂰";
-          "format-bluetooth-muted" = "{icon} 󰂲";
-          "format-muted" = "󰝟";
-          "format-icons" = {
+          format-bluetooth = "{volume}% 󰂰";
+          format-bluetooth-muted = "{icon} 󰂲";
+          format-muted = "󰝟";
+          format-icons = {
             "headphone" = "󰋋";
-            "hands-free" = "󰥰";
+            hands-free = "󰥰";
             "headset" = "󰋎";
             "phone" = "󰏲";
             "portable" = "󰄝";
@@ -126,10 +126,10 @@
               "󰕾"
             ];
           };
-          "on-click" = "pavucontrol";
-          "on-click-right" = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
-          "on-scroll-up" = "pactl set-sink-volume @DEFAULT_SINK@ +2%";
-          "on-scroll-down" = "pactl set-sink-volume @DEFAULT_SINK@ -2%";
+          on-click = "pavucontrol";
+          on-click-right = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+          on-scroll-up = "pactl set-sink-volume @DEFAULT_SINK@ +2%";
+          on-scroll-down = "pactl set-sink-volume @DEFAULT_SINK@ -2%";
         };
 
         idle_inhibitor = {
