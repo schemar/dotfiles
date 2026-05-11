@@ -19,9 +19,7 @@
         modules-right = [
           "cpu"
           "memory"
-          "network"
           "pulseaudio"
-          "bluetooth"
           "privacy"
           "idle_inhibitor"
           "tray"
