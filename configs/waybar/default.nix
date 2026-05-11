@@ -20,6 +20,7 @@
           "pulseaudio"
           "privacy"
           "idle_inhibitor"
+          "battery"
           "tray"
           "clock"
           "custom/power"
@@ -41,6 +42,38 @@
               weekdays = "<span color='#878794'><b>{}</b></span>";
               today = "<span color='#7AA8CE'><b><u>{}</u></b></span>";
             };
+          };
+        };
+
+        battery = {
+          format = "{capacity}% {icon}";
+          format-icons = {
+            "default" = [
+              "󰂎"
+              "󰁺"
+              "󰁻"
+              "󰁼"
+              "󰁽"
+              "󰁾"
+              "󰁿"
+              "󰂀"
+              "󰂁"
+              "󰂂"
+              "󰁹"
+            ];
+            "charging" = [
+              "󰢟"
+              "󰢜"
+              "󰂆"
+              "󰂇"
+              "󰂈"
+              "󰢝"
+              "󰂉"
+              "󰢞"
+              "󰂊"
+              "󰂋"
+              "󰂅"
+            ];
           };
         };
 
