@@ -54,7 +54,7 @@
     open-sans
     source-serif
 
-    nautilus
+    nautilus # gnome file manager
     imv
 
     eog # eye of gnome image viewer
@@ -63,6 +63,8 @@
     thunderbird
     todoist-electron
   ];
+
+  services.udiskie.enable = true;
 
   xdg.mimeApps = {
     enable = true;

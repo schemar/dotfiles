@@ -16,6 +16,13 @@
     inputs.home-manager.nixosModules.home-manager
   ];
 
+  services = {
+    # Disks, mounting, etc.:
+    gvfs.enable = true;
+    udisks2.enable = true;
+    devmon.enable = true;
+  };
+
   home-manager.users.${username} = {
     imports = [
       ../../home/default.nix

@@ -81,6 +81,13 @@
 
   services.gnome.gnome-keyring.enable = true;
 
+  services = {
+    # Disks, mounting, etc.:
+    gvfs.enable = true;
+    udisks2.enable = true;
+    devmon.enable = true;
+  };
+
   virtualisation.podman.enable = true;
   # Have a "docker" command that runs podman.
   # Useful for projects that have a justfile with docker commands.
