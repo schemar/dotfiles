@@ -15,6 +15,7 @@
     nix
     zsh
   ];
+  programs.zsh.enable = true;
 
   # Use user-level ZSH provided by home-manager config:
   environment.shells = [ "/run/current-system/sw/bin/zsh" ];

@@ -6,6 +6,7 @@
 {
   programs.zsh = {
     enable = true;
+    enableCompletion = true; # Make sure this is done by home-manager, not NixOS.
 
     defaultKeymap = "viins";
 
@@ -51,10 +52,6 @@
     # Have to escape zsh ${...} with ''${...}
     initContent = # sh
       ''
-        # Temp fix for compinit:
-        # Silences error on ZSH startup on macOS with multiple users.
-        ZSH_DISABLE_COMPFIX=true
-
         #
         # ENVIRONMENT
         #
