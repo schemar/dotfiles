@@ -17,8 +17,6 @@
           "sway/window"
         ];
         modules-right = [
-          "cpu"
-          "memory"
           "pulseaudio"
           "privacy"
           "idle_inhibitor"
