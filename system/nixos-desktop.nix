@@ -41,6 +41,8 @@
   };
   services.gnome.gnome-keyring.enable = true;
 
+  services.fwupd.enable = true;
+
   security.pam.services = {
     greetd.enableGnomeKeyring = true;
     swaylock.enableGnomeKeyring = true;
