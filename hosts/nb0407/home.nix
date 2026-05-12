@@ -43,6 +43,20 @@
           }
         ];
       }
+      {
+        profile.name = "entelios_office_2";
+        profile.outputs = [
+          {
+            criteria = "eDP-1";
+            status = "disable";
+          }
+          {
+            criteria = "Dell Inc. DELL U2414H 292K477303PL";
+            scale = 1.0;
+            status = "enable";
+          }
+        ];
+      }
     ];
   };
   services.podman.enable = true;
