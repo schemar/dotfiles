@@ -1,6 +1,7 @@
 {
   inputs,
   username,
+  lib,
   pkgs,
   ...
 }:
@@ -25,10 +26,24 @@
     gh
   ];
 
-  virtualisation.podman.enable = true;
-  # Have a "docker" command that runs podman.
-  # Useful for projects that have a justfile with docker commands.
-  virtualisation.podman.dockerCompat = true;
+  virtualisation = {
+    podman = {
+      enable = true;
+      # Have a "docker" command that runs podman.
+      # Useful for projects that have a justfile with docker commands.
+      dockerCompat = true;
+    };
+    virtualbox.host = {
+      enable = true;
+      enableExtensionPack = true;
+      # Workaround for kernel issues with VirtualBox 7.2.4 and Kernel 7.0.5:
+      enableKvm = true;
+      # KVM only supports NAT:
+      addNetworkInterface = false;
+    };
+  };
+  users.extraGroups.vboxusers.members = [ username ];
+  systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
 
   home-manager.users.${username} = {
     imports = [
