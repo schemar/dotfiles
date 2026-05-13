@@ -134,6 +134,7 @@ in
     "Mod4+Shift+Left" = "move left";
     "Mod4+Shift+Right" = "move right";
     "Mod4+Shift+Up" = "move up";
+    "Mod4+Shift+b" = "exec swaylock";
     "Mod4+Shift+c" = "reload";
     "Mod4+Shift+h" = "move left";
     "Mod4+Shift+j" = "move down";
