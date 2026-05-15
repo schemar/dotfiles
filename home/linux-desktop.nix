@@ -117,7 +117,7 @@
             lock_cmd="i3lock -n -c 191724"
         fi
 
-        choice=$(printf " Lock\n󰗽 Logout\n Reboot\n󰐥 Shutdown\n󰒲 Hibernate" \
+        choice=$(printf " Lock\n󰗽 Logout\n Reboot\n󰐥 Shutdown\n󰒲 Sleep\n󰤄 Hibernate" \
           | "''${menu_cmd[@]}")
 
         case "$choice" in
@@ -133,7 +133,10 @@
           "󰐥 Shutdown")
             systemctl poweroff
             ;;
-          "󰒲 Hibernate")
+          "󰒲 Sleep")
+            systemctl sleep
+            ;;
+          "󰤄 Hibernate")
             systemctl hibernate
             ;;
         esac
