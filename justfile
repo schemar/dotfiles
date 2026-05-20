@@ -30,6 +30,10 @@ nix-upgrade: nix-flake-update nix-switch
 
 hm-upgrade: nix-flake-update hm-switch
 
+firmware-upgrade:
+    fwupdmgr get-updates
+    fwupdmgr update
+
 upgrade: brew-upgrade nix-upgrade
 
 theme-dark:
