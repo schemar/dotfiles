@@ -31,7 +31,14 @@ nix-upgrade: nix-flake-update nix-switch
 hm-upgrade: nix-flake-update hm-switch
 
 firmware-upgrade:
+    #!/usr/bin/env bash
     fwupdmgr get-updates
+
+    if [ $? == 2 ]; then
+      # No updates available
+      exit 0
+    fi
+
     fwupdmgr update
 
 upgrade: brew-upgrade nix-upgrade
