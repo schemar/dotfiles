@@ -51,5 +51,24 @@
       ../../home/linux-desktop.nix
       ./home.nix
     ];
+
+    wayland.windowManager.sway.config.startup = [
+      {
+        command = "${pkgs.ghostty}/bin/ghostty && ~/.local/bin/swaywait.sh com.mitchellh.ghostty 'move workspace 1'";
+      }
+      {
+        command = "${pkgs.vivaldi}/bin/vivaldi && ~/.local/bin/swaywait.sh vivaldi-stable 'move workspace 2'";
+      }
+      {
+        command = "${pkgs.todoist-electron}/bin/todoist-electron && ~/.local/bin/swaywait.sh Todoist 'move workspace 3'";
+      }
+      {
+        command = "${pkgs.obsidian}/bin/obsidian && ~/.local/bin/swaywait.sh obsidian 'move workspace 7'";
+      }
+
+      {
+        command = "swaymsg 'workspace number 5";
+      }
+    ];
   };
 }

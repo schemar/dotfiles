@@ -17,6 +17,48 @@
     NIXOS_OZONE_WL = "1";
   };
 
+  home.file.".local/bin/swaywait.sh" = {
+    executable = true;
+    text = # bash
+      ''
+        #!/usr/bin/env bash
+
+        # Use this command to apply a sway command to an application once.
+        # Example:
+        # exec firefox
+        # exec ~/.local/bin/swaywait.sh firefox 'move workspace 3'
+        #
+        # The above example would move the next firefox window to workspace 3
+        # *once*. Future launches of firefox are unaffected.
+        #
+        # The script blocks until the provided app is started.
+        # See also: https://gist.github.com/iguanajuice/4b34ef2d93a53b7e1e91ddeb70768c4e
+
+        if [ $# -ne 2 ]
+        then
+            echo "Usage: swaywait.sh [app_id/class] [sway_command]"
+            exit 1
+        fi
+
+        TARGET=$1
+        COMMAND=$2
+
+        swaymsg -t subscribe -m '["window"]' | while read line
+        do
+            CON=`echo $line | jq -r 'select(.change=="new").container'`
+            APPID=`echo $CON | jq -r '.app_id'`
+            CLASS=`echo $CON | jq -r '.window_properties.class'`
+            CONID=`echo $CON | jq -r '.id'`
+
+            if [ "$APPID" = "$TARGET" ] || [ "$CLASS" = "$TARGET" ]
+            then
+                swaymsg "[con_id=$CONID] $COMMAND"
+                kill -PIPE 0
+            fi
+        done
+      '';
+  };
+
   wayland.windowManager.sway = {
     enable = true;
 
