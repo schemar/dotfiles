@@ -169,7 +169,9 @@
             };
             indent.enable = true;
           };
-          folding = true;
+          folding = {
+            enable = true;
+          };
 
           grammarPackages = config.programs.nixvim.plugins.treesitter.package.allGrammars ++ [
             treesitter-queries-erlang
@@ -216,7 +218,7 @@
             ''
               {
                 options = {
-                  theme = "catppuccin",
+                  theme = "catppuccin-nvim",
                   component_separators = { left = "", right = "" },
                   section_separators = { left = "", right = "" },
                   disabled_filetypes = {
