@@ -21,6 +21,25 @@
 
   systemd.network.enable = true;
 
+  # Lid handling:
+  services.logind.settings.Login = {
+    HandleLidSwitch = "lock";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitchDocked = "ignore";
+  };
+  # Prevent CPU overheating:
+  services.thermald.enable = true;
+  # Battery save management:
+  services.tlp = {
+    enable = true;
+    pd.enable = true;
+    settings = {
+      # No wifi power saving ever:
+      WIFI_PWR_ON_AC = "off";
+      WIFI_PWR_ON_BAT = "off";
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     keepassxc
     gh
