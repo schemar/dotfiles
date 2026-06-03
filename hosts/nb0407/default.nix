@@ -24,6 +24,9 @@
   environment.systemPackages = with pkgs; [
     keepassxc
     gh
+
+    # RTS Repo:
+    python3
   ];
 
   virtualisation = {
