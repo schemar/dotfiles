@@ -39,10 +39,6 @@
     virtualbox.host = {
       enable = true;
       enableExtensionPack = true;
-      # Workaround for kernel issues with VirtualBox 7.2.4 and Kernel 7.0.5:
-      enableKvm = true;
-      # KVM only supports NAT:
-      addNetworkInterface = false;
     };
   };
   users.extraGroups.vboxusers.members = [ username ];
