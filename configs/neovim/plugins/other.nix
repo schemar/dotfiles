@@ -93,14 +93,34 @@
                 context = "temporal implementation file",
               },
               {
-                context = "test file",
                 pattern = "lib/(.*).ex$",
                 target = "test/%1_test.exs",
+                context = "test file",
               },
               {
-                context = "implementation file",
                 pattern = "test/(.*)_test.exs$",
                 target = "lib/%1.ex",
+                context = "implementation file",
+              },
+              {
+                pattern = "src/(.*).erl$",
+                target = "test/%1_SUITE.erl",
+                context = "ct test file",
+              },
+              {
+                pattern = "test/(.*)_SUITE.erl$",
+                target = "src/%1.erl",
+                context = "implementation file",
+              },
+              {
+                pattern = "src/(.*).erl$",
+                target = "test/_eunit/%1_tests.erl",
+                context = "eunit test file",
+              },
+              {
+                pattern = "test/_eunit/(.*)_tests.erl$",
+                target = "src/%1.erl",
+                context = "implementation file",
               },
             },
           })
