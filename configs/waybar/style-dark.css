@@ -133,10 +133,6 @@ tooltip * {
   border-top: 2px solid @red;
 }
 
-#power-profiles-daemon {
-  padding-right: 15px;
-}
-
 #power-profiles-daemon.performance {
   border-top: 2px solid @red;
 }
