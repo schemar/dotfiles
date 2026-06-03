@@ -71,10 +71,5 @@
     watchexec
 
     remmina # RDP
-
-    # RTS repo:
-    python310
-    gcc
-    gnumake
   ];
 }
