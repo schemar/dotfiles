@@ -22,10 +22,13 @@
   systemd.network.enable = true;
 
   # Lid handling:
-  services.logind.settings.Login = {
-    HandleLidSwitch = "lock";
-    HandleLidSwitchExternalPower = "ignore";
-    HandleLidSwitchDocked = "ignore";
+  services.logind = {
+    enable = true;
+    settings.Login = {
+      HandleLidSwitch = "suspend";
+      HandleLidSwitchExternalPower = "suspend";
+      HandleLidSwitchDocked = "ignore";
+    };
   };
   # Prevent CPU overheating:
   services.thermald.enable = true;
