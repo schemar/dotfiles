@@ -16,11 +16,18 @@ brew-upgrade:
 nix-switch:
     sudo {{ rebuild }} switch --flake .
 
+# Configure the system with this flake after reboot
+nix-boot:
+    sudo {{ rebuild }} boot --flake .
+
 hm-switch:
     home-manager switch --flake .#$(whoami)@$(hostname)
 
 remote-switch user="schemar" host="klabautermann":
     nixos-rebuild switch --target-host ssh://{{ user }}@{{ host }} --build-host ssh://{{ user }}@{{ host }} --sudo --flake .#{{ host }}
+
+remote-boot user="schemar" host="klabautermann":
+    nixos-rebuild boot --target-host ssh://{{ user }}@{{ host }} --build-host ssh://{{ user }}@{{ host }} --sudo --flake .#{{ host }}
 
 nix-clean:
     nix-env --delete-generations +5
