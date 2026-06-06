@@ -14,6 +14,10 @@
     enable = true;
     onActivation = {
       cleanup = "zap";
+
+      extraFlags = [
+        "--force-cleanup"
+      ];
     };
 
     taps = [

@@ -5,7 +5,7 @@
     # Automatically start at startup
     launchd.enable = true;
 
-    userSettings = {
+    settings = {
       gaps = {
         inner.horizontal = 6;
         inner.vertical = 6;
