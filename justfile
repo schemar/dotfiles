@@ -36,7 +36,7 @@ nix-clean:
 nix-flake-update:
     nix flake update
 
-nix-upgrade: nix-flake-update nix-switch
+nix-upgrade: nix-flake-update
 
 hm-upgrade: nix-flake-update hm-switch
 
