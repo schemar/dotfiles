@@ -10,6 +10,7 @@
     ./lua.nix
     ./markdown.nix
     ./nix.nix
+    ./python.nix
     ./shell.nix
     ./typescript.nix
     ./vue.nix
