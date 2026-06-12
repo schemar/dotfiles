@@ -23,8 +23,8 @@
 
         font = [
           "Lato:size=11;4"
-          "OpenMoji Color:size=11;4"
           "Symbols Nerd Font Mono:size=11;4"
+          "Noto Color Emoji:size=11;4"
         ];
 
         background = "#0B0A0F";

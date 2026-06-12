@@ -14,8 +14,8 @@ in
   fonts = {
     names = [
       "Lato"
-      "OpenMoji Color"
       "Symbols Nerd Font Mono"
+      "Noto Color Emoji"
     ];
     size = 11.0;
   };

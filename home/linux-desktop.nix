@@ -5,7 +5,20 @@
   };
 
   # Fonts
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      emoji = [
+        "Noto Color Emoji"
+      ];
+      monospace = [
+        "Symbols Nerd Font Mono"
+        "Monaspace Neon"
+      ];
+      sansSerif = [ "Lato" ];
+      serif = [ ];
+    };
+  };
 
   home.packages = with pkgs; [
     # Configured when started by sway (see sway config).
@@ -50,7 +63,7 @@
     lato
     monaspace
     nerd-fonts.symbols-only
-    openmoji-color
+    noto-fonts-color-emoji
     open-sans
     source-serif
 

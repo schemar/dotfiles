@@ -21,8 +21,8 @@
 * {
   font-family:
     Lato,
-    OpenMoji Color,
-    Symbols Nerd Font Mono;
+    Symbols Nerd Font Mono,
+    Noto Color Emoji;
   font-size: 11pt;
   font-weight: 600;
 }
@@ -90,8 +90,7 @@ button {
 #idle_inhibitor:hover,
 #network:hover,
 #pulseaudio:hover,
-#workspaces button:hover {
-}
+#workspaces button:hover {}
 
 tooltip {
   background-color: @surface0;
@@ -108,12 +107,12 @@ tooltip * {
 }
 
 /* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
+.modules-left>widget:first-child>#workspaces {
   margin-left: 0;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
+.modules-right>widget:last-child>#workspaces {
   margin-right: 0;
 }
 
@@ -166,11 +165,11 @@ label:focus {
   min-width: 100px;
 }
 
-#tray > .passive {
+#tray>.passive {
   -gtk-icon-effect: dim;
 }
 
-#tray > .needs-attention {
+#tray>.needs-attention {
   -gtk-icon-effect: highlight;
   border-top: 2px solid @red;
 }
@@ -195,7 +194,7 @@ label:focus {
   min-width: 16px;
 }
 
-#keyboard-state > label {
+#keyboard-state>label {
   padding: 0 5px;
 }
 
