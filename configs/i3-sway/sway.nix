@@ -74,7 +74,7 @@
             settingsCommand = "exec ~/.local/bin/settingsmenu.sh fuzzel";
             notificationDismissCommand = "exec ${pkgs.mako}/bin/makoctl dismiss";
             applicationCommand = "exec ${pkgs.fuzzel}/bin/fuzzel";
-            emojiCommand = "exec ${pkgs.bemoji}/bin/bemoji --type";
+            emojiCommand = "exec BEMOJI_PICKER_CMD='${pkgs.fuzzel}/bin/fuzzel -d' ${pkgs.bemoji}/bin/bemoji --noline";
             # `grim -g "$(slurp)"` to capture the given coordinates
             # `grim -` (- as file) to send the result to stdout instead of a file
             # `swappy -f -` to read the file from stdin (-)
