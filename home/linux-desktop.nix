@@ -12,8 +12,8 @@
         "Noto Color Emoji"
       ];
       monospace = [
-        "Symbols Nerd Font Mono"
         "Monaspace Neon"
+        "Symbols Nerd Font Mono"
       ];
       sansSerif = [ "Lato" ];
       serif = [ ];
