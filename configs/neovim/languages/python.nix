@@ -13,9 +13,6 @@
           formatting = {
             black.enable = true;
           };
-          diagnostics = {
-            ruff.enable = true;
-          };
         };
       };
       lsp-format = {
