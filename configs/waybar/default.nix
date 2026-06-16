@@ -1,5 +1,9 @@
-{ ... }:
+{ pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    wttrbar # weather for waybar
+  ];
+
   programs.waybar = {
     enable = true;
 
@@ -22,6 +26,7 @@
           "idle_inhibitor"
           "battery"
           "power-profiles-daemon"
+          "custom/weather"
           "tray"
           "clock"
           "custom/power"
@@ -170,6 +175,14 @@
             "7" = "󱍅";
             "8" = "";
           };
+        };
+
+        "custom/weather" = {
+          format = "{}";
+          tooltip = true;
+          interval = 3600;
+          exec = "wttrbar --location \"Lichterfelde,Berlin,Germany\" --nerd --lang de --custom-indicator \"{temp_C}° {ICON}\"";
+          return-type = "json";
         };
 
         "custom/power" = {
