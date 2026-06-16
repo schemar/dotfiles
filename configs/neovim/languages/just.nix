@@ -6,30 +6,12 @@
         just.enable = true;
       };
     };
-    plugins = {
-      none-ls = {
-        enable = true;
-        sources = {
-          formatting = {
-            just = {
-              enable = true;
-            };
-          };
-        };
-      };
-      lsp-format = {
-        lspServersToEnable = [
-          "null-ls"
-        ];
 
-        settings = {
-          just = {
-            order = [
-              "null-ls"
-            ];
-            sync = true;
-          };
-        };
+    plugins.conform-nvim.settings = {
+      formatters_by_ft = {
+        just = [
+          "just"
+        ];
       };
     };
   };

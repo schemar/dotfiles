@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, pkgs, ... }:
 {
   programs.nixvim = {
     lsp = {
@@ -6,19 +6,16 @@
         lemminx.enable = true; # XML LSP
       };
     };
-    plugins = {
-      lsp-format = {
-        lspServersToEnable = [
-          "lemminx"
-        ];
 
-        settings = {
-          xml = {
-            order = [
-              "lemminx"
-            ];
-            sync = true;
-          };
+    plugins.conform-nvim.settings = {
+      formatters_by_ft = {
+        xml = [
+          "xmlformatter"
+        ];
+      };
+      formatters = {
+        xmlformatter = {
+          command = lib.getExe pkgs.xmlformat;
         };
       };
     };

@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, pkgs, ... }:
 {
   programs.nixvim = {
     lsp = {
@@ -7,31 +7,16 @@
         jsonls.enable = true;
       };
     };
-    plugins = {
-      none-ls = {
-        enable = true;
-        sources = {
-          formatting = {
-            prettier = {
-              enable = true;
-            };
-          };
-        };
-      };
-      lsp-format = {
-        lspServersToEnable = [
-          "jsonls"
-          "null-ls"
-        ];
 
-        settings = {
-          json = {
-            order = [
-              "jsonls"
-              "null-ls"
-            ];
-            sync = true;
-          };
+    plugins.conform-nvim.settings = {
+      formatters_by_ft = {
+        json = [
+          "prettier"
+        ];
+      };
+      formatters = {
+        prettier = {
+          command = lib.getExe pkgs.prettier;
         };
       };
     };

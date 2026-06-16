@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   imports = [
     ./elixir.nix
@@ -13,7 +13,6 @@
     ./python.nix
     ./shell.nix
     ./typescript.nix
-    ./vue.nix
     ./web.nix
     ./xml.nix
     ./yaml.nix
@@ -21,26 +20,55 @@
 
   programs.nixvim = {
     plugins = {
-      lsp-format.enable = true;
-      lspconfig.enable = true;
-      schemastore.enable = true;
-      none-ls = {
-        sources = {
-          formatting = {
-            prettier = {
-              settings = {
-                # Always format open files, even if they are ignored.
-                # Setting `ignore-path` to empty string means "ignore nothing".
-                # By default, prettier will ignore files in .gitignore and .prettierignore.
-                extra_args = [
-                  "--ignore-path"
-                  ""
-                ];
-              };
-            };
+      conform-nvim = {
+        enable = true;
+        settings = {
+          formatters_by_ft = {
+            "_" = [
+              "trim_whitespace"
+              "trim_newlines"
+            ];
           };
+          format_on_save = # Lua
+            ''
+              function(bufnr)
+                if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+                  return
+                end
+
+                slow_format_filetypes = slow_format_filetypes or {}
+                if slow_format_filetypes[vim.bo[bufnr].filetype] then
+                  return
+                end
+
+                local function on_format(err)
+                  if err and err:match("timeout$") then
+                    slow_format_filetypes[vim.bo[bufnr].filetype] = true
+                  end
+                end
+
+                return { timeout_ms = 200, lsp_fallback = true }, on_format
+               end
+            '';
+          format_after_save = # Lua
+            ''
+              function(bufnr)
+                if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+                  return
+                end
+
+                slow_format_filetypes = slow_format_filetypes or {}
+                if not slow_format_filetypes[vim.bo[bufnr].filetype] then
+                  return
+                end
+
+                return { lsp_fallback = true }
+              end
+            '';
         };
       };
+      lspconfig.enable = true;
+      schemastore.enable = true;
     };
   };
 

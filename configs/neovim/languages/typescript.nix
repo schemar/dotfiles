@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, pkgs, ... }:
 {
   programs.nixvim = {
     lsp = {
@@ -7,42 +7,16 @@
         tsgo.enable = true;
       };
     };
-    plugins = {
-      none-ls = {
-        enable = true;
-        sources = {
-          formatting = {
-            prettier = {
-              enable = true;
-            };
-          };
-        };
-      };
-      lsp-format = {
-        lspServersToEnable = [
-          "eslint"
-          "null-ls"
-        ];
 
-        settings = {
-          javascript = {
-            order = [
-              "eslint"
-              "null-ls"
-            ];
-            sync = true;
-            # Format JS only with eslint and prettier.
-            exclude = [ "tsgo" ];
-          };
-          typescript = {
-            order = [
-              "eslint"
-              "null-ls"
-            ];
-            sync = true;
-            # Format TS only with eslint and prettier.
-            exclude = [ "tsgo" ];
-          };
+    plugins.conform-nvim.settings = {
+      formatters_by_ft = {
+        typescript = [
+          "prettier"
+        ];
+      };
+      formatters = {
+        prettier = {
+          command = lib.getExe pkgs.prettier;
         };
       };
     };

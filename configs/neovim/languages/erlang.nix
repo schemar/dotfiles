@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, pkgs, ... }:
 {
   programs.nixvim = {
     lsp = {
@@ -8,32 +8,18 @@
         };
       };
     };
-    plugins = {
-      none-ls = {
-        enable = true;
-        sources = {
-          formatting = {
-            erlfmt = {
-              enable = true;
-            };
-          };
-        };
-      };
-      lsp-format = {
-        lspServersToEnable = [
-          "null-ls"
-        ];
 
-        settings = {
-          erlang = {
-            order = [
-              "null-ls"
-            ];
-            sync = true;
-          };
+    plugins.conform-nvim.settings = {
+      formatters_by_ft = {
+        erlang = [
+          "erlfmt"
+        ];
+      };
+      formatters = {
+        erlfmt = {
+          command = lib.getExe pkgs.erlfmt;
         };
       };
     };
   };
-
 }

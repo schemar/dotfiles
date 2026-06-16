@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   programs.nixvim = {
     lsp = {
@@ -6,32 +6,13 @@
         nixd.enable = true;
       };
     };
-    plugins = {
-      none-ls = {
-        enable = true;
-        sources = {
-          formatting = {
-            nixfmt = {
-              enable = true;
 
-              package = pkgs.nixfmt;
-            };
-          };
-        };
-      };
-      lsp-format = {
-        lspServersToEnable = [
-          "null-ls"
+    plugins.conform-nvim.settings = {
+      formatters_by_ft = {
+        nix = [
+          "nixfmt"
         ];
-
-        settings = {
-          nix = {
-            order = [ "null-ls" ];
-            sync = true;
-          };
-        };
       };
     };
   };
-
 }

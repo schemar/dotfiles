@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, pkgs, ... }:
 {
   programs.nixvim = {
     lsp = {
@@ -6,25 +6,18 @@
         bashls.enable = true;
       };
     };
-    plugins = {
-      lsp-format = {
-        lspServersToEnable = [
-          "bashls"
+
+    plugins.conform-nvim.settings = {
+      formatters_by_ft = {
+        bash = [
+          "shfmt"
         ];
-
-        settings = {
-          sh = {
-            order = [ "bashls" ];
-            sync = true;
-          };
-          zsh = {
-            order = [ "bashls" ];
-            sync = true;
-          };
-
+      };
+      formatters = {
+        shfmt = {
+          command = lib.getExe pkgs.shfmt;
         };
       };
     };
   };
-
 }

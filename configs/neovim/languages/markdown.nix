@@ -1,32 +1,17 @@
-{ ... }:
+{ lib, pkgs, ... }:
 {
   programs.nixvim = {
-    plugins = {
-      none-ls = {
-        enable = true;
-        sources = {
-          formatting = {
-            prettier = {
-              enable = true;
-            };
-          };
-        };
-      };
-      lsp-format = {
-        lspServersToEnable = [
-          "null-ls"
+    plugins.conform-nvim.settings = {
+      formatters_by_ft = {
+        markdown = [
+          "prettier"
         ];
-
-        settings = {
-          markdown = {
-            order = [
-              "null-ls"
-            ];
-            sync = true;
-          };
+      };
+      formatters = {
+        prettier = {
+          command = lib.getExe pkgs.prettier;
         };
       };
     };
   };
-
 }

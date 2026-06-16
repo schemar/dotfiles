@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, pkgs, ... }:
 {
   programs.nixvim = {
     lsp = {
@@ -6,30 +6,18 @@
         lua_ls.enable = true;
       };
     };
-    plugins = {
-      none-ls = {
-        enable = true;
-        sources = {
-          formatting = {
-            stylua = {
-              enable = true;
-            };
-          };
-        };
-      };
-      lsp-format = {
-        lspServersToEnable = [
-          "null-ls"
-        ];
 
-        settings = {
-          lua = {
-            order = [ "null-ls" ];
-            sync = true;
-          };
+    plugins.conform-nvim.settings = {
+      formatters_by_ft = {
+        lua = [
+          "stylua"
+        ];
+      };
+      formatters = {
+        stylua = {
+          command = lib.getExe pkgs.stylua;
         };
       };
     };
   };
-
 }

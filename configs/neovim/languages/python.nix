@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, pkgs, ... }:
 {
   programs.nixvim = {
     lsp = {
@@ -6,27 +6,16 @@
         pyright.enable = true;
       };
     };
-    plugins = {
-      none-ls = {
-        enable = true;
-        sources = {
-          formatting = {
-            black.enable = true;
-          };
-        };
-      };
-      lsp-format = {
-        lspServersToEnable = [
-          "null-ls"
-        ];
 
-        settings = {
-          erlang = {
-            order = [
-              "null-ls"
-            ];
-            sync = true;
-          };
+    plugins.conform-nvim.settings = {
+      formatters_by_ft = {
+        python = [
+          "black"
+        ];
+      };
+      formatters = {
+        black = {
+          command = lib.getExe pkgs.black;
         };
       };
     };

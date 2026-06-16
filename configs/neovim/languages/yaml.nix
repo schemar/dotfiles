@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, pkgs, ... }:
 {
   programs.nixvim = {
     lsp = {
@@ -6,31 +6,16 @@
         yamlls.enable = true;
       };
     };
-    plugins = {
-      none-ls = {
-        enable = true;
-        sources = {
-          formatting = {
-            prettier = {
-              enable = true;
-            };
-          };
-        };
-      };
-      lsp-format = {
-        lspServersToEnable = [
-          "yamlls"
-          "null-ls"
-        ];
 
-        settings = {
-          yaml = {
-            order = [
-              "yamlls"
-              "null-ls"
-            ];
-            sync = true;
-          };
+    plugins.conform-nvim.settings = {
+      formatters_by_ft = {
+        yaml = [
+          "yamlfmt"
+        ];
+      };
+      formatters = {
+        yamlfmt = {
+          command = lib.getExe pkgs.yamlfmt;
         };
       };
     };

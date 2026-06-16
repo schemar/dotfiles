@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, pkgs, ... }:
 {
   lspServerHtmlFiletypes = [
     "html"
@@ -13,6 +13,26 @@
         html.enable = true;
       };
     };
+
+    plugins.conform-nvim.settings = {
+      formatters_by_ft = {
+        html = [
+          "html_beautify"
+        ];
+        css = [
+          "css_beautify"
+        ];
+      };
+      formatters = {
+        html_beautify = {
+          command = lib.getExe pkgs.js-beautify;
+        };
+        css_beautify = {
+          command = lib.getExe pkgs.js-beautify;
+        };
+      };
+    };
+
     plugins = {
       none-ls = {
         enable = true;
@@ -21,37 +41,6 @@
             stylelint = {
               enable = true;
             };
-          };
-          formatting = {
-            prettier = {
-              enable = true;
-            };
-            stylelint = {
-              enable = true;
-            };
-          };
-        };
-      };
-      lsp-format = {
-        lspServersToEnable = [
-          "cssls"
-          "eslint"
-          "null-ls"
-        ];
-
-        settings = {
-          html = {
-            order = [ "null-ls" ];
-            sync = true;
-            # Format HTML only with prettier.
-            exclude = [ "html" ];
-          };
-          scss = {
-            order = [
-              "cssls"
-              "null-ls"
-            ];
-            sync = true;
           };
         };
       };

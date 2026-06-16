@@ -6,33 +6,21 @@
         gdscript.enable = true;
       };
     };
+
+    plugins.conform-nvim.settings = {
+      formatters_by_ft = {
+        gdscript = [
+          "gdformat"
+        ];
+      };
+    };
+
     plugins = {
       none-ls = {
         enable = true;
         sources = {
           diagnostics = {
-            gdlint = {
-              enable = true;
-            };
-          };
-          formatting = {
-            gdformat = {
-              enable = true;
-            };
-          };
-        };
-      };
-      lsp-format = {
-        lspServersToEnable = [
-          "null-ls"
-        ];
-
-        settings = {
-          gdscript = {
-            order = [
-              "null-ls"
-            ];
-            sync = true;
+            gdlint.enable = true;
           };
         };
       };
