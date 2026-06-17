@@ -507,6 +507,34 @@
                     desc = "Floating diagnostic",
                   },
                   {
+                    "<leader>lfd",
+                    function()
+                      vim.b.disable_autoformat = true
+                    end,
+                    desc = "Disable formatting (for buffer)"
+                  },
+                  {
+                    "<leader>lfD",
+                    function()
+                      vim.g.disable_autoformat = true
+                    end,
+                    desc = "Disable formatting"
+                  },
+                  {
+                    "<leader>lfe",
+                    function()
+                      vim.b.disable_autoformat = false
+                    end,
+                    desc = "Enable formatting (for buffer)"
+                  },
+                  {
+                    "<leader>lfE",
+                    function()
+                      vim.g.disable_autoformat = false
+                    end,
+                    desc = "Enable formatting"
+                  },
+                  {
                     -- Defined in plugins/debug.lua
                     "<leader>lg",
                     group = "Debug",
