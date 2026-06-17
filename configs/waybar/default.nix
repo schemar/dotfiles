@@ -181,7 +181,7 @@
           format = "{}";
           tooltip = true;
           interval = 3600;
-          exec = "wttrbar --location \"Lichterfelde,Berlin,Germany\" --nerd --lang de --custom-indicator \"{temp_C}° {ICON}\"";
+          exec = "wttrbar --location \"Berlin,Germany\" --nerd --lang de --custom-indicator \"{temp_C}° {ICON}\"";
           return-type = "json";
         };
 
