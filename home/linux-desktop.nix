@@ -28,12 +28,7 @@
 
     glib
 
-    xautolock
-
-    xset
     setxkbmap
-    xbacklight
-    feh
 
     kdePackages.polkit-kde-agent-1
     kdePackages.breeze
@@ -42,7 +37,6 @@
 
     libnotify
     wl-clipboard
-    xdg-utils
     playerctl
 
     networkmanager
@@ -113,22 +107,8 @@
       ''
         #!/usr/bin/env bash
 
-        launcher="$1"
-
-        # Check if argument is fuzzel or rofi
-        if [[ "$launcher" != "fuzzel" && "$launcher" != "rofi" ]]; then
-            echo "Usage: $0 {fuzzel|rofi}"
-            exit 1
-        fi
-
-        # Build launcher command
-        if [[ "$launcher" == "fuzzel" ]]; then
-            menu_cmd=(fuzzel -d --prompt="Power > ")
-            lock_cmd="swaylock"
-        else
-            menu_cmd=(rofi -dmenu -p "Power > ")
-            lock_cmd="i3lock -n -c 191724"
-        fi
+        menu_cmd=(fuzzel -d --prompt="Power > ")
+        lock_cmd="swaylock"
 
         choice=$(printf " Lock\n󰗽 Logout\n Reboot\n󰐥 Shutdown\n󰒲 Sleep\n󰤄 Hibernate" \
           | "''${menu_cmd[@]}")
@@ -162,20 +142,7 @@
       ''
         #!/usr/bin/env bash
 
-        launcher="$1"
-
-        # Check if argument is fuzzel or rofi
-        if [[ "$launcher" != "fuzzel" && "$launcher" != "rofi" ]]; then
-            echo "Usage: $0 {fuzzel|rofi}"
-            exit 1
-        fi
-
-        # Build launcher command
-        if [[ "$launcher" == "fuzzel" ]]; then
-            menu_cmd=(fuzzel -d --prompt="Settings > ")
-        else
-            menu_cmd=(rofi -dmenu -p "Settings > ")
-        fi
+        menu_cmd=(fuzzel -d --prompt="Settings > ")
 
         choice=$(printf " Audio\n󰛳 Network\n󰂯 Bluetooth\n Light Mode\n Dark Mode" \
           | "''${menu_cmd[@]}")
@@ -264,15 +231,11 @@
   imports = [
     ../configs/avizo
     ../configs/chromium
-    ../configs/dunst
     ../configs/firefox
     ../configs/fuzzel
-    ../configs/i3-sway/i3.nix
-    ../configs/i3-sway/sway.nix
+    ../configs/sway
     ../configs/mako
-    ../configs/polybar
     ../configs/qutebrowser
-    ../configs/rofi
     ../configs/swaylock
     ../configs/waybar
   ];

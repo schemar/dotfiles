@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  commands,
 }:
 let
   terminal = "${pkgs.ghostty}/bin/ghostty";
@@ -73,29 +72,81 @@ in
     };
   };
 
+  bars = [
+    {
+      command = "${pkgs.waybar}/bin/waybar";
+    }
+  ];
+
+  startup = [
+    {
+      command = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_DATA_DIRS";
+    }
+    { command = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"; }
+
+    {
+      command = ''
+        swayidle -w \
+          timeout 300 'swaylock -fF' \
+          timeout 600 'swaymsg "output * dpms off"' \
+          resume 'swaymsg "output * dpms on"' \
+          before-sleep 'swaylock -fF'
+      '';
+    }
+
+    {
+      command = "nm-applet";
+    }
+    { command = "systemctl --user start mako"; }
+    { command = "avizo-service"; }
+
+    {
+      command = "~/.local/bin/darkmode.sh";
+    }
+  ];
+
+  seat = {
+    "*" = {
+      hide_cursor = "when-typing enable";
+    };
+  };
+
+  input = {
+    "type:keyboard" = {
+      # Map capslock to escape;
+      # Allows Umlauts and  with right alt as compose key;
+      "xkb_options" = "caps:escape,compose:ralt";
+
+      "repeat_delay" = "200";
+      "repeat_rate" = "50";
+    };
+  };
+
   keybindings = lib.mkOptionDefault {
     "Mod4+Shift+a" = "focus child";
 
-    "Mod4+n" = lib.mkIf (
-      commands.notificationDismissCommand != null
-    ) commands.notificationDismissCommand;
+    "Mod4+n" = "exec ${pkgs.mako}/bin/makoctl dismiss";
 
-    "Mod4+Shift+e" = lib.mkIf (commands.powerCommand != null) commands.powerCommand;
-    "Mod4+Shift+s" = lib.mkIf (commands.settingsCommand != null) commands.settingsCommand;
+    "Mod4+Shift+e" = "exec ~/.local/bin/powermenu.sh";
+    "Mod4+Shift+s" = "exec ~/.local/bin/settingsmenu.sh";
 
-    "Mod4+d" = lib.mkIf (commands.applicationCommand != null) commands.applicationCommand;
-    "Mod4+Shift+d" = lib.mkIf (commands.emojiCommand != null) commands.emojiCommand;
+    "Mod4+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
+    "Mod4+Shift+d" =
+      "exec BEMOJI_PICKER_CMD='${pkgs.fuzzel}/bin/fuzzel -d' ${pkgs.bemoji}/bin/bemoji --noline";
 
-    "Mod4+p" = lib.mkIf (commands.screenshotCommand != null) commands.screenshotCommand;
-    "Mod4+Shift+p" = lib.mkIf (commands.fullScreenshotCommand != null) commands.fullScreenshotCommand;
+    # `grim -g "$(slurp)"` to capture the given coordinates
+    # `grim -` (- as file) to send the result to stdout instead of a file
+    # `swappy -f -` to read the file from stdin (-)
+    "Mod4+p" = "exec grim -g \"$(slurp)\" - | swappy -f -";
+    "Mod4+Shift+p" = "exec grim - | swappy -f -";
 
     # Commands provided by avizo.service
-    "XF86AudioRaiseVolume" = commands.audioUpCommand;
-    "XF86AudioLowerVolume" = commands.audioDownCommand;
-    "XF86AudioMute" = commands.audioMuteCommand;
-    "XF86AudioMicMute" = lib.mkIf (commands.audioMicMuteCommand != null) commands.audioMicMuteCommand;
-    "XF86MonBrightnessUp" = commands.brightnessUpCommand;
-    "XF86MonBrightnessDown" = commands.brightnessDownCommand;
+    "XF86AudioRaiseVolume" = "exec ${pkgs.avizo}/bin/volumectl -u up";
+    "XF86AudioLowerVolume" = "exec ${pkgs.avizo}/bin/volumectl -u down";
+    "XF86AudioMute" = "exec ${pkgs.avizo}/bin/volumectl toggle-mute";
+    "XF86AudioMicMute" = "exec ${pkgs.avizo}/bin/volumectl -m toggle-mute";
+    "XF86MonBrightnessUp" = "exec ${pkgs.avizo}/bin/lightctl up";
+    "XF86MonBrightnessDown" = "exec ${pkgs.avizo}/bin/lightctl down";
 
     "XF86AudioPlay" = "exec playerctl play-pause";
     "XF86AudioPause" = "exec playerctl play-pause";
@@ -103,7 +154,7 @@ in
     "XF86AudioPrev" = "exec playerctl previous";
     "XF86AudioStop" = "exec playerctl stop";
 
-    "XF86Search" = lib.mkIf (commands.searchCommand != null) commands.searchCommand;
+    "XF86Search" = "exec ${pkgs.fuzzel}/bin/fuzzel";
 
     # More or less default:
     "Mod4+1" = "workspace number 1";
@@ -159,5 +210,4 @@ in
     "Mod4+v" = "splitv";
     "Mod4+w" = "layout tabbed";
   };
-
 }
