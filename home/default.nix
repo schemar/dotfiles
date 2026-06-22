@@ -23,6 +23,8 @@
   # List packages installed in user profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   home.packages = with pkgs; [
+    unzip
+
     bottom
     just
     sd
