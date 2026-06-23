@@ -13,27 +13,32 @@
       theme = "dark:blueberry_peach_dark,light:blueberry_peach_light";
 
       font-family = [
-        "Monaspace Neon"
+        "MonoLisaCode"
         "Symbols Nerd Font Mono"
         "Noto Color Emoji"
       ];
 
       font-size = 13.0;
 
+      # -- != := === >= >- >=> |-> -> <$> </> #[ |||> |= ~@ ~- ~=
+      # |> <|> =/= =:=
+
       font-feature = [
-        "calt=1"
-        "dlig=1"
-        "cv01=2"
-        "ss01=1"
-        "ss02=1"
-        "ss03=1"
-        "ss04=1"
-        "ss05=1"
-        "ss06=1"
-        "ss07=1"
-        "ss08=1"
-        "ss09=1"
-        "ss10=1"
+        "ss03"
+        "ss13"
+        "ss14"
+        "cv01"
+        "cv02"
+        "cv03"
+        "cv04"
+        "cv05"
+        "cv06"
+        "cv07"
+        "cv08"
+        "cv09"
+        "cv10"
+        "cv11"
+        "cv12"
       ];
 
       quit-after-last-window-closed = true;

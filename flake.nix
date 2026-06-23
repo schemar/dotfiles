@@ -19,6 +19,11 @@
 
     lanzaboote.url = "github:nix-community/lanzaboote/v1.0.0";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
+
+    private-fonts = {
+      url = "git+ssh://git@github.com/schemar/fonts?ref=main";
+      flake = true;
+    };
   };
 
   outputs =
@@ -31,6 +36,7 @@
       blueberry-peach,
       disko,
       lanzaboote,
+      private-fonts,
     }:
     let
       username = "schemar";

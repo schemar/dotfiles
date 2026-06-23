@@ -12,7 +12,7 @@
         "Noto Color Emoji"
       ];
       monospace = [
-        "Monaspace Neon"
+        "MonoLisaCode"
         "Symbols Nerd Font Mono"
       ];
       sansSerif = [ "Lato" ];
@@ -52,14 +52,6 @@
 
     bemoji
     wtype # Type on wayland like xdotool; used by bemoji
-
-    # Fonts:
-    lato
-    monaspace
-    nerd-fonts.symbols-only
-    noto-fonts-color-emoji
-    open-sans
-    source-serif
 
     nautilus # gnome file manager
     imv

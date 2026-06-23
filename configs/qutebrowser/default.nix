@@ -12,7 +12,7 @@
       };
       colors.webpage.preferred_color_scheme = "dark";
       fonts = {
-        default_family = "Monaspace Neon";
+        default_family = "MonoLisaCode";
         default_size = "13pt";
       };
       window = {

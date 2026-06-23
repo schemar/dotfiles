@@ -27,9 +27,15 @@
     home = if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else "/home/${username}";
   };
 
-  fonts.packages = with pkgs; [
-    monaspace
-    nerd-fonts.symbols-only
+  fonts.packages = [
+    pkgs.lato
+    pkgs.monaspace
+    pkgs.nerd-fonts.symbols-only
+    pkgs.noto-fonts-color-emoji
+    pkgs.open-sans
+    pkgs.source-serif
+
+    inputs.private-fonts.packages.x86_64-linux.default
   ];
 
   # Include unfree packages from nixpkgs:

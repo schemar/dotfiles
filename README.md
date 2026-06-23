@@ -39,6 +39,10 @@ git clone ...
 
 Initial installation
 
+> [!NOTE]
+> You may need to run `nix flake update private-fonts` if you get a permission
+> error for the fonts repo. `sudo` does not use the correct SSH key.
+
 ```sh
 # Errors will guide you on what to fix
 # macOS:

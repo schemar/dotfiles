@@ -19,22 +19,24 @@ local config = {
 
   font = wezterm.font_with_fallback({
     {
-      family = "Monaspace Neon",
+      family = "MonoLisaCode",
       weight = "Regular",
       harfbuzz_features = {
-        "calt=1",
-        "dlig=1",
-        "cv01=2", -- Slashed zero
-        "ss01=1",
-        "ss02=1",
         "ss03=1",
-        "ss04=1",
-        "ss05=1",
-        "ss06=1",
-        "ss07=1",
-        "ss08=1",
-        "ss09=1",
-        "ss10=1",
+        "ss13=1",
+        "ss14=1",
+        "cv01=1",
+        "cv02=1",
+        "cv03=1",
+        "cv04=1",
+        "cv05=1",
+        "cv06=1",
+        "cv07=1",
+        "cv08=1",
+        "cv09=1",
+        "cv10=1",
+        "cv11=1",
+        "cv12=1",
       },
     },
     {

@@ -207,6 +207,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1781577229,
+        "narHash": "sha256-lrp67w8AulE9Ks53n27I45ADSzbOCn4H+CNW1Ck8B+8=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "567a49d1913ce81ac6e9582e3553dd90a955875f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixvim": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -251,6 +267,25 @@
         "type": "github"
       }
     },
+    "private-fonts": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1782216291,
+        "narHash": "sha256-vOUgBqCKY1qvETVDagV86SSkM8unQ1I+37oW8MSGDXs=",
+        "ref": "main",
+        "rev": "40a62bd1429abe33ee781e184c0d2fc085133ba0",
+        "revCount": 2,
+        "type": "git",
+        "url": "ssh://git@github.com/schemar/fonts"
+      },
+      "original": {
+        "ref": "main",
+        "type": "git",
+        "url": "ssh://git@github.com/schemar/fonts"
+      }
+    },
     "root": {
       "inputs": {
         "blueberry-peach": "blueberry-peach",
@@ -259,7 +294,8 @@
         "lanzaboote": "lanzaboote",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
-        "nixvim": "nixvim"
+        "nixvim": "nixvim",
+        "private-fonts": "private-fonts"
       }
     },
     "rust-overlay": {
