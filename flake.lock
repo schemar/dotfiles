@@ -272,11 +272,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1782216291,
-        "narHash": "sha256-vOUgBqCKY1qvETVDagV86SSkM8unQ1I+37oW8MSGDXs=",
+        "lastModified": 1782227791,
+        "narHash": "sha256-LTURu90XzRQPYJUA+VijDidNA2RWSEKEMXMcaLhegNk=",
         "ref": "main",
-        "rev": "40a62bd1429abe33ee781e184c0d2fc085133ba0",
-        "revCount": 2,
+        "rev": "12dcd0f5d506acd57b8b41d4a963318d1cd97db0",
+        "revCount": 3,
         "type": "git",
         "url": "ssh://git@github.com/schemar/fonts"
       },

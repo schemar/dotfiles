@@ -15,7 +15,7 @@
         "MonoLisaCode"
         "Symbols Nerd Font Mono"
       ];
-      sansSerif = [ "Lato" ];
+      sansSerif = [ "MonoLisaText" ];
       serif = [ ];
     };
   };

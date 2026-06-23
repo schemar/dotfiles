@@ -12,7 +12,7 @@ in
 
   fonts = {
     names = [
-      "Lato"
+      "MonoLisaText"
       "Symbols Nerd Font Mono"
       "Noto Color Emoji"
     ];
