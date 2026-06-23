@@ -35,7 +35,7 @@
     pkgs.open-sans
     pkgs.source-serif
 
-    inputs.private-fonts.packages.x86_64-linux.default
+    inputs.private-fonts.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   # Include unfree packages from nixpkgs:

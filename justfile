@@ -1,5 +1,3 @@
-rebuild := if os() == 'linux' { 'nixos-rebuild' } else { 'darwin-rebuild' }
-
 default: help
 
 # List available recipes
@@ -14,11 +12,16 @@ brew-upgrade:
 
 # Configure the system with this flake
 nix-switch:
-    {{ rebuild }} --sudo switch --flake .
+    nixos-rebuild --sudo switch --flake .
 
 # Configure the system with this flake after reboot
 nix-boot:
-    {{ rebuild }} --sudo boot --flake .
+    nixos-rebuild --sudo boot --flake .
+
+darwin-switch:
+    # Update private-fonts flake first, as sudo does not have github access to private repo:
+    nix flake update private-fonts
+    sudo darwin-rebuild switch --flake .
 
 hm-switch:
     home-manager switch --flake .#$(whoami)@$(hostname)
