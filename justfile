@@ -14,11 +14,11 @@ brew-upgrade:
 
 # Configure the system with this flake
 nix-switch:
-    sudo {{ rebuild }} switch --flake .
+    {{ rebuild }} --sudo switch --flake .
 
 # Configure the system with this flake after reboot
 nix-boot:
-    sudo {{ rebuild }} boot --flake .
+    {{ rebuild }} --sudo boot --flake .
 
 hm-switch:
     home-manager switch --flake .#$(whoami)@$(hostname)
