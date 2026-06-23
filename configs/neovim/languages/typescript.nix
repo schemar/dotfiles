@@ -10,6 +10,9 @@
 
     plugins.conform-nvim.settings = {
       formatters_by_ft = {
+        javascript = [
+          "prettier"
+        ];
         typescript = [
           "prettier"
         ];
