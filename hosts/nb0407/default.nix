@@ -17,7 +17,8 @@
     inputs.home-manager.nixosModules.home-manager
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Change back to linuxPackeges_latest (or 7_1, etc.) once virtualbox is patched.
+  boot.kernelPackages = pkgs.linuxPackages_7_0;
 
   systemd.network.enable = true;
 
