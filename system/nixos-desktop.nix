@@ -65,4 +65,12 @@
 
   programs.dconf.enable = true;
   programs.sway.enable = true;
+
+  # Printing with avahi auto-discovery of printers:
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
 }
