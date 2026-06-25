@@ -1,10 +1,5 @@
 { lib, pkgs, ... }:
 {
-  lspServerHtmlFiletypes = [
-    "html"
-    "templ"
-  ];
-
   programs.nixvim = {
     lsp = {
       servers = {
@@ -17,18 +12,15 @@
     plugins.conform-nvim.settings = {
       formatters_by_ft = {
         html = [
-          "html_beautify"
+          "prettier"
         ];
         css = [
-          "css_beautify"
+          "prettier"
         ];
       };
       formatters = {
-        html_beautify = {
-          command = lib.getExe pkgs.js-beautify;
-        };
-        css_beautify = {
-          command = lib.getExe pkgs.js-beautify;
+        prettier = {
+          command = lib.getExe pkgs.prettier;
         };
       };
     };

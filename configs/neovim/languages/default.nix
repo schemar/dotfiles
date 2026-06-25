@@ -4,7 +4,6 @@
     ./elixir.nix
     ./erlang.nix
     ./gdscript.nix
-    ./html.nix
     ./json.nix
     ./just.nix
     ./lua.nix
