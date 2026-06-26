@@ -1,5 +1,6 @@
 {
   inputs,
+  config,
   username,
   lib,
   pkgs,
@@ -22,6 +23,8 @@
 
   systemd.network.enable = true;
 
+  # SSD trimming:
+  services.fstrim.enable = true;
   # Lid handling:
   services.logind = {
     enable = true;
@@ -43,6 +46,14 @@
       WIFI_PWR_ON_BAT = "off";
     };
   };
+  # Intel GPU (including "xe" driver):
+  hardware.graphics.extraPackages = [
+    pkgs.intel-media-driver
+    pkgs.intel-compute-runtime
+  ];
+  boot.initrd.kernelModules =
+    lib.mkIf (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.8")
+      [ "xe" ];
 
   environment.systemPackages = with pkgs; [
     keepassxc
