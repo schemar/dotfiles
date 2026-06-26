@@ -15,6 +15,11 @@
     inputs.home-manager.nixosModules.home-manager
   ];
 
+  # SSD trimming:
+  services.fstrim.enable = true;
+  # Prevent CPU overheating:
+  services.thermald.enable = true;
+
   home-manager.users.${username} = {
     imports = [
       ../../home/default.nix
