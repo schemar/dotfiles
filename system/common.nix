@@ -13,6 +13,7 @@
   environment.systemPackages = with pkgs; [
     coreutils-prefixed
     nix
+    nh
     zsh
   ];
   programs.zsh.enable = true;

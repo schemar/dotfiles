@@ -12,29 +12,26 @@ brew-upgrade:
 
 # Configure the system with this flake
 nix-switch:
-    nixos-rebuild --sudo switch --flake .
+    nh os switch .
 
 # Configure the system with this flake after reboot
 nix-boot:
-    nixos-rebuild --sudo boot --flake .
+    nh os boot .
 
 darwin-switch:
-    # Update private-fonts flake first, as sudo does not have github access to private repo:
-    nix flake update private-fonts
-    sudo darwin-rebuild switch --flake .
+    nh darwin switch .
 
 hm-switch:
-    home-manager switch --flake .#$(whoami)@$(hostname)
+    nh home switch . -c $(whoami)@$(hostname)
 
 remote-switch user="schemar" host="klabautermann":
-    nixos-rebuild switch --target-host ssh://{{ user }}@{{ host }} --build-host ssh://{{ user }}@{{ host }} --sudo --flake .#{{ host }}
+    nh os switch --target-host ssh://{{ user }}@{{ host }} --build-host ssh://{{ user }}@{{ host }} . -H {{ host }}
 
 remote-boot user="schemar" host="klabautermann":
-    nixos-rebuild boot --target-host ssh://{{ user }}@{{ host }} --build-host ssh://{{ user }}@{{ host }} --sudo --flake .#{{ host }}
+    nh os boot --target-host ssh://{{ user }}@{{ host }} --build-host ssh://{{ user }}@{{ host }} . -H {{ host }}
 
 nix-clean:
-    nix-env --delete-generations +5
-    nix-collect-garbage
+    nh clean all --keep 5 --optimise --ask
 
 nix-flake-update:
     nix flake update
