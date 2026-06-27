@@ -61,8 +61,13 @@
       };
 
       mode.resize.binding = {
-        h = "resize smart -50";
-        l = "resize smart +50";
+        esc = [
+          "mode main"
+        ];
+        h = "resize width -50";
+        j = "resize height -50";
+        k = "resize height +50";
+        l = "resize width +50";
       };
 
       mode.service.binding = {
