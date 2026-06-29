@@ -46,10 +46,20 @@
     };
   };
   # Intel GPU (including "xe" driver):
-  hardware.graphics.extraPackages = [
-    pkgs.intel-media-driver
-    pkgs.intel-compute-runtime
-  ];
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      # Required for modern Intel GPUs (Xe iGPU and ARC)
+      intel-media-driver # VA-API (iHD) userspace
+      vpl-gpu-rt # oneVPL (QSV) runtime
+
+      # Optional (compute / tooling):
+      intel-compute-runtime # OpenCL (NEO) + Level Zero for Arc/Xe
+    ];
+  };
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD"; # Prefer the modern iHD backend
+  };
   boot.initrd.kernelModules =
     lib.mkIf (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.8")
       [ "xe" ];
