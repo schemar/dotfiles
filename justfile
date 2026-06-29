@@ -21,6 +21,8 @@ nix-boot:
 darwin-switch:
     nh darwin switch .
 
+darwin-upgrade: brew-upgrade flake-update darwin-switch
+
 hm-switch:
     nh home switch . -c $(whoami)@$(hostname)
 
@@ -30,15 +32,11 @@ remote-switch user="schemar" host="klabautermann":
 remote-boot user="schemar" host="klabautermann":
     nh os boot --target-host ssh://{{ user }}@{{ host }} --build-host ssh://{{ user }}@{{ host }} . -H {{ host }}
 
-nix-clean:
-    nh clean all --keep 5 --optimise --ask
-
-nix-flake-update:
+flake-update:
     nix flake update
 
-nix-upgrade: nix-flake-update
-
-hm-upgrade: nix-flake-update hm-switch
+nix-clean:
+    nh clean all --keep 5 --optimise --ask
 
 firmware-upgrade:
     #!/usr/bin/env bash
@@ -50,8 +48,6 @@ firmware-upgrade:
     fi
 
     fwupdmgr update
-
-upgrade: brew-upgrade nix-upgrade
 
 theme-dark:
     #!/usr/bin/env bash
