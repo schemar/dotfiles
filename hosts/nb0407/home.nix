@@ -67,7 +67,6 @@
 
     podman-compose
 
-    universal-ctags
     watchexec
 
     remmina # RDP
