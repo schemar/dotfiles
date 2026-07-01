@@ -10,6 +10,7 @@
   imports = [
     # NixOS-specific configs:
     ./configuration.nix
+    ./virtualisation.nix
     ../../system/common.nix
     ../../system/nixos-desktop.nix
     ../../system/secure-boot.nix
@@ -68,21 +69,6 @@
     # RTS Repo:
     python3
   ];
-
-  virtualisation = {
-    podman = {
-      enable = true;
-      # Have a "docker" command that runs podman.
-      # Useful for projects that have a justfile with docker commands.
-      dockerCompat = true;
-    };
-    virtualbox.host = {
-      enable = true;
-      enableExtensionPack = true;
-    };
-  };
-  users.extraGroups.vboxusers.members = [ username ];
-  systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
 
   home-manager.users.${username} = {
     imports = [
