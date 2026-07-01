@@ -20,11 +20,6 @@
         swtpm.enable = true;
       };
     };
-
-    virtualbox.host = {
-      enable = true;
-      enableExtensionPack = true;
-    };
   };
 
   programs.virt-manager.enable = true;
@@ -35,8 +30,5 @@
     dnsmasq
   ];
 
-  users.extraGroups.vboxusers.members = [ username ];
   users.users.${username}.extraGroups = [ "libvirtd" ];
-
-  systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
 }
