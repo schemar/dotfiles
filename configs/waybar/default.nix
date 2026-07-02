@@ -22,11 +22,11 @@
         ];
         modules-right = [
           "pulseaudio"
+          "battery"
+          "custom/weather"
           "privacy"
           "idle_inhibitor"
-          "battery"
           "power-profiles-daemon"
-          "custom/weather"
           "tray"
           "clock"
           "custom/power"

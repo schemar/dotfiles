@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   programs.fuzzel = {
     enable = true;
@@ -11,7 +11,7 @@
         inner-pad = "12";
         font = "MonoLisaText:size=16,Symbols Nerd Font Mono:size=16,Noto Color Emoji:size=16";
         use-bold = false;
-        terminal = "${pkgs.ghostty}/bin/ghostty";
+        terminal = "ghostty";
       };
 
       colors.background = "0B0A0FFF";

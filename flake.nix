@@ -78,15 +78,21 @@
             ./hosts/aegir
           ];
         };
-        "nb0407" = nixpkgs.lib.nixosSystem {
-          specialArgs = {
+      };
+      homeConfigurations = {
+        "${username}@nb0407" = home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+          extraSpecialArgs = {
             inherit inputs username;
             isDarwin = false;
           };
-          modules = [ ./hosts/nb0407 ];
+          modules = [
+            ./hosts/nb0407
+          ];
         };
-      };
-      homeConfigurations = {
         "${username}@nb0400" = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             system = "x86_64-linux";

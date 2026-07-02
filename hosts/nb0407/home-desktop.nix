@@ -1,9 +1,10 @@
-{ lib, pkgs, ... }:
 {
-  services.blueman-applet = {
-    enable = true;
-  };
-
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+{
   # Fonts
   fonts.fontconfig = {
     enable = true;
@@ -20,50 +21,40 @@
     };
   };
 
-  home.packages = with pkgs; [
-    # Configured when started by sway (see sway config).
-    swayidle
+  home.packages = [
+    pkgs.setxkbmap
+    pkgs.kdePackages.breeze
+    pkgs.kdePackages.breeze-gtk
+    pkgs.kdePackages.breeze-icons
 
-    swaybg
+    pkgs.bemoji
+    pkgs.imv
 
-    glib
+    pkgs.obsidian
 
-    setxkbmap
+    # Fonts:
+    pkgs.lato
+    pkgs.monaspace
+    pkgs.nerd-fonts.symbols-only
+    pkgs.noto-fonts-color-emoji
+    pkgs.open-sans
+    pkgs.source-serif
 
-    kdePackages.polkit-kde-agent-1
-    kdePackages.breeze
-    kdePackages.breeze-gtk
-    kdePackages.breeze-icons
-
-    libnotify
-    wl-clipboard
-    playerctl
-
-    networkmanager
-    networkmanagerapplet
-
-    pulseaudio
-    pavucontrol
-    blueman
-
-    grim
-    slurp
-    swappy
-
-    bemoji
-    wtype # Type on wayland like xdotool; used by bemoji
-
-    nautilus # gnome file manager
-    imv
-
-    eog # eye of gnome image viewer
-    gimp
-    obsidian
-    thunderbird
-    todoist-electron
+    inputs.private-fonts.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
-  services.udiskie.enable = true;
+  # Ensure pointer is the right size:
+  home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+    size = 32;
+    x11 = {
+      enable = true;
+      defaultCursor = "Adwaita";
+    };
+    gtk.enable = true;
+    sway.enable = true;
+  };
 
   xdg.mimeApps = {
     enable = true;
@@ -78,19 +69,6 @@
       "x-scheme-handler/https" = [ "vivaldi-stable.desktop" ];
       "x-scheme-handler/unknown" = [ "vivaldi-stable.desktop" ];
     };
-  };
-
-  # Ensure pointer is the right size:
-  home.pointerCursor = {
-    name = "Adwaita";
-    package = pkgs.adwaita-icon-theme;
-    size = 32;
-    x11 = {
-      enable = true;
-      defaultCursor = "Adwaita";
-    };
-    gtk.enable = true;
-    sway.enable = true;
   };
 
   home.file.".local/bin/powermenu.sh" = {
@@ -159,14 +137,6 @@
       '';
   };
 
-  gtk = {
-    enable = true;
-    gtk4.theme = null;
-  };
-  qt = {
-    enable = true;
-  };
-
   home.file.".local/bin/lightmode.sh" = {
     executable = true;
     text = # bash
@@ -183,7 +153,7 @@
 
         if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
           pkill swaybg
-          swaybg --mode fill --image ${../assets/images/neil-rosenstech-1o4Z1EwCkaY-unsplash.jpg} &
+          swaybg --mode fill --image ${../../assets/images/neil-rosenstech-1o4Z1EwCkaY-unsplash.jpg} &
         fi
       '';
   };
@@ -203,7 +173,7 @@
 
         if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
           pkill swaybg
-          swaybg --mode fill --image ${../assets/images/marc-linnemann-wDx3q0yb7fk-unsplash_darker.jpg} &
+          swaybg --mode fill --image ${../../assets/images/marc-linnemann-wDx3q0yb7fk-unsplash_darker.jpg} &
         fi
       '';
   };
@@ -217,23 +187,38 @@
     '';
   };
 
+  # Get criteria with swaymsg -t get_outputs
+  xdg.configFile."kanshi/config".text = ''
+    profile laptop_only {
+      output eDP-1 enable scale 2.0
+    }
+    profile {
+      output eDP-1 disable 
+      output "Dell Inc. DELL S2722QC 5Q7VLD3" enable scale 2.0
+    }
+    profile entelios_office {
+      output eDP-1 disable
+      output "Dell Inc. DELL U2412M Y1H5T27508CL" enable scale 1.0
+    }
+    profile entelios_office_2 {
+      output eDP-1 disable
+      output "Dell Inc. DELL U2414H 292K477303PL" enable scale 1.0
+    }
+  '';
+  #
   # For some reason, the scaling in wayland makes the fonts way bigger. Adjusting:
   programs.ghostty.settings."font-size" = lib.mkForce 11.0;
 
   imports = [
-    ../configs/avizo
-    ../configs/chromium
-    ../configs/firefox
-    ../configs/fuzzel
-    ../configs/sway
-    ../configs/mako
-    ../configs/qutebrowser
-    ../configs/swaylock
-    ../configs/waybar
+    ../../configs/avizo
+    ../../configs/fuzzel
+    ../../configs/mako
+    ../../configs/sway
+    ../../configs/swaylock
+    ../../configs/waybar
   ];
 
   wayland.windowManager.sway.config.startup = [
-    { command = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"; }
+    { command = "blueman-applet"; }
   ];
-
 }

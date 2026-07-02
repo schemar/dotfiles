@@ -1,99 +1,42 @@
 {
-  inputs,
-  config,
-  username,
   lib,
   pkgs,
   ...
 }:
 {
+  targets.genericLinux.enable = true;
+
+  # For some reason, the scaling in wayland makes the fonts way bigger. Adjusting:
+  programs.ghostty.settings."font-size" = lib.mkForce 11.0;
+
+  # Uses home-manager standalone module on debian linux:
   imports = [
-    # NixOS-specific configs:
-    ./configuration.nix
-    ./virtualisation.nix
-    ../../system/common.nix
-    ../../system/nixos-desktop.nix
-    ../../system/secure-boot.nix
+    ../../home/standalone.nix
+    ../../home
+    ./home-desktop.nix
+    {
+      home.packages = with pkgs; [
+        nh
 
-    # Home-manager as a NixOS module:
-    inputs.home-manager.nixosModules.home-manager
+        gh
+        prek
+
+        monaspace
+        nerd-fonts.symbols-only
+      ];
+
+      programs.ghostty.settings.window-decoration = "auto";
+      programs.ghostty.settings.window-theme = "dark";
+
+      # Disable the packages that are managed by "parent fedora":
+      programs.ghostty.package = null;
+      programs.ghostty.systemd.enable = false;
+      programs.swaylock.package = null;
+      programs.wezterm.package = null;
+      programs.fuzzel.package = null;
+      wayland.windowManager.sway.package = null;
+      services.mako.package = null;
+      programs.waybar.package = pkgs.emptyDirectory;
+    }
   ];
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  systemd.network.enable = true;
-
-  # SSD trimming:
-  services.fstrim.enable = true;
-  # Lid handling:
-  services.logind = {
-    enable = true;
-    settings.Login = {
-      HandleLidSwitch = "suspend";
-      HandleLidSwitchExternalPower = "suspend";
-      HandleLidSwitchDocked = "ignore";
-    };
-  };
-  # Prevent CPU overheating:
-  services.thermald.enable = true;
-  # Battery save management:
-  services.tlp = {
-    enable = true;
-    pd.enable = true;
-    settings = {
-      # No wifi power saving ever:
-      WIFI_PWR_ON_AC = "off";
-      WIFI_PWR_ON_BAT = "off";
-    };
-  };
-  # Intel GPU (including "xe" driver):
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      # Required for modern Intel GPUs (Xe iGPU and ARC)
-      intel-media-driver # VA-API (iHD) userspace
-      vpl-gpu-rt # oneVPL (QSV) runtime
-    ];
-  };
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD"; # Prefer the modern iHD backend
-  };
-  boot.initrd.kernelModules =
-    lib.mkIf (lib.versionAtLeast config.boot.kernelPackages.kernel.version "6.8")
-      [ "xe" ];
-
-  environment.systemPackages = with pkgs; [
-    keepassxc
-    gh
-
-    # RTS Repo:
-    python3
-  ];
-
-  home-manager.users.${username} = {
-    imports = [
-      ../../home/default.nix
-      ../../home/linux-desktop.nix
-      ./home.nix
-    ];
-
-    wayland.windowManager.sway.config.startup = [
-      {
-        command = "${pkgs.ghostty}/bin/ghostty && ~/.local/bin/swaywait.sh com.mitchellh.ghostty 'move workspace 1'";
-      }
-      {
-        command = "${pkgs.vivaldi}/bin/vivaldi && ~/.local/bin/swaywait.sh vivaldi-stable 'move workspace 2'";
-      }
-      {
-        command = "${pkgs.todoist-electron}/bin/todoist-electron && ~/.local/bin/swaywait.sh Todoist 'move workspace 3'";
-      }
-      {
-        command = "${pkgs.obsidian}/bin/obsidian && ~/.local/bin/swaywait.sh obsidian 'move workspace 7'";
-      }
-
-      {
-        command = "swaymsg 'workspace number 5";
-      }
-    ];
-  };
 }

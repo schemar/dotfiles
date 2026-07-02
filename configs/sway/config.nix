@@ -3,7 +3,7 @@
   pkgs,
 }:
 let
-  terminal = "${pkgs.ghostty}/bin/ghostty";
+  terminal = "ghostty";
 in
 {
   focus = {
@@ -74,7 +74,7 @@ in
 
   bars = [
     {
-      command = "${pkgs.waybar}/bin/waybar";
+      command = "waybar";
     }
   ];
 
@@ -82,7 +82,6 @@ in
     {
       command = "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_DATA_DIRS";
     }
-    { command = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"; }
 
     {
       command = ''
@@ -94,9 +93,7 @@ in
       '';
     }
 
-    {
-      command = "nm-applet";
-    }
+    { command = "nm-applet"; }
     { command = "systemctl --user start mako"; }
     { command = "avizo-service"; }
 
@@ -125,14 +122,13 @@ in
   keybindings = lib.mkOptionDefault {
     "Mod4+Shift+a" = "focus child";
 
-    "Mod4+n" = "exec ${pkgs.mako}/bin/makoctl dismiss";
+    "Mod4+n" = "exec makoctl dismiss";
 
     "Mod4+Shift+e" = "exec ~/.local/bin/powermenu.sh";
     "Mod4+Shift+s" = "exec ~/.local/bin/settingsmenu.sh";
 
-    "Mod4+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
-    "Mod4+Shift+d" =
-      "exec BEMOJI_PICKER_CMD='${pkgs.fuzzel}/bin/fuzzel -d' ${pkgs.bemoji}/bin/bemoji --noline";
+    "Mod4+d" = "exec fuzzel";
+    "Mod4+Shift+d" = "exec BEMOJI_PICKER_CMD='fuzzel -d' ${pkgs.bemoji}/bin/bemoji --noline";
 
     # `grim -g "$(slurp)"` to capture the given coordinates
     # `grim -` (- as file) to send the result to stdout instead of a file
@@ -154,7 +150,7 @@ in
     "XF86AudioPrev" = "exec playerctl previous";
     "XF86AudioStop" = "exec playerctl stop";
 
-    "XF86Search" = "exec ${pkgs.fuzzel}/bin/fuzzel";
+    "XF86Search" = "exec fuzzel";
 
     # More or less default:
     "Mod4+1" = "workspace number 1";

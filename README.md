@@ -4,6 +4,13 @@ This repository contains a nix configuration for my productivity stack.
 
 ## Installation
 
+> [!NOTE]
+> On Fedora Sway spin, it should be sufficient to run:
+>
+> ```bash
+> ./system/fedora_setup.sh
+> ```
+
 Requirements:
 
 - [Nix](https://nixos.org/download.html)
