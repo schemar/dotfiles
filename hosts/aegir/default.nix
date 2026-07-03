@@ -1,6 +1,5 @@
 {
   inputs,
-  pkgs,
   username,
   ...
 }:
@@ -30,7 +29,7 @@
   home-manager.users.${username} = {
     imports = [
       ../../home/default.nix
-      ../../home/linux-desktop.nix
+      ../../home/nixos-desktop.nix
       {
         # Configure output of this host:
         wayland.windowManager.sway = {

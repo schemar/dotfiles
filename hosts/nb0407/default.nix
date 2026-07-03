@@ -1,28 +1,41 @@
 {
-  lib,
   pkgs,
   ...
 }:
 {
   targets.genericLinux.enable = true;
 
-  # For some reason, the scaling in wayland makes the fonts way bigger. Adjusting:
-  programs.ghostty.settings."font-size" = lib.mkForce 11.0;
+  # Get criteria with swaymsg -t get_outputs
+  xdg.configFile."kanshi/config".text = ''
+    profile laptop_only {
+      output eDP-1 enable scale 2.0
+    }
+    profile {
+      output eDP-1 disable 
+      output "Dell Inc. DELL S2722QC 5Q7VLD3" enable scale 2.0
+    }
+    profile entelios_office {
+      output eDP-1 disable
+      output "Dell Inc. DELL U2412M Y1H5T27508CL" enable scale 1.0
+    }
+    profile entelios_office_2 {
+      output eDP-1 disable
+      output "Dell Inc. DELL U2414H 292K477303PL" enable scale 1.0
+    }
+  '';
 
-  # Uses home-manager standalone module on debian linux:
+  wayland.windowManager.sway.config.startup = [
+    { command = "blueman-applet"; }
+    { command = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"; }
+  ];
+
   imports = [
-    ../../home/standalone.nix
     ../../home
-    ./home-desktop.nix
+    ../../home/standalone.nix
+    ../../home/linux-desktop.nix
     {
       home.packages = with pkgs; [
-        nh
-
         gh
-        prek
-
-        monaspace
-        nerd-fonts.symbols-only
       ];
 
       programs.ghostty.settings.window-decoration = "auto";

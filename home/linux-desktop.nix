@@ -1,8 +1,10 @@
-{ lib, pkgs, ... }:
 {
-  services.blueman-applet = {
-    enable = true;
-  };
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
 
   # Fonts
   fonts.fontconfig = {
@@ -20,50 +22,29 @@
     };
   };
 
-  home.packages = with pkgs; [
-    # Configured when started by sway (see sway config).
-    swayidle
+  home.packages = [
+    pkgs.nh
 
-    swaybg
+    pkgs.setxkbmap
+    pkgs.kdePackages.breeze
+    pkgs.kdePackages.breeze-gtk
+    pkgs.kdePackages.breeze-icons
 
-    glib
+    pkgs.bemoji
+    pkgs.imv
 
-    setxkbmap
+    pkgs.obsidian
 
-    kdePackages.polkit-kde-agent-1
-    kdePackages.breeze
-    kdePackages.breeze-gtk
-    kdePackages.breeze-icons
+    # Fonts:
+    pkgs.lato
+    pkgs.monaspace
+    pkgs.nerd-fonts.symbols-only
+    pkgs.noto-fonts-color-emoji
+    pkgs.open-sans
+    pkgs.source-serif
 
-    libnotify
-    wl-clipboard
-    playerctl
-
-    networkmanager
-    networkmanagerapplet
-
-    pulseaudio
-    pavucontrol
-    blueman
-
-    grim
-    slurp
-    swappy
-
-    bemoji
-    wtype # Type on wayland like xdotool; used by bemoji
-
-    nautilus # gnome file manager
-    imv
-
-    eog # eye of gnome image viewer
-    gimp
-    obsidian
-    thunderbird
-    todoist-electron
+    inputs.private-fonts.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
-
-  services.udiskie.enable = true;
 
   xdg.mimeApps = {
     enable = true;
@@ -159,14 +140,6 @@
       '';
   };
 
-  gtk = {
-    enable = true;
-    gtk4.theme = null;
-  };
-  qt = {
-    enable = true;
-  };
-
   home.file.".local/bin/lightmode.sh" = {
     executable = true;
     text = # bash
@@ -208,32 +181,15 @@
       '';
   };
 
-  # Scaling in xresources:
-  xresources = {
-    extraConfig = ''
-      *dpi: 192
-      Xft.dpi: 192
-      Xcursor.size: 32
-    '';
-  };
-
   # For some reason, the scaling in wayland makes the fonts way bigger. Adjusting:
   programs.ghostty.settings."font-size" = lib.mkForce 11.0;
 
   imports = [
     ../configs/avizo
-    ../configs/chromium
-    ../configs/firefox
     ../configs/fuzzel
-    ../configs/sway
     ../configs/mako
-    ../configs/qutebrowser
+    ../configs/sway
     ../configs/swaylock
     ../configs/waybar
   ];
-
-  wayland.windowManager.sway.config.startup = [
-    { command = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"; }
-  ];
-
 }
