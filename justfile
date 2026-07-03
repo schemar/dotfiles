@@ -32,6 +32,9 @@ remote-switch user="schemar" host="klabautermann":
 remote-boot user="schemar" host="klabautermann":
     nh os boot --target-host ssh://{{ user }}@{{ host }} --build-host ssh://{{ user }}@{{ host }} . -H {{ host }}
 
+remote-restart host="klabautermann":
+    ssh {{ host }} 'sudo shutdown -r now'
+
 flake-update:
     nix flake update
 
