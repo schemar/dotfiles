@@ -45,6 +45,26 @@
     enable = true;
   };
 
+  # Only in sway:
+  systemd.user.services.mako = {
+    Unit = {
+      Description = "Lightweight Wayland notification daemon";
+      Documentation = "man:mako(1)";
+      PartOf = lib.mkForce [ "sway-session.target" ];
+      After = lib.mkForce [ "sway-session.target" ];
+    };
+    Service = {
+      Type = "dbus";
+      BusName = "org.freedesktop.Notifications";
+      ExecCondition = "/bin/sh -c '[ -n \"$WAYLAND_DISPLAY\" ]'";
+      ExecStart = "${pkgs.mako}/bin/mako";
+      ExecReload = "${pkgs.mako}/bin/makoctl reload";
+    };
+    Install = {
+      WantedBy = lib.mkForce [ "sway-session.target" ];
+    };
+  };
+
   home.file.".local/bin/lightmode.sh" = {
     executable = true;
     text = # bash
