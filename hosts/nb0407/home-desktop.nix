@@ -220,5 +220,6 @@
 
   wayland.windowManager.sway.config.startup = [
     { command = "blueman-applet"; }
+    { command = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"; }
   ];
 }

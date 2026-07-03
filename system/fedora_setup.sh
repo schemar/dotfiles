@@ -59,6 +59,9 @@ sudo systemctl enable --now fstrim.timer
 sudo systemctl enable --now tlp.service
 sudo systemctl enable --now tlp-pd.service
 
+# Add to libvirt group for access to libvirt/virt-manager/qmk:
+sudo usermod -a -G libvirt "$USER"
+
 sudo systemctl enable --now nix-daemon
 systemctl --user enable --now mako
 
