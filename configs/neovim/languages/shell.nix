@@ -12,6 +12,9 @@
         bash = [
           "shfmt"
         ];
+        sh = [
+          "shfmt"
+        ];
       };
       formatters = {
         shfmt = {
