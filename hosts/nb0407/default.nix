@@ -36,6 +36,19 @@
     {
       home.packages = with pkgs; [
         gh
+        (pkgs.writeShellScriptBin "vpnup" ''
+          sudo swanctl --initiate --child checkpoint
+        '')
+        (pkgs.writeShellScriptBin "vpndown" ''
+          sudo swanctl --terminate --child checkpoint
+        '')
+        (pkgs.writeShellScriptBin "vpnkill" ''
+          echo "# => Terminate the next command with 'C-c' if it hangs!"
+          echo "# => Killing will commence anyway."
+          sudo swanctl --terminate --child checkpoint
+          sudo pkill -f vpn-dns-updown
+          sudo systemctl restart strongswan
+        '')
       ];
 
       programs.ghostty.settings.window-decoration = "auto";
