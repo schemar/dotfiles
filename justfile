@@ -52,6 +52,11 @@ firmware-upgrade:
 
     fwupdmgr update
 
+fedora-upgrade:
+    sudo dnf upgrade --refresh
+
+fedora-full-upgrade: firmware-upgrade fedora-upgrade flake-update hm-switch
+
 theme-dark:
     #!/usr/bin/env bash
     if [ "{{ os() }}" = "macos" ]; then
