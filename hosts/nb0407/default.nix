@@ -36,18 +36,44 @@
     {
       home.packages = with pkgs; [
         gh
-        (pkgs.writeShellScriptBin "vpnup" ''
-          sudo swanctl --initiate --child checkpoint
-        '')
-        (pkgs.writeShellScriptBin "vpndown" ''
-          sudo swanctl --terminate --child checkpoint
-        '')
-        (pkgs.writeShellScriptBin "vpnkill" ''
-          echo "# => Terminate the next command with 'C-c' if it hangs!"
-          echo "# => Killing will commence anyway."
-          sudo swanctl --terminate --child checkpoint
-          sudo pkill -f vpn-dns-updown
-          sudo systemctl restart strongswan
+        (pkgs.writeShellScriptBin "vpn" ''
+          function printhelp {
+              echo "Usage: vpn COMMAND"
+              echo ""
+              echo "Valid options for COMMAND:"
+              echo "up"
+              echo "down"
+              echo "kill"
+              echo "help"
+          }
+
+          if [ "$#" -eq 0 ]; then
+              printhelp
+              exit 1
+          fi
+
+          case "$1" in
+          up)
+              sudo swanctl --initiate --child checkpoint
+              ;;
+          down)
+              sudo swanctl --terminate --child checkpoint
+              ;;
+          kill)
+              echo "# => Terminate the next command with 'C-c' if it hangs!"
+              echo "# => Killing will commence anyway."
+              sudo swanctl --terminate --child checkpoint
+              sudo pkill -f vpn-dns-updown
+              sudo systemctl restart strongswan
+              ;;
+          help)
+              printhelp
+              ;;
+          *)
+              printhelp
+              exit 1
+              ;;
+          esac
         '')
       ];
 
