@@ -29,16 +29,6 @@
       commit = {
         gpgSign = "true";
       };
-      core = {
-        # Enable dynamic delta syntax theme:
-        pager = "delta --features syntax-theme-`$HOME/.config/current_theme`";
-      };
-      "delta \"syntax-theme-light\"" = {
-        syntax-theme = "blueberry_peach_light";
-      };
-      "delta \"syntax-theme-dark\"" = {
-        syntax-theme = "blueberry_peach_dark";
-      };
       diff = {
         algorithm = "histogram";
         colorMoved = "plain";
@@ -109,14 +99,5 @@
         condition = "gitdir:entelios*/";
       }
     ];
-  };
-
-  programs.delta = {
-    # We use our own git pager setting to have dynamic theme support:
-    # (system package is enabled)
-    enable = false;
-    options = {
-      line-numbers = true;
-    };
   };
 }

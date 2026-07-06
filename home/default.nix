@@ -28,7 +28,6 @@
     bottom
     just
     sd
-    delta
 
     # Languages, language servers, formatters, etc.:
     tree-sitter

@@ -16,15 +16,6 @@
         border = "single";
         filterMode = "fuzzy";
       };
-      git = {
-        pagers = [
-          {
-            # Same themeing as in git delta config. Theme comes from bat.
-            pager = "delta --paging=never --line-numbers --features syntax-theme-`$HOME/.config/current_theme`";
-            colorArg = "always";
-          }
-        ];
-      };
       customCommands = [
         {
           key = "<c-/>";
