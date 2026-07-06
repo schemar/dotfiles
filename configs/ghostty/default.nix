@@ -15,7 +15,6 @@
       font-family = [
         "MonoLisaCode"
         "Symbols Nerd Font Mono"
-        "Noto Color Emoji"
       ];
 
       font-size = 13.0;
