@@ -77,9 +77,6 @@
         '')
       ];
 
-      programs.ghostty.settings.window-decoration = "auto";
-      programs.ghostty.settings.window-theme = "dark";
-
       # Disable the packages that are managed by "parent fedora":
       programs.ghostty.package = null;
       programs.ghostty.systemd.enable = false;
