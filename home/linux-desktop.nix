@@ -153,6 +153,7 @@
         printf "light" > ~/.config/current_theme_store
         tmux source-file ~/.config/tmux/tmux.conf
         pkill -USR1 zsh
+        makoctl mode -a light -r dark
 
         if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
           pkill swaybg
@@ -173,6 +174,7 @@
         printf "dark" > ~/.config/current_theme_store
         tmux source-file ~/.config/tmux/tmux.conf
         pkill -USR1 zsh
+        makoctl mode -a dark -r light
 
         if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
           pkill swaybg
