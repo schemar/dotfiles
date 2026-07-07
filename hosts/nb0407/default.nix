@@ -41,10 +41,11 @@
               echo "Usage: vpn COMMAND"
               echo ""
               echo "Valid options for COMMAND:"
-              echo "up"
-              echo "down"
-              echo "kill"
-              echo "help"
+              echo "up       establish a connection"
+              echo "down     close the connection"
+              echo "kill     kill the connection and restart strongswan"
+              echo "re       kill then up"
+              echo "help     this help message"
           }
 
           if [ "$#" -eq 0 ]; then
@@ -52,19 +53,33 @@
               exit 1
           fi
 
-          case "$1" in
-          up)
-              sudo swanctl --initiate --child checkpoint
-              ;;
-          down)
-              sudo swanctl --terminate --child checkpoint
-              ;;
-          kill)
+          function vpnup {
+              sudo swanctl --initiate --child checkpoint 1>/dev/null
+          }
+          function vpndown {
+              sudo swanctl --terminate --child checkpoint 1>/dev/null
+          }
+          function vpnkill {
               echo "# => Terminate the next command with 'C-c' if it hangs!"
               echo "# => Killing will commence anyway."
-              sudo swanctl --terminate --child checkpoint
+              sudo swanctl --terminate --child checkpoint 1>/dev/null
               sudo pkill -f vpn-dns-updown
               sudo systemctl restart strongswan
+          }
+
+          case "$1" in
+          up)
+              vpnup
+              ;;
+          down)
+              vpndown
+              ;;
+          kill)
+              vpnkill
+              ;;
+          re)
+              vpnkill
+              vpnup
               ;;
           help)
               printhelp
