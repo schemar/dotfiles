@@ -39,31 +39,38 @@ in
   defaultWorkspace = "workspace number 1";
 
   colors = {
-    background = "#191724";
+    background = "$bp_background";
     focused = {
-      border = "#A19DD4";
-      background = "#191724";
-      text = "#A2A2A9";
-      indicator = "#C394C2";
-      childBorder = "#A19DD4";
+      border = "$bp_violet";
+      background = "$bp_background";
+      text = "$bp_text";
+      indicator = "$bp_pink";
+      childBorder = "$bp_violet";
     };
     focusedInactive = {
-      border = "#84848C";
-      background = "#0B0A0F";
-      text = "#878794";
-      indicator = "#37363E";
-      childBorder = "#37363E";
+      border = "$bp_overlay0";
+      background = "$bp_surface0";
+      text = "$bp_subtext";
+      indicator = "$bp_surface1";
+      childBorder = "$bp_surface1";
     };
     unfocused = {
-      border = "#0B0A0F";
-      background = "#0B0A0F";
-      text = "#878794";
-      indicator = "#37363E";
-      childBorder = "#37363E";
+      border = "$bp_surface0";
+      background = "$bp_surface0";
+      text = "$bp_subtext";
+      indicator = "$bp_surface1";
+      childBorder = "$bp_surface1";
+    };
+    urgent = {
+      border = "$bp_red";
+      background = "$bp_orange";
+      text = "$bp_background";
+      indicator = "$bp_orange";
+      childBorder = "$bp_red";
     };
     placeholder = {
-      background = "#191724";
-      text = "#A2A2A9";
+      background = "$bp_background";
+      text = "$bp_text";
 
       # unused
       border = "#000000";
