@@ -7,20 +7,26 @@
 
   # Get criteria with swaymsg -t get_outputs
   xdg.configFile."kanshi/config".text = ''
-    profile laptop_only {
-      output eDP-1 enable scale 2.0
+    output eDP-1 {
+      alias $INTERNAL
+      scale 1.5
     }
-    profile {
-      output eDP-1 disable 
-      output "Dell Inc. DELL S2722QC 5Q7VLD3" enable scale 2.0
+    output "Dell Inc. DELL S2722QC 5Q7VLD3" {
+      alias $HOME
+      scale 2.0
+    }
+
+    profile laptop_only {
+      output $INTERNAL enable
+    }
+    profile home_office {
+      output $INTERNAL disable
+      output $HOME enable
     }
     profile entelios_office {
-      output eDP-1 disable
-      output "Dell Inc. DELL U2412M Y1H5T27508CL" enable scale 1.0
-    }
-    profile entelios_office_2 {
-      output eDP-1 disable
-      output "Dell Inc. DELL U2414H 292K477303PL" enable scale 1.0
+      output $INTERNAL disable
+      output DP-5 position 1706,0 scale 1.5 mode 2560x1440@119.998 enable
+      output DP-7 position 0,0 scale 1.5 mode 2560x1440@119.998 enable
     }
   '';
 
