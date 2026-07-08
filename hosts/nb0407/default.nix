@@ -9,7 +9,7 @@
   xdg.configFile."kanshi/config".text = ''
     output eDP-1 {
       alias $INTERNAL
-      scale 1.5
+      scale 2.0
     }
     output "Dell Inc. DELL S2722QC 5Q7VLD3" {
       alias $HOME
