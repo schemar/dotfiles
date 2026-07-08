@@ -174,6 +174,10 @@ in
     "Mod4+Left" = "focus left";
     "Mod4+Return" = "exec ${terminal}";
     "Mod4+Right" = "focus right";
+    "Mod4+Control+h" = "focus output left";
+    "Mod4+Control+l" = "focus output right";
+    "Mod4+Control+Shift+h" = "move container to output left";
+    "Mod4+Control+Shift+l" = "move container to output right";
     "Mod4+Shift+0" = "move container to workspace number 10";
     "Mod4+Shift+1" = "move container to workspace number 1";
     "Mod4+Shift+2" = "move container to workspace number 2";
