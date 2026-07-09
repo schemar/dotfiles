@@ -23,12 +23,22 @@
       output $INTERNAL disable
       output $HOME enable
     }
-    profile entelios_office_0 {
+    profile {
+      output $INTERNAL disable
+      output DP-5 'Lenovo Group Limited P27QD-40 VNACWFPB' position 0,0 scale 1.5 mode 2560x1440@119.998 enable
+      output DP-7 'Lenovo Group Limited P27QD-40 VNACWFPT' position 1706,0 scale 1.5 mode 2560x1440@119.998 enable
+    }
+    profile {
+      output $INTERNAL disable
+      output DP-6 'Lenovo Group Limited P27QD-40 VNACWFPB' position 0,0 scale 1.5 mode 2560x1440@119.998 enable
+      output DP-9 'Lenovo Group Limited P27QD-40 VNACWFPT' position 1706,0 scale 1.5 mode 2560x1440@119.998 enable
+    }
+    profile {
       output $INTERNAL disable
       output DP-5 position 1706,0 scale 1.5 mode 2560x1440@119.998 enable
       output DP-7 position 0,0 scale 1.5 mode 2560x1440@119.998 enable
     }
-    profile entelios_office_1 {
+    profile {
       output $INTERNAL disable
       output DP-6 position 1706,0 scale 1.5 mode 2560x1440@119.998 enable
       output DP-9 position 0,0 scale 1.5 mode 2560x1440@119.998 enable
