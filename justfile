@@ -4,24 +4,24 @@ default: help
 help:
     just --list --unsorted
 
-# Update all installed homebrew packages (incl. casks)
-brew-upgrade:
-    brew update
-    brew upgrade
-    brew upgrade --casks --greedy
-
 # Configure the system with this flake
-nix-switch:
+nixos-switch:
     nh os switch .
 
 # Configure the system with this flake after reboot
-nix-boot:
+nixos-boot:
     nh os boot .
 
 darwin-switch:
     nh darwin switch .
 
-darwin-upgrade: brew-upgrade flake-update darwin-switch
+# Update all installed homebrew packages (incl. casks)
+darwin-upgrade:
+    brew update
+    brew upgrade
+    brew upgrade --casks --greedy
+
+darwin-full-upgrade: darwin-upgrade flake-update darwin-switch
 
 hm-switch:
     nh home switch . -c $(whoami)@$(hostname)
