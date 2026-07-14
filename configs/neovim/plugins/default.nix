@@ -412,6 +412,9 @@
             };
           };
         };
+        copilot-vim = {
+          enable = true;
+        };
       };
     };
 }
