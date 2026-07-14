@@ -214,93 +214,101 @@
         lualine = {
           enable = true;
 
-          settings.__raw = # lua
-            ''
-              {
-                options = {
-                  theme = "catppuccin-nvim",
-                  component_separators = { left = "", right = "" },
-                  section_separators = { left = "", right = "" },
-                  disabled_filetypes = {
-                    statusline = {
-                      "NeogitStatus",
-                    },
-                    winbar = {},
-                  },
-                  -- When set to true, if you have configured lualine for displaying tabline
-                  -- then tabline will always show. If set to false, then tabline will be displayed
-                  -- only when there are more than 1 tab. (see :h showtabline)
-                  always_show_tabline = false,
-                  -- Single line for entire window, disregarding window splits.
-                  globalstatus = false,
-                },
-                sections = {
-                  lualine_a = { "mode", "searchcount" },
-                  lualine_b = { "diff", "diagnostics" },
-                  lualine_c = {
-                    {
-                      "filename",
-                      path = 1,
-                    },
-                  },
-                  lualine_x = {
-                    -- {
-                    --   "branch",
-                    --   fmt = function(str)
-                    --     if string.len(str) <= 15 then
-                    --       return str
-                    --     elseif string.len(str) <= 15 + 13 then
-                    --       return string.sub(str, 13, string.len(str))
-                    --     else
-                    --       return string.sub(str, 13, 22) .. "…" .. string.sub(str, string.len(str) - 5)
-                    --     end
-                    --   end,
-                    -- },
-                    {
-                      "filetype",
-                      icon_only = true,
-                    },
-                  },
-                  lualine_y = { "progress" },
-                  lualine_z = { "location" },
-                },
-                inactive_sections = {
-                  lualine_a = {},
-                  lualine_b = {},
-                  lualine_c = {
-                    {
-                      "filename",
-                      path = 1,
-                    },
-                  },
-                  lualine_x = {},
-                  lualine_y = {},
-                  lualine_z = { "location" },
-                },
-                tabline = {
-                  lualine_a = {
-                    {
-                      "tabs",
-                      mode = 2,
-                      max_length = vim.o.columns,
-                    },
-                  },
-                  lualine_b = {},
-                  lualine_c = {},
-                  lualine_x = {},
-                  lualine_y = {},
-                  lualine_z = {},
-                },
-                extenstions = {
-                  "aerial",
-                  "lazy",
-                  "man",
-                  "mason",
-                  "nvim-tree",
-                  "trouble",
-                },
-              }
-            '';
+          settings = {
+            options = {
+              component_separators = {
+                left = "";
+                right = "";
+              };
+              section_separators = {
+                left = "";
+                right = "";
+              };
+              disabled_filetypes = {
+                statusline = [
+                  "NeogitStatus"
+                ];
+                winbar = [ ];
+              };
+              # When set to true; if you have configured lualine for displaying tabline
+              # then tabline will always show. If set to false; then tabline will be displayed
+              # only when there are more than 1 tab. (see :h showtabline)
+              always_show_tabline = false;
+              # Single line for entire window; disregarding window splits.
+              globalstatus = false;
+            };
+            sections = {
+              lualine_a = [
+                "mode"
+                "searchcount"
+              ];
+              lualine_b = [
+                "diff"
+                "diagnostics"
+              ];
+              lualine_c = [
+                {
+                  __unkeyed-1 = "filename";
+                  path = 1;
+                }
+              ];
+              lualine_x = [
+                # {
+                #   "branch";
+                #   fmt = function(str)
+                #     if string.len(str) <= 15 then
+                #       return str
+                #     elseif string.len(str) <= 15 + 13 then
+                #       return string.sub(str; 13; string.len(str))
+                #     else
+                #       return string.sub(str; 13; 22) .. "…" .. string.sub(str; string.len(str) - 5)
+                #     end
+                #   end;
+                # };
+                {
+                  __unkeyed-1 = "filetype";
+                  icon_only = true;
+                }
+              ];
+              lualine_y = [ "progress" ];
+              lualine_z = [ "location" ];
+            };
+            inactive_sections = {
+              lualine_a = [ ];
+              lualine_b = [ ];
+              lualine_c = [
+                {
+                  __unkeyed-1 = "filename";
+                  path = 1;
+                }
+              ];
+              lualine_x = [ ];
+              lualine_y = [ ];
+              lualine_z = [ "location" ];
+            };
+            tabline = {
+              lualine_a = [
+                {
+                  __unkeyed-1 = "tabs";
+                  mode = 2;
+                  max_length.__raw = "vim.o.columns";
+                }
+              ];
+              lualine_b = [ ];
+              lualine_c = [ ];
+              lualine_x = [ ];
+              lualine_y = [ ];
+              lualine_z = [ ];
+            };
+            extenstions = [
+              "aerial"
+              "lazy"
+              "man"
+              "mason"
+              "nvim-tree"
+              "trouble"
+            ];
+          };
         };
         gitsigns = {
           enable = true;
