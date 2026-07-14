@@ -10,13 +10,6 @@
     ./plugins
   ];
 
-  xdg.configFile."nvim/lua/blueberry_peach/light.lua" = {
-    source = "${inputs.blueberry-peach}/ports/neovim/blueberry_peach_light.lua";
-  };
-  xdg.configFile."nvim/lua/blueberry_peach/dark.lua" = {
-    source = "${inputs.blueberry-peach}/ports/neovim/blueberry_peach_dark.lua";
-  };
-
   programs.nixvim =
     let
       border = "single";
