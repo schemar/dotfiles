@@ -113,6 +113,8 @@
         '')
       ];
 
+      programs.nixvim.plugins.copilot-vim.enable = true;
+
       # Disable the packages that are managed by "parent fedora":
       programs.ghostty.package = null;
       programs.ghostty.systemd.enable = false;

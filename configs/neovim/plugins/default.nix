@@ -420,9 +420,6 @@
             };
           };
         };
-        copilot-vim = {
-          enable = true;
-        };
       };
     };
 }
