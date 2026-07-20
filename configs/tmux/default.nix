@@ -116,6 +116,7 @@
         # https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
         set -sg terminal-overrides ",*:RGB"
 
+        source ${./config/reset_catppuccin.conf}
         if-shell "[ "$(~/.config/current_theme)" = "dark" ]" \
           "source-file ${inputs.blueberry-peach}/ports/tmux/blueberry_peach_dark.conf" \
           "source-file ${inputs.blueberry-peach}/ports/tmux/blueberry_peach_light.conf"
