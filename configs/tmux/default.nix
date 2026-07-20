@@ -27,35 +27,6 @@
     plugins = with pkgs; [
       {
         plugin = tmuxPlugins.mkTmuxPlugin {
-          pluginName = "catppuccin";
-          name = "tmux-plugin-catppuccin";
-          rtpFilePath = "catppuccin.tmux";
-          src = fetchFromGitHub {
-            owner = "catppuccin";
-            repo = "tmux";
-            rev = "14a546fb64dc1141e5d02bac2185d8c1fd530d6a";
-            sha256 = "sha256-poG3QCow2j6h/G7BLEA8v3ZJXuk28iPmH1J4t7vT55k=";
-          };
-        };
-        extraConfig = # tmux
-          ''
-            source ${./config/reset_catppuccin.conf}
-            if-shell '[ "$(~/.config/current_theme)" = "dark" ]' \
-              "source-file ${inputs.blueberry-peach}/ports/tmux/blueberry_peach_dark.conf" \
-              "source-file ${inputs.blueberry-peach}/ports/tmux/blueberry_peach_light.conf"
-
-            set -g status-left '#[bg=#{?client_prefix,blue,default},fg=#{?client_prefix,black,default}]#S#[default] '
-
-            # Make sure to do this before sourcing tmux-continuum.
-            # See their "known-issues".
-            # git branch; see file in dotfiles repo (tmux/config)
-            set -g status-right '#(${./config/pane_branch.sh})'
-            # The branch name is often longer than the default length of 40.
-            set -g status-right-length 70
-          '';
-      }
-      {
-        plugin = tmuxPlugins.mkTmuxPlugin {
           pluginName = "fzf-url";
           name = "tmux-plugin-fzf-url";
           rtpFilePath = "fzf-url.tmux";
@@ -144,6 +115,20 @@
         # Colors
         # https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
         set -sg terminal-overrides ",*:RGB"
+
+        if-shell "[ "$(~/.config/current_theme)" = "dark" ]" \
+          "source-file ${inputs.blueberry-peach}/ports/tmux/blueberry_peach_dark.conf" \
+          "source-file ${inputs.blueberry-peach}/ports/tmux/blueberry_peach_light.conf"
+
+        set -gF status-style "bg=#{@thm_crust},fg=#{@thm_fg}"
+
+        set -gF window-status-format "#[fg=#{@thm_crust},bg=#{@thm_surface_2}] ##I #[fg=#{@thm_fg},bg=#{@thm_surface_0}] ##W ##F "
+        set -gF window-status-current-format "#[fg=#{@thm_crust},bg=#{@thm_mauve}] ##I #[fg=#{@thm_crust},bg=#{@thm_overlay_0}] ##W ##F "
+
+        set -g status-left "#[bg=#{?client_prefix,blue,default},fg=#{?client_prefix,black,default}]#S#[default] "
+        set -g status-right "#(${./config/pane_branch.sh})"
+        # The branch name is often longer than the default length of 40.
+        set -g status-right-length 70
 
         # use <prefix> v/s for splitting
         bind v split-window -v
