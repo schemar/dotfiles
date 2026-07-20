@@ -4,18 +4,29 @@
     enable = true;
     enableZshIntegration = false;
     settings = {
+      disableStartupPopups = true;
+
       os = {
         editPreset = "nvim-remote";
       };
+
       gui = {
         scrollHeight = 5;
         scrollOffMargin = 5;
 
         showNumstatInFilesView = true;
 
+        nerdFontsVersion = "3";
+
         border = "single";
         filterMode = "fuzzy";
+
+        timeFormat = "2006-01-02";
+        shortTimeFormat = "15:04";
+
+        expandFocusedSidePanel = true;
       };
+
       customCommands = [
         {
           key = "<c-/>";
