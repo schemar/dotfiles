@@ -43,6 +43,10 @@
       output DP-6 position 1706,0 scale 1.5 mode 2560x1440@119.998 enable
       output DP-9 position 0,0 scale 1.5 mode 2560x1440@119.998 enable
     }
+    profile {
+      output $INTERNAL disable
+      output DP-1 'Lenovo Group Limited P27QD-40 VNACWFR2'scale 1.5 mode 2560x1440@119.998 enable
+    }
   '';
 
   wayland.windowManager.sway.config.startup = [
