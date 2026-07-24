@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   ...
 }:
 {
@@ -51,7 +52,9 @@
 
   wayland.windowManager.sway.config.startup = [
     { command = "blueman-applet"; }
-    { command = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1"; }
+    { command = "nm-applet --indicator"; }
+    { command = "kanshi"; }
+    { command = "/usr/libexec/polkit-mate-authentication-agent-1"; }
   ];
 
   imports = [
@@ -119,12 +122,56 @@
 
       programs.nixvim.plugins.copilot-vim.enable = true;
 
-      # Disable the packages that are managed by "parent fedora":
+      # Vivaldi from snap has wrong exec and name:
+      xdg.desktopEntries."vivaldi_vivaldi-stable" = {
+        name = "Vivaldi";
+        genericName = "Web Browser";
+        exec = "/snap/bin/vivaldi.vivaldi-stable %U";
+        startupNotify = true;
+        terminal = false;
+        icon = "/snap/vivaldi/current/meta/gui/icon.png";
+        type = "Application";
+        categories = [
+          "Network"
+          "WebBrowser"
+        ];
+        mimeType = [
+          "application/pdf"
+          "application/rdf+xml"
+          "application/rss+xml"
+          "application/xhtml+xml"
+          "application/xhtml_xml"
+          "application/xml"
+          "image/gif"
+          "image/jpeg"
+          "image/png"
+          "image/webp"
+          "text/html"
+          "text/xml"
+          "x-scheme-handler/http"
+          "x-scheme-handler/https"
+        ];
+      };
+      xdg.mimeApps = {
+        defaultApplications = {
+          "text/html" = [ "vivaldi_vivaldi-stable.desktop" ];
+          "x-scheme-handler/about" = [ "vivaldi_vivaldi-stable.desktop" ];
+          "x-scheme-handler/http" = [ "vivaldi_vivaldi-stable.desktop" ];
+          "x-scheme-handler/https" = [ "vivaldi_vivaldi-stable.desktop" ];
+          "x-scheme-handler/unknown" = [ "vivaldi_vivaldi-stable.desktop" ];
+        };
+      };
+
+      # Disable the packages that are managed by "parent ubuntu":
+      programs.fuzzel = {
+        package = null;
+        # Too wide otherwise with ubuntu:
+        settings.main.width = lib.mkForce "60";
+      };
       programs.ghostty.package = null;
       programs.ghostty.systemd.enable = false;
       programs.swaylock.package = null;
       programs.wezterm.package = null;
-      programs.fuzzel.package = null;
       wayland.windowManager.sway.package = null;
       services.mako.package = null;
       programs.waybar.package = pkgs.emptyDirectory;

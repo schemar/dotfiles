@@ -20,6 +20,7 @@ sudo apt install -y \
   thermald \
   tlp \
   tlp-pd \
+  mate-polkit \
   authselect \
   kanshi \
   virt-manager \
@@ -27,6 +28,7 @@ sudo apt install -y \
   podman-compose \
   podman-docker \
   pavucontrol \
+  network-manager-gnome \
   blueman \
   curl \
   imv \
@@ -48,11 +50,25 @@ sudo apt install -y \
   ghostty \
   zsh
 
+snap install gtk-theme-breeze \
+  gtk-theme-adw-gtk3 \
+  vivaldi
+
 chsh -s /usr/bin/zsh
+sudo chsh -s /usr/bin/zsh
 
 sudo systemctl enable --now fstrim.timer
 sudo systemctl enable --now tlp.service
 sudo systemctl enable --now tlp-pd.service
+# Waybar lifecycle is managed by sway config:
+systemctl --user disable --now waybar.service
+
+# Disable ubuntu splash screen:
+sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT=""/' /etc/default/grub
+sudo update-grub2
+
+# Ubuntu is doing shenanigans with locales:
+sudo localectl set-locale LANG=en_US.utf8 LC_TIME=de_DE.UTF-8
 
 # Add to libvirt group for access to libvirt/virt-manager/qmk:
 sudo usermod -a -G libvirt "$USER"
