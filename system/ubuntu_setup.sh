@@ -21,7 +21,7 @@ sudo apt install -y \
   tlp \
   tlp-pd \
   authselect \
-  virt-manager \
+  kanshi \
   virt-manager \
   podman \
   podman-compose \
