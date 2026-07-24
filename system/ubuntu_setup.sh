@@ -79,5 +79,4 @@ echo "Adding home-manager nix-channel. Currently 26.05."
 echo ""
 echo "## Home Manager"
 echo ""
-echo "Running home-manager switch --flake ."
-home-manager switch --flake .
+echo "Restart and run: home-manager switch --flake ."
