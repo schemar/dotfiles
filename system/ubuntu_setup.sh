@@ -13,41 +13,37 @@ sudo apt update
 sudo apt upgrade -y
 
 # Conflicts with TLP:
-sudo apt uninstall -y tuned tuned-ppd
+sudo apt remove -y tuned tuned-ppd
 
 sudo apt install -y \
-  intel-media-driver \
-  intel-vpl-gpu-rt \
+  intel-media-va-driver \
   thermald \
   tlp \
   tlp-pd \
-  fprintd \
-  fprintd-pam \
   authselect \
   virt-manager \
-  libvirt \
+  virt-manager \
   podman \
   podman-compose \
   podman-docker \
-  pipewire-pulseaudio \
   pavucontrol \
   blueman \
+  curl \
   imv \
   grim \
   slurp \
   swappy \
   firefox \
   fuzzel \
-  mako \
+  mako-notifier \
   sway \
   swaylock \
   swayidle \
   swaybg \
   waybar \
-  wl-copy \
+  wl-clipboard \
   wtype \
   playerctl \
-  fuse-libs \
   keepassxc \
   ghostty \
   zsh
@@ -71,13 +67,13 @@ curl https://nix-community.github.io/nix-installers/nix/x86_64/nix-multi-user-2.
 sudo apt install $HOME/Downloads/nix-multi-user-2.24.10.deb
 
 echo "Adding nixpkgs nix-channel. Currently 26.05."
-nix-channel --add https://nixos.org/channels/nixos-26.05 nixpkgs
+/usr/bin/nix-channel --add https://nixos.org/channels/nixos-26.05 nixpkgs
 echo "Adding home-manager nix-channel. Currently 26.05."
-nix-channel --add https://github.com/nix-community/home-manager/archive/release-26.05.tar.gz home-manager
+/usr/bin/nix-channel --add https://github.com/nix-community/home-manager/archive/release-26.05.tar.gz home-manager
 
-nix-channel --update
-nix-env -u '*'
-nix-shell '<home-manager>' -A install
+/usr/bin/nix-channel --update
+/usr/bin/nix-env -u '*'
+/usr/bin/nix-shell '<home-manager>' -A install
 . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 
 echo ""
