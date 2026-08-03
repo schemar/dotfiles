@@ -32,6 +32,7 @@
     eog # eye of gnome image viewer
     gimp
     thunderbird
+    obsidian
     todoist-electron
   ];
 

@@ -33,8 +33,6 @@
     pkgs.bemoji
     pkgs.imv
 
-    pkgs.obsidian
-
     # Fonts:
     pkgs.lato
     pkgs.monaspace
