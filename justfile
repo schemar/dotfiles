@@ -55,6 +55,7 @@ firmware-upgrade:
 ubuntu-upgrade:
     sudo apt update
     sudo apt -y upgrade
+    sudo snap refresh
 
 ubuntu-full-upgrade: firmware-upgrade ubuntu-upgrade flake-update hm-switch
 
