@@ -52,10 +52,11 @@ firmware-upgrade:
 
     fwupdmgr update
 
-fedora-upgrade:
-    sudo dnf upgrade --refresh
+ubuntu-upgrade:
+    sudo apt update
+    sudo apt -y upgrade
 
-fedora-full-upgrade: firmware-upgrade fedora-upgrade flake-update hm-switch
+ubuntu-full-upgrade: firmware-upgrade ubuntu-upgrade flake-update hm-switch
 
 theme-dark:
     #!/usr/bin/env bash
