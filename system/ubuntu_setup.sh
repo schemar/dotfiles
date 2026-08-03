@@ -73,6 +73,9 @@ sudo localectl set-locale LANG=en_US.utf8 LC_TIME=de_DE.UTF-8
 # Add to libvirt group for access to libvirt/virt-manager/qmk:
 sudo usermod -a -G libvirt "$USER"
 
+# Disable file transfer to stop the startup error for blueman:
+gsettings set org.blueman.general plugin-list "['\!TransferService']"
+
 echo ""
 echo "## Nix"
 echo ""
