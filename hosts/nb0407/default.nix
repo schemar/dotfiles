@@ -62,8 +62,7 @@
     ../../home/standalone.nix
     ../../home/linux-desktop.nix
     {
-      home.packages = with pkgs; [
-        gh
+      home.packages = [
         (pkgs.writeShellScriptBin "vpn" ''
           function printhelp {
               echo "Usage: vpn COMMAND"
