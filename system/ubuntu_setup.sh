@@ -42,6 +42,8 @@ sudo apt install -y \
   swaylock \
   swayidle \
   swaybg \
+  xdg-desktop-portal \
+  xdg-desktop-portal-wlr \
   waybar \
   wl-clipboard \
   wtype \
