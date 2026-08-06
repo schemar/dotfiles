@@ -130,6 +130,7 @@ in
     "Mod4+Shift+a" = "focus child";
 
     "Mod4+n" = "exec makoctl dismiss";
+    "Mod4+Shift+n" = "exec makoctl dismiss --all";
 
     "Mod4+Shift+e" = "exec ~/.local/bin/powermenu.sh";
     "Mod4+Shift+s" = "exec ~/.local/bin/settingsmenu.sh";
