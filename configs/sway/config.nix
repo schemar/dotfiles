@@ -25,10 +25,10 @@ in
 
   gaps = {
     top = 0;
-    right = 6;
-    bottom = 6;
-    left = 6;
-    inner = 6;
+    right = 2;
+    bottom = 2;
+    left = 2;
+    inner = 2;
   };
 
   window = {
