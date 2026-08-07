@@ -52,7 +52,6 @@
 
   wayland.windowManager.sway.config.startup = [
     { command = "blueman-applet"; }
-    { command = "nm-applet --indicator"; }
     { command = "kanshi"; }
     { command = "/usr/libexec/polkit-mate-authentication-agent-1"; }
   ];
