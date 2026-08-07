@@ -1,4 +1,9 @@
-{ inputs, username, ... }:
+{
+  inputs,
+  username,
+  pkgs,
+  ...
+}:
 {
   # Host configuration for klabautermann (NixOS)
 
@@ -33,6 +38,20 @@
         }
       ];
     }
+  ];
+
+  environment.systemPackages = with pkgs; [
+    steamcmd
+    steam-run
+  ];
+
+  # Project Zomboid
+  users.users.pzuser = {
+    isNormalUser = true;
+  };
+  networking.firewall.allowedUDPPorts = [
+    16261
+    16262
   ];
 
   # Configure home-manager to use the user config:
