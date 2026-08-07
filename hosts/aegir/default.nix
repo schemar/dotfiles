@@ -1,6 +1,7 @@
 {
   inputs,
   username,
+  pkgs,
   ...
 }:
 {
@@ -24,6 +25,17 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+  };
+
+  environment.systemPackages = with pkgs; [
+    steamcmd
+  ];
+
+  programs = {
+    steam = {
+      enable = true;
+    };
+    gamemode.enable = true;
   };
 
   home-manager.users.${username} = {
