@@ -1,4 +1,4 @@
-{ username, ... }:
+{ lib, username, ... }:
 {
   # The platform the configuration will be used on:
   nixpkgs.hostPlatform = "aarch64-darwin";
@@ -20,11 +20,18 @@
       ];
     };
 
-    taps = [
-      "qmk/qmk"
-      "osx-cross/arm" # required by qmk/qmk/qmk
-      "osx-cross/avr" # required by qmk/qmk/qmk
-    ];
+    taps =
+      lib.map
+        (tap: {
+          name = tap;
+          trusted = true;
+          force_auto_update = true;
+        })
+        [
+          "qmk/qmk"
+          "osx-cross/arm" # required by qmk/qmk/qmk
+          "osx-cross/avr" # required by qmk/qmk/qmk
+        ];
 
     brews = [
       "choose-gui"
