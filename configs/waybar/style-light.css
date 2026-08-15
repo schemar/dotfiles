@@ -1,21 +1,20 @@
-@define-color red #D52067;
-@define-color orange #C33513;
-@define-color yellow #8A6B00;
-@define-color green #1D8200;
-@define-color teal #007D85;
-@define-color blue #0074C2;
-@define-color violet #725ED5;
-@define-color pink #AB4AA9;
-@define-color text #5B5B5B;
-@define-color subtext #908A84;
+@define-color red #9D2033;
+@define-color orange #8A3B00;
+@define-color yellow #7C5C00;
+@define-color green #0C610C;
+@define-color teal #245C53;
+@define-color blue #374D9F;
+@define-color violet #6E3B96;
+@define-color pink #8F2E68;
+@define-color text #57534C;
+@define-color subtext #6E6863;
 @define-color overlay2 #857F79;
 @define-color overlay1 #8A847D;
 @define-color overlay0 #8F8982;
-@define-color dimmed #9C8282;
-@define-color surface2 #E8DFD4;
-@define-color surface1 #F1ECE5;
+@define-color dimmed #8B6E6E;
+@define-color surface1 #DDC8B6;
 @define-color background #FAF4ED;
-@define-color surface0 #FFFAF0;
+@define-color surface0 #FEFCFB;
 
 * {
   font-family:
@@ -27,7 +26,7 @@
 }
 
 window#waybar {
-  background-color: #faf4ed;
+  background-color: @surface1;
   color: @text;
   border: none;
 }

@@ -13,15 +13,15 @@
 
       [mode=dark]
       border-color=#A19DD4FF
-      background-color=#0B0A0F
+      background-color=#37363E
       text-color=#A2A2A9
       progress-color=over #A19DD4FF
 
       [mode=light]
-      border-color=#725ED5
-      background-color=#FAF4ED
-      text-color=#706F7A
-      progress-color=over #725ED5
+      border-color=#6E3B96
+      background-color=#DDC8B6
+      text-color=#57534C
+      progress-color=over #6E3B96
     '';
 
   services.mako = {
