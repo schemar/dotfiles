@@ -18,10 +18,10 @@
       progress-color=over #A19DD4FF
 
       [mode=light]
-      border-color=#6A67B4
+      border-color=#725ED5
       background-color=#FAF4ED
       text-color=#706F7A
-      progress-color=over #6A67B4
+      progress-color=over #725ED5
     '';
 
   services.mako = {
