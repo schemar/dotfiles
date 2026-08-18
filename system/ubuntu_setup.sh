@@ -84,7 +84,10 @@ echo ""
 
 sudo tee /usr/local/bin/sway-home-manager <<'EOF'
 #!/usr/bin/env bash
-. $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+HM_VARS="$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+if [ -r "$HM_VARS" ]; then
+  . "$HM_VARS"
+fi
 exec sway "$@"
 EOF
 sudo chmod +x /usr/local/bin/sway-home-manager
