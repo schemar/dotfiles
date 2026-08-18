@@ -79,6 +79,28 @@ sudo usermod -a -G libvirt "$USER"
 gsettings set org.blueman.general plugin-list "['\!TransferService']"
 
 echo ""
+echo "## Home Manager entry for Sway"
+echo ""
+
+sudo tee /usr/local/bin/sway-home-manager <<'EOF'
+#!/usr/bin/env bash
+. $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+exec sway "$@"
+EOF
+sudo chmod +x /usr/local/bin/sway-home-manager
+
+sudo mkdir -p /usr/local/share/wayland-sessions
+sudo tee /usr/local/share/wayland-sessions/sway.desktop <<'EOF'
+[Desktop Entry]
+Name=Sway (with home manager)
+Comment=Sway with home manager environment loaded
+Exec=/usr/local/bin/sway-home-manager
+Type=Application
+DesktopNames=Sway
+Keywords=tiling;wm;windowmanager;wayland;
+EOF
+
+echo ""
 echo "## Nix"
 echo ""
 
