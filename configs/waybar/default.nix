@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   home.packages = with pkgs; [
     wttrbar # weather for waybar
@@ -196,7 +196,12 @@
   };
 
   xdg.configFile = {
+    "waybar/common.css".source = ./common.css;
     "waybar/style-dark.css".source = ./style-dark.css;
     "waybar/style-light.css".source = ./style-light.css;
+    "waybar/blueberry_peach_dark.css".source =
+      "${inputs.blueberry-peach}/ports/waybar/blueberry_peach_dark.css";
+    "waybar/blueberry_peach_light.css".source =
+      "${inputs.blueberry-peach}/ports/waybar/blueberry_peach_light.css";
   };
 }
