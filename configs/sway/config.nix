@@ -38,47 +38,6 @@ in
 
   defaultWorkspace = "workspace number 1";
 
-  colors = {
-    background = "$bp_background";
-    focused = {
-      border = "$bp_violet";
-      background = "$bp_background";
-      text = "$bp_text";
-      indicator = "$bp_pink";
-      childBorder = "$bp_violet";
-    };
-    focusedInactive = {
-      border = "$bp_overlay0";
-      background = "$bp_surface0";
-      text = "$bp_subtext";
-      indicator = "$bp_surface1";
-      childBorder = "$bp_surface1";
-    };
-    unfocused = {
-      border = "$bp_surface0";
-      background = "$bp_surface0";
-      text = "$bp_subtext";
-      indicator = "$bp_surface1";
-      childBorder = "$bp_surface1";
-    };
-    urgent = {
-      border = "$bp_red";
-      background = "$bp_orange";
-      text = "$bp_background";
-      indicator = "$bp_orange";
-      childBorder = "$bp_red";
-    };
-    placeholder = {
-      background = "$bp_background";
-      text = "$bp_text";
-
-      # unused
-      border = "#000000";
-      indicator = "#000000";
-      childBorder = "#000000";
-    };
-  };
-
   bars = [
     {
       command = "waybar";

@@ -22,11 +22,20 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  xdg.configFile."sway/blueberry_peach_dark" = {
-    source = "${inputs.blueberry-peach}/ports/sway/blueberry_peach_dark";
-  };
-  xdg.configFile."sway/blueberry_peach_light" = {
-    source = "${inputs.blueberry-peach}/ports/sway/blueberry_peach_light";
+  # Dark/light mode will be set by darkmode.sh/lightmode.sh
+  xdg.configFile = {
+    "sway/blueberry_peach_dark" = {
+      text = ''
+        ${builtins.readFile "${inputs.blueberry-peach}/ports/sway/blueberry_peach_dark"}
+        ${builtins.readFile ./theme.conf}
+      '';
+    };
+    "sway/blueberry_peach_light" = {
+      text = ''
+        ${builtins.readFile "${inputs.blueberry-peach}/ports/sway/blueberry_peach_light"}
+        ${builtins.readFile ./theme.conf}
+      '';
+    };
   };
 
   wayland.windowManager.sway = {
@@ -41,10 +50,6 @@
 
     # Necessary for include to work:
     checkConfig = false;
-    extraConfigEarly = # sway
-      ''
-        include ./blueberry_peach_dark
-      '';
 
     extraConfig = # sway
       ''

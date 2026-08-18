@@ -156,6 +156,13 @@
         ln -sf ~/.config/fuzzel/blueberry_peach_light.ini ~/.config/fuzzel/blueberry_peach.ini
 
         if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
+          # Join the given theme file into a command that can be executed with swaymsg
+          # Joins each non-empty line with a semicolon, leading to a number of
+          # consecutive commands for swaymsg
+          THEME_FILE=~/.config/sway/blueberry_peach_light
+          THEME_CMD=$(grep -v '^\s+$' "$THEME_FILE" | paste -sd';' -)
+          swaymsg "$THEME_CMD"
+
           pkill swaybg
           swaybg --mode fill --image ${../assets/images/neil-rosenstech-1o4Z1EwCkaY-unsplash.jpg} &
         fi
@@ -178,6 +185,13 @@
         ln -sf ~/.config/fuzzel/blueberry_peach_dark.ini ~/.config/fuzzel/blueberry_peach.ini
 
         if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
+          # Join the given theme file into a command that can be executed with swaymsg
+          # Joins each non-empty line with a semicolon, leading to a number of
+          # consecutive commands for swaymsg
+          THEME_FILE=~/.config/sway/blueberry_peach_dark
+          THEME_CMD=$(grep -v '^\s+$' "$THEME_FILE" | paste -sd';' -)
+          swaymsg "$THEME_CMD"
+
           pkill swaybg
           swaybg --mode fill --image ${../assets/images/marc-linnemann-wDx3q0yb7fk-unsplash_darker.jpg} &
         fi
