@@ -1,10 +1,21 @@
-{ ... }:
+{ inputs, ... }:
 {
+  xdg.configFile = {
+    "fuzzel/blueberry_peach_light.ini".source =
+      "${inputs.blueberry-peach}/ports/fuzzel/blueberry_peach_light.ini";
+    "fuzzel/blueberry_peach_dark.ini".source =
+      "${inputs.blueberry-peach}/ports/fuzzel/blueberry_peach_dark.ini";
+  };
+
   programs.fuzzel = {
     enable = true;
 
     settings = {
       main = {
+        # Symlinks to blueberry_peach_dark or _light defined above.
+        # Symlink is updated by darkmode.sh and lightmode.sh
+        include = "~/.config/fuzzel/blueberry_peach.ini";
+
         width = "80";
         horizontal-pad = "12";
         vertical-pad = "8";
@@ -13,18 +24,6 @@
         use-bold = false;
         terminal = "ghostty";
       };
-
-      colors.background = "0B0A0FFF";
-      colors.text = "A2A2A9FF";
-      colors.prompt = "A19DD4FF";
-      colors.placeholder = "878794FF";
-      colors.input = "A2A2A9FF";
-      colors.match = "A19DD4FF";
-      colors.selection = "37363EFF";
-      colors.selection-text = "A2A2A9FF";
-      colors.selection-match = "A19DD4FF";
-      colors.counter = "A19DD4FF";
-      colors.border = "A19DD4FF";
 
       border.width = "1";
       border.radius = "0";

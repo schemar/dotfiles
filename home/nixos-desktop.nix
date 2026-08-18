@@ -80,6 +80,7 @@
         tmux source-file ~/.config/tmux/tmux.conf
         pkill -USR1 zsh
         makoctl mode -a light -r dark
+        ln -sf ~/.config/fuzzel/blueberry_peach_light.ini ~/.config/fuzzel/blueberry_peach.ini
 
         if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
           pkill swaybg
@@ -101,6 +102,7 @@
         tmux source-file ~/.config/tmux/tmux.conf
         pkill -USR1 zsh
         makoctl mode -a dark -r light
+        ln -sf ~/.config/fuzzel/blueberry_peach_dark.ini ~/.config/fuzzel/blueberry_peach.ini
 
         if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
           pkill swaybg
