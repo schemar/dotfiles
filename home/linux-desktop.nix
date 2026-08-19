@@ -35,7 +35,6 @@
 
     # Fonts:
     pkgs.lato
-    pkgs.monaspace
     pkgs.nerd-fonts.symbols-only
     pkgs.noto-fonts-color-emoji
     pkgs.open-sans
