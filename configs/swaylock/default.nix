@@ -1,13 +1,11 @@
-{ ... }:
+{ inputs, ... }:
 {
+  xdg.configFile."swaylock/config".text = ''
+    ${builtins.readFile "${inputs.blueberry-peach}/ports/swaylock/blueberry_peach_dark.conf"}
+    show-failed-attempts
+  '';
+
   programs.swaylock = {
     enable = true;
-    # Disabled due to broken PAM stack with Debian. Instead:
-    # sudo apt install swaylock
-    package = null;
-
-    settings = {
-      color = "191724";
-    };
   };
 }
