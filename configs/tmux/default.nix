@@ -116,15 +116,15 @@
         # https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
         set -sg terminal-overrides ",*:RGB"
 
-        source ${./config/reset_catppuccin.conf}
+        source ${./config/reset_blueberry_peach.conf}
         if-shell "[ "$(~/.config/current_theme)" = "dark" ]" \
           "source-file ${inputs.blueberry-peach}/ports/tmux/blueberry_peach_dark.conf" \
           "source-file ${inputs.blueberry-peach}/ports/tmux/blueberry_peach_light.conf"
 
-        set -gF status-style "bg=#{@thm_crust},fg=#{@thm_fg}"
+        set -gF status-style "bg=#{@thm_surface_0},fg=#{@thm_text}"
 
-        set -gF window-status-format "#[fg=#{@thm_crust},bg=#{@thm_surface_2}] ##I #[fg=#{@thm_fg},bg=#{@thm_bg}] ##W ##F "
-        set -gF window-status-current-format "#[fg=#{@thm_crust},bg=#{@thm_mauve}] ##I #[fg=#{@thm_fg},bg=#{@thm_surface_0}] ##W ##F "
+        set -gF window-status-format "#[fg=#{@thm_surface_0},bg=#{@thm_dimmed}] ##I #[fg=#{@thm_text},bg=#{@thm_surface_0}] ##W ##F "
+        set -gF window-status-current-format "#[fg=#{@thm_surface_0},bg=#{@thm_violet}] ##I #[fg=#{@thm_text},bg=#{@thm_surface_1}] ##W ##F "
 
         set -g status-left "#[bg=#{?client_prefix,blue,default},fg=#{?client_prefix,black,default}]#S#[default] "
         set -g status-right "#(${./config/pane_branch.sh})"
