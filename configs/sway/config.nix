@@ -33,7 +33,7 @@ in
 
   window = {
     titlebar = false;
-    border = 1;
+    border = 2;
   };
 
   defaultWorkspace = "workspace number 1";
