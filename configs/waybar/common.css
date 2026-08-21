@@ -8,7 +8,7 @@
 }
 
 window#waybar {
-  background-color: @surface1;
+  background-color: transparent;
   color: @text;
   border: none;
 }
