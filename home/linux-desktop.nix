@@ -163,7 +163,7 @@
           swaymsg "$THEME_CMD"
 
           pkill swaybg
-          swaybg --mode fill --image ${../assets/images/neil-rosenstech-1o4Z1EwCkaY-unsplash.jpg} &
+          swaybg --mode fill --image ${../assets/images/rohit-tandon-9wg5jCEPBsw-unsplash_lighter.jpg} &
         fi
       '';
   };
