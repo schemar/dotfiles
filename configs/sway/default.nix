@@ -53,6 +53,8 @@
 
     extraConfig = # sway
       ''
+        titlebar_border_thickness 2
+
         for_window [shell="xwayland"] title_format "[XWayland] %title"
 
         # Make sure tmux-server, etc. exit when sway exits so that new sessions
