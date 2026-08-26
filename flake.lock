@@ -2,11 +2,11 @@
   "nodes": {
     "blueberry-peach": {
       "locked": {
-        "lastModified": 1787746581,
-        "narHash": "sha256-X5Iyl9VgfbMeVAQq9h0DzFo13jr0/5SWD7f1FZ+LUWY=",
+        "lastModified": 1787749129,
+        "narHash": "sha256-li2XIB6EFYPPJ+EAEAt9YaBq+9/OxJxiT8a5C6va3zg=",
         "owner": "schemar",
         "repo": "blueberry-peach",
-        "rev": "fdc0ea8a468b24ad15011398da916864197b7b16",
+        "rev": "15fbce7ec006a26692b924934794e80d0c4360cd",
         "type": "github"
       },
       "original": {
