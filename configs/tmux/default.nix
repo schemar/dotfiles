@@ -138,7 +138,7 @@
         set -g mode-style "bg=#{@thm_surface_1},bold"
         set -gF clock-mode-colour "#{@thm_violet}"
 
-        set -gF status-left "#[bg=#{?client_prefix,blue,default},fg=#{?client_prefix,black,default}]#S#[default] "
+        set -g status-left "#[bg=#{?client_prefix,blue,default},fg=#{?client_prefix,black,default}]#S#[default] "
         set -g status-right "#(${./config/pane_branch.sh})"
         # The branch name is often longer than the default length of 40.
         set -g status-right-length 70
