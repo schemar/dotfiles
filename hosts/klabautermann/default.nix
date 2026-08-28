@@ -49,10 +49,13 @@
   users.users.pzuser = {
     isNormalUser = true;
   };
-  networking.firewall.allowedUDPPorts = [
-    16261
-    16262
-  ];
+  networking.firewall = {
+    enable = true;
+    allowedUDPPorts = [
+      16261
+      16262
+    ];
+  };
 
   # Configure home-manager to use the user config:
   home-manager.users.${username} = {
