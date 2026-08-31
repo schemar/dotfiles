@@ -56,6 +56,21 @@
               ":reload-all"
             ];
           };
+
+          # Peek at the top of the enclosing syntax node, then C-j to come back:
+          C-k = [
+            "expand_selection"
+            "ensure_selections_forward"
+            "flip_selections"
+            "align_view_top"
+          ];
+          C-j = [
+            "shrink_selection"
+            "ensure_selections_forward"
+            "flip_selections"
+            "align_view_top"
+          ];
+
           space = {
             # Yazi "integration":
             C-f = [
