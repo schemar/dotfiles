@@ -15,9 +15,13 @@
 
     extraPackages = with pkgs; [
       erlang-language-platform
+      ruff # python
       nixd
       nixfmt
+      python313Packages.jedi # python
       taplo # toml
+      ty # python
+      typescript-language-server
       yaml-language-server
       yamlfmt
     ];
@@ -114,7 +118,22 @@
           };
         }
         {
+          name = "javascript";
+          auto-format = true;
+          formatter = {
+            command = "${lib.getExe pkgs.prettier}";
+            args = [
+              "--parser"
+              "typescript"
+            ];
+          };
+        }
+        {
           name = "nix";
+          auto-format = true;
+        }
+        {
+          name = "python";
           auto-format = true;
         }
         {
