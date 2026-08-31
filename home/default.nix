@@ -54,6 +54,7 @@
     ../configs/gh
     ../configs/ghostty
     ../configs/git
+    ../configs/helix
     ../configs/jq
     ../configs/lazygit
     ../configs/mise
