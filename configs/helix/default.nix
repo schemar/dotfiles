@@ -12,6 +12,16 @@
   programs.helix = {
     enable = true;
     defaultEditor = true;
+
+    extraPackages = with pkgs; [
+      erlang-language-platform
+      nixd
+      nixfmt
+      taplo # toml
+      yaml-language-server
+      yamlfmt
+    ];
+
     settings = {
       theme = "blueberry_peach_dark";
       keys = {
@@ -94,24 +104,6 @@
       };
     };
     languages = {
-      language-server = {
-        elp = {
-          command = "${pkgs.erlang-language-platform}/bin/elp";
-          args = [ "server" ];
-        };
-        nixd.command = "${lib.getExe pkgs.nixd}";
-        taplo = {
-          command = "${lib.getExe pkgs.taplo}";
-          args = [
-            "lsp"
-            "stdio"
-          ];
-        };
-        yaml-language-server = {
-          command = "${lib.getExe pkgs.yaml-language-server}";
-          args = [ "--stdio" ];
-        };
-      };
       language = [
         {
           name = "erlang";
@@ -124,17 +116,10 @@
         {
           name = "nix";
           auto-format = true;
-          formatter = {
-            command = "${lib.getExe pkgs.nixfmt}";
-          };
         }
         {
           name = "yaml";
           auto-format = true;
-          formatter = {
-            command = "${lib.getExe pkgs.yamlfmt}";
-            args = [ "-" ];
-          };
         }
       ];
       grammar = [
