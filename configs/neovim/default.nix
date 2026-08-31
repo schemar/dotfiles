@@ -16,7 +16,7 @@
     in
     {
       enable = true;
-      defaultEditor = true;
+      defaultEditor = false;
       vimdiffAlias = true;
 
       nixpkgs.config.allowUnfree = true;

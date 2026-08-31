@@ -11,6 +11,7 @@
   # };
   programs.helix = {
     enable = true;
+    defaultEditor = true;
     settings = {
       theme = "blueberry_peach_dark";
       keys = {
@@ -20,6 +21,26 @@
             C-s = "vsplit";
             v = "hsplit";
             C-v = "hsplit";
+          };
+          C-g = {
+            b = ":sh git blame -L %{selection_line_start},%{selection_line_end} %{buffer_name}";
+            l = ":sh git log --max-count=1 --no-merges --oneline -L %{selection_line_start},%{selection_line_end}:%{buffer_name}";
+            L = [
+              ":sh echo \"%{selection_line_start},%{selection_line_end}:%{buffer_name}\" > /tmp/helix-git-log-selection"
+              ":vsplit-new"
+              ":insert-output git log -L $(cat /tmp/helix-git-log-selection)"
+              ":set-language diff"
+              ":sh rm -f /tmp/helix-git-log-selection"
+            ];
+            # Lazygit "integration":
+            C-g = [
+              ":write-all"
+              # Use ZSH with `-i` (interactive) to use the same aliases that are
+              # configured for my interactive shell.
+              ":insert-output zsh -ic lazygit"
+              ":redraw"
+              ":reload-all"
+            ];
           };
           space = {
             # Yazi "integration":
@@ -34,13 +55,6 @@
               # exiting Yazi and returning to Helix (https://github.com/sxyazi/yazi/pull/2461):
               ":set mouse false"
               ":set mouse true"
-            ];
-            # Lazygit "integration":
-            "C-g" = [
-              ":new"
-              ":insert-output lazygit"
-              ":buffer-close!"
-              ":redraw"
             ];
             w = {
               s = "vsplit";
@@ -80,12 +94,33 @@
       };
     };
     languages = {
-      language-server.nixd.command = "${lib.getExe pkgs.nixd}";
-      language-server.elp = {
-        command = "${pkgs.erlang-language-platform}/bin/elp";
-        args = [ "server" ];
+      language-server = {
+        elp = {
+          command = "${pkgs.erlang-language-platform}/bin/elp";
+          args = [ "server" ];
+        };
+        nixd.command = "${lib.getExe pkgs.nixd}";
+        taplo = {
+          command = "${lib.getExe pkgs.taplo}";
+          args = [
+            "lsp"
+            "stdio"
+          ];
+        };
+        yaml-language-server = {
+          command = "${lib.getExe pkgs.yaml-language-server}";
+          args = [ "--stdio" ];
+        };
       };
       language = [
+        {
+          name = "erlang";
+          auto-format = true;
+          formatter = {
+            command = "${lib.getExe pkgs.erlfmt}";
+            args = [ "-" ];
+          };
+        }
         {
           name = "nix";
           auto-format = true;
@@ -94,10 +129,10 @@
           };
         }
         {
-          name = "erlang";
+          name = "yaml";
           auto-format = true;
           formatter = {
-            command = "${lib.getExe pkgs.erlfmt}";
+            command = "${lib.getExe pkgs.yamlfmt}";
             args = [ "-" ];
           };
         }

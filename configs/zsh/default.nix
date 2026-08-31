@@ -53,8 +53,6 @@
         #
 
         export PATH="$HOME/.local/bin:$PATH"
-        export VISUAL="nvim"
-
 
         # Remove mode switching delay.
         KEYTIMEOUT=5
