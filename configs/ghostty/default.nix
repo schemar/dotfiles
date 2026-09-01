@@ -18,6 +18,9 @@
       ];
 
       font-size = 13.0;
+      cursor-style = "block";
+      cursor-style-blink = false;
+      shell-integration-features = "no-cursor";
 
       # -- != := === >= >- >=> |-> -> <$> </> #[ |||> |= ~@ ~- ~=
       # |> <|> =/= =:=

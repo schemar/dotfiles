@@ -1,14 +1,20 @@
 {
   inputs,
-  isDarwin,
+  pkgs,
   ...
 }:
+let
+  zsh-helix-mode = pkgs.fetchFromGitHub {
+    owner = "multirious";
+    repo = "zsh-helix-mode";
+    rev = "e8d4940588f9809ab5658aa7c9c664921d547879";
+    sha256 = "sha256-YggmEZ5hRySwXR+VZFKKZ+HzH5Cvz0661QeiAjlE30E=";
+  };
+in
 {
   programs.zsh = {
     enable = true;
     enableCompletion = true; # Make sure this is done by home-manager, not NixOS.
-
-    defaultKeymap = "viins";
 
     syntaxHighlighting = {
       enable = true;
@@ -56,24 +62,6 @@
 
         # Remove mode switching delay.
         KEYTIMEOUT=5
-        # Change cursor shape for different vi modes.
-        function zle-keymap-select {
-          if [[ ''${KEYMAP} == vicmd ]] ||
-             [[ $1 = 'block' ]]; then
-            echo -ne '\e[2 q'
-
-          elif [[ ''${KEYMAP} == main ]] ||
-               [[ ''${KEYMAP} == viins ]] ||
-               [[ ''${KEYMAP} = ''' ]] ||
-               [[ $1 = 'beam' ]]; then
-            echo -ne '\e[6 q'
-          fi
-        }
-        zle -N zle-keymap-select
-        _fix_cursor() {
-           echo -ne '\e[6 q'
-        }
-        precmd_functions+=(_fix_cursor)
 
         # Correct locale
         export LC_ALL=en_US.UTF-8
@@ -100,54 +88,11 @@
         }
         compdef _npm_completion npm
 
-        # Set git branch in tmux
-        # See also ~/.tmux.conf which reads the branch variable for status-right
-        find_git_repo () {
-          local dir=.
-          until [ "$dir" -ef / ]; do
-            if [ -f "$dir/.git/HEAD" ]; then
-              printf '%s' "$(${if isDarwin then "greadlink" else "readlink"} -e $dir)/"
-            fi
-            dir="../$dir"
-          done
+        #
+        # Themeing
+        #
 
-          printf '%s' ""
-        }
-
-        tmux_pane_id () {
-          printf '%s' "$(tmux display -p "#D" | tr -d %)"
-        }
-
-        tmux_set_git() {
-          if [[ -z  "$TMUX" ]]; then
-            # Only run if in tmux
-            return
-          fi
-
-          local pane_id=$(tmux_pane_id)
-          local cwd=`${if isDarwin then "greadlink" else "readlink"} -e "$(pwd)"`/
-          local last_repo_len=''${#TMUX_GIT_LAST_REPO}
-
-          local repo_dir="$(find_git_repo)"
-
-          # Could optimize here by not updating when staying in same repo:
-          if [[ -z ''${repo_dir} ]]; then
-            # No git repo found
-            tmux set-env -g TMUX_GIT_BRANCH_$pane_id  ' (not git)'
-          else
-            local branch='(unknown)'
-            local head=$(< "''${repo_dir}.git/HEAD")
-            if [[ $head == ref:\ refs/heads/* ]]; then
-                branch=''${head#*/*/}
-            elif [[ $head != ''' ]]; then
-                branch='(detached)'
-            fi
-            tmux set-env -g TMUX_GIT_BRANCH_$pane_id  " ''${branch}"
-          fi
-        }
-
-        autoload -Uz add-zsh-hook
-        add-zsh-hook precmd tmux_set_git
+        source ${zsh-helix-mode}/zsh-helix-mode.plugin.zsh
 
         function update_theme() {
           export THEME_MODE=$(~/.config/current_theme)
@@ -155,9 +100,27 @@
           if [[ "$THEME_MODE" == "light" ]]; then
             source "${inputs.blueberry-peach}/ports/zsh_syntax_highlighting/blueberry_peach_light-syntax-highlighting.sh"
             source "${inputs.blueberry-peach}/ports/fzf/blueberry_peach_light-fzf-colors.sh"
+            ZHM_CURSOR_NORMAL="\e[0m\e[2 q\e]12;#6F58A2\a"
+            ZHM_CURSOR_INSERT="\e[0m\e[2 q\e]12;#247500\a"
+            ZHM_CURSOR_SELECT="\e[0m\e[2 q\e]12;#2169A6\a"
+            ZHM_STYLE_CURSOR_SELECT="fg=#FAF4ED,bg=#2169A6"
+            ZHM_STYLE_CURSOR_INSERT="fg=#FAF4ED,bg=#247500"
+            ZHM_STYLE_OTHER_CURSOR_NORMAL="fg=#FAF4ED,bg=#A5407B"
+            ZHM_STYLE_OTHER_CURSOR_SELECT="fg=#FAF4ED,bg=#017468"
+            ZHM_STYLE_OTHER_CURSOR_INSERT="fg=#FAF4ED,bg=#247500"
+            ZHM_STYLE_SELECTION="fg=#6B635C,bg=#F3E2D3,bold"
           else
             source "${inputs.blueberry-peach}/ports/zsh_syntax_highlighting/blueberry_peach_dark-syntax-highlighting.sh"
             source "${inputs.blueberry-peach}/ports/fzf/blueberry_peach_dark-fzf-colors.sh"
+            ZHM_CURSOR_NORMAL="\e[0m\e[2 q\e]12;#A19DD4\a"
+            ZHM_CURSOR_INSERT="\e[0m\e[2 q\e]12;#75B087\a"
+            ZHM_CURSOR_SELECT="\e[0m\e[2 q\e]12;#7AA8CE\a"
+            ZHM_STYLE_CURSOR_SELECT="fg=#191724,bg=#7AA8CE"
+            ZHM_STYLE_CURSOR_INSERT="fg=#191724,bg=#75B087"
+            ZHM_STYLE_OTHER_CURSOR_NORMAL="fg=#191724,bg=#C394C2"
+            ZHM_STYLE_OTHER_CURSOR_SELECT="fg=#191724,bg=#5EB1AF"
+            ZHM_STYLE_OTHER_CURSOR_INSERT="fg=#191724,bg=#75B087"
+            ZHM_STYLE_SELECTION="fg=#A2A2A9,bg=#353144,bold"
           fi
         }
 
