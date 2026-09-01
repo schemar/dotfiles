@@ -3,6 +3,18 @@
   pkgs,
   ...
 }:
+let
+  full-terminal = command: [
+    ":write-all"
+    ":insert-output ${command}"
+    ":redraw"
+    ":reload-all"
+  ];
+  # Use ZSH with `-i` to use the same aliases that are configured for my
+  # interactive shell.
+  full-terminal-i = command: full-terminal "zsh -ic \"${command}\"";
+  full-terminal-interactive = command: full-terminal "zsh -ic \"${command}\" >/dev/tty 2>&1";
+in
 {
   # Does not work at the moment. Helix "does not find the file" ...
   # Copying manually for now :(
@@ -14,16 +26,19 @@
     defaultEditor = true;
 
     extraPackages = with pkgs; [
+      bash-language-server
       erlang-language-platform
-      ruff # python
+      lua-language-server
       nixd
       nixfmt
       python313Packages.jedi # python
+      ruff # python
       taplo # toml
-      ty # python
       typescript-language-server
-      yaml-language-server
+      ty # python
+      vscode-langservers-extracted # html, css, json, eslint
       yamlfmt
+      yaml-language-server
     ];
 
     settings = {
@@ -47,30 +62,37 @@
               ":sh rm -f /tmp/helix-git-log-selection"
             ];
             # Lazygit "integration":
-            C-g = [
-              ":write-all"
-              # Use ZSH with `-i` (interactive) to use the same aliases that are
-              # configured for my interactive shell.
-              ":insert-output zsh -ic lazygit"
-              ":redraw"
-              ":reload-all"
-            ];
+            C-g = full-terminal-i "lazygit";
+            s = {
+              v = ":sh gh stack view";
+              V = full-terminal-interactive "gh stack view";
+              m = full-terminal-interactive "gh stack modify";
+              u = [
+                ":sh gh stack up"
+                ":sh gh stack view"
+              ];
+              d = [
+                ":sh gh stack down"
+                ":sh gh stack view"
+              ];
+              s = ":sh gh stack sync";
+              h = ":sh gh stack push";
+            };
           };
 
-          # Peek at the top of the enclosing syntax node, then C-j to come back:
-          C-k = [
-            "expand_selection"
-            "ensure_selections_forward"
-            "flip_selections"
-            "align_view_top"
-          ];
+          # Mark line and move with them up/down
+          # https://github.com/helix-editor/helix/discussions/5764#discussioncomment-4840408
           C-j = [
-            "shrink_selection"
-            "ensure_selections_forward"
-            "flip_selections"
-            "align_view_top"
+            "extend_to_line_bounds"
+            "delete_selection"
+            "paste_after"
           ];
-
+          C-k = [
+            "extend_to_line_bounds"
+            "delete_selection"
+            "move_line_up"
+            "paste_before"
+          ];
           space = {
             # Yazi "integration":
             C-f = [
@@ -118,12 +140,56 @@
         end-of-line-diagnostics = "error";
         inline-diagnostics = {
           cursor-line = "info";
-          other-lines = "error";
+        };
+
+        file-picker.hidden = false;
+
+        auto-save = {
+          focus-lost = true;
+          after-delay = {
+            enable = true;
+            timeout = 10000; # ms
+          };
+        };
+
+        statusline = {
+          left = [
+            "mode"
+            "file-name"
+            "read-only-indicator"
+            "file-modification-indicator"
+          ];
+          center = [ ];
+          right = [
+            "spinner"
+            "spacer"
+            "version-control"
+            "spacer"
+            "diagnostics"
+            "separator"
+            "selections"
+            "register"
+            "separator"
+            "position"
+            "position-percentage"
+            "file-type"
+          ];
         };
       };
     };
     languages = {
       language = [
+        {
+          name = "bash";
+          auto-format = true;
+          formatter = {
+            command = "${lib.getExe pkgs.shfmt}";
+          };
+        }
+        {
+          name = "css";
+          auto-format = true;
+        }
         {
           name = "erlang";
           auto-format = true;
@@ -131,6 +197,10 @@
             command = "${lib.getExe pkgs.erlfmt}";
             args = [ "-" ];
           };
+        }
+        {
+          name = "html";
+          auto-format = true;
         }
         {
           name = "javascript";
@@ -144,11 +214,23 @@
           };
         }
         {
+          name = "json";
+          auto-format = true;
+        }
+        {
+          name = "lua";
+          auto-format = true;
+        }
+        {
           name = "nix";
           auto-format = true;
         }
         {
           name = "python";
+          auto-format = true;
+        }
+        {
+          name = "toml";
           auto-format = true;
         }
         {
