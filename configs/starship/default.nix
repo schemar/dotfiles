@@ -57,8 +57,6 @@
         symbol = " ";
       };
       git_branch = {
-        # Use tmux status right instead
-        disabled = true;
         style = "fg:yellow";
         symbol = " ";
       };

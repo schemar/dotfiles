@@ -139,9 +139,6 @@
         set -gF clock-mode-colour "#{@thm_violet}"
 
         set -g status-left "#[bg=#{?client_prefix,blue,default},fg=#{?client_prefix,black,default}]#S#[default] "
-        set -g status-right "#(${./config/pane_branch.sh})"
-        # The branch name is often longer than the default length of 40.
-        set -g status-right-length 70
 
         # use <prefix> v/s for splitting
         bind v split-window -v
