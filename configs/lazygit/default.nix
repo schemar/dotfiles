@@ -7,7 +7,7 @@
       disableStartupPopups = true;
 
       os = {
-        editPreset = "nvim-remote";
+        editPreset = "helix (hx)";
       };
 
       gui = {
