@@ -368,82 +368,8 @@
                       vim.cmd('startinsert')
                     end,
                     desc = "Lazygit",
-                  }, 
-                  { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Branch history" },
-                  {
-                    "<leader>gt",
-                    group = "Graphite",
-                    {
-                      {
-                        "<leader>gtl",
-                        "<cmd>!gt ls<cr>",
-                        desc = "List stacks",
-                      },
-                      {
-                        "<leader>gtc",
-                        function()
-                          split_term("gt create")
-                        end,
-                        desc = "Create",
-                      },
-                      {
-                        "<leader>gts",
-                        function()
-                          split_term_and_edit("gt sync")
-                        end,
-                        desc = "Sync",
-                      },
-                      {
-                        "<leader>gtp",
-                        function()
-                          split_term("gt submit --no-edit")
-                        end,
-                        desc = "Submit",
-                      },
-                      {
-                        "<leader>gtP",
-                        function()
-                          split_term("gt submit --no-edit --publish")
-                        end,
-                        desc = "Submit (publish)",
-                      },
-                      {
-                        "<leader>gtm",
-                        function()
-                          split_term("gt modify")
-                        end,
-                        desc = "Modify",
-                      },
-                      {
-                        "<leader>gtM",
-                        function()
-                          split_term_and_edit("gt modify && gt sync && gt submit --no-edit")
-                        end,
-                        desc = "Modify, Sync, Submit",
-                      },
-                      {
-                        "<leader>gto",
-                        function()
-                          split_term_and_edit("gt checkout")
-                        end,
-                        desc = "Checkout",
-                      },
-                      {
-                        "<leader>gtu",
-                        function()
-                          gt_command_ls("up")
-                        end,
-                        desc = "Up",
-                      },
-                      {
-                        "<leader>gtd",
-                        function()
-                          gt_command_ls("down")
-                        end,
-                        desc = "Down",
-                      },
-                    },
                   },
+                  { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "Branch history" },
                 },
               },
               {
