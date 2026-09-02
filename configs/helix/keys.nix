@@ -67,7 +67,7 @@ in
           # Yazi "integration":
           C-f = [
             ":sh rm -f /tmp/helix-yazi-selection-result"
-            ":insert-output yazi --chooser-file=/tmp/helix-yazi-selection-result"
+            ":insert-output yazi --chooser-file=/tmp/helix-yazi-selection-result %{buffer_name}"
             ":sh printf \"\\x1b[?1049h\\x1b[?2004h\" > /dev/tty"
             ":open %sh{cat /tmp/helix-yazi-selection-result}"
             ":redraw"
