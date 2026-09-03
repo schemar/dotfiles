@@ -10,11 +10,39 @@ let
     rev = "e8d4940588f9809ab5658aa7c9c664921d547879";
     sha256 = "sha256-YggmEZ5hRySwXR+VZFKKZ+HzH5Cvz0661QeiAjlE30E=";
   };
+  mkInit = name: cmd: pkgs.runCommand "${name}-init.zsh" { } "${cmd} > $out";
+  zoxideInit = mkInit "zoxide" "${pkgs.zoxide}/bin/zoxide init zsh";
+  starshipInit = mkInit "starship" "${pkgs.starship}/bin/starship init zsh --print-full-init";
+  direnvInit = mkInit "direnv" "${pkgs.direnv}/bin/direnv hook zsh";
+  miseInit = mkInit "mise" "${pkgs.mise}/bin/mise activate zsh";
+  fzfInit = mkInit "fzf" "${pkgs.fzf}/bin/fzf --zsh";
 in
 {
+  # "Compiled" at build time (see "source"s below):
+  programs.zoxide.enableZshIntegration = false;
+  programs.fzf.enableZshIntegration = false;
+  programs.starship.enableZshIntegration = false;
+  programs.mise.enableZshIntegration = false;
+  programs.direnv.enableZshIntegration = false;
+
   programs.zsh = {
     enable = true;
-    enableCompletion = true; # Make sure this is done by home-manager, not NixOS.
+    # Make sure this is done by home-manager, not NixOS:
+    # (see also programs.zsh.enableCompletion = false in systems/common.nix)
+    enableCompletion = true;
+    completionInit = ''
+      autoload -Uz compinit
+      _zdump=''${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION
+      [[ -d ''${_zdump:h} ]] || mkdir -p ''${_zdump:h}
+      _zfresh=( $_zdump(N.mh-24) )
+      if (( $#_zfresh )); then
+        compinit -C -d "$_zdump"
+      else
+        compinit -d "$_zdump"
+        { zcompile -R -- "$_zdump" } &!
+      fi
+      unset _zdump _zfresh
+    '';
 
     syntaxHighlighting = {
       enable = true;
@@ -43,17 +71,21 @@ in
       tmux = "tmux -2";
 
       # Themeing for bat
-      bat = "bat --theme=blueberry_peach_$(~/.config/current_theme)";
+      bat = "bat --theme=blueberry_peach_\${THEME_MODE:-dark}";
 
-      # Themeing for lazygit
-      # Use \lazygit to prevent recursive aliasing
-      lazygit = "lazygit --use-config-file=\"$(\\lazygit --print-config-dir)/config.yml,$HOME/.config/lazygit/blueberry_peach_$(~/.config/current_theme).yml\"";
       lg = "lazygit";
     };
 
     # Have to escape zsh ${...} with ''${...}
     initContent = # sh
       ''
+        # Compiled at build time:
+        source ${zoxideInit}
+        source ${fzfInit}
+        source ${direnvInit}
+        source ${miseInit}
+        [[ $TERM != dumb ]] && source ${starshipInit}
+
         #
         # ENVIRONMENT
         #
@@ -65,12 +97,6 @@ in
 
         # Correct locale
         export LC_ALL=en_US.UTF-8
-
-        #
-        # TOOLS
-        #
-
-        export THEME_MODE=$(~/.config/current_theme)
 
         #
         # COMPLETIONS
@@ -95,7 +121,12 @@ in
         source ${zsh-helix-mode}/zsh-helix-mode.plugin.zsh
 
         function update_theme() {
-          export THEME_MODE=$(~/.config/current_theme)
+          # Reads faster than $(~./...):
+          export THEME_MODE=''${$(<~/.config/current_theme_store):-dark}
+
+          # Themeing for lazygit. Do it here so we don't have to do it on every startup.
+          local lg_base="$(lazygit --print-config-dir)"
+          export LG_CONFIG_FILE="$lg_base/config.yml,$HOME/.config/lazygit/blueberry_peach_''${THEME_MODE}.yml"
 
           if [[ "$THEME_MODE" == "light" ]]; then
             source "${inputs.blueberry-peach}/ports/zsh_syntax_highlighting/blueberry_peach_light-syntax-highlighting.sh"
@@ -117,7 +148,6 @@ in
 
   programs.direnv = {
     enable = true;
-    enableZshIntegration = true;
     nix-direnv.enable = true;
   };
 
@@ -146,7 +176,6 @@ in
 
   programs.zoxide = {
     enable = true;
-    enableZshIntegration = true;
   };
 
 }

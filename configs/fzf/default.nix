@@ -8,7 +8,5 @@
     fileWidgetOptions = [
       "--preview 'bat --style=numbers,changes --color=always {} --theme=blueberry_peach_$(~/.config/current_theme)'"
     ];
-
-    enableZshIntegration = true;
   };
 }
