@@ -100,27 +100,11 @@ in
           if [[ "$THEME_MODE" == "light" ]]; then
             source "${inputs.blueberry-peach}/ports/zsh_syntax_highlighting/blueberry_peach_light-syntax-highlighting.sh"
             source "${inputs.blueberry-peach}/ports/fzf/blueberry_peach_light-fzf-colors.sh"
-            ZHM_CURSOR_NORMAL="\e[0m\e[2 q\e]12;#6F58A2\a"
-            ZHM_CURSOR_INSERT="\e[0m\e[2 q\e]12;#247500\a"
-            ZHM_CURSOR_SELECT="\e[0m\e[2 q\e]12;#2169A6\a"
-            ZHM_STYLE_CURSOR_SELECT="fg=#FAF4ED,bg=#2169A6"
-            ZHM_STYLE_CURSOR_INSERT="fg=#FAF4ED,bg=#247500"
-            ZHM_STYLE_OTHER_CURSOR_NORMAL="fg=#FAF4ED,bg=#A5407B"
-            ZHM_STYLE_OTHER_CURSOR_SELECT="fg=#FAF4ED,bg=#017468"
-            ZHM_STYLE_OTHER_CURSOR_INSERT="fg=#FAF4ED,bg=#247500"
-            ZHM_STYLE_SELECTION="fg=#6B635C,bg=#F3E2D3,bold"
+            source "${inputs.blueberry-peach}/ports/zsh_helix_mode/blueberry_peach_light-helix-mode.sh"
           else
             source "${inputs.blueberry-peach}/ports/zsh_syntax_highlighting/blueberry_peach_dark-syntax-highlighting.sh"
             source "${inputs.blueberry-peach}/ports/fzf/blueberry_peach_dark-fzf-colors.sh"
-            ZHM_CURSOR_NORMAL="\e[0m\e[2 q\e]12;#A19DD4\a"
-            ZHM_CURSOR_INSERT="\e[0m\e[2 q\e]12;#75B087\a"
-            ZHM_CURSOR_SELECT="\e[0m\e[2 q\e]12;#7AA8CE\a"
-            ZHM_STYLE_CURSOR_SELECT="fg=#191724,bg=#7AA8CE"
-            ZHM_STYLE_CURSOR_INSERT="fg=#191724,bg=#75B087"
-            ZHM_STYLE_OTHER_CURSOR_NORMAL="fg=#191724,bg=#C394C2"
-            ZHM_STYLE_OTHER_CURSOR_SELECT="fg=#191724,bg=#5EB1AF"
-            ZHM_STYLE_OTHER_CURSOR_INSERT="fg=#191724,bg=#75B087"
-            ZHM_STYLE_SELECTION="fg=#A2A2A9,bg=#353144,bold"
+            source "${inputs.blueberry-peach}/ports/zsh_helix_mode/blueberry_peach_dark-helix-mode.sh"
           fi
         }
 
