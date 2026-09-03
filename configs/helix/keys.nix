@@ -8,7 +8,6 @@ let
   ];
   # Use ZSH with `-i` to use the same aliases that are configured for my
   # interactive shell.
-  full-terminal-i = command: full-terminal "zsh -ic \"${command}\"";
   full-terminal-interactive = command: full-terminal "zsh -ic \"${command}\" >/dev/tty 2>&1";
 in
 {
@@ -32,7 +31,7 @@ in
             ":sh rm -f /tmp/helix-git-log-selection"
           ];
           # Lazygit "integration":
-          C-g = full-terminal-i "lazygit";
+          C-g = full-terminal-interactive "lazygit";
           s = {
             v = ":sh gh stack view";
             V = full-terminal-interactive "gh stack view";
