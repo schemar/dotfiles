@@ -76,6 +76,13 @@ in
             ":set mouse false"
             ":set mouse true"
           ];
+          # Other file:
+          o = [
+            ":sh rm -f /tmp/helix-other-file-selection-result"
+            ":insert-output other-file %{buffer_name} /tmp/helix-other-file-selection-result 1>/dev/tty 2>&1"
+            ":open %sh{cat /tmp/helix-other-file-selection-result}"
+            ":redraw"
+          ];
           w = {
             s = "vsplit";
             C-s = "vsplit";
