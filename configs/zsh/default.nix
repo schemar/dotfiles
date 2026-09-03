@@ -95,9 +95,6 @@ in
         # Remove mode switching delay.
         KEYTIMEOUT=5
 
-        # Correct locale
-        export LC_ALL=en_US.UTF-8
-
         #
         # COMPLETIONS
         #

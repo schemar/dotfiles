@@ -20,6 +20,13 @@
   # changes in each release.
   home.stateVersion = "24.11";
 
+  home.sessionVariables = {
+    # Set shell lang early:
+    LANG = "en_US.UTF-8";
+    # Stomp everything with LC_ALL:
+    LC_ALL = "en_US.UTF-8";
+  };
+
   # List packages installed in user profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   home.packages = with pkgs; [
