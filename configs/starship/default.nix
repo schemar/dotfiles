@@ -1,7 +1,24 @@
-{ ... }:
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  starshipInit = pkgs.runCommand "starship-init.zsh" { } ''
+    ${lib.getExe config.programs.starship.package} \
+    init zsh --print-full-init > "$out"
+  '';
+in
+{
+  # Keep prompt initialization after the other interactive integrations.
+  programs.zsh.initContent = lib.mkOrder 1200 ''
+    [[ $TERM == dumb ]] || source ${starshipInit}
+  '';
+
   programs.starship = {
     enable = true;
+    enableZshIntegration = false;
 
     settings = {
       username = {

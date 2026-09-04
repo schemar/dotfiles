@@ -12,19 +12,9 @@ let
   };
   mkInit = name: cmd: pkgs.runCommand "${name}-init.zsh" { } "${cmd} > $out";
   zoxideInit = mkInit "zoxide" "${pkgs.zoxide}/bin/zoxide init zsh";
-  starshipInit = mkInit "starship" "${pkgs.starship}/bin/starship init zsh --print-full-init";
   direnvInit = mkInit "direnv" "${pkgs.direnv}/bin/direnv hook zsh";
-  miseInit = mkInit "mise" "${pkgs.mise}/bin/mise activate zsh";
-  fzfInit = mkInit "fzf" "${pkgs.fzf}/bin/fzf --zsh";
 in
 {
-  # "Compiled" at build time (see "source"s below):
-  programs.zoxide.enableZshIntegration = false;
-  programs.fzf.enableZshIntegration = false;
-  programs.starship.enableZshIntegration = false;
-  programs.mise.enableZshIntegration = false;
-  programs.direnv.enableZshIntegration = false;
-
   programs.zsh = {
     enable = true;
     # Make sure this is done by home-manager, not NixOS:
@@ -79,12 +69,8 @@ in
     # Have to escape zsh ${...} with ''${...}
     initContent = # sh
       ''
-        # Compiled at build time:
         source ${zoxideInit}
-        source ${fzfInit}
         source ${direnvInit}
-        source ${miseInit}
-        [[ $TERM != dumb ]] && source ${starshipInit}
 
         #
         # ENVIRONMENT
@@ -145,6 +131,7 @@ in
 
   programs.direnv = {
     enable = true;
+    enableZshIntegration = false;
     nix-direnv.enable = true;
   };
 
@@ -173,6 +160,7 @@ in
 
   programs.zoxide = {
     enable = true;
+    enableZshIntegration = false;
   };
 
 }
