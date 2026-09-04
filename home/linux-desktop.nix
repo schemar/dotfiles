@@ -154,6 +154,9 @@
         makoctl mode -a light -r dark
         ln -sf ~/.config/fuzzel/blueberry_peach_light.ini ~/.config/fuzzel/blueberry_peach.ini
 
+        ln -sf ~/.config/helix/themes/blueberry_peach_light.toml ~/.config/helix/themes/blueberry_peach.toml
+        pkill -USR1 -u "$UID" hx
+
         if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
           # Join the given theme file into a command that can be executed with swaymsg
           # Joins each non-empty line with a semicolon, leading to a number of
@@ -182,6 +185,9 @@
         pkill -USR1 -u "$UID" -x zsh
         makoctl mode -a dark -r light
         ln -sf ~/.config/fuzzel/blueberry_peach_dark.ini ~/.config/fuzzel/blueberry_peach.ini
+
+        ln -sf ~/.config/helix/themes/blueberry_peach_dark.toml ~/.config/helix/themes/blueberry_peach.toml
+        pkill -USR1 -u "$UID" -x hx
 
         if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
           # Join the given theme file into a command that can be executed with swaymsg

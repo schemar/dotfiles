@@ -74,6 +74,9 @@ theme-dark:
     # See trap in ZSH config:
     pkill -USR1 -u "$UID" -x zsh
 
+    ln -sf ~/.config/helix/themes/blueberry_peach_light.toml ~/.config/helix/themes/blueberry_peach.toml
+    pkill -USR1 -u "$UID" hx
+
 theme-light:
     #!/usr/bin/env bash
     if [ "{{ os() }}" = "macos" ]; then
@@ -87,3 +90,6 @@ theme-light:
     /etc/profiles/per-user/$USER/bin/tmux source-file ~/.config/tmux/tmux.conf
     # See trap in ZSH config:
     pkill -USR1 -u "$UID" -x zsh
+
+    ln -sf ~/.config/helix/themes/blueberry_peach_light.toml ~/.config/helix/themes/blueberry_peach.toml
+    pkill -USR1 -u "$UID" hx
