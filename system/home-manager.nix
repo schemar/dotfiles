@@ -9,7 +9,7 @@
 
   home-manager.users.${username} = {
     imports = [
-      ../../home/default
+      ../home
     ];
   };
 }
