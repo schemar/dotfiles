@@ -74,7 +74,7 @@ theme-dark:
     # See trap in ZSH config:
     pkill -USR1 -u "$UID" -x zsh
 
-    ln -sf ~/.config/helix/themes/blueberry_peach_light.toml ~/.config/helix/themes/blueberry_peach.toml
+    ln -sf ~/.config/helix/themes/blueberry_peach_dark.toml ~/.config/helix/themes/blueberry_peach.toml
     pkill -USR1 -u "$UID" hx
 
 theme-light:
