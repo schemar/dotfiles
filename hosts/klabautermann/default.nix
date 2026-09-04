@@ -15,6 +15,7 @@
 
     # System-level configurations:
     ../../system/common.nix
+    ../../system/home-manager.nix
 
     # Home-manager as a NixOS module:
     inputs.home-manager.nixosModules.home-manager
@@ -54,13 +55,6 @@
     allowedUDPPorts = [
       16261
       16262
-    ];
-  };
-
-  # Configure home-manager to use the user config:
-  home-manager.users.${username} = {
-    imports = [
-      ../../home
     ];
   };
 }

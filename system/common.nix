@@ -17,8 +17,6 @@
     zsh
   ];
   programs.zsh.enable = true;
-  # Completion is managed by home-manager's zsh:
-  programs.zsh.enableCompletion = false;
 
   # Use user-level ZSH provided by home-manager config:
   environment.shells = [ "/run/current-system/sw/bin/zsh" ];
