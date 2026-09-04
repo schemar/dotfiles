@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   pkgs,
   ...
@@ -22,16 +23,21 @@ in
     enableCompletion = true;
     completionInit = ''
       autoload -Uz compinit
-      _zdump=''${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION
+
+      # The Home Manager environment store path changes when installed
+      # packages change. Its basename therefore acts as an invalidation key.
+      _hm_generation=${baseNameOf "${config.home.path}"}
+      _zdump=''${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION-$_hm_generation
+
       [[ -d ''${_zdump:h} ]] || mkdir -p ''${_zdump:h}
-      _zfresh=( $_zdump(N.mh-24) )
-      if (( $#_zfresh )); then
-        compinit -C -d "$_zdump"
-      else
-        compinit -d "$_zdump"
+
+      compinit -i -d "$_zdump"
+
+      if [[ ! -s "$_zdump.zwc" || "$_zdump" -nt "$_zdump.zwc" ]]; then
         { zcompile -R -- "$_zdump" } &!
       fi
-      unset _zdump _zfresh
+
+      unset _zdump
     '';
 
     syntaxHighlighting = {
