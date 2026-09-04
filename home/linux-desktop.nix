@@ -4,6 +4,50 @@
   inputs,
   ...
 }:
+let
+  # mode can be light or dark
+  switchMode = mode: {
+    executable = true;
+    text = # bash
+      ''
+        #!/usr/bin/env bash
+
+        gsettings set org.gnome.desktop.interface gtk-theme '${
+          if mode == "light" then "Breeze" else "Breeze-Dark"
+        }'
+        gsettings set org.gnome.desktop.interface icon-theme '${
+          if mode == "light" then "breeze" else "breeze-dark"
+        }'
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-${mode}'
+
+        printf "${mode}" > ~/.config/current_theme_store
+        tmux source-file ~/.config/tmux/tmux.conf
+        pkill -USR1 -u "$UID" -x zsh
+        makoctl mode -a ${mode} -r ${if mode == "light" then "dark" else "light"}
+        ln -sf ~/.config/fuzzel/blueberry_peach_${mode}.ini ~/.config/fuzzel/blueberry_peach.ini
+
+        ln -sf ~/.config/helix/themes/blueberry_peach_${mode}.toml ~/.config/helix/themes/blueberry_peach.toml
+        pkill -USR1 -u "$UID" hx
+
+        if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
+          # Join the given theme file into a command that can be executed with swaymsg
+          # Joins each non-empty line with a semicolon, leading to a number of
+          # consecutive commands for swaymsg
+          THEME_FILE=~/.config/sway/blueberry_peach_${mode}
+          THEME_CMD=$(grep -v '^\s+$' "$THEME_FILE" | paste -sd';' -)
+          swaymsg "$THEME_CMD"
+
+          pkill swaybg
+          swaybg --mode fill --image ${
+            if mode == "light" then
+              ../assets/images/rohit-tandon-9wg5jCEPBsw-unsplash_lighter.jpg
+            else
+              ../assets/images/marc-linnemann-wDx3q0yb7fk-unsplash_darker.jpg
+          } &
+        fi
+      '';
+  };
+in
 {
 
   # Fonts
@@ -138,70 +182,8 @@
       '';
   };
 
-  home.file.".local/bin/lightmode.sh" = {
-    executable = true;
-    text = # bash
-      ''
-        #!/usr/bin/env bash
-
-        gsettings set org.gnome.desktop.interface gtk-theme 'Breeze'
-        gsettings set org.gnome.desktop.interface icon-theme 'breeze'
-        gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
-
-        printf "light" > ~/.config/current_theme_store
-        tmux source-file ~/.config/tmux/tmux.conf
-        pkill -USR1 -u "$UID" -x zsh
-        makoctl mode -a light -r dark
-        ln -sf ~/.config/fuzzel/blueberry_peach_light.ini ~/.config/fuzzel/blueberry_peach.ini
-
-        ln -sf ~/.config/helix/themes/blueberry_peach_light.toml ~/.config/helix/themes/blueberry_peach.toml
-        pkill -USR1 -u "$UID" hx
-
-        if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
-          # Join the given theme file into a command that can be executed with swaymsg
-          # Joins each non-empty line with a semicolon, leading to a number of
-          # consecutive commands for swaymsg
-          THEME_FILE=~/.config/sway/blueberry_peach_light
-          THEME_CMD=$(grep -v '^\s+$' "$THEME_FILE" | paste -sd';' -)
-          swaymsg "$THEME_CMD"
-
-          pkill swaybg
-          swaybg --mode fill --image ${../assets/images/rohit-tandon-9wg5jCEPBsw-unsplash_lighter.jpg} &
-        fi
-      '';
-  };
-  home.file.".local/bin/darkmode.sh" = {
-    executable = true;
-    text = # bash
-      ''
-        #!/usr/bin/env bash
-
-        gsettings set org.gnome.desktop.interface gtk-theme 'Breeze-Dark'
-        gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark'
-        gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-
-        printf "dark" > ~/.config/current_theme_store
-        tmux source-file ~/.config/tmux/tmux.conf
-        pkill -USR1 -u "$UID" -x zsh
-        makoctl mode -a dark -r light
-        ln -sf ~/.config/fuzzel/blueberry_peach_dark.ini ~/.config/fuzzel/blueberry_peach.ini
-
-        ln -sf ~/.config/helix/themes/blueberry_peach_dark.toml ~/.config/helix/themes/blueberry_peach.toml
-        pkill -USR1 -u "$UID" -x hx
-
-        if [ "$XDG_SESSION_DESKTOP" = "sway" ]; then
-          # Join the given theme file into a command that can be executed with swaymsg
-          # Joins each non-empty line with a semicolon, leading to a number of
-          # consecutive commands for swaymsg
-          THEME_FILE=~/.config/sway/blueberry_peach_dark
-          THEME_CMD=$(grep -v '^\s+$' "$THEME_FILE" | paste -sd';' -)
-          swaymsg "$THEME_CMD"
-
-          pkill swaybg
-          swaybg --mode fill --image ${../assets/images/marc-linnemann-wDx3q0yb7fk-unsplash_darker.jpg} &
-        fi
-      '';
-  };
+  home.file.".local/bin/lightmode.sh" = switchMode "light";
+  home.file.".local/bin/darkmode.sh" = switchMode "dark";
 
   # For some reason, the scaling in wayland makes the fonts way bigger. Adjusting:
   programs.ghostty.settings."font-size" = lib.mkForce 11.0;
