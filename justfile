@@ -72,7 +72,7 @@ theme-dark:
     printf "dark" > ~/.config/current_theme_store
     /etc/profiles/per-user/$USER/bin/tmux source-file ~/.config/tmux/tmux.conf
     # See trap in ZSH config:
-    pkill -USR1 zsh
+    pkill -USR1 -u "$UID" -x zsh
 
 theme-light:
     #!/usr/bin/env bash
@@ -86,4 +86,4 @@ theme-light:
     printf "light" > ~/.config/current_theme_store
     /etc/profiles/per-user/$USER/bin/tmux source-file ~/.config/tmux/tmux.conf
     # See trap in ZSH config:
-    pkill -USR1 zsh
+    pkill -USR1 -u "$UID" -x zsh

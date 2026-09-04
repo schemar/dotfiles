@@ -150,7 +150,7 @@
 
         printf "light" > ~/.config/current_theme_store
         tmux source-file ~/.config/tmux/tmux.conf
-        pkill -USR1 zsh
+        pkill -USR1 -u "$UID" -x zsh
         makoctl mode -a light -r dark
         ln -sf ~/.config/fuzzel/blueberry_peach_light.ini ~/.config/fuzzel/blueberry_peach.ini
 
@@ -179,7 +179,7 @@
 
         printf "dark" > ~/.config/current_theme_store
         tmux source-file ~/.config/tmux/tmux.conf
-        pkill -USR1 zsh
+        pkill -USR1 -u "$UID" -x zsh
         makoctl mode -a dark -r light
         ln -sf ~/.config/fuzzel/blueberry_peach_dark.ini ~/.config/fuzzel/blueberry_peach.ini
 

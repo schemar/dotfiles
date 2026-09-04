@@ -21,24 +21,39 @@ in
     # Make sure this is done by home-manager, not NixOS:
     # (see also programs.zsh.enableCompletion = false in systems/common.nix)
     enableCompletion = true;
-    completionInit = ''
-      autoload -Uz compinit
+    completionInit = # zsh
+      ''
+        # Tell Zsh that compinit is an autoloadable native Zsh function.
+        # -U prevents alias expansion while loading it.
+        autoload -Uz compinit
 
-      # The Home Manager environment store path changes when installed
-      # packages change. Its basename therefore acts as an invalidation key.
-      _hm_generation=${baseNameOf "${config.home.path}"}
-      _zdump=''${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION-$_hm_generation
+        # Evaluated by Nix at Home Manager build time.
+        # Produces a value such as abc123-home-manager-path.
+        _hm_generation=${baseNameOf "${config.home.path}"}
 
-      [[ -d ''${_zdump:h} ]] || mkdir -p ''${_zdump:h}
+        # ''${ escapes Nix interpolation, producing a literal for Zsh to evaluate later.
+        #
+        # Resulting cache name contains:
+        # - the Zsh version
+        # - the current Home Manager environment identifier
+        _zdump=''${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-$ZSH_VERSION-$_hm_generation
 
-      compinit -i -d "$_zdump"
+        # ''${_zdump:h} is Zsh syntax for the dump file's parent directory.
+        # Create that directory if it does not yet exist.
+        [[ -d ''${_zdump:h} ]] || mkdir -p ''${_zdump:h}
 
-      if [[ ! -s "$_zdump.zwc" || "$_zdump" -nt "$_zdump.zwc" ]]; then
-        { zcompile -R -- "$_zdump" } &!
-      fi
+        # Initialize completion and use this file for compinit's textual cache.
+        compinit -d "$_zdump"
 
-      unset _zdump
-    '';
+        # Compile when the bytecode cache is absent, empty, or older than
+        # the textual completion dump.
+        if [[ ! -s "$_zdump.zwc" || "$_zdump" -nt "$_zdump.zwc" ]]; then
+          zcompile -R -- "$_zdump"
+        fi
+
+        # Do not leave helper parameters in the interactive shell.
+        unset _zdump _hm_generationation
+      '';
 
     syntaxHighlighting = {
       enable = true;
@@ -54,8 +69,6 @@ in
       ng = "rm -f ~/.cache/godothost && nvim --listen ~/.cache/godothost";
 
       src = "source ~/.zshrc";
-
-      fkill = "ps -efl | fzf | awk '\''{print $4}'\'' | xargs kill";
 
       # Tmux usability aliases
       tma = "tmux new-session -A -s entag";
@@ -73,7 +86,7 @@ in
     };
 
     # Have to escape zsh ${...} with ''${...}
-    initContent = # sh
+    initContent = # zsh
       ''
         source ${zoxideInit}
         source ${direnvInit}
@@ -86,22 +99,6 @@ in
 
         # Remove mode switching delay.
         KEYTIMEOUT=5
-
-        #
-        # COMPLETIONS
-        #
-
-        # npm run scripts
-        _npm_completion() {
-          local si=$IFS
-          compadd -- $(COMP_CWORD=$((CURRENT-1)) \
-                       COMP_LINE=$BUFFER \
-                       COMP_POINT=0 \
-                       npm completion -- "''${words[@]}" \
-                       2>/dev/null)
-          IFS=$si
-        }
-        compdef _npm_completion npm
 
         #
         # Themeing
@@ -130,7 +127,7 @@ in
 
         update_theme
         # Auto update on signal, but only if running interactively.
-        # Trigger with `pkill -USR1 zsh` or `pkill -USR1 -u "$(whoami)" zsh`
+        # Trigger with: pkill -USR1 -u "$UID" -x zsh
         trap '[[ $- == *i* ]] && update_theme' USR1
       '';
   };
