@@ -70,7 +70,6 @@
     ./linux-desktop.nix
     ../configs/chromium
     ../configs/firefox
-    ../configs/qutebrowser
   ];
 
   wayland.windowManager.sway.config.startup = [

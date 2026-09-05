@@ -43,7 +43,6 @@
       "anki"
       "ghostty"
       "gimp"
-      "qutebrowser"
       "raycast"
       "wezterm"
     ];
