@@ -1,9 +1,17 @@
-{ inputs, ... }:
+{ pkgs, ... }:
 {
-  xdg.dataFile."nvim/site/pack/themes/start/blueberry-peach" = {
-    source = "${inputs.blueberry-peach}/ports/neovim";
-  };
   programs.nixvim = {
+    extraPlugins = [
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "blueberry-peach.nvim";
+        src = pkgs.fetchFromGitHub {
+          owner = "schemar";
+          repo = "blueberry-peach.nvim";
+          rev = "0a288892eae41e6714e68b599be140c6fc3407ca";
+          hash = "sha256-TSHd+tosdgGkdejwN2ufdUQ6hzDWkNyq5wRAV6pt/mo=";
+        };
+      })
+    ];
     opts = {
       # [[ Theme ]]
       syntax = "ON"; # str: Allow syntax highlighting
