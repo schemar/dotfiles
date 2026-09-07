@@ -48,11 +48,11 @@ in
         # Compile when the bytecode cache is absent, empty, or older than
         # the textual completion dump.
         if [[ ! -s "$_zdump.zwc" || "$_zdump" -nt "$_zdump.zwc" ]]; then
-          zcompile -R -- "$_zdump"
+          zcompile "$_zdump"
         fi
 
         # Do not leave helper parameters in the interactive shell.
-        unset _zdump _hm_generationation
+        unset _zdump _hm_generation
       '';
 
     syntaxHighlighting = {
