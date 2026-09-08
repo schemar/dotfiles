@@ -26,13 +26,13 @@
     }
     profile {
       output $INTERNAL disable
-      output DP-5 'Lenovo Group Limited P27QD-40 VNACWFPB' position 0,0 scale 1.5 mode 2560x1440@119.998 enable
-      output DP-7 'Lenovo Group Limited P27QD-40 VNACWFPT' position 1706,0 scale 1.5 mode 2560x1440@119.998 enable
+      output 'Lenovo Group Limited P27QD-40 VNACWFPB' position 0,0 scale 1.5 mode 2560x1440@119.998 enable
+      output 'Lenovo Group Limited P27QD-40 VNACWFPT' position 1706,0 scale 1.5 mode 2560x1440@119.998 enable
     }
     profile {
       output $INTERNAL disable
-      output DP-6 'Lenovo Group Limited P27QD-40 VNACWFPB' position 0,0 scale 1.5 mode 2560x1440@119.998 enable
-      output DP-9 'Lenovo Group Limited P27QD-40 VNACWFPT' position 1706,0 scale 1.5 mode 2560x1440@119.998 enable
+      output 'Lenovo Group Limited P27QD-40 VNACWFPB' position 0,0 scale 1.5 mode 2560x1440@119.998 enable
+      output 'Lenovo Group Limited P27QD-40 VNACWFPT' position 1706,0 scale 1.5 mode 2560x1440@119.998 enable
     }
     profile {
       output $INTERNAL disable
@@ -46,7 +46,11 @@
     }
     profile {
       output $INTERNAL disable
-      output DP-1 'Lenovo Group Limited P27QD-40 VNACWFR2'scale 1.5 mode 2560x1440@119.998 enable
+      output 'Lenovo Group Limited P27QD-40 VNACWFR2' scale 1.5 mode 2560x1440@119.998 enable
+    }
+    profile {
+      output $INTERNAL disable
+      output 'HP Inc. HP E27u G5 CN444122MP' position 0,0 scale 1.5 mode 2560x1440@74.971 enable
     }
   '';
 
