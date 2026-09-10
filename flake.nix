@@ -23,6 +23,7 @@
     private-fonts = {
       url = "git+ssh://git@github.com/schemar/fonts?ref=main";
       flake = true;
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

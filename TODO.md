@@ -44,10 +44,11 @@ Suggested order: bugs 1–6 (all one-liners), then 7–11, then the
       activation. Non-declarative, needs network, and swallows all errors with
       `|| true`. The `makeBinPath` PATH export is dead code — both calls already
       use absolute `lib.getExe` paths. Nixpkgs `helix` already ships grammars.
-- [ ] **8. Three nixpkgs instances in the lock** — `flake.nix:20,26`.
+- [x] **8. Three nixpkgs instances in the lock** — `flake.nix:20,26`.
       `nixvim` → `nixpkgs_2`, `private-fonts` → **`nixpkgs_3` (nixos-unstable)**.
       Add `inputs.nixpkgs.follows = "nixpkgs"` to both — at minimum
       `private-fonts` (unstable glibc against a stable system).
+      -> nixvim not following on purpose
 - [ ] **9. Wrong Home Manager module for Vivaldi** — `configs/chromium/default.nix`.
       `programs.chromium.package = pkgs.vivaldi` makes HM manage
       `~/.config/chromium/*` while Vivaldi reads `~/.config/vivaldi/*`.
