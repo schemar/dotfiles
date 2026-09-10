@@ -20,7 +20,7 @@ Suggested order: bugs 1–6 (all one-liners), then 7–11, then the
       `grep -v '^\s+$'` — in POSIX BRE `+` is a *literal* character, so blank
       lines are never stripped and `paste -sd';'` emits `cmd;;cmd`.
       → `grep -v '^[[:space:]]*$'`.
-- [ ] **4. Waybar has no stylesheet** — `configs/waybar/`.
+- [x] **4. Waybar has no stylesheet** — `configs/waybar/`.
       Verified `programs.waybar.style = null`, and the generated files are
       `common.css`, `style-dark.css`, `style-light.css`,
       `blueberry_peach_{dark,light}.css` — but waybar only auto-loads
@@ -28,7 +28,8 @@ Suggested order: bugs 1–6 (all one-liners), then 7–11, then the
       default styling. Nothing symlinks it either (the theme scripts don't touch
       waybar). Set `programs.waybar.style`, or write a `style.css` that
       `@import`s the others.
-- [ ] **5. `extenstions` typo** — `configs/neovim/plugins/default.nix:303`.
+      -> wrong
+- [x] **5. `extenstions` typo** — `configs/neovim/plugins/default.nix:303`.
       lualine silently ignores it. → `extensions`.
 - [ ] **6. Broken nested quoting in tmux** — `configs/tmux/default.nix:120`.
       `if-shell "[ "$(~/.config/current_theme)" = "dark" ]"` — unescaped nested
