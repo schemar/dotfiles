@@ -117,7 +117,7 @@
         set -sg terminal-overrides ",*:RGB"
 
         source ${./config/reset_blueberry_peach.conf}
-        if-shell "[ "$(~/.config/current_theme)" = "dark" ]" \
+        if-shell "[ \"$(~/.config/current_theme)\" = \"dark\" ]" \
           "source-file ${inputs.blueberry-peach}/ports/tmux/blueberry_peach_dark.conf" \
           "source-file ${inputs.blueberry-peach}/ports/tmux/blueberry_peach_light.conf"
 

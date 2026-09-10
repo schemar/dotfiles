@@ -31,7 +31,7 @@ Suggested order: bugs 1–6 (all one-liners), then 7–11, then the
       -> wrong
 - [x] **5. `extenstions` typo** — `configs/neovim/plugins/default.nix:303`.
       lualine silently ignores it. → `extensions`.
-- [ ] **6. Broken nested quoting in tmux** — `configs/tmux/default.nix:120`.
+- [x] **6. Broken nested quoting in tmux** — `configs/tmux/default.nix:120`.
       `if-shell "[ "$(~/.config/current_theme)" = "dark" ]"` — unescaped nested
       double quotes.
 
