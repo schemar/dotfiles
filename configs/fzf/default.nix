@@ -21,7 +21,7 @@ in
         if [[ $options[zle] = on ]]; then
           source ${fzfInit}
 
-          FZF_DEFAULTCOMMAND="fd --type f --hidden --exclude .git/"
+          FZF_DEFAULT_COMMAND="fd --type f --hidden --exclude .git/"
           FZF_CTRL_T_COMMAND="fd --type f --hidden --exclude .git/"
           FZF_ALT_C_COMMAND="fd --type d --hidden --exclude .git/"
 
