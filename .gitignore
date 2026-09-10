@@ -2,6 +2,5 @@
 output.log
 .state
 *.swp
-configs/qutebrowser/autoconfig.yml
 # Ignore temporary files that end in ~
 *~
