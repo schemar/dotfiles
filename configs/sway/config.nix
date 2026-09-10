@@ -21,7 +21,7 @@ in
 
   # For any defaults left from the sway/i3 modules in home manager:
   modifier = "Mod4"; # Use the Super/Windows key as the Mod key
-  terminal = terminal;
+  inherit terminal;
 
   gaps = {
     top = 2;

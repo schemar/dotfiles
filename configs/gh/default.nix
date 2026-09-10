@@ -4,7 +4,7 @@
 
   programs.gh = {
     enable = true;
-    extensions = with pkgs; [
+    extensions = [
       # Disable and install from `gh` to get updates faster (nixpkgs stable lags far behind)
       # gh-stack
     ];

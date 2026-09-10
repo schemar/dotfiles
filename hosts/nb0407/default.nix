@@ -31,11 +31,6 @@
     }
     profile {
       output $INTERNAL disable
-      output 'Lenovo Group Limited P27QD-40 VNACWFPB' position 0,0 scale 1.5 mode 2560x1440@119.998 enable
-      output 'Lenovo Group Limited P27QD-40 VNACWFPT' position 1706,0 scale 1.5 mode 2560x1440@119.998 enable
-    }
-    profile {
-      output $INTERNAL disable
       output 'Lenovo Group Limited P27QD-40 VNACWFT7' position 0,0 scale 1.5 mode 2560x1440@119.998 enable
       output 'Lenovo Group Limited P27QD-40 VNACM7K7' position 1706,0 scale 1.5 mode 2560x1440@119.998 enable
     }

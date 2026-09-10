@@ -49,10 +49,11 @@ Suggested order: bugs 1–6 (all one-liners), then 7–11, then the
       Add `inputs.nixpkgs.follows = "nixpkgs"` to both — at minimum
       `private-fonts` (unstable glibc against a stable system).
       -> nixvim not following on purpose
-- [ ] **9. Wrong Home Manager module for Vivaldi** — `configs/chromium/default.nix`.
+- [x] **9. Wrong Home Manager module for Vivaldi** — `configs/chromium/default.nix`.
       `programs.chromium.package = pkgs.vivaldi` makes HM manage
       `~/.config/chromium/*` while Vivaldi reads `~/.config/vivaldi/*`.
       HM has a real `programs.vivaldi` module (confirmed present). Switch to it.
+      ->  wrong
 - [ ] **10. `nix` in `home.packages`** — `home/default.nix:39`.
       Verified it lands in both the user *and* the system profile. A
       profile-level nix shadowing the daemon's is a classic breakage source.
@@ -74,7 +75,7 @@ Suggested order: bugs 1–6 (all one-liners), then 7–11, then the
 - [ ] **14. Tilde in signing key** — `configs/git/default.nix:86`.
       Git does not tilde-expand `user.signingkey` for ssh signing. Use an
       absolute path or `config.home.homeDirectory`.
-- [ ] **15. ~57 lines of redundant sway keybindings** — `configs/sway/config.nix:122-179`.
+- [x] **15. ~57 lines of redundant sway keybindings** — `configs/sway/config.nix:122-179`.
       `lib.mkOptionDefault` already provides these (modifier *is* `Mod4`,
       terminal *is* `ghostty`). Keep only the genuine additions
       (`Mod4+Shift+b`, `Mod4+Control+*`, `Mod4+Shift+a`).
@@ -99,7 +100,7 @@ Suggested order: bugs 1–6 (all one-liners), then 7–11, then the
 - [ ] **22. Dead `isDarwin` specialArg** — `flake.nix:69`.
       No system module reads it (`system/common.nix` computes it for HM via
       `extraSpecialArgs`), and klabautermann omits it → inconsistent.
-- [ ] **23. Unused input bindings** — `flake.nix:29-40`.
+- [x] **23. Unused input bindings** — `flake.nix:29-40`.
       Destructures 5 inputs it never uses. → `inputs@{ self, nixpkgs, nix-darwin,
       home-manager, disko, ... }`.
 - [ ] **24. Host boilerplate** — `flake.nix`. Three near-identical host blocks;
@@ -108,7 +109,7 @@ Suggested order: bugs 1–6 (all one-liners), then 7–11, then the
       NixOS hosts too.
 - [ ] **26. Hardcoded username** — `hosts/aegir/configuration.nix:56` uses
       `users.users.schemar` while klabautermann uses `${username}`.
-- [ ] **27. Duplicate kanshi profile** — `hosts/nb0407/default.nix:29-38`.
+- [x] **27. Duplicate kanshi profile** — `hosts/nb0407/default.nix:29-38`.
       Two byte-identical `profile` blocks; the second is unreachable. Also raw
       text where `services.kanshi` offers typed `profiles`/`outputs`.
 
@@ -133,7 +134,7 @@ Suggested order: bugs 1–6 (all one-liners), then 7–11, then the
 
 ## ⚡ Quick wins
 
-- [ ] `system/common.nix:11` — `experimental-features` should be a **list**, not
+- [x] `system/common.nix:11` — `experimental-features` should be a **list**, not
       the string `"nix-command flakes"`.
 - [ ] `system/common.nix:16` — `coreutils-prefixed` is Darwin-oriented; guard it
       with `lib.optionals pkgs.stdenv.hostPlatform.isDarwin`.
@@ -141,13 +142,13 @@ Suggested order: bugs 1–6 (all one-liners), then 7–11, then the
       `"/run/current-system/sw/bin/zsh"` strings.
 - [ ] `system/common.nix:29` — `home = if isDarwin …` is redundant; both NixOS
       and nix-darwin already default it correctly.
-- [ ] `configs/gh/default.nix:7-10` — `with pkgs; [ ]` on an empty list.
-- [ ] `configs/ssh/default.nix:1` — unused `config` argument.
-- [ ] `configs/sway/config.nix:24` — `terminal = terminal;` → `inherit terminal;`.
+- [x] `configs/gh/default.nix:7-10` — `with pkgs; [ ]` on an empty list.
+- [x] `configs/ssh/default.nix:1` — unused `config` argument.
+- [x] `configs/sway/config.nix:24` — `terminal = terminal;` → `inherit terminal;`.
 - [ ] `configs/zsh/default.nix:98` — `export PATH=…` → `home.sessionPath`.
 - [ ] `configs/zsh/default.nix:12` — `sha256 =` → `hash =`; and `zsh-helix-mode`
       belongs in `programs.zsh.plugins`.
-- [ ] `configs/fzf/default.nix:28` — comment says "written in
+- [x] `configs/fzf/default.nix:28` — comment says "written in
       configs/fzf/default.nix" *inside that very file*; it's actually in
       `configs/zsh/default.nix`.
 - [ ] `configs/tmux/default.nix:7` — `terminal` should be `tmux-256color`, not

@@ -33,11 +33,8 @@
       nix-darwin,
       nixpkgs,
       home-manager,
-      nixvim,
-      blueberry-peach,
       disko,
-      lanzaboote,
-      private-fonts,
+      ...
     }:
     let
       username = "schemar";
