@@ -34,7 +34,7 @@ let
           # Joins each non-empty line with a semicolon, leading to a number of
           # consecutive commands for swaymsg
           THEME_FILE=~/.config/sway/blueberry_peach_${mode}
-          THEME_CMD=$(grep -v '^\s+$' "$THEME_FILE" | paste -sd';' -)
+          THEME_CMD=$(grep -v '^[[:space:]]*$' "$THEME_FILE" | paste -sd';' -)
           swaymsg "$THEME_CMD"
 
           pkill swaybg

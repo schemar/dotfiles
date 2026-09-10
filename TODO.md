@@ -16,7 +16,7 @@ Suggested order: bugs 1–6 (all one-liners), then 7–11, then the
       `configs/zsh/default.nix:118`. `FZF_DEFAULT_COMMAND` / `FZF_DEFAULT_OPTS`
       are read by the fzf *binary* (a child process); plain shell assignments are
       invisible to it. Add `export`.
-- [ ] **3. Broken grep regex** — `home/linux-desktop.nix:34`.
+- [x] **3. Broken grep regex** — `home/linux-desktop.nix:34`.
       `grep -v '^\s+$'` — in POSIX BRE `+` is a *literal* character, so blank
       lines are never stripped and `paste -sd';'` emits `cmd;;cmd`.
       → `grep -v '^[[:space:]]*$'`.
