@@ -115,7 +115,7 @@ in
           export LG_CONFIG_FILE="$lg_base/config.yml,$HOME/.config/lazygit/blueberry_peach_''${THEME_MODE}.yml"
 
           # Written here instead of configs/fzf/default.nix in order for theme to not append endlessly:
-          FZF_DEFAULT_OPTS="--style minimal --preview 'bat --theme=blueberry_peach_\''${THEME_MODE:-dark} --color=always {}'"
+          export FZF_DEFAULT_OPTS="--style minimal --preview 'bat --theme=blueberry_peach_\''${THEME_MODE:-dark} --color=always {}'"
 
           if [[ "$THEME_MODE" == "light" ]]; then
             source "${inputs.blueberry-peach}/ports/zsh_syntax_highlighting/blueberry_peach_light-syntax-highlighting.sh"

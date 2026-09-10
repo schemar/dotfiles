@@ -12,7 +12,7 @@ Suggested order: bugs 1–6 (all one-liners), then 7–11, then the
 
 - [x] **1. `FZF_DEFAULTCOMMAND` typo** — `configs/fzf/default.nix:24`.
       Missing underscore, so fzf never uses `fd`. → `FZF_DEFAULT_COMMAND`.
-- [ ] **2. fzf vars not exported** — `configs/fzf/default.nix:24-26`,
+- [x] **2. fzf vars not exported** — `configs/fzf/default.nix:24-26`,
       `configs/zsh/default.nix:118`. `FZF_DEFAULT_COMMAND` / `FZF_DEFAULT_OPTS`
       are read by the fzf *binary* (a child process); plain shell assignments are
       invisible to it. Add `export`.
