@@ -1,5 +1,8 @@
 # Dotfiles
 
+> [!IMPORTANT]
+> 2026-09-13: Moved to https://git.sr.ht/~schemar/dotfiles
+
 This repository contains a nix configuration for my productivity stack.
 
 ## Installation
